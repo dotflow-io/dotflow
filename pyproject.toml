@@ -11,7 +11,6 @@ requires-python = ">=3.6"
 classifiers = [
   'Development Status :: 4 - Beta',
   "Operating System :: OS Independent",
-  "License :: OSI Approved :: GNU General Public License v3.0",
   'Intended Audience :: Developers',
   'Natural Language :: English',
   "Programming Language :: Python :: 3.6",
@@ -30,5 +29,5 @@ Repository = "https://github.com/linux-profile/dotflow"
 Documentation = "https://github.com/linux-profile/dotflow/blob/master/README.md"
 
 [build-system]
-requires = ["setuptools >= 61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
