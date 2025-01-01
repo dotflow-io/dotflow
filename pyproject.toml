@@ -11,7 +11,6 @@ requires-python = ">=3.6"
 classifiers = [
   'Development Status :: 4 - Beta',
   "Operating System :: OS Independent",
-  "License :: OSI Approved :: GNU General Public License v3.0",
   'Intended Audience :: Developers',
   'Natural Language :: English',
   "Programming Language :: Python :: 3.6",
@@ -29,10 +28,6 @@ Issues = "https://github.com/linux-profile/dotflow/issues"
 Repository = "https://github.com/linux-profile/dotflow"
 Documentation = "https://github.com/linux-profile/dotflow/blob/master/README.md"
 
-[tool.poetry.dependencies]
-python = "^3.12"
-
-
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
