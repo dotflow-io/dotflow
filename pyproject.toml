@@ -29,10 +29,6 @@ Issues = "https://github.com/linux-profile/dotflow/issues"
 Repository = "https://github.com/linux-profile/dotflow"
 Documentation = "https://github.com/linux-profile/dotflow/blob/master/README.md"
 
-[tool.poetry.dependencies]
-python = "^3.12"
-
-
 [build-system]
 requires = ["setuptools >= 61.0"]
 build-backend = "setuptools.build_meta"
