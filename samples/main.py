@@ -1,52 +1,31 @@
 #!/usr/bin/env python
 
-from dotflow import (
-    action,
-    Context,
-    Executor,
-    Task,
-    Workflow
-)
+from dotflow import DotFlow, action, retry
 
 
-class Extract(Task):
 
-    @action
-    def run(self):
-        return "ok"
+def callback(**kwargs):
+    print(kwargs)
 
 
-class Transform(Task):
-
-    @action
-    def run(self):
-        return Context(storage=True)
-
-
-class Load(Task):
-
-    @action
-    def run(self):
-        pass
-
-
-class MyWorkflow(Workflow):
-
-    def build(self) -> None:
-        return self.builder.add(
-            step=Extract
-        ).add(
-            step=Transform,
-        ).add(
-            step=Load
-        )
+@action
+@retry(max_retry=1)
+def my_task():
+    print("task")
+    raise Exception("Task Error!")
 
 
 def main():
-    result = Executor.start(workflow=MyWorkflow())
+    workflow = DotFlow()
 
-    for item in result:
-        print(item.status, ":", item.current_context.storage)
+    workflow.task.add(step=my_task, callback=callback)
+    workflow.task.add(step=my_task, callback=callback)
+    workflow.task.add(step=my_task)
+
+    sequential = workflow.host.start(workflow=workflow).sequential(keep_going=True)
+    background = workflow.host.start(workflow=workflow).background()
+    parallel = workflow.host.start(workflow=workflow).parallel()
+    data_store = workflow.host.start(workflow=workflow).data_store()
 
 
 if __name__ == '__main__':
