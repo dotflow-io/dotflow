@@ -35,7 +35,8 @@ description = "DotFlow"
 authors = ["Fernando Celmer <email@fernandocelmer.com>"]
 readme = "README.md"
 license = "GPL-3.0-only"
-package-mode = false
+package-mode = true
+requires-python = ">=3.6"
 homepage = "https://github.com/linux-profile/dotflow"
 documentation = "https://github.com/linux-profile/dotflow"
 repository = "https://github.com/linux-profile/dotflow"
