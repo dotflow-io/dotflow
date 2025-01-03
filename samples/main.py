@@ -3,7 +3,6 @@
 from dotflow import DotFlow, action, retry
 
 
-
 def callback(**kwargs):
     print(kwargs)
 
@@ -22,10 +21,10 @@ def main():
     workflow.task.add(step=my_task, callback=callback)
     workflow.task.add(step=my_task)
 
-    sequential = workflow.host.start(workflow=workflow).sequential(keep_going=True)
-    background = workflow.host.start(workflow=workflow).background()
-    parallel = workflow.host.start(workflow=workflow).parallel()
-    data_store = workflow.host.start(workflow=workflow).data_store()
+    sequential = workflow.start(workflow=workflow).sequential(keep_going=True)
+    background = workflow.start(workflow=workflow).background()
+    parallel = workflow.start(workflow=workflow).parallel()
+    data_store = workflow.start(workflow=workflow).data_store()
 
 
 if __name__ == '__main__':

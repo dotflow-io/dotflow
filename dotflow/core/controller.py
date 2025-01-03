@@ -2,6 +2,7 @@
 
 import threading
 
+from datetime import datetime
 from uuid import uuid4
 from typing import Callable
 
@@ -30,7 +31,8 @@ class Response:
         status: str,
         previous_context: ABCContext,
         current_context: ABCContext = Context(),
-        error: Exception = None
+        error: Exception = None,
+        duration: int = 0
     ) -> None:
         self.id = id
         self.task = task
@@ -38,23 +40,10 @@ class Response:
         self.previous_context = previous_context
         self.current_context = current_context
         self.error = error
+        self.duration = duration
 
 
 class Controller:
-
-    @classmethod
-    def start(cls,
-              workflow: ABCWorkflow,
-              execute_on_success: Callable = execution_default,
-              execute_on_failure: Callable = execution_default):
-        return Strategies(
-            workflow=workflow,
-            success=execute_on_success,
-            failure=execute_on_failure
-        )
-
-
-class Strategies:
 
     def __init__(self,
                  workflow: ABCWorkflow,
@@ -73,24 +62,29 @@ class Strategies:
             self.success(content=result)
 
     def _excution(self, task: Task, previous_context: ABCContext):
+        start_time = datetime.now()
         try:
             current_context = task.step(previous_context=previous_context)
+            duration = int((datetime.now() - start_time).total_seconds())
             content = Response(
                 id=self.id,
                 task=task,
                 status=Status.COMPLETED,
                 previous_context=previous_context,
                 current_context=current_context,
-                error=None
+                error=None,
+                duration=duration
             )
         except Exception as error:
+            duration = int((datetime.now() - start_time).total_seconds())
             content = Response(
                 id=self.id,
                 task=task,
                 status=Status.FAILED,
                 previous_context=previous_context,
                 current_context=Context(),
-                error=error
+                error=error,
+                duration=duration
             )
 
         task.callback(content=content)

@@ -14,5 +14,5 @@ class DotFlow(ABCWorkflow):
             initial_context = Context(storage=initial_context)
 
         self.task = TaskBuilder()
-        self.host = Controller
+        self.start = Controller
         self.initial_context = initial_context
