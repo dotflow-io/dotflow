@@ -1,0 +1,26 @@
+name: 📝 Code quality
+
+on:
+  pull_request:
+    branches: [ "develop" ]
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: ⚙️ Set up Python 3.12
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.12"
+    - name: ⚙️ Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8
+    - name: 📝️ Code Scan
+      run: |
+        flake8 dotflow/ --count --show-source --statistics --ignore=E501
