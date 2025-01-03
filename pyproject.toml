@@ -7,7 +7,7 @@ authors = [
 license = {file = "LICENSE"}
 description = "DotFlow"
 readme = "README.md"
-requires-python = ">=3.6"
+requires-python = ">=3.8"
 classifiers = [
   'Development Status :: 4 - Beta',
   "Operating System :: OS Independent",
@@ -36,7 +36,6 @@ authors = ["Fernando Celmer <email@fernandocelmer.com>"]
 readme = "README.md"
 license = "GPL-3.0-only"
 package-mode = true
-requires-python = ">=3.6"
 homepage = "https://github.com/linux-profile/dotflow"
 documentation = "https://github.com/linux-profile/dotflow"
 repository = "https://github.com/linux-profile/dotflow"
@@ -56,7 +55,7 @@ classifiers = [
 flow = 'dotflow.main:main'
 
 [tool.poetry.dependencies]
-python = ">=3.6"
+python = ">=3.8.1"
 
 [tool.poetry.group.dev.dependencies]
 build = "^1.2.2.post1"
