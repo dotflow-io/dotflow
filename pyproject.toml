@@ -28,6 +28,42 @@ Issues = "https://github.com/linux-profile/dotflow/issues"
 Repository = "https://github.com/linux-profile/dotflow"
 Documentation = "https://github.com/linux-profile/dotflow/blob/master/README.md"
 
+[tool.poetry]
+name = "dotflow"
+version = "0.1.0"
+description = "DotFlow"
+authors = ["Fernando Celmer <email@fernandocelmer.com>"]
+readme = "README.md"
+license = "GPL-3.0-only"
+package-mode = true
+homepage = "https://github.com/linux-profile/dotflow"
+documentation = "https://github.com/linux-profile/dotflow"
+repository = "https://github.com/linux-profile/dotflow"
+classifiers = [
+  'Development Status :: 4 - Beta',
+  "Operating System :: OS Independent",
+  'Intended Audience :: Developers',
+  'Natural Language :: English',
+  "Programming Language :: Python :: 3.6",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+
+[tool.poetry.scripts]
+flow = 'dotflow.main:main'
+
+[tool.poetry.dependencies]
+python = "^3.13"
+
+[tool.poetry.group.dev.dependencies]
+mkdocs = "^1.6.1"
+build = "^1.2.2.post1"
+pytest = "^8.3.4"
+
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
