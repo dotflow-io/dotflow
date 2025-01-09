@@ -1,0 +1,29 @@
+site_name: Dotflow
+repo_name: FernandoCelmer/dotflow
+repo_url: https://github.com/FernandoCelmer/dotflow
+site_url: https://www.fernandocelmer.com/
+copyright: Fernando Celmer
+
+nav:
+    - Home: index.md
+    - Getting Started: nav/getting-started.md
+    - Development:
+      - nav/development/development-guide.md
+      - nav/development/release-notes.md
+
+theme:
+  name: simple-blog
+  theme_style: light
+  site_name_style: normal
+  title_style: bold
+  colors:
+    text: black
+    title: black
+    primary: black
+    background: white
+  components:
+    site_name: true
+    title: true
+    menu: true
+    preview: true
+    footer: true
