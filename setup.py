@@ -25,10 +25,10 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     project_urls = {
-        'Homepage': 'https://github.com/linux-profile/dotflow',
-        'Repository': 'https://github.com/linux-profile/dotflow',
-        'Documentation': 'https://github.com/linux-profile/dotflow/blob/master/README.md',
-        'Issues': 'https://github.com/linux-profile/dotflow/issues',
+        'Homepage': 'https://github.com/FernandoCelmer/dotflow',
+        'Repository': 'https://github.com/FernandoCelmer/dotflow',
+        'Documentation': 'https://fernandocelmer.github.io/dotflow',
+        'Issues': 'https://github.com/FernandoCelmer/dotflow/issues',
     },
     cmdclass={
         'install': CustomInstallCommand,

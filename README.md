@@ -1,6 +1,6 @@
 # Welcome to dotflow
 
-![](docs/assets/dotflow.gif)
+![](https://raw.githubusercontent.com/FernandoCelmer/dotflow/master/docs/assets/dotflow.gif)
 
 ## Getting Help
 

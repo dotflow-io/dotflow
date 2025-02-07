@@ -13,7 +13,6 @@ classifiers = [
   "Operating System :: OS Independent",
   'Intended Audience :: Developers',
   'Natural Language :: English',
-  "Programming Language :: Python :: 3.6",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
@@ -23,10 +22,10 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/linux-profile/dotflow"
-Issues = "https://github.com/linux-profile/dotflow/issues"
-Repository = "https://github.com/linux-profile/dotflow"
-Documentation = "https://github.com/linux-profile/dotflow/blob/master/README.md"
+Homepage = "https://github.com/FernandoCelmer/dotflow"
+Issues = "https://github.com/FernandoCelmer/dotflow/issues"
+Repository = "https://github.com/FernandoCelmer/dotflow"
+Documentation = "https://github.com/FernandoCelmer/dotflow/blob/master/README.md"
 
 [tool.poetry]
 name = "dotflow"
@@ -36,9 +35,9 @@ authors = ["Fernando Celmer <email@fernandocelmer.com>"]
 readme = "README.md"
 license = "GPL-3.0-only"
 package-mode = true
-homepage = "https://github.com/linux-profile/dotflow"
-documentation = "https://github.com/linux-profile/dotflow"
-repository = "https://github.com/linux-profile/dotflow"
+homepage = "https://github.com/FernandoCelmer/dotflow"
+documentation = "https://fernandocelmer.github.io/dotflow/"
+repository = "https://github.com/FernandoCelmer/dotflow"
 classifiers = [
   'Development Status :: 4 - Beta',
   "Operating System :: OS Independent",
