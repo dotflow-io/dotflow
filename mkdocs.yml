@@ -14,8 +14,17 @@ nav:
 theme:
   name: simple-blog
   theme_style: light
-  site_name_style: normal
+  favicon: assets/logo.ico
+  logo: assets/logo.png
+  theme_style: light
+  site_name_style: bold
   title_style: bold
+  sidebar: true
+  navigation_depth: 2
+  highlightjs: true
+    - yaml
+    - python
+    - bash
   colors:
     text: black
     title: black
@@ -23,7 +32,7 @@ theme:
     background: white
   components:
     site_name: true
-    title: true
+    title: false
     menu: true
     preview: true
     footer: true
