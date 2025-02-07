@@ -56,6 +56,7 @@ flow = 'dotflow.main:main'
 
 [tool.poetry.dependencies]
 python = ">=3.8.1"
+mkdocs-simple-blog = "^0.1.0"
 
 [tool.poetry.group.dev.dependencies]
 build = "^1.2.2.post1"
@@ -66,7 +67,6 @@ tox = "^4.23.2"
 
 [tool.poetry.group.docs.dependencies]
 mkdocs = "^1.6.1"
-mkdocs-simple-blog = "^0.0.10"
 
 [build-system]
 requires = ["poetry-core"]

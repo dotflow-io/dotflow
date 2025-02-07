@@ -1,6 +1,8 @@
 # Welcome to dotflow
 
-![](docs/assets/dotflow.gif)
+---
+
+![](assets/dotflow.gif)
 
 ## Getting Help
 
