@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html data-bs-theme="light">
     <head>
                 <title>Release notes - Dotflow</title>
 
@@ -12,13 +12,15 @@
             
 
             
-                <link  rel="icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+                <link  rel="icon" type="image/x-icon" href="../../../assets/logo.ico">
             
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-                        <script>hljs.initHighlightingOnLoad();</script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+                <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.4.0/styles/base16/grayscale-dark.min.css">
+                <script>hljs.highlightAll();</script>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
+            <link rel="stylesheet" href="../../../assets/css/root.min.css">
             <link rel="stylesheet" href="../../../assets/css/main.min.css">
                 <script src="../../../search/main.js"></script>
 
@@ -34,9 +36,11 @@
 <nav class="navbar navbar-expand-xl border-bottom">
     <div class="container-fluid">
         
+            <img class="logo" src="../../../assets/logo.png">
+        
 
         
-            <span class="normal fs-4 title-color site-name" id="component-site-name" style="text-transform: uppercase;">Dotflow</span>
+            <span class="bold fs-4 title-color site-name" id="component-site-name" style="text-transform: uppercase;">Dotflow</span>
         
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsMenu"
@@ -67,7 +71,7 @@
                             <ul class="dropdown-menu">
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../development-guide/" class="dropdown-item text-decoration-none ">Development guide</a>
+        <a href="../development-guide/" class="dropdown-item text-decoration-none ">Development Guide</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
@@ -105,30 +109,35 @@
 
   <div class="md-source-repo-url">
     <a href="https://github.com/FernandoCelmer/dotflow" class="md-source">
-      FernandoCelmer/dotflow
+        FernandoCelmer/dotflow
     </a>
 
     <ul class="md-source-repo-text">
       <li>
         <i class="fa fa-tag" aria-hidden="true"></i>
-        <img alt="GitHub tag (latest by date)"
-          src="https://img.shields.io/github/v/tag/FernandoCelmer/dotflow?color=white&label=%20&style=flat-square">
+        <img
+          alt="GitHub tag (latest by date)"
+          src="https://img.shields.io/github/v/tag/FernandoCelmer/dotflow?color=white&label=%20&style=flat-square"
+        />
       </li>
 
       <li>
         <i class="fa fa-star" aria-hidden="true"></i>
-        <img alt="GitHub Repo stars"
-          src="https://img.shields.io/github/stars/FernandoCelmer/dotflow?color=white&label=%20&style=flat-square">
+        <img
+          alt="GitHub Repo stars"
+          src="https://img.shields.io/github/stars/FernandoCelmer/dotflow?color=white&label=%20&style=flat-square"
+        />
       </li>
 
       <li>
         <i class="fa fa-code-fork" aria-hidden="true"></i>
-        <img alt="GitHub forks"
-          src="https://img.shields.io/github/forks/FernandoCelmer/dotflow?color=white&label=%20&style=flat-square">
+        <img
+          alt="GitHub forks"
+          src="https://img.shields.io/github/forks/FernandoCelmer/dotflow?color=white&label=%20&style=flat-square"
+        />
       </li>
     </ul>
   </div>
-
 </div>
 <!--  endblock -->
                         
@@ -152,35 +161,55 @@
     </div>
 </div>
 <!-- endblock -->
-                    <!-- block content -->
-<section class="container post">
+
+                
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-3" id="component-sidebar">
+                                    <!-- block sidebar -->
+<div class="navbar-expand-md" role="complementary">
+    
+    <div class="sidebar navbar-collapse collapse card">
+        <ul class="nav flex-column">
+        </ul>
+    </div>
+</div>
+<!-- endblock -->
+                            </div>
+                            <div class="col-9" id="component-content">
+                                    <!-- block content -->
+<section class="container post" id="component-content">
     <article>
         <header>
             
-                <h1 class="bold title" id="component-title">Release notes</h1>
             
         </header>
         <p></p>
     </article>
 </section>
 <!-- endblock -->
+                            </div>
+                        </div>
+                    </div>
+                
+                
             </main>
 
             
                     <!-- block preview -->
-        <div class="row row-cols-md-3 text-center pt-md-3" id="component-preview">
-            <div class="col themed-grid-col">
-                <a rel="prev" href="../development-guide/" class="nav-link">
-                    <i class="fa fa-arrow-left"></i> Previous
-                </a>
-            </div>
-            <div class="col themed-grid-col"></div>
-            <div class="col themed-grid-col">
-                <a rel="next" class="nav-link disabled">
-                    Next <i class="fa fa-arrow-right"></i>
-                </a>
-            </div>
+    <div class="preview row row-cols-md-3 text-center pt-md-3" id="component-preview">
+        <div class="col themed-grid-col">
+            <a rel="prev" href="../development-guide/" class="nav-link">
+                <i class="fa fa-arrow-left"></i> Previous
+            </a>
         </div>
+        <div class="col themed-grid-col"></div>
+        <div class="col themed-grid-col">
+            <a rel="next" class="nav-link disabled">
+                Next <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
 <!-- endblock -->
             
 

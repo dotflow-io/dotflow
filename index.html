@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html data-bs-theme="light">
     <head>
                 <title>Dotflow</title>
 
@@ -12,13 +12,15 @@
             
 
             
-                <link  rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+                <link  rel="icon" type="image/x-icon" href="assets/logo.ico">
             
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-                        <script>hljs.initHighlightingOnLoad();</script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+                <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.4.0/styles/base16/grayscale-dark.min.css">
+                <script>hljs.highlightAll();</script>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+            <link rel="stylesheet" href="assets/css/root.min.css">
             <link rel="stylesheet" href="assets/css/main.min.css">
                 <script src="search/main.js"></script>
 
@@ -34,9 +36,11 @@
 <nav class="navbar navbar-expand-xl border-bottom">
     <div class="container-fluid">
         
+            <img class="logo" src="assets/logo.png">
+        
 
         
-            <span class="normal fs-4 title-color site-name" id="component-site-name" style="text-transform: uppercase;">Dotflow</span>
+            <span class="bold fs-4 title-color site-name" id="component-site-name" style="text-transform: uppercase;">Dotflow</span>
         
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsMenu"
@@ -67,7 +71,7 @@
                             <ul class="dropdown-menu">
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="nav/development/development-guide/" class="dropdown-item text-decoration-none ">Development guide</a>
+        <a href="nav/development/development-guide/" class="dropdown-item text-decoration-none ">Development Guide</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
@@ -105,30 +109,35 @@
 
   <div class="md-source-repo-url">
     <a href="https://github.com/FernandoCelmer/dotflow" class="md-source">
-      FernandoCelmer/dotflow
+        FernandoCelmer/dotflow
     </a>
 
     <ul class="md-source-repo-text">
       <li>
         <i class="fa fa-tag" aria-hidden="true"></i>
-        <img alt="GitHub tag (latest by date)"
-          src="https://img.shields.io/github/v/tag/FernandoCelmer/dotflow?color=white&label=%20&style=flat-square">
+        <img
+          alt="GitHub tag (latest by date)"
+          src="https://img.shields.io/github/v/tag/FernandoCelmer/dotflow?color=white&label=%20&style=flat-square"
+        />
       </li>
 
       <li>
         <i class="fa fa-star" aria-hidden="true"></i>
-        <img alt="GitHub Repo stars"
-          src="https://img.shields.io/github/stars/FernandoCelmer/dotflow?color=white&label=%20&style=flat-square">
+        <img
+          alt="GitHub Repo stars"
+          src="https://img.shields.io/github/stars/FernandoCelmer/dotflow?color=white&label=%20&style=flat-square"
+        />
       </li>
 
       <li>
         <i class="fa fa-code-fork" aria-hidden="true"></i>
-        <img alt="GitHub forks"
-          src="https://img.shields.io/github/forks/FernandoCelmer/dotflow?color=white&label=%20&style=flat-square">
+        <img
+          alt="GitHub forks"
+          src="https://img.shields.io/github/forks/FernandoCelmer/dotflow?color=white&label=%20&style=flat-square"
+        />
       </li>
     </ul>
   </div>
-
 </div>
 <!--  endblock -->
                         
@@ -152,15 +161,57 @@
     </div>
 </div>
 <!-- endblock -->
-                    <!-- block content -->
-<section class="container post">
+
+                
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-3" id="component-sidebar">
+                                    <!-- block sidebar -->
+<div class="navbar-expand-md" role="complementary">
+    
+    <div class="sidebar navbar-collapse collapse card">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#welcome-to-dotflow" class="nav-link">Welcome to dotflow</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#getting-help" class="nav-link">Getting Help</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#commit-style" class="nav-link">Commit Style</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#license" class="nav-link">License</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- endblock -->
+                            </div>
+                            <div class="col-9" id="component-content">
+                                    <!-- block content -->
+<section class="container post" id="component-content">
     <article>
         <header>
             
-                <h1 class="bold title" id="component-title">Home</h1>
             
         </header>
         <p><h1 id="welcome-to-dotflow">Welcome to dotflow</h1>
+<hr />
+<p><img alt="" src="assets/dotflow.gif" /></p>
+<h2 id="getting-help">Getting Help</h2>
+<p>We use GitHub issues for tracking bugs and feature requests and have limited bandwidth to address them. If you need anything, I ask you to please follow our templates for opening issues or discussions.</p>
+<ul>
+<li>🐛 <a href="https://github.com/FernandoCelmer/dotflow/issues/new/choose">Bug Report</a></li>
+<li>📕 <a href="https://github.com/FernandoCelmer/dotflow/issues/new/choose">Documentation Issue</a></li>
+<li>🚀 <a href="https://github.com/FernandoCelmer/dotflow/issues/new/choose">Feature Request</a></li>
+<li>💬 <a href="https://github.com/FernandoCelmer/dotflow/issues/new/choose">General Question</a></li>
+</ul>
 <h2 id="commit-style">Commit Style</h2>
 <ul>
 <li>⚙️ FEATURE</li>
@@ -174,27 +225,33 @@
 <li>⚠️ SECURITY</li>
 </ul>
 <h2 id="license">License</h2>
-<p>This project is licensed under the terms of the GNU General Public License v3.0 license.</p></p>
+<p><img alt="GitHub License" src="https://img.shields.io/github/license/FernandoCelmer/dotflow" /></p>
+<p>This project is licensed under the terms of the GNU General Public License v3.0.</p></p>
     </article>
 </section>
 <!-- endblock -->
+                            </div>
+                        </div>
+                    </div>
+                
+                
             </main>
 
             
                     <!-- block preview -->
-        <div class="row row-cols-md-3 text-center pt-md-3" id="component-preview">
-            <div class="col themed-grid-col">
-                <a rel="prev" class="nav-link disabled">
-                    <i class="fa fa-arrow-left"></i> Previous
-                </a>
-            </div>
-            <div class="col themed-grid-col"></div>
-            <div class="col themed-grid-col">
-                <a rel="next" href="nav/getting-started/" class="nav-link">
-                    Next <i class="fa fa-arrow-right"></i>
-                </a>
-            </div>
+    <div class="preview row row-cols-md-3 text-center pt-md-3" id="component-preview">
+        <div class="col themed-grid-col">
+            <a rel="prev" class="nav-link disabled">
+                <i class="fa fa-arrow-left"></i> Previous
+            </a>
         </div>
+        <div class="col themed-grid-col"></div>
+        <div class="col themed-grid-col">
+            <a rel="next" href="nav/getting-started/" class="nav-link">
+                Next <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
 <!-- endblock -->
             
 
