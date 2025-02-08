@@ -21,11 +21,19 @@
          <lastmod>2025-02-08</lastmod>
     </url>
     <url>
+         <loc>https://www.fernandocelmer.com/nav/reference/action-decorator/</loc>
+         <lastmod>2025-02-08</lastmod>
+    </url>
+    <url>
          <loc>https://www.fernandocelmer.com/nav/reference/context-class/</loc>
          <lastmod>2025-02-08</lastmod>
     </url>
     <url>
          <loc>https://www.fernandocelmer.com/nav/reference/dotflow-class/</loc>
+         <lastmod>2025-02-08</lastmod>
+    </url>
+    <url>
+         <loc>https://www.fernandocelmer.com/nav/reference/retry-decorator/</loc>
          <lastmod>2025-02-08</lastmod>
     </url>
 </urlset>
