@@ -8,7 +8,7 @@ You can import the action decorator directly from dotflow:
 from dotflow import action
 ```
 
-## Exemple
+## Example
 
 `class` dotflow.action
 

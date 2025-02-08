@@ -10,7 +10,7 @@ You can import the Context class directly from dotflow:
 from dotflow import Context
 ```
 
-## Exemple
+## Example
 
 `class` dotflow.Context
 

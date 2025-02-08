@@ -10,7 +10,7 @@ You can import the Dotflow class directly from dotflow:
 from dotflow import DotFlow
 ```
 
-## Exemple
+## Example
 
 `class` dotflow.DotFlow
 

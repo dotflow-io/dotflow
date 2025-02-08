@@ -8,7 +8,7 @@ You can import the action decorator directly from dotflow:
 from dotflow import retry
 ```
 
-## Exemple
+## Example
 
 `class` dotflow.retry
 
