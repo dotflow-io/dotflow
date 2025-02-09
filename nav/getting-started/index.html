@@ -263,7 +263,7 @@
             
         </header>
         <p><h1 id="getting-started">Getting Started</h1>
-<p>February 7, 2025</p>
+<p>February 10, 2025</p>
 <hr />
 <h2 id="install">Install</h2>
 <p>To install Dotflow, run the following command from the command line:</p>
@@ -300,14 +300,14 @@ workflow.start(workflow=workflow).sequential()
     print(kwargs)
 </code></pre>
 <h3 id="3-task-function">3 - Task function</h3>
-<p>Now create the function responsible for executing your task. It's very simple; just use the <a href="../reference/action-decorator/">action</a> decorator on top of the function, and that's it—you've created a task. If necessary, you can also add another decorator called <a href="../reference/retry-decorator/">retry</a> to set the maximum number of execution attempts if the function fails.</p>
+<p>Now create the function responsible for executing your task. It's very simple; just use the <code>-&gt;</code> <a href="../reference/action-decorator/">action</a> decorator on top of the function, and that's it—you've created a task. If necessary, you can also add another decorator called <code>-&gt;</code> <a href="../reference/retry-decorator/">retry</a> to set the maximum number of execution attempts if the function fails.</p>
 <pre><code class="language-python">@action
 @retry(max_retry=1)
 def my_task():
     print(&quot;task&quot;)
 </code></pre>
 <h3 id="4-dotflow-class">4 - DotFlow Class</h3>
-<p>Instantiate the DotFlow class in a variable to be used in the following steps.</p>
+<p>Instantiate the DotFlow class in a <code>workflow</code> variable to be used in the following steps.</p>
 <pre><code class="language-python">workflow = DotFlow()
 </code></pre>
 <h3 id="5-add-task">5 - Add Task</h3>
