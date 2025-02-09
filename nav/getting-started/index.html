@@ -221,6 +221,30 @@
             </li>
             <li class="nav-item" data-bs-level="2"><a href="#first-steps" class="nav-link">First Steps</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="3"><a href="#1-import" class="nav-link">1 - Import</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="3"><a href="#2-callback-function" class="nav-link">2 - Callback function</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="3"><a href="#3-task-function" class="nav-link">3 - Task function</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="3"><a href="#4-dotflow-class" class="nav-link">4 - DotFlow Class</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="3"><a href="#5-add-task" class="nav-link">5 - Add Task</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="3"><a href="#6-start" class="nav-link">6 - Start</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
               </ul>
@@ -253,7 +277,7 @@
 <p>The simplest file could look like this:</p>
 <pre><code class="language-python">from dotflow import DotFlow, action, retry
 
-def callback(**kwargs):
+def my_callback(**kwargs):
     print(kwargs)
 
 @action
@@ -261,8 +285,38 @@ def callback(**kwargs):
 def my_task():
     print(&quot;task&quot;)
 
+workflow = DotFlow()
+
 workflow.task.add(step=my_task, callback=callback)
 workflow.start(workflow=workflow).sequential()
+</code></pre>
+<h3 id="1-import">1 - Import</h3>
+<p>Start with the basics, which is importing the necessary classes and methods. (<a href="../reference/dotflow-class/">DotFlow</a>, <a href="../reference/action-decorator/">action</a>, <a href="../reference/retry-decorator/">retry</a>)</p>
+<pre><code class="language-python">from dotflow import DotFlow, action, retry
+</code></pre>
+<h3 id="2-callback-function">2 - Callback function</h3>
+<p>Create a <code>my_callback</code> function to receive execution information of a task. <code>It is not necessary</code> to include this function, as you will still have a report at the end of the execution in the instantiated object of the <code>DotFlow</code> class. This <code>my_callback</code> function is only needed if you need to do something after the execution of the task, for example: sending a message to someone, making a phone call, or sending a letter.</p>
+<pre><code class="language-python">def my_callback(**kwargs):
+    print(kwargs)
+</code></pre>
+<h3 id="3-task-function">3 - Task function</h3>
+<p>Now create the function responsible for executing your task. It's very simple; just use the <a href="../reference/action-decorator/">action</a> decorator on top of the function, and that's it—you've created a task. If necessary, you can also add another decorator called <a href="../reference/retry-decorator/">retry</a> to set the maximum number of execution attempts if the function fails.</p>
+<pre><code class="language-python">@action
+@retry(max_retry=1)
+def my_task():
+    print(&quot;task&quot;)
+</code></pre>
+<h3 id="4-dotflow-class">4 - DotFlow Class</h3>
+<p>Instantiate the DotFlow class in a variable to be used in the following steps.</p>
+<pre><code class="language-python">workflow = DotFlow()
+</code></pre>
+<h3 id="5-add-task">5 - Add Task</h3>
+<p>Now, simply add the <code>my_task</code> and <code>my_callback</code> functions you created earlier to the workflow using the code below. This process is necessary to define which tasks will be executed and the order in which they will run. The execution order follows the sequence in which they were added to the workflow.</p>
+<pre><code class="language-python">workflow.task.add(step=my_task, callback=callback)
+</code></pre>
+<h3 id="6-start">6 - Start</h3>
+<p>Finally, just execute the workflow with the following code snippet.</p>
+<pre><code class="language-python">workflow.start(workflow=workflow).sequential()
 </code></pre></p>
     </article>
 </section>
