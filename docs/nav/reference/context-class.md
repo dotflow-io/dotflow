@@ -24,5 +24,5 @@ Context(
 
 | PARAMETER  | DESCRIPTION      |
 |:-----------:|:---------------|
-| *`storage` | Attribute where any type of Python object can be stored. <hr> **TYPE**: [Any](https://docs.python.org/3/library/typing.html#typing.Any) **DEFAULT**: None|
+| `storage` | Attribute where any type of Python object can be stored. <hr> **TYPE**: [Any](https://docs.python.org/3/library/typing.html#typing.Any) **DEFAULT**: None|
 | `datetime` | Attribute available only for access; sending this parameter is not allowed. It will be assigned a value at runtime with the current date and time. <hr> **TYPE**: [datetime](https://docs.python.org/3/library/datetime.html) **DEFAULT**: [datetime.now](https://docs.python.org/3/library/datetime.html#datetime.datetime.now)|
