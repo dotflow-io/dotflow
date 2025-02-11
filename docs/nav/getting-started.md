@@ -38,7 +38,7 @@ def my_task():
 workflow = DotFlow()
 
 workflow.task.add(step=my_task, callback=callback)
-workflow.start(workflow=workflow).sequential()
+workflow.start(workflow=workflow)
 ```
 
 ### 1 - Import
@@ -70,7 +70,7 @@ def my_task():
 ```
 
 ### 4 - DotFlow Class
-Instantiate the DotFlow class in a `workflow` variable to be used in the following steps.
+Instantiate the DotFlow class in a `workflow` variable to be used in the following steps. [More details](https://fernandocelmer.github.io/dotflow/nav/reference/dotflow-class/).
 
 ```python
 workflow = DotFlow()
@@ -89,5 +89,5 @@ workflow.task.add(step=my_task, callback=my_callback)
 Finally, just execute the workflow with the following code snippet.
 
 ```python
-workflow.start(workflow=workflow).sequential()
+workflow.start(workflow=workflow)
 ```
