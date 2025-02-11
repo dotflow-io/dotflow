@@ -32,7 +32,8 @@ class Response:
         previous_context: ABCContext,
         current_context: ABCContext = Context(),
         error: Exception = None,
-        duration: int = 0) -> None:
+        duration: int = 0
+    ) -> None:
         self.id = id
         self.task = task
         self.status = status
