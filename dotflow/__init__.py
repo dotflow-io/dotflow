@@ -1,6 +1,6 @@
 """Dotflow __init__ module."""
 
-__version__ = "0.2.0.dev-2"
+__version__ = "0.2.0.dev3"
 
 from .core.actions import action, retry
 from .core.workflow import DotFlow
