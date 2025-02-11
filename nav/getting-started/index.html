@@ -291,7 +291,7 @@ workflow.task.add(step=my_task, callback=callback)
 workflow.start(workflow=workflow).sequential()
 </code></pre>
 <h3 id="1-import">1 - Import</h3>
-<p>Start with the basics, which is importing the necessary classes and methods. (<a href="../reference/dotflow-class/">DotFlow</a>, <a href="../reference/action-decorator/">action</a>, <a href="../reference/retry-decorator/">retry</a>)</p>
+<p>Start with the basics, which is importing the necessary classes and methods. (<a href="https://fernandocelmer.github.io/dotflow/nav/reference/dotflow-class/">DotFlow</a>, <a href="https://fernandocelmer.github.io/dotflow/nav/reference/action-decorator/">action</a>, <a href="https://fernandocelmer.github.io/dotflow/nav/reference/retry-decorator/">retry</a>)</p>
 <pre><code class="language-python">from dotflow import DotFlow, action, retry
 </code></pre>
 <h3 id="2-callback-function">2 - Callback function</h3>
@@ -300,7 +300,7 @@ workflow.start(workflow=workflow).sequential()
     print(kwargs)
 </code></pre>
 <h3 id="3-task-function">3 - Task function</h3>
-<p>Now create the function responsible for executing your task. It's very simple; just use the <code>-&gt;</code> <a href="../reference/action-decorator/">action</a> decorator on top of the function, and that's it—you've created a task. If necessary, you can also add another decorator called <code>-&gt;</code> <a href="../reference/retry-decorator/">retry</a> to set the maximum number of execution attempts if the function fails.</p>
+<p>Now create the function responsible for executing your task. It's very simple; just use the <code>-&gt;</code> <a href="https://fernandocelmer.github.io/dotflow/nav/reference/action-decorator/">action</a> decorator on top of the function, and that's it—you've created a task. If necessary, you can also add another decorator called <code>-&gt;</code> <a href="https://fernandocelmer.github.io/dotflow/nav/reference/retry-decorator/">retry</a> to set the maximum number of execution attempts if the function fails.</p>
 <pre><code class="language-python">@action
 @retry(max_retry=1)
 def my_task():
@@ -312,7 +312,7 @@ def my_task():
 </code></pre>
 <h3 id="5-add-task">5 - Add Task</h3>
 <p>Now, simply add the <code>my_task</code> and <code>my_callback</code> functions you created earlier to the workflow using the code below. This process is necessary to define which tasks will be executed and the order in which they will run. The execution order follows the sequence in which they were added to the workflow.</p>
-<pre><code class="language-python">workflow.task.add(step=my_task, callback=callback)
+<pre><code class="language-python">workflow.task.add(step=my_task, callback=my_callback)
 </code></pre>
 <h3 id="6-start">6 - Start</h3>
 <p>Finally, just execute the workflow with the following code snippet.</p>
