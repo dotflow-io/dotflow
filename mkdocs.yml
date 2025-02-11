@@ -11,6 +11,8 @@ nav:
     - Reference:
       - nav/reference/dotflow-class.md
       - nav/reference/context-class.md
+      - nav/reference/action-decorator.md
+      - nav/reference/retry-decorator.md
     - Development:
       - nav/development/development-guide.md
       - nav/development/release-notes.md
