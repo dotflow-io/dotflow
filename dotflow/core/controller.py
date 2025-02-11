@@ -32,8 +32,7 @@ class Response:
         previous_context: ABCContext,
         current_context: ABCContext = Context(),
         error: Exception = None,
-        duration: int = 0
-    ) -> None:
+        duration: int = 0) -> None:
         self.id = id
         self.task = task
         self.status = status
@@ -48,11 +47,18 @@ class Controller:
     def __init__(self,
                  workflow: ABCWorkflow,
                  success: Callable = execution_default,
-                 failure: Callable = execution_default):
+                 failure: Callable = execution_default,
+                 keep_going: bool = False,
+                 mode: str = "sequential"):
         self.id = uuid4().hex
         self.workflow = workflow
         self.success = success
         self.failure = failure
+
+        try:
+            getattr(self, mode)(keep_going=keep_going)
+        except AttributeError:
+            raise Exception("Execution mode does not exist.")
 
     def _callback_workflow(self, result: Response):
         final_status = [flow.status for flow in result]
