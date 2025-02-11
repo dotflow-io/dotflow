@@ -221,7 +221,7 @@
             </li>
             <li class="nav-item" data-bs-level="2"><a href="#functions" class="nav-link">Functions</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="3"><a href="#task" class="nav-link">task</a>
+            <li class="nav-item" data-bs-level="3"><a href="#add" class="nav-link">add</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -255,7 +255,6 @@
 <h2 id="example">Example</h2>
 <p><code>class</code> dotflow.DotFlow</p>
 <pre><code class="language-python">DotFlow(
-    title=&quot;My Workflow&quot;,
     initial_context={&quot;data&quot;: [0, 1, 2, 3]}
 )
 </code></pre>
@@ -269,29 +268,33 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: center;"><code>title</code></td>
-<td style="text-align: left;">Reference title of the workflow. This title is used for documentation purposes and also for differentiation in contexts where many workflows are being executed. <br> <strong>TYPE</strong>: <a href="https://docs.python.org/3/library/stdtypes.html#str">string</a> <strong>DEFAULT</strong>: ""</td>
-</tr>
-<tr>
 <td style="text-align: center;"><code>initial_context</code></td>
-<td style="text-align: left;">The parameter has the main objective of including initial data in the execution of the workflow. This parameter can be accessed internally to retrieve this information and process it if necessary, according to the logic or objective of the workflow. <br> <strong>TYPE</strong>: <a href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a> <strong>DEFAULT</strong>: <a href="https://fernandocelmer.github.io/dotflow/nav/reference/context-class/">Context</a></td>
+<td style="text-align: left;">The parameter exists to include initial data in the execution of the workflow within the <strong>class context</strong>. This parameter can be accessed internally, for example: <strong>self.initial_context</strong>, to retrieve this information and manipulate it if necessary, according to the objective of the workflow. <hr> <strong>TYPE</strong>: <a href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a> <strong>DEFAULT</strong>: <a href="https://fernandocelmer.github.io/dotflow/nav/reference/context-class/">Context</a></td>
 </tr>
 </tbody>
 </table>
 <h2 id="functions">Functions</h2>
-<h3 id="task">task</h3>
-<p><code>class</code> dotflow.DotFlow.task</p>
+<h3 id="add">add</h3>
+<p><code>class</code> dotflow.DotFlow.task.add</p>
 <table>
 <thead>
 <tr>
 <th>Function</th>
-<th>Description</th>
+<th>DESCRIPTION</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>add</code></td>
-<td></td>
+<td>*<code>step</code></td>
+<td>A parameter that receives an object of the callable type, which is basically a function. You can see in this <a href="https://fernandocelmer.github.io/dotflow/nav/getting-started/#3-task-function">example</a>. <hr> <strong>TYPE</strong>: <a href="https://docs.python.org/3/library/typing.html#typing.Callable">Callable</a> <strong>DEFAULT</strong>: _____</td>
+</tr>
+<tr>
+<td><code>initial_context</code></td>
+<td>The parameter exists to include initial data in the execution of the workflow within the <strong>function context</strong>. This parameter can be accessed internally, for example: <strong>initial_contextc</strong>, to retrieve this information and manipulate it if necessary, according to the objective of the workflow. <hr> <strong>TYPE</strong>: <a href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a> <strong>DEFAULT</strong>: <a href="https://fernandocelmer.github.io/dotflow/nav/reference/context-class/">Context</a></td>
+</tr>
+<tr>
+<td><code>callback</code></td>
+<td>Any callable object that receives <strong>args</strong> or <strong>kwargs</strong>, which is basically a function. You can see in this <a href="https://fernandocelmer.github.io/dotflow/nav/getting-started/#2-callback-function">example</a>. <hr> <strong>TYPE</strong>: <a href="https://docs.python.org/3/library/typing.html#typing.Callable">Callable</a> <strong>DEFAULT</strong>: _____</td>
 </tr>
 </tbody>
 </table>
@@ -300,26 +303,18 @@
 <table>
 <thead>
 <tr>
-<th>Function</th>
-<th>Description</th>
+<th>PARAMETER</th>
+<th>DESCRIPTION</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>sequential</code></td>
-<td></td>
+<td><code>keep_going</code></td>
+<td>A parameter that receives a boolean object with the purpose of continuing or not the execution of the workflow in case of an error during the execution of a task. If it is <strong>true</strong>, the execution will continue; if it is <strong>false</strong>, the workflow will stop. <hr> <strong>TYPE</strong>: <a href="https://docs.python.org/3/library/functions.html#bool">bool</a> <strong>DEFAULT</strong>: false</td>
 </tr>
 <tr>
-<td><code>background</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>parallel</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>data_store</code></td>
-<td></td>
+<td><code>mode</code></td>
+<td>A parameter for assigning the execution mode of the workflow. Currently, there is the option to execute in <strong>sequential</strong> mode or <strong>background</strong> mode. By default, it is in <strong>sequential</strong> mode. <hr> <strong>TYPE</strong>: <a href="https://docs.python.org/3/library/stdtypes.html#str">str</a> <strong>DEFAULT</strong>: "sequential"</td>
 </tr>
 </tbody>
 </table></p>

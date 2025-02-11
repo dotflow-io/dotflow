@@ -288,7 +288,7 @@ def my_task():
 workflow = DotFlow()
 
 workflow.task.add(step=my_task, callback=callback)
-workflow.start(workflow=workflow).sequential()
+workflow.start(workflow=workflow)
 </code></pre>
 <h3 id="1-import">1 - Import</h3>
 <p>Start with the basics, which is importing the necessary classes and methods. (<a href="https://fernandocelmer.github.io/dotflow/nav/reference/dotflow-class/">DotFlow</a>, <a href="https://fernandocelmer.github.io/dotflow/nav/reference/action-decorator/">action</a>, <a href="https://fernandocelmer.github.io/dotflow/nav/reference/retry-decorator/">retry</a>)</p>
@@ -307,7 +307,7 @@ def my_task():
     print(&quot;task&quot;)
 </code></pre>
 <h3 id="4-dotflow-class">4 - DotFlow Class</h3>
-<p>Instantiate the DotFlow class in a <code>workflow</code> variable to be used in the following steps.</p>
+<p>Instantiate the DotFlow class in a <code>workflow</code> variable to be used in the following steps. <a href="https://fernandocelmer.github.io/dotflow/nav/reference/dotflow-class/">More details</a>.</p>
 <pre><code class="language-python">workflow = DotFlow()
 </code></pre>
 <h3 id="5-add-task">5 - Add Task</h3>
@@ -316,7 +316,7 @@ def my_task():
 </code></pre>
 <h3 id="6-start">6 - Start</h3>
 <p>Finally, just execute the workflow with the following code snippet.</p>
-<pre><code class="language-python">workflow.start(workflow=workflow).sequential()
+<pre><code class="language-python">workflow.start(workflow=workflow)
 </code></pre></p>
     </article>
 </section>
