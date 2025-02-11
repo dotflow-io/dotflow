@@ -4,10 +4,12 @@ __version__ = "0.2.0.dev-2"
 
 from .core.actions import action, retry
 from .core.workflow import DotFlow
+from .core.context import Context
 
 
 __all__ = [
     "action",
     "retry",
-    "DotFlow"
+    "DotFlow",
+    "Context"
 ]
