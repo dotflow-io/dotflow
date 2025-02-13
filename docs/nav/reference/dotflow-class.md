@@ -16,7 +16,6 @@ from dotflow import DotFlow
 
 ```python
 DotFlow(
-    title="My Workflow",
     initial_context={"data": [0, 1, 2, 3]}
 )
 ```
@@ -25,26 +24,25 @@ DotFlow(
 
 | PARAMETER  | DESCRIPTION      |
 |:-----------:|:---------------|
-| `title` | Reference title of the workflow. This title is used for documentation purposes and also for differentiation in contexts where many workflows are being executed. <br> **TYPE**: [string](https://docs.python.org/3/library/stdtypes.html#str) **DEFAULT**: ""|
-| `initial_context`            | The parameter has the main objective of including initial data in the execution of the workflow. This parameter can be accessed internally to retrieve this information and process it if necessary, according to the logic or objective of the workflow. <br> **TYPE**: [Any](https://docs.python.org/3/library/typing.html#typing.Any) **DEFAULT**: [Context](https://fernandocelmer.github.io/dotflow/nav/reference/context-class/) |
+| `initial_context`            | The parameter exists to include initial data in the execution of the workflow within the **class context**. This parameter can be accessed internally, for example: **self.initial_context**, to retrieve this information and manipulate it if necessary, according to the objective of the workflow. <hr> **TYPE**: [Any](https://docs.python.org/3/library/typing.html#typing.Any) **DEFAULT**: [Context](https://fernandocelmer.github.io/dotflow/nav/reference/context-class/) |
 
 ## Functions
 
-### task
+### add
 
-`class` dotflow.DotFlow.task
+`class` dotflow.DotFlow.task.add
 
-| Function  | Description   |
-|-----------|---------------|
-| `add`     |               |
+| Function          | DESCRIPTION   |
+|-------------------|---------------|
+| *`step`            | A parameter that receives an object of the callable type, which is basically a function. You can see in this [example](https://fernandocelmer.github.io/dotflow/nav/getting-started/#3-task-function). <hr> **TYPE**: [Callable](https://docs.python.org/3/library/typing.html#typing.Callable) **DEFAULT**: _____|
+| `initial_context` | The parameter exists to include initial data in the execution of the workflow within the **function context**. This parameter can be accessed internally, for example: **initial_context**, to retrieve this information and manipulate it if necessary, according to the objective of the workflow. <hr> **TYPE**: [Any](https://docs.python.org/3/library/typing.html#typing.Any) **DEFAULT**: [Context](https://fernandocelmer.github.io/dotflow/nav/reference/context-class/)| [Context](https://fernandocelmer.github.io/dotflow/nav/reference/context-class/) |
+| `callback`        | Any callable object that receives **args** or **kwargs**, which is basically a function. You can see in this [example](https://fernandocelmer.github.io/dotflow/nav/getting-started/#2-callback-function). <hr> **TYPE**: [Callable](https://docs.python.org/3/library/typing.html#typing.Callable) **DEFAULT**: _____|
 
 ### start
 
 `class` dotflow.DotFlow.start
 
-| Function      | Description   |
-|---------------|---------------|
-| `sequential`  |               |
-| `background`  |               |
-| `parallel`    |               |
-| `data_store`  |               |
+| PARAMETER     | DESCRIPTION |
+|---------------|-----------------|
+| `keep_going`  | A parameter that receives a boolean object with the purpose of continuing or not the execution of the workflow in case of an error during the execution of a task. If it is **true**, the execution will continue; if it is **false**, the workflow will stop. <hr> **TYPE**: [bool](https://docs.python.org/3/library/functions.html#bool) **DEFAULT**: false |
+| `mode`        | A parameter for assigning the execution mode of the workflow. Currently, there is the option to execute in **sequential** mode or **background** mode. By default, it is in **sequential** mode. <hr> **TYPE**: [str](https://docs.python.org/3/library/stdtypes.html#str) **DEFAULT**: "sequential" |

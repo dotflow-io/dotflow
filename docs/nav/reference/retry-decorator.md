@@ -24,4 +24,4 @@ def my_task():
 
 | PARAMETER  | DESCRIPTION      |
 |:-----------:|:---------------|
-| *`max_retry` | Maximum number of retries that the function should be executed if there is an error. <br> **TYPE**: int **DEFAULT**: 1 |
+| *`max_retry` | Maximum number of retries that the function should be executed if there is an error. <hr> **TYPE**: [int](https://docs.python.org/3/library/functions.html#int) **DEFAULT**: _____ |

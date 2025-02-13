@@ -21,10 +21,7 @@ def main():
     workflow.task.add(step=my_task, callback=callback)
     workflow.task.add(step=my_task)
 
-    sequential = workflow.start(workflow=workflow).sequential(keep_going=True)
-    background = workflow.start(workflow=workflow).background()
-    parallel = workflow.start(workflow=workflow).parallel()
-    data_store = workflow.start(workflow=workflow).data_store()
+    workflow.start(workflow=workflow)
 
 
 if __name__ == '__main__':
