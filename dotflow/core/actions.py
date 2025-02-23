@@ -26,8 +26,10 @@ def action(func):
 
 
 def retry(max_retry):
-    warn(f"The 'retry' decorator is deprecated", DeprecationWarning, stacklevel=2)
+    warn("The 'retry' decorator is deprecated", DeprecationWarning, stacklevel=2)
+
     def inside(func):
+
         def wrapper(*args, **kwargs):
             attempt = 0
             error_output = Exception()
@@ -47,7 +49,7 @@ def retry(max_retry):
 
 class Action(object):
 
-    def __init__(self, func = None, retry: int = 1):
+    def __init__(self, func=None, retry: int = 1):
         self._func = func
         self._retry = retry
 
@@ -69,17 +71,17 @@ class Action(object):
         return wrapper
 
     def retry(self, *args, **kwargs):
-            attempt = 0
-            error_output = Exception()
+        attempt = 0
+        error_output = Exception()
 
-            while self._retry > attempt:
-                try:
-                    return self._func(*args, **kwargs)
-                except Exception as error:
-                    error_output = error
-                    attempt += 1
+        while self._retry > attempt:
+            try:
+                return self._func(*args, **kwargs)
+            except Exception as error:
+                error_output = error
+                attempt += 1
 
-            raise error_output
+        raise error_output
 
     def output(self, content: Any):
         if content:
