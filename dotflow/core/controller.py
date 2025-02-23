@@ -1,4 +1,4 @@
-"""DotFlow"""
+"""Controller module"""
 
 import threading
 
@@ -59,7 +59,7 @@ class Controller:
         try:
             getattr(self, mode)(keep_going=keep_going)
         except AttributeError:
-            raise Exception("Execution mode does not exist.")
+            raise Exception("Execution mode does not exist.") from AttributeError
 
     def _callback_workflow(self, result: Response):
         final_status = [flow.status for flow in result]

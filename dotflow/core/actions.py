@@ -1,4 +1,4 @@
-"""Action"""
+"""Actions module"""
 
 from dotflow.core.context import Context
 
