@@ -25,10 +25,10 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     project_urls = {
-        'Homepage': 'https://github.com/FernandoCelmer/dotflow',
-        'Repository': 'https://github.com/FernandoCelmer/dotflow',
+        'Homepage': 'https://github.com/dotflow-io/dotflow',
+        'Repository': 'https://github.com/dotflow-io/dotflow',
         'Documentation': 'https://fernandocelmer.github.io/dotflow',
-        'Issues': 'https://github.com/FernandoCelmer/dotflow/issues',
+        'Issues': 'https://github.com/dotflow-io/dotflow/issues',
     },
     cmdclass={
         'install': CustomInstallCommand,

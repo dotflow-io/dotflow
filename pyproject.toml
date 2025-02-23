@@ -22,10 +22,10 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/FernandoCelmer/dotflow"
-Issues = "https://github.com/FernandoCelmer/dotflow/issues"
-Repository = "https://github.com/FernandoCelmer/dotflow"
-Documentation = "https://github.com/FernandoCelmer/dotflow/blob/master/README.md"
+Homepage = "https://github.com/dotflow-io/dotflow"
+Issues = "https://github.com/dotflow-io/dotflow/issues"
+Repository = "https://github.com/dotflow-io/dotflow"
+Documentation = "https://github.com/dotflow-io/dotflow/blob/master/README.md"
 
 [tool.poetry]
 name = "dotflow"
@@ -35,9 +35,9 @@ authors = ["Fernando Celmer <email@fernandocelmer.com>"]
 readme = "README.md"
 license = "GPL-3.0-only"
 package-mode = true
-homepage = "https://github.com/FernandoCelmer/dotflow"
+homepage = "https://github.com/dotflow-io/dotflow"
 documentation = "https://fernandocelmer.github.io/dotflow/"
-repository = "https://github.com/FernandoCelmer/dotflow"
+repository = "https://github.com/dotflow-io/dotflow"
 classifiers = [
   'Development Status :: 4 - Beta',
   "Operating System :: OS Independent",

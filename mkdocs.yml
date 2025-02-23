@@ -1,7 +1,7 @@
 site_name: Dotflow
 repo_name: FernandoCelmer/dotflow
-repo_url: https://github.com/FernandoCelmer/dotflow
-site_url: https://www.fernandocelmer.com/
+repo_url: https://github.com/dotflow-io/dotflow
+site_url: http://dotflow-io
 copyright: Fernando Celmer
 
 nav:
