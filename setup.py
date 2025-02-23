@@ -27,7 +27,7 @@ setup(
     project_urls = {
         'Homepage': 'https://github.com/dotflow-io/dotflow',
         'Repository': 'https://github.com/dotflow-io/dotflow',
-        'Documentation': 'https://fernandocelmer.github.io/dotflow',
+        'Documentation': 'https://dotflow-io.github.io/dotflow',
         'Issues': 'https://github.com/dotflow-io/dotflow/issues',
     },
     cmdclass={

@@ -43,7 +43,7 @@ workflow.start(workflow=workflow)
 
 ### 1 - Import
 
-Start with the basics, which is importing the necessary classes and methods. ([DotFlow](https://fernandocelmer.github.io/dotflow/nav/reference/dotflow-class/), [action](https://fernandocelmer.github.io/dotflow/nav/reference/action-decorator/), [retry](https://fernandocelmer.github.io/dotflow/nav/reference/retry-decorator/))
+Start with the basics, which is importing the necessary classes and methods. ([DotFlow](https://dotflow-io.github.io/dotflow/nav/reference/dotflow-class/), [action](https://dotflow-io.github.io/dotflow/nav/reference/action-decorator/), [retry](https://dotflow-io.github.io/dotflow/nav/reference/retry-decorator/))
 
 ```python
 from dotflow import DotFlow, action, retry
@@ -60,7 +60,7 @@ def my_callback(**kwargs):
 
 ### 3 - Task function
 
-Now create the function responsible for executing your task. It's very simple; just use the `->` [action](https://fernandocelmer.github.io/dotflow/nav/reference/action-decorator/) decorator on top of the function, and that's it—you've created a task. If necessary, you can also add another decorator called `->` [retry](https://fernandocelmer.github.io/dotflow/nav/reference/retry-decorator/) to set the maximum number of execution attempts if the function fails.
+Now create the function responsible for executing your task. It's very simple; just use the `->` [action](https://dotflow-io.github.io/dotflow/nav/reference/action-decorator/) decorator on top of the function, and that's it—you've created a task. If necessary, you can also add another decorator called `->` [retry](https://dotflow-io.github.io/dotflow/nav/reference/retry-decorator/) to set the maximum number of execution attempts if the function fails.
 
 ```python
 @action
@@ -70,7 +70,7 @@ def my_task():
 ```
 
 ### 4 - DotFlow Class
-Instantiate the DotFlow class in a `workflow` variable to be used in the following steps. [More details](https://fernandocelmer.github.io/dotflow/nav/reference/dotflow-class/).
+Instantiate the DotFlow class in a `workflow` variable to be used in the following steps. [More details](https://dotflow-io.github.io/dotflow/nav/reference/dotflow-class/).
 
 ```python
 workflow = DotFlow()

@@ -4,7 +4,7 @@
 
 This is a very simple library that is still in the early stages of development. The main goal of this tool is to create a simple and secure workflow for executing any type of task. The library's API design was made to make it easy to add tasks and control their execution. To keep it simple, just instantiate the `DotFlow` class, use the `add` method, and the `start` method to begin execution.
 
-Start with the basics [here](https://fernandocelmer.github.io/dotflow/nav/getting-started/).
+Start with the basics [here](https://dotflow-io.github.io/dotflow/nav/getting-started/).
 
 ## Getting Help
 

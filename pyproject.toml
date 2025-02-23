@@ -36,7 +36,7 @@ readme = "README.md"
 license = "GPL-3.0-only"
 package-mode = true
 homepage = "https://github.com/dotflow-io/dotflow"
-documentation = "https://fernandocelmer.github.io/dotflow/"
+documentation = "https://dotflow-io.github.io/dotflow/"
 repository = "https://github.com/dotflow-io/dotflow"
 classifiers = [
   'Development Status :: 4 - Beta',
