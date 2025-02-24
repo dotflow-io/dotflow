@@ -54,7 +54,7 @@ classifiers = [
 flow = 'dotflow.main:main'
 
 [tool.poetry.dependencies]
-python = ">=3.9"
+python = ">=3.9.0"
 mkdocs-simple-blog = "^0.1.0"
 
 [tool.poetry.group.dev.dependencies]
@@ -63,6 +63,7 @@ pytest = "^8.3.4"
 flake8 = "^7.1.1"
 tox = "^4.23.2"
 pytest-cov = "^6.0.0"
+pylint = "^3.3.4"
 
 
 [tool.poetry.group.docs.dependencies]

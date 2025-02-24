@@ -1,4 +1,4 @@
-"""Action"""
+"""Actions module"""
 
 from typing import Any
 from warnings import warn
