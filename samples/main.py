@@ -10,11 +10,12 @@ def callback(**kwargs):
 @action(retry=5)
 def extract_task():
     print("extract")
+    return 1
 
 
 @action
-def transform_task():
-    print("transform")
+def transform_task(previous_context):
+    print(previous_context.storage, "transform")
 
 
 @action
