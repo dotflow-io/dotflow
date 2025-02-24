@@ -84,7 +84,7 @@ class TestClassActions(unittest.TestCase):
 
             for record in self._caplog.records:
                 self.assertEqual(record.message, error_message)
-                
+
     def test_action_class_with_previous_context(self):
         inside = Action(dummy_step_previous_context)
 
