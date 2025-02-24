@@ -1,3 +1,5 @@
+"""Workflow module"""
+
 from abc import ABC
 
 

@@ -1,9 +1,11 @@
+"""Task module"""
+
 from typing import Callable, List
 
 from dotflow.core.context import Context
 
 
-def callback(*args, **kwargs):
+def _callback(*args, **kwargs):
     pass
 
 
@@ -28,7 +30,7 @@ class TaskBuilder:
     def add(self,
             step: Task,
             initial_context: Context = Context(),
-            callback: Callable = callback):
+            callback: Callable = _callback):
         task_id = len(self.queu)
 
         if not isinstance(initial_context, Context):

@@ -1,3 +1,5 @@
+"""Context module"""
+
 from abc import ABC
 
 
