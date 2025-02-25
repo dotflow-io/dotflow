@@ -1,9 +1,7 @@
-"""Status module"""
+"""Workflow Status module"""
 
-class Status:
+class WorkflowStatus:
 
-    START = "Started"
-    STOP = "Stopped"
     FAILED = "Failed"
     COMPLETED = "Completed"
     IN_PROGRESS = "In progress"

@@ -7,7 +7,7 @@ from datetime import datetime
 from typing import Callable, List
 
 from dotflow.core.context import Context
-from dotflow.core.types.status import Status
+from dotflow.core.status.step import StepStatus
 from dotflow.core.task import Task
 from dotflow.core.utils import exec
 
@@ -32,7 +32,7 @@ class Controller:
 
     def _callback_workflow(self, result: Task):
         final_status = [flow.status for flow in result]
-        if Status.FAILED in final_status:
+        if StepStatus.FAILED in final_status:
             self.failure(content=result)
         else:
             self.success(content=result)
@@ -45,7 +45,7 @@ class Controller:
             current_context = task.step(previous_context=previous_context)
             duration = int((datetime.now() - start_time).total_seconds())
 
-            task.status = Status.COMPLETED
+            task.status = WorkflowStatus.COMPLETED
             task.current_context = current_context
             task.previous_context = previous_context
             task.duration = duration
@@ -53,7 +53,7 @@ class Controller:
         except Exception as error:
             duration = int((datetime.now() - start_time).total_seconds())
 
-            task.status = Status.FAILED
+            task.status = WorkflowStatus.FAILED
             task.previous_context = previous_context
             task.error.append(error)
             task.duration = duration
@@ -72,7 +72,7 @@ class Controller:
             previous_context = task.current_context
 
             if not keep_going:
-                if task.status == Status.FAILED:
+                if task.status == WorkflowStatus.FAILED:
                     break
 
         self._callback_workflow(result=self.tasks)
