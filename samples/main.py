@@ -10,8 +10,7 @@ def callback(**kwargs):
 @action
 @retry(max_retry=1)
 def my_task():
-    print("task")
-    raise Exception("Task Error!")
+    return "task"
 
 
 def main():
@@ -21,7 +20,7 @@ def main():
     workflow.task.add(step=my_task, callback=callback)
     workflow.task.add(step=my_task)
 
-    workflow.start(workflow=workflow)
+    workflow.start()
 
 
 if __name__ == '__main__':

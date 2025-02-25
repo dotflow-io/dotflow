@@ -1,18 +1,13 @@
 """DotFlow"""
 
+from functools import partial
 
-from dotflow.abc.workflow import ABCWorkflow
-from dotflow.core.context import Context
 from dotflow.core.controller import Controller
 from dotflow.core.task import TaskBuilder
 
 
-class DotFlow(ABCWorkflow):
+class DotFlow:
 
-    def __init__(self, initial_context: Context = Context()) -> None:
-        if not isinstance(initial_context, Context):
-            initial_context = Context(storage=initial_context)
-
+    def __init__(self) -> None:
         self.task = TaskBuilder()
-        self.start = Controller
-        self.initial_context = initial_context
+        self.start = partial(Controller, self.task.queu)
