@@ -28,7 +28,7 @@ def main():
 
     workflow.task.add(step=extract_task, callback=callback)
     workflow.task.add(step=transform_task, callback=callback)
-    workflow.task.add()
+    workflow.task.add(step=load_task)
 
     workflow.start()
 
