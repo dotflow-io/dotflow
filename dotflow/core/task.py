@@ -4,7 +4,7 @@ from uuid import UUID
 from typing import Any, Callable, List
 
 from dotflow.core.context import Context
-from dotflow.core.status.step import StepStatus
+from dotflow.core.status.workflow import WorkflowStatus
 from dotflow.core.utils import callback
 
 
@@ -17,7 +17,7 @@ class Task:
                  initial_context: Any = None,
                  current_context: Any = None,
                  previous_context: Any = None,
-                 status: StepStatus = StepStatus.NOT_STARTED,
+                 status: WorkflowStatus = WorkflowStatus.NOT_STARTED,
                  error: List[Exception] = [],
                  duration: int = 0,
                  workflow_id: UUID = None):

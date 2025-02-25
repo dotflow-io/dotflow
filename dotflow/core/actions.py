@@ -57,17 +57,17 @@ class Action(object):
         if self._func:
             if 'previous_context' in self._func.__code__.co_varnames:
                 previous_context = kwargs.get("previous_context") or Context()
-                return self.output(content=self.retry(*args, previous_context=previous_context))
+                return Context(storage=self.retry(*args, previous_context=previous_context))
             else:
-                return self.output(content=self.retry(*args))
+                return Context(storage=self.retry(*args))
 
         def wrapper(*_args, **_kwargs):
             self._func = args[0]
             if 'previous_context' in args[0].__code__.co_varnames:
                 previous_context = _kwargs.get("previous_context") or Context()
-                return self.output(content=self.retry(*_args, previous_context=previous_context))
+                return Context(storage=self.retry(*_args, previous_context=previous_context))
             else:
-                return self.output(content=self.retry(*_args))
+                return Context(storage=self.retry(*_args))
         return wrapper
 
     def retry(self, *args, **kwargs):
@@ -82,10 +82,3 @@ class Action(object):
                 attempt += 1
 
         raise error_output
-
-    def output(self, content: Any):
-        if content:
-            if isinstance(content, Context):
-                return content
-            return Context(storage=content)
-        return Context()
