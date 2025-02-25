@@ -3,11 +3,13 @@
 from typing import Any
 from datetime import datetime
 
-from dotflow.core.abc.context import ABCContext
 
-
-class Context(ABCContext):
+class Context:
 
     def __init__(self, storage: Any = None) -> None:
-        self.datetime = datetime.now()
+        self.time = datetime.now()
         self.storage = storage
+
+        if isinstance(storage, Context):
+            self.time = storage.time
+            self.storage = storage.storage

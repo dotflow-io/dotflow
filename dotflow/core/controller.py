@@ -9,18 +9,15 @@ from typing import Callable, List
 from dotflow.core.context import Context
 from dotflow.core.types.status import Status
 from dotflow.core.task import Task
-
-
-def execution_default(*args, **kwargs):
-    pass
+from dotflow.core.utils import exec
 
 
 class Controller:
 
     def __init__(self,
                  tasks: List[Task],
-                 success: Callable = execution_default,
-                 failure: Callable = execution_default,
+                 success: Callable = exec,
+                 failure: Callable = exec,
                  keep_going: bool = False,
                  mode: str = "sequential"):
         self.workflow_id = uuid4()
@@ -47,7 +44,7 @@ class Controller:
         try:
             current_context = task.step(previous_context=previous_context)
             duration = int((datetime.now() - start_time).total_seconds())
-            
+
             task.status = Status.COMPLETED
             task.current_context = current_context
             task.previous_context = previous_context

@@ -14,5 +14,5 @@ class TestContext(unittest.TestCase):
     def test_instantiating_class(self):
         context = Context(storage=self.example)
 
-        self.assertIsInstance(context.datetime, datetime)
+        self.assertIsInstance(context.time, datetime)
         self.assertEqual(context.storage, self.example)

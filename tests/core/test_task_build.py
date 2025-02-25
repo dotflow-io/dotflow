@@ -3,8 +3,9 @@
 import unittest
 
 from dotflow.core.context import Context
-from dotflow.core.task import Task, TaskBuilder, _callback
+from dotflow.core.task import Task, TaskBuilder
 from dotflow.core.actions import action
+from dotflow.core.utils import callback
 
 
 @action
@@ -28,7 +29,7 @@ class TestTaskBuild(unittest.TestCase):
 
         self.assertEqual(task.queu[0].task_id, 0)
         self.assertIsInstance(task.queu[0], Task)
-        self.assertEqual(task.queu[0].callback, _callback)
+        self.assertEqual(task.queu[0].callback, callback)
         self.assertEqual(len(task.queu), 1)
 
     def test_add_method_with_class_context(self):
