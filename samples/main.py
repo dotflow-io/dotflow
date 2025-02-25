@@ -1,25 +1,34 @@
 #!/usr/bin/env python
 
-from dotflow import DotFlow, action, retry
+from dotflow import DotFlow, action
 
 
 def callback(**kwargs):
-    print(kwargs)
+    print("Callback", kwargs)
+
+
+@action(retry=5)
+def extract_task():
+    print("extract")
+    return 1
 
 
 @action
-@retry(max_retry=1)
-def my_task():
-    print("task")
-    raise Exception("Task Error!")
+def transform_task(previous_context):
+    print(previous_context.storage, "transform")
+
+
+@action
+def load_task():
+    print("load")
 
 
 def main():
     workflow = DotFlow()
 
-    workflow.task.add(step=my_task, callback=callback)
-    workflow.task.add(step=my_task, callback=callback)
-    workflow.task.add(step=my_task)
+    workflow.task.add(step=extract_task, callback=callback)
+    workflow.task.add(step=transform_task, callback=callback)
+    workflow.task.add(step=load_task)
 
     workflow.start(workflow=workflow)
 
