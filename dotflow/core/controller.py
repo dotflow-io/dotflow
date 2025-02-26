@@ -3,13 +3,13 @@
 import threading
 
 from uuid import uuid4
-from datetime import datetime
 from typing import Callable, List
 
 from dotflow.core.context import Context
 from dotflow.core.status.workflow import WorkflowStatus
 from dotflow.core.task import Task
 from dotflow.core.utils import exec
+from dotflow.core.decorators import time
 
 
 class Controller:
@@ -37,27 +37,20 @@ class Controller:
         else:
             self.success(content=result)
 
+    @time
     def _excution(self, task: Task, previous_context: Context):
         task.workflow_id = self.workflow_id
-        task.status = WorkflowStatus.IN_PROGRESS
-        start_time = datetime.now()
+        task.set_status(WorkflowStatus.IN_PROGRESS)
+        task.set_previous_context(previous_context)
 
         try:
             current_context = task.step(previous_context=previous_context)
-            duration = int((datetime.now() - start_time).total_seconds())
-
-            task.status = WorkflowStatus.COMPLETED
-            task.current_context = current_context
-            task.previous_context = previous_context
-            task.duration = duration
+            task.set_status(WorkflowStatus.COMPLETED)
+            task.set_current_context(current_context)
 
         except Exception as error:
-            duration = int((datetime.now() - start_time).total_seconds())
-
-            task.status = WorkflowStatus.FAILED
-            task.previous_context = previous_context
+            task.set_status(WorkflowStatus.FAILED)
             task.error.append(error)
-            task.duration = duration
 
         task.callback(content=task)
         return task

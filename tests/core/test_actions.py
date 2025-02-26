@@ -6,7 +6,7 @@ import logging
 from pytest import fixture
 
 from dotflow.core.context import Context
-from dotflow.core.actions import Action, action
+from dotflow.core.action import Action
 
 
 def dummy_step():
@@ -22,26 +22,6 @@ def dummy_step_previous_context(previous_context):
     logging.debug(previous_context.storage)
 
 
-class TestMethodActions(unittest.TestCase):
-
-    @fixture(autouse=True)
-    def inject_fixtures(self, caplog):
-        self._caplog = caplog
-
-    def test_instantiating_action_method(self):
-        inside = action(dummy_step)
-        decorated_function = inside()
-
-        self.assertIsInstance(decorated_function, Context)
-
-    def test_action_with_previous_context(self):
-        inside = action(dummy_step_previous_context)
-
-        with self._caplog.at_level(logging.DEBUG):
-            inside()
-            self.assertEqual(self._caplog.records[0].message, 'None')
-
-
 class TestClassActions(unittest.TestCase):
 
     @fixture(autouse=True)
@@ -54,8 +34,8 @@ class TestClassActions(unittest.TestCase):
         inside = Action(dummy_step)
         decorated_function = inside()
 
-        self.assertEqual(inside._retry, number_of_retries)
-        self.assertEqual(inside._func, dummy_step)
+        self.assertEqual(inside.retry, number_of_retries)
+        self.assertEqual(inside.func, dummy_step)
         self.assertIsInstance(decorated_function, Context)
 
     def test_instantiating_action_class_with_retry(self):
@@ -64,8 +44,8 @@ class TestClassActions(unittest.TestCase):
         inside = Action(dummy_step, retry=number_of_retries)
         decorated_function = inside()
 
-        self.assertEqual(inside._retry, number_of_retries)
-        self.assertEqual(inside._func, dummy_step)
+        self.assertEqual(inside.retry, number_of_retries)
+        self.assertEqual(inside.func, dummy_step)
         self.assertIsInstance(decorated_function, Context)
 
     def test_instantiating_action_class_with_fail_retry(self):

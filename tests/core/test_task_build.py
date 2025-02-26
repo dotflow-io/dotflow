@@ -4,7 +4,7 @@ import unittest
 
 from dotflow.core.context import Context
 from dotflow.core.task import Task, TaskBuilder
-from dotflow.core.actions import action
+from dotflow.core.action import Action as action
 from dotflow.core.utils import callback
 
 

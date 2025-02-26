@@ -19,8 +19,8 @@ class Task:
                  previous_context: Any = None,
                  status: WorkflowStatus = WorkflowStatus.NOT_STARTED,
                  error: List[Exception] = [],
-                 duration: int = 0,
-                 workflow_id: UUID = None):
+                 duration: float = 0,
+                 workflow_id: UUID = None) -> None:
         self.task_id = task_id
         self.step = step
         self.callback = callback
@@ -31,6 +31,18 @@ class Task:
         self.error = error
         self.duration = duration
         self.workflow_id = workflow_id
+    
+    def set_status(self, value: WorkflowStatus) -> None:
+        self.status = value
+
+    def set_duration(self, value: float) -> None:
+        self.duration = value
+
+    def set_current_context(self, value: Context) -> None:
+        self.current_context = value
+
+    def set_previous_context(self, value: Context) -> None:
+        self.previous_context = value
 
 
 class TaskBuilder:
