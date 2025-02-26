@@ -77,8 +77,8 @@ class Controller:
         th = threading.Thread(target=self.sequential, args=[keep_going])
         th.start()
 
-    def parallel(self):
+    def parallel(self, keep_going: bool = False):
         ...
 
-    def data_store(self):
+    def data_store(self, keep_going: bool = False):
         ...

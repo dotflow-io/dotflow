@@ -13,7 +13,7 @@ from tests.mocks import action_step, simple_step
 class TestTaskBuild(unittest.TestCase):
 
     def setUp(self):
-        self.example = {"foo": "bar"}
+        self.content = {"foo": "bar"}
 
     def test_instantiating_class(self):
         task = TaskBuilder()
@@ -34,13 +34,13 @@ class TestTaskBuild(unittest.TestCase):
         task.add(
             step=action_step,
             initial_context=Context(
-                storage=self.example
+                storage=self.content
             )
         )
 
         self.assertEqual(
             task.queu[0].initial_context.storage,
-            self.example
+            self.content
         )
 
         self.assertIsInstance(
@@ -52,12 +52,12 @@ class TestTaskBuild(unittest.TestCase):
         task = TaskBuilder()
         task.add(
             step=action_step,
-            initial_context=self.example
+            initial_context=self.content
         )
 
         self.assertEqual(
             task.queu[0].initial_context.storage,
-            self.example
+            self.content
         )
 
         self.assertIsInstance(

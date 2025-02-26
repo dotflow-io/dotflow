@@ -10,6 +10,11 @@ def action_step() -> None:
     pass
 
 
+@action
+def action_step_with_error() -> None:
+    raise Exception("Fail!")
+
+
 def simple_step() -> None:
     pass
 
