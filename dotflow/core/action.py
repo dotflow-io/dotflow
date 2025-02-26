@@ -1,6 +1,6 @@
 """Action module"""
 
-from typing import Callable
+from typing import Callable, Dict
 
 from dotflow.core.context import Context
 
@@ -14,7 +14,7 @@ class Action(object):
     def __call__(self, *args, **kwargs):
         if self.func:
             if self._has_context():
-                context = kwargs.get("previous_context") or Context()
+                context = self._get_context(kwargs=kwargs)
                 return Context(storage=self._retry(*args, previous_context=context))
             else:
                 return Context(storage=self._retry(*args))
@@ -22,7 +22,7 @@ class Action(object):
         def action(*_args, **_kwargs):
             self.func = args[0]
             if self._has_context():
-                context = _kwargs.get("previous_context") or Context()
+                context = self._get_context(kwargs=_kwargs)
                 return Context(storage=self._retry(*_args, previous_context=context))
             else:
                 return Context(storage=self._retry(*_args))
@@ -43,3 +43,6 @@ class Action(object):
 
     def _has_context(self):
         return 'previous_context' in self.func.__code__.co_varnames
+
+    def _get_context(self, kwargs: Dict):
+        return kwargs.get("previous_context") or Context()
