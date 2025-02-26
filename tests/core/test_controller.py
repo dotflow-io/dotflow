@@ -7,7 +7,7 @@ from unittest.mock import Mock
 from types import FunctionType
 
 from dotflow.core.controller import Controller
-from dotflow.core.models import Execution, Status 
+from dotflow.core.models import Execution, Status
 from dotflow.core.exception import ExecutionModeNotExist
 from dotflow.core.task import Task
 
