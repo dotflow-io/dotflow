@@ -1,0 +1,11 @@
+[flake8]
+extend-ignore = E501,E501
+exclude =
+    __pycache__,
+    docs,
+    dotflow/core/exception.py,
+    setup.py,
+    old,
+    build,
+    dist
+max-complexity = 10

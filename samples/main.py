@@ -30,7 +30,7 @@ def main():
     workflow.task.add(step=transform_task, callback=callback)
     workflow.task.add(step=load_task)
 
-    workflow.start(workflow=workflow)
+    workflow.start()
 
 
 if __name__ == '__main__':

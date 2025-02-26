@@ -1,5 +1,12 @@
 # Release Notes
 
+## v0.4.0
+
+- [📦 PyPI - Build 0.4.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.4.0)
+- [📌 Improvement of the API to start the workflow task](https://github.com/dotflow-io/dotflow/issues/23)
+- [📌 Improved API interface for decorators](https://github.com/dotflow-io/dotflow/issues/19)
+- [📌 Improvement unit tests](https://github.com/dotflow-io/dotflow/issues/14)
+
 ## v0.3.0
 
 - [📦 PyPI - Build 0.3.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.3.0)

@@ -25,28 +25,26 @@ poetry add dotflow
 The simplest file could look like this:
 
 ```python
-from dotflow import DotFlow, action, retry
+from dotflow import DotFlow, action
 
-def my_callback(**kwargs):
-    print(kwargs)
+def my_callback(*args, **kwargs):
+    print(args, kwargs)
 
-@action
-@retry(max_retry=1)
+@action(retry=5)
 def my_task():
     print("task")
 
 workflow = DotFlow()
-
 workflow.task.add(step=my_task, callback=callback)
-workflow.start(workflow=workflow)
+workflow.start()
 ```
 
 ### 1 - Import
 
-Start with the basics, which is importing the necessary classes and methods. ([DotFlow](https://dotflow-io.github.io/dotflow/nav/reference/dotflow-class/), [action](https://dotflow-io.github.io/dotflow/nav/reference/action-decorator/), [retry](https://dotflow-io.github.io/dotflow/nav/reference/retry-decorator/))
+Start with the basics, which is importing the necessary classes and methods. ([DotFlow](https://dotflow-io.github.io/dotflow/nav/reference/dotflow-class/), [action](https://dotflow-io.github.io/dotflow/nav/reference/action-decorator/))
 
 ```python
-from dotflow import DotFlow, action, retry
+from dotflow import DotFlow, action
 ```
 
 ### 2 - Callback function
@@ -54,17 +52,16 @@ from dotflow import DotFlow, action, retry
 Create a `my_callback` function to receive execution information of a task. `It is not necessary` to include this function, as you will still have a report at the end of the execution in the instantiated object of the `DotFlow` class. This `my_callback` function is only needed if you need to do something after the execution of the task, for example: sending a message to someone, making a phone call, or sending a letter.
 
 ```python
-def my_callback(**kwargs):
-    print(kwargs)
+def my_callback(*args, **kwargs):
+    print(args, kwargs)
 ```
 
 ### 3 - Task function
 
-Now create the function responsible for executing your task. It's very simple; just use the `->` [action](https://dotflow-io.github.io/dotflow/nav/reference/action-decorator/) decorator on top of the function, and that's it—you've created a task. If necessary, you can also add another decorator called `->` [retry](https://dotflow-io.github.io/dotflow/nav/reference/retry-decorator/) to set the maximum number of execution attempts if the function fails.
+Now, create the function responsible for executing your task. It's very simple; just use the [action](https://dotflow-io.github.io/dotflow/nav/reference/action-decorator/) decorator above the function, and that's it—you've created a task. If necessary, you can also add the parameter called `retry` to set the maximum number of execution attempts if the function fails.
 
 ```python
-@action
-@retry(max_retry=1)
+@action(retry=5)
 def my_task():
     print("task")
 ```
@@ -89,5 +86,5 @@ workflow.task.add(step=my_task, callback=my_callback)
 Finally, just execute the workflow with the following code snippet.
 
 ```python
-workflow.start(workflow=workflow)
+workflow.start()
 ```

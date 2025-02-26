@@ -3,42 +3,43 @@
 import unittest
 
 from dotflow.core.context import Context
+from dotflow.core.models.status import Status
 from dotflow.core.task import Task
-from dotflow.core.actions import action
 
-
-@action
-def dummy_step():
-    pass
-
-
-def dummy_callback(*args, **kwargs):
-    pass
+from tests.mocks import (
+    action_step,
+    simple_callback
+)
 
 
 class TestTask(unittest.TestCase):
 
     def setUp(self):
-        self.example = {"foo": "bar"}
+        self.task = Task(
+            task_id=0,
+            step=action_step,
+            callback=simple_callback
+        )
+        self.content = {"foo": "bar"}
 
     def test_instantiating_class(self):
         Task(
             task_id=0,
             initial_context=Context(
-                storage=self.example
+                storage=self.content
             ),
-            step=dummy_step,
-            callback=dummy_callback
+            step=action_step,
+            callback=simple_callback
         )
 
     def test_task_id(self):
         task = Task(
             task_id=0,
             initial_context=Context(
-                storage=self.example
+                storage=self.content
             ),
-            step=dummy_step,
-            callback=dummy_callback
+            step=action_step,
+            callback=simple_callback
         )
 
         self.assertEqual(task.task_id, 0)
@@ -47,13 +48,37 @@ class TestTask(unittest.TestCase):
         task = Task(
             task_id=0,
             initial_context=Context(
-                storage=self.example
+                storage=self.content
             ),
-            step=dummy_step,
-            callback=dummy_callback
+            step=action_step,
+            callback=simple_callback
         )
 
         self.assertEqual(
             task.initial_context.storage,
-            self.example
+            self.content
         )
+
+    def test_set_status(self):
+        expected_value = Status.COMPLETED
+
+        self.task.set_status(value=expected_value)
+        self.assertEqual(self.task.status, expected_value)
+
+    def test_set_duration(self):
+        expected_value = 42
+
+        self.task.set_duration(value=expected_value)
+        self.assertEqual(self.task.duration, expected_value)
+
+    def test_set_current_context(self):
+        expected_value = Context(storage=self.content)
+
+        self.task.set_current_context(value=expected_value)
+        self.assertEqual(self.task.current_context, expected_value)
+
+    def test_set_previous_context(self):
+        expected_value = Context(storage=self.content)
+
+        self.task.set_previous_context(value=expected_value)
+        self.assertEqual(self.task.previous_context, expected_value)

@@ -1,12 +1,15 @@
 """Context module"""
 
-from datetime import datetime
 from typing import Any
-from dotflow.abc.context import ABCContext
+from datetime import datetime
 
 
-class Context(ABCContext):
+class Context:
 
     def __init__(self, storage: Any = None) -> None:
-        self.datetime = datetime.now()
-        self.storage = storage
+        self.time = datetime.now()
+
+        if isinstance(storage, Context):
+            self.storage = storage.storage
+        else:
+            self.storage = storage
