@@ -1,6 +1,6 @@
 """Dotflow __init__ module."""
 
-__version__ = "0.4.0.dev-1"
+__version__ = "0.4.0"
 
 from .core.action import Action as action
 from .core.context import Context
