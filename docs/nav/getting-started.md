@@ -27,8 +27,8 @@ The simplest file could look like this:
 ```python
 from dotflow import DotFlow, action
 
-def my_callback(**kwargs):
-    print(kwargs)
+def my_callback(*args, **kwargs):
+    print(args, kwargs)
 
 @action(retry=5)
 def my_task():
@@ -52,8 +52,8 @@ from dotflow import DotFlow, action
 Create a `my_callback` function to receive execution information of a task. `It is not necessary` to include this function, as you will still have a report at the end of the execution in the instantiated object of the `DotFlow` class. This `my_callback` function is only needed if you need to do something after the execution of the task, for example: sending a message to someone, making a phone call, or sending a letter.
 
 ```python
-def my_callback(**kwargs):
-    print(kwargs)
+def my_callback(*args, **kwargs):
+    print(args, kwargs)
 ```
 
 ### 3 - Task function
