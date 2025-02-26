@@ -1,6 +1,8 @@
 # Action decorator
 
-## Import
+Here's the reference information for the `action` decorator.
+
+### Import
 
 You can import the action decorator directly from dotflow:
 
@@ -8,7 +10,9 @@ You can import the action decorator directly from dotflow:
 from dotflow import action
 ```
 
-## Example
+### Examples
+
+#### Standard
 
 `class` dotflow.action
 
@@ -17,3 +21,19 @@ from dotflow import action
 def my_task():
     print("task")
 ```
+
+#### With Retry
+
+`class` dotflow.action
+
+```python
+@action(retry=5)
+def my_task():
+    print("task")
+```
+
+### Parameters
+
+| PARAMETER  | DESCRIPTION      |
+|:-----------:|:---------------|
+| `retry` | Integer-type parameter referring to the number of retry attempts the function will execute in case of failure. |
