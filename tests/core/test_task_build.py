@@ -3,14 +3,11 @@
 import unittest
 
 from dotflow.core.context import Context
+from dotflow.core.exception import MissingStepDecorator
 from dotflow.core.task import Task, TaskBuilder
-from dotflow.core.action import Action as action
 from dotflow.core.utils import callback
 
-
-@action
-def dummy_step():
-    pass
+from tests.mocks import action_step, simple_step
 
 
 class TestTaskBuild(unittest.TestCase):
@@ -25,7 +22,7 @@ class TestTaskBuild(unittest.TestCase):
 
     def test_add_method(self):
         task = TaskBuilder()
-        task.add(step=dummy_step)
+        task.add(step=action_step)
 
         self.assertEqual(task.queu[0].task_id, 0)
         self.assertIsInstance(task.queu[0], Task)
@@ -35,7 +32,7 @@ class TestTaskBuild(unittest.TestCase):
     def test_add_method_with_class_context(self):
         task = TaskBuilder()
         task.add(
-            step=dummy_step,
+            step=action_step,
             initial_context=Context(
                 storage=self.example
             )
@@ -54,7 +51,7 @@ class TestTaskBuild(unittest.TestCase):
     def test_add_method_without_class_context(self):
         task = TaskBuilder()
         task.add(
-            step=dummy_step,
+            step=action_step,
             initial_context=self.example
         )
 
@@ -71,9 +68,30 @@ class TestTaskBuild(unittest.TestCase):
     def test_count_method(self):
         task = TaskBuilder()
 
-        initial_count = task.count()
-        self.assertEqual(initial_count, 0)
+        initial_count = 0
+        final_count = 1
 
-        task.add(step=dummy_step)
-        final_count = task.count()
-        self.assertEqual(final_count, 1)
+        self.assertEqual(task.count(), initial_count)
+
+        task.add(step=action_step)
+
+        self.assertEqual(task.count(), final_count)
+
+    def test_clear_method(self):
+        task = TaskBuilder()
+
+        expected_count_before = 1
+        expected_count_after = 0
+
+        task.add(step=action_step)
+        self.assertEqual(task.count(), expected_count_before)
+
+        task.clear()
+
+        self.assertEqual(task.count(), expected_count_after)
+
+    def test_with_step_without_decorator(self):
+        task = TaskBuilder()
+
+        with self.assertRaises(MissingStepDecorator):
+            task.add(step=simple_step)

@@ -9,10 +9,18 @@ from dotflow.core.context import Context
 class TestContext(unittest.TestCase):
 
     def setUp(self):
-        self.example = {"foo": "bar"}
+        self.content = {"foo": "bar"}
 
     def test_instantiating_class(self):
-        context = Context(storage=self.example)
+        context = Context(storage=self.content)
 
         self.assertIsInstance(context.time, datetime)
-        self.assertEqual(context.storage, self.example)
+        self.assertEqual(context.storage, self.content)
+
+    def test_instantiates_context_with_context(self):
+        context = Context(
+            storage=Context(storage=self.content)
+        )
+
+        self.assertIsInstance(context.time, datetime)
+        self.assertEqual(context.storage, self.content)

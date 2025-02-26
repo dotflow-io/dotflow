@@ -9,17 +9,10 @@ from dotflow.core.context import Context
 from dotflow.core.decorators.action import action
 
 
-def dummy_step():
-    pass
-
-
-def dummy_step_with_fail():
-    logging.error("Fail!")
-    raise Exception("Fail!")
-
-
-def dummy_step_previous_context(previous_context):
-    logging.debug(previous_context.storage)
+from tests.mocks import (
+    simple_step,
+    dummy_step_previous_context
+)
 
 
 class TestMethodAction(unittest.TestCase):
@@ -29,7 +22,7 @@ class TestMethodAction(unittest.TestCase):
         self._caplog = caplog
 
     def test_instantiating_action_method(self):
-        inside = action(dummy_step)
+        inside = action(simple_step)
         decorated_function = inside()
 
         self.assertIsInstance(decorated_function, Context)

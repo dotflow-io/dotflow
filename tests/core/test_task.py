@@ -4,16 +4,11 @@ import unittest
 
 from dotflow.core.context import Context
 from dotflow.core.task import Task
-from dotflow.core.action import Action as action
 
-
-@action
-def dummy_step():
-    pass
-
-
-def dummy_callback(*args, **kwargs):
-    pass
+from tests.mocks import (
+    action_step,
+    simple_callback
+)
 
 
 class TestTask(unittest.TestCase):
@@ -27,8 +22,8 @@ class TestTask(unittest.TestCase):
             initial_context=Context(
                 storage=self.example
             ),
-            step=dummy_step,
-            callback=dummy_callback
+            step=action_step,
+            callback=simple_callback
         )
 
     def test_task_id(self):
@@ -37,8 +32,8 @@ class TestTask(unittest.TestCase):
             initial_context=Context(
                 storage=self.example
             ),
-            step=dummy_step,
-            callback=dummy_callback
+            step=action_step,
+            callback=simple_callback
         )
 
         self.assertEqual(task.task_id, 0)
@@ -49,8 +44,8 @@ class TestTask(unittest.TestCase):
             initial_context=Context(
                 storage=self.example
             ),
-            step=dummy_step,
-            callback=dummy_callback
+            step=action_step,
+            callback=simple_callback
         )
 
         self.assertEqual(
