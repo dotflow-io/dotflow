@@ -83,17 +83,22 @@
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
+        <a href="../reference/add-function/" class="dropdown-item text-decoration-none ">Add Function</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../reference/start-function/" class="dropdown-item text-decoration-none ">Start Function</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
         <a href="../reference/context-class/" class="dropdown-item text-decoration-none ">Context class</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
         <a href="../reference/action-decorator/" class="dropdown-item text-decoration-none ">Action decorator</a>
-    </li>
-<!-- endblock -->
-                                    <!-- block dropdown-menu -->
-    <li>
-        <a href="../reference/retry-decorator/" class="dropdown-item text-decoration-none ">Retry decorator</a>
     </li>
 <!-- endblock -->
                             </ul>
@@ -275,34 +280,31 @@
 </code></pre>
 <h2 id="first-steps">First Steps</h2>
 <p>The simplest file could look like this:</p>
-<pre><code class="language-python">from dotflow import DotFlow, action, retry
+<pre><code class="language-python">from dotflow import DotFlow, action
 
-def my_callback(**kwargs):
-    print(kwargs)
+def my_callback(*args, **kwargs):
+    print(args, kwargs)
 
-@action
-@retry(max_retry=1)
+@action(retry=5)
 def my_task():
     print(&quot;task&quot;)
 
 workflow = DotFlow()
-
 workflow.task.add(step=my_task, callback=callback)
-workflow.start(workflow=workflow)
+workflow.start()
 </code></pre>
 <h3 id="1-import">1 - Import</h3>
-<p>Start with the basics, which is importing the necessary classes and methods. (<a href="https://dotflow-io.github.io/dotflow/nav/reference/dotflow-class/">DotFlow</a>, <a href="https://dotflow-io.github.io/dotflow/nav/reference/action-decorator/">action</a>, <a href="https://dotflow-io.github.io/dotflow/nav/reference/retry-decorator/">retry</a>)</p>
-<pre><code class="language-python">from dotflow import DotFlow, action, retry
+<p>Start with the basics, which is importing the necessary classes and methods. (<a href="https://dotflow-io.github.io/dotflow/nav/reference/dotflow-class/">DotFlow</a>, <a href="https://dotflow-io.github.io/dotflow/nav/reference/action-decorator/">action</a>)</p>
+<pre><code class="language-python">from dotflow import DotFlow, action
 </code></pre>
 <h3 id="2-callback-function">2 - Callback function</h3>
 <p>Create a <code>my_callback</code> function to receive execution information of a task. <code>It is not necessary</code> to include this function, as you will still have a report at the end of the execution in the instantiated object of the <code>DotFlow</code> class. This <code>my_callback</code> function is only needed if you need to do something after the execution of the task, for example: sending a message to someone, making a phone call, or sending a letter.</p>
-<pre><code class="language-python">def my_callback(**kwargs):
-    print(kwargs)
+<pre><code class="language-python">def my_callback(*args, **kwargs):
+    print(args, kwargs)
 </code></pre>
 <h3 id="3-task-function">3 - Task function</h3>
-<p>Now create the function responsible for executing your task. It's very simple; just use the <code>-&gt;</code> <a href="https://dotflow-io.github.io/dotflow/nav/reference/action-decorator/">action</a> decorator on top of the function, and that's it—you've created a task. If necessary, you can also add another decorator called <code>-&gt;</code> <a href="https://dotflow-io.github.io/dotflow/nav/reference/retry-decorator/">retry</a> to set the maximum number of execution attempts if the function fails.</p>
-<pre><code class="language-python">@action
-@retry(max_retry=1)
+<p>Now, create the function responsible for executing your task. It's very simple; just use the <a href="https://dotflow-io.github.io/dotflow/nav/reference/action-decorator/">action</a> decorator above the function, and that's it—you've created a task. If necessary, you can also add the parameter called <code>retry</code> to set the maximum number of execution attempts if the function fails.</p>
+<pre><code class="language-python">@action(retry=5)
 def my_task():
     print(&quot;task&quot;)
 </code></pre>
@@ -316,7 +318,7 @@ def my_task():
 </code></pre>
 <h3 id="6-start">6 - Start</h3>
 <p>Finally, just execute the workflow with the following code snippet.</p>
-<pre><code class="language-python">workflow.start(workflow=workflow)
+<pre><code class="language-python">workflow.start()
 </code></pre></p>
     </article>
 </section>

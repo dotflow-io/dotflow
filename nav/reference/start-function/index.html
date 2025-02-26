@@ -1,14 +1,14 @@
 <!doctype html>
 <html data-bs-theme="light">
     <head>
-                <title>Mode of Action - Dotflow</title>
+                <title>Start Function - Dotflow</title>
 
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
             
-            <link rel="canonical" href="http://dotflow-io/nav/learn/approaches/">
+            <link rel="canonical" href="http://dotflow-io/nav/reference/start-function/">
             
 
             
@@ -73,32 +73,32 @@
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="
+                            <a class=" active 
                             nav-link dropdown-toggle text-decoration-none" href="#" data-bs-toggle="dropdown">[Reference]</a>
                             <ul class="dropdown-menu">
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/dotflow-class/" class="dropdown-item text-decoration-none ">Dotflow class</a>
+        <a href="../dotflow-class/" class="dropdown-item text-decoration-none ">Dotflow class</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/add-function/" class="dropdown-item text-decoration-none ">Add Function</a>
+        <a href="../add-function/" class="dropdown-item text-decoration-none ">Add Function</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/start-function/" class="dropdown-item text-decoration-none ">Start Function</a>
+        <a href="./" class="dropdown-item text-decoration-none  active ">Start Function</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/context-class/" class="dropdown-item text-decoration-none ">Context class</a>
+        <a href="../context-class/" class="dropdown-item text-decoration-none ">Context class</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/action-decorator/" class="dropdown-item text-decoration-none ">Action decorator</a>
+        <a href="../action-decorator/" class="dropdown-item text-decoration-none ">Action decorator</a>
     </li>
 <!-- endblock -->
                             </ul>
@@ -210,21 +210,13 @@
     <div class="sidebar navbar-collapse collapse card">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#mode-of-action" class="nav-link">Mode of Action</a>
+            <li class="nav-item" data-bs-level="1"><a href="#start-function" class="nav-link">Start Function</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#sequential" class="nav-link">Sequential</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#background" class="nav-link">Background</a>
+            <li class="nav-item" data-bs-level="3"><a href="#example" class="nav-link">Example</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#parallel" class="nav-link">Parallel</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#data-storage" class="nav-link">Data Storage</a>
+            <li class="nav-item" data-bs-level="3"><a href="#parameters" class="nav-link">Parameters</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -243,11 +235,31 @@
             
             
         </header>
-        <p><h1 id="mode-of-action">Mode of Action</h1>
-<h2 id="sequential">Sequential</h2>
-<h2 id="background">Background</h2>
-<h2 id="parallel">Parallel</h2>
-<h2 id="data-storage">Data Storage</h2></p>
+        <p><h1 id="start-function">Start Function</h1>
+<p>Here's the reference information for the <code>start</code> function.</p>
+<h3 id="example">Example</h3>
+<p><code>class</code> dotflow.DotFlow.start</p>
+<pre><code class="language-python">workflow.start()
+</code></pre>
+<h3 id="parameters">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>PARAMETER</th>
+<th>DESCRIPTION</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>keep_going</code></td>
+<td>A parameter that receives a boolean object with the purpose of continuing or not the execution of the workflow in case of an error during the execution of a task. If it is <strong>true</strong>, the execution will continue; if it is <strong>false</strong>, the workflow will stop. <hr> <strong>TYPE</strong>: <a href="https://docs.python.org/3/library/functions.html#bool">bool</a> <strong>DEFAULT</strong>: false</td>
+</tr>
+<tr>
+<td><code>mode</code></td>
+<td>A parameter for assigning the execution mode of the workflow. Currently, there is the option to execute in <strong>sequential</strong> mode or <strong>background</strong> mode. By default, it is in <strong>sequential</strong> mode. <hr> <strong>TYPE</strong>: <a href="https://docs.python.org/3/library/stdtypes.html#str">str</a> <strong>DEFAULT</strong>: "sequential"</td>
+</tr>
+</tbody>
+</table></p>
     </article>
 </section>
 <!-- endblock -->
@@ -260,6 +272,19 @@
 
             
                     <!-- block preview -->
+    <div class="preview row row-cols-md-3 text-center pt-md-3" id="component-preview">
+        <div class="col themed-grid-col">
+            <a rel="prev" href="../add-function/" class="nav-link">
+                <i class="fa fa-arrow-left"></i> Previous
+            </a>
+        </div>
+        <div class="col themed-grid-col"></div>
+        <div class="col themed-grid-col">
+            <a rel="next" href="../context-class/" class="nav-link">
+                Next <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
 <!-- endblock -->
             
 

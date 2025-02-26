@@ -83,17 +83,22 @@
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
+        <a href="../add-function/" class="dropdown-item text-decoration-none ">Add Function</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../start-function/" class="dropdown-item text-decoration-none ">Start Function</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
         <a href="./" class="dropdown-item text-decoration-none  active ">Context class</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
         <a href="../action-decorator/" class="dropdown-item text-decoration-none ">Action decorator</a>
-    </li>
-<!-- endblock -->
-                                    <!-- block dropdown-menu -->
-    <li>
-        <a href="../retry-decorator/" class="dropdown-item text-decoration-none ">Retry decorator</a>
     </li>
 <!-- endblock -->
                             </ul>
@@ -207,15 +212,15 @@
             
             <li class="nav-item" data-bs-level="1"><a href="#context-class" class="nav-link">Context class</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#import" class="nav-link">Import</a>
+            <li class="nav-item" data-bs-level="3"><a href="#import" class="nav-link">Import</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#example" class="nav-link">Example</a>
+            <li class="nav-item" data-bs-level="3"><a href="#example" class="nav-link">Example</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#parameters" class="nav-link">Parameters</a>
+            <li class="nav-item" data-bs-level="3"><a href="#parameters" class="nav-link">Parameters</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -236,17 +241,17 @@
         </header>
         <p><h1 id="context-class">Context class</h1>
 <p>Here's the reference information for the <code>Context</code> class, with all its parameters, attributes and functions.</p>
-<h2 id="import">Import</h2>
+<h3 id="import">Import</h3>
 <p>You can import the Context class directly from dotflow:</p>
 <pre><code class="language-python">from dotflow import Context
 </code></pre>
-<h2 id="example">Example</h2>
+<h3 id="example">Example</h3>
 <p><code>class</code> dotflow.Context</p>
 <pre><code class="language-python">Context(
     storage={&quot;data&quot;: [0, 1, 2, 3]}
 )
 </code></pre>
-<h2 id="parameters">Parameters</h2>
+<h3 id="parameters">Parameters</h3>
 <table>
 <thead>
 <tr>
@@ -260,7 +265,7 @@
 <td style="text-align: left;">Attribute where any type of Python object can be stored. <hr> <strong>TYPE</strong>: <a href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a> <strong>DEFAULT</strong>: None</td>
 </tr>
 <tr>
-<td style="text-align: center;"><code>datetime</code></td>
+<td style="text-align: center;"><code>time</code></td>
 <td style="text-align: left;">Attribute available only for access; sending this parameter is not allowed. It will be assigned a value at runtime with the current date and time. <hr> <strong>TYPE</strong>: <a href="https://docs.python.org/3/library/datetime.html">datetime</a> <strong>DEFAULT</strong>: <a href="https://docs.python.org/3/library/datetime.html#datetime.datetime.now">datetime.now</a></td>
 </tr>
 </tbody>
@@ -279,7 +284,7 @@
                     <!-- block preview -->
     <div class="preview row row-cols-md-3 text-center pt-md-3" id="component-preview">
         <div class="col themed-grid-col">
-            <a rel="prev" href="../dotflow-class/" class="nav-link">
+            <a rel="prev" href="../start-function/" class="nav-link">
                 <i class="fa fa-arrow-left"></i> Previous
             </a>
         </div>

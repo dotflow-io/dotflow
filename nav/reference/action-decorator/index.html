@@ -83,17 +83,22 @@
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
+        <a href="../add-function/" class="dropdown-item text-decoration-none ">Add Function</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../start-function/" class="dropdown-item text-decoration-none ">Start Function</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
         <a href="../context-class/" class="dropdown-item text-decoration-none ">Context class</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
         <a href="./" class="dropdown-item text-decoration-none  active ">Action decorator</a>
-    </li>
-<!-- endblock -->
-                                    <!-- block dropdown-menu -->
-    <li>
-        <a href="../retry-decorator/" class="dropdown-item text-decoration-none ">Retry decorator</a>
     </li>
 <!-- endblock -->
                             </ul>
@@ -207,11 +212,23 @@
             
             <li class="nav-item" data-bs-level="1"><a href="#action-decorator" class="nav-link">Action decorator</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#import" class="nav-link">Import</a>
+            <li class="nav-item" data-bs-level="3"><a href="#import" class="nav-link">Import</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#example" class="nav-link">Example</a>
+            <li class="nav-item" data-bs-level="3"><a href="#examples" class="nav-link">Examples</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="4"><a href="#standard" class="nav-link">Standard</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="4"><a href="#with-retry" class="nav-link">With Retry</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="3"><a href="#parameters" class="nav-link">Parameters</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -231,16 +248,39 @@
             
         </header>
         <p><h1 id="action-decorator">Action decorator</h1>
-<h2 id="import">Import</h2>
+<p>Here's the reference information for the <code>action</code> decorator.</p>
+<h3 id="import">Import</h3>
 <p>You can import the action decorator directly from dotflow:</p>
 <pre><code class="language-python">from dotflow import action
 </code></pre>
-<h2 id="example">Example</h2>
+<h3 id="examples">Examples</h3>
+<h4 id="standard">Standard</h4>
 <p><code>class</code> dotflow.action</p>
 <pre><code class="language-python">@action
 def my_task():
     print(&quot;task&quot;)
-</code></pre></p>
+</code></pre>
+<h4 id="with-retry">With Retry</h4>
+<p><code>class</code> dotflow.action</p>
+<pre><code class="language-python">@action(retry=5)
+def my_task():
+    print(&quot;task&quot;)
+</code></pre>
+<h3 id="parameters">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">PARAMETER</th>
+<th style="text-align: left;">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>retry</code></td>
+<td style="text-align: left;">Integer-type parameter referring to the number of retry attempts the function will execute in case of failure.</td>
+</tr>
+</tbody>
+</table></p>
     </article>
 </section>
 <!-- endblock -->
@@ -261,7 +301,7 @@ def my_task():
         </div>
         <div class="col themed-grid-col"></div>
         <div class="col themed-grid-col">
-            <a rel="next" href="../retry-decorator/" class="nav-link">
+            <a rel="next" href="../../development/development-guide/" class="nav-link">
                 Next <i class="fa fa-arrow-right"></i>
             </a>
         </div>

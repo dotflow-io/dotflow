@@ -2,38 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>http://dotflow-io/</loc>
-         <lastmod>2025-02-23</lastmod>
+         <lastmod>2025-02-26</lastmod>
     </url>
     <url>
          <loc>http://dotflow-io/nav/getting-started/</loc>
-         <lastmod>2025-02-23</lastmod>
+         <lastmod>2025-02-26</lastmod>
     </url>
     <url>
          <loc>http://dotflow-io/nav/development/development-guide/</loc>
-         <lastmod>2025-02-23</lastmod>
+         <lastmod>2025-02-26</lastmod>
     </url>
     <url>
          <loc>http://dotflow-io/nav/development/release-notes/</loc>
-         <lastmod>2025-02-23</lastmod>
+         <lastmod>2025-02-26</lastmod>
     </url>
     <url>
          <loc>http://dotflow-io/nav/learn/approaches/</loc>
-         <lastmod>2025-02-23</lastmod>
+         <lastmod>2025-02-26</lastmod>
     </url>
     <url>
          <loc>http://dotflow-io/nav/reference/action-decorator/</loc>
-         <lastmod>2025-02-23</lastmod>
+         <lastmod>2025-02-26</lastmod>
+    </url>
+    <url>
+         <loc>http://dotflow-io/nav/reference/add-function/</loc>
+         <lastmod>2025-02-26</lastmod>
     </url>
     <url>
          <loc>http://dotflow-io/nav/reference/context-class/</loc>
-         <lastmod>2025-02-23</lastmod>
+         <lastmod>2025-02-26</lastmod>
     </url>
     <url>
          <loc>http://dotflow-io/nav/reference/dotflow-class/</loc>
-         <lastmod>2025-02-23</lastmod>
+         <lastmod>2025-02-26</lastmod>
     </url>
     <url>
          <loc>http://dotflow-io/nav/reference/retry-decorator/</loc>
-         <lastmod>2025-02-23</lastmod>
+         <lastmod>2025-02-26</lastmod>
+    </url>
+    <url>
+         <loc>http://dotflow-io/nav/reference/start-function/</loc>
+         <lastmod>2025-02-26</lastmod>
     </url>
 </urlset>

@@ -1,14 +1,14 @@
 <!doctype html>
 <html data-bs-theme="light">
     <head>
-                <title>Mode of Action - Dotflow</title>
+                <title>Add Function - Dotflow</title>
 
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
             
-            <link rel="canonical" href="http://dotflow-io/nav/learn/approaches/">
+            <link rel="canonical" href="http://dotflow-io/nav/reference/add-function/">
             
 
             
@@ -73,32 +73,32 @@
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="
+                            <a class=" active 
                             nav-link dropdown-toggle text-decoration-none" href="#" data-bs-toggle="dropdown">[Reference]</a>
                             <ul class="dropdown-menu">
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/dotflow-class/" class="dropdown-item text-decoration-none ">Dotflow class</a>
+        <a href="../dotflow-class/" class="dropdown-item text-decoration-none ">Dotflow class</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/add-function/" class="dropdown-item text-decoration-none ">Add Function</a>
+        <a href="./" class="dropdown-item text-decoration-none  active ">Add Function</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/start-function/" class="dropdown-item text-decoration-none ">Start Function</a>
+        <a href="../start-function/" class="dropdown-item text-decoration-none ">Start Function</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/context-class/" class="dropdown-item text-decoration-none ">Context class</a>
+        <a href="../context-class/" class="dropdown-item text-decoration-none ">Context class</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/action-decorator/" class="dropdown-item text-decoration-none ">Action decorator</a>
+        <a href="../action-decorator/" class="dropdown-item text-decoration-none ">Action decorator</a>
     </li>
 <!-- endblock -->
                             </ul>
@@ -210,21 +210,13 @@
     <div class="sidebar navbar-collapse collapse card">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#mode-of-action" class="nav-link">Mode of Action</a>
+            <li class="nav-item" data-bs-level="1"><a href="#add-function" class="nav-link">Add Function</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#sequential" class="nav-link">Sequential</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#background" class="nav-link">Background</a>
+            <li class="nav-item" data-bs-level="3"><a href="#example" class="nav-link">Example</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#parallel" class="nav-link">Parallel</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#data-storage" class="nav-link">Data Storage</a>
+            <li class="nav-item" data-bs-level="3"><a href="#parameters" class="nav-link">Parameters</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -243,11 +235,35 @@
             
             
         </header>
-        <p><h1 id="mode-of-action">Mode of Action</h1>
-<h2 id="sequential">Sequential</h2>
-<h2 id="background">Background</h2>
-<h2 id="parallel">Parallel</h2>
-<h2 id="data-storage">Data Storage</h2></p>
+        <p><h1 id="add-function">Add Function</h1>
+<p>Here's the reference information for the <code>add</code> function.</p>
+<h3 id="example">Example</h3>
+<p><code>class</code> dotflow.DotFlow.task.add</p>
+<pre><code class="language-python">workflow.task.add(step=my_task, callback=my_callback)
+</code></pre>
+<h3 id="parameters">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>DESCRIPTION</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*<code>step</code></td>
+<td>A parameter that receives an object of the callable type, which is basically a function. You can see in this <a href="https://dotflow-io.github.io/dotflow/nav/getting-started/#3-task-function">example</a>. <hr> <strong>TYPE</strong>: <a href="https://docs.python.org/3/library/typing.html#typing.Callable">Callable</a> <strong>DEFAULT</strong>: _____</td>
+</tr>
+<tr>
+<td><code>initial_context</code></td>
+<td>The parameter exists to include initial data in the execution of the workflow within the <strong>function context</strong>. This parameter can be accessed internally, for example: <strong>initial_context</strong>, to retrieve this information and manipulate it if necessary, according to the objective of the workflow. <hr> <strong>TYPE</strong>: <a href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a> <strong>DEFAULT</strong>: <a href="https://dotflow-io.github.io/dotflow/nav/reference/context-class/">Context</a></td>
+</tr>
+<tr>
+<td><code>callback</code></td>
+<td>Any callable object that receives <strong>args</strong> or <strong>kwargs</strong>, which is basically a function. You can see in this <a href="https://dotflow-io.github.io/dotflow/nav/getting-started/#2-callback-function">example</a>. <hr> <strong>TYPE</strong>: <a href="https://docs.python.org/3/library/typing.html#typing.Callable">Callable</a> <strong>DEFAULT</strong>: _____</td>
+</tr>
+</tbody>
+</table></p>
     </article>
 </section>
 <!-- endblock -->
@@ -260,6 +276,19 @@
 
             
                     <!-- block preview -->
+    <div class="preview row row-cols-md-3 text-center pt-md-3" id="component-preview">
+        <div class="col themed-grid-col">
+            <a rel="prev" href="../dotflow-class/" class="nav-link">
+                <i class="fa fa-arrow-left"></i> Previous
+            </a>
+        </div>
+        <div class="col themed-grid-col"></div>
+        <div class="col themed-grid-col">
+            <a rel="next" href="../start-function/" class="nav-link">
+                Next <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
 <!-- endblock -->
             
 
