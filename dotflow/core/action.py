@@ -19,14 +19,14 @@ class Action(object):
             else:
                 return Context(storage=self._retry(*args))
 
-        def wrapper(*_args, **_kwargs):
+        def action(*_args, **_kwargs):
             self.func = args[0]
             if self._has_context():
                 context = _kwargs.get("previous_context") or Context()
                 return Context(storage=self._retry(*_args, previous_context=context))
             else:
                 return Context(storage=self._retry(*_args))
-        return wrapper
+        return action
 
     def _retry(self, *args, **kwargs):
         attempt = 0

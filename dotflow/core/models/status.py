@@ -1,6 +1,7 @@
 """Step Status module"""
 
-class WorkflowStatus:
+
+class Status:
 
     NOT_STARTED = "Not started"
     IN_PROGRESS = "In progress"

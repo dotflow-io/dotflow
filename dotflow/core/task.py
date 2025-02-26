@@ -1,10 +1,13 @@
 """Task module"""
 
 from uuid import UUID
+from types import FunctionType
 from typing import Any, Callable, List
 
+from dotflow.core.action import Action
 from dotflow.core.context import Context
-from dotflow.core.status.workflow import WorkflowStatus
+from dotflow.core.exception import MissingStepDecorator
+from dotflow.core.models.status import Status
 from dotflow.core.utils import callback
 
 
@@ -17,7 +20,7 @@ class Task:
                  initial_context: Any = None,
                  current_context: Any = None,
                  previous_context: Any = None,
-                 status: WorkflowStatus = WorkflowStatus.NOT_STARTED,
+                 status: Status = Status.NOT_STARTED,
                  error: List[Exception] = [],
                  duration: float = 0,
                  workflow_id: UUID = None) -> None:
@@ -31,8 +34,8 @@ class Task:
         self.error = error
         self.duration = duration
         self.workflow_id = workflow_id
-    
-    def set_status(self, value: WorkflowStatus) -> None:
+
+    def set_status(self, value: Status) -> None:
         self.status = value
 
     def set_duration(self, value: float) -> None:
@@ -53,7 +56,18 @@ class TaskBuilder:
     def add(self,
             step: Callable,
             callback: Callable = callback,
-            initial_context: Any = None):
+            initial_context: Any = None) -> None:
+
+        is_ok = []
+        if isinstance(step, Action):
+            is_ok.append(True)
+
+        if isinstance(step, FunctionType):
+            if step.__name__ == "action":
+                is_ok.append(True)
+
+        if not is_ok:
+            raise MissingStepDecorator()
 
         self.queu.append(
             Task(

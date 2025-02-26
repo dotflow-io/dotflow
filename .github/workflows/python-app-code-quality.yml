@@ -23,5 +23,4 @@ jobs:
         pip install flake8
     - name: 📝️ Code Scan
       run: |
-        flake8 dotflow/ --count --show-source --statistics --ignore=E501
-        flake8 tests/ --count --show-source --statistics --ignore=E501
+        flake8

@@ -4,7 +4,11 @@ from warnings import warn
 
 
 def retry(max_retry: int):
-    warn("The 'retry' decorator is deprecated", DeprecationWarning, stacklevel=2)
+    warn(
+        message="The 'retry' decorator is deprecated",
+        category=DeprecationWarning,
+        stacklevel=2
+    )
 
     def inside(func):
 
