@@ -35,7 +35,7 @@ def my_task():
     print("task")
 
 workflow = DotFlow()
-workflow.task.add(step=my_task, callback=callback)
+workflow.task.add(step=my_task, callback=my_callback)
 workflow.start()
 ```
 
