@@ -290,7 +290,7 @@ def my_task():
     print(&quot;task&quot;)
 
 workflow = DotFlow()
-workflow.task.add(step=my_task, callback=callback)
+workflow.task.add(step=my_task, callback=my_callback)
 workflow.start()
 </code></pre>
 <h3 id="1-import">1 - Import</h3>
