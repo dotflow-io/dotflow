@@ -21,7 +21,7 @@ setup(
     version=__version__,
     author="Fernando Celmer",
     author_email="email@fernandocelmer.com",
-    description="🎲 Dotflow turns an idea into flow quickly!",
+    description="🎲 Dotflow turns an idea into flow!",
     long_description=long_description,
     long_description_content_type="text/markdown",
     project_urls = {

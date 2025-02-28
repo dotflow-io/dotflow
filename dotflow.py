@@ -2,13 +2,14 @@
 
 import argparse
 
+from dotflow import __description__
 from dotflow.cli.setup import Command
 
 
 def main():
     Command(
         parser=argparse.ArgumentParser(
-            description='🎲 Dotflow turns an idea into flow quickly!'
+            description=__description__
         )
     )
 

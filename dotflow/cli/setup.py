@@ -1,6 +1,6 @@
 """Module Command"""
 
-from dotflow import __version__
+from dotflow import __version__, __description__
 from dotflow.cli.commands.server import Server
 
 
@@ -32,4 +32,4 @@ class Command:
         if hasattr(arguments, 'exec'):
             arguments.exec(parser=self.parser, arguments=arguments)
         else:
-            print("Dotflow")
+            print(__description__)
