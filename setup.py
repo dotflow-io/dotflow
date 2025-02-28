@@ -52,6 +52,6 @@ setup(
     python_requires=">=3.6",
     zip_safe=True,
     entry_points={
-        'console_scripts': ['flow=dotflow.main:main'],
+        'console_scripts': ['dotflow=dotflow.main:main'],
     },
 )
