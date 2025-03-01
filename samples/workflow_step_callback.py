@@ -19,6 +19,8 @@ def main():
     workflow.task.add(step=simple_step, callback=callback)
     workflow.start()
 
+    return workflow
+
 
 if __name__ == "__main__":
     main()

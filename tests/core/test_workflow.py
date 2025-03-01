@@ -1,63 +1,118 @@
-"""Test context of workflow"""
+"""Test context of controller"""
 
 import unittest
 
-from dotflow.core.controller import Controller
-from dotflow.core.context import Context
-from dotflow.core.task import Task, TaskBuilder
-from dotflow.core.workflow import DotFlow
-from dotflow.core.models.status import Status
+from uuid import UUID
+from unittest.mock import Mock
+from types import FunctionType
 
-from tests.mocks import action_step
+from dotflow.core.workflow import Workflow
+from dotflow.core.models import TypeExecution, Status
+from dotflow.core.exception import ExecutionModeNotExist, StepMissingInit
+from dotflow.core.task import Task
+
+from tests.mocks import (
+    ActionStep,
+    ActionStepWithoutInit,
+    action_step,
+    action_step_with_error,
+    simple_callback,
+)
 
 
-class TestDotFlow(unittest.TestCase):
+class TestController(unittest.TestCase):
 
     def setUp(self):
-        self.workflow = DotFlow()
-        self.workflow.task.add(step=action_step)
+        task = Task(
+            task_id=0,
+            step=action_step,
+            callback=simple_callback
+        )
+        self.tasks = [task]
 
     def test_instantiating_class(self):
-        self.assertIsInstance(self.workflow.task, TaskBuilder)
-        self.assertIsInstance(self.workflow.start(), Controller)
+        controller = Workflow(tasks=self.tasks)
 
-    def test_result_task_with_start(self):
-        self.workflow.start()
-        result = self.workflow.result_task()
+        self.assertListEqual(controller.tasks, self.tasks)
+        self.assertIsInstance(controller.workflow_id, UUID)
+        self.assertIsInstance(controller.success, FunctionType)
+        self.assertIsInstance(controller.failure, FunctionType)
 
-        self.assertEqual(len(result), 1)
-        self.assertIsInstance(result[0], Task)
-        self.assertEqual(result[0].status, Status.COMPLETED)
+    def test_execution_with_function_completed(self):
+        task = Task(
+            task_id=0,
+            step=action_step,
+            callback=simple_callback
+        )
 
-    def test_result_context_with_start(self):
-        self.workflow.start()
-        result = self.workflow.result_context()
+        controller = Workflow(tasks=[task])
+        self.assertEqual(controller.tasks[0].status, Status.COMPLETED)
 
-        self.assertEqual(len(result), 1)
-        self.assertIsInstance(result[0], Context)
+    def test_execution_with_function_failed(self):
+        task = Task(
+            task_id=0,
+            step=action_step_with_error,
+            callback=simple_callback
+        )
 
-    def test_result_storage_with_start(self):
-        self.workflow.start()
-        result = self.workflow.result_storage()
+        controller = Workflow(tasks=[task])
+        self.assertEqual(controller.tasks[0].status, Status.FAILED)
 
-        self.assertEqual(len(result), 1)
-        self.assertEqual(result[0], {"foo": "bar"})
+    def test_with_execution_mode_that_does_not_exist(self):
+        with self.assertRaises(ExecutionModeNotExist):
+            Workflow(tasks=self.tasks, mode="unknown")
 
-    def test_result_task_without_start(self):
-        result = self.workflow.result_task()
+    def test_with_execution_mode_sequential(self):
+        Workflow(tasks=self.tasks, mode=TypeExecution.SEQUENTIAL)
 
-        self.assertEqual(len(result), 1)
-        self.assertIsInstance(result[0], Task)
-        self.assertEqual(result[0].status, Status.NOT_STARTED)
+    def test_with_execution_mode_background(self):
+        Workflow(tasks=self.tasks, mode=TypeExecution.BACKGROUND)
 
-    def test_result_context_without_start(self):
-        result = self.workflow.result_context()
+    def test_with_execution_mode_parallel(self):
+        Workflow(tasks=self.tasks, mode=TypeExecution.PARALLEL)
 
-        self.assertEqual(len(result), 1)
-        self.assertIsInstance(result[0], Context)
+    def test_with_execution_mode_data_store(self):
+        Workflow(tasks=self.tasks, mode=TypeExecution.DATA_STORE)
 
-    def test_result_storage_without_start(self):
-        result = self.workflow.result_storage()
+    def test_callback_success_called(self):
+        task = Task(
+            task_id=0,
+            step=action_step,
+            callback=simple_callback
+        )
+        mock_success = Mock()
 
-        self.assertEqual(len(result), 1)
-        self.assertEqual(result[0], None)
+        Workflow(tasks=[task], success=mock_success)
+        mock_success.assert_called()
+
+    def test_callback_failure_called(self):
+        task = Task(
+            task_id=0,
+            step=action_step_with_error,
+            callback=simple_callback
+        )
+        mock_failure = Mock()
+
+        Workflow(tasks=[task], failure=mock_failure)
+        mock_failure.assert_called()
+
+    def test_execution_with_class_completed(self):
+        task = Task(
+            task_id=0,
+            step=ActionStep,
+            callback=simple_callback
+        )
+
+        controller = Workflow(tasks=[task])
+        self.assertEqual(controller.tasks[0].status, Status.COMPLETED)
+
+    def test_execution_with_class_without_init_failed(self):
+        task = Task(
+            task_id=42,
+            step=ActionStepWithoutInit,
+            callback=simple_callback
+        )
+
+        controller = Workflow(tasks=[task])
+        self.assertEqual(controller.tasks[0].status, Status.FAILED)
+        self.assertIsInstance(controller.tasks[0].error[0], StepMissingInit)

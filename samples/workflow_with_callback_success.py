@@ -3,8 +3,8 @@
 from dotflow import DotFlow, action
 
 
-def callback(content):  # HERE
-    for task in content:
+def callback(tasks):  # HERE
+    for task in tasks:
         print(task.task_id, task.status, task.current_context.storage)
 
 
@@ -18,6 +18,8 @@ def main():
 
     workflow.task.add(step=simple_step)
     workflow.start(success=callback)
+
+    return workflow
 
 
 if __name__ == "__main__":

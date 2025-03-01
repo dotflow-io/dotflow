@@ -29,8 +29,7 @@ def main():
     workflow.task.add(step=Step)
     workflow.start()
 
-    for task in workflow.result_task():
-        print(task.task_id, task.status, task.current_context.storage)
+    return workflow
 
 
 if __name__ == "__main__":

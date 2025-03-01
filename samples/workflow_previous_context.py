@@ -29,6 +29,8 @@ def main():
 
     workflow.start()
 
+    return workflow
+
 
 if __name__ == "__main__":
     main()
