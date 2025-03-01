@@ -55,8 +55,8 @@ class Execution:
             self.task.set_current_context(current_context)
 
         except AttributeError as err:
-            if err.name == "__code__" and self.task.step.func:
-                if hasattr(self.task.step.func, "__name__"):
+            if self.task.step.func and hasattr(self.task.step.func, "__name__"):
+                if "'__code__'" in err.args[0].split():
                     err = StepMissingInit(name=self.task.step.func.__name__)
 
             self.task.set_status(Status.FAILED)
