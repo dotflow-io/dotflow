@@ -1,7 +1,7 @@
 """Utils module"""
 
 
-def exec(*args, **kwargs) -> None:
+def simple(*args, **kwargs) -> None:
     pass
 
 
