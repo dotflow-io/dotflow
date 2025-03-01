@@ -15,9 +15,6 @@ def main():
     workflow.task.add(step=simple_step)
     workflow.start()
 
-    for task in workflow.task.queu:
-        print(task.task_id, task.status, task.current_context.storage)
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

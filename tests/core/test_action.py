@@ -10,8 +10,8 @@ from dotflow.core.action import Action
 
 from tests.mocks import (
     simple_step,
-    dummy_step_previous_context,
-    dummy_step_with_fail
+    simple_step_with_previous_context,
+    simple_step_with_fail
 )
 
 
@@ -45,7 +45,7 @@ class TestClassActions(unittest.TestCase):
         error_message = "Fail!"
         number_of_retries = 5
 
-        inside = Action(dummy_step_with_fail, retry=number_of_retries)
+        inside = Action(simple_step_with_fail, retry=number_of_retries)
 
         with self._caplog.at_level(logging.ERROR):
             try:
@@ -59,8 +59,30 @@ class TestClassActions(unittest.TestCase):
                 self.assertEqual(record.message, error_message)
 
     def test_action_class_with_previous_context(self):
-        inside = Action(dummy_step_previous_context)
+        inside = Action(simple_step_with_previous_context)
 
         with self._caplog.at_level(logging.DEBUG):
             inside()
             self.assertEqual(self._caplog.records[0].message, 'None')
+
+    def test_has_context_true(self):
+        inside = Action(simple_step_with_previous_context)
+
+        self.assertTrue(inside._has_context())
+
+    def test_has_context_false(self):
+        inside = Action(simple_step)
+
+        self.assertFalse(inside._has_context())
+
+    def test_get_context_with_content(self):
+        inside = Action(simple_step)
+        result = inside._get_context(kwargs={"previous_context": "foo"})
+
+        self.assertEqual(result, "foo")
+
+    def test_get_context_without_content(self):
+        inside = Action(simple_step)
+        result = inside._get_context(kwargs={})
+
+        self.assertIsInstance(result, Context)

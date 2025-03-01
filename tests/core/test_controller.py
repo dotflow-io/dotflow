@@ -12,6 +12,7 @@ from dotflow.core.exception import ExecutionModeNotExist
 from dotflow.core.task import Task
 
 from tests.mocks import (
+    ActionStep,
     action_step,
     action_step_with_error,
     simple_callback,
@@ -36,7 +37,7 @@ class TestController(unittest.TestCase):
         self.assertIsInstance(controller.success, FunctionType)
         self.assertIsInstance(controller.failure, FunctionType)
 
-    def test_function_execution_completed(self):
+    def test_execution_with_function_completed(self):
         task = Task(
             task_id=0,
             step=action_step,
@@ -46,7 +47,7 @@ class TestController(unittest.TestCase):
         controller = Controller(tasks=[task])
         self.assertEqual(controller.tasks[0].status, Status.COMPLETED)
 
-    def test_function_execution_failed(self):
+    def test_execution_with_function_failed(self):
         task = Task(
             task_id=0,
             step=action_step_with_error,
@@ -93,3 +94,13 @@ class TestController(unittest.TestCase):
 
         Controller(tasks=[task], failure=mock_failure)
         mock_failure.assert_called()
+
+    def test_execution_with_class_completed(self):
+        task = Task(
+            task_id=0,
+            step=ActionStep,
+            callback=simple_callback
+        )
+
+        controller = Controller(tasks=[task])
+        self.assertEqual(controller.tasks[0].status, Status.COMPLETED)

@@ -20,5 +20,5 @@ def main():
     workflow.start(success=callback)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

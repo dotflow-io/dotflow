@@ -3,14 +3,61 @@
 import unittest
 
 from dotflow.core.controller import Controller
-from dotflow.core.task import TaskBuilder
+from dotflow.core.context import Context
+from dotflow.core.task import Task, TaskBuilder
 from dotflow.core.workflow import DotFlow
+from dotflow.core.models.status import Status
+
+from tests.mocks import action_step
 
 
 class TestDotFlow(unittest.TestCase):
 
-    def test_instantiating_class(self):
-        workflow = DotFlow()
+    def setUp(self):
+        self.workflow = DotFlow()
+        self.workflow.task.add(step=action_step)
 
-        self.assertIsInstance(workflow.task, TaskBuilder)
-        self.assertIsInstance(workflow.start(), Controller)
+    def test_instantiating_class(self):
+        self.assertIsInstance(self.workflow.task, TaskBuilder)
+        self.assertIsInstance(self.workflow.start(), Controller)
+
+    def test_result_task_with_start(self):
+        self.workflow.start()
+        result = self.workflow.result_task()
+
+        self.assertEqual(len(result), 1)
+        self.assertIsInstance(result[0], Task)
+        self.assertEqual(result[0].status, Status.COMPLETED)
+
+    def test_result_context_with_start(self):
+        self.workflow.start()
+        result = self.workflow.result_context()
+
+        self.assertEqual(len(result), 1)
+        self.assertIsInstance(result[0], Context)
+
+    def test_result_storage_with_start(self):
+        self.workflow.start()
+        result = self.workflow.result_storage()
+
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0], {"foo": "bar"})
+
+    def test_result_task_without_start(self):
+        result = self.workflow.result_task()
+
+        self.assertEqual(len(result), 1)
+        self.assertIsInstance(result[0], Task)
+        self.assertEqual(result[0].status, Status.NOT_STARTED)
+
+    def test_result_context_without_start(self):
+        result = self.workflow.result_context()
+
+        self.assertEqual(len(result), 1)
+        self.assertIsInstance(result[0], Context)
+
+    def test_result_storage_without_start(self):
+        result = self.workflow.result_storage()
+
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0], None)

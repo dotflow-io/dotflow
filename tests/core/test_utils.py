@@ -2,7 +2,7 @@
 
 import unittest
 
-from dotflow.core.utils import callback, exec
+from dotflow.core.utils import callback, simple
 
 
 class TestUtils(unittest.TestCase):
@@ -11,4 +11,4 @@ class TestUtils(unittest.TestCase):
         callback()
 
     def test_exec(self):
-        exec()
+        simple()
