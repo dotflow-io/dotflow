@@ -20,7 +20,7 @@ from tests.mocks import (
 )
 
 
-class TestController(unittest.TestCase):
+class TestWorkflow(unittest.TestCase):
 
     def setUp(self):
         task = Task(

@@ -5,7 +5,6 @@ import threading
 from uuid import uuid4
 from typing import Callable, List
 
-from dotflow.core.action import Action
 from dotflow.core.context import Context
 from dotflow.core.execution import Execution
 from dotflow.core.exception import ExecutionModeNotExist
@@ -40,19 +39,6 @@ class Workflow:
             self.failure(tasks=tasks)
         else:
             self.success(tasks=tasks)
-
-    def _execution_with_class(self, step_class: Callable):
-        context = Context(storage=[])
-
-        for func_name in dir(step_class):
-            additional_function = getattr(step_class, func_name)
-            if isinstance(additional_function, Action):
-                try:
-                    context.storage.append(additional_function())
-                except TypeError:
-                    context.storage.append(additional_function(step_class))
-
-        return context
 
     def sequential(self, keep_going: bool = False):
         previous_context = Context()
