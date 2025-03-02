@@ -39,6 +39,9 @@ class Execution:
                 except TypeError:
                     context.storage.append(additional_function(step_class))
 
+        if not context.storage:
+            return Context(storage=step_class)
+
         return context
 
     @time
