@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from dotflow import __version__
+from dotflow import __version__, __description__
 from setuptools import setup
 from setuptools.command.install import install
 
@@ -21,7 +21,7 @@ setup(
     version=__version__,
     author="Fernando Celmer",
     author_email="email@fernandocelmer.com",
-    description="🎲 Dotflow turns an idea into flow!",
+    description=__description__,
     long_description=long_description,
     long_description_content_type="text/markdown",
     project_urls = {
@@ -36,20 +36,17 @@ setup(
     classifiers=[
         'Development Status :: 4 - Beta',
         "Operating System :: OS Independent",
-        "License :: OSI Approved :: GNU General Public License v3.0",
+        "License :: OSI Approved :: MIT License",
         'Intended Audience :: Developers',
         'Natural Language :: English',
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
-        "Programming Language :: Python :: 3.13",
     ],
     packages=['dotflow'],
     include_package_data=True,
-    python_requires=">=3.6",
+    python_requires=">=3.9",
     zip_safe=True,
     entry_points={
         'console_scripts': ['dotflow=dotflow.main:main'],
