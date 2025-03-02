@@ -53,6 +53,8 @@ dotflow = 'dotflow.main:main'
 [tool.poetry.dependencies]
 python = ">=3.9.0"
 mkdocs-simple-blog = "^0.1.0"
+pyzmq = "^26.2.1"
+pydantic = "^2.10.6"
 
 [tool.poetry.group.dev.dependencies]
 build = "^1.2.2.post1"
