@@ -1,5 +1,15 @@
 # Release Notes
 
+## v0.5.0
+
+- [📦 PyPI - Build 0.5.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.5.0)
+- [📌 CLI - Command-Line Interface](https://github.com/dotflow-io/dotflow/pull/29)
+- [📌 Step adaptation with class structure](https://github.com/dotflow-io/dotflow/pull/31)
+
+## v0.4.1
+
+- [📦 PyPI - Build 0.4.1](https://github.com/dotflow-io/dotflow/releases/tag/v0.4.1)
+
 ## v0.4.0
 
 - [📦 PyPI - Build 0.4.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.4.0)
