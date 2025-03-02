@@ -52,6 +52,7 @@ coverage.xml
 cover/
 /report
 /coverage
+/reports
 
 # Translations
 *.mo
