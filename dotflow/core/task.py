@@ -7,7 +7,11 @@ from dotflow.core.action import Action
 from dotflow.core.context import Context
 from dotflow.core.exception import MissingActionDecorator
 from dotflow.core.models.status import Status
-from dotflow.core.utils import callback
+from dotflow.core.utils import (
+    basic_callback,
+    traceback_error,
+    message_error
+)
 
 
 class Task:
@@ -16,7 +20,7 @@ class Task:
         self,
         task_id: int,
         step: Callable,
-        callback: Callable = callback,
+        callback: Callable = basic_callback,
         initial_context: Any = None,
     ) -> None:
         self.task_id = task_id
@@ -26,7 +30,7 @@ class Task:
         self.current_context = Context()
         self.previous_context = Context()
         self.status = Status.NOT_STARTED
-        self.error = []
+        self.error = TaskError()
         self.duration = 0
         self.workflow_id = None
 
@@ -45,6 +49,22 @@ class Task:
     def set_workflow_id(self, value: UUID) -> None:
         self.workflow_id = value
 
+    def set_error(self, value: Exception) -> None:
+        self.error.set(error=value)
+
+
+class TaskError:
+
+    def __init__(self):
+        self.exception = None
+        self.traceback = None
+        self.message = None
+
+    def set(self, error: Exception):
+        self.exception = error
+        self.traceback = traceback_error(error=error)
+        self.message = message_error(error=error)
+
 
 class TaskBuilder:
 
@@ -52,7 +72,10 @@ class TaskBuilder:
         self.queu: List[Task] = []
 
     def add(
-        self, step: Callable, callback: Callable = callback, initial_context: Any = None
+        self,
+        step: Callable,
+        callback: Callable = basic_callback,
+        initial_context: Any = None
     ) -> None:
         if step.__module__ != Action.__module__:
             raise MissingActionDecorator()

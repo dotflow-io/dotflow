@@ -1,6 +1,4 @@
-"""TypeExecution module"""
-
-import logging
+"""Execution module"""
 
 from uuid import UUID
 from typing import Callable
@@ -54,22 +52,20 @@ class Execution:
                     step_class=current_context.storage
                 )
 
-            self.task.set_status(Status.COMPLETED)
             self.task.set_current_context(current_context)
+            self.task.set_status(Status.COMPLETED)
 
         except AttributeError as err:
             if self.task.step.func and hasattr(self.task.step.func, "__name__"):
                 if "'__code__'" in err.args[0].split():
                     err = StepMissingInit(name=self.task.step.func.__name__)
 
+            self.task.set_error(err)
             self.task.set_status(Status.FAILED)
-            self.task.error.append(err)
-            logging.error(msg=err)
 
         except Exception as err:
+            self.task.set_error(err)
             self.task.set_status(Status.FAILED)
-            self.task.error.append(err)
-            logging.error(msg=err)
 
         finally:
             self.task.callback(content=self.task)
