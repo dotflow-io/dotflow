@@ -11,7 +11,7 @@ from dotflow.core.decorators.action import action
 
 from tests.mocks import (
     simple_step,
-    dummy_step_previous_context
+    simple_step_with_previous_context
 )
 
 
@@ -28,7 +28,7 @@ class TestMethodAction(unittest.TestCase):
         self.assertIsInstance(decorated_function, Context)
 
     def test_action_with_previous_context(self):
-        inside = action(dummy_step_previous_context)
+        inside = action(simple_step_with_previous_context)
 
         with self._caplog.at_level(logging.DEBUG):
             inside()

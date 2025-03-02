@@ -1,7 +1,7 @@
-"""Execution mode module"""
+"""Type Execution mode module"""
 
 
-class Execution:
+class TypeExecution:
 
     SEQUENTIAL = "sequential"
     BACKGROUND = "background"

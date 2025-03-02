@@ -3,11 +3,15 @@
 import unittest
 
 from dotflow.core.context import Context
-from dotflow.core.exception import MissingStepDecorator
+from dotflow.core.exception import MissingActionDecorator
 from dotflow.core.task import Task, TaskBuilder
 from dotflow.core.utils import callback
 
-from tests.mocks import action_step, simple_step
+from tests.mocks import (
+    action_step,
+    simple_step,
+    SimpleStep
+)
 
 
 class TestTaskBuild(unittest.TestCase):
@@ -90,8 +94,14 @@ class TestTaskBuild(unittest.TestCase):
 
         self.assertEqual(task.count(), expected_count_after)
 
-    def test_with_step_without_decorator(self):
+    def test_with_method_step_without_decorator(self):
         task = TaskBuilder()
 
-        with self.assertRaises(MissingStepDecorator):
+        with self.assertRaises(MissingActionDecorator):
             task.add(step=simple_step)
+
+    def test_with_class_step_without_decorator(self):
+        task = TaskBuilder()
+
+        with self.assertRaises(MissingActionDecorator):
+            task.add(step=SimpleStep)

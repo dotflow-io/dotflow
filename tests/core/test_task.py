@@ -1,6 +1,7 @@
 """Test context of task"""
 
 import unittest
+from uuid import uuid4
 
 from dotflow.core.context import Context
 from dotflow.core.models.status import Status
@@ -82,3 +83,9 @@ class TestTask(unittest.TestCase):
 
         self.task.set_previous_context(value=expected_value)
         self.assertEqual(self.task.previous_context, expected_value)
+
+    def test_set_workflow_id(self):
+        expected_value = uuid4()
+
+        self.task.set_workflow_id(value=expected_value)
+        self.assertEqual(self.task.workflow_id, expected_value)

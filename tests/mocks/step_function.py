@@ -1,4 +1,4 @@
-"""Module Mock"""
+"""Step Function"""
 
 import logging
 
@@ -7,7 +7,12 @@ from dotflow.core.action import Action as action
 
 @action
 def action_step() -> None:
-    pass
+    return {"foo": "bar"}
+
+
+@action(retry=1)
+def action_step_with_retry() -> None:
+    return {"foo": "bar"}
 
 
 @action
@@ -16,17 +21,13 @@ def action_step_with_error() -> None:
 
 
 def simple_step() -> None:
-    pass
+    return {"foo": "bar"}
 
 
-def simple_callback(*args, **kwargs):
-    pass
-
-
-def dummy_step_with_fail() -> None:
+def simple_step_with_fail() -> None:
     logging.error("Fail!")
     raise Exception("Fail!")
 
 
-def dummy_step_previous_context(previous_context):
+def simple_step_with_previous_context(previous_context):
     logging.debug(previous_context.storage)

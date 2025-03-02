@@ -3,17 +3,21 @@
 from dotflow import DotFlow, action
 
 
-@action(retry=5)  # HERE
+def callback(tasks):  # HERE
+    for task in tasks:
+        print(task.task_id, task.status, task.current_context.storage)
+
+
+@action
 def simple_step():
-    print("Fail!")
-    raise Exception()
+    return "ok"
 
 
 def main():
     workflow = DotFlow()
 
     workflow.task.add(step=simple_step)
-    workflow.start()
+    workflow.start(success=callback)
 
     return workflow
 

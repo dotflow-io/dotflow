@@ -3,11 +3,6 @@
 from dotflow import DotFlow, action
 
 
-def callback(content):  # HERE
-    print(content.task_id, content.status, content.current_context.storage)
-    print(content.__dict__)
-
-
 @action
 def simple_step():
     return "ok"
@@ -16,8 +11,11 @@ def simple_step():
 def main():
     workflow = DotFlow()
 
-    workflow.task.add(step=simple_step, callback=callback)
+    workflow.task.add(step=simple_step)
     workflow.start()
+
+    for task in workflow.result_task():
+        print(task.task_id, task.status, task.current_context.storage)
 
     return workflow
 

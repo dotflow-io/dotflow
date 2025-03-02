@@ -29,15 +29,8 @@ def main():
 
     workflow.start(keep_going=True)  # HERE
 
-    for task in workflow.task.queu:
-        print(
-            task.task_id,
-            task.status,
-            task.previous_context.storage,
-            ">",
-            task.current_context.storage
-        )
+    return workflow
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

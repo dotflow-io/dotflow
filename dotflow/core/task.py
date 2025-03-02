@@ -1,39 +1,34 @@
 """Task module"""
 
 from uuid import UUID
-from types import FunctionType
 from typing import Any, Callable, List
 
 from dotflow.core.action import Action
 from dotflow.core.context import Context
-from dotflow.core.exception import MissingStepDecorator
+from dotflow.core.exception import MissingActionDecorator
 from dotflow.core.models.status import Status
 from dotflow.core.utils import callback
 
 
 class Task:
 
-    def __init__(self,
-                 task_id: int,
-                 step: Callable,
-                 callback: Callable,
-                 initial_context: Any = None,
-                 current_context: Any = None,
-                 previous_context: Any = None,
-                 status: Status = Status.NOT_STARTED,
-                 error: List[Exception] = [],
-                 duration: float = 0,
-                 workflow_id: UUID = None) -> None:
+    def __init__(
+        self,
+        task_id: int,
+        step: Callable,
+        callback: Callable = callback,
+        initial_context: Any = None,
+    ) -> None:
         self.task_id = task_id
         self.step = step
         self.callback = callback
         self.initial_context = Context(initial_context)
-        self.current_context = Context(current_context)
-        self.previous_context = Context(previous_context)
-        self.status = status
-        self.error = error
-        self.duration = duration
-        self.workflow_id = workflow_id
+        self.current_context = Context()
+        self.previous_context = Context()
+        self.status = Status.NOT_STARTED
+        self.error = []
+        self.duration = 0
+        self.workflow_id = None
 
     def set_status(self, value: Status) -> None:
         self.status = value
@@ -47,27 +42,20 @@ class Task:
     def set_previous_context(self, value: Context) -> None:
         self.previous_context = value
 
+    def set_workflow_id(self, value: UUID) -> None:
+        self.workflow_id = value
+
 
 class TaskBuilder:
 
     def __init__(self) -> None:
         self.queu: List[Task] = []
 
-    def add(self,
-            step: Callable,
-            callback: Callable = callback,
-            initial_context: Any = None) -> None:
-
-        is_ok = []
-        if isinstance(step, Action):
-            is_ok.append(True)
-
-        if isinstance(step, FunctionType):
-            if step.__name__ == "action":
-                is_ok.append(True)
-
-        if not is_ok:
-            raise MissingStepDecorator()
+    def add(
+        self, step: Callable, callback: Callable = callback, initial_context: Any = None
+    ) -> None:
+        if step.__module__ != Action.__module__:
+            raise MissingActionDecorator()
 
         self.queu.append(
             Task(
@@ -77,6 +65,7 @@ class TaskBuilder:
                 initial_context=initial_context,
             )
         )
+
         return self
 
     def count(self) -> int:
