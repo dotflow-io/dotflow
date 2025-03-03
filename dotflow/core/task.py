@@ -34,23 +34,23 @@ class Task:
         self.duration = 0
         self.workflow_id = None
 
-    def set_status(self, value: Status) -> None:
+    def _set_status(self, value: Status) -> None:
         self.status = value
 
-    def set_duration(self, value: float) -> None:
+    def _set_duration(self, value: float) -> None:
         self.duration = value
 
-    def set_current_context(self, value: Context) -> None:
+    def _set_current_context(self, value: Context) -> None:
         self.current_context = value
 
-    def set_previous_context(self, value: Context) -> None:
+    def _set_previous_context(self, value: Context) -> None:
         self.previous_context = value
 
-    def set_workflow_id(self, value: UUID) -> None:
+    def _set_workflow_id(self, value: UUID) -> None:
         self.workflow_id = value
 
-    def set_error(self, value: Exception) -> None:
-        self.error.set(error=value)
+    def _set_error(self, value: Exception) -> None:
+        self.error._set(error=value)
 
 
 class TaskError:
@@ -60,7 +60,7 @@ class TaskError:
         self.traceback = None
         self.message = None
 
-    def set(self, error: Exception):
+    def _set(self, error: Exception):
         self.exception = error
         self.traceback = traceback_error(error=error)
         self.message = message_error(error=error)

@@ -20,9 +20,9 @@ class Execution:
             previous_context: Context
     ) -> None:
         self.task = task
-        self.task.set_status(Status.IN_PROGRESS)
-        self.task.set_workflow_id(workflow_id)
-        self.task.set_previous_context(previous_context)
+        self.task._set_status(Status.IN_PROGRESS)
+        self.task._set_workflow_id(workflow_id)
+        self.task._set_previous_context(previous_context)
 
         self._excution()
 
@@ -45,27 +45,30 @@ class Execution:
     @time
     def _excution(self):
         try:
-            current_context = self.task.step(previous_context=self.task.previous_context)
+            current_context = self.task.step(
+                initial_context=self.task.initial_context,
+                previous_context=self.task.previous_context
+            )
 
             if hasattr(current_context.storage.__init__, "__code__"):
                 current_context = self._execution_with_class(
                     step_class=current_context.storage
                 )
 
-            self.task.set_current_context(current_context)
-            self.task.set_status(Status.COMPLETED)
+            self.task._set_current_context(current_context)
+            self.task._set_status(Status.COMPLETED)
 
         except AttributeError as err:
             if self.task.step.func and hasattr(self.task.step.func, "__name__"):
                 if "'__code__'" in err.args[0].split():
                     err = StepMissingInit(name=self.task.step.func.__name__)
 
-            self.task.set_error(err)
-            self.task.set_status(Status.FAILED)
+            self.task._set_error(err)
+            self.task._set_status(Status.FAILED)
 
         except Exception as err:
-            self.task.set_error(err)
-            self.task.set_status(Status.FAILED)
+            self.task._set_error(err)
+            self.task._set_status(Status.FAILED)
 
         finally:
             self.task.callback(content=self.task)
