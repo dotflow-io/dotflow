@@ -12,7 +12,9 @@ from tests.mocks.step_function import (
     action_step_with_retry,
     action_step_with_error,
     simple_step,
+    simple_step_with_params,
     simple_step_with_fail,
+    simple_step_with_initial_context,
     simple_step_with_previous_context
 )
 
@@ -27,7 +29,9 @@ __all__ = [
     "action_step_with_retry",
     "action_step_with_error",
     "simple_step",
+    "simple_step_with_params",
     "simple_step_with_fail",
+    "simple_step_with_initial_context",
     "simple_step_with_previous_context",
     "simple_callback"
 ]
