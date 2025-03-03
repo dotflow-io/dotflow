@@ -1,5 +1,10 @@
 # Release Notes
 
+## v0.7.0
+
+- [📦 PyPI - Build 0.7.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.7.0)
+- [📌 Communication layer implementation](https://github.com/dotflow-io/dotflow/pull/34)
+
 ## v0.6.0
 
 - [📦 PyPI - Build 0.6.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.6.0)
