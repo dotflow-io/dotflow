@@ -1,9 +1,9 @@
 """Setup module"""
 
 from dotflow import __version__, __description__
+from dotflow.core.utils.basic_functions import basic_callback
 from dotflow.cli.commands import (
     ServerCommand,
-    StartCommand,
     TaskCommand
 )
 
@@ -23,8 +23,6 @@ class Command:
             help="Show program's version number and exit."
         )
 
-        self.setup_server()
-        self.setup_start()
         self.setup_task()
         self.command()
 
@@ -36,18 +34,13 @@ class Command:
     def setup_task(self):
         self.cmd_task = self.subparsers.add_parser("task", help="Task")
         self.cmd_task = self.cmd_task.add_argument_group("Usage: dotflow task [OPTIONS]")
-        self.cmd_task.add_argument("option", choices=["add"])
+        self.cmd_task.add_argument("option", choices=["add", "start"])
 
-        self.cmd_task.add_argument("--step", type=str, required=True)
-        self.cmd_task.add_argument("--callbback", type=str)
-        self.cmd_task.add_argument("--initial-context")
+        self.cmd_task.add_argument("-s", "--step", required=True)
+        self.cmd_task.add_argument("-c", "--callback", default=basic_callback)
+        self.cmd_task.add_argument("-i", "--initial-context")
 
         self.cmd_task.set_defaults(exec=TaskCommand)
-
-    def setup_start(self):
-        self.cmd_start = self.subparsers.add_parser("start", help="Task")
-        self.cmd_start = self.cmd_start.add_argument_group("Usage: dotflow start [OPTIONS]")
-        self.cmd_start.set_defaults(exec=StartCommand)
 
     def command(self):
         arguments = self.parser.parse_args()

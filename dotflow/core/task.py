@@ -5,6 +5,7 @@ from typing import Any, Callable, List
 
 from dotflow.core.action import Action
 from dotflow.core.context import Context
+from dotflow.core.module import Module
 from dotflow.core.exception import MissingActionDecorator
 from dotflow.core.models.status import Status
 from dotflow.core.utils import (
@@ -33,6 +34,14 @@ class Task:
         self.error = TaskError()
         self.duration = 0
         self.workflow_id = None
+
+    @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, value: Status) -> None:
+        self._status = value
 
     def _set_status(self, value: Status) -> None:
         self.status = value
@@ -77,6 +86,8 @@ class TaskBuilder:
         callback: Callable = basic_callback,
         initial_context: Any = None
     ) -> None:
+        step = Module(value=step)
+
         if step.__module__ != Action.__module__:
             raise MissingActionDecorator()
 
@@ -84,7 +95,7 @@ class TaskBuilder:
             Task(
                 task_id=len(self.queu),
                 step=step,
-                callback=callback,
+                callback=Module(value=callback),
                 initial_context=initial_context,
             )
         )

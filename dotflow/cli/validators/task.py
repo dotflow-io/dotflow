@@ -1,16 +1,12 @@
 """Task validator module"""
 
-from typing import Any
-from dotflow.cli.validator import Validator
+from typing import Optional
+
+from pydantic import BaseModel, Field  # type: ignore
 
 
-class TaskValidator(Validator):
+class TaskValidator(BaseModel):
 
-    def input_step(self, value: Any):
-        return value
-
-    def input_callbback(self, value: Any):
-        return value
-
-    def input_initial_context(self, value: Any):
-        return value
+    step: str
+    callback: Optional[str] = Field(default=None)
+    initial_context: Optional[str] = Field(default=None)

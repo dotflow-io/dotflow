@@ -9,4 +9,5 @@ class Command:
         self.storage = Storage()
         self.params = kwargs.get("arguments")
 
-        getattr(self, self.params.option)()
+        if hasattr(self.params, "option"):
+            getattr(self, self.params.option)()

@@ -1,6 +1,7 @@
 """Workflow module"""
 
 import threading
+from datetime import datetime
 
 from uuid import uuid4
 from typing import Callable, List
@@ -24,6 +25,7 @@ class Workflow:
         mode: TypeExecution = TypeExecution.SEQUENTIAL,
     ) -> None:
         self.workflow_id = uuid4()
+        self.started = datetime.now()
         self.tasks = tasks
         self.success = success
         self.failure = failure
