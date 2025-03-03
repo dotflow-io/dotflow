@@ -10,6 +10,8 @@ from dotflow.core.action import Action
 
 from tests.mocks import (
     simple_step,
+    simple_step_with_params,
+    simple_step_with_initial_context,
     simple_step_with_previous_context,
     simple_step_with_fail
 )
@@ -65,24 +67,48 @@ class TestClassActions(unittest.TestCase):
             inside()
             self.assertEqual(self._caplog.records[0].message, 'None')
 
-    def test_has_context_true(self):
+    def test_set_params_previous_context(self):
         inside = Action(simple_step_with_previous_context)
+        inside._set_params()
 
-        self.assertTrue(inside._has_context())
+        self.assertListEqual(inside.params, ["previous_context"])
 
-    def test_has_context_false(self):
-        inside = Action(simple_step)
+    def test_set_params_initial_context(self):
+        inside = Action(simple_step_with_initial_context)
+        inside._set_params()
 
-        self.assertFalse(inside._has_context())
+        self.assertListEqual(inside.params, ["initial_context"])
 
-    def test_get_context_with_content(self):
-        inside = Action(simple_step)
-        result = inside._get_context(kwargs={"previous_context": "foo"})
+    def test_get_context_with_initial_context(self):
+        expected_value = {"initial_context": "bar"}
 
-        self.assertEqual(result, "foo")
+        inside = Action(simple_step_with_initial_context)
+        inside.params = ["initial_context"]
+        result = inside._get_context(kwargs=expected_value)
+
+        self.assertEqual(result, expected_value)
+
+    def test_get_context_with_previous_context(self):
+        expected_value = {"previous_context": "foo"}
+
+        inside = Action(simple_step_with_previous_context)
+        inside.params = ["previous_context"]
+        result = inside._get_context(kwargs=expected_value)
+
+        self.assertEqual(result, expected_value)
 
     def test_get_context_without_content(self):
-        inside = Action(simple_step)
-        result = inside._get_context(kwargs={})
+        expected_value = {}
 
-        self.assertIsInstance(result, Context)
+        inside = Action(simple_step)
+        result = inside._get_context(kwargs=expected_value)
+
+        self.assertEqual(result, expected_value)
+
+    def test_get_context_without_context_params(self):
+        mock_values = {"foo": True, "bar": True}
+
+        inside = Action(simple_step_with_params)
+        result = inside._get_context(kwargs=mock_values)
+
+        self.assertEqual(result, {})

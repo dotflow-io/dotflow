@@ -5,7 +5,7 @@ import unittest
 from dotflow.core.context import Context
 from dotflow.core.exception import MissingActionDecorator
 from dotflow.core.task import Task, TaskBuilder
-from dotflow.core.utils import callback
+from dotflow.core.utils import basic_callback
 
 from tests.mocks import (
     action_step,
@@ -30,7 +30,7 @@ class TestTaskBuild(unittest.TestCase):
 
         self.assertEqual(task.queu[0].task_id, 0)
         self.assertIsInstance(task.queu[0], Task)
-        self.assertEqual(task.queu[0].callback, callback)
+        self.assertEqual(task.queu[0].callback, basic_callback)
         self.assertEqual(len(task.queu), 1)
 
     def test_add_method_with_class_context(self):

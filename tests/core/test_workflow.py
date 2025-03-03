@@ -115,4 +115,4 @@ class TestWorkflow(unittest.TestCase):
 
         controller = Workflow(tasks=[task])
         self.assertEqual(controller.tasks[0].status, Status.FAILED)
-        self.assertIsInstance(controller.tasks[0].error[0], StepMissingInit)
+        self.assertIsInstance(controller.tasks[0].error.exception, StepMissingInit)

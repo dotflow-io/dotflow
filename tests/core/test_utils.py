@@ -2,13 +2,13 @@
 
 import unittest
 
-from dotflow.core.utils import callback, simple
+from dotflow.core.utils import basic_callback, basic_function
 
 
 class TestUtils(unittest.TestCase):
 
     def test_callback(self):
-        callback()
+        basic_callback()
 
-    def test_exec(self):
-        simple()
+    def test_function(self):
+        basic_function()

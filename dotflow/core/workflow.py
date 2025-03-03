@@ -10,7 +10,7 @@ from dotflow.core.execution import Execution
 from dotflow.core.exception import ExecutionModeNotExist
 from dotflow.core.models import TypeExecution, Status
 from dotflow.core.task import Task
-from dotflow.core.utils import simple
+from dotflow.core.utils import basic_callback
 
 
 class Workflow:
@@ -18,8 +18,8 @@ class Workflow:
     def __init__(
         self,
         tasks: List[Task],
-        success: Callable = simple,
-        failure: Callable = simple,
+        success: Callable = basic_callback,
+        failure: Callable = basic_callback,
         keep_going: bool = False,
         mode: TypeExecution = TypeExecution.SEQUENTIAL,
     ) -> None:

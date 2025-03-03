@@ -9,14 +9,14 @@ def extract_task():
 
 
 @action
-def transform_task(previous_context):  # HERE
-    print(previous_context.storage, "transform")
+def transform_task(initial_context, previous_context):  # HERE
+    print(initial_context.storage, "initial_context")
+    print(previous_context.storage, "previous_context")
     return "transform"
 
 
 @action
-def load_task(previous_context):  # HERE
-    print(previous_context.storage, "load")
+def load_task():
     return "load"
 
 
@@ -24,7 +24,7 @@ def main():
     workflow = DotFlow()
 
     workflow.task.add(step=extract_task)
-    workflow.task.add(step=transform_task)
+    workflow.task.add(step=transform_task, initial_context={"foo": True})
     workflow.task.add(step=load_task)
 
     workflow.start()
