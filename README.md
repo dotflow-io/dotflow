@@ -39,7 +39,7 @@ pip install dotflow
 poetry add dotflow
 ```
 
-## First Steps
+## A Simple Example
 
 The simplest file could look like this:
 
@@ -57,6 +57,8 @@ workflow = DotFlow()
 workflow.task.add(step=my_task, callback=my_callback)
 workflow.start()
 ```
+
+## First Steps
 
 #### 1 - Import
 
