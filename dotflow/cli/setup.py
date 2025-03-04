@@ -1,10 +1,21 @@
 """Setup module"""
 
+from rich import print  # type: ignore
+
 from dotflow import __version__, __description__
+from dotflow.log import logger
+from dotflow.config import Config
 from dotflow.core.utils.basic_functions import basic_callback
+from dotflow.core.exception import (
+    MissingActionDecorator,
+    ExecutionModeNotExist,
+    StepMissingInit,
+    ModuleNotFound,
+    MESSAGE_UNKNOWN_ERROR
+)
 from dotflow.cli.commands import (
     ServerCommand,
-    TaskCommand
+    StartCommand
 )
 
 
@@ -23,7 +34,7 @@ class Command:
             help="Show program's version number and exit."
         )
 
-        self.setup_task()
+        self.setup_start()
         self.command()
 
     def setup_server(self):
@@ -31,20 +42,37 @@ class Command:
         self.cmd_server = self.cmd_server.add_argument_group("Usage: dotflow server [OPTIONS]")
         self.cmd_server.set_defaults(exec=ServerCommand)
 
-    def setup_task(self):
-        self.cmd_task = self.subparsers.add_parser("task", help="Task")
-        self.cmd_task = self.cmd_task.add_argument_group("Usage: dotflow task [OPTIONS]")
-        self.cmd_task.add_argument("option", choices=["add", "start"])
+    def setup_start(self):
+        self.cmd_start = self.subparsers.add_parser("start", help="Task")
+        self.cmd_start = self.cmd_start.add_argument_group("Usage: dotflow task [OPTIONS]")
 
-        self.cmd_task.add_argument("-s", "--step", required=True)
-        self.cmd_task.add_argument("-c", "--callback", default=basic_callback)
-        self.cmd_task.add_argument("-i", "--initial-context")
+        self.cmd_start.add_argument("-s", "--step", required=True)
+        self.cmd_start.add_argument("-c", "--callback", default=basic_callback)
+        self.cmd_start.add_argument("-i", "--initial-context")
+        self.cmd_start.add_argument("-o", "--output", default=False, action='store_true')
+        self.cmd_start.add_argument("-p", "--path", default=Config.PATH)
 
-        self.cmd_task.set_defaults(exec=TaskCommand)
+        self.cmd_start.set_defaults(exec=StartCommand)
 
     def command(self):
-        arguments = self.parser.parse_args()
-        if hasattr(arguments, "exec"):
-            arguments.exec(parser=self.parser, arguments=arguments)
-        else:
-            print(__description__)
+        try:
+            arguments = self.parser.parse_args()
+            if hasattr(arguments, "exec"):
+                arguments.exec(parser=self.parser, arguments=arguments)
+            else:
+                print(__description__)
+        except MissingActionDecorator as err:
+            print(":game_die:", "[bold red]Error:[/bold red]", err)
+
+        except ExecutionModeNotExist as err:
+            print(":game_die:", "[bold red]Error:[/bold red]", err)
+
+        except StepMissingInit as err:
+            print(":game_die:", "[bold red]Error:[/bold red]", err)
+
+        except ModuleNotFound as err:
+            print(":game_die:", "[bold red]Error:[/bold red]", err)
+
+        except Exception as err:
+            print(":game_die:", "[bold red]Error:[/bold red]", MESSAGE_UNKNOWN_ERROR)
+            logger.error(err)
