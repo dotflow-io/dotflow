@@ -4,6 +4,7 @@ import unittest
 
 from examples.cli_with_callback import main as cli_with_callback
 from examples.cli_with_initial_context import main as cli_with_initial_context
+from examples.cli_with_mode import main as cli_with_mode
 from examples.cli_with_output_context import main as cli_with_output_context
 from examples.cli_with_path import main as cli_with_path
 from examples.cli import main as cli
@@ -33,6 +34,9 @@ class TestIntegration(unittest.TestCase):
 
     def test_cli_with_initial_context(self):
         cli_with_initial_context()
+
+    def test_cli_with_mode(self):
+        cli_with_mode()
 
     def test_cli_with_output_context(self):
         cli_with_output_context()

@@ -4,6 +4,8 @@ from dotflow import DotFlow, action
 
 
 def callback(tasks):  # HERE
+    assert tasks
+
     for task in tasks:
         print(task.task_id, task.status, task.current_context.storage)
 

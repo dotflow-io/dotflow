@@ -12,12 +12,16 @@ def extract_task():
 @action
 def transform_task(previous_context):  # HERE
     print(previous_context.storage, "transform")
+    assert previous_context.storage
+
     return "transform"
 
 
 @action
 def load_task(previous_context):  # HERE
     print(previous_context.storage, "load")
+    assert previous_context.storage
+
     return "load"
 
 

@@ -4,6 +4,8 @@ from dotflow import DotFlow, action
 
 
 def callback(content):  # HERE
+    assert content
+
     print(content.task_id, content.status, content.current_context.storage)
     print(content.__dict__)
 

@@ -6,12 +6,16 @@ from dotflow import DotFlow, action
 @action
 def extract_task(initial_context):  # HERE
     print(initial_context.storage, "extract")
+    assert initial_context.storage
+
     return "extract"
 
 
 @action
 def transform_task(initial_context):  # HERE
     print(initial_context.storage, "transform")
+    assert initial_context.storage
+
     return "transform"
 
 
