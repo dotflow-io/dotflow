@@ -7,7 +7,7 @@ from dotflow.core.action import Action
 from dotflow.core.context import Context
 from dotflow.core.exception import StepMissingInit
 from dotflow.core.task import Task
-from dotflow.core.models import Status
+from dotflow.core.models import TaskStatus
 
 from dotflow.core.decorators import time
 
@@ -20,9 +20,9 @@ class Execution:
             previous_context: Context
     ) -> None:
         self.task = task
-        self.task._set_status(Status.IN_PROGRESS)
+        self.task.status = TaskStatus.IN_PROGRESS
         self.task._set_workflow_id(workflow_id)
-        self.task._set_previous_context(previous_context)
+        self.task.previous_context = previous_context
 
         self._excution()
 
@@ -55,20 +55,20 @@ class Execution:
                     step_class=current_context.storage
                 )
 
-            self.task._set_current_context(current_context)
-            self.task._set_status(Status.COMPLETED)
+            self.task.status = TaskStatus.COMPLETED
+            self.task.current_context = current_context
 
         except AttributeError as err:
             if self.task.step.func and hasattr(self.task.step.func, "__name__"):
                 if "'__code__'" in err.args[0].split():
                     err = StepMissingInit(name=self.task.step.func.__name__)
 
-            self.task._set_error(err)
-            self.task._set_status(Status.FAILED)
+            self.task.status = TaskStatus.FAILED
+            self.task.error = err
 
         except Exception as err:
-            self.task._set_error(err)
-            self.task._set_status(Status.FAILED)
+            self.task.status = TaskStatus.FAILED
+            self.task.error = err
 
         finally:
             self.task.callback(content=self.task)

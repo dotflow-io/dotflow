@@ -7,7 +7,7 @@ from unittest.mock import Mock
 from types import FunctionType
 
 from dotflow.core.workflow import Workflow
-from dotflow.core.models import TypeExecution, Status
+from dotflow.core.models import TypeExecution, TaskStatus
 from dotflow.core.exception import ExecutionModeNotExist, StepMissingInit
 from dotflow.core.task import Task
 
@@ -30,11 +30,11 @@ class TestWorkflow(unittest.TestCase):
         )
         self.tasks = [task]
 
-    def test_instantiating_class(self):
+    def test_instantiating_workflow_class(self):
         controller = Workflow(tasks=self.tasks)
 
         self.assertListEqual(controller.tasks, self.tasks)
-        self.assertIsInstance(controller.workflow_id, UUID)
+        self.assertIsInstance(controller.id, UUID)
         self.assertIsInstance(controller.success, FunctionType)
         self.assertIsInstance(controller.failure, FunctionType)
 
@@ -46,7 +46,7 @@ class TestWorkflow(unittest.TestCase):
         )
 
         controller = Workflow(tasks=[task])
-        self.assertEqual(controller.tasks[0].status, Status.COMPLETED)
+        self.assertEqual(controller.tasks[0].status, TaskStatus.COMPLETED)
 
     def test_execution_with_function_failed(self):
         task = Task(
@@ -56,7 +56,7 @@ class TestWorkflow(unittest.TestCase):
         )
 
         controller = Workflow(tasks=[task])
-        self.assertEqual(controller.tasks[0].status, Status.FAILED)
+        self.assertEqual(controller.tasks[0].status, TaskStatus.FAILED)
 
     def test_with_execution_mode_that_does_not_exist(self):
         with self.assertRaises(ExecutionModeNotExist):
@@ -104,7 +104,7 @@ class TestWorkflow(unittest.TestCase):
         )
 
         controller = Workflow(tasks=[task])
-        self.assertEqual(controller.tasks[0].status, Status.COMPLETED)
+        self.assertEqual(controller.tasks[0].status, TaskStatus.COMPLETED)
 
     def test_execution_with_class_without_init_failed(self):
         task = Task(
@@ -114,5 +114,5 @@ class TestWorkflow(unittest.TestCase):
         )
 
         controller = Workflow(tasks=[task])
-        self.assertEqual(controller.tasks[0].status, Status.FAILED)
+        self.assertEqual(controller.tasks[0].status, TaskStatus.FAILED)
         self.assertIsInstance(controller.tasks[0].error.exception, StepMissingInit)

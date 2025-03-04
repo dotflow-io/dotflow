@@ -1,7 +1,7 @@
-"""Step Status module"""
+"""Step Task Status module"""
 
 
-class Status:
+class TaskStatus:
 
     NOT_STARTED = "Not started"
     IN_PROGRESS = "In progress"
