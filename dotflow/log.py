@@ -1,17 +1,20 @@
+"""Log"""
+
 import logging
 import logging.config
 
-from dotflow.config import Config as initial_config
+from dotflow.core.utils import make_dir
+from dotflow.settings import Settings as settings
 
-config = initial_config()
+make_dir(path=settings.INITIAL_PATH, show_log=True)
 
 logging.basicConfig(
-    filename=config.logger_path,
+    filename=settings.LOG_PATH,
     level=logging.INFO,
     filemode="a"
 )
 
-logger = logging.getLogger(config.logger_name)
+logger = logging.getLogger(settings.LOG_PROFILE)
 logger.setLevel(logging.DEBUG)
 
 ch = logging.StreamHandler()

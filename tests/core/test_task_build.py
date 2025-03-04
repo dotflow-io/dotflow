@@ -2,7 +2,7 @@
 
 import unittest
 
-from dotflow.config import Config
+from dotflow.core.config import Config
 from dotflow.core.context import Context
 from dotflow.core.exception import MissingActionDecorator
 from dotflow.core.task import Task, TaskBuilder

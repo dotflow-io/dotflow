@@ -4,7 +4,7 @@ from rich import print  # type: ignore
 
 from dotflow import __version__, __description__
 from dotflow.log import logger
-from dotflow.config import Config
+from dotflow.settings import Settings as settings
 from dotflow.core.utils.basic_functions import basic_callback
 from dotflow.core.exception import (
     MissingActionDecorator,
@@ -50,7 +50,7 @@ class Command:
         self.cmd_start.add_argument("-c", "--callback", default=basic_callback)
         self.cmd_start.add_argument("-i", "--initial-context")
         self.cmd_start.add_argument("-o", "--output", default=False, action='store_true')
-        self.cmd_start.add_argument("-p", "--path", default=Config.PATH)
+        self.cmd_start.add_argument("-p", "--path", default=settings.INITIAL_PATH)
 
         self.cmd_start.set_defaults(exec=StartCommand)
 

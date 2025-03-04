@@ -3,7 +3,7 @@
 from uuid import uuid4
 from functools import partial
 
-from dotflow.config import Config
+from dotflow.core.config import Config
 from dotflow.core.workflow import Workflow
 from dotflow.core.task import TaskBuilder
 

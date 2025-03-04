@@ -4,26 +4,19 @@ from uuid import UUID
 from typing import Any, Callable, List
 
 from dotflow.log import logger
-from dotflow.config import Config
+from dotflow.core.config import Config
 from dotflow.core.action import Action
 from dotflow.core.context import Context
 from dotflow.core.module import Module
 from dotflow.core.exception import MissingActionDecorator
 from dotflow.core.models.status import TaskStatus
-from dotflow.core.utils import (
-    basic_callback,
-    traceback_error,
-    message_error
-)
+from dotflow.settings import Settings as settings
+from dotflow.core.utils import basic_callback, traceback_error, message_error, copy_file
 
 
 class TaskInstance:
 
-    def __init__(
-            self,
-            *args,
-            **kwargs
-    ) -> None:
+    def __init__(self, *args, **kwargs) -> None:
         self.task_id = None
         self.workflow_id = None
         self.step = None
@@ -45,15 +38,9 @@ class Task(TaskInstance):
         callback: Callable = basic_callback,
         initial_context: Any = None,
         workflow_id: UUID = None,
-        config: Config = None
+        config: Config = None,
     ) -> None:
-        super().__init__(
-            task_id,
-            step,
-            callback,
-            initial_context,
-            workflow_id
-        )
+        super().__init__(task_id, step, callback, initial_context, workflow_id)
         self.config = config
         self.task_id = task_id
         self.workflow_id = workflow_id
@@ -72,10 +59,7 @@ class Task(TaskInstance):
     def status(self, value: TaskStatus) -> None:
         self._status = value
 
-        logger.info(
-            "ID %s - %s - %s",
-            self.workflow_id, self.task_id, value
-        )
+        logger.info("ID %s - %s - %s", self.workflow_id, self.task_id, value)
 
     @property
     def error(self):
@@ -90,8 +74,10 @@ class Task(TaskInstance):
 
         logger.error(
             "ID %s - %s - %s \n %s",
-            self.workflow_id, self.task_id,
-            self.status, task_error.traceback
+            self.workflow_id,
+            self.task_id,
+            self.status,
+            task_error.traceback,
         )
 
     @property
@@ -117,10 +103,12 @@ class Task(TaskInstance):
         if self.config.output:
             logger.info(
                 "ID %s - %s - Current Context -> %s",
-                self.workflow_id, self.task_id, str(value.storage)
+                self.workflow_id,
+                self.task_id,
+                str(value.storage),
             )
 
-        self.config._log_transfer()
+        copy_file(source=settings.LOG_PATH, destination=self.config.log_path)
 
     @property
     def initial_context(self):
@@ -135,10 +123,12 @@ class Task(TaskInstance):
         if self.config.output:
             logger.info(
                 "ID %s - %s - Initial Context -> %s",
-                self.workflow_id, self.task_id, str(value)
+                self.workflow_id,
+                self.task_id,
+                str(value),
             )
 
-        self.config._log_transfer()
+        copy_file(source=settings.LOG_PATH, destination=self.config.log_path)
 
     @property
     def config(self):
@@ -167,11 +157,7 @@ class TaskError:
 
 class TaskBuilder:
 
-    def __init__(
-            self,
-            config: Config,
-            workflow_id: UUID = None
-    ) -> None:
+    def __init__(self, config: Config, workflow_id: UUID = None) -> None:
         self.queu: List[Task] = []
         self.workflow_id = workflow_id
         self.config = config
@@ -180,7 +166,7 @@ class TaskBuilder:
         self,
         step: Callable,
         callback: Callable = basic_callback,
-        initial_context: Any = None
+        initial_context: Any = None,
     ) -> None:
         step = Module(value=step)
 
@@ -194,7 +180,7 @@ class TaskBuilder:
                 callback=Module(value=callback),
                 initial_context=initial_context,
                 workflow_id=self.workflow_id,
-                config=self.config
+                config=self.config,
             )
         )
 
