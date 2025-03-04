@@ -26,19 +26,30 @@ class Execution:
 
         self._excution()
 
-    def _execution_with_class(self, step_class: Callable):
+    def _execution_with_class(self, class_instance: Callable):
         context = Context(storage=[])
 
-        for func_name in dir(step_class):
-            additional_function = getattr(step_class, func_name)
+        for func_name in dir(class_instance):
+            additional_function = getattr(class_instance, func_name)
             if isinstance(additional_function, Action):
                 try:
-                    context.storage.append(additional_function())
+                    context.storage.append(
+                        additional_function(
+                            initial_context=self.task.initial_context,
+                            previous_context=self.task.previous_context
+                        )
+                    )
                 except TypeError:
-                    context.storage.append(additional_function(step_class))
+                    context.storage.append(
+                        additional_function(
+                            class_instance,
+                            initial_context=self.task.initial_context,
+                            previous_context=self.task.previous_context
+                            )
+                    )
 
         if not context.storage:
-            return Context(storage=step_class)
+            return Context(storage=class_instance)
 
         return context
 
@@ -52,7 +63,7 @@ class Execution:
 
             if hasattr(current_context.storage.__init__, "__code__"):
                 current_context = self._execution_with_class(
-                    step_class=current_context.storage
+                    class_instance=current_context.storage
                 )
 
             self.task.status = TaskStatus.COMPLETED
