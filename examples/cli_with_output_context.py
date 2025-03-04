@@ -18,7 +18,7 @@ def main():
     0000-00-00 00:00:00,000 - INFO [dotflow]: ID 5ace2ca5-3d88-4119-a064-a9ae048826e9 - 0 - Completed
     0000-00-00 00:00:00,000 - INFO [dotflow]: ID 5ace2ca5-3d88-4119-a064-a9ae048826e9 - 0 - Current Context -> {'foo': 'bar'}
     """
-    system("dotflow start --step examples.cli_with_output.simple_step --output")
+    system("dotflow start --step examples.cli_with_output_context.simple_step --output-context")
 
 
 if __name__ == "__main__":

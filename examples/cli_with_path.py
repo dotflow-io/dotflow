@@ -16,8 +16,7 @@ def main():
     0000-00-00 00:00:00,000 - INFO [dotflow]: ID 56a908c5-c9f2-4ebf-a00a-895e49bd189b - 0 - In progress
     0000-00-00 00:00:00,000 - INFO [dotflow]: ID 56a908c5-c9f2-4ebf-a00a-895e49bd189b - 0 - Completed
     """
-    system("dotflow start --step examples.cli_with_path.simple_step --path my_folder")
-    system("dotflow start --step examples.cli_with_path.simple_step --path /home/your_user/log")
+    system("dotflow start --step examples.cli_with_path.simple_step --path .storage")
     system("dotflow start --step examples.cli_with_path.simple_step --path .")
 
 

@@ -4,7 +4,7 @@ import unittest
 
 from examples.cli_with_callback import main as cli_with_callback
 from examples.cli_with_initial_context import main as cli_with_initial_context
-from examples.cli_with_output import main as cli_with_output
+from examples.cli_with_output_context import main as cli_with_output_context
 from examples.cli_with_path import main as cli_with_path
 from examples.cli import main as cli
 from examples.simple_class_workflow import main as simple_class_workflow
@@ -34,8 +34,8 @@ class TestIntegration(unittest.TestCase):
     def test_cli_with_initial_context(self):
         cli_with_initial_context()
 
-    def test_cli_with_output(self):
-        cli_with_output()
+    def test_cli_with_output_context(self):
+        cli_with_output_context()
 
     def test_cli_with_path(self):
         cli_with_path()
