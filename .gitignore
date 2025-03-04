@@ -175,5 +175,6 @@ cython_debug/
 
 
 # Dotflow
+.xpto
 .storage
 tests.py
