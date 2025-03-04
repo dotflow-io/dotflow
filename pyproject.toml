@@ -1,6 +1,6 @@
 [project]
 name = "dotflow"
-version = "0.7.4.dev1"
+version = "0.7.5.dev1"
 authors = [
   { name="Fernando Celmer", email="email@fernandocelmer.com" },
 ]
@@ -9,7 +9,7 @@ description = "🎲 Dotflow turns an idea into flow!"
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
-	"rich (^13.9.4)"
+	"rich"
 ]
 classifiers = [
   'Development Status :: 4 - Beta',
@@ -30,7 +30,7 @@ Documentation = "https://github.com/dotflow-io/dotflow/blob/master/README.md"
 
 [tool.poetry]
 name = "dotflow"
-version = "0.7.4.dev1"
+version = "0.7.5.dev1"
 description = "🎲 Dotflow turns an idea into flow!"
 authors = ["Fernando Celmer <email@fernandocelmer.com>"]
 readme = "README.md"
