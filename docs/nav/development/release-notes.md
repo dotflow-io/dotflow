@@ -1,5 +1,10 @@
 # Release Notes
 
+## v0.8.0
+
+- [📦 PyPI - Build 0.8.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.8.0)
+- [📌 Create CLI to manage workflow](https://github.com/dotflow-io/dotflow/pull/37)
+
 ## v0.7.0
 
 - [📦 PyPI - Build 0.7.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.7.0)
