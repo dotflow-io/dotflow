@@ -4,7 +4,7 @@ import unittest
 from uuid import uuid4
 
 from dotflow.core.context import Context
-from dotflow.core.models.status import Status
+from dotflow.core.models.status import TaskStatus
 from dotflow.core.task import Task, TaskError
 
 from tests.mocks import (
@@ -23,7 +23,7 @@ class TestTask(unittest.TestCase):
         )
         self.content = {"foo": "bar"}
 
-    def test_instantiating_class(self):
+    def test_instantiating_task_class(self):
         task = Task(
             task_id=0,
             initial_context=Context(
@@ -66,9 +66,9 @@ class TestTask(unittest.TestCase):
         )
 
     def test_set_status(self):
-        expected_value = Status.COMPLETED
+        expected_value = TaskStatus.COMPLETED
 
-        self.task._set_status(value=expected_value)
+        self.task.status = expected_value
         self.assertEqual(self.task.status, expected_value)
 
     def test_set_duration(self):
@@ -80,14 +80,14 @@ class TestTask(unittest.TestCase):
     def test_set_current_context(self):
         expected_value = Context(storage=self.content)
 
-        self.task._set_current_context(value=expected_value)
-        self.assertEqual(self.task.current_context, expected_value)
+        self.task.current_context = expected_value
+        self.assertEqual(self.task.current_context.storage, expected_value.storage)
 
     def test_set_previous_context(self):
         expected_value = Context(storage=self.content)
 
-        self.task._set_previous_context(value=expected_value)
-        self.assertEqual(self.task.previous_context, expected_value)
+        self.task.previous_context = expected_value
+        self.assertEqual(self.task.previous_context.storage, expected_value.storage)
 
     def test_set_workflow_id(self):
         expected_value = uuid4()
@@ -101,7 +101,7 @@ class TestTask(unittest.TestCase):
         try:
             raise Exception(expected_value)
         except Exception as err:
-            self.task._set_error(value=err)
+            self.task.error = err
 
         self.assertEqual(self.task.error.message, expected_value)
         self.assertIsInstance(self.task.error.exception, Exception)

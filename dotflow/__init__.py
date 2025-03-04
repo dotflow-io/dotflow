@@ -1,8 +1,9 @@
 """Dotflow __init__ module."""
 
-__version__ = "0.7.0"
+__version__ = "0.8.0.dev3"
 __description__ = "🎲 Dotflow turns an idea into flow!"
 
+from .core.config import Config
 from .core.action import Action as action
 from .core.context import Context
 from .core.dotflow import DotFlow
@@ -15,5 +16,6 @@ __all__ = [
     "retry",
     "DotFlow",
     "Context",
+    "Config",
     "Task"
 ]

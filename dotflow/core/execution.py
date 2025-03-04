@@ -7,7 +7,7 @@ from dotflow.core.action import Action
 from dotflow.core.context import Context
 from dotflow.core.exception import StepMissingInit
 from dotflow.core.task import Task
-from dotflow.core.models import Status
+from dotflow.core.models import TaskStatus
 
 from dotflow.core.decorators import time
 
@@ -20,25 +20,36 @@ class Execution:
             previous_context: Context
     ) -> None:
         self.task = task
-        self.task._set_status(Status.IN_PROGRESS)
+        self.task.status = TaskStatus.IN_PROGRESS
         self.task._set_workflow_id(workflow_id)
-        self.task._set_previous_context(previous_context)
+        self.task.previous_context = previous_context
 
         self._excution()
 
-    def _execution_with_class(self, step_class: Callable):
+    def _execution_with_class(self, class_instance: Callable):
         context = Context(storage=[])
 
-        for func_name in dir(step_class):
-            additional_function = getattr(step_class, func_name)
+        for func_name in dir(class_instance):
+            additional_function = getattr(class_instance, func_name)
             if isinstance(additional_function, Action):
                 try:
-                    context.storage.append(additional_function())
+                    context.storage.append(
+                        additional_function(
+                            initial_context=self.task.initial_context,
+                            previous_context=self.task.previous_context
+                        )
+                    )
                 except TypeError:
-                    context.storage.append(additional_function(step_class))
+                    context.storage.append(
+                        additional_function(
+                            class_instance,
+                            initial_context=self.task.initial_context,
+                            previous_context=self.task.previous_context
+                            )
+                    )
 
         if not context.storage:
-            return Context(storage=step_class)
+            return Context(storage=class_instance)
 
         return context
 
@@ -52,23 +63,23 @@ class Execution:
 
             if hasattr(current_context.storage.__init__, "__code__"):
                 current_context = self._execution_with_class(
-                    step_class=current_context.storage
+                    class_instance=current_context.storage
                 )
 
-            self.task._set_current_context(current_context)
-            self.task._set_status(Status.COMPLETED)
+            self.task.status = TaskStatus.COMPLETED
+            self.task.current_context = current_context
 
         except AttributeError as err:
             if self.task.step.func and hasattr(self.task.step.func, "__name__"):
                 if "'__code__'" in err.args[0].split():
                     err = StepMissingInit(name=self.task.step.func.__name__)
 
-            self.task._set_error(err)
-            self.task._set_status(Status.FAILED)
+            self.task.status = TaskStatus.FAILED
+            self.task.error = err
 
         except Exception as err:
-            self.task._set_error(err)
-            self.task._set_status(Status.FAILED)
+            self.task.status = TaskStatus.FAILED
+            self.task.error = err
 
         finally:
             self.task.callback(content=self.task)

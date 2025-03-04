@@ -6,7 +6,7 @@ from uuid import uuid4
 
 from dotflow.core.context import Context
 from dotflow.core.execution import Execution
-from dotflow.core.models import Status
+from dotflow.core.models import TaskStatus
 from dotflow.core.task import Task
 
 from tests.mocks import (
@@ -33,7 +33,7 @@ class TestExecution(unittest.TestCase):
             previous_context=Context()
         )
 
-        self.assertEqual(controller.task.status, Status.COMPLETED)
+        self.assertEqual(controller.task.status, TaskStatus.COMPLETED)
         self.assertEqual(controller.task.workflow_id, workflow_id)
 
     def test_execution_with_function_failed(self):
@@ -49,7 +49,7 @@ class TestExecution(unittest.TestCase):
             previous_context=Context()
         )
 
-        self.assertEqual(controller.task.status, Status.FAILED)
+        self.assertEqual(controller.task.status, TaskStatus.FAILED)
         self.assertEqual(controller.task.workflow_id, workflow_id)
 
     def test_execution_with_class_completed(self):
@@ -65,7 +65,7 @@ class TestExecution(unittest.TestCase):
             previous_context=Context()
         )
 
-        self.assertEqual(controller.task.status, Status.COMPLETED)
+        self.assertEqual(controller.task.status, TaskStatus.COMPLETED)
         self.assertEqual(controller.task.workflow_id, workflow_id)
 
     def test_execution_with_class_failed(self):
@@ -81,5 +81,5 @@ class TestExecution(unittest.TestCase):
             previous_context=Context()
         )
 
-        self.assertEqual(controller.task.status, Status.FAILED)
+        self.assertEqual(controller.task.status, TaskStatus.FAILED)
         self.assertEqual(controller.task.workflow_id, workflow_id)

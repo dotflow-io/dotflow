@@ -1,14 +1,15 @@
 """Workflow module"""
 
 import threading
+from datetime import datetime
 
-from uuid import uuid4
+from uuid import UUID, uuid4
 from typing import Callable, List
 
 from dotflow.core.context import Context
 from dotflow.core.execution import Execution
 from dotflow.core.exception import ExecutionModeNotExist
-from dotflow.core.models import TypeExecution, Status
+from dotflow.core.models import TypeExecution, TaskStatus
 from dotflow.core.task import Task
 from dotflow.core.utils import basic_callback
 
@@ -22,8 +23,10 @@ class Workflow:
         failure: Callable = basic_callback,
         keep_going: bool = False,
         mode: TypeExecution = TypeExecution.SEQUENTIAL,
+        id: UUID = uuid4()
     ) -> None:
-        self.workflow_id = uuid4()
+        self.id = id
+        self.started = datetime.now()
         self.tasks = tasks
         self.success = success
         self.failure = failure
@@ -35,7 +38,7 @@ class Workflow:
 
     def _callback_workflow(self, tasks: Task):
         final_status = [task.status for task in tasks]
-        if Status.FAILED in final_status:
+        if TaskStatus.FAILED in final_status:
             self.failure(tasks=tasks)
         else:
             self.success(tasks=tasks)
@@ -46,13 +49,13 @@ class Workflow:
         for task in self.tasks:
             Execution(
                 task=task,
-                workflow_id=self.workflow_id,
+                workflow_id=self.id,
                 previous_context=previous_context
             )
             previous_context = task.current_context
 
             if not keep_going:
-                if task.status == Status.FAILED:
+                if task.status == TaskStatus.FAILED:
                     break
 
         self._callback_workflow(tasks=self.tasks)

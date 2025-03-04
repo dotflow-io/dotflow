@@ -11,7 +11,7 @@ class TestContext(unittest.TestCase):
     def setUp(self):
         self.content = {"foo": "bar"}
 
-    def test_instantiating_class(self):
+    def test_instantiating_context_class(self):
         context = Context(storage=self.content)
 
         self.assertIsInstance(context.time, datetime)

@@ -1,4 +1,4 @@
-"""DotFlow"""
+"""Main"""
 
 import argparse
 
