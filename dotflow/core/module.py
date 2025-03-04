@@ -9,6 +9,8 @@ from importlib.util import (
 
 from typing import Any
 
+from dotflow.core.exception import ModuleNotFound
+
 
 class Module:
 
@@ -27,7 +29,8 @@ class Module:
 
         if hasattr(module, cls._get_name(value)):
             return getattr(module, cls._get_name(value))
-        return value
+
+        raise ModuleNotFound()
 
     @classmethod
     def _get_name(cls, value: str):
