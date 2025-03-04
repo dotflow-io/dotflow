@@ -2,6 +2,11 @@
 
 import unittest
 
+from examples.cli_with_callback import main as cli_with_callback
+from examples.cli_with_initial_context import main as cli_with_initial_context
+from examples.cli_with_output import main as cli_with_output
+from examples.cli_with_path import main as cli_with_path
+from examples.cli import main as cli
 from examples.simple_class_workflow import main as simple_class_workflow
 from examples.simple_function_workflow_with_error import main as simple_function_workflow_with_error
 from examples.simple_function_workflow import main as simple_function_workflow
@@ -22,6 +27,21 @@ from examples.workflow_with_retry import main as workflow_with_retry
 
 
 class TestIntegration(unittest.TestCase):
+
+    def test_cli_with_callback(self):
+        cli_with_callback()
+
+    def test_cli_with_initial_context(self):
+        cli_with_initial_context()
+
+    def test_cli_with_output(self):
+        cli_with_output()
+
+    def test_cli_with_path(self):
+        cli_with_path()
+
+    def test_cli(self):
+        cli()
 
     def test_simple_class_workflow(self):
         simple_class_workflow()
