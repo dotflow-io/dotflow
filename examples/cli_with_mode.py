@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-from time import sleep
 from os import system
 
 from dotflow import action
@@ -8,7 +7,6 @@ from dotflow import action
 
 @action
 def simple_step():
-    sleep(3)
     return "ok"
 
 

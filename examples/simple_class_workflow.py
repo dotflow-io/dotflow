@@ -32,7 +32,7 @@ class Step:
 def main():
     workflow = DotFlow()
 
-    workflow.task.add(step=Step)
+    workflow.task.add(step=Step, initial_context={"foo": "bar"})
     workflow.start()
 
     return workflow
