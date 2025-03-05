@@ -6,7 +6,7 @@ from uuid import uuid4
 
 from dotflow.core.context import Context
 from dotflow.core.execution import Execution
-from dotflow.core.models import TaskStatus
+from dotflow.core.types import TaskStatus
 from dotflow.core.task import Task
 
 from tests.mocks import (

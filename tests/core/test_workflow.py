@@ -7,7 +7,7 @@ from unittest.mock import Mock
 from types import FunctionType
 
 from dotflow.core.workflow import Workflow
-from dotflow.core.models import TypeExecution, TaskStatus
+from dotflow.core.types import TypeExecution, TaskStatus
 from dotflow.core.exception import ExecutionModeNotExist
 from dotflow.core.task import Task
 

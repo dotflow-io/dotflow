@@ -9,7 +9,7 @@ from dotflow.core.action import Action
 from dotflow.core.context import Context
 from dotflow.core.module import Module
 from dotflow.core.exception import MissingActionDecorator
-from dotflow.core.models.status import TaskStatus
+from dotflow.core.types.status import TaskStatus
 from dotflow.settings import Settings as settings
 from dotflow.utils import basic_callback, traceback_error, message_error, copy_file
 
