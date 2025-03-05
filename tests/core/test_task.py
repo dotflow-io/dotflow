@@ -4,7 +4,7 @@ import unittest
 from uuid import uuid4
 
 from dotflow.core.context import Context
-from dotflow.core.models.status import TaskStatus
+from dotflow.core.types.status import TaskStatus
 from dotflow.core.task import Task, TaskError
 
 from tests.mocks import (

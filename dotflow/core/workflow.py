@@ -9,9 +9,9 @@ from typing import Callable, List
 from dotflow.core.context import Context
 from dotflow.core.execution import Execution
 from dotflow.core.exception import ExecutionModeNotExist
-from dotflow.core.models import TypeExecution, TaskStatus
+from dotflow.core.types import TypeExecution, TaskStatus
 from dotflow.core.task import Task
-from dotflow.core.utils import basic_callback
+from dotflow.utils import basic_callback
 
 
 class Workflow:

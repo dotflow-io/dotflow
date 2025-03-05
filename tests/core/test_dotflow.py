@@ -6,7 +6,7 @@ from dotflow.core.workflow import Workflow
 from dotflow.core.context import Context
 from dotflow.core.task import Task, TaskBuilder
 from dotflow.core.dotflow import DotFlow
-from dotflow.core.models.status import TaskStatus
+from dotflow.core.types.status import TaskStatus
 
 from tests.mocks import action_step
 

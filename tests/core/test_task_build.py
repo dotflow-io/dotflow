@@ -6,7 +6,7 @@ from dotflow.core.config import Config
 from dotflow.core.context import Context
 from dotflow.core.exception import MissingActionDecorator
 from dotflow.core.task import Task, TaskBuilder
-from dotflow.core.utils import basic_callback
+from dotflow.utils import basic_callback
 
 from tests.mocks import (
     action_step,

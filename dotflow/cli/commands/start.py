@@ -3,7 +3,7 @@
 from os import system
 
 from dotflow import DotFlow, Config
-from dotflow.core.models.execution import TypeExecution
+from dotflow.core.types.execution import TypeExecution
 from dotflow.cli.command import Command
 
 

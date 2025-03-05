@@ -6,8 +6,10 @@ from dotflow import DotFlow, action
 @action(retry=5)
 class Step:
 
-    def __init__(self):
-        """It is extremely important to have an '__init__' function!"""
+    def __init__(self, initial_context):
+        print(initial_context.storage, "__init__")
+        assert initial_context.storage
+        self.variable = True
 
     def auxiliary_function(self):
         """This function will not be executed, because
@@ -18,6 +20,7 @@ class Step:
     def first_function(self, initial_context):
         print(initial_context.storage, "first_function")
         assert initial_context.storage
+        assert self.variable
 
         return {"foo": "bar"}
 

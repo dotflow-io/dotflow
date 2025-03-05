@@ -1,5 +1,10 @@
 # Release Notes
 
+## v0.8.2
+
+- [📦 PyPI - Build 0.8.2](https://github.com/dotflow-io/dotflow/releases/tag/v0.8.2)
+- [🪲 Fixed class-type step without init](https://github.com/dotflow-io/dotflow/commit/4991f5a61022ac0035c6dcc203458e152bca47e8)
+
 ## v0.8.1
 
 - [📦 PyPI - Build 0.8.1](https://github.com/dotflow-io/dotflow/releases/tag/v0.8.1)

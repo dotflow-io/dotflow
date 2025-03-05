@@ -7,7 +7,7 @@ from examples.cli_with_initial_context import main as cli_with_initial_context
 from examples.cli_with_mode import main as cli_with_mode
 from examples.cli_with_output_context import main as cli_with_output_context
 from examples.cli_with_path import main as cli_with_path
-from examples.cli import main as cli
+from examples.simple_cli import main as simple_cli
 from examples.simple_class_workflow import main as simple_class_workflow
 from examples.simple_function_workflow_with_error import main as simple_function_workflow_with_error
 from examples.simple_function_workflow import main as simple_function_workflow
@@ -44,8 +44,8 @@ class TestIntegration(unittest.TestCase):
     def test_cli_with_path(self):
         cli_with_path()
 
-    def test_cli(self):
-        cli()
+    def test_simple_cli(self):
+        simple_cli()
 
     def test_simple_class_workflow(self):
         simple_class_workflow()

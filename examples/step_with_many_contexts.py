@@ -13,8 +13,8 @@ def transform_task(initial_context, previous_context):  # HERE
     print(initial_context.storage, "initial_context")
     print(previous_context.storage, "previous_context")
 
-    assert initial_context.storage
-    assert previous_context.storage
+    assert initial_context.storage, {"foo": True}
+    assert previous_context.storage, "extract"
 
     return "transform"
 

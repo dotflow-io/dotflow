@@ -16,6 +16,7 @@ def main():
 
     for storage in workflow.result_storage():
         print(storage)
+        assert storage, "ok"
 
     return workflow
 

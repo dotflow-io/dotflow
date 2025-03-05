@@ -7,13 +7,13 @@ from unittest.mock import Mock
 from types import FunctionType
 
 from dotflow.core.workflow import Workflow
-from dotflow.core.models import TypeExecution, TaskStatus
-from dotflow.core.exception import ExecutionModeNotExist, StepMissingInit
+from dotflow.core.types import TypeExecution, TaskStatus
+from dotflow.core.exception import ExecutionModeNotExist
 from dotflow.core.task import Task
 
 from tests.mocks import (
     ActionStep,
-    ActionStepWithoutInit,
+    # ActionStepWithoutInit,
     action_step,
     action_step_with_error,
     simple_callback,
@@ -105,14 +105,3 @@ class TestWorkflow(unittest.TestCase):
 
         controller = Workflow(tasks=[task])
         self.assertEqual(controller.tasks[0].status, TaskStatus.COMPLETED)
-
-    def test_execution_with_class_without_init_failed(self):
-        task = Task(
-            task_id=42,
-            step=ActionStepWithoutInit,
-            callback=simple_callback
-        )
-
-        controller = Workflow(tasks=[task])
-        self.assertEqual(controller.tasks[0].status, TaskStatus.FAILED)
-        self.assertIsInstance(controller.tasks[0].error.exception, StepMissingInit)
