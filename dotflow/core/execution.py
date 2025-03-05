@@ -63,12 +63,12 @@ class Execution:
                 previous_context=self.task.previous_context,
             )
 
-            so_this_is_a_class = [
+            object_attributes = [
                 type(getattr(current_context.storage, param)) is Action
                 for param in dir(current_context.storage)
             ]
 
-            if True in so_this_is_a_class:
+            if True in object_attributes:
                 current_context = self._execution_with_class(
                     class_instance=current_context.storage
                 )
