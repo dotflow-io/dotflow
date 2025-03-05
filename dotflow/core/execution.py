@@ -28,25 +28,27 @@ class Execution:
 
     def _execution_with_class(self, class_instance: Callable):
         context = Context(storage=[])
+        previous_context = self.task.previous_context
 
         for func_name in dir(class_instance):
             additional_function = getattr(class_instance, func_name)
+
             if isinstance(additional_function, Action):
                 try:
-                    context.storage.append(
-                        additional_function(
+                    current_context = additional_function(
                             initial_context=self.task.initial_context,
-                            previous_context=self.task.previous_context
-                        )
+                            previous_context=previous_context
                     )
+                    context.storage.append(current_context)
+                    previous_context = current_context
                 except TypeError:
-                    context.storage.append(
-                        additional_function(
+                    current_context = additional_function(
                             class_instance,
                             initial_context=self.task.initial_context,
-                            previous_context=self.task.previous_context
-                            )
+                            previous_context=previous_context
                     )
+                    context.storage.append(current_context)
+                    previous_context = current_context
 
         if not context.storage:
             return Context(storage=class_instance)
