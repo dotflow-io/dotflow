@@ -56,7 +56,8 @@ class Action(object):
 
         if type(self.func) is type:
             if hasattr(self.func, "__init__"):
-                self.params = [param for param in self.func.__init__.__code__.co_varnames]
+                if hasattr(self.func.__init__, "__code__"):
+                    self.params = [param for param in self.func.__init__.__code__.co_varnames]
 
     def _get_context(self, kwargs: Dict):
         context = {}
