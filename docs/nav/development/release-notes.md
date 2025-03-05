@@ -1,5 +1,10 @@
 # Release Notes
 
+## v0.8.1
+
+- [📦 PyPI - Build 0.8.1](https://github.com/dotflow-io/dotflow/releases/tag/v0.8.1)
+- [🪲 Fixed context switching](https://github.com/dotflow-io/dotflow/commit/ca9be8d313d900a90d66e026c57a151f6effc6dc)
+
 ## v0.8.0
 
 - [📦 PyPI - Build 0.8.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.8.0)
