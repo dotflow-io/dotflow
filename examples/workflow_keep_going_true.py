@@ -11,16 +11,12 @@ def extract_task():
 @action
 def transform_task(previous_context):
     print(previous_context.storage, "transform")
-    assert previous_context.storage
-
     raise Exception("Fail!")
 
 
 @action
 def load_task(previous_context):
     print(previous_context.storage, "load")
-    assert previous_context.storage
-
     return "load"
 
 

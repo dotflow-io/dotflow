@@ -8,8 +8,6 @@ from dotflow import action
 @action
 def simple_step(initial_context):
     print(initial_context.storage, "simple_step")
-    assert initial_context
-
     return {"foo": "bar"}
 
 
