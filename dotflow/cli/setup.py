@@ -10,7 +10,6 @@ from dotflow.core.models.execution import TypeExecution
 from dotflow.core.exception import (
     MissingActionDecorator,
     ExecutionModeNotExist,
-    StepMissingInit,
     ModuleNotFound,
     MESSAGE_UNKNOWN_ERROR,
 )
@@ -86,9 +85,6 @@ class Command:
             print(message_icon, message_error, err)
 
         except ExecutionModeNotExist as err:
-            print(message_icon, message_error, err)
-
-        except StepMissingInit as err:
             print(message_icon, message_error, err)
 
         except ModuleNotFound as err:
