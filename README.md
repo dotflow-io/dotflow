@@ -120,7 +120,7 @@ workflow.start()
 |03| [cli_with_mode](https://github.com/dotflow-io/dotflow/blob/master/examples/cli_with_mode.py)                                             |
 |04| [cli_with_output_context](https://github.com/dotflow-io/dotflow/blob/master/examples/cli_with_output_context.py)                         |
 |05| [cli_with_path](https://github.com/dotflow-io/dotflow/blob/master/examples/cli_with_path.py)                                             |
-|06| [cli](https://github.com/dotflow-io/dotflow/blob/master/examples/cli.py)                                                                 |
+|06| [simple_cli](https://github.com/dotflow-io/dotflow/blob/master/examples/simple_cli.py)                                                                 |
 |07| [simple_class_workflow](https://github.com/dotflow-io/dotflow/blob/master/examples/simple_class_workflow.py)                             |
 |08| [simple_function_workflow_with_error](https://github.com/dotflow-io/dotflow/blob/master/examples/simple_function_workflow_with_error.py) |
 |09| [simple_function_workflow](https://github.com/dotflow-io/dotflow/blob/master/examples/simple_function_workflow.py)                       |
