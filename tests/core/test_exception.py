@@ -6,10 +6,8 @@ import unittest
 from dotflow.core.exception import (
     MissingActionDecorator,
     ExecutionModeNotExist,
-    StepMissingInit,
     MESSAGE_MISSING_STEP_DECORATOR,
-    MESSAGE_EXECUTION_NOT_EXIST,
-    MESSAGE_STEP_MISSING_INIT
+    MESSAGE_EXECUTION_NOT_EXIST
 )
 
 
@@ -29,12 +27,4 @@ class TestException(unittest.TestCase):
         self.assertEqual(
             exception.args[0],
             MESSAGE_EXECUTION_NOT_EXIST
-        )
-
-    def test_step_missing_init(self):
-        exception = StepMissingInit(name="Step")
-
-        self.assertEqual(
-            exception.args[0],
-            MESSAGE_STEP_MISSING_INIT.format(name="Step")
         )
