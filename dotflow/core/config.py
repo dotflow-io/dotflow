@@ -1,6 +1,6 @@
 """Config module"""
 
-from dotflow.core.utils import make_dir
+from dotflow.utils import make_dir
 from dotflow.settings import Settings as settings
 
 

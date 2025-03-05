@@ -2,7 +2,7 @@
 
 import unittest
 
-from dotflow.core.utils import basic_callback, basic_function
+from dotflow.utils import basic_callback, basic_function
 
 
 class TestUtils(unittest.TestCase):

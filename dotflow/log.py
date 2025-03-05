@@ -3,7 +3,7 @@
 import logging
 import logging.config
 
-from dotflow.core.utils import make_dir
+from dotflow.utils import make_dir
 from dotflow.settings import Settings as settings
 
 make_dir(path=settings.INITIAL_PATH, show_log=True)

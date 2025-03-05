@@ -11,7 +11,7 @@ from dotflow.core.module import Module
 from dotflow.core.exception import MissingActionDecorator
 from dotflow.core.models.status import TaskStatus
 from dotflow.settings import Settings as settings
-from dotflow.core.utils import basic_callback, traceback_error, message_error, copy_file
+from dotflow.utils import basic_callback, traceback_error, message_error, copy_file
 
 
 class TaskInstance:
