@@ -32,6 +32,7 @@ def main():
     for contexts in workflow.result_context():
         for context in contexts.storage:
             print(context.time, context.storage)
+            assert context.storage
 
     return workflow
 

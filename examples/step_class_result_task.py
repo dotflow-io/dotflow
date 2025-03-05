@@ -32,6 +32,7 @@ def main():
     for task in workflow.result_task():
         for current_context in task.current_context.storage:
             print(task.task_id, task.status, current_context.storage)
+            assert current_context.storage
 
     return workflow
 

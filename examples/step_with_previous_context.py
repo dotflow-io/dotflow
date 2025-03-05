@@ -12,7 +12,7 @@ def extract_task():
 @action
 def transform_task(previous_context):  # HERE
     print(previous_context.storage, "transform")
-    assert previous_context.storage
+    assert previous_context.storage, "extract"
 
     return "transform"
 
@@ -20,7 +20,7 @@ def transform_task(previous_context):  # HERE
 @action
 def load_task(previous_context):  # HERE
     print(previous_context.storage, "load")
-    assert previous_context.storage
+    assert previous_context.storage, "transform"
 
     return "load"
 

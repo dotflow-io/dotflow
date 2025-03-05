@@ -32,6 +32,7 @@ def main():
     for storages in workflow.result_storage():
         for storage in storages:
             print(storage.time, storage.storage)
+            assert storage.storage
 
     return workflow
 
