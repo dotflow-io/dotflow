@@ -2,6 +2,9 @@
 
 from tests.mocks.step_class import (
     ActionStep,
+    ActionStepWithInitialContext,
+    ActionStepWithPreviousContext,
+    ActionStepWithContexts,
     ActionStepWithError,
     ActionStepWithoutInit,
     SimpleStep
@@ -9,6 +12,9 @@ from tests.mocks.step_class import (
 
 from tests.mocks.step_function import (
     action_step,
+    action_step_with_initial_context,
+    action_step_with_previous_context,
+    action_step_with_contexts,
     action_step_with_retry,
     action_step_with_error,
     simple_step,
@@ -22,10 +28,16 @@ from tests.mocks.callback import simple_callback
 
 __all__ = [
     "ActionStep",
+    "ActionStepWithInitialContext",
+    "ActionStepWithPreviousContext",
+    "ActionStepWithContexts",
     "ActionStepWithError",
     "ActionStepWithoutInit",
     "SimpleStep",
     "action_step",
+    "action_step_with_initial_context",
+    "action_step_with_previous_context",
+    "action_step_with_contexts",
     "action_step_with_retry",
     "action_step_with_error",
     "simple_step",
