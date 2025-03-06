@@ -1,0 +1,3 @@
+"""Constants"""
+
+NOT_CALLABLE = ()

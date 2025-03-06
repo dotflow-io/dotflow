@@ -113,6 +113,34 @@ def main():
     workflow.task.add(step=load_task_y)
     workflow.start()
 
+    workflow = DotFlow()
+    workflow.task.add(
+        [
+            simple_step,
+            simple_step,
+            simple_step,
+            simple_step,
+            simple_step,
+            simple_step,
+            simple_step,
+            simple_step,
+            simple_step,
+            simple_step,
+            simple_step,
+            simple_step,
+            simple_step,
+            simple_step,
+            simple_step,
+            simple_step,
+            simple_step,
+            simple_step,
+            simple_step,
+            simple_step,
+        ],
+        initial_context={"foo": "bar"}
+    )
+    workflow.start()
+
     return workflow
 
 
