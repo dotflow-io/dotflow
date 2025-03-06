@@ -30,7 +30,9 @@ class Module:
         if hasattr(module, cls._get_name(value)):
             return getattr(module, cls._get_name(value))
 
-        raise ModuleNotFound()
+        raise ModuleNotFound(
+            module=value
+        )
 
     @classmethod
     def _get_name(cls, value: str):

@@ -21,8 +21,8 @@ class Execution:
     ) -> None:
         self.task = task
         self.task.status = TaskStatus.IN_PROGRESS
-        self.task._set_workflow_id(workflow_id)
         self.task.previous_context = previous_context
+        self.task.workflow_id = workflow_id
 
         self._excution()
 
