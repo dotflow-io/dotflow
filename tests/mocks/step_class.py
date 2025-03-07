@@ -1,4 +1,4 @@
-"""Step Class"""
+"""Mock Class"""
 
 from dotflow.core.action import Action as action
 

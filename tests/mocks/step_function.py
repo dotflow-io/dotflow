@@ -1,4 +1,4 @@
-"""Step Function"""
+"""Mock Function"""
 
 import logging
 from typing import Any

@@ -1,5 +1,9 @@
 """Mocks __init__ module."""
 
+from tests.mocks.constants import (
+    NOT_CALLABLE
+)
+
 from tests.mocks.step_class import (
     ActionStep,
     ActionStepWithInitialContext,
@@ -27,6 +31,7 @@ from tests.mocks.step_function import (
 from tests.mocks.callback import simple_callback
 
 __all__ = [
+    "NOT_CALLABLE",
     "ActionStep",
     "ActionStepWithInitialContext",
     "ActionStepWithPreviousContext",

@@ -1,9 +1,10 @@
 """Exception module"""
 
 MESSAGE_UNKNOWN_ERROR = "Unknown error, please check logs for more information."
-MESSAGE_MISSING_STEP_DECORATOR = "A step function necessarily needs an 'action' decorator to circulate in the workflow. For more implementation details, access the documentation: https://dotflow-io.github.io/dotflow/nav/getting-started/#3-task-function."
+MESSAGE_MISSING_STEP_DECORATOR = "A step function necessarily needs an '@action' decorator to circulate in the workflow. For more implementation details, access the documentation: https://dotflow-io.github.io/dotflow/nav/getting-started/#3-task-function."
+MESSAGE_NOT_CALLABLE_OBJECT = "Problem validating the '{name}' object type; this is not a callable object"
 MESSAGE_EXECUTION_NOT_EXIST = "The execution mode does not exist. Allowed parameter is 'sequential' and 'background'."
-MESSAGE_MODULE_NOT_FOUND = "Problem importing the python module, it probably doesn't exist or is wrong."
+MESSAGE_MODULE_NOT_FOUND = "Problem importing the python module '{module}', it probably doesn't exist or is wrong."
 
 
 class MissingActionDecorator(Exception):
@@ -24,7 +25,20 @@ class ExecutionModeNotExist(Exception):
 
 class ModuleNotFound(Exception):
 
-    def __init__(self):
+    def __init__(self, module: str):
         super(ModuleNotFound, self).__init__(
-            MESSAGE_MODULE_NOT_FOUND
+            MESSAGE_MODULE_NOT_FOUND.format(
+                module=module
+            )
         )
+
+
+class NotCallableObject(Exception):
+
+    def __init__(self, name: str):
+        super(NotCallableObject, self).__init__(
+            MESSAGE_NOT_CALLABLE_OBJECT.format(
+                name=name
+            )
+        )
+
