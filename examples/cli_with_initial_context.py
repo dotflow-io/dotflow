@@ -13,11 +13,9 @@ def simple_step(initial_context):
 
 def main():
     """
-    0000-00-00 00:00:00,000 - INFO [dotflow]: ID 5ace2ca5-3d88-4119-a064-a9ae048826e9 - 0 - Initial Context -> abc
     0000-00-00 00:00:00,000 - INFO [dotflow]: ID 5ace2ca5-3d88-4119-a064-a9ae048826e9 - 0 - Not started
     0000-00-00 00:00:00,000 - INFO [dotflow]: ID 5ace2ca5-3d88-4119-a064-a9ae048826e9 - 0 - In progress
     0000-00-00 00:00:00,000 - INFO [dotflow]: ID 5ace2ca5-3d88-4119-a064-a9ae048826e9 - 0 - Completed
-    0000-00-00 00:00:00,000 - INFO [dotflow]: ID 5ace2ca5-3d88-4119-a064-a9ae048826e9 - 0 - Current Context -> {'foo': 'bar'}
     """
     system("dotflow start --step examples.cli_with_initial_context.simple_step --initial-context abc --output-context")
 
