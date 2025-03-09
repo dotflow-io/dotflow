@@ -26,34 +26,41 @@ class Execution:
 
         self._excution()
 
+    def _is_action(self, class_instance: Callable, func: Callable):
+        return (
+            callable(getattr(class_instance, func))
+            and not func.startswith("__")
+            and getattr(class_instance, func).__module__ is Action.__module__
+        )
+
     def _execution_with_class(self, class_instance: Callable):
-        context = Context(storage=[])
+        new_context = Context(storage=[])
         previous_context = self.task.previous_context
+        callable_list = [func for func in dir(class_instance) if self._is_action(class_instance, func)]
 
-        for func_name in dir(class_instance):
-            additional_function = getattr(class_instance, func_name)
+        for callable_name in callable_list:
+            new_object = getattr(class_instance, callable_name)
+            try:
+                subcontext = new_object(
+                    initial_context=self.task.initial_context,
+                    previous_context=previous_context,
+                )
+                new_context.storage.append(subcontext)
+                previous_context = subcontext
 
-            if isinstance(additional_function, Action):
-                try:
-                    current_context = additional_function(
-                        initial_context=self.task.initial_context,
-                        previous_context=previous_context,
-                    )
-                    context.storage.append(current_context)
-                    previous_context = current_context
-                except TypeError:
-                    current_context = additional_function(
-                        class_instance,
-                        initial_context=self.task.initial_context,
-                        previous_context=previous_context,
-                    )
-                    context.storage.append(current_context)
-                    previous_context = current_context
+            except TypeError:
+                subcontext = new_object(
+                    class_instance,
+                    initial_context=self.task.initial_context,
+                    previous_context=previous_context,
+                )
+                new_context.storage.append(subcontext)
+                previous_context = subcontext
 
-        if not context.storage:
+        if not new_context.storage:
             return Context(storage=class_instance)
 
-        return context
+        return new_context
 
     @time
     def _excution(self):
@@ -63,12 +70,7 @@ class Execution:
                 previous_context=self.task.previous_context,
             )
 
-            object_attributes = [
-                type(getattr(current_context.storage, param)) is Action
-                for param in dir(current_context.storage)
-            ]
-
-            if True in object_attributes:
+            if type(current_context.storage) not in [str, int, float, dict, list]:
                 current_context = self._execution_with_class(
                     class_instance=current_context.storage
                 )
