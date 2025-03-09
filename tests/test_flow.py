@@ -56,8 +56,8 @@ def extract_task_x():
 
 @action
 def transform_task_x(initial_context, previous_context):
-    print(initial_context.storage, "initial_context")
-    print(previous_context.storage, "previous_context")
+    print("initial_context:", initial_context.storage, )
+    print("previous_context:", previous_context.storage)
 
     assert initial_context.storage, {"foo": True}
     assert previous_context.storage, "extract"
@@ -98,13 +98,6 @@ def main():
     workflow.task.add(step=StepX)
     workflow.task.add(step=StepY, initial_context={"foo": "bar"})
     workflow.task.add(step=simple_step)
-    workflow.task.add(step=simple_step)
-    workflow.task.add(step=simple_step)
-    workflow.task.add(step=simple_step)
-    workflow.task.add(step=simple_step)
-    workflow.task.add(step=simple_step)
-    workflow.task.add(step=simple_step)
-    workflow.task.add(step=simple_step)
     workflow.task.add(step=extract_task_x)
     workflow.task.add(step=transform_task_x, initial_context={"foo": True})
     workflow.task.add(step=load_task_x)
@@ -116,26 +109,25 @@ def main():
     workflow = DotFlow()
     workflow.task.add(
         [
-            simple_step,
-            simple_step,
-            simple_step,
-            simple_step,
-            simple_step,
-            simple_step,
-            simple_step,
-            simple_step,
-            simple_step,
-            simple_step,
-            simple_step,
-            simple_step,
-            simple_step,
-            simple_step,
-            simple_step,
-            simple_step,
-            simple_step,
-            simple_step,
-            simple_step,
-            simple_step,
+            StepX,
+            StepY,
+            extract_task_x,
+            transform_task_x,
+            load_task_x
+        ],
+        initial_context={"foo": "bar"}
+    )
+    workflow.start()
+
+    workflow = DotFlow()
+    workflow.task.add(
+        [
+            "tests.test_flow.StepX",
+            "tests.test_flow.StepY",
+            "tests.test_flow.extract_task_x",
+            "tests.test_flow.transform_task_x",
+            "tests.test_flow.load_task_x",
+            simple_step
         ],
         initial_context={"foo": "bar"}
     )
