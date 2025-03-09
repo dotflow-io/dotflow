@@ -178,3 +178,4 @@ cython_debug/
 .output
 .storage
 .dotflow-io
+*.json
