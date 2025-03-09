@@ -3,7 +3,7 @@
 from uuid import UUID
 from typing import Callable, List, Tuple
 from inspect import getsourcelines
-from types import FunctionType
+from types import FunctionType, NoneType
 
 from dotflow.core.action import Action
 from dotflow.core.context import Context
@@ -24,7 +24,8 @@ class Execution:
         tuple,
         set,
         bool,
-        FunctionType
+        FunctionType,
+        NoneType
     ]
 
     def __init__(
@@ -58,7 +59,7 @@ class Execution:
         for callable_name in callable_list:
             for index, code in enumerate(inside_code):
                 if code.find(f"def {callable_name}") != -1:
-                    ordered_list.append((index, getattr(class_instance, callable_name)))
+                    ordered_list.append((index, callable_name))
 
         ordered_list.sort()
         return ordered_list
@@ -76,17 +77,18 @@ class Execution:
             callable_list=callable_list, class_instance=class_instance
         )
 
-        for new_object in ordered_list:
+        for _, new in ordered_list:
+            new_object = getattr(class_instance, new)
             try:
-                subcontext = new_object[1](
+                subcontext = new_object(
                     initial_context=self.task.initial_context,
                     previous_context=previous_context,
                 )
                 new_context.storage.append(subcontext)
                 previous_context = subcontext
 
-            except TypeError:
-                subcontext = new_object[1](
+            except Exception:
+                subcontext = new_object(
                     class_instance,
                     initial_context=self.task.initial_context,
                     previous_context=previous_context,
