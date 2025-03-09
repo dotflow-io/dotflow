@@ -58,9 +58,7 @@ class Execution:
         for callable_name in callable_list:
             for index, code in enumerate(inside_code):
                 if code.find(f"def {callable_name}") != -1:
-                    ordered_list.append(
-                        (index, getattr(class_instance, callable_name))
-                    )
+                    ordered_list.append((index, getattr(class_instance, callable_name)))
 
         ordered_list.sort()
         return ordered_list
@@ -68,11 +66,14 @@ class Execution:
     def _execution_with_class(self, class_instance: Callable):
         new_context = Context(storage=[])
         previous_context = self.task.previous_context
-        callable_list = [func for func in dir(class_instance) if self._is_action(class_instance, func)]
+        callable_list = [
+            func
+            for func in dir(class_instance)
+            if self._is_action(class_instance, func)
+        ]
 
         ordered_list = self._execution_orderer(
-            callable_list=callable_list,
-            class_instance=class_instance
+            callable_list=callable_list, class_instance=class_instance
         )
 
         for new_object in ordered_list:
