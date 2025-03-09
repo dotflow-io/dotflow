@@ -9,11 +9,7 @@ from dotflow.cli.command import Command
 
 class StartCommand(Command):
 
-    def __init__(self, **kwargs):
-        self.params = kwargs.get("arguments")
-        self.start()
-
-    def start(self):
+    def setup(self):
         workflow = DotFlow(
             config=Config(
                 path=self.params.path,

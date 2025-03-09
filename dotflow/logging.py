@@ -3,25 +3,25 @@
 import logging
 import logging.config
 
-from dotflow.utils import make_dir
 from dotflow.settings import Settings as settings
 
-make_dir(path=settings.INITIAL_PATH, show_log=True)
+settings.START_PATH.mkdir(parents=True, exist_ok=True)
 
 logging.basicConfig(
     filename=settings.LOG_PATH,
+    format=settings.LOG_FORMAT,
     level=logging.INFO,
-    filemode="a"
+    filemode="a",
 )
 
 logger = logging.getLogger(settings.LOG_PROFILE)
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
 ch = logging.StreamHandler()
-ch.setLevel(logging.DEBUG)
+ch.setLevel(logging.INFO)
 
 formatter = logging.Formatter(
-    '%(asctime)s - %(levelname)s [%(name)s]: %(message)s'
+    settings.LOG_FORMAT
 )
 
 ch.setFormatter(formatter)

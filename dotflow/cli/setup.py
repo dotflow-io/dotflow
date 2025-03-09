@@ -3,7 +3,7 @@
 from rich import print  # type: ignore
 
 from dotflow import __version__, __description__
-from dotflow.log import logger
+from dotflow.logging import logger
 from dotflow.settings import Settings as settings
 from dotflow.utils.basic_functions import basic_callback
 from dotflow.core.types.execution import TypeExecution
@@ -13,7 +13,11 @@ from dotflow.core.exception import (
     ModuleNotFound,
     MESSAGE_UNKNOWN_ERROR,
 )
-from dotflow.cli.commands import InitCommand, ServerCommand, StartCommand
+from dotflow.cli.commands import (
+    InitCommand,
+    LogCommand,
+    StartCommand
+)
 
 
 class Command:
@@ -32,15 +36,9 @@ class Command:
         )
 
         self.setup_init()
+        self.setup_logs()
         self.setup_start()
         self.command()
-
-    def setup_server(self):
-        self.cmd_server = self.subparsers.add_parser("server", help="Server")
-        self.cmd_server = self.cmd_server.add_argument_group(
-            "Usage: dotflow server [OPTIONS]"
-        )
-        self.cmd_server.set_defaults(exec=ServerCommand)
 
     def setup_init(self):
         self.cmd_init = self.subparsers.add_parser("init", help="Init")
@@ -61,7 +59,7 @@ class Command:
         self.cmd_start.add_argument(
             "-o", "--output-context", default=False, action="store_true"
         )
-        self.cmd_start.add_argument("-p", "--path", default=settings.INITIAL_PATH)
+        self.cmd_start.add_argument("-p", "--path", default=settings.START_PATH)
         self.cmd_start.add_argument(
             "-m",
             "--mode",
@@ -71,10 +69,14 @@ class Command:
 
         self.cmd_start.set_defaults(exec=StartCommand)
 
+    def setup_logs(self):
+        self.cmd_logs = self.subparsers.add_parser("logs", help="Logs")
+        self.cmd_logs = self.cmd_logs.add_argument_group(
+            "Usage: dotflow log [OPTIONS]"
+        )
+        self.cmd_logs.set_defaults(exec=LogCommand)
+
     def command(self):
-        message_icon = ":game_die:"
-        message_error = "[bold red]Error:[/bold red]"
-    
         try:
             arguments = self.parser.parse_args()
             if hasattr(arguments, "exec"):
@@ -82,14 +84,14 @@ class Command:
             else:
                 print(__description__)
         except MissingActionDecorator as err:
-            print(message_icon, message_error, err)
+            print(settings.WARNING_ALERT, err)
 
         except ExecutionModeNotExist as err:
-            print(message_icon, message_error, err)
+            print(settings.WARNING_ALERT, err)
 
         except ModuleNotFound as err:
-            print(message_icon, message_error, err)
+            print(settings.WARNING_ALERT, err)
 
         except Exception as err:
-            print(message_icon, message_error, MESSAGE_UNKNOWN_ERROR)
             logger.error(err)
+            print(settings.ERROR_ALERT, MESSAGE_UNKNOWN_ERROR)

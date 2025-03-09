@@ -1,10 +1,14 @@
 """Command module"""
 
+from abc import ABC, abstractmethod
 
-class Command:
+
+class Command(ABC):
 
     def __init__(self, **kwargs):
         self.params = kwargs.get("arguments")
+        self.setup()
 
-        if hasattr(self.params, "option"):
-            getattr(self, self.params.option)()
+    @abstractmethod
+    def setup(self):
+        pass
