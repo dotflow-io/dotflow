@@ -11,7 +11,8 @@ from tests.mocks.step_class import (
     ActionStepWithContexts,
     ActionStepWithError,
     ActionStepWithoutInit,
-    SimpleStep
+    SimpleStep,
+    ActionStepExecutionOrderer
 )
 
 from tests.mocks.step_function import (
@@ -39,6 +40,7 @@ __all__ = [
     "ActionStepWithError",
     "ActionStepWithoutInit",
     "SimpleStep",
+    "ActionStepExecutionOrderer",
     "action_step",
     "action_step_with_initial_context",
     "action_step_with_previous_context",

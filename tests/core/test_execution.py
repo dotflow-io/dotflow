@@ -1,6 +1,9 @@
 """Test context of execution"""
 
+import logging
 import unittest
+
+from pytest import fixture  # type: ignore
 
 from uuid import uuid4
 
@@ -15,6 +18,8 @@ from tests.mocks import (
     ActionStepWithPreviousContext,
     ActionStepWithContexts,
     ActionStepWithError,
+    SimpleStep,
+    ActionStepExecutionOrderer,
     action_step,
     action_step_with_initial_context,
     action_step_with_previous_context,
@@ -26,9 +31,18 @@ from tests.mocks import (
 
 class TestExecution(unittest.TestCase):
 
+    @fixture(autouse=True)
+    def inject_fixtures(self, caplog):
+        self._caplog = caplog
+
     def setUp(self):
         self.workflow_id = uuid4()
         self.context = {"context": True}
+        self.task = Task(
+            task_id=0,
+            step=action_step,
+            callback=simple_callback
+        )
 
     def test_execution_with_function_completed(self):
         workflow_id = uuid4()
@@ -63,34 +77,52 @@ class TestExecution(unittest.TestCase):
         self.assertEqual(controller.task.workflow_id, workflow_id)
 
     def test_execution_with_class_completed(self):
+        execution_log = ""
         workflow_id = uuid4()
+
         task = Task(
             task_id=0,
             step=ActionStep,
             callback=simple_callback
         )
-        controller = Execution(
-            task=task,
-            workflow_id=workflow_id,
-            previous_context=Context()
-        )
 
+        with self._caplog.at_level(logging.NOTSET):
+            controller = Execution(
+                task=task,
+                workflow_id=workflow_id,
+                previous_context=Context()
+            )
+
+            for log in self._caplog.records:
+                if log.funcName == "run":
+                    execution_log = log.message
+
+        self.assertEqual(execution_log, "ActionStep: Run function executed")
         self.assertEqual(controller.task.status, TaskStatus.COMPLETED)
         self.assertEqual(controller.task.workflow_id, workflow_id)
 
     def test_execution_with_class_failed(self):
+        execution_log = ""
         workflow_id = uuid4()
+
         task = Task(
             task_id=0,
             step=ActionStepWithError,
             callback=simple_callback
         )
-        controller = Execution(
-            task=task,
-            workflow_id=workflow_id,
-            previous_context=Context()
-        )
 
+        with self._caplog.at_level(logging.NOTSET):
+            controller = Execution(
+                task=task,
+                workflow_id=workflow_id,
+                previous_context=Context()
+            )
+
+            for log in self._caplog.records:
+                if log.funcName == "run":
+                    execution_log = log.message
+
+        self.assertEqual(execution_log, "ActionStepWithError: Run function executed")
         self.assertEqual(controller.task.status, TaskStatus.FAILED)
         self.assertEqual(controller.task.workflow_id, workflow_id)
 
@@ -171,7 +203,10 @@ class TestExecution(unittest.TestCase):
         )
 
         self.assertEqual(controller.task.status, TaskStatus.COMPLETED)
-        self.assertEqual(controller.task._previous_context.storage, self.context)
+        self.assertEqual(controller.task.previous_context.storage, self.context)
+
+        self.assertEqual(controller.task.current_context.storage[0].storage, {"func": "run_x"})
+        self.assertEqual(controller.task.current_context.storage[1].storage, {"func": "run_y"})
 
     def test_execution_class_with_contexts(self):
         task = Task(
@@ -189,3 +224,76 @@ class TestExecution(unittest.TestCase):
         self.assertEqual(controller.task.status, TaskStatus.COMPLETED)
         self.assertEqual(controller.task.initial_context.storage, self.context)
         self.assertEqual(controller.task.previous_context.storage, self.context)
+
+        self.assertEqual(controller.task.initial_context.storage, {"context": True})
+        self.assertEqual(controller.task.previous_context.storage, {"context": True})
+        self.assertEqual(controller.task.current_context.storage[0].storage, {"foo": "bar"})
+
+    def test_is_action_true(self):
+        controller = Execution(
+            task=self.task,
+            workflow_id=self.workflow_id,
+            previous_context=Context()
+        )
+
+        class_instance = ActionStep().storage
+        self.assertTrue(
+            controller._is_action(
+                class_instance=class_instance,
+                func="run"
+            )
+        )
+
+    def test_is_action_false(self):
+        controller = Execution(
+            task=self.task,
+            workflow_id=self.workflow_id,
+            previous_context=Context()
+        )
+
+        class_instance = SimpleStep()
+        self.assertFalse(
+            controller._is_action(
+                class_instance=class_instance,
+                func="run"
+            )
+        )
+
+    def test_is_action_init_false(self):
+        controller = Execution(
+            task=self.task,
+            workflow_id=self.workflow_id,
+            previous_context=Context()
+        )
+
+        class_instance = SimpleStep()
+        self.assertFalse(
+            controller._is_action(
+                class_instance=class_instance,
+                func="__init__"
+            )
+        )
+
+    def test_execution_orderer(self):
+        expected_value = [
+            (4, 'func_f'),
+            (8, 'func_e'),
+            (12, 'func_d'),
+            (16, 'func_c'),
+            (20, 'func_b'),
+            (24, 'func_a')
+        ]
+
+        controller = Execution(
+            task=self.task,
+            workflow_id=self.workflow_id,
+            previous_context=Context()
+        )
+
+        class_instance = ActionStepExecutionOrderer().storage
+        callable_list = [func for func in dir(class_instance) if controller._is_action(class_instance, func)]
+
+        self.assertListEqual(
+            controller._execution_orderer(callable_list=callable_list, class_instance=class_instance),
+            expected_value
+        )

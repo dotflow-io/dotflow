@@ -38,7 +38,7 @@ class TestWorkflow(unittest.TestCase):
         self.assertIsInstance(controller.success, FunctionType)
         self.assertIsInstance(controller.failure, FunctionType)
 
-    def test_execution_with_function_completed(self):
+    def test_workflow_with_function_completed(self):
         task = Task(
             task_id=0,
             step=action_step,
@@ -48,7 +48,7 @@ class TestWorkflow(unittest.TestCase):
         controller = Workflow(tasks=[task])
         self.assertEqual(controller.tasks[0].status, TaskStatus.COMPLETED)
 
-    def test_execution_with_function_failed(self):
+    def test_workflow_with_function_failed(self):
         task = Task(
             task_id=0,
             step=action_step_with_error,
@@ -96,7 +96,7 @@ class TestWorkflow(unittest.TestCase):
         Workflow(tasks=[task], failure=mock_failure)
         mock_failure.assert_called()
 
-    def test_execution_with_class_completed(self):
+    def test_workflow_with_class_completed(self):
         task = Task(
             task_id=0,
             step=ActionStep,

@@ -3,7 +3,7 @@
 import unittest
 import logging
 
-from pytest import fixture
+from pytest import fixture  # type: ignore
 
 from dotflow.core.context import Context
 from dotflow.core.action import Action
