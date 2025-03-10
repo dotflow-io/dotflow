@@ -93,5 +93,5 @@ class Command:
             print(settings.WARNING_ALERT, err)
 
         except Exception as err:
-            logger.error(err)
+            logger.error(f"Internal problem: {str(err)}")
             print(settings.ERROR_ALERT, MESSAGE_UNKNOWN_ERROR)

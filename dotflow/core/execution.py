@@ -5,6 +5,7 @@ from typing import Callable, List, Tuple
 from inspect import getsourcelines
 from types import FunctionType, NoneType
 
+from dotflow.logging import logger
 from dotflow.core.action import Action
 from dotflow.core.context import Context
 from dotflow.core.task import Task
@@ -54,14 +55,24 @@ class Execution:
             class_instance: Callable
     ) -> Tuple[int, Callable]:
         ordered_list = []
-        inside_code = getsourcelines(class_instance.__class__)[0]
 
-        for callable_name in callable_list:
-            for index, code in enumerate(inside_code):
-                if code.find(f"def {callable_name}") != -1:
-                    ordered_list.append((index, callable_name))
+        try:
+            inside_code = getsourcelines(class_instance.__class__)[0]
 
-        ordered_list.sort()
+            for callable_name in callable_list:
+                for index, code in enumerate(inside_code):
+                    if code.find(f"def {callable_name}") != -1:
+                        ordered_list.append((index, callable_name))
+
+            ordered_list.sort()
+            return ordered_list
+
+        except TypeError as err:
+            logger.error(f"Internal problem: {str(err)}")
+
+        for index, callable_name in enumerate(callable_list):
+            ordered_list.append((index, callable_name))
+
         return ordered_list
 
     def _execution_with_class(self, class_instance: Callable):

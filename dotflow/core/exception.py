@@ -5,7 +5,7 @@ MESSAGE_MISSING_STEP_DECORATOR = "A step function necessarily needs an '@action'
 MESSAGE_NOT_CALLABLE_OBJECT = "Problem validating the '{name}' object type; this is not a callable object"
 MESSAGE_EXECUTION_NOT_EXIST = "The execution mode does not exist. Allowed parameter is 'sequential' and 'background'."
 MESSAGE_MODULE_NOT_FOUND = "Problem importing the python module '{module}'."
-
+MESSAGE_PROBLEM_ORDERING = "Problem with correctly ordering functions of the '{name}' class."
 
 class MissingActionDecorator(Exception):
 
@@ -42,3 +42,12 @@ class NotCallableObject(Exception):
             )
         )
 
+
+class ProblemOrdering(Exception):
+
+    def __init__(self, name: str):
+        super(ProblemOrdering, self).__init__(
+            MESSAGE_PROBLEM_ORDERING.format(
+                name=name
+            )
+        )
