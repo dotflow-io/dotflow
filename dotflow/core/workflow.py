@@ -44,7 +44,9 @@ class Workflow:
             self.success(tasks=tasks)
 
     def sequential(self, keep_going: bool = False):
-        previous_context = Context()
+        previous_context = Context(
+            workflow_id=self.id
+        )
 
         for task in self.tasks:
             Execution(

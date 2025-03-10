@@ -105,6 +105,7 @@ class Execution:
                 subcontext = new_object(
                     initial_context=self.task.initial_context,
                     previous_context=previous_context,
+                    task=self.task
                 )
                 new_context.storage.append(subcontext)
                 previous_context = subcontext
@@ -114,6 +115,7 @@ class Execution:
                     class_instance,
                     initial_context=self.task.initial_context,
                     previous_context=previous_context,
+                    task=self.task
                 )
                 new_context.storage.append(subcontext)
                 previous_context = subcontext
@@ -129,6 +131,7 @@ class Execution:
             current_context = self.task.step(
                 initial_context=self.task.initial_context,
                 previous_context=self.task.previous_context,
+                task=self.task
             )
 
             if type(current_context.storage) not in self.VALID_OBJECTS:

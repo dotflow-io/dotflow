@@ -5,10 +5,12 @@ import logging
 
 from pytest import fixture  # type: ignore
 
+from dotflow.core.task import Task
 from dotflow.core.context import Context
 from dotflow.core.action import Action
 
 from tests.mocks import (
+    action_step,
     simple_step,
     simple_step_with_params,
     simple_step_with_initial_context,
@@ -22,12 +24,16 @@ class TestClassActions(unittest.TestCase):
     @fixture(autouse=True)
     def inject_fixtures(self, caplog):
         self._caplog = caplog
+        self.task = Task(
+            task_id=1,
+            step=action_step
+        )
 
     def test_instantiating_action_class(self):
         number_of_retries = 1
 
-        inside = Action(simple_step)
-        decorated_function = inside()
+        inside = Action(simple_step, task=self.task)
+        decorated_function = inside(task=self.task)
 
         self.assertEqual(inside.retry, number_of_retries)
         self.assertEqual(inside.func, simple_step)
@@ -36,8 +42,8 @@ class TestClassActions(unittest.TestCase):
     def test_instantiating_action_class_with_retry(self):
         number_of_retries = 5
 
-        inside = Action(simple_step, retry=number_of_retries)
-        decorated_function = inside()
+        inside = Action(simple_step, task=self.task, retry=number_of_retries)
+        decorated_function = inside(task=self.task)
 
         self.assertEqual(inside.retry, number_of_retries)
         self.assertEqual(inside.func, simple_step)
@@ -61,10 +67,10 @@ class TestClassActions(unittest.TestCase):
                 self.assertEqual(record.message, error_message)
 
     def test_action_class_with_previous_context(self):
-        inside = Action(simple_step_with_previous_context)
+        inside = Action(simple_step_with_previous_context, task=self.task)
 
         with self._caplog.at_level(logging.DEBUG):
-            inside()
+            inside(task=self.task)
             self.assertEqual(self._caplog.records[0].message, 'None')
 
     def test_set_params_previous_context(self):
@@ -80,22 +86,24 @@ class TestClassActions(unittest.TestCase):
         self.assertListEqual(inside.params, ["initial_context"])
 
     def test_get_context_with_initial_context(self):
-        expected_value = {"initial_context": "bar"}
+        input_value = {"initial_context": "bar"}
 
         inside = Action(simple_step_with_initial_context)
         inside.params = ["initial_context"]
-        result = inside._get_context(kwargs=expected_value)
+        result = inside._get_context(kwargs=input_value)
 
-        self.assertEqual(result, expected_value)
+        self.assertIsInstance(result["initial_context"], Context)
+        self.assertEqual(result["initial_context"].storage, "bar")
 
     def test_get_context_with_previous_context(self):
-        expected_value = {"previous_context": "foo"}
+        input_value = {"previous_context": "foo"}
 
         inside = Action(simple_step_with_previous_context)
         inside.params = ["previous_context"]
-        result = inside._get_context(kwargs=expected_value)
+        result = inside._get_context(kwargs=input_value)
 
-        self.assertEqual(result, expected_value)
+        self.assertIsInstance(result["previous_context"], Context)
+        self.assertEqual(result["previous_context"].storage, "foo")
 
     def test_get_context_without_content(self):
         expected_value = {}
