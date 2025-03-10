@@ -1,5 +1,10 @@
 # Release Notes
 
+## v0.9.1
+
+- [📦 PyPI - Build 0.9.1](https://github.com/dotflow-io/dotflow/releases/tag/v0.9.1)
+- [🪲 BUG: Fixed ImportError NoneType Python 3.9](https://github.com/dotflow-io/dotflow/commit/406d6e57ae2e21476f1e570e83e5be495c844e9a)
+
 ## v0.9.0
 
 - [📦 PyPI - Build 0.9.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.9.0)
