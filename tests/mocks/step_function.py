@@ -12,6 +12,11 @@ def action_step() -> Any:
 
 
 @action
+def action_step_valid_object(initial_context) -> Any:
+    return initial_context
+
+
+@action
 def action_step_with_initial_context(initial_context) -> Any:
     assert initial_context.storage
     return initial_context.storage

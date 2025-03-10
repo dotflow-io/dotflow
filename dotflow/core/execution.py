@@ -25,13 +25,19 @@ class Execution:
         str,
         int,
         float,
+        complex,
         dict,
         list,
         tuple,
         set,
+        frozenset,
+        range,
         bool,
         FunctionType,
-        NoneType
+        NoneType,
+        bytes,
+        bytearray,
+        memoryview,
     ]
 
     def __init__(
