@@ -1,5 +1,10 @@
 # Release Notes
 
+## v0.9.0
+
+- [📦 PyPI - Build 0.9.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.9.0)
+- [📌 Bulk task inclusion option](https://github.com/dotflow-io/dotflow/pull/40)
+
 ## v0.8.2
 
 - [📦 PyPI - Build 0.8.2](https://github.com/dotflow-io/dotflow/releases/tag/v0.8.2)
