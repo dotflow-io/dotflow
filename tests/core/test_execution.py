@@ -195,10 +195,12 @@ class TestExecution(unittest.TestCase):
 
     def test_is_action_true(self):
         controller = Execution(
-            task=self.task, workflow_id=self.workflow_id, previous_context=Context()
+            task=self.task,
+            workflow_id=self.workflow_id,
+            previous_context=Context()
         )
 
-        class_instance = ActionStep().storage
+        class_instance = ActionStep(task=controller.task).storage
         self.assertTrue(
             controller._is_action(class_instance=class_instance, func="run")
         )
@@ -234,10 +236,12 @@ class TestExecution(unittest.TestCase):
         ]
 
         controller = Execution(
-            task=self.task, workflow_id=self.workflow_id, previous_context=Context()
+            task=self.task,
+            workflow_id=self.workflow_id,
+            previous_context=Context()
         )
 
-        class_instance = ActionStepExecutionOrderer().storage
+        class_instance = ActionStepExecutionOrderer(task=controller.task).storage
         callable_list = [
             func
             for func in dir(class_instance)
@@ -280,7 +284,9 @@ class TestExecution(unittest.TestCase):
             )
 
             controller = Execution(
-                task=task, workflow_id=self.workflow_id, previous_context=None
+                task=task,
+                workflow_id=self.workflow_id,
+                previous_context=None
             )
 
             self.assertEqual(controller.task.status, TaskStatus.COMPLETED)

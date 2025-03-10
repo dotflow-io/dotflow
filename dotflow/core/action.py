@@ -8,8 +8,14 @@ from dotflow.core.context import Context
 
 class Action(object):
 
-    def __init__(self, func: Callable = None, retry: int = 1):
+    def __init__(
+            self,
+            func: Callable = None,
+            task: Callable = None,
+            retry: int = 1
+    ) -> None:
         self.func = func
+        self.task = task
         self.retry = retry
         self.params = []
 
@@ -18,22 +24,42 @@ class Action(object):
         if self.func:
             self._set_params()
 
+            task = self._get_task(kwargs=kwargs)
             contexts = self._get_context(kwargs=kwargs)
-            if contexts:
-                return Context(storage=self._retry(*args, **contexts))
 
-            return Context(storage=self._retry(*args))
+            if contexts:
+                return Context(
+                    storage=self._retry(*args, **contexts),
+                    task_id=task.task_id,
+                    workflow_id=task.workflow_id
+                )
+
+            return Context(
+                storage=self._retry(*args),
+                task_id=task.task_id,
+                workflow_id=task.workflow_id
+            )
 
         # No parameters
         def action(*_args, **_kwargs):
             self.func = args[0]
             self._set_params()
 
+            task = self._get_task(kwargs=_kwargs)
             contexts = self._get_context(kwargs=_kwargs)
-            if contexts:
-                return Context(storage=self._retry(*_args, **contexts))
 
-            return Context(storage=self._retry(*_args))
+            if contexts:
+                return Context(
+                    storage=self._retry(*_args, **contexts),
+                    task_id=task.task_id,
+                    workflow_id=task.workflow_id
+                )
+
+            return Context(
+                storage=self._retry(*_args),
+                task_id=task.task_id,
+                workflow_id=task.workflow_id
+            )
 
         return action
 
@@ -62,9 +88,12 @@ class Action(object):
     def _get_context(self, kwargs: Dict):
         context = {}
         if "initial_context" in self.params:
-            context["initial_context"] = kwargs.get("initial_context") or Context()
+            context["initial_context"] = Context(kwargs.get("initial_context"))
 
         if "previous_context" in self.params:
-            context["previous_context"] = kwargs.get("previous_context") or Context()
+            context["previous_context"] = Context(kwargs.get("previous_context"))
 
         return context
+
+    def _get_task(self, kwargs: Dict):
+        return kwargs.get("task")

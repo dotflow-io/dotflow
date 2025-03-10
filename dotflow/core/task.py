@@ -135,7 +135,11 @@ class Task(TaskInstance):
 
     @current_context.setter
     def current_context(self, value: Context):
-        self._current_context = Context(value)
+        self._current_context = Context(
+            task_id=self.task_id,
+            workflow_id=self.workflow_id,
+            storage=value
+        )
 
         TaskController(task=self).controller_output_context(
             content=self.current_context.storage,
