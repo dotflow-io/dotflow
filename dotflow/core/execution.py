@@ -3,7 +3,12 @@
 from uuid import UUID
 from typing import Callable, List, Tuple
 from inspect import getsourcelines
-from types import FunctionType, NoneType
+from types import FunctionType
+
+try:
+    from types import NoneType
+except ImportError:
+    NoneType = type(None)
 
 from dotflow.logging import logger
 from dotflow.core.action import Action
