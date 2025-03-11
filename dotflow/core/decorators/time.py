@@ -4,6 +4,7 @@ from datetime import datetime
 
 
 def time(func):
+    """"Time Decorator"""
     def inside(*args, **kwargs):
         start = datetime.now()
         task = func(*args, **kwargs)

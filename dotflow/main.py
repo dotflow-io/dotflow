@@ -7,6 +7,7 @@ from dotflow.cli.setup import Command
 
 
 def main():
+    """CLI DotFlow"""
     Command(
         parser=argparse.ArgumentParser(
             description=__description__

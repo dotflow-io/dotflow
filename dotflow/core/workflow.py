@@ -33,8 +33,11 @@ class Workflow:
 
     Args:
         tasks (List[Task]):
+
         success (Callable):
+
         failure (Callable):
+
         keep_going (bool):
             A parameter that receives a boolean object with the purpose of continuing
             or not the execution of the workflow in case of an error during the
@@ -45,6 +48,7 @@ class Workflow:
             A parameter for assigning the execution mode of the workflow. Currently,
             there is the option to execute in **sequential** mode or **background** mode.
             By default, it is in **sequential** mode.
+
         id (UUID):
 
     Attributes:

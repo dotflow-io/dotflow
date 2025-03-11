@@ -4,6 +4,7 @@ from pathlib import Path
 
 
 class Settings:
+    """Settings DotFlow"""
 
     START_PATH = Path(".output")
     GITIGNORE = Path(".gitignore")

@@ -25,7 +25,9 @@ class DotFlow:
 
     Attributes:
         workflow_id (UUID):
+
         task (List[Task]):
+
         start (Workflow):
     """
 

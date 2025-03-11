@@ -30,7 +30,9 @@ class Action(object):
 
     Args:
         func (Callable):
+
         task (Callable):
+
         retry (int):
             Integer-type argument referring to the number of retry attempts
             the function will execute in case of failure.
