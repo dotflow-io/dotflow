@@ -1,14 +1,14 @@
 <!doctype html>
 <html data-bs-theme="light">
     <head>
-                <title>TaskStatus - Dotflow</title>
+                <title>Decorators - Dotflow</title>
 
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
             
-            <link rel="canonical" href="http://dotflow-io/nav/reference/type-status/">
+            <link rel="canonical" href="http://dotflow-io/nav/reference/decorators/">
             
 
             
@@ -124,7 +124,7 @@
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../decorators/" class="dropdown-item text-decoration-none ">Decorators</a>
+        <a href="./" class="dropdown-item text-decoration-none  active ">Decorators</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
@@ -160,7 +160,7 @@
 <!-- endblock -->
                 <!-- block dropdown-menu -->
     <li>
-        <a href="./" class="dropdown-item text-decoration-none  active ">TaskStatus</a>
+        <a href="../type-status/" class="dropdown-item text-decoration-none ">TaskStatus</a>
     </li>
 <!-- endblock -->
         </ul>
@@ -266,34 +266,10 @@
     <div class="sidebar navbar-collapse collapse card">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#taskstatus" class="nav-link">TaskStatus</a>
+            <li class="nav-item" data-bs-level="1"><a href="#decorators" class="nav-link">Decorators</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#dotflow.core.types.status.TaskStatus" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;TaskStatus</a>
+            <li class="nav-item" data-bs-level="2"><a href="#dotflow.core.decorators.time.time" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;time</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.types.status.TaskStatus.NOT_STARTED" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;NOT_STARTED</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.types.status.TaskStatus.IN_PROGRESS" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;IN_PROGRESS</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.types.status.TaskStatus.COMPLETED" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;COMPLETED</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.types.status.TaskStatus.PAUSED" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;PAUSED</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.types.status.TaskStatus.RETRY" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;RETRY</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.types.status.TaskStatus.FAILED" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;FAILED</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
               </ul>
             </li>
               </ul>
@@ -311,230 +287,43 @@
             
             
         </header>
-        <p><h1 id="taskstatus">TaskStatus</h1>
+        <p><h1 id="decorators">Decorators</h1>
 
 
-<div class="doc doc-object doc-class">
+<div class="doc doc-object doc-function">
 
 
-
-<h2 id="dotflow.core.types.status.TaskStatus" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>dotflow.core.types.status.TaskStatus</code>
-
+<h2 id="dotflow.core.decorators.time.time" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <code class="highlight language-python"><span class="n">dotflow</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">decorators</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="n">func</span><span class="p">)</span></code>
 
 </h2>
 
 
     <div class="doc doc-contents first">
 
+        <p>"Time Decorator</p>
 
-
-
-<details class="import" open>
-  <summary>Import</summary>
-  <p>You can import the <strong>TaskStatus</strong> class with:</p>
-<pre><code>from dotflow.core.types import TaskStatus
-</code></pre>
-</details>
           
 
-
-
-
-
-
-              <details class="quote">
-                <summary>Source code in <code>dotflow/core/types/status.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 6</span>
+            <details class="quote">
+              <summary>Source code in <code>dotflow/core/decorators/time.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 6</span>
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">TaskStatus</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Import:</span>
-<span class="sd">        You can import the **TaskStatus** class with:</span>
-
-<span class="sd">            from dotflow.core.types import TaskStatus</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">NOT_STARTED</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Doc</span><span class="p">(</span><span class="s2">&quot;Status not started.&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="s2">&quot;Not started&quot;</span>
-    <span class="n">IN_PROGRESS</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Doc</span><span class="p">(</span><span class="s2">&quot;Status in progress.&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="s2">&quot;In progress&quot;</span>
-    <span class="n">COMPLETED</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Doc</span><span class="p">(</span><span class="s2">&quot;Status completed.&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="s2">&quot;Completed&quot;</span>
-    <span class="n">PAUSED</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Doc</span><span class="p">(</span><span class="s2">&quot;Status paused.&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="s2">&quot;Paused&quot;</span>
-    <span class="n">RETRY</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Doc</span><span class="p">(</span><span class="s2">&quot;Status retry.&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="s2">&quot;Retry&quot;</span>
-    <span class="n">FAILED</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Doc</span><span class="p">(</span><span class="s2">&quot;Status failed.&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="s2">&quot;Failed&quot;</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">time</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;&quot;Time Decorator&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inside</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">task</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">task</span>
+    <span class="k">return</span> <span class="n">inside</span>
 </code></pre></div></td></tr></table></div>
-              </details>
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="dotflow.core.types.status.TaskStatus.NOT_STARTED" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">NOT_STARTED</span> <span class="o">=</span> <span class="s1">&#39;Not started&#39;</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-</h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Status not started.</p>
-
-          
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="dotflow.core.types.status.TaskStatus.IN_PROGRESS" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">IN_PROGRESS</span> <span class="o">=</span> <span class="s1">&#39;In progress&#39;</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-</h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Status in progress.</p>
-
-          
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="dotflow.core.types.status.TaskStatus.COMPLETED" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">COMPLETED</span> <span class="o">=</span> <span class="s1">&#39;Completed&#39;</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-</h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Status completed.</p>
-
-          
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="dotflow.core.types.status.TaskStatus.PAUSED" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">PAUSED</span> <span class="o">=</span> <span class="s1">&#39;Paused&#39;</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-</h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Status paused.</p>
-
-          
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="dotflow.core.types.status.TaskStatus.RETRY" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">RETRY</span> <span class="o">=</span> <span class="s1">&#39;Retry&#39;</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-</h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Status retry.</p>
-
-          
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="dotflow.core.types.status.TaskStatus.FAILED" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">FAILED</span> <span class="o">=</span> <span class="s1">&#39;Failed&#39;</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-</h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Status failed.</p>
-
-          
-    </div>
-
-</div>
-
-
-
-
-
-  </div>
-
+            </details>
     </div>
 
 </div></p>
@@ -552,13 +341,13 @@
                     <!-- block preview -->
     <div class="preview row row-cols-md-3 text-center pt-md-3" id="component-preview">
         <div class="col themed-grid-col">
-            <a rel="prev" href="../type-execution/" class="nav-link">
+            <a rel="prev" href="../utils/" class="nav-link">
                 <i class="fa fa-arrow-left"></i> Previous
             </a>
         </div>
         <div class="col themed-grid-col"></div>
         <div class="col themed-grid-col">
-            <a rel="next" href="../../development/development-guide/" class="nav-link">
+            <a rel="next" href="../exception/" class="nav-link">
                 Next <i class="fa fa-arrow-right"></i>
             </a>
         </div>

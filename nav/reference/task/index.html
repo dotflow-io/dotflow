@@ -124,6 +124,16 @@
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
+        <a href="../decorators/" class="dropdown-item text-decoration-none ">Decorators</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../exception/" class="dropdown-item text-decoration-none ">Exception</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
         <a class="dropdown-item text-decoration-none" href="#">Instance &raquo;</a>
         <ul class="submenu dropdown-menu">
                 <!-- block dropdown-menu -->
@@ -653,7 +663,12 @@ which is basically a function. You can see in this
 <span class="normal">231</span>
 <span class="normal">232</span>
 <span class="normal">233</span>
-<span class="normal">234</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Task</span><span class="p">(</span><span class="n">TaskInstance</span><span class="p">):</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Task</span><span class="p">(</span><span class="n">TaskInstance</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Import:</span>
 <span class="sd">        You can import the **Task** class directly from dotflow:</span>
@@ -671,16 +686,21 @@ which is basically a function. You can see in this
 
 <span class="sd">    Args:</span>
 <span class="sd">        task_id (int): Task ID.</span>
+
 <span class="sd">        step (Callable):</span>
 <span class="sd">            A argument that receives an object of the callable type,</span>
 <span class="sd">            which is basically a function. You can see in this</span>
 <span class="sd">            [example](https://dotflow-io.github.io/dotflow/nav/getting-started/#3-task-function).</span>
+
 <span class="sd">        callback (Callable):</span>
 <span class="sd">            Any callable object that receives **args** or **kwargs**,</span>
 <span class="sd">            which is basically a function. You can see in this</span>
 <span class="sd">            [example](https://dotflow-io.github.io/dotflow/nav/getting-started/#2-callback-function).</span>
+
 <span class="sd">        initial_context (Any): Any python object.</span>
+
 <span class="sd">        workflow_id (UUID): Workflow ID.</span>
+
 <span class="sd">        config (Config): Configuration class.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
