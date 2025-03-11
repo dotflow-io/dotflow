@@ -340,7 +340,7 @@ workflow.task.add(step=my_task, callback=my_callback)
 workflow.start()
 </code></pre>
 <h3 id="1-import">1 - Import</h3>
-<p>Start with the basics, which is importing the necessary classes and methods. (<a href="https://dotflow-io.github.io/dotflow/nav/reference/dotflow-class/">DotFlow</a>, <a href="https://dotflow-io.github.io/dotflow/nav/reference/action-decorator/">action</a>)</p>
+<p>Start with the basics, which is importing the necessary classes and methods. (<a href="https://dotflow-io.github.io/dotflow/nav/reference/dotflow/">DotFlow</a>, <a href="https://dotflow-io.github.io/dotflow/nav/reference/action/">action</a>)</p>
 <pre><code class="language-python">from dotflow import DotFlow, action
 </code></pre>
 <h3 id="2-callback-function">2 - Callback function</h3>
@@ -349,13 +349,13 @@ workflow.start()
     print(args, kwargs)
 </code></pre>
 <h3 id="3-task-function">3 - Task function</h3>
-<p>Now, create the function responsible for executing your task. It's very simple; just use the <a href="https://dotflow-io.github.io/dotflow/nav/reference/action-decorator/">action</a> decorator above the function, and that's it—you've created a task. If necessary, you can also add the parameter called <code>retry</code> to set the maximum number of execution attempts if the function fails.</p>
+<p>Now, create the function responsible for executing your task. It's very simple; just use the <a href="https://dotflow-io.github.io/dotflow/nav/reference/action/">action</a> decorator above the function, and that's it—you've created a task. If necessary, you can also add the parameter called <code>retry</code> to set the maximum number of execution attempts if the function fails.</p>
 <pre><code class="language-python">@action(retry=5)
 def my_task():
     print(&quot;task&quot;)
 </code></pre>
 <h3 id="4-dotflow-class">4 - DotFlow Class</h3>
-<p>Instantiate the DotFlow class in a <code>workflow</code> variable to be used in the following steps. <a href="https://dotflow-io.github.io/dotflow/nav/reference/dotflow-class/">More details</a>.</p>
+<p>Instantiate the DotFlow class in a <code>workflow</code> variable to be used in the following steps. <a href="https://dotflow-io.github.io/dotflow/nav/reference/dotflow/">More details</a>.</p>
 <pre><code class="language-python">workflow = DotFlow()
 </code></pre>
 <h3 id="5-add-task">5 - Add Task</h3>
