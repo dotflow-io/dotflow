@@ -9,6 +9,26 @@ from dotflow.core.task import TaskBuilder
 
 
 class DotFlow:
+    """
+    Import:
+        You can import the **Dotflow** class directly from dotflow:
+
+            from dotflow import DotFlow
+
+    Example:
+        `class` dotflow.core.dotflow.Dotflow
+
+            workflow = DotFlow()
+
+    Args:
+        config (Config): Configuration class.
+
+    Attributes:
+        workflow_id (UUID):
+        task (List[Task]):
+        start (Workflow):
+    ---
+    """
 
     def __init__(
             self,
@@ -28,10 +48,22 @@ class DotFlow:
         )
 
     def result_task(self):
+        """
+        Returns:
+            list (List[Task]): Returns a list of Task class.
+        """
         return self.task.queu
 
     def result_context(self):
+        """
+        Returns:
+            list (List[Context]): Returns a list of Context class.
+        """
         return [task.current_context for task in self.task.queu]
 
     def result_storage(self):
+        """
+        Returns:
+            list (List[Any]): Returns a list of assorted objects.
+        """
         return [task.current_context.storage for task in self.task.queu]

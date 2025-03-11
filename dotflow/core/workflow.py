@@ -15,6 +15,45 @@ from dotflow.utils import basic_callback
 
 
 class Workflow:
+    """
+    Import:
+        You can import the **Workflow** class with:
+
+            from dotflow.core.workflow import Workflow
+
+    Example:
+        `class` dotflow.core.workflow.Workflow
+
+            workflow = Workflow(
+                tasks=[tasks],
+                success=basic_callback,
+                failure=basic_callback,
+                keep_going=True
+            )
+
+    Args:
+        tasks (List[Task]):
+        success (Callable):
+        failure (Callable):
+        keep_going (bool):
+            A parameter that receives a boolean object with the purpose of continuing
+            or not the execution of the workflow in case of an error during the
+            execution of a task. If it is **true**, the execution will continue;
+            if it is **False**, the workflow will stop.
+
+        mode (TypeExecution):
+            A parameter for assigning the execution mode of the workflow. Currently,
+            there is the option to execute in **sequential** mode or **background** mode.
+            By default, it is in **sequential** mode.
+        id (UUID):
+
+    Attributes:
+        id (UUID)
+        started (datetime):
+        tasks (List[Task]):
+        success (Callable):
+        failure (Callable):
+    """
 
     def __init__(
         self,
@@ -67,6 +106,8 @@ class Workflow:
         th = threading.Thread(target=self.sequential, args=[keep_going])
         th.start()
 
-    def parallel(self, keep_going: bool = False): ...
+    def parallel(self, keep_going: bool = False):
+        """Not implemented"""
 
-    def data_store(self, keep_going: bool = False): ...
+    def data_store(self, keep_going: bool = False):
+        """Not implemented"""

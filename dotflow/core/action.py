@@ -7,6 +7,35 @@ from dotflow.core.context import Context
 
 
 class Action(object):
+    """
+    Import:
+        You can import the **action** decorator directly from dotflow:
+
+            from dotflow import action
+
+    Example:
+        `class` dotflow.core.action.Action
+
+        Standard
+
+            @action
+            def my_task():
+                print("task")
+
+        With Retry
+
+            @action(retry=5)
+            def my_task():
+                print("task")
+
+    Args:
+        func (Callable):
+        task (Callable):
+        retry (int):
+            Integer-type argument referring to the number of retry attempts
+            the function will execute in case of failure.
+    ---
+    """
 
     def __init__(
             self,

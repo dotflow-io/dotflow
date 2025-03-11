@@ -7,6 +7,12 @@ from datetime import datetime
 
 
 class ContextInstance:
+    """
+    Import:
+        You can import the **ContextInstance** class with:
+
+            from dotflow.core.context import ContextInstance
+    """
 
     def __init__(self, *args, **kwargs):
         self._time = None
@@ -16,6 +22,25 @@ class ContextInstance:
 
 
 class Context(ContextInstance):
+    """
+    Import:
+        You can import the Context class directly from dotflow:
+
+            from dotflow import Context
+
+    Example:
+        `class` dotflow.core.context.Context
+
+            Context(
+                storage={"data": [0, 1, 2, 3]}
+            )
+
+    Args:
+        storage (Any): Attribute where any type of Python object can be stored.
+        task_id (int): Task ID.
+        workflow_id (UUID): Workflow ID.
+    ---
+    """
 
     def __init__(
             self,
