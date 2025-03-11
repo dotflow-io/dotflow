@@ -1,14 +1,14 @@
 <!doctype html>
 <html data-bs-theme="light">
     <head>
-                <title>Release Notes - Dotflow</title>
+                <title>TaskStatus - Dotflow</title>
 
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
             
-            <link rel="canonical" href="http://dotflow-io/nav/development/release-notes/">
+            <link rel="canonical" href="http://dotflow-io/nav/reference/type-status/">
             
 
             
@@ -74,42 +74,42 @@
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="
+                            <a class=" active 
                             nav-link dropdown-toggle text-decoration-none" href="#" data-bs-toggle="dropdown">[Reference]</a>
                             <ul class="dropdown-menu">
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/action/" class="dropdown-item text-decoration-none ">Action</a>
+        <a href="../action/" class="dropdown-item text-decoration-none ">Action</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/config/" class="dropdown-item text-decoration-none ">Config</a>
+        <a href="../config/" class="dropdown-item text-decoration-none ">Config</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/context/" class="dropdown-item text-decoration-none ">Context</a>
+        <a href="../context/" class="dropdown-item text-decoration-none ">Context</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/dotflow/" class="dropdown-item text-decoration-none ">DotFlow</a>
+        <a href="../dotflow/" class="dropdown-item text-decoration-none ">DotFlow</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/task/" class="dropdown-item text-decoration-none ">Task</a>
+        <a href="../task/" class="dropdown-item text-decoration-none ">Task</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/task-builder/" class="dropdown-item text-decoration-none ">TaskBuilder</a>
+        <a href="../task-builder/" class="dropdown-item text-decoration-none ">TaskBuilder</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/workflow/" class="dropdown-item text-decoration-none ">Workflow</a>
+        <a href="../workflow/" class="dropdown-item text-decoration-none ">Workflow</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
@@ -118,12 +118,12 @@
         <ul class="submenu dropdown-menu">
                 <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/task-instance/" class="dropdown-item text-decoration-none ">TaskInstance</a>
+        <a href="../task-instance/" class="dropdown-item text-decoration-none ">TaskInstance</a>
     </li>
 <!-- endblock -->
                 <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/context-instance/" class="dropdown-item text-decoration-none ">ContextInstance</a>
+        <a href="../context-instance/" class="dropdown-item text-decoration-none ">ContextInstance</a>
     </li>
 <!-- endblock -->
         </ul>
@@ -135,12 +135,12 @@
         <ul class="submenu dropdown-menu">
                 <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/type-execution/" class="dropdown-item text-decoration-none ">TypeExecution</a>
+        <a href="../type-execution/" class="dropdown-item text-decoration-none ">TypeExecution</a>
     </li>
 <!-- endblock -->
                 <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/type-status/" class="dropdown-item text-decoration-none ">TaskStatus</a>
+        <a href="./" class="dropdown-item text-decoration-none  active ">TaskStatus</a>
     </li>
 <!-- endblock -->
         </ul>
@@ -149,17 +149,17 @@
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class=" active 
+                            <a class="
                             nav-link dropdown-toggle text-decoration-none" href="#" data-bs-toggle="dropdown">[Development]</a>
                             <ul class="dropdown-menu">
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../development-guide/" class="dropdown-item text-decoration-none ">Development Guide</a>
+        <a href="../../development/development-guide/" class="dropdown-item text-decoration-none ">Development Guide</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="./" class="dropdown-item text-decoration-none  active ">Release Notes</a>
+        <a href="../../development/release-notes/" class="dropdown-item text-decoration-none ">Release Notes</a>
     </li>
 <!-- endblock -->
                             </ul>
@@ -246,58 +246,34 @@
     <div class="sidebar navbar-collapse collapse card">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#release-notes" class="nav-link">Release Notes</a>
+            <li class="nav-item" data-bs-level="1"><a href="#taskstatus" class="nav-link">TaskStatus</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#v091" class="nav-link">v0.9.1</a>
+            <li class="nav-item" data-bs-level="2"><a href="#dotflow.core.types.status.TaskStatus" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;TaskStatus</a>
               <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#v090" class="nav-link">v0.9.0</a>
+            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.types.status.TaskStatus.NOT_STARTED" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;NOT_STARTED</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#v082" class="nav-link">v0.8.2</a>
+            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.types.status.TaskStatus.IN_PROGRESS" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;IN_PROGRESS</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#v081" class="nav-link">v0.8.1</a>
+            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.types.status.TaskStatus.COMPLETED" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;COMPLETED</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#v080" class="nav-link">v0.8.0</a>
+            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.types.status.TaskStatus.PAUSED" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;PAUSED</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#v070" class="nav-link">v0.7.0</a>
+            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.types.status.TaskStatus.RETRY" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;RETRY</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#v060" class="nav-link">v0.6.0</a>
+            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.types.status.TaskStatus.FAILED" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;FAILED</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#v050" class="nav-link">v0.5.0</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#v041" class="nav-link">v0.4.1</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#v040" class="nav-link">v0.4.0</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#v030" class="nav-link">v0.3.0</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#v020" class="nav-link">v0.2.0</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#v010" class="nav-link">v0.1.0</a>
-              <ul class="nav flex-column">
               </ul>
             </li>
               </ul>
@@ -315,73 +291,221 @@
             
             
         </header>
-        <p><h1 id="release-notes">Release Notes</h1>
-<h2 id="v091">v0.9.1</h2>
-<ul>
-<li><a href="https://github.com/dotflow-io/dotflow/releases/tag/v0.9.1">📦 PyPI - Build 0.9.1</a></li>
-<li><a href="https://github.com/dotflow-io/dotflow/commit/406d6e57ae2e21476f1e570e83e5be495c844e9a">🪲 BUG: Fixed ImportError NoneType Python 3.9</a></li>
-</ul>
-<h2 id="v090">v0.9.0</h2>
-<ul>
-<li><a href="https://github.com/dotflow-io/dotflow/releases/tag/v0.9.0">📦 PyPI - Build 0.9.0</a></li>
-<li><a href="https://github.com/dotflow-io/dotflow/pull/40">📌 Bulk task inclusion option</a></li>
-</ul>
-<h2 id="v082">v0.8.2</h2>
-<ul>
-<li><a href="https://github.com/dotflow-io/dotflow/releases/tag/v0.8.2">📦 PyPI - Build 0.8.2</a></li>
-<li><a href="https://github.com/dotflow-io/dotflow/commit/4991f5a61022ac0035c6dcc203458e152bca47e8">🪲 Fixed class-type step without init</a></li>
-</ul>
-<h2 id="v081">v0.8.1</h2>
-<ul>
-<li><a href="https://github.com/dotflow-io/dotflow/releases/tag/v0.8.1">📦 PyPI - Build 0.8.1</a></li>
-<li><a href="https://github.com/dotflow-io/dotflow/commit/ca9be8d313d900a90d66e026c57a151f6effc6dc">🪲 Fixed context switching</a></li>
-</ul>
-<h2 id="v080">v0.8.0</h2>
-<ul>
-<li><a href="https://github.com/dotflow-io/dotflow/releases/tag/v0.8.0">📦 PyPI - Build 0.8.0</a></li>
-<li><a href="https://github.com/dotflow-io/dotflow/pull/37">📌 Create CLI to manage workflow</a></li>
-</ul>
-<h2 id="v070">v0.7.0</h2>
-<ul>
-<li><a href="https://github.com/dotflow-io/dotflow/releases/tag/v0.7.0">📦 PyPI - Build 0.7.0</a></li>
-<li><a href="https://github.com/dotflow-io/dotflow/pull/34">📌 Communication layer implementation</a></li>
-</ul>
-<h2 id="v060">v0.6.0</h2>
-<ul>
-<li><a href="https://github.com/dotflow-io/dotflow/releases/tag/v0.6.0">📦 PyPI - Build 0.6.0</a></li>
-</ul>
-<h2 id="v050">v0.5.0</h2>
-<ul>
-<li><a href="https://github.com/dotflow-io/dotflow/releases/tag/v0.5.0">📦 PyPI - Build 0.5.1</a></li>
-<li><a href="https://github.com/dotflow-io/dotflow/pull/29">📌 CLI - Command-Line Interface</a></li>
-<li><a href="https://github.com/dotflow-io/dotflow/pull/31">📌 Step adaptation with class structure</a></li>
-</ul>
-<h2 id="v041">v0.4.1</h2>
-<ul>
-<li><a href="https://github.com/dotflow-io/dotflow/releases/tag/v0.4.1">📦 PyPI - Build 0.4.1</a></li>
-</ul>
-<h2 id="v040">v0.4.0</h2>
-<ul>
-<li><a href="https://github.com/dotflow-io/dotflow/releases/tag/v0.4.0">📦 PyPI - Build 0.4.0</a></li>
-<li><a href="https://github.com/dotflow-io/dotflow/issues/23">📌 Improvement of the API to start the workflow task</a></li>
-<li><a href="https://github.com/dotflow-io/dotflow/issues/19">📌 Improved API interface for decorators</a></li>
-<li><a href="https://github.com/dotflow-io/dotflow/issues/14">📌 Improvement unit tests</a></li>
-</ul>
-<h2 id="v030">v0.3.0</h2>
-<ul>
-<li><a href="https://github.com/dotflow-io/dotflow/releases/tag/v0.3.0">📦 PyPI - Build 0.3.0</a></li>
-<li><a href="https://github.com/dotflow-io/dotflow/issues/10">📌 Improvement of the API to start the workflow task</a></li>
-</ul>
-<h2 id="v020">v0.2.0</h2>
-<ul>
-<li><a href="https://github.com/dotflow-io/dotflow/releases/tag/v0.2.0">📦 PyPI - Build 0.2.0</a></li>
-<li><a href="https://github.com/dotflow-io/dotflow/issues/6">📌 Create documentation</a></li>
-<li><a href="https://github.com/dotflow-io/dotflow/issues/9">📌 Import of the context class</a></li>
-</ul>
-<h2 id="v010">v0.1.0</h2>
-<ul>
-<li><a href="https://github.com/dotflow-io/dotflow/releases/tag/v0.1.0">📦 PyPI - Build 0.1.0</a></li>
-</ul></p>
+        <p><h1 id="taskstatus">TaskStatus</h1>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="dotflow.core.types.status.TaskStatus" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>dotflow.core.types.status.TaskStatus</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+<details class="import" open>
+  <summary>Import</summary>
+  <p>You can import the <strong>TypeExecution</strong> class with:</p>
+<pre><code>from dotflow.core.types import TaskStatus
+</code></pre>
+</details>
+          
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>dotflow/core/types/status.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">TaskStatus</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Import:</span>
+<span class="sd">        You can import the **TypeExecution** class with:</span>
+
+<span class="sd">            from dotflow.core.types import TaskStatus</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">NOT_STARTED</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Not started&quot;</span>
+    <span class="n">IN_PROGRESS</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;In progress&quot;</span>
+    <span class="n">COMPLETED</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Completed&quot;</span>
+    <span class="n">PAUSED</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Paused&quot;</span>
+    <span class="n">RETRY</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Retry&quot;</span>
+    <span class="n">FAILED</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Failed&quot;</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="dotflow.core.types.status.TaskStatus.NOT_STARTED" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">NOT_STARTED</span> <span class="o">=</span> <span class="s1">&#39;Not started&#39;</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+          
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="dotflow.core.types.status.TaskStatus.IN_PROGRESS" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">IN_PROGRESS</span> <span class="o">=</span> <span class="s1">&#39;In progress&#39;</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+          
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="dotflow.core.types.status.TaskStatus.COMPLETED" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">COMPLETED</span> <span class="o">=</span> <span class="s1">&#39;Completed&#39;</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+          
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="dotflow.core.types.status.TaskStatus.PAUSED" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">PAUSED</span> <span class="o">=</span> <span class="s1">&#39;Paused&#39;</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+          
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="dotflow.core.types.status.TaskStatus.RETRY" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">RETRY</span> <span class="o">=</span> <span class="s1">&#39;Retry&#39;</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+          
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="dotflow.core.types.status.TaskStatus.FAILED" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">FAILED</span> <span class="o">=</span> <span class="s1">&#39;Failed&#39;</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+          
+    </div>
+
+</div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div></p>
     </article>
 </section>
 <!-- endblock -->
@@ -396,13 +520,13 @@
                     <!-- block preview -->
     <div class="preview row row-cols-md-3 text-center pt-md-3" id="component-preview">
         <div class="col themed-grid-col">
-            <a rel="prev" href="../development-guide/" class="nav-link">
+            <a rel="prev" href="../type-execution/" class="nav-link">
                 <i class="fa fa-arrow-left"></i> Previous
             </a>
         </div>
         <div class="col themed-grid-col"></div>
         <div class="col themed-grid-col">
-            <a rel="next" class="nav-link disabled">
+            <a rel="next" href="../../development/development-guide/" class="nav-link">
                 Next <i class="fa fa-arrow-right"></i>
             </a>
         </div>

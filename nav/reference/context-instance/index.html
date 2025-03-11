@@ -1,14 +1,14 @@
 <!doctype html>
 <html data-bs-theme="light">
     <head>
-                <title>Start Function - Dotflow</title>
+                <title>ContextInstance - Dotflow</title>
 
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
             
-            <link rel="canonical" href="http://dotflow-io/nav/reference/start-function/">
+            <link rel="canonical" href="http://dotflow-io/nav/reference/context-instance/">
             
 
             
@@ -22,8 +22,8 @@
             <link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
             <link rel="stylesheet" href="../../../assets/css/root.min.css">
             <link rel="stylesheet" href="../../../assets/css/main.min.css">
+                <link href="../../../assets/_mkdocstrings.css" rel="stylesheet">
                 <link href="../../../assets/style.css" rel="stylesheet">
-                <script src="../../../search/main.js"></script>
 
             
                 
@@ -79,27 +79,71 @@
                             <ul class="dropdown-menu">
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../dotflow-class/" class="dropdown-item text-decoration-none ">Dotflow class</a>
+        <a href="../action/" class="dropdown-item text-decoration-none ">Action</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../add-function/" class="dropdown-item text-decoration-none ">Add Function</a>
+        <a href="../config/" class="dropdown-item text-decoration-none ">Config</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="./" class="dropdown-item text-decoration-none  active ">Start Function</a>
+        <a href="../context/" class="dropdown-item text-decoration-none ">Context</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../context-class/" class="dropdown-item text-decoration-none ">Context class</a>
+        <a href="../dotflow/" class="dropdown-item text-decoration-none ">DotFlow</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../action-decorator/" class="dropdown-item text-decoration-none ">Action decorator</a>
+        <a href="../task/" class="dropdown-item text-decoration-none ">Task</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../task-builder/" class="dropdown-item text-decoration-none ">TaskBuilder</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../workflow/" class="dropdown-item text-decoration-none ">Workflow</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a class="dropdown-item text-decoration-none" href="#">Instance &raquo;</a>
+        <ul class="submenu dropdown-menu">
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../task-instance/" class="dropdown-item text-decoration-none ">TaskInstance</a>
+    </li>
+<!-- endblock -->
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="./" class="dropdown-item text-decoration-none  active ">ContextInstance</a>
+    </li>
+<!-- endblock -->
+        </ul>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a class="dropdown-item text-decoration-none" href="#">Types &raquo;</a>
+        <ul class="submenu dropdown-menu">
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../type-execution/" class="dropdown-item text-decoration-none ">TypeExecution</a>
+    </li>
+<!-- endblock -->
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../type-status/" class="dropdown-item text-decoration-none ">TaskStatus</a>
+    </li>
+<!-- endblock -->
+        </ul>
     </li>
 <!-- endblock -->
                             </ul>
@@ -190,16 +234,7 @@
 <!--  endblock -->
             </header>
 
-            <main><!-- block search -->
-<div class="collapse" id="collapseExample">
-    <div role="search" class="search-box">
-        <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-            <input type="text" name="q" class="search-query"
-            placeholder="Search docs" title="Type search term here" />
-        </form>
-    </div>
-</div>
-<!-- endblock -->
+            <main>
 
                 
                     <div class="container">
@@ -211,14 +246,26 @@
     <div class="sidebar navbar-collapse collapse card">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#start-function" class="nav-link">Start Function</a>
+            <li class="nav-item" data-bs-level="1"><a href="#contextinstance" class="nav-link">ContextInstance</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="3"><a href="#example" class="nav-link">Example</a>
+            <li class="nav-item" data-bs-level="2"><a href="#dotflow.core.context.ContextInstance" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;ContextInstance</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.context.ContextInstance._time" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;_time</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="3"><a href="#parameters" class="nav-link">Parameters</a>
+            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.context.ContextInstance._task_id" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;_task_id</a>
               <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.context.ContextInstance._workflow_id" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;_workflow_id</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.context.ContextInstance._storage" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;_storage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
               </ul>
@@ -236,31 +283,171 @@
             
             
         </header>
-        <p><h1 id="start-function">Start Function</h1>
-<p>Here's the reference information for the <code>start</code> function.</p>
-<h3 id="example">Example</h3>
-<p><code>class</code> dotflow.DotFlow.start</p>
-<pre><code class="language-python">workflow.start()
+        <p><h1 id="contextinstance">ContextInstance</h1>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="dotflow.core.context.ContextInstance" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>dotflow.core.context.ContextInstance</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+<details class="import" open>
+  <summary>Import</summary>
+  <p>You can import the <strong>ContextInstance</strong> class with:</p>
+<pre><code>from dotflow.core.context import ContextInstance
 </code></pre>
-<h3 id="parameters">Parameters</h3>
-<table>
-<thead>
-<tr>
-<th>PARAMETER</th>
-<th>DESCRIPTION</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>keep_going</code></td>
-<td>A parameter that receives a boolean object with the purpose of continuing or not the execution of the workflow in case of an error during the execution of a task. If it is <strong>true</strong>, the execution will continue; if it is <strong>False</strong>, the workflow will stop. <hr> <strong>TYPE</strong>: <a href="https://docs.python.org/3/library/functions.html#bool">bool</a> <strong>DEFAULT</strong>: false</td>
-</tr>
-<tr>
-<td><code>mode</code></td>
-<td>A parameter for assigning the execution mode of the workflow. Currently, there is the option to execute in <strong>sequential</strong> mode or <strong>background</strong> mode. By default, it is in <strong>sequential</strong> mode. <hr> <strong>TYPE</strong>: <a href="https://docs.python.org/3/library/stdtypes.html#str">str</a> <strong>DEFAULT</strong>: "sequential"</td>
-</tr>
-</tbody>
-</table></p>
+</details>
+          
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>dotflow/core/context.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ContextInstance</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Import:</span>
+<span class="sd">        You can import the **ContextInstance** class with:</span>
+
+<span class="sd">            from dotflow.core.context import ContextInstance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_time</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_task_id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_workflow_id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_storage</span> <span class="o">=</span> <span class="kc">None</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="dotflow.core.context.ContextInstance._time" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">_time</span> <span class="o">=</span> <span class="kc">None</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+          
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="dotflow.core.context.ContextInstance._task_id" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">_task_id</span> <span class="o">=</span> <span class="kc">None</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+          
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="dotflow.core.context.ContextInstance._workflow_id" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">_workflow_id</span> <span class="o">=</span> <span class="kc">None</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+          
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="dotflow.core.context.ContextInstance._storage" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">_storage</span> <span class="o">=</span> <span class="kc">None</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+          
+    </div>
+
+</div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div></p>
     </article>
 </section>
 <!-- endblock -->
@@ -275,13 +462,13 @@
                     <!-- block preview -->
     <div class="preview row row-cols-md-3 text-center pt-md-3" id="component-preview">
         <div class="col themed-grid-col">
-            <a rel="prev" href="../add-function/" class="nav-link">
+            <a rel="prev" href="../task-instance/" class="nav-link">
                 <i class="fa fa-arrow-left"></i> Previous
             </a>
         </div>
         <div class="col themed-grid-col"></div>
         <div class="col themed-grid-col">
-            <a rel="next" href="../context-class/" class="nav-link">
+            <a rel="next" href="../type-execution/" class="nav-link">
                 Next <i class="fa fa-arrow-right"></i>
             </a>
         </div>
@@ -316,7 +503,6 @@
             <script src="../../../assets/js/jquery-3.3.1.slim.min.js""></script>
             <script src="../../../assets/js/bootstrap.bundle.min.js""></script>
             <script src="../../../assets/js/main.min.js""></script>
-                <script src="../../../search/main.js" defer></script>
 
     </body>
 

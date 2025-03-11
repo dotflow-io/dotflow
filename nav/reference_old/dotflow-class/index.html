@@ -1,14 +1,14 @@
 <!doctype html>
 <html data-bs-theme="light">
     <head>
-                <title>Action decorator - Dotflow</title>
+                <title>Dotflow class - Dotflow</title>
 
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
             
-            <link rel="canonical" href="http://dotflow-io/nav/reference/action-decorator/">
+            <link rel="canonical" href="http://dotflow-io/nav/reference_old/dotflow-class/">
             
 
             
@@ -22,8 +22,8 @@
             <link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
             <link rel="stylesheet" href="../../../assets/css/root.min.css">
             <link rel="stylesheet" href="../../../assets/css/main.min.css">
+                <link href="../../../assets/_mkdocstrings.css" rel="stylesheet">
                 <link href="../../../assets/style.css" rel="stylesheet">
-                <script src="../../../search/main.js"></script>
 
             
                 
@@ -74,32 +74,76 @@
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class=" active 
+                            <a class="
                             nav-link dropdown-toggle text-decoration-none" href="#" data-bs-toggle="dropdown">[Reference]</a>
                             <ul class="dropdown-menu">
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../dotflow-class/" class="dropdown-item text-decoration-none ">Dotflow class</a>
+        <a href="../../reference/action/" class="dropdown-item text-decoration-none ">Action</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../add-function/" class="dropdown-item text-decoration-none ">Add Function</a>
+        <a href="../../reference/config/" class="dropdown-item text-decoration-none ">Config</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../start-function/" class="dropdown-item text-decoration-none ">Start Function</a>
+        <a href="../../reference/context/" class="dropdown-item text-decoration-none ">Context</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../context-class/" class="dropdown-item text-decoration-none ">Context class</a>
+        <a href="../../reference/dotflow/" class="dropdown-item text-decoration-none ">DotFlow</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="./" class="dropdown-item text-decoration-none  active ">Action decorator</a>
+        <a href="../../reference/task/" class="dropdown-item text-decoration-none ">Task</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../../reference/task-builder/" class="dropdown-item text-decoration-none ">TaskBuilder</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../../reference/workflow/" class="dropdown-item text-decoration-none ">Workflow</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a class="dropdown-item text-decoration-none" href="#">Instance &raquo;</a>
+        <ul class="submenu dropdown-menu">
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../../reference/task-instance/" class="dropdown-item text-decoration-none ">TaskInstance</a>
+    </li>
+<!-- endblock -->
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../../reference/context-instance/" class="dropdown-item text-decoration-none ">ContextInstance</a>
+    </li>
+<!-- endblock -->
+        </ul>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a class="dropdown-item text-decoration-none" href="#">Types &raquo;</a>
+        <ul class="submenu dropdown-menu">
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../../reference/type-execution/" class="dropdown-item text-decoration-none ">TypeExecution</a>
+    </li>
+<!-- endblock -->
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../../reference/type-status/" class="dropdown-item text-decoration-none ">TaskStatus</a>
+    </li>
+<!-- endblock -->
+        </ul>
     </li>
 <!-- endblock -->
                             </ul>
@@ -190,16 +234,7 @@
 <!--  endblock -->
             </header>
 
-            <main><!-- block search -->
-<div class="collapse" id="collapseExample">
-    <div role="search" class="search-box">
-        <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-            <input type="text" name="q" class="search-query"
-            placeholder="Search docs" title="Type search term here" />
-        </form>
-    </div>
-</div>
-<!-- endblock -->
+            <main>
 
                 
                     <div class="container">
@@ -211,25 +246,13 @@
     <div class="sidebar navbar-collapse collapse card">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#action-decorator" class="nav-link">Action decorator</a>
+            <li class="nav-item" data-bs-level="1"><a href="#dotflow-class" class="nav-link">Dotflow class</a>
               <ul class="nav flex-column">
             <li class="nav-item" data-bs-level="3"><a href="#import" class="nav-link">Import</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="3"><a href="#examples" class="nav-link">Examples</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="4"><a href="#standard" class="nav-link">Standard</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="4"><a href="#with-retry" class="nav-link">With Retry</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="3"><a href="#parameters" class="nav-link">Parameters</a>
+            <li class="nav-item" data-bs-level="3"><a href="#example" class="nav-link">Example</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -248,40 +271,16 @@
             
             
         </header>
-        <p><h1 id="action-decorator">Action decorator</h1>
-<p>Here's the reference information for the <code>action</code> decorator.</p>
+        <p><h1 id="dotflow-class">Dotflow class</h1>
+<p>Here's the reference information for the <code>DotFlow</code> class, with all its parameters, attributes and functions.</p>
 <h3 id="import">Import</h3>
-<p>You can import the action decorator directly from dotflow:</p>
-<pre><code class="language-python">from dotflow import action
+<p>You can import the Dotflow class directly from dotflow:</p>
+<pre><code class="language-python">from dotflow import DotFlow
 </code></pre>
-<h3 id="examples">Examples</h3>
-<h4 id="standard">Standard</h4>
-<p><code>class</code> dotflow.action</p>
-<pre><code class="language-python">@action
-def my_task():
-    print(&quot;task&quot;)
-</code></pre>
-<h4 id="with-retry">With Retry</h4>
-<p><code>class</code> dotflow.action</p>
-<pre><code class="language-python">@action(retry=5)
-def my_task():
-    print(&quot;task&quot;)
-</code></pre>
-<h3 id="parameters">Parameters</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">PARAMETER</th>
-<th style="text-align: left;">DESCRIPTION</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;"><code>retry</code></td>
-<td style="text-align: left;">Integer-type parameter referring to the number of retry attempts the function will execute in case of failure.</td>
-</tr>
-</tbody>
-</table></p>
+<h3 id="example">Example</h3>
+<p><code>class</code> dotflow.DotFlow</p>
+<pre><code class="language-python">workflow = DotFlow()
+</code></pre></p>
     </article>
 </section>
 <!-- endblock -->
@@ -294,19 +293,6 @@ def my_task():
 
             
                     <!-- block preview -->
-    <div class="preview row row-cols-md-3 text-center pt-md-3" id="component-preview">
-        <div class="col themed-grid-col">
-            <a rel="prev" href="../context-class/" class="nav-link">
-                <i class="fa fa-arrow-left"></i> Previous
-            </a>
-        </div>
-        <div class="col themed-grid-col"></div>
-        <div class="col themed-grid-col">
-            <a rel="next" href="../../development/development-guide/" class="nav-link">
-                Next <i class="fa fa-arrow-right"></i>
-            </a>
-        </div>
-    </div>
 <!-- endblock -->
             
 
@@ -337,7 +323,6 @@ def my_task():
             <script src="../../../assets/js/jquery-3.3.1.slim.min.js""></script>
             <script src="../../../assets/js/bootstrap.bundle.min.js""></script>
             <script src="../../../assets/js/main.min.js""></script>
-                <script src="../../../search/main.js" defer></script>
 
     </body>
 

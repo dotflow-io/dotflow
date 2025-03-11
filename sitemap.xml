@@ -2,38 +2,86 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>http://dotflow-io/</loc>
-         <lastmod>2025-03-10</lastmod>
+         <lastmod>2025-03-11</lastmod>
     </url>
     <url>
          <loc>http://dotflow-io/nav/getting-started/</loc>
-         <lastmod>2025-03-10</lastmod>
+         <lastmod>2025-03-11</lastmod>
     </url>
     <url>
          <loc>http://dotflow-io/nav/development/development-guide/</loc>
-         <lastmod>2025-03-10</lastmod>
+         <lastmod>2025-03-11</lastmod>
+    </url>
+    <url>
+         <loc>http://dotflow-io/nav/development/reference/</loc>
+         <lastmod>2025-03-11</lastmod>
     </url>
     <url>
          <loc>http://dotflow-io/nav/development/release-notes/</loc>
-         <lastmod>2025-03-10</lastmod>
+         <lastmod>2025-03-11</lastmod>
     </url>
     <url>
-         <loc>http://dotflow-io/nav/reference/action-decorator/</loc>
-         <lastmod>2025-03-10</lastmod>
+         <loc>http://dotflow-io/nav/reference/action/</loc>
+         <lastmod>2025-03-11</lastmod>
     </url>
     <url>
-         <loc>http://dotflow-io/nav/reference/add-function/</loc>
-         <lastmod>2025-03-10</lastmod>
+         <loc>http://dotflow-io/nav/reference/config/</loc>
+         <lastmod>2025-03-11</lastmod>
     </url>
     <url>
-         <loc>http://dotflow-io/nav/reference/context-class/</loc>
-         <lastmod>2025-03-10</lastmod>
+         <loc>http://dotflow-io/nav/reference/context-instance/</loc>
+         <lastmod>2025-03-11</lastmod>
     </url>
     <url>
-         <loc>http://dotflow-io/nav/reference/dotflow-class/</loc>
-         <lastmod>2025-03-10</lastmod>
+         <loc>http://dotflow-io/nav/reference/context/</loc>
+         <lastmod>2025-03-11</lastmod>
     </url>
     <url>
-         <loc>http://dotflow-io/nav/reference/start-function/</loc>
-         <lastmod>2025-03-10</lastmod>
+         <loc>http://dotflow-io/nav/reference/dotflow/</loc>
+         <lastmod>2025-03-11</lastmod>
+    </url>
+    <url>
+         <loc>http://dotflow-io/nav/reference/task-builder/</loc>
+         <lastmod>2025-03-11</lastmod>
+    </url>
+    <url>
+         <loc>http://dotflow-io/nav/reference/task-instance/</loc>
+         <lastmod>2025-03-11</lastmod>
+    </url>
+    <url>
+         <loc>http://dotflow-io/nav/reference/task/</loc>
+         <lastmod>2025-03-11</lastmod>
+    </url>
+    <url>
+         <loc>http://dotflow-io/nav/reference/type-execution/</loc>
+         <lastmod>2025-03-11</lastmod>
+    </url>
+    <url>
+         <loc>http://dotflow-io/nav/reference/type-status/</loc>
+         <lastmod>2025-03-11</lastmod>
+    </url>
+    <url>
+         <loc>http://dotflow-io/nav/reference/workflow/</loc>
+         <lastmod>2025-03-11</lastmod>
+    </url>
+    <url>
+         <loc>http://dotflow-io/nav/reference_old/action-decorator/</loc>
+         <lastmod>2025-03-11</lastmod>
+    </url>
+    <url>
+         <loc>http://dotflow-io/nav/reference_old/add-function/</loc>
+         <lastmod>2025-03-11</lastmod>
+    </url>
+    <url>
+         <loc>http://dotflow-io/nav/reference_old/context-class/</loc>
+         <lastmod>2025-03-11</lastmod>
+    </url>
+    <url>
+         <loc>http://dotflow-io/nav/reference_old/dotflow-class/</loc>
+         <lastmod>2025-03-11</lastmod>
+    </url>
+    <url>
+         <loc>http://dotflow-io/nav/reference_old/start-function/</loc>
+         <lastmod>2025-03-11</lastmod>
     </url>
 </urlset>

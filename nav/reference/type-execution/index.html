@@ -1,14 +1,14 @@
 <!doctype html>
 <html data-bs-theme="light">
     <head>
-                <title>Add Function - Dotflow</title>
+                <title>TypeExecution - Dotflow</title>
 
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
             
-            <link rel="canonical" href="http://dotflow-io/nav/reference/add-function/">
+            <link rel="canonical" href="http://dotflow-io/nav/reference/type-execution/">
             
 
             
@@ -22,8 +22,8 @@
             <link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
             <link rel="stylesheet" href="../../../assets/css/root.min.css">
             <link rel="stylesheet" href="../../../assets/css/main.min.css">
+                <link href="../../../assets/_mkdocstrings.css" rel="stylesheet">
                 <link href="../../../assets/style.css" rel="stylesheet">
-                <script src="../../../search/main.js"></script>
 
             
                 
@@ -79,27 +79,71 @@
                             <ul class="dropdown-menu">
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../dotflow-class/" class="dropdown-item text-decoration-none ">Dotflow class</a>
+        <a href="../action/" class="dropdown-item text-decoration-none ">Action</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="./" class="dropdown-item text-decoration-none  active ">Add Function</a>
+        <a href="../config/" class="dropdown-item text-decoration-none ">Config</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../start-function/" class="dropdown-item text-decoration-none ">Start Function</a>
+        <a href="../context/" class="dropdown-item text-decoration-none ">Context</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../context-class/" class="dropdown-item text-decoration-none ">Context class</a>
+        <a href="../dotflow/" class="dropdown-item text-decoration-none ">DotFlow</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../action-decorator/" class="dropdown-item text-decoration-none ">Action decorator</a>
+        <a href="../task/" class="dropdown-item text-decoration-none ">Task</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../task-builder/" class="dropdown-item text-decoration-none ">TaskBuilder</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../workflow/" class="dropdown-item text-decoration-none ">Workflow</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a class="dropdown-item text-decoration-none" href="#">Instance &raquo;</a>
+        <ul class="submenu dropdown-menu">
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../task-instance/" class="dropdown-item text-decoration-none ">TaskInstance</a>
+    </li>
+<!-- endblock -->
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../context-instance/" class="dropdown-item text-decoration-none ">ContextInstance</a>
+    </li>
+<!-- endblock -->
+        </ul>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a class="dropdown-item text-decoration-none" href="#">Types &raquo;</a>
+        <ul class="submenu dropdown-menu">
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="./" class="dropdown-item text-decoration-none  active ">TypeExecution</a>
+    </li>
+<!-- endblock -->
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../type-status/" class="dropdown-item text-decoration-none ">TaskStatus</a>
+    </li>
+<!-- endblock -->
+        </ul>
     </li>
 <!-- endblock -->
                             </ul>
@@ -190,16 +234,7 @@
 <!--  endblock -->
             </header>
 
-            <main><!-- block search -->
-<div class="collapse" id="collapseExample">
-    <div role="search" class="search-box">
-        <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-            <input type="text" name="q" class="search-query"
-            placeholder="Search docs" title="Type search term here" />
-        </form>
-    </div>
-</div>
-<!-- endblock -->
+            <main>
 
                 
                     <div class="container">
@@ -211,14 +246,26 @@
     <div class="sidebar navbar-collapse collapse card">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#add-function" class="nav-link">Add Function</a>
+            <li class="nav-item" data-bs-level="1"><a href="#typeexecution" class="nav-link">TypeExecution</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="3"><a href="#example" class="nav-link">Example</a>
+            <li class="nav-item" data-bs-level="2"><a href="#dotflow.core.types.execution.TypeExecution" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;TypeExecution</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.types.execution.TypeExecution.SEQUENTIAL" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;SEQUENTIAL</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="3"><a href="#parameters" class="nav-link">Parameters</a>
+            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.types.execution.TypeExecution.BACKGROUND" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;BACKGROUND</a>
               <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.types.execution.TypeExecution.PARALLEL" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;PARALLEL</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.types.execution.TypeExecution.DATA_STORE" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;DATA_STORE</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
               </ul>
@@ -236,35 +283,173 @@
             
             
         </header>
-        <p><h1 id="add-function">Add Function</h1>
-<p>Here's the reference information for the <code>add</code> function.</p>
-<h3 id="example">Example</h3>
-<p><code>class</code> dotflow.DotFlow.task.add</p>
-<pre><code class="language-python">workflow.task.add(step=my_task, callback=my_callback)
+        <p><h1 id="typeexecution">TypeExecution</h1>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="dotflow.core.types.execution.TypeExecution" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>dotflow.core.types.execution.TypeExecution</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+<details class="import" open>
+  <summary>Import</summary>
+  <p>You can import the <strong>TypeExecution</strong> class with:</p>
+<pre><code>from dotflow.core.types import ConTypeExecutionfig
 </code></pre>
-<h3 id="parameters">Parameters</h3>
-<table>
-<thead>
-<tr>
-<th>Function</th>
-<th>DESCRIPTION</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>*<code>step</code></td>
-<td>A parameter that receives an object of the callable type, which is basically a function. You can see in this <a href="https://dotflow-io.github.io/dotflow/nav/getting-started/#3-task-function">example</a>. <hr> <strong>TYPE</strong>: <a href="https://docs.python.org/3/library/typing.html#typing.Callable">Callable</a> <strong>DEFAULT</strong>: _____</td>
-</tr>
-<tr>
-<td><code>initial_context</code></td>
-<td>The parameter exists to include initial data in the execution of the workflow within the <strong>function context</strong>. This parameter can be accessed internally, for example: <strong>initial_context</strong>, to retrieve this information and manipulate it if necessary, according to the objective of the workflow. <hr> <strong>TYPE</strong>: <a href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a> <strong>DEFAULT</strong>: <a href="https://dotflow-io.github.io/dotflow/nav/reference/context-class/">Context</a></td>
-</tr>
-<tr>
-<td><code>callback</code></td>
-<td>Any callable object that receives <strong>args</strong> or <strong>kwargs</strong>, which is basically a function. You can see in this <a href="https://dotflow-io.github.io/dotflow/nav/getting-started/#2-callback-function">example</a>. <hr> <strong>TYPE</strong>: <a href="https://docs.python.org/3/library/typing.html#typing.Callable">Callable</a> <strong>DEFAULT</strong>: _____</td>
-</tr>
-</tbody>
-</table></p>
+</details>
+          
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>dotflow/core/types/execution.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">TypeExecution</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Import:</span>
+<span class="sd">        You can import the **TypeExecution** class with:</span>
+
+<span class="sd">            from dotflow.core.types import ConTypeExecutionfig</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">SEQUENTIAL</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;sequential&quot;</span>
+    <span class="n">BACKGROUND</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;background&quot;</span>
+    <span class="n">PARALLEL</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;parallel&quot;</span>
+    <span class="n">DATA_STORE</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;data_store&quot;</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="dotflow.core.types.execution.TypeExecution.SEQUENTIAL" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">SEQUENTIAL</span> <span class="o">=</span> <span class="s1">&#39;sequential&#39;</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+          
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="dotflow.core.types.execution.TypeExecution.BACKGROUND" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">BACKGROUND</span> <span class="o">=</span> <span class="s1">&#39;background&#39;</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+          
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="dotflow.core.types.execution.TypeExecution.PARALLEL" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">PARALLEL</span> <span class="o">=</span> <span class="s1">&#39;parallel&#39;</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+          
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="dotflow.core.types.execution.TypeExecution.DATA_STORE" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">DATA_STORE</span> <span class="o">=</span> <span class="s1">&#39;data_store&#39;</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+          
+    </div>
+
+</div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div></p>
     </article>
 </section>
 <!-- endblock -->
@@ -279,13 +464,13 @@
                     <!-- block preview -->
     <div class="preview row row-cols-md-3 text-center pt-md-3" id="component-preview">
         <div class="col themed-grid-col">
-            <a rel="prev" href="../dotflow-class/" class="nav-link">
+            <a rel="prev" href="../context-instance/" class="nav-link">
                 <i class="fa fa-arrow-left"></i> Previous
             </a>
         </div>
         <div class="col themed-grid-col"></div>
         <div class="col themed-grid-col">
-            <a rel="next" href="../start-function/" class="nav-link">
+            <a rel="next" href="../type-status/" class="nav-link">
                 Next <i class="fa fa-arrow-right"></i>
             </a>
         </div>
@@ -320,7 +505,6 @@
             <script src="../../../assets/js/jquery-3.3.1.slim.min.js""></script>
             <script src="../../../assets/js/bootstrap.bundle.min.js""></script>
             <script src="../../../assets/js/main.min.js""></script>
-                <script src="../../../search/main.js" defer></script>
 
     </body>
 
