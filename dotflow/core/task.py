@@ -24,6 +24,12 @@ from dotflow.utils import (
 
 
 class TaskInstance:
+    """
+    Import:
+        You can import the **TaskInstance** class with:
+
+            from dotflow.core.task import TaskInstance
+    """
 
     def __init__(self, *args, **kwargs) -> None:
         self.task_id = None
@@ -40,6 +46,36 @@ class TaskInstance:
 
 
 class Task(TaskInstance):
+    """
+    Import:
+        You can import the **Task** class directly from dotflow:
+
+            from dotflow import Task
+
+    Example:
+        `class` dotflow.core.task.Task
+
+            task = Task(
+                task_id=1,
+                step=my_step,
+                callback=my_callback
+            )
+
+    Args:
+        task_id (int): Task ID.
+        step (Callable):
+            A argument that receives an object of the callable type,
+            which is basically a function. You can see in this
+            [example](https://dotflow-io.github.io/dotflow/nav/getting-started/#3-task-function).
+        callback (Callable):
+            Any callable object that receives **args** or **kwargs**,
+            which is basically a function. You can see in this
+            [example](https://dotflow-io.github.io/dotflow/nav/getting-started/#2-callback-function).
+        initial_context (Any): Any python object.
+        workflow_id (UUID): Workflow ID.
+        config (Config): Configuration class.
+    ---
+    """
 
     def __init__(
         self,
@@ -208,6 +244,27 @@ class TaskError:
 
 
 class TaskBuilder:
+    """
+    Import:
+        You can import the **Task** class with:
+
+            from dotflow.core.task import TaskBuilder
+
+    Example:
+        `class` dotflow.core.task.TaskBuilder
+
+            from uuid import uuid4
+
+            build = TaskBuilder(
+                config=config
+                workflow_id=uuid4()
+            )
+
+    Args:
+        config (Config): Configuration class.
+        workflow_id (UUID): Workflow ID.
+    ---
+    """
 
     def __init__(
             self,
@@ -224,6 +281,26 @@ class TaskBuilder:
         callback: Callable = basic_callback,
         initial_context: Any = None,
     ) -> None:
+        """
+        Args:
+            step (Callable):
+                A argument that receives an object of the callable type,
+                which is basically a function. You can see in this
+                [example](https://dotflow-io.github.io/dotflow/nav/getting-started/#3-task-function).
+
+            callback (Callable):
+                Any callable object that receives **args** or **kwargs**,
+                which is basically a function. You can see in this
+                [example](https://dotflow-io.github.io/dotflow/nav/getting-started/#2-callback-function).
+
+            initial_context (Context):
+                The argument exists to include initial data in the execution
+                of the workflow within the **function context**. This parameter
+                can be accessed internally, for example: **initial_context**,
+                to retrieve this information and manipulate it if necessary,
+                according to the objective of the workflow.
+        ---
+        """
         if isinstance(step, list):
             for inside_step in step:
                 self.add(

@@ -9,11 +9,21 @@ nav:
     - Learn:
       - nav/getting-started.md
     - Reference:
-      - nav/reference/dotflow-class.md
-      - nav/reference/add-function.md
-      - nav/reference/start-function.md
-      - nav/reference/context-class.md
-      - nav/reference/action-decorator.md
+      - nav/reference/action.md
+      - nav/reference/config.md
+      - nav/reference/context.md
+      - nav/reference/dotflow.md
+      - nav/reference/settings.md
+      - nav/reference/task.md
+      - nav/reference/task-builder.md
+      - nav/reference/workflow.md
+      - nav/reference/utils.md
+      - Instance:
+        - nav/reference/task-instance.md
+        - nav/reference/context-instance.md
+      - Types:
+        - nav/reference/type-execution.md
+        - nav/reference/type-status.md
     - Development:
       - nav/development/development-guide.md
       - nav/development/release-notes.md
@@ -27,7 +37,7 @@ theme:
   site_name_style: bold
   title_style: bold
   sidebar: true
-  navigation_depth: 4
+  navigation_depth: 3
   highlightjs: true
     - yaml
     - python
@@ -46,3 +56,18 @@ theme:
 
 extra_css:
   - assets/style.css
+
+plugins:
+- mkdocstrings:
+    handlers:
+      python:
+        paths: [.]
+        options:
+          backlinks: tree
+          heading_level: 2
+          show_root_heading: true
+          show_if_no_docstring: true
+          show_symbol_type_heading: true
+          show_symbol_type_toc: true
+          extensions:
+          - griffe_typingdoc

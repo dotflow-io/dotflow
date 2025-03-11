@@ -6,6 +6,30 @@ from dotflow.settings import Settings as settings
 
 
 class Config:
+    """
+    Import:
+        You can import the **Config** class with:
+
+            from dotflow.core.config import Config
+
+    Example:
+        `class` dotflow.core.config.Config
+
+            config = Config(
+                path=".output",
+                output=False
+            )
+
+    Args:
+        path (str): Initial path of the library.
+        output (bool): Flag for storing context in a file.
+
+    Attributes:
+        path (Path):
+        task_path (Path):
+        log_path (Path):
+        output (str):
+    """
 
     def __init__(
             self,
