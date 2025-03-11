@@ -1,14 +1,14 @@
 <!doctype html>
 <html data-bs-theme="light">
     <head>
-                <title>Add Function - Dotflow</title>
+                <title>Utils - Dotflow</title>
 
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
             
-            <link rel="canonical" href="http://dotflow-io/nav/reference_old/add-function/">
+            <link rel="canonical" href="http://dotflow-io/nav/reference/utils/">
             
 
             
@@ -74,52 +74,52 @@
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="
+                            <a class=" active 
                             nav-link dropdown-toggle text-decoration-none" href="#" data-bs-toggle="dropdown">[Reference]</a>
                             <ul class="dropdown-menu">
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/action/" class="dropdown-item text-decoration-none ">Action</a>
+        <a href="../action/" class="dropdown-item text-decoration-none ">Action</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/config/" class="dropdown-item text-decoration-none ">Config</a>
+        <a href="../config/" class="dropdown-item text-decoration-none ">Config</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/context/" class="dropdown-item text-decoration-none ">Context</a>
+        <a href="../context/" class="dropdown-item text-decoration-none ">Context</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/dotflow/" class="dropdown-item text-decoration-none ">DotFlow</a>
+        <a href="../dotflow/" class="dropdown-item text-decoration-none ">DotFlow</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/settings/" class="dropdown-item text-decoration-none ">Settings</a>
+        <a href="../settings/" class="dropdown-item text-decoration-none ">Settings</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/task/" class="dropdown-item text-decoration-none ">Task</a>
+        <a href="../task/" class="dropdown-item text-decoration-none ">Task</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/task-builder/" class="dropdown-item text-decoration-none ">TaskBuilder</a>
+        <a href="../task-builder/" class="dropdown-item text-decoration-none ">TaskBuilder</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/workflow/" class="dropdown-item text-decoration-none ">Workflow</a>
+        <a href="../workflow/" class="dropdown-item text-decoration-none ">Workflow</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/utils/" class="dropdown-item text-decoration-none ">Utils</a>
+        <a href="./" class="dropdown-item text-decoration-none  active ">Utils</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
@@ -128,12 +128,12 @@
         <ul class="submenu dropdown-menu">
                 <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/task-instance/" class="dropdown-item text-decoration-none ">TaskInstance</a>
+        <a href="../task-instance/" class="dropdown-item text-decoration-none ">TaskInstance</a>
     </li>
 <!-- endblock -->
                 <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/context-instance/" class="dropdown-item text-decoration-none ">ContextInstance</a>
+        <a href="../context-instance/" class="dropdown-item text-decoration-none ">ContextInstance</a>
     </li>
 <!-- endblock -->
         </ul>
@@ -145,12 +145,12 @@
         <ul class="submenu dropdown-menu">
                 <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/type-execution/" class="dropdown-item text-decoration-none ">TypeExecution</a>
+        <a href="../type-execution/" class="dropdown-item text-decoration-none ">TypeExecution</a>
     </li>
 <!-- endblock -->
                 <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/type-status/" class="dropdown-item text-decoration-none ">TaskStatus</a>
+        <a href="../type-status/" class="dropdown-item text-decoration-none ">TaskStatus</a>
     </li>
 <!-- endblock -->
         </ul>
@@ -256,13 +256,13 @@
     <div class="sidebar navbar-collapse collapse card">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#add-function" class="nav-link">Add Function</a>
+            <li class="nav-item" data-bs-level="1"><a href="#utils" class="nav-link">Utils</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="3"><a href="#example" class="nav-link">Example</a>
+            <li class="nav-item" data-bs-level="2"><a href="#dotflow.utils.basic_functions.basic_function" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;basic_function</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="3"><a href="#parameters" class="nav-link">Parameters</a>
+            <li class="nav-item" data-bs-level="2"><a href="#dotflow.utils.basic_functions.basic_callback" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;basic_callback</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -281,35 +281,56 @@
             
             
         </header>
-        <p><h1 id="add-function">Add Function</h1>
-<p>Here's the reference information for the <code>add</code> function.</p>
-<h3 id="example">Example</h3>
-<p><code>class</code> dotflow.DotFlow.task.add</p>
-<pre><code class="language-python">workflow.task.add(step=my_task, callback=my_callback)
-</code></pre>
-<h3 id="parameters">Parameters</h3>
-<table>
-<thead>
-<tr>
-<th>Function</th>
-<th>DESCRIPTION</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>*<code>step</code></td>
-<td>A parameter that receives an object of the callable type, which is basically a function. You can see in this <a href="https://dotflow-io.github.io/dotflow/nav/getting-started/#3-task-function">example</a>. <hr> <strong>TYPE</strong>: <a href="https://docs.python.org/3/library/typing.html#typing.Callable">Callable</a> <strong>DEFAULT</strong>: _____</td>
-</tr>
-<tr>
-<td><code>initial_context</code></td>
-<td>The parameter exists to include initial data in the execution of the workflow within the <strong>function context</strong>. This parameter can be accessed internally, for example: <strong>initial_context</strong>, to retrieve this information and manipulate it if necessary, according to the objective of the workflow. <hr> <strong>TYPE</strong>: <a href="https://docs.python.org/3/library/typing.html#typing.Any">Any</a> <strong>DEFAULT</strong>: <a href="https://dotflow-io.github.io/dotflow/nav/reference/context-class/">Context</a></td>
-</tr>
-<tr>
-<td><code>callback</code></td>
-<td>Any callable object that receives <strong>args</strong> or <strong>kwargs</strong>, which is basically a function. You can see in this <a href="https://dotflow-io.github.io/dotflow/nav/getting-started/#2-callback-function">example</a>. <hr> <strong>TYPE</strong>: <a href="https://docs.python.org/3/library/typing.html#typing.Callable">Callable</a> <strong>DEFAULT</strong>: _____</td>
-</tr>
-</tbody>
-</table></p>
+        <p><h1 id="utils">Utils</h1>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="dotflow.utils.basic_functions.basic_function" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <code class="highlight language-python"><span class="n">dotflow</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">basic_functions</span><span class="o">.</span><span class="n">basic_function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents first">
+
+          
+
+            <details class="quote">
+              <summary>Source code in <code>dotflow/utils/basic_functions.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">basic_function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="dotflow.utils.basic_functions.basic_callback" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <code class="highlight language-python"><span class="n">dotflow</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">basic_functions</span><span class="o">.</span><span class="n">basic_callback</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents first">
+
+          
+
+            <details class="quote">
+              <summary>Source code in <code>dotflow/utils/basic_functions.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">basic_callback</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div></p>
     </article>
 </section>
 <!-- endblock -->
@@ -322,6 +343,19 @@
 
             
                     <!-- block preview -->
+    <div class="preview row row-cols-md-3 text-center pt-md-3" id="component-preview">
+        <div class="col themed-grid-col">
+            <a rel="prev" href="../workflow/" class="nav-link">
+                <i class="fa fa-arrow-left"></i> Previous
+            </a>
+        </div>
+        <div class="col themed-grid-col"></div>
+        <div class="col themed-grid-col">
+            <a rel="next" href="../task-instance/" class="nav-link">
+                Next <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
 <!-- endblock -->
             
 

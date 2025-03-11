@@ -99,6 +99,11 @@
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
+        <a href="../../reference/settings/" class="dropdown-item text-decoration-none ">Settings</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
         <a href="../../reference/task/" class="dropdown-item text-decoration-none ">Task</a>
     </li>
 <!-- endblock -->
@@ -110,6 +115,11 @@
                                     <!-- block dropdown-menu -->
     <li>
         <a href="../../reference/workflow/" class="dropdown-item text-decoration-none ">Workflow</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../../reference/utils/" class="dropdown-item text-decoration-none ">Utils</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
@@ -312,6 +322,37 @@
 </code></pre>
 </details>
 
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>config</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="            dotflow.core.config.Config" href="../../reference/config/#dotflow.core.config.Config">Config</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Configuration class.</p>
+              </div>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="            dotflow.core.config.Config" href="../../reference/config/#dotflow.core.config.Config">Config</a>()</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
 <p><span class="doc-section-title">Attributes:</span></p>
     <table>
       <thead>
@@ -323,13 +364,47 @@
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code><span title="dotflow.core.dotflow.DotFlow.config">config</span></code></td>
+            <td><code><a class="autorefs autorefs-internal" title="            workflow_id = uuid4()
+
+  
+      instance-attribute
+   (dotflow.core.dotflow.DotFlow.workflow_id)" href="../../reference/dotflow/#dotflow.core.dotflow.DotFlow.workflow_id">workflow_id</a></code></td>
             <td>
-                  <code><a class="autorefs autorefs-internal" title="            dotflow.core.config.Config" href="../../reference/config/#dotflow.core.config.Config">Config</a></code>
+                  <code><span title="UUID">UUID</span></code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p><strong>DEFAULT</strong>: <code>Config</code></p>
+                
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            task = TaskBuilder(config=config, workflow_id=self.workflow_id)
+
+  
+      instance-attribute
+   (dotflow.core.dotflow.DotFlow.task)" href="../../reference/dotflow/#dotflow.core.dotflow.DotFlow.task">task</a></code></td>
+            <td>
+                  <code><span title="List">List</span>[<a class="autorefs autorefs-internal" title="            dotflow.core.task.Task" href="../../reference/task/#dotflow.core.task.Task">Task</a>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            start = partial(Workflow, tasks=self.task.queu, id=self.workflow_id)
+
+  
+      instance-attribute
+   (dotflow.core.dotflow.DotFlow.start)" href="../../reference/dotflow/#dotflow.core.dotflow.DotFlow.start">start</a></code></td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="            dotflow.core.workflow.Workflow" href="../../reference/workflow/#dotflow.core.workflow.Workflow">Workflow</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                
               </div>
             </td>
           </tr>
@@ -399,7 +474,12 @@
 <span class="normal">61</span>
 <span class="normal">62</span>
 <span class="normal">63</span>
-<span class="normal">64</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DotFlow</span><span class="p">:</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DotFlow</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Import:</span>
 <span class="sd">        You can import the **Dotflow** class directly from dotflow:</span>
@@ -411,8 +491,13 @@
 
 <span class="sd">            workflow = DotFlow()</span>
 
+<span class="sd">    Args:</span>
+<span class="sd">        config (Config): Configuration class.</span>
+
 <span class="sd">    Attributes:</span>
-<span class="sd">        config (Config): **DEFAULT**: `Config`</span>
+<span class="sd">        workflow_id (UUID):</span>
+<span class="sd">        task (List[Task]):</span>
+<span class="sd">        start (Workflow):</span>
 <span class="sd">    ---</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -507,12 +592,12 @@
 
             <details class="quote">
               <summary>Source code in <code>dotflow/core/dotflow.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">result_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">result_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        list (List[Task]): Returns a list of Task class.</span>
@@ -563,12 +648,12 @@
 
             <details class="quote">
               <summary>Source code in <code>dotflow/core/dotflow.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">result_context</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">result_context</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        list (List[Context]): Returns a list of Context class.</span>
@@ -619,12 +704,12 @@
 
             <details class="quote">
               <summary>Source code in <code>dotflow/core/dotflow.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">result_storage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">result_storage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        list (List[Any]): Returns a list of assorted objects.</span>

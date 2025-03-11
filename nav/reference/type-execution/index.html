@@ -99,6 +99,11 @@
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
+        <a href="../settings/" class="dropdown-item text-decoration-none ">Settings</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
         <a href="../task/" class="dropdown-item text-decoration-none ">Task</a>
     </li>
 <!-- endblock -->
@@ -110,6 +115,11 @@
                                     <!-- block dropdown-menu -->
     <li>
         <a href="../workflow/" class="dropdown-item text-decoration-none ">Workflow</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../utils/" class="dropdown-item text-decoration-none ">Utils</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
@@ -305,7 +315,7 @@
 <details class="import" open>
   <summary>Import</summary>
   <p>You can import the <strong>TypeExecution</strong> class with:</p>
-<pre><code>from dotflow.core.types import ConTypeExecutionfig
+<pre><code>from dotflow.core.types import TypeExecution
 </code></pre>
 </details>
           
@@ -317,9 +327,7 @@
 
               <details class="quote">
                 <summary>Source code in <code>dotflow/core/types/execution.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 6</span>
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
@@ -328,18 +336,20 @@
 <span class="normal">12</span>
 <span class="normal">13</span>
 <span class="normal">14</span>
-<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">TypeExecution</span><span class="p">:</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">TypeExecution</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Import:</span>
 <span class="sd">        You can import the **TypeExecution** class with:</span>
 
-<span class="sd">            from dotflow.core.types import ConTypeExecutionfig</span>
+<span class="sd">            from dotflow.core.types import TypeExecution</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">SEQUENTIAL</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;sequential&quot;</span>
-    <span class="n">BACKGROUND</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;background&quot;</span>
-    <span class="n">PARALLEL</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;parallel&quot;</span>
-    <span class="n">DATA_STORE</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;data_store&quot;</span>
+    <span class="n">SEQUENTIAL</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Doc</span><span class="p">(</span><span class="s2">&quot;Sequential execution.&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="s2">&quot;sequential&quot;</span>
+    <span class="n">BACKGROUND</span><span class="p">:</span>  <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Doc</span><span class="p">(</span><span class="s2">&quot;Background execution.&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="s2">&quot;background&quot;</span>
+    <span class="n">PARALLEL</span><span class="p">:</span>  <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Doc</span><span class="p">(</span><span class="s2">&quot;Parallel execution.&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="s2">&quot;parallel&quot;</span>
+    <span class="n">DATA_STORE</span><span class="p">:</span>  <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Doc</span><span class="p">(</span><span class="s2">&quot;Data store execution.&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="s2">&quot;data_store&quot;</span>
 </code></pre></div></td></tr></table></div>
               </details>
 
@@ -370,6 +380,8 @@
 
     <div class="doc doc-contents ">
 
+        <p>Sequential execution.</p>
+
           
     </div>
 
@@ -391,6 +403,8 @@
 
 
     <div class="doc doc-contents ">
+
+        <p>Background execution.</p>
 
           
     </div>
@@ -414,6 +428,8 @@
 
     <div class="doc doc-contents ">
 
+        <p>Parallel execution.</p>
+
           
     </div>
 
@@ -435,6 +451,8 @@
 
 
     <div class="doc doc-contents ">
+
+        <p>Data store execution.</p>
 
           
     </div>

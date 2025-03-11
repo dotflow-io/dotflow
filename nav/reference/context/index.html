@@ -99,6 +99,11 @@
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
+        <a href="../settings/" class="dropdown-item text-decoration-none ">Settings</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
         <a href="../task/" class="dropdown-item text-decoration-none ">Task</a>
     </li>
 <!-- endblock -->
@@ -110,6 +115,11 @@
                                     <!-- block dropdown-menu -->
     <li>
         <a href="../workflow/" class="dropdown-item text-decoration-none ">Workflow</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../utils/" class="dropdown-item text-decoration-none ">Utils</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
@@ -320,65 +330,63 @@
 </code></pre>
 </details>
 
-<p><span class="doc-section-title">Attributes:</span></p>
+<p><span class="doc-section-title">Parameters:</span></p>
     <table>
       <thead>
         <tr>
           <th>Name</th>
           <th>Type</th>
           <th>Description</th>
+          <th>Default</th>
         </tr>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            storage
-
-  
-      property
-      writable
-   (dotflow.core.context.Context.storage)" href="#dotflow.core.context.Context.storage">storage</a></code></td>
+            <td>
+                <code>storage</code>
+            </td>
             <td>
                   <code><span title="typing.Any">Any</span></code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>description
-Attribute where any type of Python object can be stored.</p>
-<hr>
-<p><strong>DEFAULT</strong>: <code>None</code></p>
+                <p>Attribute where any type of Python object can be stored.</p>
               </div>
+            </td>
+            <td>
+                  <code>None</code>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            task_id
-
-  
-      property
-      writable
-   (dotflow.core.context.Context.task_id)" href="#dotflow.core.context.Context.task_id">task_id</a></code></td>
+            <td>
+                <code>task_id</code>
+            </td>
             <td>
                   <code><span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p><strong>DEFAULT</strong>: <code>None</code></p>
+                <p>Task ID.</p>
               </div>
+            </td>
+            <td>
+                  <code>None</code>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            workflow_id
-
-  
-      property
-      writable
-   (dotflow.core.context.Context.workflow_id)" href="#dotflow.core.context.Context.workflow_id">workflow_id</a></code></td>
+            <td>
+                <code>workflow_id</code>
+            </td>
             <td>
                   <code><span title="uuid.UUID">UUID</span></code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p><strong>DEFAULT</strong>: <code>None</code></p>
+                <p>Workflow ID.</p>
               </div>
+            </td>
+            <td>
+                  <code>None</code>
             </td>
           </tr>
       </tbody>
@@ -474,9 +482,7 @@ Attribute where any type of Python object can be stored.</p>
 <span class="normal">101</span>
 <span class="normal">102</span>
 <span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Context</span><span class="p">(</span><span class="n">ContextInstance</span><span class="p">):</span>
+<span class="normal">104</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Context</span><span class="p">(</span><span class="n">ContextInstance</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Import:</span>
 <span class="sd">        You can import the Context class directly from dotflow:</span>
@@ -490,12 +496,10 @@ Attribute where any type of Python object can be stored.</p>
 <span class="sd">                storage={&quot;data&quot;: [0, 1, 2, 3]}</span>
 <span class="sd">            )</span>
 
-<span class="sd">    Attributes:</span>
-<span class="sd">        storage (Any): description</span>
-<span class="sd">            Attribute where any type of Python object can be stored.</span>
-<span class="sd">            &lt;hr&gt; **DEFAULT**: `None`</span>
-<span class="sd">        task_id (int): **DEFAULT**: `None`</span>
-<span class="sd">        workflow_id (UUID): **DEFAULT**: `None`</span>
+<span class="sd">    Args:</span>
+<span class="sd">        storage (Any): Attribute where any type of Python object can be stored.</span>
+<span class="sd">        task_id (int): Task ID.</span>
+<span class="sd">        workflow_id (UUID): Workflow ID.</span>
 <span class="sd">    ---</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 

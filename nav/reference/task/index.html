@@ -99,6 +99,11 @@
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
+        <a href="../settings/" class="dropdown-item text-decoration-none ">Settings</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
         <a href="./" class="dropdown-item text-decoration-none  active ">Task</a>
     </li>
 <!-- endblock -->
@@ -110,6 +115,11 @@
                                     <!-- block dropdown-menu -->
     <li>
         <a href="../workflow/" class="dropdown-item text-decoration-none ">Workflow</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../utils/" class="dropdown-item text-decoration-none ">Utils</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
@@ -334,108 +344,115 @@
 </code></pre>
 </details>
 
-<p><span class="doc-section-title">Attributes:</span></p>
+<p><span class="doc-section-title">Parameters:</span></p>
     <table>
       <thead>
         <tr>
           <th>Name</th>
           <th>Type</th>
           <th>Description</th>
+          <th>Default</th>
         </tr>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            task_id = task_id
-
-  
-      instance-attribute
-   (dotflow.core.task.Task.task_id)" href="#dotflow.core.task.Task.task_id">task_id</a></code></td>
+            <td>
+                <code>task_id</code>
+            </td>
             <td>
                   <code><span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>*</p>
+                <p>Task ID.</p>
               </div>
+            </td>
+            <td>
+                <em>required</em>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            step
-
-  
-      property
-      writable
-   (dotflow.core.task.Task.step)" href="#dotflow.core.task.Task.step">step</a></code></td>
+            <td>
+                <code>step</code>
+            </td>
             <td>
                   <code><span title="typing.Callable">Callable</span></code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>*</p>
+                <p>A argument that receives an object of the callable type,
+which is basically a function. You can see in this
+<a href="https://dotflow-io.github.io/dotflow/nav/getting-started/#3-task-function">example</a>.</p>
               </div>
+            </td>
+            <td>
+                <em>required</em>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            callback
-
-  
-      property
-      writable
-   (dotflow.core.task.Task.callback)" href="#dotflow.core.task.Task.callback">callback</a></code></td>
+            <td>
+                <code>callback</code>
+            </td>
             <td>
                   <code><span title="typing.Callable">Callable</span></code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p><strong>DEFAULT</strong>: <code>basic_callback</code></p>
+                <p>Any callable object that receives <strong>args</strong> or <strong>kwargs</strong>,
+which is basically a function. You can see in this
+<a href="https://dotflow-io.github.io/dotflow/nav/getting-started/#2-callback-function">example</a>.</p>
               </div>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="            dotflow.utils.basic_functions.basic_callback(*args, **kwargs) (dotflow.utils.basic_callback)" href="../utils/#dotflow.utils.basic_functions.basic_callback">basic_callback</a></code>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            initial_context
-
-  
-      property
-      writable
-   (dotflow.core.task.Task.initial_context)" href="#dotflow.core.task.Task.initial_context">initial_context</a></code></td>
+            <td>
+                <code>initial_context</code>
+            </td>
             <td>
                   <code><span title="typing.Any">Any</span></code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p><strong>DEFAULT</strong>: <code>None</code></p>
+                <p>Any python object.</p>
               </div>
+            </td>
+            <td>
+                  <code>None</code>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            workflow_id = workflow_id
-
-  
-      instance-attribute
-   (dotflow.core.task.Task.workflow_id)" href="#dotflow.core.task.Task.workflow_id">workflow_id</a></code></td>
+            <td>
+                <code>workflow_id</code>
+            </td>
             <td>
                   <code><span title="uuid.UUID">UUID</span></code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p><strong>DEFAULT</strong>: <code>None</code></p>
+                <p>Workflow ID.</p>
               </div>
+            </td>
+            <td>
+                  <code>None</code>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            config
-
-  
-      property
-      writable
-   (dotflow.core.task.Task.config)" href="#dotflow.core.task.Task.config">config</a></code></td>
+            <td>
+                <code>config</code>
+            </td>
             <td>
                   <code><a class="autorefs autorefs-internal" title="            dotflow.core.config.Config" href="../config/#dotflow.core.config.Config">Config</a></code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p><strong>DEFAULT</strong>: <code>None</code></p>
+                <p>Configuration class.</p>
               </div>
+            </td>
+            <td>
+                  <code>None</code>
             </td>
           </tr>
       </tbody>
@@ -632,7 +649,13 @@
 <span class="normal">226</span>
 <span class="normal">227</span>
 <span class="normal">228</span>
-<span class="normal">229</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Task</span><span class="p">(</span><span class="n">TaskInstance</span><span class="p">):</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Task</span><span class="p">(</span><span class="n">TaskInstance</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Import:</span>
 <span class="sd">        You can import the **Task** class directly from dotflow:</span>
@@ -648,13 +671,19 @@
 <span class="sd">                callback=my_callback</span>
 <span class="sd">            )</span>
 
-<span class="sd">    Attributes:</span>
-<span class="sd">        task_id (int): *</span>
-<span class="sd">        step (Callable): *</span>
-<span class="sd">        callback (Callable): **DEFAULT**: `basic_callback`</span>
-<span class="sd">        initial_context (Any): **DEFAULT**: `None`</span>
-<span class="sd">        workflow_id (UUID): **DEFAULT**: `None`</span>
-<span class="sd">        config (Config): **DEFAULT**: `None`</span>
+<span class="sd">    Args:</span>
+<span class="sd">        task_id (int): Task ID.</span>
+<span class="sd">        step (Callable):</span>
+<span class="sd">            A argument that receives an object of the callable type,</span>
+<span class="sd">            which is basically a function. You can see in this</span>
+<span class="sd">            [example](https://dotflow-io.github.io/dotflow/nav/getting-started/#3-task-function).</span>
+<span class="sd">        callback (Callable):</span>
+<span class="sd">            Any callable object that receives **args** or **kwargs**,</span>
+<span class="sd">            which is basically a function. You can see in this</span>
+<span class="sd">            [example](https://dotflow-io.github.io/dotflow/nav/getting-started/#2-callback-function).</span>
+<span class="sd">        initial_context (Any): Any python object.</span>
+<span class="sd">        workflow_id (UUID): Workflow ID.</span>
+<span class="sd">        config (Config): Configuration class.</span>
 <span class="sd">    ---</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -1002,7 +1031,7 @@
                     <!-- block preview -->
     <div class="preview row row-cols-md-3 text-center pt-md-3" id="component-preview">
         <div class="col themed-grid-col">
-            <a rel="prev" href="../dotflow/" class="nav-link">
+            <a rel="prev" href="../settings/" class="nav-link">
                 <i class="fa fa-arrow-left"></i> Previous
             </a>
         </div>

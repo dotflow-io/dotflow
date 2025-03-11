@@ -18,7 +18,7 @@ p a {
 }
 
 code a {
-    color: gray !important;
+    color: var(--color-white) !important;
     text-underline-position: under;
 }
 
@@ -43,6 +43,11 @@ code.doc-symbol-method, a code.doc-symbol-method {
 }
 
 code.doc-symbol-attribute, a code.doc-symbol-attribute {
+    color: var(--color-white);
+    background-color: var(--background);
+}
+
+code.doc-symbol-function, a code.doc-symbol-function {
     color: var(--color-white);
     background-color: var(--background);
 }

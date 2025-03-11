@@ -99,6 +99,11 @@
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
+        <a href="../settings/" class="dropdown-item text-decoration-none ">Settings</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
         <a href="../task/" class="dropdown-item text-decoration-none ">Task</a>
     </li>
 <!-- endblock -->
@@ -110,6 +115,11 @@
                                     <!-- block dropdown-menu -->
     <li>
         <a href="../workflow/" class="dropdown-item text-decoration-none ">Workflow</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../utils/" class="dropdown-item text-decoration-none ">Utils</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
@@ -319,6 +329,59 @@
 </code></pre>
 </details>
 
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>path</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Initial path of the library.</p>
+              </div>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="            START_PATH = Path('.output')
+
+  
+      class-attribute
+      instance-attribute
+   (dotflow.settings.Settings.START_PATH)" href="../settings/#dotflow.settings.Settings.START_PATH">START_PATH</a></code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>output</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Flag for storing context in a file.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+        <hr />
+
+
 <p><span class="doc-section-title">Attributes:</span></p>
     <table>
       <thead>
@@ -336,11 +399,41 @@
       instance-attribute
    (dotflow.core.config.Config.path)" href="#dotflow.core.config.Config.path">path</a></code></td>
             <td>
-                  <code><span title="str">str</span></code>
+                  <code><span title="pathlib.Path">Path</span></code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p><strong>DEFAULT</strong>: <code>.output</code></p>
+                
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            task_path = Path(path, 'tasks')
+
+  
+      instance-attribute
+   (dotflow.core.config.Config.task_path)" href="#dotflow.core.config.Config.task_path">task_path</a></code></td>
+            <td>
+                  <code><span title="pathlib.Path">Path</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><a class="autorefs autorefs-internal" title="            log_path = Path(path, settings.LOG_FILE_NAME)
+
+  
+      instance-attribute
+   (dotflow.core.config.Config.log_path)" href="#dotflow.core.config.Config.log_path">log_path</a></code></td>
+            <td>
+                  <code><span title="pathlib.Path">Path</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                
               </div>
             </td>
           </tr>
@@ -351,17 +444,16 @@
       instance-attribute
    (dotflow.core.config.Config.output)" href="#dotflow.core.config.Config.output">output</a></code></td>
             <td>
-                  <code><span title="Callable">Callable</span></code>
+                  <code><span title="str">str</span></code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p><strong>DEFAULT</strong>: <code>False</code></p>
+                
               </div>
             </td>
           </tr>
       </tbody>
     </table>
-        <hr />
 
           
 
@@ -404,7 +496,13 @@
 <span class="normal">37</span>
 <span class="normal">38</span>
 <span class="normal">39</span>
-<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Config</span><span class="p">:</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Config</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Import:</span>
 <span class="sd">        You can import the **Config** class with:</span>
@@ -419,10 +517,16 @@
 <span class="sd">                output=False</span>
 <span class="sd">            )</span>
 
-<span class="sd">    Attributes:</span>
-<span class="sd">        path (str): **DEFAULT**: `.output`</span>
-<span class="sd">        output (Callable): **DEFAULT**: `False`</span>
+<span class="sd">    Args:</span>
+<span class="sd">        path (str): Initial path of the library.</span>
+<span class="sd">        output (bool): Flag for storing context in a file.</span>
 <span class="sd">    ---</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        path (Path):</span>
+<span class="sd">        task_path (Path):</span>
+<span class="sd">        log_path (Path):</span>
+<span class="sd">        output (str):</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
