@@ -23,7 +23,6 @@ class Config:
     Args:
         path (str): Initial path of the library.
         output (bool): Flag for storing context in a file.
-    ---
 
     Attributes:
         path (Path):
