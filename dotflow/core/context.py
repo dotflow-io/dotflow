@@ -39,7 +39,6 @@ class Context(ContextInstance):
         storage (Any): Attribute where any type of Python object can be stored.
         task_id (int): Task ID.
         workflow_id (UUID): Workflow ID.
-    ---
     """
 
     def __init__(

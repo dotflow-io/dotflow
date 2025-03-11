@@ -34,7 +34,6 @@ class Action(object):
         retry (int):
             Integer-type argument referring to the number of retry attempts
             the function will execute in case of failure.
-    ---
     """
 
     def __init__(

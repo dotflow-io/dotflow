@@ -74,7 +74,6 @@ class Task(TaskInstance):
         initial_context (Any): Any python object.
         workflow_id (UUID): Workflow ID.
         config (Config): Configuration class.
-    ---
     """
 
     def __init__(
@@ -263,7 +262,6 @@ class TaskBuilder:
     Args:
         config (Config): Configuration class.
         workflow_id (UUID): Workflow ID.
-    ---
     """
 
     def __init__(
@@ -299,7 +297,6 @@ class TaskBuilder:
                 can be accessed internally, for example: **initial_context**,
                 to retrieve this information and manipulate it if necessary,
                 according to the objective of the workflow.
-        ---
         """
         if isinstance(step, list):
             for inside_step in step:

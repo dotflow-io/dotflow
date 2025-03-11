@@ -27,7 +27,6 @@ class DotFlow:
         workflow_id (UUID):
         task (List[Task]):
         start (Workflow):
-    ---
     """
 
     def __init__(
