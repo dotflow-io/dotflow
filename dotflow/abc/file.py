@@ -1,4 +1,4 @@
-"""File module"""
+"""File ABC"""
 
 from abc import ABC, abstractmethod
 

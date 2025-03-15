@@ -13,13 +13,11 @@ from dotflow.core.context import Context
 from dotflow.core.module import Module
 from dotflow.core.exception import MissingActionDecorator, NotCallableObject
 from dotflow.core.types.status import TaskStatus
-from dotflow.settings import Settings as settings
 from dotflow.utils import (
     basic_callback,
     traceback_error,
     message_error,
-    write_file,
-    copy_file
+    write_file
 )
 
 
@@ -147,11 +145,6 @@ class Task(TaskInstance):
     def previous_context(self, value: Context):
         self._previous_context = Context(value)
 
-        TaskController(task=self).controller_output_context(
-            content=self.previous_context.storage,
-            context_name="previous_context"
-        )
-
     @property
     def initial_context(self):
         if not self._initial_context:
@@ -161,11 +154,6 @@ class Task(TaskInstance):
     @initial_context.setter
     def initial_context(self, value: Context):
         self._initial_context = Context(value)
-
-        TaskController(task=self).controller_output_context(
-            content=self.initial_context.storage,
-            context_name="initial_context"
-        )
 
     @property
     def current_context(self):
@@ -181,9 +169,9 @@ class Task(TaskInstance):
             storage=value
         )
 
-        TaskController(task=self).controller_output_context(
-            content=self.current_context.storage,
-            context_name="current_context"
+        self.config.storage.post(
+            key=self.current_context.current_key,
+            context=self.current_context
         )
 
     @property
@@ -355,10 +343,6 @@ class TaskController:
             self.task.workflow_id,
             self.task.task_id,
             self.task.status,
-        )
-        copy_file(
-            source=settings.LOG_PATH,
-            destination=self.task.config.log_path
         )
 
     def controller_output_context(self, content: Any, context_name: str) -> None:

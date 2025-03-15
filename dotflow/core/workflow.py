@@ -88,6 +88,7 @@ class Workflow:
 
     def sequential(self, keep_going: bool = False):
         previous_context = Context(
+            task_id=0,
             workflow_id=self.id
         )
 

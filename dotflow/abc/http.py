@@ -1,4 +1,4 @@
-"""HTTP module"""
+"""HTTP ABC"""
 
 from abc import ABC, abstractmethod
 from typing import Callable
