@@ -40,7 +40,11 @@ def write_file(
         with open(file=path, mode=mode, encoding="utf-8") as file:
             file.write(content)
     except Exception:
-        system(f"echo '{content}' > {path}")
+        if mode == "a":
+            system(f"echo '{content}' >> {path}")
+
+        if mode == "w":
+            system(f"echo '{content}' > {path}")
 
 
 def read_file(path: Path) -> str:
