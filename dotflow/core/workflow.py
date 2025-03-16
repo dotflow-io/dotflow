@@ -52,7 +52,7 @@ class Workflow:
         id (UUID):
 
     Attributes:
-        id (UUID)
+        id (UUID):
         started (datetime):
         tasks (List[Task]):
         success (Callable):
