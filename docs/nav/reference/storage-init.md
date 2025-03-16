@@ -1,3 +1,3 @@
-# StorageInit
+# StorageDefault
 
-::: dotflow.providers.storage_init.StorageInit
+::: dotflow.providers.storage_init.StorageDefault

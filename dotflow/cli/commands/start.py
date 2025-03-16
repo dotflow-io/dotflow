@@ -3,7 +3,7 @@
 from os import system
 
 from dotflow import DotFlow, Config
-from dotflow.providers import StorageInit, StorageFile
+from dotflow.providers import StorageDefault, StorageFile
 from dotflow.core.types.execution import TypeExecution
 from dotflow.cli.command import Command
 
@@ -14,7 +14,7 @@ class StartCommand(Command):
         workflow = DotFlow()
 
         if self.params.storage:
-            storage = {"default": StorageInit, "file": StorageFile}
+            storage = {"default": StorageDefault, "file": StorageFile}
 
             config = Config(
                 storage=storage.get(self.params.storage)(

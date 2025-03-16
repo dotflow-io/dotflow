@@ -7,7 +7,7 @@ from dotflow.abc.storage import Storage
 from dotflow.core.context import Context
 
 
-class StorageInit(Storage):
+class StorageDefault(Storage):
     """Storage"""
 
     def post(self, key: str, context: Context) -> None:

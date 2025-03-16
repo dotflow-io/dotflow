@@ -30,6 +30,9 @@ Issues = "https://github.com/dotflow-io/dotflow/issues"
 Repository = "https://github.com/dotflow-io/dotflow"
 Documentation = "https://github.com/dotflow-io/dotflow/blob/master/README.md"
 
+[project.optional-dependencies]
+mongodb = ["dotflow-mongodb"]
+
 [tool.poetry]
 name = "dotflow"
 version = "0.10.0.dev1"

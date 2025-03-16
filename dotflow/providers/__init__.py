@@ -1,9 +1,6 @@
 """Providers __init__ module."""
 
+from dotflow.providers.storage_default import StorageDefault
 from dotflow.providers.storage_file import StorageFile
-from dotflow.providers.storage_init import StorageInit
 
-__all__ = [
-    "StorageFile",
-    "StorageInit"
-]
+__all__ = ["StorageDefault", "StorageFile"]

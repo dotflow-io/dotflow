@@ -1,7 +1,7 @@
 """Config module"""
 
 from dotflow.abc.storage import Storage
-from dotflow.providers.storage_init import StorageInit
+from dotflow.providers.storage_default import StorageDefault
 
 
 class Config:
@@ -9,12 +9,13 @@ class Config:
     Import:
         You can import the **Config** class with:
 
-            from dotflow import Config, StorageInit
+            from dotflow import Config
+            from dotflow.storage import StorageDefault
 
     Example:
         `class` dotflow.core.config.Config
 
-            config = Config(storage=StorageInit)
+            config = Config(storage=StorageDefault)
 
     Args:
         storage (Storage): Type of the storage.
@@ -23,5 +24,5 @@ class Config:
         storage (Storage):
     """
 
-    def __init__(self, storage: Storage = StorageInit()) -> None:
+    def __init__(self, storage: Storage = StorageDefault()) -> None:
         self.storage = storage
