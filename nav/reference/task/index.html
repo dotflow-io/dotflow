@@ -134,6 +134,45 @@
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
+        <a class="dropdown-item text-decoration-none" href="#">ABC &raquo;</a>
+        <ul class="submenu dropdown-menu">
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../abc-storage/" class="dropdown-item text-decoration-none ">Storage</a>
+    </li>
+<!-- endblock -->
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../abc-http/" class="dropdown-item text-decoration-none ">HTTPRequest</a>
+    </li>
+<!-- endblock -->
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../abc-tcp/" class="dropdown-item text-decoration-none ">TCP</a>
+    </li>
+<!-- endblock -->
+        </ul>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a class="dropdown-item text-decoration-none" href="#">Storages &raquo;</a>
+        <ul class="submenu dropdown-menu">
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../storage-init/" class="dropdown-item text-decoration-none ">StorageDefault</a>
+    </li>
+<!-- endblock -->
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../storage-file/" class="dropdown-item text-decoration-none ">StorageFile</a>
+    </li>
+<!-- endblock -->
+        </ul>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
         <a class="dropdown-item text-decoration-none" href="#">Instance &raquo;</a>
         <ul class="submenu dropdown-menu">
                 <!-- block dropdown-menu -->
@@ -477,7 +516,11 @@ which is basically a function. You can see in this
 
               <details class="quote">
                 <summary>Source code in <code>dotflow/core/task.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 48</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
 <span class="normal"> 49</span>
 <span class="normal"> 50</span>
 <span class="normal"> 51</span>
@@ -659,16 +702,7 @@ which is basically a function. You can see in this
 <span class="normal">227</span>
 <span class="normal">228</span>
 <span class="normal">229</span>
-<span class="normal">230</span>
-<span class="normal">231</span>
-<span class="normal">232</span>
-<span class="normal">233</span>
-<span class="normal">234</span>
-<span class="normal">235</span>
-<span class="normal">236</span>
-<span class="normal">237</span>
-<span class="normal">238</span>
-<span class="normal">239</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Task</span><span class="p">(</span><span class="n">TaskInstance</span><span class="p">):</span>
+<span class="normal">230</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Task</span><span class="p">(</span><span class="n">TaskInstance</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Import:</span>
 <span class="sd">        You can import the **Task** class directly from dotflow:</span>
@@ -770,11 +804,6 @@ which is basically a function. You can see in this
     <span class="k">def</span><span class="w"> </span><span class="nf">previous_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Context</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_previous_context</span> <span class="o">=</span> <span class="n">Context</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
-        <span class="n">TaskController</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">controller_output_context</span><span class="p">(</span>
-            <span class="n">content</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">previous_context</span><span class="o">.</span><span class="n">storage</span><span class="p">,</span>
-            <span class="n">context_name</span><span class="o">=</span><span class="s2">&quot;previous_context&quot;</span>
-        <span class="p">)</span>
-
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">initial_context</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initial_context</span><span class="p">:</span>
@@ -784,11 +813,6 @@ which is basically a function. You can see in this
     <span class="nd">@initial_context</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">initial_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Context</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_initial_context</span> <span class="o">=</span> <span class="n">Context</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-
-        <span class="n">TaskController</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">controller_output_context</span><span class="p">(</span>
-            <span class="n">content</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_context</span><span class="o">.</span><span class="n">storage</span><span class="p">,</span>
-            <span class="n">context_name</span><span class="o">=</span><span class="s2">&quot;initial_context&quot;</span>
-        <span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">current_context</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -804,9 +828,9 @@ which is basically a function. You can see in this
             <span class="n">storage</span><span class="o">=</span><span class="n">value</span>
         <span class="p">)</span>
 
-        <span class="n">TaskController</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">controller_output_context</span><span class="p">(</span>
-            <span class="n">content</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">current_context</span><span class="o">.</span><span class="n">storage</span><span class="p">,</span>
-            <span class="n">context_name</span><span class="o">=</span><span class="s2">&quot;current_context&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+            <span class="n">key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">),</span>
+            <span class="n">context</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">current_context</span>
         <span class="p">)</span>
 
     <span class="nd">@property</span>
@@ -849,7 +873,12 @@ which is basically a function. You can see in this
     <span class="k">def</span><span class="w"> </span><span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">TaskStatus</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">value</span>
 
-        <span class="n">TaskController</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">controller_logger</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;ID </span><span class="si">%s</span><span class="s2"> - </span><span class="si">%s</span><span class="s2"> - </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">workflow_id</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">task_id</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">,</span>
+        <span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

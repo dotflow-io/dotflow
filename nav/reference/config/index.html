@@ -134,6 +134,45 @@
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
+        <a class="dropdown-item text-decoration-none" href="#">ABC &raquo;</a>
+        <ul class="submenu dropdown-menu">
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../abc-storage/" class="dropdown-item text-decoration-none ">Storage</a>
+    </li>
+<!-- endblock -->
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../abc-http/" class="dropdown-item text-decoration-none ">HTTPRequest</a>
+    </li>
+<!-- endblock -->
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../abc-tcp/" class="dropdown-item text-decoration-none ">TCP</a>
+    </li>
+<!-- endblock -->
+        </ul>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a class="dropdown-item text-decoration-none" href="#">Storages &raquo;</a>
+        <ul class="submenu dropdown-menu">
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../storage-init/" class="dropdown-item text-decoration-none ">StorageDefault</a>
+    </li>
+<!-- endblock -->
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../storage-file/" class="dropdown-item text-decoration-none ">StorageFile</a>
+    </li>
+<!-- endblock -->
+        </ul>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
         <a class="dropdown-item text-decoration-none" href="#">Instance &raquo;</a>
         <ul class="submenu dropdown-menu">
                 <!-- block dropdown-menu -->
@@ -270,22 +309,6 @@
               <ul class="nav flex-column">
             <li class="nav-item" data-bs-level="2"><a href="#dotflow.core.config.Config" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;Config</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.config.Config.path" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;path</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.config.Config.task_path" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;task_path</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.config.Config.log_path" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;log_path</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.config.Config.output" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;output</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
               </ul>
             </li>
               </ul>
@@ -325,17 +348,15 @@
 <details class="import" open>
   <summary>Import</summary>
   <p>You can import the <strong>Config</strong> class with:</p>
-<pre><code>from dotflow.core.config import Config
+<pre><code>from dotflow import Config
+from dotflow.storage import StorageDefault
 </code></pre>
 </details>
 
 <details class="example" open>
   <summary>Example</summary>
   <p><code>class</code> dotflow.core.config.Config</p>
-<pre><code>config = Config(
-    path=".output",
-    output=False
-)
+<pre><code>config = Config(storage=StorageDefault)
 </code></pre>
 </details>
 
@@ -352,39 +373,18 @@
       <tbody>
           <tr class="doc-section-item">
             <td>
-                <code>path</code>
+                <code>storage</code>
             </td>
             <td>
-                  <code><span title="str">str</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Initial path of the library.</p>
-              </div>
-            </td>
-            <td>
-                  <code><a class="autorefs autorefs-internal" title="            START_PATH = Path('.output')
-
-  
-      class-attribute
-      instance-attribute
-   (dotflow.settings.Settings.START_PATH)" href="../settings/#dotflow.settings.Settings.START_PATH">START_PATH</a></code>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td>
-                <code>output</code>
-            </td>
-            <td>
-                  <code><span title="bool">bool</span></code>
+                  <code><a class="autorefs autorefs-internal" title="            dotflow.abc.storage.Storage" href="../abc-storage/#dotflow.abc.storage.Storage">Storage</a></code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Flag for storing context in a file.</p>
+                <p>Type of the storage.</p>
               </div>
             </td>
             <td>
-                  <code>False</code>
+                  <code><a class="autorefs autorefs-internal" title="            dotflow.providers.storage_default.StorageDefault" href="../storage-init/#dotflow.providers.storage_default.StorageDefault">StorageDefault</a>()</code>
             </td>
           </tr>
       </tbody>
@@ -402,58 +402,9 @@
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            path = Path(path)
-
-  
-      instance-attribute
-   (dotflow.core.config.Config.path)" href="#dotflow.core.config.Config.path">path</a></code></td>
+            <td><code><span title="dotflow.core.config.Config.storage">storage</span></code></td>
             <td>
-                  <code><span title="pathlib.Path">Path</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                
-              </div>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            task_path = Path(path, 'tasks')
-
-  
-      instance-attribute
-   (dotflow.core.config.Config.task_path)" href="#dotflow.core.config.Config.task_path">task_path</a></code></td>
-            <td>
-                  <code><span title="pathlib.Path">Path</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                
-              </div>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            log_path = Path(path, settings.LOG_FILE_NAME)
-
-  
-      instance-attribute
-   (dotflow.core.config.Config.log_path)" href="#dotflow.core.config.Config.log_path">log_path</a></code></td>
-            <td>
-                  <code><span title="pathlib.Path">Path</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                
-              </div>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><a class="autorefs autorefs-internal" title="            output = output
-
-  
-      instance-attribute
-   (dotflow.core.config.Config.output)" href="#dotflow.core.config.Config.output">output</a></code></td>
-            <td>
-                  <code><span title="str">str</span></code>
+                  <code><a class="autorefs autorefs-internal" title="            dotflow.abc.storage.Storage" href="../abc-storage/#dotflow.abc.storage.Storage">Storage</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -473,7 +424,8 @@
 
               <details class="quote">
                 <summary>Source code in <code>dotflow/core/config.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 8</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 7</span>
+<span class="normal"> 8</span>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
@@ -493,69 +445,28 @@
 <span class="normal">25</span>
 <span class="normal">26</span>
 <span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Config</span><span class="p">:</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Config</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Import:</span>
 <span class="sd">        You can import the **Config** class with:</span>
 
-<span class="sd">            from dotflow.core.config import Config</span>
+<span class="sd">            from dotflow import Config</span>
+<span class="sd">            from dotflow.storage import StorageDefault</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        `class` dotflow.core.config.Config</span>
 
-<span class="sd">            config = Config(</span>
-<span class="sd">                path=&quot;.output&quot;,</span>
-<span class="sd">                output=False</span>
-<span class="sd">            )</span>
+<span class="sd">            config = Config(storage=StorageDefault)</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        path (str): Initial path of the library.</span>
-
-<span class="sd">        output (bool): Flag for storing context in a file.</span>
+<span class="sd">        storage (Storage): Type of the storage.</span>
 
 <span class="sd">    Attributes:</span>
-<span class="sd">        path (Path):</span>
-
-<span class="sd">        task_path (Path):</span>
-
-<span class="sd">        log_path (Path):</span>
-
-<span class="sd">        output (str):</span>
+<span class="sd">        storage (Storage):</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">START_PATH</span><span class="p">,</span>
-            <span class="n">output</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">task_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;tasks&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">log_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">settings</span><span class="o">.</span><span class="n">LOG_FILE_NAME</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">output</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">task_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">storage</span><span class="p">:</span> <span class="n">Storage</span> <span class="o">=</span> <span class="n">StorageDefault</span><span class="p">())</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">storage</span> <span class="o">=</span> <span class="n">storage</span>
 </code></pre></div></td></tr></table></div>
               </details>
 
@@ -568,90 +479,6 @@
 
 
 
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="dotflow.core.config.Config.path" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-</h3>
-
-
-    <div class="doc doc-contents ">
-
-          
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="dotflow.core.config.Config.task_path" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">task_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;tasks&#39;</span><span class="p">)</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-</h3>
-
-
-    <div class="doc doc-contents ">
-
-          
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="dotflow.core.config.Config.log_path" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">log_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">settings</span><span class="o">.</span><span class="n">LOG_FILE_NAME</span><span class="p">)</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-</h3>
-
-
-    <div class="doc doc-contents ">
-
-          
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="dotflow.core.config.Config.output" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">output</span> <span class="o">=</span> <span class="n">output</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-</h3>
-
-
-    <div class="doc doc-contents ">
-
-          
-    </div>
-
-</div>
 
 
 
