@@ -13,12 +13,16 @@ class DotFlow:
     Import:
         You can import the **Dotflow** class directly from dotflow:
 
-            from dotflow import DotFlow
+            from dotflow import DotFlow, Config, StorageFile
 
     Example:
         `class` dotflow.core.dotflow.Dotflow
 
-            workflow = DotFlow()
+            config = Config(
+                storage=StorageFile()
+            )
+
+            workflow = DotFlow(config=config)
 
     Args:
         config (Config): Configuration class.

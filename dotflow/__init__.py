@@ -9,10 +9,8 @@ from .core.context import Context
 from .core.dotflow import DotFlow
 from .core.task import Task
 
-from .providers.storages import (
-    StorageInit,
-    StorageLocal
-)
+from .providers.storage_file import StorageFile
+from .providers.storage_init import StorageInit
 
 
 __all__ = [
@@ -21,6 +19,6 @@ __all__ = [
     "Config",
     "DotFlow",
     "Task",
-    "StorageInit",
-    "StorageLocal"
+    "StorageFile",
+    "StorageInit"
 ]

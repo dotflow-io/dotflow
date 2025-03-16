@@ -142,6 +142,9 @@ class Execution:
             self.task.status = TaskStatus.COMPLETED
             self.task.current_context = current_context
 
+        except AssertionError as err:
+            raise err
+
         except Exception as err:
             self.task.status = TaskStatus.FAILED
             self.task.error = err

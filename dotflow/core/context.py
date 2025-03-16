@@ -105,14 +105,3 @@ class Context(ContextInstance):
             self.workflow_id = value.workflow_id
         else:
             self._storage = value
-
-    @property
-    def current_key(self):
-        return f"{self.workflow_id}-{self.task_id}"
-
-    @property
-    def previous_key(self):
-        previous = 0
-        if self.task_id:
-            previous = 0 if self.task_id - 1 <= 0 else self.task_id - 1
-        return f"{self.workflow_id}-{previous}"

@@ -2,7 +2,6 @@
 
 from uuid import UUID
 from typing import Any, Callable, List
-from time import strftime, localtime
 
 from rich.console import Console  # type: ignore
 
@@ -16,8 +15,7 @@ from dotflow.core.types.status import TaskStatus
 from dotflow.utils import (
     basic_callback,
     traceback_error,
-    message_error,
-    write_file
+    message_error
 )
 
 
@@ -170,7 +168,7 @@ class Task(TaskInstance):
         )
 
         self.config.storage.post(
-            key=self.current_context.current_key,
+            key=self.config.storage.key(task=self),
             context=self.current_context
         )
 
@@ -214,7 +212,12 @@ class Task(TaskInstance):
     def status(self, value: TaskStatus) -> None:
         self._status = value
 
-        TaskController(task=self).controller_logger()
+        logger.info(
+            "ID %s - %s - %s",
+            self.workflow_id,
+            self.task_id,
+            self.status,
+        )
 
     @property
     def config(self):
@@ -321,38 +324,3 @@ class TaskBuilder:
 
     def reverse(self) -> None:
         self.queu.reverse()
-
-
-class TaskController:
-
-    def __init__(self, task: Task):
-        self.task = task
-        self.default_time_format = "%Y-%m-%d %H:%M:%S"
-
-    def _get_body(self):
-        return "{time} ID: {workflow_id} - {task_id} - {task_status}".format(
-            time=strftime(self.default_time_format, localtime()),
-            workflow_id=self.task.workflow_id,
-            task_id=self.task.task_id,
-            task_status=self.task.status
-        )
-
-    def controller_logger(self):
-        logger.info(
-            "ID %s - %s - %s",
-            self.task.workflow_id,
-            self.task.task_id,
-            self.task.status,
-        )
-
-    def controller_output_context(self, content: Any, context_name: str) -> None:
-        if self.task.config.output:
-            file_name = "{workflow_id}-{task_id}-{context_name}".format(
-                workflow_id=self.task.workflow_id.hex,
-                task_id=self.task.task_id,
-                context_name=context_name
-            )
-            write_file(
-                path=self.task.config.task_path.joinpath(file_name),
-                content=str(content)
-            )
