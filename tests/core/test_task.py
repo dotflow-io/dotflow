@@ -7,7 +7,7 @@ from dotflow.core.action import Action
 from dotflow.core.config import Config
 from dotflow.core.context import Context
 from dotflow.core.types.status import TaskStatus
-from dotflow.core.exception import MissingActionDecorator, NotCallableObject, ModuleNotFound
+from dotflow.core.exception import MissingActionDecorator, NotCallableObject, ImportModuleError
 from dotflow.core.task import Task, TaskError
 
 from tests.mocks import (
@@ -95,7 +95,7 @@ class TestTaskSetter(unittest.TestCase):
     def test_set_step_with_path_module_fail(self):
         input_value = "tests.mocks.step_function.XPTO"
 
-        with self.assertRaises(ModuleNotFound):
+        with self.assertRaises(ImportModuleError):
             Task(
                 task_id=0,
                 step=input_value,
@@ -139,7 +139,7 @@ class TestTaskSetter(unittest.TestCase):
     def test_set_callback_with_path_module_fail(self):
         input_value = "tests.mocks.step_function.XPTO"
 
-        with self.assertRaises(ModuleNotFound):
+        with self.assertRaises(ImportModuleError):
             Task(
                 task_id=0,
                 step=action_step,

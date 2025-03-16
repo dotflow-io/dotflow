@@ -4,7 +4,7 @@
 
 ::: dotflow.core.exception.ExecutionModeNotExist
 
-::: dotflow.core.exception.ModuleNotFound
+::: dotflow.core.exception.ImportModuleError
 
 ::: dotflow.core.exception.NotCallableObject
 

@@ -9,7 +9,7 @@ from importlib.util import (
 
 from typing import Any
 
-from dotflow.core.exception import ModuleNotFound
+from dotflow.core.exception import ImportModuleError
 
 
 class Module:
@@ -30,7 +30,7 @@ class Module:
         if hasattr(module, cls._get_name(value)):
             return getattr(module, cls._get_name(value))
 
-        raise ModuleNotFound(
+        raise ImportModuleError(
             module=value
         )
 
