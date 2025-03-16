@@ -19,6 +19,8 @@ class ContextInstance:
         self._task_id = None
         self._workflow_id = None
         self._storage = None
+        self._current_key = None
+        self._previous_key = None
 
 
 class Context(ContextInstance):

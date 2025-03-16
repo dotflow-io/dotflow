@@ -2,6 +2,7 @@
 
 import json
 import logging
+from pathlib import Path
 
 from os import makedirs, system
 from shutil import copy
@@ -39,9 +40,14 @@ def write_file(
         with open(file=path, mode=mode, encoding="utf-8") as file:
             file.write(content)
     except Exception:
-        system(f"echo '{content}' > {path}")
+        if mode == "a":
+            system(f"echo '{content}' >> {path}")
+
+        if mode == "w":
+            system(f"echo '{content}' > {path}")
 
 
-def read_file(path: str) -> str:
-    with open(file=path) as file:
-        return file.read()
+def read_file(path: Path) -> str:
+    if path.exists():
+        with open(file=path, mode="r") as file:
+            return file.read()

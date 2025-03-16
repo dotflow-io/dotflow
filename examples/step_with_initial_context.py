@@ -6,7 +6,7 @@ from dotflow import DotFlow, action
 @action
 def extract_task(initial_context):  # HERE
     print(initial_context.storage, "extract")
-    assert initial_context.storage, {"foo": True}
+    assert initial_context.storage == {"foo": True}
 
     return "extract"
 
@@ -14,7 +14,7 @@ def extract_task(initial_context):  # HERE
 @action
 def transform_task(initial_context):  # HERE
     print(initial_context.storage, "transform")
-    assert initial_context.storage, {"bar": True}
+    assert initial_context.storage == {"bar": True}
 
     return "transform"
 

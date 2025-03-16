@@ -2,7 +2,6 @@
 
 from uuid import UUID
 from typing import Any, Callable, List
-from time import strftime, localtime
 
 from rich.console import Console  # type: ignore
 
@@ -13,13 +12,10 @@ from dotflow.core.context import Context
 from dotflow.core.module import Module
 from dotflow.core.exception import MissingActionDecorator, NotCallableObject
 from dotflow.core.types.status import TaskStatus
-from dotflow.settings import Settings as settings
 from dotflow.utils import (
     basic_callback,
     traceback_error,
-    message_error,
-    write_file,
-    copy_file
+    message_error
 )
 
 
@@ -147,11 +143,6 @@ class Task(TaskInstance):
     def previous_context(self, value: Context):
         self._previous_context = Context(value)
 
-        TaskController(task=self).controller_output_context(
-            content=self.previous_context.storage,
-            context_name="previous_context"
-        )
-
     @property
     def initial_context(self):
         if not self._initial_context:
@@ -161,11 +152,6 @@ class Task(TaskInstance):
     @initial_context.setter
     def initial_context(self, value: Context):
         self._initial_context = Context(value)
-
-        TaskController(task=self).controller_output_context(
-            content=self.initial_context.storage,
-            context_name="initial_context"
-        )
 
     @property
     def current_context(self):
@@ -181,9 +167,9 @@ class Task(TaskInstance):
             storage=value
         )
 
-        TaskController(task=self).controller_output_context(
-            content=self.current_context.storage,
-            context_name="current_context"
+        self.config.storage.post(
+            key=self.config.storage.key(task=self),
+            context=self.current_context
         )
 
     @property
@@ -226,7 +212,12 @@ class Task(TaskInstance):
     def status(self, value: TaskStatus) -> None:
         self._status = value
 
-        TaskController(task=self).controller_logger()
+        logger.info(
+            "ID %s - %s - %s",
+            self.workflow_id,
+            self.task_id,
+            self.status,
+        )
 
     @property
     def config(self):
@@ -333,42 +324,3 @@ class TaskBuilder:
 
     def reverse(self) -> None:
         self.queu.reverse()
-
-
-class TaskController:
-
-    def __init__(self, task: Task):
-        self.task = task
-        self.default_time_format = "%Y-%m-%d %H:%M:%S"
-
-    def _get_body(self):
-        return "{time} ID: {workflow_id} - {task_id} - {task_status}".format(
-            time=strftime(self.default_time_format, localtime()),
-            workflow_id=self.task.workflow_id,
-            task_id=self.task.task_id,
-            task_status=self.task.status
-        )
-
-    def controller_logger(self):
-        logger.info(
-            "ID %s - %s - %s",
-            self.task.workflow_id,
-            self.task.task_id,
-            self.task.status,
-        )
-        copy_file(
-            source=settings.LOG_PATH,
-            destination=self.task.config.log_path
-        )
-
-    def controller_output_context(self, content: Any, context_name: str) -> None:
-        if self.task.config.output:
-            file_name = "{workflow_id}-{task_id}-{context_name}".format(
-                workflow_id=self.task.workflow_id.hex,
-                task_id=self.task.task_id,
-                context_name=context_name
-            )
-            write_file(
-                path=self.task.config.task_path.joinpath(file_name),
-                content=str(content)
-            )

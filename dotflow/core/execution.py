@@ -44,7 +44,7 @@ class Execution:
         self,
         task: Task,
         workflow_id: UUID,
-        previous_context: Context
+        previous_context: Context = None
     ) -> None:
         self.task = task
         self.task.status = TaskStatus.IN_PROGRESS
@@ -79,7 +79,7 @@ class Execution:
             return ordered_list
 
         except TypeError as err:
-            logger.error(f"Internal problem: {str(err)}")
+            logger.error("Internal problem: %s", str(err))
 
         for index, callable_name in enumerate(callable_list):
             ordered_list.append((index, callable_name))
@@ -141,6 +141,9 @@ class Execution:
 
             self.task.status = TaskStatus.COMPLETED
             self.task.current_context = current_context
+
+        except AssertionError as err:
+            raise err
 
         except Exception as err:
             self.task.status = TaskStatus.FAILED

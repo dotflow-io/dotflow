@@ -88,6 +88,7 @@ class Workflow:
 
     def sequential(self, keep_going: bool = False):
         previous_context = Context(
+            task_id=0,
             workflow_id=self.id
         )
 
@@ -97,7 +98,10 @@ class Workflow:
                 workflow_id=self.id,
                 previous_context=previous_context
             )
-            previous_context = task.current_context
+
+            previous_context = task.config.storage.get(
+                key=task.config.storage.key(task=task)
+            )
 
             if not keep_going:
                 if task.status == TaskStatus.FAILED:

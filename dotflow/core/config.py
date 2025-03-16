@@ -1,8 +1,7 @@
 """Config module"""
 
-from pathlib import Path
-
-from dotflow.settings import Settings as settings
+from dotflow.abc.storage import Storage
+from dotflow.providers.storage_init import StorageInit
 
 
 class Config:
@@ -10,40 +9,19 @@ class Config:
     Import:
         You can import the **Config** class with:
 
-            from dotflow.core.config import Config
+            from dotflow import Config, StorageInit
 
     Example:
         `class` dotflow.core.config.Config
 
-            config = Config(
-                path=".output",
-                output=False
-            )
+            config = Config(storage=StorageInit)
 
     Args:
-        path (str): Initial path of the library.
-
-        output (bool): Flag for storing context in a file.
+        storage (Storage): Type of the storage.
 
     Attributes:
-        path (Path):
-
-        task_path (Path):
-
-        log_path (Path):
-
-        output (str):
+        storage (Storage):
     """
 
-    def __init__(
-            self,
-            path: str = settings.START_PATH,
-            output: bool = False
-    ) -> None:
-        self.path = Path(path)
-        self.task_path = Path(path, "tasks")
-        self.log_path = Path(path, settings.LOG_FILE_NAME)
-        self.output = output
-
-        self.path.mkdir(parents=True, exist_ok=True)
-        self.task_path.mkdir(parents=True, exist_ok=True)
+    def __init__(self, storage: Storage = StorageInit()) -> None:
+        self.storage = storage
