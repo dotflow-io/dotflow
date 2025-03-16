@@ -152,6 +152,6 @@ workflow.start()
 - ⚠️ SECURITY
 
 ## License
-![GitHub License](https://img.shields.io/github/license/FernandoCelmer/dotflow)
+![GitHub License](https://img.shields.io/github/license/dotflow-io/dotflow)
 
 This project is licensed under the terms of the MIT License.
