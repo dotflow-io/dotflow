@@ -14,7 +14,7 @@ def transform_task(initial_context, previous_context):  # HERE
     print(previous_context.storage, "previous_context")
 
     assert initial_context.storage, {"foo": True}
-    assert previous_context.storage, "extract"
+    assert previous_context.storage == "extract"
 
     return "transform"
 

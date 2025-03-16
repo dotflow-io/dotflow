@@ -19,15 +19,15 @@ class Step:
     @action
     def first_function(self, initial_context):
         print(initial_context.storage, "first_function")
-        assert initial_context.storage
-        assert self.variable
+        assert initial_context.storage == {"foo": "bar"}
+        assert self.variable is True
 
         return {"foo": "bar"}
 
     @action
     def second_function(self, previous_context):
         print(previous_context.storage, "second_function")
-        assert previous_context.storage
+        assert previous_context.storage == {"foo": "bar"}
 
         return True
 
