@@ -80,6 +80,12 @@ mkdocs-simple-blog = "^0.1.0"
 mkdocstrings = {extras = ["python"], version = "^0.29.0"}
 griffe-typingdoc = "^0.2.8"
 
+
+[[tool.poetry.source]]
+name = "test"
+url = "https://test.pypi.org/simple/"
+priority = "supplemental"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
