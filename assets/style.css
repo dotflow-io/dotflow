@@ -51,3 +51,8 @@ code.doc-symbol-function, a code.doc-symbol-function {
     color: var(--color-white);
     background-color: var(--background);
 }
+
+table {
+    border-collapse: collapse;
+    width: -webkit-fill-available !important;
+}
