@@ -66,9 +66,9 @@ class Workflow:
         failure: Callable = basic_callback,
         keep_going: bool = False,
         mode: TypeExecution = TypeExecution.SEQUENTIAL,
-        id: UUID = uuid4()
+        id: UUID = None
     ) -> None:
-        self.id = id
+        self.id = id or uuid4()
         self.started = datetime.now()
         self.tasks = tasks
         self.success = success
@@ -87,6 +87,7 @@ class Workflow:
             self.success(tasks=tasks)
 
     def sequential(self, keep_going: bool = False):
+        """Sequential"""
         previous_context = Context(
             task_id=0,
             workflow_id=self.id
@@ -111,6 +112,7 @@ class Workflow:
         return self.tasks
 
     def background(self, keep_going: bool = False):
+        """Background"""
         th = threading.Thread(target=self.sequential, args=[keep_going])
         th.start()
 

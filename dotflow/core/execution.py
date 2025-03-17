@@ -146,6 +146,7 @@ class Execution:
 
         except Exception as err:
             self.task.status = TaskStatus.FAILED
+            self.task.current_context = None
             self.task.error = err
 
         finally:

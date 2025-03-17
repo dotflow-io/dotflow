@@ -10,7 +10,7 @@ class Storage(ABC):
     """Storage"""
 
     def __init__(self, *args, **kwargs):
-        super().__init__()
+        pass
 
     @abstractmethod
     def post(self, key: str, context: Context) -> None:

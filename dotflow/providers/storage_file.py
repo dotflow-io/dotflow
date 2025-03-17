@@ -1,7 +1,8 @@
 """Local"""
 
 from pathlib import Path
-from typing import Callable
+from typing import Any, Callable
+from json import dumps, loads, JSONDecodeError
 
 from dotflow.abc.storage import Storage
 from dotflow.core.context import Context
@@ -12,24 +13,54 @@ from dotflow.settings import Settings as settings
 class StorageFile(Storage):
     """Storage"""
 
-    def __init__(self, path: str = settings.START_PATH, *args, **kwargs):
+    def __init__(self, *args, path: str = settings.START_PATH, **kwargs):
         self.path = Path(path, "tasks")
         self.path.mkdir(parents=True, exist_ok=True)
 
     def post(self, key: str, context: Context) -> None:
+        task_context = []
+
+        if Path(self.path, key).exists():
+            task_context = read_file(path=Path(self.path, key))
+
         if isinstance(context.storage, list):
-            content = ""
             for item in context.storage:
                 if isinstance(item, Context):
-                    content += f"{str(item.storage)}\n"
+                    task_context.append(self._context_dumps(storage=item.storage))
 
-            write_file(path=Path(self.path, key), content=content, mode="a")
+            write_file(path=Path(self.path, key), content=task_context, mode="a")
             return None
 
-        write_file(path=Path(self.path, key), content=str(context.storage))
+        task_context.append(str(context.storage))
+        write_file(path=Path(self.path, key), content=task_context)
+        return None
 
     def get(self, key: str) -> Context:
-        return Context(storage=read_file(path=Path(self.path, key)))
+        task_context = []
+
+        if Path(self.path, key).exists():
+            task_context = read_file(path=Path(self.path, key))
+
+        if len(task_context) == 1:
+            return self._context_loads(storage=task_context[0])
+
+        contexts = Context(storage=[])
+        for context in task_context:
+            contexts.storage.append(self._context_loads(storage=context))
+
+        return contexts
 
     def key(self, task: Callable):
-        return f"{task.workflow_id}-{task.task_id}"
+        return f"{task.workflow_id}-{task.task_id}.json"
+
+    def _context_loads(self, storage: Any) -> Context:
+        try:
+            return Context(storage=loads(storage))
+        except JSONDecodeError:
+            return Context(storage=storage)
+
+    def _context_dumps(self, storage: Any) -> str:
+        try:
+            return dumps(storage)
+        except TypeError:
+            return str(storage)
