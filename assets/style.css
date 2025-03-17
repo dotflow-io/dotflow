@@ -1,3 +1,17 @@
+body {
+    font-size: 1.2em;
+}
+
+h2 {
+    font-size: 1.8rem !important;
+    line-height: 0.4rem;
+}
+
+h3 {
+    font-size: 1.3rem !important;
+    line-height: 1.4rem;
+}
+
 p a {
     color: gray !important;
     text-underline-position: under;
