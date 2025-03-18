@@ -12,6 +12,33 @@ This is a very simple library that is still in the early stages of development. 
 
 Start with the basics [here](https://dotflow-io.github.io/dotflow/nav/getting-started/).
 
+## Table of Contents
+
+<details>
+<summary>Click to expand</summary>
+
+- [Getting Help](#getting-help)
+- [Getting Started](#getting-started)
+    - [Install](#install)
+- [A Simple Example](#a-simple-example)
+- [First Steps](#first-steps)
+    - [Import](#import)
+    - [Callback function](#callback-function)
+    - [Task function](#task-function)
+    - [DotFlow Class](#dotflow-class)
+    - [Add Task](#add-task)
+    - [Start](#start)
+- [CLI](#cli)
+    - [Simple Start](#simple-start)
+    - [With Initial Context](#with-initial-context)
+    - [With Callback](#with-callback)
+    - [With Mode](#with-mode)
+- [More Examples](#more-examples)
+- [Commit Style](#commit-style)
+- [License](#license)
+
+</details>
+
 ## Getting Help
 
 We use GitHub issues for tracking bugs and feature requests and have limited bandwidth to address them. If you need anything, I ask you to please follow our templates for opening issues or discussions.
@@ -60,7 +87,7 @@ workflow.start()
 
 ## First Steps
 
-#### 1 - Import
+#### Import
 
 Start with the basics, which is importing the necessary classes and methods. ([DotFlow](https://dotflow-io.github.io/dotflow/nav/reference/dotflow/), [action](https://dotflow-io.github.io/dotflow/nav/reference/action/))
 
@@ -68,7 +95,7 @@ Start with the basics, which is importing the necessary classes and methods. ([D
 from dotflow import DotFlow, action
 ```
 
-#### 2 - Callback function
+#### Callback function
 
 Create a `my_callback` function to receive execution information of a task. `It is not necessary` to include this function, as you will still have a report at the end of the execution in the instantiated object of the `DotFlow` class. This `my_callback` function is only needed if you need to do something after the execution of the task, for example: sending a message to someone, making a phone call, or sending a letter. [More details](https://dotflow-io.github.io/dotflow/nav/reference/utils/#dotflow.utils.basic_functions.basic_callback)
 
@@ -77,7 +104,7 @@ def my_callback(*args, **kwargs):
     print(args, kwargs)
 ```
 
-#### 3 - Task function
+#### Task function
 
 Now, create the function responsible for executing your task. It's very simple; just use the [action](https://dotflow-io.github.io/dotflow/nav/reference/action/) decorator above the function, and that's it—you've created a task. If necessary, you can also add the parameter called `retry` to set the maximum number of execution attempts if the function fails. [More details](https://dotflow-io.github.io/dotflow/nav/reference/utils/#dotflow.utils.basic_functions.basic_function)
 
@@ -87,7 +114,7 @@ def my_task():
     print("task")
 ```
 
-#### 4 - DotFlow Class
+#### DotFlow Class
 
 Instantiate the DotFlow class in a `workflow` variable to be used in the following steps. [More details](https://dotflow-io.github.io/dotflow/nav/reference/dotflow/).
 
@@ -95,7 +122,7 @@ Instantiate the DotFlow class in a `workflow` variable to be used in the followi
 workflow = DotFlow()
 ```
 
-#### 5 - Add Task
+#### Add Task
 
 Now, simply add the `my_task` and `my_callback` functions you created earlier to the workflow using the code below. This process is necessary to define which tasks will be executed and the order in which they will run. The execution order follows the sequence in which they were added to the workflow. [More details](https://dotflow-io.github.io/dotflow/nav/reference/task-builder/#dotflow.core.task.TaskBuilder.add)
 
@@ -103,12 +130,42 @@ Now, simply add the `my_task` and `my_callback` functions you created earlier to
 workflow.task.add(step=my_task, callback=my_callback)
 ```
 
-#### 6 - Start
+#### Start
 
 Finally, just execute the workflow with the following code snippet. [More details](https://dotflow-io.github.io/dotflow/nav/reference/workflow/#dotflow.core.workflow.Workflow)
 
 ```python
 workflow.start()
+```
+
+## CLI
+
+#### Simple Start
+
+```bash
+dotflow start --step examples.cli_with_mode.simple_step
+```
+
+#### With Initial Context
+
+```bash
+dotflow start --step examples.cli_with_initial_context.simple_step --initial-context abc
+```
+
+#### With Callback
+
+```bash
+dotflow start --step examples.cli_with_callback.simple_step --callback examples.cli_with_callback.callback
+```
+
+#### With Mode
+
+```bash
+dotflow start --step examples.cli_with_mode.simple_step --mode sequential
+```
+
+```bash
+dotflow start --step examples.cli_with_mode.simple_step --mode background
 ```
 
 ## More Examples
