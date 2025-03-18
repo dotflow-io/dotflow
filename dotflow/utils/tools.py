@@ -37,7 +37,7 @@ def write_file(
 def read_file(
         path: Path,
         encoding: str = "utf-8"
-) -> Any | None:
+) -> Any:
     """Read file"""
     if path.exists():
         with open(file=path, mode="r", encoding=encoding) as file:
