@@ -490,7 +490,7 @@ By default, it is in <strong>sequential</strong> mode.</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>id</code>
+                <code>workflow_id</code>
             </td>
             <td>
                   <code><span title="uuid.UUID">UUID</span></code>
@@ -501,7 +501,7 @@ By default, it is in <strong>sequential</strong> mode.</p>
               </div>
             </td>
             <td>
-                  <code><span title="uuid.uuid4">uuid4</span>()</code>
+                  <code>None</code>
             </td>
           </tr>
       </tbody>
@@ -519,7 +519,7 @@ By default, it is in <strong>sequential</strong> mode.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code><span title="dotflow.core.workflow.Workflow.id">id</span></code></td>
+            <td><code><span title="dotflow.core.workflow.Workflow.workflow_id">workflow_id</span></code></td>
             <td>
                   <code><span title="uuid.UUID">UUID</span></code>
             </td>
@@ -689,7 +689,9 @@ By default, it is in <strong>sequential</strong> mode.</p>
 <span class="normal">118</span>
 <span class="normal">119</span>
 <span class="normal">120</span>
-<span class="normal">121</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Workflow</span><span class="p">:</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Workflow</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Import:</span>
 <span class="sd">        You can import the **Workflow** class with:</span>
@@ -724,10 +726,10 @@ By default, it is in <strong>sequential</strong> mode.</p>
 <span class="sd">            there is the option to execute in **sequential** mode or **background** mode.</span>
 <span class="sd">            By default, it is in **sequential** mode.</span>
 
-<span class="sd">        id (UUID):</span>
+<span class="sd">        workflow_id (UUID):</span>
 
 <span class="sd">    Attributes:</span>
-<span class="sd">        id (UUID):</span>
+<span class="sd">        workflow_id (UUID):</span>
 <span class="sd">        started (datetime):</span>
 <span class="sd">        tasks (List[Task]):</span>
 <span class="sd">        success (Callable):</span>
@@ -741,9 +743,9 @@ By default, it is in <strong>sequential</strong> mode.</p>
         <span class="n">failure</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="n">basic_callback</span><span class="p">,</span>
         <span class="n">keep_going</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">mode</span><span class="p">:</span> <span class="n">TypeExecution</span> <span class="o">=</span> <span class="n">TypeExecution</span><span class="o">.</span><span class="n">SEQUENTIAL</span><span class="p">,</span>
-        <span class="nb">id</span><span class="p">:</span> <span class="n">UUID</span> <span class="o">=</span> <span class="n">uuid4</span><span class="p">()</span>
+        <span class="n">workflow_id</span><span class="p">:</span> <span class="n">UUID</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">workflow_id</span> <span class="o">=</span> <span class="n">workflow_id</span> <span class="ow">or</span> <span class="n">uuid4</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">started</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span> <span class="o">=</span> <span class="n">tasks</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">success</span> <span class="o">=</span> <span class="n">success</span>
@@ -762,15 +764,16 @@ By default, it is in <strong>sequential</strong> mode.</p>
             <span class="bp">self</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="n">tasks</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">sequential</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_going</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sequential&quot;&quot;&quot;</span>
         <span class="n">previous_context</span> <span class="o">=</span> <span class="n">Context</span><span class="p">(</span>
             <span class="n">task_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">workflow_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span>
+            <span class="n">workflow_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">workflow_id</span>
         <span class="p">)</span>
 
         <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">:</span>
             <span class="n">Execution</span><span class="p">(</span>
                 <span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span>
-                <span class="n">workflow_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                <span class="n">workflow_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">workflow_id</span><span class="p">,</span>
                 <span class="n">previous_context</span><span class="o">=</span><span class="n">previous_context</span>
             <span class="p">)</span>
 
@@ -786,6 +789,7 @@ By default, it is in <strong>sequential</strong> mode.</p>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">background</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_going</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Background&quot;&quot;&quot;</span>
         <span class="n">th</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sequential</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">keep_going</span><span class="p">])</span>
         <span class="n">th</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
@@ -852,6 +856,8 @@ By default, it is in <strong>sequential</strong> mode.</p>
 
     <div class="doc doc-contents ">
 
+        <p>Sequential</p>
+
           
 
             <details class="quote">
@@ -878,16 +884,18 @@ By default, it is in <strong>sequential</strong> mode.</p>
 <span class="normal">108</span>
 <span class="normal">109</span>
 <span class="normal">110</span>
-<span class="normal">111</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">sequential</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_going</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="normal">111</span>
+<span class="normal">112</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">sequential</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_going</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sequential&quot;&quot;&quot;</span>
     <span class="n">previous_context</span> <span class="o">=</span> <span class="n">Context</span><span class="p">(</span>
         <span class="n">task_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-        <span class="n">workflow_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">workflow_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">workflow_id</span>
     <span class="p">)</span>
 
     <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">:</span>
         <span class="n">Execution</span><span class="p">(</span>
             <span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span>
-            <span class="n">workflow_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="n">workflow_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">workflow_id</span><span class="p">,</span>
             <span class="n">previous_context</span><span class="o">=</span><span class="n">previous_context</span>
         <span class="p">)</span>
 
@@ -918,13 +926,17 @@ By default, it is in <strong>sequential</strong> mode.</p>
 
     <div class="doc doc-contents ">
 
+        <p>Background</p>
+
           
 
             <details class="quote">
               <summary>Source code in <code>dotflow/core/workflow.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">background</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_going</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">background</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_going</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Background&quot;&quot;&quot;</span>
     <span class="n">th</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sequential</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">keep_going</span><span class="p">])</span>
     <span class="n">th</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
@@ -950,8 +962,8 @@ By default, it is in <strong>sequential</strong> mode.</p>
 
             <details class="quote">
               <summary>Source code in <code>dotflow/core/workflow.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">117</span>
-<span class="normal">118</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_going</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">119</span>
+<span class="normal">120</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_going</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Not implemented&quot;&quot;&quot;</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -976,8 +988,8 @@ By default, it is in <strong>sequential</strong> mode.</p>
 
             <details class="quote">
               <summary>Source code in <code>dotflow/core/workflow.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">120</span>
-<span class="normal">121</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">data_store</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_going</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">122</span>
+<span class="normal">123</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">data_store</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_going</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Not implemented&quot;&quot;&quot;</span>
 </code></pre></div></td></tr></table></div>
             </details>
