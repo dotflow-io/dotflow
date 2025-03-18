@@ -76,12 +76,19 @@ from dotflow import DotFlow, action
 def my_callback(*args, **kwargs):
     print(args, kwargs)
 
+@action
+def my_task_x():
+    print("task")
+
 @action(retry=5)
-def my_task():
+def my_task_y():
     print("task")
 
 workflow = DotFlow()
-workflow.task.add(step=my_task, callback=my_callback)
+
+workflow.task.add(step=my_task_x, callback=my_callback)
+workflow.task.add(step=my_task_y, callback=my_callback)
+
 workflow.start()
 ```
 
@@ -110,7 +117,7 @@ Now, create the function responsible for executing your task. It's very simple; 
 
 ```python
 @action(retry=5)
-def my_task():
+def my_task_x():
     print("task")
 ```
 
@@ -124,10 +131,25 @@ workflow = DotFlow()
 
 #### Add Task
 
-Now, simply add the `my_task` and `my_callback` functions you created earlier to the workflow using the code below. This process is necessary to define which tasks will be executed and the order in which they will run. The execution order follows the sequence in which they were added to the workflow. [More details](https://dotflow-io.github.io/dotflow/nav/reference/task-builder/#dotflow.core.task.TaskBuilder.add)
+Now, simply add the `my_task_x` and `my_callback` functions you created earlier to the workflow using the code below. This process is necessary to define which tasks will be executed and the order in which they will run. The execution order follows the sequence in which they were added to the workflow. [More details](https://dotflow-io.github.io/dotflow/nav/reference/task-builder/#dotflow.core.task.TaskBuilder.add)
+
+- Adding one step at a time:
 
 ```python
-workflow.task.add(step=my_task, callback=my_callback)
+workflow.task.add(step=my_task_x, callback=my_callback)
+workflow.task.add(step=my_task_y, callback=my_callback)
+```
+
+- Adding multiple steps at the same time:
+
+```python
+workflow.task.add(step=[my_task_x, my_task_y], callback=my_callback)
+```
+
+- Adding a step with the module path:
+
+```python
+workflow.task.add(step="module.task.my_task_x", callback=my_callback)
 ```
 
 #### Start
