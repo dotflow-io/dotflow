@@ -49,10 +49,10 @@ class Workflow:
             there is the option to execute in **sequential** mode or **background** mode.
             By default, it is in **sequential** mode.
 
-        id (UUID):
+        workflow_id (UUID):
 
     Attributes:
-        id (UUID):
+        workflow_id (UUID):
         started (datetime):
         tasks (List[Task]):
         success (Callable):
@@ -66,9 +66,9 @@ class Workflow:
         failure: Callable = basic_callback,
         keep_going: bool = False,
         mode: TypeExecution = TypeExecution.SEQUENTIAL,
-        id: UUID = None
+        workflow_id: UUID = None
     ) -> None:
-        self.id = id or uuid4()
+        self.workflow_id = workflow_id or uuid4()
         self.started = datetime.now()
         self.tasks = tasks
         self.success = success
@@ -90,13 +90,13 @@ class Workflow:
         """Sequential"""
         previous_context = Context(
             task_id=0,
-            workflow_id=self.id
+            workflow_id=self.workflow_id
         )
 
         for task in self.tasks:
             Execution(
                 task=task,
-                workflow_id=self.id,
+                workflow_id=self.workflow_id,
                 previous_context=previous_context
             )
 

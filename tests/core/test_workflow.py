@@ -34,7 +34,7 @@ class TestWorkflow(unittest.TestCase):
         controller = Workflow(tasks=self.tasks)
 
         self.assertListEqual(controller.tasks, self.tasks)
-        self.assertIsInstance(controller.id, UUID)
+        self.assertIsInstance(controller.workflow_id, UUID)
         self.assertIsInstance(controller.success, FunctionType)
         self.assertIsInstance(controller.failure, FunctionType)
 

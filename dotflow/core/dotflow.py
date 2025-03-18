@@ -50,7 +50,7 @@ class DotFlow:
         self.start = partial(
             Workflow,
             tasks=self.task.queu,
-            id=self.workflow_id
+            workflow_id=self.workflow_id
         )
 
     def result_task(self):
