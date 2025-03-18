@@ -179,3 +179,4 @@ cython_debug/
 .storage
 .dotflow-io
 *.json
+*tasks

@@ -1,4 +1,4 @@
-"""Init"""
+"""Storage Default"""
 
 from typing import Callable
 from ctypes import cast, py_object
