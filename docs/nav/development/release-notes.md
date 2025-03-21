@@ -1,5 +1,12 @@
 # Release Notes
 
+## v0.10.0
+
+- [📦 PyPI - Build 0.10.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.10.0)
+- [📌 Storage MongoDB](https://github.com/dotflow-io/dotflow/pull/42)
+- [📌 ABC Config / Storage](https://github.com/dotflow-io/dotflow/pull/43)
+- [📌 Update Documentation](https://github.com/dotflow-io/dotflow/pull/44)
+
 ## v0.9.1
 
 - [📦 PyPI - Build 0.9.1](https://github.com/dotflow-io/dotflow/releases/tag/v0.9.1)
