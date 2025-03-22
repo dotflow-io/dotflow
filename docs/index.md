@@ -1,10 +1,14 @@
 # Welcome to dotflow
 
----
+<div align="center">
+  <a aria-label="Serverless.com" href="https://dotflow.io">Website</a>
+  &nbsp;•&nbsp;
+  <a aria-label="Dotglow Documentation" href="https://dotflow-io.github.io/dotflow/">Documentation</a>
+  &nbsp;•&nbsp;
+  <a aria-label="Pypi" href="https://pypi.org/project/dotflow/">Pypi</a>
+</div>
 
-![](assets/dotflow.gif)
-
----
+![](https://raw.githubusercontent.com/FernandoCelmer/dotflow/master/docs/assets/dotflow.gif)
 
 ![GitHub Org's stars](https://img.shields.io/github/stars/dotflow-io?label=Dotflow&style=flat-square)
 ![GitHub last commit](https://img.shields.io/github/last-commit/dotflow-io/dotflow?style=flat-square)
@@ -12,7 +16,9 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/dotflow?style=flat-square)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/dotflow?style=flat-square)
 
-This is a very simple library that is still in the early stages of development. The main goal of this tool is to create a simple and secure workflow for executing any type of task. The library's API design was made to make it easy to add tasks and control their execution. To keep it simple, just instantiate the `DotFlow` class, use the `add` method, and the `start` method to begin execution.
+With Dotflow, you get a powerful and easy-to-use library designed to create execution pipelines without complication. Add tasks intuitively and control the entire process with just a few commands.
+
+Our goal is to make task management faster and more secure, without overwhelming you with complexity. Simply instantiate the DotFlow class, add your tasks with the `add` method, and start execution with the `start` method.
 
 Start with the basics [here](https://dotflow-io.github.io/dotflow/nav/getting-started/).
 
