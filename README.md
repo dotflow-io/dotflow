@@ -1,8 +1,7 @@
 <div align="center">
   <a aria-label="Serverless.com" href="https://dotflow.io">Website</a>
   &nbsp;•&nbsp;
-  <a aria-label="Dotglow Documentation" href="
-dotflow-io.github.io/dotflow/">Documentation</a>
+  <a aria-label="Dotglow Documentation" href="https://dotflow-io.github.io/dotflow/">Documentation</a>
   &nbsp;•&nbsp;
   <a aria-label="Pypi" href="https://pypi.org/project/dotflow/">Pypi</a>
 </div>
