@@ -1,5 +1,9 @@
 # Release Notes
 
+## v0.11.0
+
+- [📦 PyPI - Build 0.11.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.11.0)
+
 ## v0.10.0
 
 - [📦 PyPI - Build 0.10.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.10.0)
