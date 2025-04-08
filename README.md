@@ -210,7 +210,7 @@ dotflow start --step examples.cli_with_mode.simple_step --mode background
 
 |  | Example                                                                                                                                  |
 |--| ---------------------------------------------------------------------------------------------------------------------------------------- |
-|01| [cli_with_callback](https://github.com/dotflow-io/examples/blob/master/master/cli_with_callback.py)                                     |
+|01| [cli_with_callback](https://github.com/dotflow-io/examples/blob/master/cli_with_callback.py)                                     |
 |02| [cli_with_initial_context](https://github.com/dotflow-io/examples/blob/master/cli_with_initial_context.py)                       |
 |03| [cli_with_mode](https://github.com/dotflow-io/examples/blob/master/cli_with_mode.py)                                             |
 |04| [cli_with_output_context](https://github.com/dotflow-io/examples/blob/master/cli_with_output_context.py)                         |
