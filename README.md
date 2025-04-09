@@ -208,14 +208,14 @@ dotflow start --step examples.cli_with_mode.simple_step --mode background
 
 ## More Examples
 
-|  | Example                                                                                                                                  |
-|--| ---------------------------------------------------------------------------------------------------------------------------------------- |
+|  | Example                                                                                                                          |
+|--| -------------------------------------------------------------------------------------------------------------------------------- |
 |01| [cli_with_callback](https://github.com/dotflow-io/examples/blob/master/cli_with_callback.py)                                     |
 |02| [cli_with_initial_context](https://github.com/dotflow-io/examples/blob/master/cli_with_initial_context.py)                       |
 |03| [cli_with_mode](https://github.com/dotflow-io/examples/blob/master/cli_with_mode.py)                                             |
 |04| [cli_with_output_context](https://github.com/dotflow-io/examples/blob/master/cli_with_output_context.py)                         |
 |05| [cli_with_path](https://github.com/dotflow-io/examples/blob/master/cli_with_path.py)                                             |
-|06| [simple_cli](https://github.com/dotflow-io/examples/blob/master/simple_cli.py)                                                                 |
+|06| [simple_cli](https://github.com/dotflow-io/examples/blob/master/simple_cli.py)                                                   |
 |07| [simple_class_workflow](https://github.com/dotflow-io/examples/blob/master/simple_class_workflow.py)                             |
 |08| [simple_function_workflow_with_error](https://github.com/dotflow-io/examples/blob/master/simple_function_workflow_with_error.py) |
 |09| [simple_function_workflow](https://github.com/dotflow-io/examples/blob/master/simple_function_workflow.py)                       |
