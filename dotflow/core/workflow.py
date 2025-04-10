@@ -6,6 +6,7 @@ from datetime import datetime
 from uuid import UUID, uuid4
 from typing import Callable, List
 
+from dotflow.core.config import Config
 from dotflow.core.context import Context
 from dotflow.core.execution import Execution
 from dotflow.core.exception import ExecutionModeNotExist
@@ -34,6 +35,8 @@ class Workflow:
     Args:
         tasks (List[Task]):
 
+        config (Config): Configuration class.
+
         success (Callable):
 
         failure (Callable):
@@ -55,6 +58,7 @@ class Workflow:
         workflow_id (UUID):
         started (datetime):
         tasks (List[Task]):
+        config (Config):
         success (Callable):
         failure (Callable):
     """
@@ -62,6 +66,7 @@ class Workflow:
     def __init__(
         self,
         tasks: List[Task],
+        config: Config,
         success: Callable = basic_callback,
         failure: Callable = basic_callback,
         keep_going: bool = False,
@@ -71,6 +76,7 @@ class Workflow:
         self.workflow_id = workflow_id or uuid4()
         self.started = datetime.now()
         self.tasks = tasks
+        self.config = config
         self.success = success
         self.failure = failure
 
