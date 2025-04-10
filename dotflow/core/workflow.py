@@ -80,6 +80,10 @@ class Workflow:
         self.success = success
         self.failure = failure
 
+        self.config.server.create_workflow(
+            id=self.workflow_id
+        )
+
         try:
             getattr(self, mode)(keep_going=keep_going)
         except AttributeError as err:
@@ -98,6 +102,8 @@ class Workflow:
             task_id=0,
             workflow_id=self.workflow_id
         )
+
+        [self.config.server.create_task(id=task.task_id) for task in self.tasks]
 
         for task in self.tasks:
             Execution(

@@ -143,6 +143,10 @@ class Task(TaskInstance):
     def previous_context(self, value: Context):
         self._previous_context = Context(value)
 
+        self.config.server.create_context(
+            self.previous_context
+        )
+
     @property
     def initial_context(self):
         if not self._initial_context:
@@ -152,6 +156,10 @@ class Task(TaskInstance):
     @initial_context.setter
     def initial_context(self, value: Context):
         self._initial_context = Context(value)
+
+        self.config.server.create_context(
+            self.initial_context
+        )
 
     @property
     def current_context(self):
@@ -170,6 +178,10 @@ class Task(TaskInstance):
         self.config.storage.post(
             key=self.config.storage.key(task=self),
             context=self.current_context
+        )
+
+        self.config.server.create_context(
+            self.current_context
         )
 
     @property
