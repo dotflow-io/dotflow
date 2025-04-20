@@ -74,6 +74,12 @@ class Workflow:
         self.success = success
         self.failure = failure
 
+        self.groups = {}
+        for task in self.tasks:
+            if not self.groups.get(task.group_name):
+                self.groups[task.group_name] = []
+            self.groups[task.group_name].append(task)
+
         try:
             getattr(self, mode)(keep_going=keep_going)
         except AttributeError as err:

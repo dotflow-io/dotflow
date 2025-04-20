@@ -39,6 +39,7 @@ class TaskInstance:
         self._error = None
         self._status = None
         self._config = None
+        self.group_name = None
 
 
 class Task(TaskInstance):
@@ -75,6 +76,8 @@ class Task(TaskInstance):
         workflow_id (UUID): Workflow ID.
 
         config (Config): Configuration class.
+
+        group_name (str): Group name of tasks.
     """
 
     def __init__(
@@ -85,13 +88,16 @@ class Task(TaskInstance):
         initial_context: Any = None,
         workflow_id: UUID = None,
         config: Config = None,
+        group_name: str = "default"
     ) -> None:
         super().__init__(
             task_id,
             step,
             callback,
             initial_context,
-            workflow_id
+            workflow_id,
+            config,
+            group_name
         )
         self.task_id = task_id
         self.workflow_id = workflow_id
@@ -100,6 +106,7 @@ class Task(TaskInstance):
         self.initial_context = initial_context
         self.status = TaskStatus.NOT_STARTED
         self.config = config
+        self.group_name = group_name
 
     @property
     def step(self):
@@ -274,6 +281,7 @@ class TaskBuilder:
         step: Callable,
         callback: Callable = basic_callback,
         initial_context: Any = None,
+        group_name: str = "default"
     ) -> None:
         """
         Args:
@@ -293,13 +301,16 @@ class TaskBuilder:
                 can be accessed internally, for example: **initial_context**,
                 to retrieve this information and manipulate it if necessary,
                 according to the objective of the workflow.
+
+            group_name (str): Group name of tasks.
         """
         if isinstance(step, list):
             for inside_step in step:
                 self.add(
                     step=inside_step,
                     callback=callback,
-                    initial_context=initial_context
+                    initial_context=initial_context,
+                    group_name=group_name
                 )
             return self
 
@@ -311,6 +322,7 @@ class TaskBuilder:
                 initial_context=initial_context,
                 workflow_id=self.workflow_id,
                 config=self.config,
+                group_name=group_name
             )
         )
 
