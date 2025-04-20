@@ -1,5 +1,10 @@
 # Release Notes
 
+## v0.11.1
+
+- [📦 PyPI - Build 0.11.1](https://github.com/dotflow-io/dotflow/releases/tag/v0.11.1)
+- [🪲 BUG: Problem with context of type 'pydantic class'](https://github.com/dotflow-io/dotflow/pull/50)
+
 ## v0.11.0
 
 - [📦 PyPI - Build 0.11.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.11.0)
