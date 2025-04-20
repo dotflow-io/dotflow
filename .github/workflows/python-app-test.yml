@@ -27,6 +27,7 @@ jobs:
     - name: ⚙️ Git submodule
       run: |
         git submodule update --recursive --remote
+        git pull --recurse-submodules
         ls examples/
     - name: ❤️️ Test with PyTest
       run: |
