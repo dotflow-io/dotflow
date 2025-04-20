@@ -53,11 +53,14 @@ class Execution:
         self._excution()
 
     def _is_action(self, class_instance: Callable, func: Callable):
-        return (
-            callable(getattr(class_instance, func))
-            and not func.startswith("__")
-            and getattr(class_instance, func).__module__ is Action.__module__
-        )
+        try:
+            return (
+                callable(getattr(class_instance, func))
+                and getattr(class_instance, func).__module__ is Action.__module__
+                and not func.startswith("__")
+            )
+        except AttributeError:
+            return False
 
     def _execution_orderer(
             self,
