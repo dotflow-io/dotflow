@@ -26,6 +26,7 @@ jobs:
         pip install -r requirements-dev.txt
     - name: ❤️️ Test with PyTest
       run: |
+        ls
         pytest
     - name: ❤️️ Test with Tox
       run: |
