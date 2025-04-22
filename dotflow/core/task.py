@@ -272,7 +272,7 @@ class TaskBuilder:
             config: Config,
             workflow_id: UUID = None
     ) -> None:
-        self.queu: List[Callable] = []
+        self.queue: List[Callable] = []
         self.workflow_id = workflow_id
         self.config = config
 
@@ -314,9 +314,9 @@ class TaskBuilder:
                 )
             return self
 
-        self.queu.append(
+        self.queue.append(
             Task(
-                task_id=len(self.queu),
+                task_id=len(self.queue),
                 step=step,
                 callback=Module(value=callback),
                 initial_context=initial_context,
@@ -329,10 +329,10 @@ class TaskBuilder:
         return self
 
     def count(self) -> int:
-        return len(self.queu)
+        return len(self.queue)
 
     def clear(self) -> None:
-        self.queu.clear()
+        self.queue.clear()
 
     def reverse(self) -> None:
-        self.queu.reverse()
+        self.queue.reverse()

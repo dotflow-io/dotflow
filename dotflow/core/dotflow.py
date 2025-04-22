@@ -49,7 +49,7 @@ class DotFlow:
 
         self.start = partial(
             Workflow,
-            tasks=self.task.queu,
+            tasks=self.task.queue,
             workflow_id=self.workflow_id
         )
 
@@ -58,18 +58,18 @@ class DotFlow:
         Returns:
             list (List[Task]): Returns a list of Task class.
         """
-        return self.task.queu
+        return self.task.queue
 
     def result_context(self):
         """
         Returns:
             list (List[Context]): Returns a list of Context class.
         """
-        return [task.current_context for task in self.task.queu]
+        return [task.current_context for task in self.task.queue]
 
     def result_storage(self):
         """
         Returns:
             list (List[Any]): Returns a list of assorted objects.
         """
-        return [task.current_context.storage for task in self.task.queu]
+        return [task.current_context.storage for task in self.task.queue]
