@@ -195,19 +195,20 @@ class Task(TaskInstance):
 
     @error.setter
     def error(self, value: Exception) -> None:
-        task_error = TaskError(value)
-        self._error = task_error
+        if type(value) is Exception:
+            task_error = TaskError(value)
+            self._error = task_error
 
-        logger.error(
-            "ID %s - %s - %s \n %s",
-            self.workflow_id,
-            self.task_id,
-            self.status,
-            task_error.traceback,
-        )
+            logger.error(
+                "ID %s - %s - %s \n %s",
+                self.workflow_id,
+                self.task_id,
+                self.status,
+                task_error.traceback,
+            )
 
-        console = Console()
-        console.print_exception(show_locals=True)
+            console = Console()
+            console.print_exception(show_locals=True)
 
     @property
     def status(self):
@@ -241,8 +242,8 @@ class TaskError:
 
     def __init__(self, error: Exception = None) -> None:
         self.exception = error
-        self.traceback = traceback_error(error=error)
-        self.message = message_error(error=error)
+        self.traceback = traceback_error(error=error) if error else ""
+        self.message = message_error(error=error) if error else ""
 
 
 class TaskBuilder:

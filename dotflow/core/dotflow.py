@@ -4,7 +4,7 @@ from uuid import uuid4
 from functools import partial
 
 from dotflow.core.config import Config
-from dotflow.core.workflow import Workflow
+from dotflow.core.workflow import Manager
 from dotflow.core.task import TaskBuilder
 
 
@@ -33,7 +33,7 @@ class DotFlow:
 
         task (List[Task]):
 
-        start (Workflow):
+        start (Manager):
     """
 
     def __init__(
@@ -48,7 +48,7 @@ class DotFlow:
         )
 
         self.start = partial(
-            Workflow,
+            Manager,
             tasks=self.task.queue,
             workflow_id=self.workflow_id
         )
