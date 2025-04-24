@@ -3,7 +3,7 @@
 MESSAGE_UNKNOWN_ERROR = "Unknown error, please check logs for more information."
 MESSAGE_MISSING_STEP_DECORATOR = "A step function necessarily needs an '@action' decorator to circulate in the workflow. For more implementation details, access the documentation: https://dotflow-io.github.io/dotflow/nav/getting-started/#3-task-function."
 MESSAGE_NOT_CALLABLE_OBJECT = "Problem validating the '{name}' object type; this is not a callable object"
-MESSAGE_EXECUTION_NOT_EXIST = "The execution mode does not exist. Allowed parameter is 'sequential' and 'background'."
+MESSAGE_EXECUTION_NOT_EXIST = "The execution mode does not exist. Allowed parameter is 'sequential', 'background' and 'parallel'."
 MESSAGE_IMPORT_MODULE_ERROR = "Error importing Python module '{module}'."
 MESSAGE_PROBLEM_ORDERING = "Problem with correctly ordering functions of the '{name}' class."
 MESSAGE_MODULE_NOT_FOUND = "Module '{module}' not found. Please install with 'pip install {library}'"

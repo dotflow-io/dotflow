@@ -2,7 +2,7 @@
 
 from abc import ABC, abstractmethod
 from uuid import UUID
-from typing import List
+from typing import Dict, List
 
 from dotflow.core.task import Task
 
@@ -13,18 +13,20 @@ class Flow(ABC):
             self,
             tasks: List[Task],
             workflow_id: UUID,
-            ignore: bool
+            ignore: bool,
+            groups: Dict[str, List[Task]]
     ) -> None:
         self.queue = None
         self.tasks = tasks
         self.workflow_id = workflow_id
         self.ignore = ignore
+        self.groups = groups
 
-        self.setup()
+        self.setup_queue()
         self.run()
 
     @abstractmethod
-    def setup(self) -> None:
+    def setup_queue(self) -> None:
         self.queue = []
 
     @abstractmethod

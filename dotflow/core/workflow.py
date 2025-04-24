@@ -6,7 +6,7 @@ from datetime import datetime
 from multiprocessing import Process, Queue
 
 from uuid import UUID, uuid4
-from typing import Callable, List
+from typing import Callable, Dict, List
 
 from dotflow.abc.flow import Flow
 from dotflow.core.context import Context
@@ -15,6 +15,16 @@ from dotflow.core.exception import ExecutionModeNotExist
 from dotflow.core.types import TypeExecution, TaskStatus
 from dotflow.core.task import Task
 from dotflow.utils import basic_callback
+
+
+def grouper(tasks: List[Task]) -> Dict[str, List[Task]]:
+    groups = {}
+    for task in tasks:
+        if not groups.get(task.group_name):
+            groups[task.group_name] = []
+        groups[task.group_name].append(task)
+
+    return groups
 
 
 class Manager:
@@ -81,27 +91,42 @@ class Manager:
         self.failure = failure
         self.workflow_id = workflow_id or uuid4()
         self.started = datetime.now()
+
         execution = None
+        groups = grouper(tasks=tasks)
 
         try:
             execution = getattr(self, mode)
         except AttributeError as err:
             raise ExecutionModeNotExist() from err
 
-        self.tasks = execution(tasks=tasks, workflow_id=workflow_id, ignore=keep_going)
+        self.tasks = execution(
+            tasks=tasks,
+            workflow_id=workflow_id,
+            ignore=keep_going,
+            groups=groups
+        )
 
         self._callback_workflow(tasks=self.tasks)
 
     def _callback_workflow(self, tasks: List[Task]):
-        breakpoint
         final_status = [task.status for task in tasks]
+
         if TaskStatus.FAILED in final_status:
             self.failure(tasks=tasks)
         else:
             self.success(tasks=tasks)
 
     def sequential(self, **kwargs) -> List[Task]:
+        if len(kwargs.get("groups")) > 1:
+            process = SequentialGroup(**kwargs)
+            return process.get_tasks()
+
         process = Sequential(**kwargs)
+        return process.get_tasks()
+
+    def sequential_group(self, **kwargs):
+        process = SequentialGroup(**kwargs)
         return process.get_tasks()
 
     def background(self, **kwargs) -> List[Task]:
@@ -115,7 +140,7 @@ class Manager:
 
 class Sequential(Flow):
 
-    def setup(self) -> None:
+    def setup_queue(self) -> None:
         self.queue = []
 
     def get_tasks(self) -> List[Task]:
@@ -125,7 +150,9 @@ class Sequential(Flow):
         self.queue.append(task)
 
     def run(self) -> None:
-        previous_context = Context(workflow_id=self.workflow_id)
+        previous_context = Context(
+            workflow_id=self.workflow_id
+        )
 
         for task in self.tasks:
             Execution(
@@ -144,9 +171,83 @@ class Sequential(Flow):
                     break
 
 
+class SequentialGroup(Flow):
+
+    def setup_queue(self) -> None:
+        self.queue = Queue()
+
+    def get_tasks(self) -> List[Task]:
+        contexts = {}
+        while len(contexts) < len(self.groups):
+            if not self.queue.empty():
+                contexts = {**contexts, **self.queue.get()}
+
+        if contexts:
+            for task in self.tasks:
+                task.current_context = contexts[task.task_id]["current_context"]
+                task.duration = contexts[task.task_id]["duration"]
+                task.error = contexts[task.task_id]["error"]
+                task.status = contexts[task.task_id]["status"]
+
+        return self.tasks
+
+    def internal_callback(self, task: Task) -> None:
+        current_task = {
+            task.task_id: {
+                "current_context": task.current_context,
+                "duration": task.duration,
+                "error": task.error,
+                "status": task.status
+            }
+        }
+        self.queue.put(current_task)
+
+    def run(self) -> None:
+        thread_list = []
+        process_list = []
+
+        for group in self.groups:
+            def parallel(process_list):
+                process = Process(
+                    target=self.sequential,
+                    args=(self.groups[group],)
+                )
+                process.start()
+                process_list.append(process)
+
+            thread = threading.Thread(
+                target=parallel,
+                args=(process_list,)
+            )
+            thread.start()
+            thread_list.append(thread)
+
+        [process.join() for process in process_list]
+        [thread.join() for thread in thread_list]
+
+    def sequential(self, groups: List[Task]) -> None:
+        previous_context = Context(workflow_id=self.workflow_id)
+
+        for task in groups:
+            Execution(
+                task=task,
+                workflow_id=self.workflow_id,
+                previous_context=previous_context,
+                internal_callback=self.internal_callback
+            )
+
+            previous_context = task.config.storage.get(
+                key=task.config.storage.key(task=task)
+            )
+
+            if not self.ignore:
+                if task.status == TaskStatus.FAILED:
+                    break
+
+
 class Background(Flow):
 
-    def setup(self) -> None:
+    def setup_queue(self) -> None:
         self.queue = []
 
     def get_tasks(self) -> List[Task]:
@@ -166,13 +267,14 @@ class Background(Flow):
 
 class Parallel(Flow):
 
-    def setup(self) -> None:
+    def setup_queue(self) -> None:
         self.queue = Queue()
 
     def get_tasks(self) -> List[Task]:
         contexts = {}
-        while not self.queue.empty():
-            contexts = {**contexts, **self.queue.get()}
+        while len(contexts) < len(self.groups):
+            if not self.queue.empty():
+                contexts = {**contexts, **self.queue.get()}
 
         for task in self.tasks:
             task.current_context = contexts[task.task_id]["current_context"]
@@ -195,7 +297,9 @@ class Parallel(Flow):
 
     def run(self) -> None:
         process_list = []
-        previous_context = Context(workflow_id=self.workflow_id)
+        previous_context = Context(
+            workflow_id=self.workflow_id
+        )
 
         for task in self.tasks:
             process = Process(
