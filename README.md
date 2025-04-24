@@ -222,6 +222,8 @@ workflow.task.add(step=task_bar)
 
 workflow.start()
 ```
+<details>
+<summary>Click to see diagram</summary>
 
 ```mermaid
 flowchart TD
@@ -230,6 +232,8 @@ B[task_foo] -->|response to| C
 C[task_bar] -->|response| D
 D[Finish]
 ```
+
+</details>
 
 ### Sequential with Groups
 
@@ -242,6 +246,9 @@ workflow.task.add(step=task_bar, group_name="bar")
 workflow.start()
 ```
 
+<details>
+<summary>Click to see diagram</summary>
+
 ```mermaid
 flowchart TD
     A[Start] -->|run| C(Parallel Groups)
@@ -252,6 +259,8 @@ flowchart TD
     E -->|response| Y[task_d]
     Y --> H[Finish]
 ```
+
+</details>
 
 ### Background
 
@@ -264,6 +273,9 @@ workflow.task.add(step=task_bar)
 workflow.start(mode="background")
 ```
 
+<details>
+<summary>Click to see diagram</summary>
+
 ```mermaid
 flowchart TD
 A[Start] -->|run| B
@@ -271,6 +283,8 @@ B[task_foo] -->|response to| C
 C[task_bar] -->|response| D
 D[Finish]
 ```
+
+</details>
 
 ### Parallel
 
@@ -285,6 +299,9 @@ workflow.task.add(step=task_d)
 workflow.start(mode="parallel")
 ```
 
+<details>
+<summary>Click to see diagram</summary>
+
 ```mermaid
 flowchart TD
     S[Start] -->|run| A[task_a]
@@ -297,6 +314,7 @@ flowchart TD
     D --> H[Finish]
 ```
 
+</details>
 
 ## More Examples
 
