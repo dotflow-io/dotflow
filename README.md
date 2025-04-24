@@ -210,7 +210,7 @@ dotflow start --step examples.cli_with_mode.simple_step --mode background
 dotflow start --step examples.cli_with_mode.simple_step --mode parallel
 ```
 
-## Process
+## Process Mode
 
 ### Sequential
 
