@@ -170,7 +170,7 @@ workflow.task.add(step="module.task.my_task_x", callback=my_callback)
 
 #### Start
 
-Finally, just execute the workflow with the following code snippet. [More details](https://dotflow-io.github.io/dotflow/nav/reference/workflow/#dotflow.core.workflow.Workflow)
+Finally, just execute the workflow with the following code snippet. [More details](https://dotflow-io.github.io/dotflow/nav/reference/workflow/#dotflow.core.workflow.Manager)
 
 ```python
 workflow.start()
@@ -204,6 +204,10 @@ dotflow start --step examples.cli_with_mode.simple_step --mode sequential
 
 ```bash
 dotflow start --step examples.cli_with_mode.simple_step --mode background
+```
+
+```bash
+dotflow start --step examples.cli_with_mode.simple_step --mode parallel
 ```
 
 ## More Examples
