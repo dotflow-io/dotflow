@@ -2,7 +2,7 @@
 
 import unittest
 
-from dotflow.core.workflow import Workflow
+from dotflow.core.workflow import Manager
 from dotflow.core.context import Context
 from dotflow.core.task import Task, TaskBuilder
 from dotflow.core.dotflow import DotFlow
@@ -19,7 +19,7 @@ class TestDotFlow(unittest.TestCase):
 
     def test_instantiating_dotflow_class(self):
         self.assertIsInstance(self.workflow.task, TaskBuilder)
-        self.assertIsInstance(self.workflow.start(), Workflow)
+        self.assertIsInstance(self.workflow.start(), Manager)
 
     def test_result_task_with_start(self):
         self.workflow.start()
