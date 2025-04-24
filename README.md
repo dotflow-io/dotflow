@@ -212,7 +212,7 @@ dotflow start --step examples.cli_with_mode.simple_step --mode parallel
 
 ## Process Mode
 
-### Sequential
+#### Sequential
 
 **Example**
 
@@ -235,7 +235,7 @@ D[Finish]
 
 </details>
 
-### Sequential with Groups
+#### Sequential with Groups
 
 **Example:**
 
@@ -262,7 +262,7 @@ flowchart TD
 
 </details>
 
-### Background
+#### Background
 
 **Example:**
 
@@ -286,7 +286,7 @@ D[Finish]
 
 </details>
 
-### Parallel
+#### Parallel
 
 **Example:**
 
