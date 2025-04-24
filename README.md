@@ -210,6 +210,94 @@ dotflow start --step examples.cli_with_mode.simple_step --mode background
 dotflow start --step examples.cli_with_mode.simple_step --mode parallel
 ```
 
+## Process
+
+### Sequential
+
+**Example**
+
+```python
+workflow.task.add(step=task_foo)
+workflow.task.add(step=task_bar)
+
+workflow.start()
+```
+
+```mermaid
+flowchart TD
+A[Start] -->|run| B
+B[task_foo] -->|response to| C
+C[task_bar] -->|response| D
+D[Finish]
+```
+
+### Sequential with Groups
+
+**Example:**
+
+```python
+workflow.task.add(step=task_foo, group_name="foo")
+workflow.task.add(step=task_bar, group_name="bar")
+
+workflow.start()
+```
+
+```mermaid
+flowchart TD
+    A[Start] -->|run| C(Parallel Groups)
+    C -->|run| D[task_a]
+    C -->|run| E[task_c]
+    D -->|response| X[task_b]
+    X --> H[Finish]
+    E -->|response| Y[task_d]
+    Y --> H[Finish]
+```
+
+### Background
+
+**Example:**
+
+```python
+workflow.task.add(step=task_foo)
+workflow.task.add(step=task_bar)
+
+workflow.start(mode="background")
+```
+
+```mermaid
+flowchart TD
+A[Start] -->|run| B
+B[task_foo] -->|response to| C
+C[task_bar] -->|response| D
+D[Finish]
+```
+
+### Parallel
+
+**Example:**
+
+```python
+workflow.task.add(step=task_a)
+workflow.task.add(step=task_b)
+workflow.task.add(step=task_c)
+workflow.task.add(step=task_d)
+
+workflow.start(mode="parallel")
+```
+
+```mermaid
+flowchart TD
+    S[Start] -->|run| A[task_a]
+    S[Start] -->|run| B[task_b]
+    S[Start] -->|run| C[task_c]
+    S[Start] -->|run| D[task_d]
+    A --> H[Finish]
+    B --> H[Finish]
+    C --> H[Finish]
+    D --> H[Finish]
+```
+
+
 ## More Examples
 
 |  | Example                                                                                                                          |
