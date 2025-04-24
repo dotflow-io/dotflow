@@ -214,8 +214,6 @@ dotflow start --step examples.cli_with_mode.simple_step --mode parallel
 
 #### Sequential
 
-**Example**
-
 ```python
 workflow.task.add(step=task_foo)
 workflow.task.add(step=task_bar)
@@ -236,8 +234,6 @@ D[Finish]
 </details>
 
 #### Sequential with Groups
-
-**Example:**
 
 ```python
 workflow.task.add(step=task_foo, group_name="foo")
@@ -264,8 +260,6 @@ flowchart TD
 
 #### Background
 
-**Example:**
-
 ```python
 workflow.task.add(step=task_foo)
 workflow.task.add(step=task_bar)
@@ -287,8 +281,6 @@ D[Finish]
 </details>
 
 #### Parallel
-
-**Example:**
 
 ```python
 workflow.task.add(step=task_a)
