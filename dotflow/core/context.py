@@ -46,7 +46,7 @@ class Context(ContextInstance):
     def __init__(
             self,
             storage: Any = None,
-            task_id: int = None,
+            task_id: int = 0,
             workflow_id: UUID = None,
     ) -> None:
         super().__init__(
