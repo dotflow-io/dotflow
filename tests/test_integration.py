@@ -25,6 +25,11 @@ from examples.workflow_step_callback import main as workflow_step_callback
 from examples.workflow_with_callback_failure import main as workflow_with_callback_failure
 from examples.workflow_with_callback_success import main as workflow_with_callback_success
 from examples.workflow_with_retry import main as workflow_with_retry
+from examples.step_with_groups import main as step_with_groups
+from examples.workflow_background_mode import main as workflow_background_mode
+from examples.workflow_parallel_mode import main as workflow_parallel_mode
+from examples.workflow_sequential_group_mode import main as workflow_sequential_group_mode
+from examples.workflow_sequential_mode import main as workflow_sequential_mode
 
 
 class TestIntegration(unittest.TestCase):
@@ -97,3 +102,18 @@ class TestIntegration(unittest.TestCase):
 
     def test_workflow_with_callback_success(self):
         workflow_with_callback_success()
+
+    def test_step_with_groups(self):
+        step_with_groups()
+
+    def test_workflow_background_mode(self):
+        workflow_background_mode()
+
+    def test_workflow_parallel_mode(self):
+        workflow_parallel_mode()
+
+    def test_workflow_sequential_group_mode(self):
+        workflow_sequential_group_mode()
+
+    def test_workflow_sequential_mode(sefl):
+        workflow_sequential_mode()
