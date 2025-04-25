@@ -310,31 +310,37 @@ flowchart TD
 
 ## More Examples
 
-|  | Example                                                                                                                          |
-|--| -------------------------------------------------------------------------------------------------------------------------------- |
-|01| [cli_with_callback](https://github.com/dotflow-io/examples/blob/master/cli_with_callback.py)                                     |
-|02| [cli_with_initial_context](https://github.com/dotflow-io/examples/blob/master/cli_with_initial_context.py)                       |
-|03| [cli_with_mode](https://github.com/dotflow-io/examples/blob/master/cli_with_mode.py)                                             |
-|04| [cli_with_output_context](https://github.com/dotflow-io/examples/blob/master/cli_with_output_context.py)                         |
-|05| [cli_with_path](https://github.com/dotflow-io/examples/blob/master/cli_with_path.py)                                             |
-|06| [simple_cli](https://github.com/dotflow-io/examples/blob/master/simple_cli.py)                                                   |
-|07| [simple_class_workflow](https://github.com/dotflow-io/examples/blob/master/simple_class_workflow.py)                             |
-|08| [simple_function_workflow_with_error](https://github.com/dotflow-io/examples/blob/master/simple_function_workflow_with_error.py) |
-|09| [simple_function_workflow](https://github.com/dotflow-io/examples/blob/master/simple_function_workflow.py)                       |
-|10| [step_class_result_context](https://github.com/dotflow-io/examples/blob/master/step_class_result_context.py)                     |
-|11| [step_class_result_storage](https://github.com/dotflow-io/examples/blob/master/step_class_result_storage.py)                     |
-|12| [step_class_result_task](https://github.com/dotflow-io/examples/blob/master/step_class_result_task.py)                           |
-|13| [step_function_result_context](https://github.com/dotflow-io/examples/blob/master/step_function_result_context.py)               |
-|14| [step_function_result_storage](https://github.com/dotflow-io/examples/blob/master/step_function_result_storage.py)               |
-|15| [step_function_result_task](https://github.com/dotflow-io/examples/blob/master/step_function_result_task.py)                     |
-|16| [step_with_initial_context](https://github.com/dotflow-io/examples/blob/master/step_with_initial_context.py)                     |
-|17| [step_with_many_contexts](https://github.com/dotflow-io/examples/blob/master/step_with_many_contexts.py)                         |
-|18| [step_with_previous_context](https://github.com/dotflow-io/examples/blob/master/step_with_previous_context.py)                   |
-|19| [workflow_keep_going_true](https://github.com/dotflow-io/examples/blob/master/workflow_keep_going_true.py)                       |
-|20| [workflow_step_callback](https://github.com/dotflow-io/examples/blob/master/workflow_step_callback.py)                           |
-|21| [workflow_with_callback_failure](https://github.com/dotflow-io/examples/blob/master/workflow_with_callback_failure.py)           |
-|22| [workflow_with_callback_success](https://github.com/dotflow-io/examples/blob/master/workflow_with_callback_success.py)           |
-|23| [workflow_with_retry](https://github.com/dotflow-io/examples/blob/master/workflow_with_retry.py)                                 |
+| Example                                                                                                                          |                                                                                            |
+| -------------------------------------------------------------------------------------------------------------------------------- |--------------------------------------------------------------------------------------------|
+| [cli_with_callback](https://github.com/dotflow-io/examples/blob/master/cli_with_callback.py)                                     | `dotflow start --step cli_with_callback.simple_step --callback cli_with_callback.callback` |
+| [cli_with_initial_context](https://github.com/dotflow-io/examples/blob/master/cli_with_initial_context.py)                       | `dotflow start --step cli_with_initial_context.simple_step --initial-context abc`          |
+| [cli_with_mode](https://github.com/dotflow-io/examples/blob/master/cli_with_mode.py)                                             | `dotflow start --step cli_with_mode.simple_step --mode sequential`                         |
+| [cli_with_output_context](https://github.com/dotflow-io/examples/blob/master/cli_with_output_context.py)                         | `dotflow start --step cli_with_output_context.simple_step --storage file`                  |
+| [cli_with_path](https://github.com/dotflow-io/examples/blob/master/cli_with_path.py)                                             | `dotflow start --step cli_with_path.simple_step --path .storage --storage file`            |
+| [simple_cli](https://github.com/dotflow-io/examples/blob/master/simple_cli.py)                                                   | `dotflow start --step simple_cli.simple_step`                                              |
+| [simple_class_workflow](https://github.com/dotflow-io/examples/blob/master/simple_class_workflow.py)                             | `python examples/simple_class_workflow.py`                                                 |
+| [simple_function_workflow_with_error](https://github.com/dotflow-io/examples/blob/master/simple_function_workflow_with_error.py) | `python examples/simple_function_workflow_with_error.py`                                   |
+| [simple_function_workflow](https://github.com/dotflow-io/examples/blob/master/simple_function_workflow.py)                       | `python examples/simple_function_workflow.py`                                              |
+| [step_class_result_context](https://github.com/dotflow-io/examples/blob/master/step_class_result_context.py)                     | `python examples/step_class_result_context.py`                                             |
+| [step_class_result_storage](https://github.com/dotflow-io/examples/blob/master/step_class_result_storage.py)                     | `python examples/step_class_result_storage.py`                                             |
+| [step_class_result_task](https://github.com/dotflow-io/examples/blob/master/step_class_result_task.py)                           | `python examples/step_class_result_task.py`                                                |
+| [step_function_result_context](https://github.com/dotflow-io/examples/blob/master/step_function_result_context.py)               | `python examples/step_function_result_context.py`                                          |
+| [step_function_result_storage](https://github.com/dotflow-io/examples/blob/master/step_function_result_storage.py)               | `python examples/step_function_result_storage.py`                                          |
+| [step_function_result_task](https://github.com/dotflow-io/examples/blob/master/step_function_result_task.py)                     | `python examples/step_function_result_task.py`                                             |
+| [step_with_initial_context](https://github.com/dotflow-io/examples/blob/master/step_with_initial_context.py)                     | `python examples/step_with_initial_context.py`                                             |
+| [step_with_many_contexts](https://github.com/dotflow-io/examples/blob/master/step_with_many_contexts.py)                         | `python examples/step_with_many_contexts.py`                                               |
+| [step_with_previous_context](https://github.com/dotflow-io/examples/blob/master/step_with_previous_context.py)                   | `python examples/step_with_previous_context.py`                                            |
+| [workflow_keep_going_true](https://github.com/dotflow-io/examples/blob/master/workflow_keep_going_true.py)                       | `python examples/workflow_keep_going_true.py`                                              |
+| [workflow_step_callback](https://github.com/dotflow-io/examples/blob/master/workflow_step_callback.py)                           | `python examples/workflow_step_callback.py`                                                |
+| [workflow_with_callback_failure](https://github.com/dotflow-io/examples/blob/master/workflow_with_callback_failure.py)           | `python examples/workflow_with_callback_failure.py`                                        |
+| [workflow_with_callback_success](https://github.com/dotflow-io/examples/blob/master/workflow_with_callback_success.py)           | `python examples/workflow_with_callback_success.py`                                        |
+| [workflow_with_retry](https://github.com/dotflow-io/examples/blob/master/workflow_with_retry.py)                                 | `python examples/workflow_with_retry.py`                                                   |
+| [step_with_groups](https://github.com/dotflow-io/examples/blob/master/step_with_groups.py)                                       | `python examples/step_with_groups.py`                                                      |
+| [workflow_background_mode](https://github.com/dotflow-io/examples/blob/master/workflow_background_mode.py)                       | `python examples/workflow_background_mode.py`                                              |
+| [workflow_parallel_mode](https://github.com/dotflow-io/examples/blob/master/workflow_parallel_mode.py)                           | `python examples/workflow_parallel_mode.py`                                                |
+| [workflow_sequential_group_mode](https://github.com/dotflow-io/examples/blob/master/workflow_sequential_group_mode.py)           | `python examples/workflow_sequential_group_mode.py`                                        |
+| [workflow_sequential_mode](https://github.com/dotflow-io/examples/blob/master/workflow_sequential_mode.py)                       | `python examples/workflow_sequential_mode.py`                                              |
+
 
 ## Commit Style
 
