@@ -166,9 +166,8 @@ class Sequential(Flow):
                 key=task.config.storage.key(task=task)
             )
 
-            if not self.ignore:
-                if task.status == TaskStatus.FAILED:
-                    break
+            if not self.ignore and task.status == TaskStatus.FAILED:
+                break
 
 
 class SequentialGroup(Flow):
@@ -203,29 +202,29 @@ class SequentialGroup(Flow):
         self.queue.put(current_task)
 
     def run(self) -> None:
-        thread_list = []
-        process_list = []
+        threads = []
+        processes = []
 
-        for group in self.groups:
-            def parallel(process_list):
+        for _, group_tasks in self.groups.items():
+            def launch_group(processes):
                 process = Process(
-                    target=self.sequential,
-                    args=(self.groups[group],)
+                    target=self._run_group,
+                    args=(group_tasks,)
                 )
                 process.start()
-                process_list.append(process)
+                processes.append(process)
 
             thread = threading.Thread(
-                target=parallel,
-                args=(process_list,)
+                target=launch_group,
+                args=(processes,)
             )
             thread.start()
-            thread_list.append(thread)
+            threads.append(thread)
 
-        [process.join() for process in process_list]
-        [thread.join() for thread in thread_list]
+        [process.join() for process in processes]
+        [thread.join() for thread in threads]
 
-    def sequential(self, groups: List[Task]) -> None:
+    def _run_group(self, groups: List[Task]) -> None:
         previous_context = Context(workflow_id=self.workflow_id)
 
         for task in groups:
@@ -240,9 +239,8 @@ class SequentialGroup(Flow):
                 key=task.config.storage.key(task=task)
             )
 
-            if not self.ignore:
-                if task.status == TaskStatus.FAILED:
-                    break
+            if not self.ignore and task.status == TaskStatus.FAILED:
+                break
 
 
 class Background(Flow):
@@ -296,7 +294,7 @@ class Parallel(Flow):
         self.queue.put(current_task)
 
     def run(self) -> None:
-        process_list = []
+        processes = []
         previous_context = Context(
             workflow_id=self.workflow_id
         )
@@ -312,6 +310,6 @@ class Parallel(Flow):
                 )
             )
             process.start()
-            process_list.append(process)
+            processes.append(process)
 
-        [process.join() for process in process_list]
+        [process.join() for process in processes]
