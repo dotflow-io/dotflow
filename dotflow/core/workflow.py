@@ -84,7 +84,7 @@ class Manager:
         failure: Callable = basic_callback,
         mode: TypeExecution = TypeExecution.SEQUENTIAL,
         keep_going: bool = False,
-        workflow_id: UUID = None
+        workflow_id: UUID = None,
     ) -> None:
         self.tasks = tasks
         self.success = success
@@ -101,10 +101,7 @@ class Manager:
             raise ExecutionModeNotExist() from err
 
         self.tasks = execution(
-            tasks=tasks,
-            workflow_id=workflow_id,
-            ignore=keep_going,
-            groups=groups
+            tasks=tasks, workflow_id=workflow_id, ignore=keep_going, groups=groups
         )
 
         self._callback_workflow(tasks=self.tasks)
@@ -150,16 +147,14 @@ class Sequential(Flow):
         self.queue.append(task)
 
     def run(self) -> None:
-        previous_context = Context(
-            workflow_id=self.workflow_id
-        )
+        previous_context = Context(workflow_id=self.workflow_id)
 
         for task in self.tasks:
             Execution(
                 task=task,
                 workflow_id=self.workflow_id,
                 previous_context=previous_context,
-                internal_callback=self.internal_callback
+                internal_callback=self.internal_callback,
             )
 
             previous_context = task.config.storage.get(
@@ -196,7 +191,7 @@ class SequentialGroup(Flow):
                 "current_context": task.current_context,
                 "duration": task.duration,
                 "error": task.error,
-                "status": task.status
+                "status": task.status,
             }
         }
         self.queue.put(current_task)
@@ -206,18 +201,13 @@ class SequentialGroup(Flow):
         processes = []
 
         for _, group_tasks in self.groups.items():
+
             def launch_group(processes):
-                process = Process(
-                    target=self._run_group,
-                    args=(group_tasks,)
-                )
+                process = Process(target=self._run_group, args=(group_tasks,))
                 process.start()
                 processes.append(process)
 
-            thread = threading.Thread(
-                target=launch_group,
-                args=(processes,)
-            )
+            thread = threading.Thread(target=launch_group, args=(processes,))
             thread.start()
             threads.append(thread)
 
@@ -232,7 +222,7 @@ class SequentialGroup(Flow):
                 task=task,
                 workflow_id=self.workflow_id,
                 previous_context=previous_context,
-                internal_callback=self.internal_callback
+                internal_callback=self.internal_callback,
             )
 
             previous_context = task.config.storage.get(
@@ -257,7 +247,12 @@ class Background(Flow):
     def run(self) -> None:
         thread = threading.Thread(
             target=Sequential,
-            args=(self.tasks, self.workflow_id, self.ignore, self.groups,)
+            args=(
+                self.tasks,
+                self.workflow_id,
+                self.ignore,
+                self.groups,
+            ),
         )
         thread.start()
         thread.join()
@@ -288,26 +283,19 @@ class Parallel(Flow):
                 "current_context": task.current_context,
                 "duration": task.duration,
                 "error": task.error,
-                "status": task.status
+                "status": task.status,
             }
         }
         self.queue.put(current_task)
 
     def run(self) -> None:
         processes = []
-        previous_context = Context(
-            workflow_id=self.workflow_id
-        )
+        previous_context = Context(workflow_id=self.workflow_id)
 
         for task in self.tasks:
             process = Process(
                 target=Execution,
-                args=(
-                    task,
-                    self.workflow_id,
-                    previous_context,
-                    self.internal_callback
-                )
+                args=(task, self.workflow_id, previous_context, self.internal_callback),
             )
             process.start()
             processes.append(process)
