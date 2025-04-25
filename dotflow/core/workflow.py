@@ -259,7 +259,7 @@ class Background(Flow):
     def run(self) -> None:
         thread = threading.Thread(
             target=Sequential,
-            args=(self.tasks, self.workflow_id, self.ignore,)
+            args=(self.tasks, self.workflow_id, self.ignore, self.groups,)
         )
         thread.start()
         thread.join()

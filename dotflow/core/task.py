@@ -195,6 +195,9 @@ class Task(TaskInstance):
 
     @error.setter
     def error(self, value: Exception) -> None:
+        if isinstance(value, TaskError):
+            self._error = value
+
         if type(value) is Exception:
             task_error = TaskError(value)
             self._error = task_error
