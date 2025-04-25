@@ -198,7 +198,7 @@ class Task(TaskInstance):
         if isinstance(value, TaskError):
             self._error = value
 
-        if type(value) is Exception:
+        if isinstance(value, Exception):
             task_error = TaskError(value)
             self._error = task_error
 

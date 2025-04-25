@@ -272,7 +272,7 @@ class Parallel(Flow):
 
     def get_tasks(self) -> List[Task]:
         contexts = {}
-        while len(contexts) < len(self.groups):
+        while len(contexts) < len(self.tasks):
             if not self.queue.empty():
                 contexts = {**contexts, **self.queue.get()}
 
