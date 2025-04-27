@@ -11,17 +11,7 @@ from dotflow.cli.command import Command
 class StartCommand(Command):
 
     def setup(self):
-        workflow = DotFlow()
-
-        if self.params.storage:
-            storage = {"default": StorageDefault, "file": StorageFile}
-
-            config = Config(
-                storage=storage.get(self.params.storage)(
-                    path=self.params.path,
-                )
-            )
-            workflow = DotFlow(config=config)
+        workflow = self._new_workflow()
 
         workflow.task.add(
             step=self.params.step,
@@ -33,3 +23,20 @@ class StartCommand(Command):
 
         if self.params.mode == TypeExecution.BACKGROUND:
             system("/bin/bash")
+
+    def _new_workflow(self):
+        if not self.params.storage:
+            return DotFlow()
+
+        storage_classes = {
+            "default": StorageDefault,
+            "file": StorageFile
+        }
+
+        config = Config(
+            storage=storage_classes.get(self.params.storage)(
+                path=self.params.path,
+            )
+        )
+
+        return DotFlow(config=config)
