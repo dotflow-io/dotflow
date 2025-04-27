@@ -1,6 +1,8 @@
 """Workflow module"""
 
 import threading
+import warnings
+import platform
 
 from datetime import datetime
 from multiprocessing import Process, Queue
@@ -17,7 +19,13 @@ from dotflow.core.task import Task
 from dotflow.utils import basic_callback
 
 
+def is_darwin() -> bool:
+    """Is Darwin"""
+    return platform.system() == "Darwin"
+
+
 def grouper(tasks: List[Task]) -> Dict[str, List[Task]]:
+    """Grouper"""
     groups = {}
     for task in tasks:
         if not groups.get(task.group_name):
@@ -115,7 +123,7 @@ class Manager:
             self.success(tasks=tasks)
 
     def sequential(self, **kwargs) -> List[Task]:
-        if len(kwargs.get("groups")) > 1:
+        if len(kwargs.get("groups"), {}) > 1 and not is_darwin():
             process = SequentialGroup(**kwargs)
             return process.get_tasks()
 
@@ -131,11 +139,21 @@ class Manager:
         return process.get_tasks()
 
     def parallel(self, **kwargs) -> List[Task]:
+        if is_darwin():
+            warnings.warn(
+                "Parallel mode does not work with MacOS."
+                " Running tasks in sequence.",
+                Warning
+            )
+            process = Sequential(**kwargs)
+            return process.get_tasks()
+
         process = Parallel(**kwargs)
         return process.get_tasks()
 
 
 class Sequential(Flow):
+    """Sequential"""
 
     def setup_queue(self) -> None:
         self.queue = []
@@ -166,13 +184,14 @@ class Sequential(Flow):
 
 
 class SequentialGroup(Flow):
+    """SequentialGroup"""
 
     def setup_queue(self) -> None:
         self.queue = Queue()
 
     def get_tasks(self) -> List[Task]:
         contexts = {}
-        while len(contexts) < len(self.groups):
+        while len(contexts) < len(self.tasks):
             if not self.queue.empty():
                 contexts = {**contexts, **self.queue.get()}
 
@@ -201,18 +220,26 @@ class SequentialGroup(Flow):
         processes = []
 
         for _, group_tasks in self.groups.items():
-
-            def launch_group(processes):
-                process = Process(target=self._run_group, args=(group_tasks,))
-                process.start()
-                processes.append(process)
-
-            thread = threading.Thread(target=launch_group, args=(processes,))
+            thread = threading.Thread(
+                target=self._launch_group,
+                args=(processes, group_tasks,)
+            )
             thread.start()
             threads.append(thread)
 
-        [process.join() for process in processes]
-        [thread.join() for thread in threads]
+        for process in processes:
+            process.join()
+
+        for thread in threads:
+            thread.join()
+
+    def _launch_group(self, processes, group_tasks):
+        process = Process(
+            target=self._run_group,
+            args=(group_tasks,)
+        )
+        process.start()
+        processes.append(process)
 
     def _run_group(self, groups: List[Task]) -> None:
         previous_context = Context(workflow_id=self.workflow_id)
@@ -234,6 +261,7 @@ class SequentialGroup(Flow):
 
 
 class Background(Flow):
+    """Background"""
 
     def setup_queue(self) -> None:
         self.queue = []
@@ -259,6 +287,7 @@ class Background(Flow):
 
 
 class Parallel(Flow):
+    """Parallel"""
 
     def setup_queue(self) -> None:
         self.queue = Queue()
@@ -300,4 +329,5 @@ class Parallel(Flow):
             process.start()
             processes.append(process)
 
-        [process.join() for process in processes]
+        for process in processes:
+            process.join()
