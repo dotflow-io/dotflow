@@ -1,5 +1,10 @@
 # Release Notes
 
+## v0.12.0
+
+- [📦 PyPI - Build 0.12.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.12.0)
+- [📌 Separate tasks into groups](https://github.com/dotflow-io/dotflow/pull/54)
+
 ## v0.11.1
 
 - [📦 PyPI - Build 0.11.1](https://github.com/dotflow-io/dotflow/releases/tag/v0.11.1)
