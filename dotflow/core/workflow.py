@@ -123,7 +123,7 @@ class Manager:
             self.success(tasks=tasks)
 
     def sequential(self, **kwargs) -> List[Task]:
-        if len(kwargs.get("groups"), {}) > 1 and not is_darwin():
+        if len(kwargs.get("groups", {})) > 1 and not is_darwin():
             process = SequentialGroup(**kwargs)
             return process.get_tasks()
 
