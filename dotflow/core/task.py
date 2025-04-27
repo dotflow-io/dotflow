@@ -1,5 +1,7 @@
 """Task module"""
 
+import json
+
 from uuid import UUID
 from typing import Any, Callable, List
 
@@ -10,6 +12,8 @@ from dotflow.core.config import Config
 from dotflow.core.action import Action
 from dotflow.core.context import Context
 from dotflow.core.module import Module
+from dotflow.core.serializers.task import SerializerTask
+from dotflow.core.serializers.workflow import SerializerWorkflow
 from dotflow.core.exception import MissingActionDecorator, NotCallableObject
 from dotflow.core.types.status import TaskStatus
 from dotflow.utils import (
@@ -240,6 +244,13 @@ class Task(TaskInstance):
     def config(self, value: Config):
         self._config = value
 
+    def schema(self) -> SerializerTask:
+        item = SerializerTask(
+            **self.__dict__
+        ).model_dump_json()
+
+        return json.loads(item)
+
 
 class TaskError:
 
@@ -340,3 +351,11 @@ class TaskBuilder:
 
     def reverse(self) -> None:
         self.queue.reverse()
+
+    def schema(self) -> SerializerWorkflow:
+        item = SerializerWorkflow(
+            workflow_id=self.workflow_id,
+            tasks=[item.schema() for item in self.queue]
+        ).model_dump_json()
+
+        return json.loads(item)
