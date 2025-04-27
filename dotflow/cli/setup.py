@@ -6,18 +6,14 @@ from dotflow import __version__, __description__
 from dotflow.logging import logger
 from dotflow.settings import Settings as settings
 from dotflow.utils.basic_functions import basic_callback
-from dotflow.core.types.execution import TypeExecution
+from dotflow.core.types import TypeExecution, TypeStorage
 from dotflow.core.exception import (
     MissingActionDecorator,
     ExecutionModeNotExist,
     ImportModuleError,
     MESSAGE_UNKNOWN_ERROR,
 )
-from dotflow.cli.commands import (
-    InitCommand,
-    LogCommand,
-    StartCommand
-)
+from dotflow.cli.commands import InitCommand, LogCommand, StartCommand
 
 
 class Command:
@@ -56,13 +52,19 @@ class Command:
         self.cmd_start.add_argument("-s", "--step", required=True)
         self.cmd_start.add_argument("-c", "--callback", default=basic_callback)
         self.cmd_start.add_argument("-i", "--initial-context")
-        self.cmd_start.add_argument("-o", "--storage", choices=["default", "file"])
+        self.cmd_start.add_argument(
+            "-o", "--storage", choices=[TypeStorage.DEFAULT, TypeStorage.FILE]
+        )
         self.cmd_start.add_argument("-p", "--path", default=settings.START_PATH)
         self.cmd_start.add_argument(
             "-m",
             "--mode",
             default=TypeExecution.SEQUENTIAL,
-            choices=[TypeExecution.SEQUENTIAL, TypeExecution.BACKGROUND],
+            choices=[
+                TypeExecution.SEQUENTIAL,
+                TypeExecution.BACKGROUND,
+                TypeExecution.PARALLEL,
+            ],
         )
 
         self.cmd_start.set_defaults(exec=StartCommand)

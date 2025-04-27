@@ -4,7 +4,7 @@ from uuid import uuid4
 from functools import partial
 
 from dotflow.core.config import Config
-from dotflow.core.workflow import Workflow
+from dotflow.core.workflow import Manager
 from dotflow.core.task import TaskBuilder
 
 
@@ -33,7 +33,7 @@ class DotFlow:
 
         task (List[Task]):
 
-        start (Workflow):
+        start (Manager):
     """
 
     def __init__(
@@ -48,8 +48,8 @@ class DotFlow:
         )
 
         self.start = partial(
-            Workflow,
-            tasks=self.task.queu,
+            Manager,
+            tasks=self.task.queue,
             workflow_id=self.workflow_id
         )
 
@@ -58,21 +58,21 @@ class DotFlow:
         Returns:
             list (List[Task]): Returns a list of Task class.
         """
-        return self.task.queu
+        return self.task.queue
 
     def result_context(self):
         """
         Returns:
             list (List[Context]): Returns a list of Context class.
         """
-        return [task.current_context for task in self.task.queu]
+        return [task.current_context for task in self.task.queue]
 
     def result_storage(self):
         """
         Returns:
             list (List[Any]): Returns a list of assorted objects.
         """
-        return [task.current_context.storage for task in self.task.queu]
+        return [task.current_context.storage for task in self.task.queue]
 
     def result(self):
-        return self.task.queu[-1].current_context.storage
+        return self.task.queue[-1].current_context.storage
