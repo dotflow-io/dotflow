@@ -62,7 +62,11 @@ class Command:
             "-m",
             "--mode",
             default=TypeExecution.SEQUENTIAL,
-            choices=[TypeExecution.SEQUENTIAL, TypeExecution.BACKGROUND],
+            choices=[
+                TypeExecution.SEQUENTIAL,
+                TypeExecution.BACKGROUND,
+                TypeExecution.PARALLEL
+            ],
         )
 
         self.cmd_start.set_defaults(exec=StartCommand)
