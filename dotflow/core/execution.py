@@ -46,14 +46,14 @@ class Execution:
         task: Task,
         workflow_id: UUID,
         previous_context: Context = None,
-        internal_callback: Callable = basic_callback
+        _internal_callback: Callable = basic_callback
     ) -> None:
         self.task = task
         self.task.status = TaskStatus.IN_PROGRESS
         self.task.previous_context = previous_context
         self.task.workflow_id = workflow_id
 
-        self._excution(internal_callback)
+        self._excution(_internal_callback)
 
     def _is_action(self, class_instance: Callable, func: Callable):
         try:
@@ -131,7 +131,7 @@ class Execution:
         return new_context
 
     @time
-    def _excution(self, internal_callback):
+    def _excution(self, _internal_callback):
         try:
             current_context = self.task.step(
                 initial_context=self.task.initial_context,
@@ -157,6 +157,6 @@ class Execution:
 
         finally:
             self.task.callback(task=self.task)
-            internal_callback(task=self.task)
+            _internal_callback(task=self.task)
 
         return self.task

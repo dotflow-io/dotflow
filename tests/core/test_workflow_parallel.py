@@ -101,7 +101,7 @@ class TestWorkflowParallel(unittest.TestCase):
         )
 
         execution.setup_queue()
-        execution.internal_callback(task=task)
+        execution._internal_callback(task=task)
 
         tasks = execution.get_tasks()
         self.assertEqual(tasks[0].task_id, 5)
