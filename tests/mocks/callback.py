@@ -1,5 +1,7 @@
 """Callback Mock"""
 
+from logging import error
+
 
 def simple_callback(*args, **kwargs):
-    pass
+    error(kwargs.get("task").task_id)

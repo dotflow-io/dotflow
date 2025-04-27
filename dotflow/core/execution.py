@@ -15,7 +15,9 @@ from dotflow.core.action import Action
 from dotflow.core.context import Context
 from dotflow.core.task import Task
 from dotflow.core.types import TaskStatus
+
 from dotflow.core.decorators import time
+from dotflow.utils import basic_callback
 
 
 class Execution:
@@ -43,14 +45,15 @@ class Execution:
         self,
         task: Task,
         workflow_id: UUID,
-        previous_context: Context = None
+        previous_context: Context = None,
+        _internal_callback: Callable = basic_callback
     ) -> None:
         self.task = task
         self.task.status = TaskStatus.IN_PROGRESS
         self.task.previous_context = previous_context
         self.task.workflow_id = workflow_id
 
-        self._excution()
+        self._excution(_internal_callback)
 
     def _is_action(self, class_instance: Callable, func: Callable):
         try:
@@ -128,7 +131,7 @@ class Execution:
         return new_context
 
     @time
-    def _excution(self):
+    def _excution(self, _internal_callback):
         try:
             current_context = self.task.step(
                 initial_context=self.task.initial_context,
@@ -153,6 +156,7 @@ class Execution:
             self.task.error = err
 
         finally:
-            self.task.callback(content=self.task)
+            self.task.callback(task=self.task)
+            _internal_callback(task=self.task)
 
         return self.task

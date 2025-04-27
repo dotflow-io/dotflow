@@ -7,49 +7,42 @@ from dotflow.core.action import Action
 from dotflow.core.config import Config
 from dotflow.core.context import Context
 from dotflow.core.types.status import TaskStatus
-from dotflow.core.exception import MissingActionDecorator, NotCallableObject, ImportModuleError
+from dotflow.core.exception import (
+    MissingActionDecorator,
+    NotCallableObject,
+    ImportModuleError,
+)
 from dotflow.core.task import Task, TaskError
 
-from tests.mocks import (
-    action_step,
-    simple_callback,
-    simple_step
-)
+from tests.mocks import action_step, simple_callback, simple_step
 
 
 class TestTask(unittest.TestCase):
 
     def setUp(self):
-        self.task = Task(
-            task_id=0,
-            step=action_step,
-            callback=simple_callback
-        )
+        self.task = Task(task_id=0, step=action_step, callback=simple_callback)
         self.content = {"foo": "bar"}
 
     def test_instantiating_task_class(self):
         task = Task(
             task_id=0,
-            initial_context=Context(
-                storage=self.content
-            ),
+            initial_context=Context(storage=self.content),
             step=action_step,
-            callback=simple_callback
+            callback=simple_callback,
         )
 
         self.assertIsInstance(task.initial_context, Context)
         self.assertIsInstance(task.current_context, Context)
         self.assertIsInstance(task.previous_context, Context)
         self.assertIsInstance(task.error, TaskError)
+        self.assertEqual(task.group_name, "default")
 
     def test_task_id(self):
         task = Task(
             task_id=0,
-            initial_context=Context(
-                storage=self.content
-            ),
+            initial_context=Context(storage=self.content),
             step=action_step,
-            callback=simple_callback
+            callback=simple_callback,
         )
 
         self.assertEqual(task.task_id, 0)
@@ -60,11 +53,9 @@ class TestTask(unittest.TestCase):
         task = Task(
             task_id=0,
             workflow_id=workflow_id,
-            initial_context=Context(
-                storage=self.content
-            ),
+            initial_context=Context(storage=self.content),
             step=action_step,
-            callback=simple_callback
+            callback=simple_callback,
         )
 
         self.assertEqual(task.workflow_id, workflow_id)
@@ -73,22 +64,14 @@ class TestTask(unittest.TestCase):
 class TestTaskSetter(unittest.TestCase):
 
     def setUp(self):
-        self.task = Task(
-            task_id=0,
-            step=action_step,
-            callback=simple_callback
-        )
+        self.task = Task(task_id=0, step=action_step, callback=simple_callback)
         self.content = {"foo": "bar"}
 
     def test_set_step_with_path_module_success(self):
         input_value = "tests.mocks.step_function.action_step"
         expected_value = Action
 
-        task = Task(
-            task_id=0,
-            step=input_value,
-            callback=simple_callback
-        )
+        task = Task(task_id=0, step=input_value, callback=simple_callback)
 
         self.assertIsInstance(task.step, expected_value)
 
@@ -96,21 +79,13 @@ class TestTaskSetter(unittest.TestCase):
         input_value = "tests.mocks.step_function.XPTO"
 
         with self.assertRaises(ImportModuleError):
-            Task(
-                task_id=0,
-                step=input_value,
-                callback=simple_callback
-            )
+            Task(task_id=0, step=input_value, callback=simple_callback)
 
     def test_set_step_with_function_success(self):
         input_value = action_step
         expected_value = Action
 
-        task = Task(
-            task_id=0,
-            step=input_value,
-            callback=simple_callback
-        )
+        task = Task(task_id=0, step=input_value, callback=simple_callback)
 
         self.assertIsInstance(task.step, expected_value)
 
@@ -118,21 +93,13 @@ class TestTaskSetter(unittest.TestCase):
         input_value = simple_step
 
         with self.assertRaises(MissingActionDecorator):
-            Task(
-                task_id=0,
-                step=input_value,
-                callback=simple_callback
-            )
+            Task(task_id=0, step=input_value, callback=simple_callback)
 
     def test_set_callback_with_path_module_success(self):
         input_value = "tests.mocks.step_function.action_step"
         expected_value = Action
 
-        task = Task(
-            task_id=0,
-            step=action_step,
-            callback=input_value
-        )
+        task = Task(task_id=0, step=action_step, callback=input_value)
 
         self.assertIsInstance(task.step, expected_value)
 
@@ -140,21 +107,13 @@ class TestTaskSetter(unittest.TestCase):
         input_value = "tests.mocks.step_function.XPTO"
 
         with self.assertRaises(ImportModuleError):
-            Task(
-                task_id=0,
-                step=action_step,
-                callback=input_value
-            )
+            Task(task_id=0, step=action_step, callback=input_value)
 
     def test_set_callback_with_path_module_not_callable_fail(self):
         input_value = "tests.mocks.constants.NOT_CALLABLE"
 
         with self.assertRaises(NotCallableObject):
-            Task(
-                task_id=0,
-                step=action_step,
-                callback=input_value
-            )
+            Task(task_id=0, step=action_step, callback=input_value)
 
     def test_set_initial_context(self):
         expected_value = Context(storage=self.content)

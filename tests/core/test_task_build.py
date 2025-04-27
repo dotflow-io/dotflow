@@ -24,16 +24,16 @@ class TestTaskBuild(unittest.TestCase):
     def test_instantiating_task_build_class(self):
         task = TaskBuilder(config=self.config)
 
-        self.assertListEqual(task.queu, [])
+        self.assertListEqual(task.queue, [])
 
     def test_add_method(self):
         task = TaskBuilder(config=self.config)
         task.add(step=action_step)
 
-        self.assertEqual(task.queu[0].task_id, 0)
-        self.assertIsInstance(task.queu[0], Task)
-        self.assertEqual(task.queu[0].callback, basic_callback)
-        self.assertEqual(len(task.queu), 1)
+        self.assertEqual(task.queue[0].task_id, 0)
+        self.assertIsInstance(task.queue[0], Task)
+        self.assertEqual(task.queue[0].callback, basic_callback)
+        self.assertEqual(len(task.queue), 1)
 
     def test_add_method_with_class_context(self):
         task = TaskBuilder(config=self.config)
@@ -45,12 +45,12 @@ class TestTaskBuild(unittest.TestCase):
         )
 
         self.assertEqual(
-            task.queu[0].initial_context.storage,
+            task.queue[0].initial_context.storage,
             self.content
         )
 
         self.assertIsInstance(
-            task.queu[0].initial_context,
+            task.queue[0].initial_context,
             Context
         )
 
@@ -62,12 +62,12 @@ class TestTaskBuild(unittest.TestCase):
         )
 
         self.assertEqual(
-            task.queu[0].initial_context.storage,
+            task.queue[0].initial_context.storage,
             self.content
         )
 
         self.assertIsInstance(
-            task.queu[0].initial_context,
+            task.queue[0].initial_context,
             Context
         )
 

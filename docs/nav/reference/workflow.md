@@ -1,10 +1,9 @@
-# Workflow
+# Manager
 
-::: dotflow.core.workflow.Workflow
+::: dotflow.core.workflow.Manager
     options:
         members:
             - _callback_workflow
             - sequential
             - background
             - parallel
-            - data_store
