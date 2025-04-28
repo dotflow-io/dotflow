@@ -1,5 +1,8 @@
 """Action module"""
 
+from time import sleep
+
+from concurrent.futures import ThreadPoolExecutor
 from typing import Callable, Dict
 from types import FunctionType
 
@@ -39,14 +42,20 @@ class Action(object):
     """
 
     def __init__(
-            self,
-            func: Callable = None,
-            task: Callable = None,
-            retry: int = 1
+        self,
+        func: Callable = None,
+        task: Callable = None,
+        retry: int = 1,
+        timeout: int = 0,
+        retry_delay: int = 1,
+        backoff: bool = False,
     ) -> None:
         self.func = func
         self.task = task
         self.retry = retry
+        self.timeout = timeout
+        self.retry_delay = retry_delay
+        self.backoff = backoff
         self.params = []
 
     def __call__(self, *args, **kwargs):
@@ -59,15 +68,15 @@ class Action(object):
 
             if contexts:
                 return Context(
-                    storage=self._retry(*args, **contexts),
+                    storage=self._run_action(*args, **contexts),
                     task_id=task.task_id,
-                    workflow_id=task.workflow_id
+                    workflow_id=task.workflow_id,
                 )
 
             return Context(
-                storage=self._retry(*args),
+                storage=self._run_action(*args),
                 task_id=task.task_id,
-                workflow_id=task.workflow_id
+                workflow_id=task.workflow_id,
             )
 
         # No parameters
@@ -80,31 +89,39 @@ class Action(object):
 
             if contexts:
                 return Context(
-                    storage=self._retry(*_args, **contexts),
+                    storage=self._run_action(*_args, **contexts),
                     task_id=task.task_id,
-                    workflow_id=task.workflow_id
+                    workflow_id=task.workflow_id,
                 )
 
             return Context(
-                storage=self._retry(*_args),
+                storage=self._run_action(*_args),
                 task_id=task.task_id,
-                workflow_id=task.workflow_id
+                workflow_id=task.workflow_id,
             )
 
         return action
 
-    def _retry(self, *args, **kwargs):
-        attempt = 0
-        exception = Exception()
+    def _run_action(self, *args, **kwargs):
+        last_exception = Exception("Unknown")
 
-        while self.retry > attempt:
+        for _ in range(1, self.retry + 1):
             try:
-                return self.func(*args, **kwargs)
-            except Exception as error:
-                exception = error
-                attempt += 1
+                if self.timeout:
+                    with ThreadPoolExecutor(max_workers=1) as executor:
+                        future = executor.submit(self.func, *args, **kwargs)
+                        return future.result(timeout=self.timeout)
 
-        raise exception
+                return self.func(*args, **kwargs)
+
+            except Exception as error:
+                last_exception = error
+
+                sleep(self.retry_delay)
+                if self.backoff:
+                    self.retry_delay *= 2
+
+        raise last_exception
 
     def _set_params(self):
         if isinstance(self.func, FunctionType):
@@ -113,7 +130,9 @@ class Action(object):
         if type(self.func) is type:
             if hasattr(self.func, "__init__"):
                 if hasattr(self.func.__init__, "__code__"):
-                    self.params = [param for param in self.func.__init__.__code__.co_varnames]
+                    self.params = [
+                        param for param in self.func.__init__.__code__.co_varnames
+                    ]
 
     def _get_context(self, kwargs: Dict):
         context = {}
