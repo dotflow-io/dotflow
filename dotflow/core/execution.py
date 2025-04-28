@@ -46,7 +46,7 @@ class Execution:
         task: Task,
         workflow_id: UUID,
         previous_context: Context = None,
-        _internal_callback: Callable = basic_callback
+        _internal_callback: Callable = basic_callback,
     ) -> None:
         self.task = task
         self.task.status = TaskStatus.IN_PROGRESS
@@ -66,9 +66,7 @@ class Execution:
             return False
 
     def _execution_orderer(
-            self,
-            callable_list: List[str],
-            class_instance: Callable
+        self, callable_list: List[str], class_instance: Callable
     ) -> Tuple[int, Callable]:
         ordered_list = []
 
@@ -84,7 +82,10 @@ class Execution:
             return ordered_list
 
         except TypeError as err:
-            logger.error("Internal problem: %s", str(err))
+            logger.error(
+                "Internal problem with ordering the class functions, but don't worry, it was executed.: %s",
+                str(err),
+            )
 
         for index, callable_name in enumerate(callable_list):
             ordered_list.append((index, callable_name))
@@ -110,7 +111,7 @@ class Execution:
                 subcontext = new_object(
                     initial_context=self.task.initial_context,
                     previous_context=previous_context,
-                    task=self.task
+                    task=self.task,
                 )
                 new_context.storage.append(subcontext)
                 previous_context = subcontext
@@ -120,7 +121,7 @@ class Execution:
                     class_instance,
                     initial_context=self.task.initial_context,
                     previous_context=previous_context,
-                    task=self.task
+                    task=self.task,
                 )
                 new_context.storage.append(subcontext)
                 previous_context = subcontext
@@ -136,7 +137,7 @@ class Execution:
             current_context = self.task.step(
                 initial_context=self.task.initial_context,
                 previous_context=self.task.previous_context,
-                task=self.task
+                task=self.task,
             )
 
             if type(current_context.storage) not in self.VALID_OBJECTS:
