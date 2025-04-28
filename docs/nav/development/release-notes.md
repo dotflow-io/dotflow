@@ -4,6 +4,7 @@
 
 - [📦 PyPI - Build 0.12.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.12.0)
 - [📌 Separate tasks into groups](https://github.com/dotflow-io/dotflow/pull/54)
+- [📌 Workflow result](https://github.com/dotflow-io/dotflow/pull/52)
 
 ## v0.11.1
 
