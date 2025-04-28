@@ -245,10 +245,12 @@ class Task(TaskInstance):
         self._config = value
 
     def schema(self) -> SerializerTask:
-        item = SerializerTask(
+        return SerializerTask(
             **self.__dict__
-        ).model_dump_json()
+        )
 
+    def result(self) -> SerializerWorkflow:
+        item = self.schema().model_dump_json()
         return json.loads(item)
 
 
@@ -353,9 +355,11 @@ class TaskBuilder:
         self.queue.reverse()
 
     def schema(self) -> SerializerWorkflow:
-        item = SerializerWorkflow(
+        return SerializerWorkflow(
             workflow_id=self.workflow_id,
             tasks=[item.schema() for item in self.queue]
-        ).model_dump_json()
+        )
 
+    def result(self) -> SerializerWorkflow:
+        item = self.schema().model_dump_json()
         return json.loads(item)

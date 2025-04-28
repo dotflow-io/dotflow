@@ -75,4 +75,4 @@ class DotFlow:
         return [task.current_context.storage for task in self.task.queue]
 
     def result(self):
-        return self.task.schema()
+        return self.task.result()

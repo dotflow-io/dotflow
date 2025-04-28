@@ -32,7 +32,7 @@ class SerializerTask(BaseModel):
     def error_validator(cls, value: str) -> str:
         if value:
             return SerializerTaskError(**value.__dict__)
-        return value
+        return None
 
     @field_validator(
         "initial_context", "current_context", "previous_context", mode="before"
