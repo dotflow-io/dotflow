@@ -1,7 +1,7 @@
 <!doctype html>
 <html data-bs-theme="light">
     <head>
-                <title>Workflow - Dotflow</title>
+                <title>Manager - Dotflow</title>
 
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,12 +19,9 @@
                 <script>hljs.highlightAll();</script>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
             <link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
             <link rel="stylesheet" href="../../../assets/css/root.min.css">
             <link rel="stylesheet" href="../../../assets/css/main.min.css">
-            <link rel="stylesheet" href="../../../assets/css/media.min.css">
-            <link rel="stylesheet" href="../../../assets/css/mkdocstrings.min.css">
                 <link href="../../../assets/_mkdocstrings.css" rel="stylesheet">
                 <link href="../../../assets/style.css" rel="stylesheet">
 
@@ -117,7 +114,7 @@
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="./" class="dropdown-item text-decoration-none  active ">Workflow</a>
+        <a href="./" class="dropdown-item text-decoration-none  active ">Manager</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
@@ -139,6 +136,11 @@
     <li>
         <a class="dropdown-item text-decoration-none" href="#">ABC &raquo;</a>
         <ul class="submenu dropdown-menu">
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../abc-flow/" class="dropdown-item text-decoration-none ">Flow</a>
+    </li>
+<!-- endblock -->
                 <!-- block dropdown-menu -->
     <li>
         <a href="../abc-storage/" class="dropdown-item text-decoration-none ">Storage</a>
@@ -301,34 +303,30 @@
                 
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-3 d-none d-md-block" id="component-sidebar">
+                            <div class="col-3" id="component-sidebar">
                                     <!-- block sidebar -->
 <div class="navbar-expand-md" role="complementary">
     
     <div class="sidebar navbar-collapse collapse card">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#workflow" class="nav-link">Workflow</a>
+            <li class="nav-item" data-bs-level="1"><a href="#manager" class="nav-link">Manager</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#dotflow.core.workflow.Workflow" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;Workflow</a>
+            <li class="nav-item" data-bs-level="2"><a href="#dotflow.core.workflow.Manager" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;Manager</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.workflow.Workflow._callback_workflow" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;_callback_workflow</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.workflow.Workflow.sequential" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;sequential</a>
+            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.workflow.Manager._callback_workflow" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;_callback_workflow</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.workflow.Workflow.background" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;background</a>
+            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.workflow.Manager.sequential" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;sequential</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.workflow.Workflow.parallel" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;parallel</a>
+            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.workflow.Manager.background" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;background</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.workflow.Workflow.data_store" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;data_store</a>
+            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.workflow.Manager.parallel" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;parallel</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -341,7 +339,7 @@
 </div>
 <!-- endblock -->
                             </div>
-                            <div class="col-md-9 col-12" id="component-content">
+                            <div class="col-9" id="component-content">
                                     <!-- block content -->
 <section class="container post" id="component-content">
     <article>
@@ -349,15 +347,15 @@
             
             
         </header>
-        <p><h1 id="workflow">Workflow</h1>
+        <p><h1 id="manager">Manager</h1>
 
 
 <div class="doc doc-object doc-class">
 
 
 
-<h2 id="dotflow.core.workflow.Workflow" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>dotflow.core.workflow.Workflow</code>
+<h2 id="dotflow.core.workflow.Manager" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-class"></code>            <code>dotflow.core.workflow.Manager</code>
 
 
 </h2>
@@ -370,15 +368,15 @@
 
 <details class="import" open>
   <summary>Import</summary>
-  <p>You can import the <strong>Workflow</strong> class with:</p>
-<pre><code>from dotflow.core.workflow import Workflow
+  <p>You can import the <strong>Manager</strong> class with:</p>
+<pre><code>from dotflow.core.workflow import Manager
 </code></pre>
 </details>
 
 <details class="example" open>
   <summary>Example</summary>
-  <p><code>class</code> dotflow.core.workflow.Workflow</p>
-<pre><code>workflow = Workflow(
+  <p><code>class</code> dotflow.core.workflow.Manager</p>
+<pre><code>workflow = Manager(
     tasks=[tasks],
     success=basic_callback,
     failure=basic_callback,
@@ -407,7 +405,7 @@
             </td>
             <td>
               <div class="doc-md-description">
-                
+                <p>A list containing objects of type Task.</p>
               </div>
             </td>
             <td>
@@ -423,7 +421,8 @@
             </td>
             <td>
               <div class="doc-md-description">
-                
+                <p>Success function to be executed after the completion of the entire
+workflow. It's essentially a callback for successful scenarios.</p>
               </div>
             </td>
             <td>
@@ -439,11 +438,35 @@
             </td>
             <td>
               <div class="doc-md-description">
-                
+                <p>Failure function to be executed after the completion of the entire
+workflow. It's essentially a callback for error scenarios</p>
               </div>
             </td>
             <td>
                   <code><a class="autorefs autorefs-internal" title="            dotflow.utils.basic_functions.basic_callback(*args, **kwargs) (dotflow.utils.basic_callback)" href="../utils/#dotflow.utils.basic_functions.basic_callback">basic_callback</a></code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>mode</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="            dotflow.core.types.execution.TypeExecution (dotflow.core.types.TypeExecution)" href="../type-execution/#dotflow.core.types.execution.TypeExecution">TypeExecution</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Parameter that defines the execution mode of the workflow. Currently,
+there are options to execute in <strong>sequential</strong>, <strong>background</strong>, or <strong>parallel</strong> mode.
+The sequential mode is used by default.</p>
+              </div>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="            SEQUENTIAL = 'sequential'
+
+  
+      class-attribute
+      instance-attribute
+   (dotflow.core.types.TypeExecution.SEQUENTIAL)" href="../type-execution/#dotflow.core.types.execution.TypeExecution.SEQUENTIAL">SEQUENTIAL</a></code>
             </td>
           </tr>
           <tr class="doc-section-item">
@@ -463,29 +486,6 @@ if it is <strong>False</strong>, the workflow will stop.</p>
             </td>
             <td>
                   <code>False</code>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td>
-                <code>mode</code>
-            </td>
-            <td>
-                  <code><a class="autorefs autorefs-internal" title="            dotflow.core.types.execution.TypeExecution (dotflow.core.types.TypeExecution)" href="../type-execution/#dotflow.core.types.execution.TypeExecution">TypeExecution</a></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>A parameter for assigning the execution mode of the workflow. Currently,
-there is the option to execute in <strong>sequential</strong> mode or <strong>background</strong> mode.
-By default, it is in <strong>sequential</strong> mode.</p>
-              </div>
-            </td>
-            <td>
-                  <code><a class="autorefs autorefs-internal" title="            SEQUENTIAL = 'sequential'
-
-  
-      class-attribute
-      instance-attribute
-   (dotflow.core.types.TypeExecution.SEQUENTIAL)" href="../type-execution/#dotflow.core.types.execution.TypeExecution.SEQUENTIAL">SEQUENTIAL</a></code>
             </td>
           </tr>
           <tr class="doc-section-item">
@@ -519,7 +519,29 @@ By default, it is in <strong>sequential</strong> mode.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code><span title="dotflow.core.workflow.Workflow.workflow_id">workflow_id</span></code></td>
+            <td><code><span title="dotflow.core.workflow.Manager.success">success</span></code></td>
+            <td>
+                  <code><span title="typing.Callable">Callable</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="dotflow.core.workflow.Manager.failure">failure</span></code></td>
+            <td>
+                  <code><span title="typing.Callable">Callable</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="dotflow.core.workflow.Manager.workflow_id">workflow_id</span></code></td>
             <td>
                   <code><span title="uuid.UUID">UUID</span></code>
             </td>
@@ -530,42 +552,9 @@ By default, it is in <strong>sequential</strong> mode.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code><span title="dotflow.core.workflow.Workflow.started">started</span></code></td>
+            <td><code><span title="dotflow.core.workflow.Manager.started">started</span></code></td>
             <td>
                   <code><span title="datetime.datetime">datetime</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                
-              </div>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><span title="dotflow.core.workflow.Workflow.tasks">tasks</span></code></td>
-            <td>
-                  <code><span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="            dotflow.core.task.Task" href="../task/#dotflow.core.task.Task">Task</a>]</code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                
-              </div>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><span title="dotflow.core.workflow.Workflow.success">success</span></code></td>
-            <td>
-                  <code><span title="typing.Callable">Callable</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                
-              </div>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td><code><span title="dotflow.core.workflow.Workflow.failure">failure</span></code></td>
-            <td>
-                  <code><span title="typing.Callable">Callable</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -585,28 +574,7 @@ By default, it is in <strong>sequential</strong> mode.</p>
 
               <details class="quote">
                 <summary>Source code in <code>dotflow/core/workflow.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 17</span>
-<span class="normal"> 18</span>
-<span class="normal"> 19</span>
-<span class="normal"> 20</span>
-<span class="normal"> 21</span>
-<span class="normal"> 22</span>
-<span class="normal"> 23</span>
-<span class="normal"> 24</span>
-<span class="normal"> 25</span>
-<span class="normal"> 26</span>
-<span class="normal"> 27</span>
-<span class="normal"> 28</span>
-<span class="normal"> 29</span>
-<span class="normal"> 30</span>
-<span class="normal"> 31</span>
-<span class="normal"> 32</span>
-<span class="normal"> 33</span>
-<span class="normal"> 34</span>
-<span class="normal"> 35</span>
-<span class="normal"> 36</span>
-<span class="normal"> 37</span>
-<span class="normal"> 38</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 38</span>
 <span class="normal"> 39</span>
 <span class="normal"> 40</span>
 <span class="normal"> 41</span>
@@ -691,17 +659,46 @@ By default, it is in <strong>sequential</strong> mode.</p>
 <span class="normal">120</span>
 <span class="normal">121</span>
 <span class="normal">122</span>
-<span class="normal">123</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Workflow</span><span class="p">:</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Manager</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Import:</span>
-<span class="sd">        You can import the **Workflow** class with:</span>
+<span class="sd">        You can import the **Manager** class with:</span>
 
-<span class="sd">            from dotflow.core.workflow import Workflow</span>
+<span class="sd">            from dotflow.core.workflow import Manager</span>
 
 <span class="sd">    Example:</span>
-<span class="sd">        `class` dotflow.core.workflow.Workflow</span>
+<span class="sd">        `class` dotflow.core.workflow.Manager</span>
 
-<span class="sd">            workflow = Workflow(</span>
+<span class="sd">            workflow = Manager(</span>
 <span class="sd">                tasks=[tasks],</span>
 <span class="sd">                success=basic_callback,</span>
 <span class="sd">                failure=basic_callback,</span>
@@ -710,10 +707,21 @@ By default, it is in <strong>sequential</strong> mode.</p>
 
 <span class="sd">    Args:</span>
 <span class="sd">        tasks (List[Task]):</span>
+<span class="sd">            A list containing objects of type Task.</span>
 
 <span class="sd">        success (Callable):</span>
+<span class="sd">            Success function to be executed after the completion of the entire</span>
+<span class="sd">            workflow. It&#39;s essentially a callback for successful scenarios.</span>
 
 <span class="sd">        failure (Callable):</span>
+<span class="sd">            Failure function to be executed after the completion of the entire</span>
+<span class="sd">            workflow. It&#39;s essentially a callback for error scenarios</span>
+
+<span class="sd">        mode (TypeExecution):</span>
+<span class="sd">            Parameter that defines the execution mode of the workflow. Currently,</span>
+<span class="sd">            there are options to execute in **sequential**, **background**, or **parallel** mode.</span>
+<span class="sd">            The sequential mode is used by default.</span>
+
 
 <span class="sd">        keep_going (bool):</span>
 <span class="sd">            A parameter that receives a boolean object with the purpose of continuing</span>
@@ -721,19 +729,13 @@ By default, it is in <strong>sequential</strong> mode.</p>
 <span class="sd">            execution of a task. If it is **true**, the execution will continue;</span>
 <span class="sd">            if it is **False**, the workflow will stop.</span>
 
-<span class="sd">        mode (TypeExecution):</span>
-<span class="sd">            A parameter for assigning the execution mode of the workflow. Currently,</span>
-<span class="sd">            there is the option to execute in **sequential** mode or **background** mode.</span>
-<span class="sd">            By default, it is in **sequential** mode.</span>
-
 <span class="sd">        workflow_id (UUID):</span>
 
 <span class="sd">    Attributes:</span>
-<span class="sd">        workflow_id (UUID):</span>
-<span class="sd">        started (datetime):</span>
-<span class="sd">        tasks (List[Task]):</span>
 <span class="sd">        success (Callable):</span>
 <span class="sd">        failure (Callable):</span>
+<span class="sd">        workflow_id (UUID):</span>
+<span class="sd">        started (datetime):</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
@@ -741,63 +743,66 @@ By default, it is in <strong>sequential</strong> mode.</p>
         <span class="n">tasks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Task</span><span class="p">],</span>
         <span class="n">success</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="n">basic_callback</span><span class="p">,</span>
         <span class="n">failure</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="n">basic_callback</span><span class="p">,</span>
-        <span class="n">keep_going</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">mode</span><span class="p">:</span> <span class="n">TypeExecution</span> <span class="o">=</span> <span class="n">TypeExecution</span><span class="o">.</span><span class="n">SEQUENTIAL</span><span class="p">,</span>
-        <span class="n">workflow_id</span><span class="p">:</span> <span class="n">UUID</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">keep_going</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">workflow_id</span><span class="p">:</span> <span class="n">UUID</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">workflow_id</span> <span class="o">=</span> <span class="n">workflow_id</span> <span class="ow">or</span> <span class="n">uuid4</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">started</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span> <span class="o">=</span> <span class="n">tasks</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">success</span> <span class="o">=</span> <span class="n">success</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">failure</span> <span class="o">=</span> <span class="n">failure</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">workflow_id</span> <span class="o">=</span> <span class="n">workflow_id</span> <span class="ow">or</span> <span class="n">uuid4</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">started</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+
+        <span class="n">execution</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">groups</span> <span class="o">=</span> <span class="n">grouper</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="n">tasks</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)(</span><span class="n">keep_going</span><span class="o">=</span><span class="n">keep_going</span><span class="p">)</span>
+            <span class="n">execution</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">ExecutionModeNotExist</span><span class="p">()</span> <span class="kn">from</span><span class="w"> </span><span class="nn">err</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_callback_workflow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tasks</span><span class="p">:</span> <span class="n">Task</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span> <span class="o">=</span> <span class="n">execution</span><span class="p">(</span>
+            <span class="n">tasks</span><span class="o">=</span><span class="n">tasks</span><span class="p">,</span> <span class="n">workflow_id</span><span class="o">=</span><span class="n">workflow_id</span><span class="p">,</span> <span class="n">ignore</span><span class="o">=</span><span class="n">keep_going</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="n">groups</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_callback_workflow</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_callback_workflow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tasks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Task</span><span class="p">]):</span>
         <span class="n">final_status</span> <span class="o">=</span> <span class="p">[</span><span class="n">task</span><span class="o">.</span><span class="n">status</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">]</span>
+
         <span class="k">if</span> <span class="n">TaskStatus</span><span class="o">.</span><span class="n">FAILED</span> <span class="ow">in</span> <span class="n">final_status</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">failure</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="n">tasks</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="n">tasks</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">sequential</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_going</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sequential&quot;&quot;&quot;</span>
-        <span class="n">previous_context</span> <span class="o">=</span> <span class="n">Context</span><span class="p">(</span>
-            <span class="n">task_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">workflow_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">workflow_id</span>
-        <span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sequential</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;groups&quot;</span><span class="p">,</span> <span class="p">{}))</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_darwin</span><span class="p">():</span>
+            <span class="n">process</span> <span class="o">=</span> <span class="n">SequentialGroup</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
 
-        <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">:</span>
-            <span class="n">Execution</span><span class="p">(</span>
-                <span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span>
-                <span class="n">workflow_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">workflow_id</span><span class="p">,</span>
-                <span class="n">previous_context</span><span class="o">=</span><span class="n">previous_context</span>
+        <span class="n">process</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">sequential_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">process</span> <span class="o">=</span> <span class="n">SequentialGroup</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">background</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
+        <span class="n">process</span> <span class="o">=</span> <span class="n">Background</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">is_darwin</span><span class="p">():</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;Parallel mode does not work with MacOS.&quot;</span>
+                <span class="s2">&quot; Running tasks in sequence.&quot;</span><span class="p">,</span>
+                <span class="ne">Warning</span>
             <span class="p">)</span>
+            <span class="n">process</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
 
-            <span class="n">previous_context</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-                <span class="n">key</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">)</span>
-            <span class="p">)</span>
-
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">keep_going</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">task</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">TaskStatus</span><span class="o">.</span><span class="n">FAILED</span><span class="p">:</span>
-                    <span class="k">break</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_callback_workflow</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">background</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_going</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Background&quot;&quot;&quot;</span>
-        <span class="n">th</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sequential</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">keep_going</span><span class="p">])</span>
-        <span class="n">th</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_going</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Not implemented&quot;&quot;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">data_store</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_going</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Not implemented&quot;&quot;&quot;</span>
+        <span class="n">process</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
               </details>
 
@@ -816,7 +821,7 @@ By default, it is in <strong>sequential</strong> mode.</p>
 <div class="doc doc-object doc-function">
 
 
-<h3 id="dotflow.core.workflow.Workflow._callback_workflow" class="doc doc-heading">
+<h3 id="dotflow.core.workflow.Manager._callback_workflow" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">_callback_workflow</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span></code>
 
 </h3>
@@ -828,13 +833,15 @@ By default, it is in <strong>sequential</strong> mode.</p>
 
             <details class="quote">
               <summary>Source code in <code>dotflow/core/workflow.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">82</span>
-<span class="normal">83</span>
-<span class="normal">84</span>
-<span class="normal">85</span>
-<span class="normal">86</span>
-<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_callback_workflow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tasks</span><span class="p">:</span> <span class="n">Task</span><span class="p">):</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_callback_workflow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tasks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Task</span><span class="p">]):</span>
     <span class="n">final_status</span> <span class="o">=</span> <span class="p">[</span><span class="n">task</span><span class="o">.</span><span class="n">status</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">]</span>
+
     <span class="k">if</span> <span class="n">TaskStatus</span><span class="o">.</span><span class="n">FAILED</span> <span class="ow">in</span> <span class="n">final_status</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">failure</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="n">tasks</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -848,149 +855,101 @@ By default, it is in <strong>sequential</strong> mode.</p>
 <div class="doc doc-object doc-function">
 
 
-<h3 id="dotflow.core.workflow.Workflow.sequential" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">sequential</span><span class="p">(</span><span class="n">keep_going</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<h3 id="dotflow.core.workflow.Manager.sequential" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">sequential</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 </h3>
 
 
     <div class="doc doc-contents ">
 
-        <p>Sequential</p>
+          
+
+            <details class="quote">
+              <summary>Source code in <code>dotflow/core/workflow.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">sequential</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;groups&quot;</span><span class="p">,</span> <span class="p">{}))</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_darwin</span><span class="p">():</span>
+        <span class="n">process</span> <span class="o">=</span> <span class="n">SequentialGroup</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
+
+    <span class="n">process</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="dotflow.core.workflow.Manager.background" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">background</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
 
           
 
             <details class="quote">
               <summary>Source code in <code>dotflow/core/workflow.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">sequential</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_going</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sequential&quot;&quot;&quot;</span>
-    <span class="n">previous_context</span> <span class="o">=</span> <span class="n">Context</span><span class="p">(</span>
-        <span class="n">task_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-        <span class="n">workflow_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">workflow_id</span>
-    <span class="p">)</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">background</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
+    <span class="n">process</span> <span class="o">=</span> <span class="n">Background</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
 
-    <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">:</span>
-        <span class="n">Execution</span><span class="p">(</span>
-            <span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span>
-            <span class="n">workflow_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">workflow_id</span><span class="p">,</span>
-            <span class="n">previous_context</span><span class="o">=</span><span class="n">previous_context</span>
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="dotflow.core.workflow.Manager.parallel" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">parallel</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+          
+
+            <details class="quote">
+              <summary>Source code in <code>dotflow/core/workflow.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">is_darwin</span><span class="p">():</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Parallel mode does not work with MacOS.&quot;</span>
+            <span class="s2">&quot; Running tasks in sequence.&quot;</span><span class="p">,</span>
+            <span class="ne">Warning</span>
         <span class="p">)</span>
+        <span class="n">process</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
 
-        <span class="n">previous_context</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-            <span class="n">key</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">)</span>
-        <span class="p">)</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">keep_going</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">task</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">TaskStatus</span><span class="o">.</span><span class="n">FAILED</span><span class="p">:</span>
-                <span class="k">break</span>
-
-    <span class="bp">self</span><span class="o">.</span><span class="n">_callback_workflow</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">)</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span>
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="dotflow.core.workflow.Workflow.background" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">background</span><span class="p">(</span><span class="n">keep_going</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
-
-</h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Background</p>
-
-          
-
-            <details class="quote">
-              <summary>Source code in <code>dotflow/core/workflow.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">background</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_going</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Background&quot;&quot;&quot;</span>
-    <span class="n">th</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sequential</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">keep_going</span><span class="p">])</span>
-    <span class="n">th</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="dotflow.core.workflow.Workflow.parallel" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">parallel</span><span class="p">(</span><span class="n">keep_going</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
-
-</h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Not implemented</p>
-
-          
-
-            <details class="quote">
-              <summary>Source code in <code>dotflow/core/workflow.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">119</span>
-<span class="normal">120</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_going</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Not implemented&quot;&quot;&quot;</span>
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="dotflow.core.workflow.Workflow.data_store" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">data_store</span><span class="p">(</span><span class="n">keep_going</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
-
-</h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Not implemented</p>
-
-          
-
-            <details class="quote">
-              <summary>Source code in <code>dotflow/core/workflow.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">122</span>
-<span class="normal">123</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">data_store</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_going</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Not implemented&quot;&quot;&quot;</span>
+    <span class="n">process</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>

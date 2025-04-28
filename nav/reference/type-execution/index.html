@@ -19,12 +19,9 @@
                 <script>hljs.highlightAll();</script>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
             <link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
             <link rel="stylesheet" href="../../../assets/css/root.min.css">
             <link rel="stylesheet" href="../../../assets/css/main.min.css">
-            <link rel="stylesheet" href="../../../assets/css/media.min.css">
-            <link rel="stylesheet" href="../../../assets/css/mkdocstrings.min.css">
                 <link href="../../../assets/_mkdocstrings.css" rel="stylesheet">
                 <link href="../../../assets/style.css" rel="stylesheet">
 
@@ -117,7 +114,7 @@
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../workflow/" class="dropdown-item text-decoration-none ">Workflow</a>
+        <a href="../workflow/" class="dropdown-item text-decoration-none ">Manager</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
@@ -139,6 +136,11 @@
     <li>
         <a class="dropdown-item text-decoration-none" href="#">ABC &raquo;</a>
         <ul class="submenu dropdown-menu">
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../abc-flow/" class="dropdown-item text-decoration-none ">Flow</a>
+    </li>
+<!-- endblock -->
                 <!-- block dropdown-menu -->
     <li>
         <a href="../abc-storage/" class="dropdown-item text-decoration-none ">Storage</a>
@@ -301,7 +303,7 @@
                 
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-3 d-none d-md-block" id="component-sidebar">
+                            <div class="col-3" id="component-sidebar">
                                     <!-- block sidebar -->
 <div class="navbar-expand-md" role="complementary">
     
@@ -324,10 +326,6 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="3"><a href="#dotflow.core.types.execution.TypeExecution.DATA_STORE" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;DATA_STORE</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
               </ul>
             </li>
               </ul>
@@ -337,7 +335,7 @@
 </div>
 <!-- endblock -->
                             </div>
-                            <div class="col-md-9 col-12" id="component-content">
+                            <div class="col-9" id="component-content">
                                     <!-- block content -->
 <section class="container post" id="component-content">
     <article>
@@ -389,8 +387,7 @@
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">TypeExecution</span><span class="p">:</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">TypeExecution</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Import:</span>
 <span class="sd">        You can import the **TypeExecution** class with:</span>
@@ -401,7 +398,6 @@
     <span class="n">SEQUENTIAL</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Doc</span><span class="p">(</span><span class="s2">&quot;Sequential execution.&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="s2">&quot;sequential&quot;</span>
     <span class="n">BACKGROUND</span><span class="p">:</span>  <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Doc</span><span class="p">(</span><span class="s2">&quot;Background execution.&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="s2">&quot;background&quot;</span>
     <span class="n">PARALLEL</span><span class="p">:</span>  <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Doc</span><span class="p">(</span><span class="s2">&quot;Parallel execution.&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="s2">&quot;parallel&quot;</span>
-    <span class="n">DATA_STORE</span><span class="p">:</span>  <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Doc</span><span class="p">(</span><span class="s2">&quot;Data store execution.&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="s2">&quot;data_store&quot;</span>
 </code></pre></div></td></tr></table></div>
               </details>
 
@@ -481,30 +477,6 @@
     <div class="doc doc-contents ">
 
         <p>Parallel execution.</p>
-
-          
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="dotflow.core.types.execution.TypeExecution.DATA_STORE" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">DATA_STORE</span> <span class="o">=</span> <span class="s1">&#39;data_store&#39;</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-</h3>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Data store execution.</p>
 
           
     </div>

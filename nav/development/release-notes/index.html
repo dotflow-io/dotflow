@@ -19,12 +19,9 @@
                 <script>hljs.highlightAll();</script>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
             <link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
             <link rel="stylesheet" href="../../../assets/css/root.min.css">
             <link rel="stylesheet" href="../../../assets/css/main.min.css">
-            <link rel="stylesheet" href="../../../assets/css/media.min.css">
-            <link rel="stylesheet" href="../../../assets/css/mkdocstrings.min.css">
                 <link href="../../../assets/_mkdocstrings.css" rel="stylesheet">
                 <link href="../../../assets/style.css" rel="stylesheet">
 
@@ -117,7 +114,7 @@
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../../reference/workflow/" class="dropdown-item text-decoration-none ">Workflow</a>
+        <a href="../../reference/workflow/" class="dropdown-item text-decoration-none ">Manager</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
@@ -139,6 +136,11 @@
     <li>
         <a class="dropdown-item text-decoration-none" href="#">ABC &raquo;</a>
         <ul class="submenu dropdown-menu">
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../../reference/abc-flow/" class="dropdown-item text-decoration-none ">Flow</a>
+    </li>
+<!-- endblock -->
                 <!-- block dropdown-menu -->
     <li>
         <a href="../../reference/abc-storage/" class="dropdown-item text-decoration-none ">Storage</a>
@@ -301,7 +303,7 @@
                 
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-3 d-none d-md-block" id="component-sidebar">
+                            <div class="col-3" id="component-sidebar">
                                     <!-- block sidebar -->
 <div class="navbar-expand-md" role="complementary">
     
@@ -310,6 +312,18 @@
             
             <li class="nav-item" data-bs-level="1"><a href="#release-notes" class="nav-link">Release Notes</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#v0120" class="nav-link">v0.12.0</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#v0111" class="nav-link">v0.11.1</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#v0110" class="nav-link">v0.11.0</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-bs-level="2"><a href="#v0100" class="nav-link">v0.10.0</a>
               <ul class="nav flex-column">
               </ul>
@@ -373,7 +387,7 @@
 </div>
 <!-- endblock -->
                             </div>
-                            <div class="col-md-9 col-12" id="component-content">
+                            <div class="col-9" id="component-content">
                                     <!-- block content -->
 <section class="container post" id="component-content">
     <article>
@@ -382,6 +396,21 @@
             
         </header>
         <p><h1 id="release-notes">Release Notes</h1>
+<h2 id="v0120">v0.12.0</h2>
+<ul>
+<li><a href="https://github.com/dotflow-io/dotflow/releases/tag/v0.12.0">📦 PyPI - Build 0.12.0</a></li>
+<li><a href="https://github.com/dotflow-io/dotflow/pull/54">📌 Separate tasks into groups</a></li>
+<li><a href="https://github.com/dotflow-io/dotflow/pull/52">📌 Workflow result</a></li>
+</ul>
+<h2 id="v0111">v0.11.1</h2>
+<ul>
+<li><a href="https://github.com/dotflow-io/dotflow/releases/tag/v0.11.1">📦 PyPI - Build 0.11.1</a></li>
+<li><a href="https://github.com/dotflow-io/dotflow/pull/50">🪲 BUG: Problem with context of type 'pydantic class'</a></li>
+</ul>
+<h2 id="v0110">v0.11.0</h2>
+<ul>
+<li><a href="https://github.com/dotflow-io/dotflow/releases/tag/v0.11.0">📦 PyPI - Build 0.11.0</a></li>
+</ul>
 <h2 id="v0100">v0.10.0</h2>
 <ul>
 <li><a href="https://github.com/dotflow-io/dotflow/releases/tag/v0.10.0">📦 PyPI - Build 0.10.0</a></li>

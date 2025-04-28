@@ -19,12 +19,9 @@
                 <script>hljs.highlightAll();</script>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
             <link rel="stylesheet" href="assets/css/bootstrap.min.css">
             <link rel="stylesheet" href="assets/css/root.min.css">
             <link rel="stylesheet" href="assets/css/main.min.css">
-            <link rel="stylesheet" href="assets/css/media.min.css">
-            <link rel="stylesheet" href="assets/css/mkdocstrings.min.css">
                 <link href="assets/_mkdocstrings.css" rel="stylesheet">
                 <link href="assets/style.css" rel="stylesheet">
 
@@ -117,7 +114,7 @@
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="nav/reference/workflow/" class="dropdown-item text-decoration-none ">Workflow</a>
+        <a href="nav/reference/workflow/" class="dropdown-item text-decoration-none ">Manager</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
@@ -139,6 +136,11 @@
     <li>
         <a class="dropdown-item text-decoration-none" href="#">ABC &raquo;</a>
         <ul class="submenu dropdown-menu">
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="nav/reference/abc-flow/" class="dropdown-item text-decoration-none ">Flow</a>
+    </li>
+<!-- endblock -->
                 <!-- block dropdown-menu -->
     <li>
         <a href="nav/reference/abc-storage/" class="dropdown-item text-decoration-none ">Storage</a>
@@ -301,7 +303,7 @@
                 
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-3 d-none d-md-block" id="component-sidebar">
+                            <div class="col-3" id="component-sidebar">
                                     <!-- block sidebar -->
 <div class="navbar-expand-md" role="complementary">
     
@@ -329,7 +331,7 @@
 </div>
 <!-- endblock -->
                             </div>
-                            <div class="col-md-9 col-12" id="component-content">
+                            <div class="col-9" id="component-content">
                                     <!-- block content -->
 <section class="container post" id="component-content">
     <article>
@@ -338,15 +340,22 @@
             
         </header>
         <p><h1 id="welcome-to-dotflow">Welcome to dotflow</h1>
-<hr />
-<p><img alt="" src="assets/dotflow.gif" /></p>
-<hr />
+<div align="center">
+  <a aria-label="Serverless.com" href="https://dotflow.io">Website</a>
+  &nbsp;•&nbsp;
+  <a aria-label="Dotglow Documentation" href="https://dotflow-io.github.io/dotflow/">Documentation</a>
+  &nbsp;•&nbsp;
+  <a aria-label="Pypi" href="https://pypi.org/project/dotflow/">Pypi</a>
+</div>
+
+<p><img alt="" src="https://raw.githubusercontent.com/FernandoCelmer/dotflow/master/docs/assets/dotflow.gif" /></p>
 <p><img alt="GitHub Org's stars" src="https://img.shields.io/github/stars/dotflow-io?label=Dotflow&amp;style=flat-square" />
 <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/dotflow-io/dotflow?style=flat-square" />
 <img alt="PyPI" src="https://img.shields.io/pypi/v/dotflow?style=flat-square" />
 <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/dotflow?style=flat-square" />
 <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/dotflow?style=flat-square" /></p>
-<p>This is a very simple library that is still in the early stages of development. The main goal of this tool is to create a simple and secure workflow for executing any type of task. The library's API design was made to make it easy to add tasks and control their execution. To keep it simple, just instantiate the <code>DotFlow</code> class, use the <code>add</code> method, and the <code>start</code> method to begin execution.</p>
+<p>With Dotflow, you get a powerful and easy-to-use library designed to create execution pipelines without complication. Add tasks intuitively and control the entire process with just a few commands.</p>
+<p>Our goal is to make task management faster and more secure, without overwhelming you with complexity. Simply instantiate the DotFlow class, add your tasks with the <code>add</code> method, and start execution with the <code>start</code> method.</p>
 <p>Start with the basics <a href="https://dotflow-io.github.io/dotflow/nav/getting-started/">here</a>.</p>
 <h2 id="getting-help">Getting Help</h2>
 <p>We use GitHub issues for tracking bugs and feature requests and have limited bandwidth to address them. If you need anything, I ask you to please follow our templates for opening issues or discussions.</p>

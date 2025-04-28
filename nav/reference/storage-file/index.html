@@ -19,12 +19,9 @@
                 <script>hljs.highlightAll();</script>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
             <link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
             <link rel="stylesheet" href="../../../assets/css/root.min.css">
             <link rel="stylesheet" href="../../../assets/css/main.min.css">
-            <link rel="stylesheet" href="../../../assets/css/media.min.css">
-            <link rel="stylesheet" href="../../../assets/css/mkdocstrings.min.css">
                 <link href="../../../assets/_mkdocstrings.css" rel="stylesheet">
                 <link href="../../../assets/style.css" rel="stylesheet">
 
@@ -117,7 +114,7 @@
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
     <li>
-        <a href="../workflow/" class="dropdown-item text-decoration-none ">Workflow</a>
+        <a href="../workflow/" class="dropdown-item text-decoration-none ">Manager</a>
     </li>
 <!-- endblock -->
                                     <!-- block dropdown-menu -->
@@ -139,6 +136,11 @@
     <li>
         <a class="dropdown-item text-decoration-none" href="#">ABC &raquo;</a>
         <ul class="submenu dropdown-menu">
+                <!-- block dropdown-menu -->
+    <li>
+        <a href="../abc-flow/" class="dropdown-item text-decoration-none ">Flow</a>
+    </li>
+<!-- endblock -->
                 <!-- block dropdown-menu -->
     <li>
         <a href="../abc-storage/" class="dropdown-item text-decoration-none ">Storage</a>
@@ -301,7 +303,7 @@
                 
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-3 d-none d-md-block" id="component-sidebar">
+                            <div class="col-3" id="component-sidebar">
                                     <!-- block sidebar -->
 <div class="navbar-expand-md" role="complementary">
     
@@ -317,14 +319,6 @@
               </ul>
             </li>
             <li class="nav-item" data-bs-level="3"><a href="#dotflow.providers.storage_file.StorageFile.__init__" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;__init__</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="3"><a href="#dotflow.providers.storage_file.StorageFile._dumps" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;_dumps</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="3"><a href="#dotflow.providers.storage_file.StorageFile._loads" class="nav-link"><code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;_loads</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -349,7 +343,7 @@
 </div>
 <!-- endblock -->
                             </div>
-                            <div class="col-md-9 col-12" id="component-content">
+                            <div class="col-9" id="component-content">
                                     <!-- block content -->
 <section class="container post" id="component-content">
     <article>
@@ -550,66 +544,6 @@
 <span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">START_PATH</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;tasks&quot;</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="dotflow.providers.storage_file.StorageFile._dumps" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">_dumps</span><span class="p">(</span><span class="n">storage</span><span class="p">)</span></code>
-
-</h3>
-
-
-    <div class="doc doc-contents ">
-
-          
-
-            <details class="quote">
-              <summary>Source code in <code>dotflow/providers/storage_file.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_dumps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">storage</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">dumps</span><span class="p">(</span><span class="n">storage</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">storage</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="dotflow.providers.storage_file.StorageFile._loads" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">_loads</span><span class="p">(</span><span class="n">storage</span><span class="p">)</span></code>
-
-</h3>
-
-
-    <div class="doc doc-contents ">
-
-          
-
-            <details class="quote">
-              <summary>Source code in <code>dotflow/providers/storage_file.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_loads</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">storage</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Context</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">Context</span><span class="p">(</span><span class="n">storage</span><span class="o">=</span><span class="n">loads</span><span class="p">(</span><span class="n">storage</span><span class="p">))</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">Context</span><span class="p">(</span><span class="n">storage</span><span class="o">=</span><span class="n">storage</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
