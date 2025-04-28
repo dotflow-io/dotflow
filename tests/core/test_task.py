@@ -1,5 +1,7 @@
 """Test context of task"""
 
+import json
+
 import unittest
 from uuid import uuid4
 
@@ -7,6 +9,7 @@ from dotflow.core.action import Action
 from dotflow.core.config import Config
 from dotflow.core.context import Context
 from dotflow.core.types.status import TaskStatus
+from dotflow.core.serializers.task import SerializerTaskError, SerializerTask
 from dotflow.core.exception import (
     MissingActionDecorator,
     NotCallableObject,
@@ -59,6 +62,73 @@ class TestTask(unittest.TestCase):
         )
 
         self.assertEqual(task.workflow_id, workflow_id)
+
+    def test_task_schema(self):
+        expected_error_message = "System error"
+        expected_duration = 1.0
+        expected_workflow_id = uuid4()
+
+        task = Task(
+            task_id=0,
+            workflow_id=expected_workflow_id,
+            initial_context=Context(storage=self.content),
+            step=action_step,
+            callback=simple_callback,
+        )
+
+        try:
+            raise SystemError(expected_error_message)
+        except Exception as error:
+            task.error = error
+
+        task.current_context = self.content
+        task.previous_context = self.content
+        task.duration = expected_duration
+
+        schema = task.schema()
+
+        self.assertIsInstance(schema, SerializerTask)
+        self.assertIsInstance(schema.error, SerializerTaskError)
+
+        self.assertEqual(schema.task_id, 0)
+        self.assertEqual(schema.workflow_id, expected_workflow_id)
+        self.assertEqual(schema.status, TaskStatus.NOT_STARTED)
+        self.assertEqual(schema.error.message, expected_error_message)
+        self.assertEqual(schema.duration, expected_duration)
+        self.assertEqual(schema.initial_context, json.dumps(self.content))
+        self.assertEqual(schema.current_context, json.dumps(self.content))
+        self.assertEqual(schema.previous_context, json.dumps(self.content))
+        self.assertEqual(schema.group_name, "default")
+
+    def test_task_result(self):
+        expected_duration = 1.0
+        expected_workflow_id = uuid4()
+        expected_result = {
+            "task_id": 0,
+            "workflow_id": str(expected_workflow_id),
+            "status": "Not started",
+            "error": None,
+            "duration": expected_duration,
+            "initial_context": '{"foo": "bar"}',
+            "current_context": '{"foo": "bar"}',
+            "previous_context": '{"foo": "bar"}',
+            "group_name": "default",
+        }
+
+        task = Task(
+            task_id=0,
+            workflow_id=expected_workflow_id,
+            initial_context=Context(storage=self.content),
+            step=action_step,
+            callback=simple_callback,
+        )
+
+        task.current_context = self.content
+        task.previous_context = self.content
+        task.duration = expected_duration
+
+        result = task.result()
+        self.assertEqual(result, expected_result)
 
 
 class TestTaskSetter(unittest.TestCase):
