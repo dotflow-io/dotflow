@@ -10,6 +10,7 @@ try:
 except ImportError:
     NoneType = type(None)
 
+from dotflow.core.exception import ExecutionWithClassError
 from dotflow.logging import logger
 from dotflow.core.action import Action
 from dotflow.core.context import Context
@@ -116,7 +117,10 @@ class Execution:
                 new_context.storage.append(subcontext)
                 previous_context = subcontext
 
-            except Exception:
+            except Exception as error:
+                if not isinstance(error, ExecutionWithClassError):
+                    raise error
+
                 subcontext = new_object(
                     class_instance,
                     initial_context=self.task.initial_context,

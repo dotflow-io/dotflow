@@ -63,3 +63,8 @@ class ModuleNotFound(Exception):
                 library=library
             )
         )
+
+
+class ExecutionWithClassError(Exception):
+    def __init__(self):
+        super(ExecutionWithClassError, self).__init__("Unknown")

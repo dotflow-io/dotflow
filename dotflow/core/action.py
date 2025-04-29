@@ -6,7 +6,18 @@ from concurrent.futures import ThreadPoolExecutor
 from typing import Callable, Dict
 from types import FunctionType
 
+from dotflow.core.exception import ExecutionWithClassError
 from dotflow.core.context import Context
+
+
+def is_execution_with_class_internal_error(error: Exception) -> bool:
+    message = str(error)
+    patterns = [
+        "initial_context",
+        "previous_context",
+        "missing 1 required positional argument: 'self'",
+    ]
+    return any(pattern in message for pattern in patterns)
 
 
 class Action(object):
@@ -103,9 +114,7 @@ class Action(object):
         return action
 
     def _run_action(self, *args, **kwargs):
-        last_exception = Exception("Unknown")
-
-        for _ in range(1, self.retry + 1):
+        for attempt in range(1, self.retry + 1):
             try:
                 if self.timeout:
                     with ThreadPoolExecutor(max_workers=1) as executor:
@@ -117,11 +126,15 @@ class Action(object):
             except Exception as error:
                 last_exception = error
 
+                if is_execution_with_class_internal_error(error=last_exception):
+                    raise ExecutionWithClassError()
+
+                if attempt == self.retry:
+                    raise last_exception
+
                 sleep(self.retry_delay)
                 if self.backoff:
                     self.retry_delay *= 2
-
-        raise last_exception
 
     def _set_params(self):
         if isinstance(self.func, FunctionType):
