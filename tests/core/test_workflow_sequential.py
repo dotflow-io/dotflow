@@ -96,7 +96,7 @@ class TestWorkflowSequential(unittest.TestCase):
 
         self.assertListEqual(execution.queue, [])
 
-    def test_instantiating_sequential_internal_callback(self):
+    def test_instantiating_sequential_flow_callback(self):
         task = Task(task_id=5, step=action_step, callback=simple_callback)
         groups = grouper(tasks=[task])
 
@@ -108,7 +108,7 @@ class TestWorkflowSequential(unittest.TestCase):
         )
 
         execution.setup_queue()
-        execution._internal_callback(task=task)
+        execution._flow_callback(task=task)
 
         tasks = execution.get_tasks()
         self.assertEqual(tasks[0].task_id, 5)
