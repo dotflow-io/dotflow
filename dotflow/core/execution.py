@@ -157,6 +157,7 @@ class Execution:
             self.task.error = err
 
         finally:
+            self.task.config.notify.send(task=self.task.result())
             self.task.callback(task=self.task)
             _internal_callback(task=self.task)
 

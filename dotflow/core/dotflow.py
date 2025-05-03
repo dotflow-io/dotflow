@@ -2,6 +2,7 @@
 
 from uuid import uuid4
 from functools import partial
+from typing import Optional
 
 from dotflow.core.config import Config
 from dotflow.core.workflow import Manager
@@ -26,7 +27,7 @@ class DotFlow:
             workflow = DotFlow(config=config)
 
     Args:
-        config (Config): Configuration class.
+        config (Optional[Config]): Configuration class.
 
     Attributes:
         workflow_id (UUID):
@@ -38,9 +39,10 @@ class DotFlow:
 
     def __init__(
             self,
-            config: Config = Config()
+            config: Optional[Config] = None
     ) -> None:
         self.workflow_id = uuid4()
+        config = config if config else Config()
 
         self.task = TaskBuilder(
             config=config,
