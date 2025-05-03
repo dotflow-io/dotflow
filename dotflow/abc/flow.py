@@ -34,7 +34,7 @@ class Flow(ABC):
         return self.queue
 
     @abstractmethod
-    def _internal_callback(self, task: Task) -> None:
+    def _flow_callback(self, task: Task) -> None:
         self.queue.append(task)
 
     @abstractmethod

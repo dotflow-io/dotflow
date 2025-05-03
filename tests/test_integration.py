@@ -30,6 +30,9 @@ from examples.workflow_background_mode import main as workflow_background_mode
 from examples.workflow_parallel_mode import main as workflow_parallel_mode
 from examples.workflow_sequential_group_mode import main as workflow_sequential_group_mode
 from examples.workflow_sequential_mode import main as workflow_sequential_mode
+from examples.workflow_with_backoff import main as workflow_with_backoff
+from examples.workflow_with_retry_delay import main as workflow_with_retry_delay
+from examples.workflow_with_timeout import main as workflow_with_timeout
 
 
 class TestIntegration(unittest.TestCase):
@@ -117,3 +120,12 @@ class TestIntegration(unittest.TestCase):
 
     def test_workflow_sequential_mode(sefl):
         workflow_sequential_mode()
+
+    def test_workflow_with_backoff(self):
+        workflow_with_backoff()
+
+    def test_workflow_with_retry_delay(self):
+        workflow_with_retry_delay()
+
+    def test_workflow_with_timeout(self):
+        workflow_with_timeout()
