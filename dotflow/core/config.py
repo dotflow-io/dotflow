@@ -38,8 +38,8 @@ class Config:
         log (Optional[Log]): Type of the notify.
 
     Attributes:
-        storage (Storage):
-        notify (Notify):
+        storage (Optional[Storage]):
+        notify (Optional[Notify]):
         log (Optional[Log]):
     """
 

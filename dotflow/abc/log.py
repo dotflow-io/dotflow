@@ -10,8 +10,8 @@ class Log(ABC):
 
     @abstractmethod
     def info(self, task: Any) -> None:
-        """Send log"""
+        """Info"""
 
     @abstractmethod
     def error(self, task: Any) -> None:
-        """Send log"""
+        """Error"""

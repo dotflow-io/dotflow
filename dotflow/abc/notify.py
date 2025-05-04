@@ -10,4 +10,4 @@ class Notify(ABC):
 
     @abstractmethod
     def send(self, task: Any) -> None:
-        """Send task"""
+        """Send"""
