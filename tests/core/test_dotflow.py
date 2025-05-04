@@ -6,7 +6,7 @@ from dotflow.core.workflow import Manager
 from dotflow.core.context import Context
 from dotflow.core.task import Task, TaskBuilder
 from dotflow.core.dotflow import DotFlow
-from dotflow.core.types.status import TaskStatus
+from dotflow.core.types.status import TypeStatus
 
 from tests.mocks import action_step
 
@@ -27,7 +27,7 @@ class TestDotFlow(unittest.TestCase):
 
         self.assertEqual(len(result), 1)
         self.assertIsInstance(result[0], Task)
-        self.assertEqual(result[0].status, TaskStatus.COMPLETED)
+        self.assertEqual(result[0].status, TypeStatus.COMPLETED)
 
     def test_result_context_with_start(self):
         self.workflow.start()
@@ -48,7 +48,7 @@ class TestDotFlow(unittest.TestCase):
 
         self.assertEqual(len(result), 1)
         self.assertIsInstance(result[0], Task)
-        self.assertEqual(result[0].status, TaskStatus.NOT_STARTED)
+        self.assertEqual(result[0].status, TypeStatus.NOT_STARTED)
 
     def test_result_context_without_start(self):
         result = self.workflow.result_context()

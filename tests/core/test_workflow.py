@@ -7,7 +7,7 @@ from unittest.mock import Mock
 from types import FunctionType
 
 from dotflow.core.workflow import Manager
-from dotflow.core.types import TypeExecution, TaskStatus
+from dotflow.core.types import TypeExecution, TypeStatus
 from dotflow.core.exception import ExecutionModeNotExist
 from dotflow.core.task import Task
 
@@ -45,7 +45,7 @@ class TestWorkflow(unittest.TestCase):
         )
 
         controller = Manager(tasks=[task])
-        self.assertEqual(controller.tasks[0].status, TaskStatus.COMPLETED)
+        self.assertEqual(controller.tasks[0].status, TypeStatus.COMPLETED)
 
     def test_workflow_with_function_failed(self):
         task = Task(
@@ -55,7 +55,7 @@ class TestWorkflow(unittest.TestCase):
         )
 
         controller = Manager(tasks=[task])
-        self.assertEqual(controller.tasks[0].status, TaskStatus.FAILED)
+        self.assertEqual(controller.tasks[0].status, TypeStatus.FAILED)
 
     def test_with_execution_mode_that_does_not_exist(self):
         with self.assertRaises(ExecutionModeNotExist):
@@ -100,4 +100,4 @@ class TestWorkflow(unittest.TestCase):
         )
 
         controller = Manager(tasks=[task])
-        self.assertEqual(controller.tasks[0].status, TaskStatus.COMPLETED)
+        self.assertEqual(controller.tasks[0].status, TypeStatus.COMPLETED)
