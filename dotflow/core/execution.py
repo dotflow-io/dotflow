@@ -1,6 +1,7 @@
 """Execution module"""
 
 from uuid import UUID
+from datetime import datetime
 from typing import Callable, List, Tuple
 from inspect import getsourcelines
 from types import FunctionType
@@ -17,7 +18,6 @@ from dotflow.core.context import Context
 from dotflow.core.task import Task
 from dotflow.core.types import TypeStatus
 
-from dotflow.core.decorators import time
 from dotflow.utils import basic_callback
 
 
@@ -135,9 +135,9 @@ class Execution:
 
         return new_context
 
-    @time
     def _excution(self, _flow_callback):
         try:
+            start = datetime.now()
             current_context = self.task.step(
                 initial_context=self.task.initial_context,
                 previous_context=self.task.previous_context,
@@ -150,6 +150,7 @@ class Execution:
                 )
 
             self.task.current_context = current_context
+            self.task.duration = (datetime.now() - start).total_seconds()
             self.task.status = TypeStatus.COMPLETED
 
         except AssertionError as err:
