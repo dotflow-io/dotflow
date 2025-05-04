@@ -15,7 +15,7 @@ from dotflow.logging import logger
 from dotflow.core.action import Action
 from dotflow.core.context import Context
 from dotflow.core.task import Task
-from dotflow.core.types import TaskStatus
+from dotflow.core.types import TypeStatus
 
 from dotflow.core.decorators import time
 from dotflow.utils import basic_callback
@@ -50,7 +50,7 @@ class Execution:
         _flow_callback: Callable = basic_callback,
     ) -> None:
         self.task = task
-        self.task.status = TaskStatus.IN_PROGRESS
+        self.task.status = TypeStatus.IN_PROGRESS
         self.task.previous_context = previous_context
         self.task.workflow_id = workflow_id
 
@@ -149,19 +149,18 @@ class Execution:
                     class_instance=current_context.storage
                 )
 
-            self.task.status = TaskStatus.COMPLETED
             self.task.current_context = current_context
+            self.task.status = TypeStatus.COMPLETED
 
         except AssertionError as err:
             raise err
 
         except Exception as err:
-            self.task.status = TaskStatus.FAILED
-            self.task.current_context = None
             self.task.error = err
+            self.task.current_context = None
+            self.task.status = TypeStatus.FAILED
 
         finally:
-            self.task.config.notify.send(task=self.task.result())
             self.task.callback(task=self.task)
             _flow_callback(task=self.task)
 

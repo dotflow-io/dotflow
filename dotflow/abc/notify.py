@@ -1,6 +1,6 @@
 """Notify ABC"""
 
-from typing import Dict
+from typing import Any
 
 from abc import ABC, abstractmethod
 
@@ -9,5 +9,5 @@ class Notify(ABC):
     """Notify"""
 
     @abstractmethod
-    def send(self, task: Dict[str, any]) -> None:
+    def send(self, task: Any) -> None:
         """Send task"""

@@ -2,9 +2,11 @@
 
 from typing import Optional
 
+from dotflow.abc.log import Log
 from dotflow.abc.storage import Storage
 from dotflow.abc.notify import Notify
 
+from dotflow.providers.log_default import LogDefault
 from dotflow.providers.storage_default import StorageDefault
 from dotflow.providers.notify_default import NotifyDefault
 
@@ -15,30 +17,38 @@ class Config:
         You can import the **Config** class with:
 
             from dotflow import Config
-            from dotflow.storage import StorageDefault
-            from dotflow.notify import NotifyDefault
+            from dotflow.providers import (
+                StorageDefault,
+                NotifyDefault,
+                LogDefault
+            )
 
     Example:
         `class` dotflow.core.config.Config
 
             config = Config(
                 storage=StorageFile(path=".output"),
-                notify=NotifyDefault()
+                notify=NotifyDefault(),
+                log=LogDefault()
             )
 
     Args:
         storage (Optional[Storage]): Type of the storage.
         notify (Optional[Notify]): Type of the notify.
+        log (Optional[Log]): Type of the notify.
 
     Attributes:
         storage (Storage):
         notify (Notify):
+        log (Optional[Log]):
     """
 
     def __init__(
-            self,
-            storage: Optional[Storage] = None,
-            notify: Optional[Notify] = None
+        self,
+        storage: Optional[Storage] = None,
+        notify: Optional[Notify] = None,
+        log: Optional[Log] = None,
     ) -> None:
         self.storage = storage if storage else StorageDefault()
         self.notify = notify if notify else NotifyDefault()
+        self.log = log if log else LogDefault()
