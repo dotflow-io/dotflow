@@ -161,7 +161,7 @@ class Sequential(Flow):
     def get_tasks(self) -> List[Task]:
         return self.queue
 
-    def _internal_callback(self, task: Task) -> None:
+    def _flow_callback(self, task: Task) -> None:
         self.queue.append(task)
 
     def run(self) -> None:
@@ -172,7 +172,7 @@ class Sequential(Flow):
                 task=task,
                 workflow_id=self.workflow_id,
                 previous_context=previous_context,
-                _internal_callback=self._internal_callback,
+                _flow_callback=self._flow_callback,
             )
 
             previous_context = task.config.storage.get(
@@ -204,7 +204,7 @@ class SequentialGroup(Flow):
 
         return self.tasks
 
-    def _internal_callback(self, task: Task) -> None:
+    def _flow_callback(self, task: Task) -> None:
         current_task = {
             task.task_id: {
                 "current_context": task.current_context,
@@ -249,7 +249,7 @@ class SequentialGroup(Flow):
                 task=task,
                 workflow_id=self.workflow_id,
                 previous_context=previous_context,
-                _internal_callback=self._internal_callback,
+                _flow_callback=self._flow_callback,
             )
 
             previous_context = task.config.storage.get(
@@ -269,7 +269,7 @@ class Background(Flow):
     def get_tasks(self) -> List[Task]:
         return self.tasks
 
-    def _internal_callback(self, task: Task) -> None:
+    def _flow_callback(self, task: Task) -> None:
         pass
 
     def run(self) -> None:
@@ -306,7 +306,7 @@ class Parallel(Flow):
 
         return self.tasks
 
-    def _internal_callback(self, task: Task) -> None:
+    def _flow_callback(self, task: Task) -> None:
         current_task = {
             task.task_id: {
                 "current_context": task.current_context,
@@ -324,7 +324,7 @@ class Parallel(Flow):
         for task in self.tasks:
             process = Process(
                 target=Execution,
-                args=(task, self.workflow_id, previous_context, self._internal_callback),
+                args=(task, self.workflow_id, previous_context, self._flow_callback),
             )
             process.start()
             processes.append(process)

@@ -90,7 +90,7 @@ class TestWorkflowSequentialGroup(unittest.TestCase):
 
         self.assertIsInstance(execution.queue, Queue)
 
-    def test_instantiating_sequential_group_internal_callback(self):
+    def test_instantiating_sequential_group_flow_callback(self):
         task = Task(task_id=5, step=action_step, callback=simple_callback)
         groups = grouper(tasks=[task])
 
@@ -102,7 +102,7 @@ class TestWorkflowSequentialGroup(unittest.TestCase):
         )
 
         execution.setup_queue()
-        execution._internal_callback(task=task)
+        execution._flow_callback(task=task)
 
         tasks = execution.get_tasks()
         self.assertEqual(tasks[0].task_id, 5)

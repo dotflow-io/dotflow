@@ -1,5 +1,10 @@
 # Release Notes
 
+## v0.13.0
+
+- [📦 PyPI - Build 0.13.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.13.0)
+- [📌 Action with timeout, retry_delay and backoff](https://github.com/dotflow-io/dotflow/pull/56)
+
 ## v0.12.0
 
 - [📦 PyPI - Build 0.12.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.12.0)

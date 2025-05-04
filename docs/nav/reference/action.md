@@ -7,7 +7,7 @@
             - task
             - retry
             - params
-            - _retry
+            - _run_action
             - _set_params
             - _get_context
             - _get_task

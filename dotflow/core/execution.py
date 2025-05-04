@@ -10,6 +10,7 @@ try:
 except ImportError:
     NoneType = type(None)
 
+from dotflow.core.exception import ExecutionWithClassError
 from dotflow.logging import logger
 from dotflow.core.action import Action
 from dotflow.core.context import Context
@@ -46,14 +47,14 @@ class Execution:
         task: Task,
         workflow_id: UUID,
         previous_context: Context = None,
-        _internal_callback: Callable = basic_callback,
+        _flow_callback: Callable = basic_callback,
     ) -> None:
         self.task = task
         self.task.status = TaskStatus.IN_PROGRESS
         self.task.previous_context = previous_context
         self.task.workflow_id = workflow_id
 
-        self._excution(_internal_callback)
+        self._excution(_flow_callback)
 
     def _is_action(self, class_instance: Callable, func: Callable):
         try:
@@ -116,7 +117,10 @@ class Execution:
                 new_context.storage.append(subcontext)
                 previous_context = subcontext
 
-            except Exception:
+            except Exception as error:
+                if not isinstance(error, ExecutionWithClassError):
+                    raise error
+
                 subcontext = new_object(
                     class_instance,
                     initial_context=self.task.initial_context,
@@ -132,7 +136,7 @@ class Execution:
         return new_context
 
     @time
-    def _excution(self, _internal_callback):
+    def _excution(self, _flow_callback):
         try:
             current_context = self.task.step(
                 initial_context=self.task.initial_context,
@@ -159,6 +163,6 @@ class Execution:
         finally:
             self.task.config.notify.send(task=self.task.result())
             self.task.callback(task=self.task)
-            _internal_callback(task=self.task)
+            _flow_callback(task=self.task)
 
         return self.task

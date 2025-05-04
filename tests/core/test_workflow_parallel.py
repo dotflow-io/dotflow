@@ -89,7 +89,7 @@ class TestWorkflowParallel(unittest.TestCase):
 
         self.assertIsInstance(execution.queue, Queue)
 
-    def test_instantiating_parallel_internal_callback(self):
+    def test_instantiating_parallel_flow_callback(self):
         task = Task(task_id=5, step=action_step, callback=simple_callback)
         groups = grouper(tasks=[task])
 
@@ -101,7 +101,7 @@ class TestWorkflowParallel(unittest.TestCase):
         )
 
         execution.setup_queue()
-        execution._internal_callback(task=task)
+        execution._flow_callback(task=task)
 
         tasks = execution.get_tasks()
         self.assertEqual(tasks[0].task_id, 5)
