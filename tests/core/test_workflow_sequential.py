@@ -6,7 +6,7 @@ from uuid import uuid4
 from unittest.mock import Mock
 
 from dotflow.core.workflow import Sequential, grouper
-from dotflow.core.types import TaskStatus
+from dotflow.core.types import TypeStatus
 from dotflow.core.task import Task, TaskError
 
 from tests.mocks import (
@@ -61,7 +61,7 @@ class TestWorkflowSequential(unittest.TestCase):
             groups=grouper(tasks=tasks),
         )
 
-        self.assertEqual(execution.tasks[0].status, TaskStatus.COMPLETED)
+        self.assertEqual(execution.tasks[0].status, TypeStatus.COMPLETED)
         self.assertEqual(execution.tasks[0].current_context.storage, {"foo": "bar"})
         self.assertIsInstance(execution.tasks[0].error, TaskError)
         self.assertEqual(execution.tasks[0].error.message, "")
@@ -76,7 +76,7 @@ class TestWorkflowSequential(unittest.TestCase):
             groups=grouper(tasks=tasks),
         )
 
-        self.assertEqual(execution.tasks[0].status, TaskStatus.FAILED)
+        self.assertEqual(execution.tasks[0].status, TypeStatus.FAILED)
         self.assertIsNone(execution.tasks[0].current_context.storage)
         self.assertIsInstance(execution.tasks[0].error, TaskError)
         self.assertEqual(execution.tasks[0].error.message, "Fail!")

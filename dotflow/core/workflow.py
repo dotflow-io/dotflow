@@ -14,7 +14,7 @@ from dotflow.abc.flow import Flow
 from dotflow.core.context import Context
 from dotflow.core.execution import Execution
 from dotflow.core.exception import ExecutionModeNotExist
-from dotflow.core.types import TypeExecution, TaskStatus
+from dotflow.core.types import TypeExecution, TypeStatus
 from dotflow.core.task import Task
 from dotflow.utils import basic_callback
 
@@ -117,7 +117,7 @@ class Manager:
     def _callback_workflow(self, tasks: List[Task]):
         final_status = [task.status for task in tasks]
 
-        if TaskStatus.FAILED in final_status:
+        if TypeStatus.FAILED in final_status:
             self.failure(tasks=tasks)
         else:
             self.success(tasks=tasks)
@@ -179,7 +179,7 @@ class Sequential(Flow):
                 key=task.config.storage.key(task=task)
             )
 
-            if not self.ignore and task.status == TaskStatus.FAILED:
+            if not self.ignore and task.status == TypeStatus.FAILED:
                 break
 
 
@@ -256,7 +256,7 @@ class SequentialGroup(Flow):
                 key=task.config.storage.key(task=task)
             )
 
-            if not self.ignore and task.status == TaskStatus.FAILED:
+            if not self.ignore and task.status == TypeStatus.FAILED:
                 break
 
 
