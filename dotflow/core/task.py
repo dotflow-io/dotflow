@@ -228,13 +228,11 @@ class Task(TaskInstance):
     def config(self, value: Config):
         self._config = value
 
-    def schema(self) -> SerializerTask:
-        return SerializerTask(
-            **self.__dict__
-        )
+    def schema(self, max: int = None) -> SerializerTask:
+        return SerializerTask(**self.__dict__, max=max)
 
-    def result(self) -> SerializerWorkflow:
-        item = self.schema().model_dump_json()
+    def result(self, max: int = None) -> SerializerWorkflow:
+        item = self.schema(max=max).model_dump_json()
         return json.loads(item)
 
 

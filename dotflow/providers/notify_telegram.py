@@ -19,11 +19,13 @@ class NotifyTelegram(Notify):
         self,
         token: str,
         chat_id: int,
-        notification_type: Optional[TypeStatus] = None
+        notification_type: Optional[TypeStatus] = None,
+        timeout: int = 1.5
     ):
         self.token = token
         self.chat_id = chat_id
         self.notification_type = notification_type
+        self.timeout = timeout
 
     def send(self, task: Any) -> None:
         if not self.notification_type or self.notification_type == task.status:
@@ -37,7 +39,7 @@ class NotifyTelegram(Notify):
                     url=API_TELEGRAM.format(token=self.token),
                     headers={"Content-Type": "application/json"},
                     data=dumps(data),
-                    timeout=5
+                    timeout=self.timeout
                 )
                 response.raise_for_status()
             except Exception as error:
@@ -52,5 +54,5 @@ class NotifyTelegram(Notify):
             status=task.status,
             workflow_id=task.workflow_id,
             task_id=task.task_id,
-            task=task.result(),
+            task=task.result(max=4000),
         )

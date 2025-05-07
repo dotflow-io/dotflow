@@ -106,14 +106,15 @@ class Execution:
             callable_list=callable_list, class_instance=class_instance
         )
 
-        for _, new in ordered_list:
-            new_object = getattr(class_instance, new)
+        for index, new in enumerate(ordered_list):
+            new_object = getattr(class_instance, new[1])
             try:
                 subcontext = new_object(
                     initial_context=self.task.initial_context,
                     previous_context=previous_context,
                     task=self.task,
                 )
+                subcontext.task_id = index
                 new_context.storage.append(subcontext)
                 previous_context = subcontext
 
@@ -127,6 +128,7 @@ class Execution:
                     previous_context=previous_context,
                     task=self.task,
                 )
+                subcontext.task_id = index
                 new_context.storage.append(subcontext)
                 previous_context = subcontext
 
