@@ -15,7 +15,7 @@ class DotFlow:
         You can import the **Dotflow** class directly from dotflow:
 
             from dotflow import DotFlow, Config
-            from dotflow.storage import StorageFile
+            from dotflow.providers import StorageFile
 
     Example:
         `class` dotflow.core.dotflow.Dotflow

@@ -9,11 +9,11 @@ from dotflow.core.types.status import TypeStatus
 from dotflow.abc.notify import Notify
 from dotflow.logging import logger
 
-MESSAGE = "{symbol} {status}\n```json\n{task}```\n{workflow_id}-{task_id}"
-API_TELEGRAM = "https://api.telegram.org/bot{token}/sendMessage"
-
 
 class NotifyTelegram(Notify):
+
+    MESSAGE = "{symbol} {status}\n```json\n{task}```\n{workflow_id}-{task_id}"
+    API_TELEGRAM = "https://api.telegram.org/bot{token}/sendMessage"
 
     def __init__(
         self,
@@ -36,7 +36,7 @@ class NotifyTelegram(Notify):
             }
             try:
                 response = post(
-                    url=API_TELEGRAM.format(token=self.token),
+                    url=self.API_TELEGRAM.format(token=self.token),
                     headers={"Content-Type": "application/json"},
                     data=dumps(data),
                     timeout=self.timeout
@@ -49,7 +49,7 @@ class NotifyTelegram(Notify):
                 )
 
     def _get_text(self, task: Any) -> str:
-        return MESSAGE.format(
+        return self.MESSAGE.format(
             symbol=TypeStatus.get_symbol(task.status),
             status=task.status,
             workflow_id=task.workflow_id,

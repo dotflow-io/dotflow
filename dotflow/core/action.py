@@ -42,14 +42,38 @@ class Action(object):
             def my_task():
                 print("task")
 
+
+        With Timeout
+
+            @action(timeout=60)
+            def my_task():
+                print("task")
+
+        With Retry delay
+
+            @action(retry=5, retry_delay=5)
+            def my_task():
+                print("task")
+
+        With Backoff
+
+            @action(retry=5, backoff=True)
+            def my_task():
+                print("task")
+
     Args:
         func (Callable):
 
         task (Callable):
 
-        retry (int):
-            Integer-type argument referring to the number of retry attempts
-            the function will execute in case of failure.
+        retry (int): Number of task retries on on_failure.
+
+        timeout (int): Execution timeout for a task. Duration (in seconds)
+
+        retry_delay (int): Retry delay on task on_failure. Duration (in seconds)
+
+        backoff (int): Exponential backoff
+
     """
 
     def __init__(

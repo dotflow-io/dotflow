@@ -47,8 +47,8 @@ class Manager:
 
             workflow = Manager(
                 tasks=[tasks],
-                success=basic_callback,
-                failure=basic_callback,
+                on_success=basic_callback,
+                on_failure=basic_callback,
                 keep_going=True
             )
 
@@ -56,11 +56,11 @@ class Manager:
         tasks (List[Task]):
             A list containing objects of type Task.
 
-        success (Callable):
+        on_success (Callable):
             Success function to be executed after the completion of the entire
             workflow. It's essentially a callback for successful scenarios.
 
-        failure (Callable):
+        on_failure (Callable):
             Failure function to be executed after the completion of the entire
             workflow. It's essentially a callback for error scenarios
 
@@ -76,27 +76,30 @@ class Manager:
             execution of a task. If it is **true**, the execution will continue;
             if it is **False**, the workflow will stop.
 
-        workflow_id (UUID):
+        workflow_id (UUID): Workflow ID.
 
     Attributes:
-        success (Callable):
-        failure (Callable):
+        on_success (Callable):
+
+        on_failure (Callable):
+
         workflow_id (UUID):
+
         started (datetime):
     """
 
     def __init__(
         self,
         tasks: List[Task],
-        success: Callable = basic_callback,
-        failure: Callable = basic_callback,
+        on_success: Callable = basic_callback,
+        on_failure: Callable = basic_callback,
         mode: TypeExecution = TypeExecution.SEQUENTIAL,
         keep_going: bool = False,
         workflow_id: UUID = None,
     ) -> None:
         self.tasks = tasks
-        self.success = success
-        self.failure = failure
+        self.on_success = on_success
+        self.on_failure = on_failure
         self.workflow_id = workflow_id or uuid4()
         self.started = datetime.now()
 
@@ -118,9 +121,9 @@ class Manager:
         final_status = [task.status for task in tasks]
 
         if TypeStatus.FAILED in final_status:
-            self.failure(tasks=tasks)
+            self.on_failure(tasks=tasks)
         else:
-            self.success(tasks=tasks)
+            self.on_success(tasks=tasks)
 
     def sequential(self, **kwargs) -> List[Task]:
         if len(kwargs.get("groups", {})) > 1 and not is_darwin():

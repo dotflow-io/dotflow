@@ -17,6 +17,7 @@ class Config:
         You can import the **Config** class with:
 
             from dotflow import Config
+
             from dotflow.providers import (
                 StorageDefault,
                 NotifyDefault,
@@ -45,10 +46,10 @@ class Config:
 
     def __init__(
         self,
-        storage: Optional[Storage] = None,
-        notify: Optional[Notify] = None,
-        log: Optional[Log] = None,
+        storage: Optional[Storage] = StorageDefault(),
+        notify: Optional[Notify] = NotifyDefault(),
+        log: Optional[Log] = LogDefault(),
     ) -> None:
-        self.storage = storage if storage else StorageDefault()
-        self.notify = notify if notify else NotifyDefault()
-        self.log = log if log else LogDefault()
+        self.storage = storage
+        self.notify = notify
+        self.log = log
