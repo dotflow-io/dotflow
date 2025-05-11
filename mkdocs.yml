@@ -1,8 +1,11 @@
 site_name: Dotflow
+site_url: https://dotflow.io
+site_author: Fernando Celmer
+copyright: Fernando Celmer
+
 repo_name: dotflow-io/dotflow
 repo_url: https://github.com/dotflow-io/dotflow
-site_url: https://dotflow.io
-copyright: Fernando Celmer
+edit_uri: ""
 
 nav:
     - Home: index.md
@@ -49,6 +52,10 @@ nav:
 
 theme:
   name: material
+  favicon: assets/logo.ico
+  logo: assets/logo.png
+
+  # Material
   palette:
     - media: (prefers-color-scheme)
       toggle:
@@ -67,32 +74,36 @@ theme:
         icon: material/lightbulb-outline
         name: Switch to system preference
 
-  # theme_style: light
-  favicon: assets/logo.ico
-  logo: assets/logo.png
-  # theme_style: light
-  # site_name_style: bold
-  # title_style: bold
-  # sidebar: true
-  # navigation_depth: 3
+  # Simple Blog
+  theme_style: light
+  theme_style: light
+  site_name_style: bold
+  title_style: bold
+  sidebar: true
+  navigation_depth: 3
   highlightjs: true
     - yaml
     - python
     - bash
-  # colors:
-  #   text: black
-  #   title: black
-  #   primary: black
-  #   background: white
-  # components:
-  #   site_name: true
-  #   title: false
-  #   menu: true
-  #   preview: true
-  #   footer: true
+  colors:
+    text: black
+    title: black
+    primary: black
+    background: white
+  components:
+    site_name: true
+    title: false
+    menu: true
+    preview: true
+    footer: true
 
 extra_css:
   - assets/style.css
+
+extra:
+  version:
+    provider: mike
+  python_supported_version: 3.9
 
 plugins:
 - search
@@ -109,8 +120,3 @@ plugins:
           show_symbol_type_toc: true
           extensions:
           - griffe_typingdoc
-
-extra:
-  version:
-    provider: mike
-  python_supported_version: 3.9
