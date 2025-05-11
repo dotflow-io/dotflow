@@ -1,14 +1,14 @@
-"""Type TaskStatus mode module"""
+"""Type TypeStatus mode module"""
 
 from typing_extensions import Annotated, Doc
 
 
-class TaskStatus:
+class TypeStatus:
     """
     Import:
-        You can import the **TaskStatus** class with:
+        You can import the **TypeStatus** class with:
 
-            from dotflow.core.types import TaskStatus
+            from dotflow.core.types import TypeStatus
     """
 
     NOT_STARTED: Annotated[str, Doc("Status not started.")] = "Not started"
@@ -17,3 +17,15 @@ class TaskStatus:
     PAUSED: Annotated[str, Doc("Status paused.")] = "Paused"
     RETRY: Annotated[str, Doc("Status retry.")] = "Retry"
     FAILED: Annotated[str, Doc("Status failed.")] = "Failed"
+
+    @classmethod
+    def get_symbol(cls, value: str) -> str:
+        status = {
+           TypeStatus.NOT_STARTED: "⚪",
+           TypeStatus.IN_PROGRESS: "🔵",
+           TypeStatus.COMPLETED: "✅",
+           TypeStatus.PAUSED: "◼️",
+           TypeStatus.RETRY: "❗",
+           TypeStatus.FAILED: "❌"
+        }
+        return status.get(value)

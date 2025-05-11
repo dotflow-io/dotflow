@@ -5,9 +5,6 @@ import json
 from uuid import UUID
 from typing import Any, Callable, List
 
-from rich.console import Console  # type: ignore
-
-from dotflow.logging import logger
 from dotflow.core.config import Config
 from dotflow.core.action import Action
 from dotflow.core.context import Context
@@ -15,7 +12,7 @@ from dotflow.core.module import Module
 from dotflow.core.serializers.task import SerializerTask
 from dotflow.core.serializers.workflow import SerializerWorkflow
 from dotflow.core.exception import MissingActionDecorator, NotCallableObject
-from dotflow.core.types.status import TaskStatus
+from dotflow.core.types.status import TypeStatus
 from dotflow.utils import (
     basic_callback,
     traceback_error,
@@ -103,14 +100,14 @@ class Task(TaskInstance):
             config,
             group_name
         )
+        self.config = config
+        self.group_name = group_name
         self.task_id = task_id
         self.workflow_id = workflow_id
         self.step = step
         self.callback = callback
         self.initial_context = initial_context
-        self.status = TaskStatus.NOT_STARTED
-        self.config = config
-        self.group_name = group_name
+        self.status = TypeStatus.NOT_STARTED
 
     @property
     def step(self):
@@ -206,33 +203,20 @@ class Task(TaskInstance):
             task_error = TaskError(value)
             self._error = task_error
 
-            logger.error(
-                "ID %s - %s - %s \n %s",
-                self.workflow_id,
-                self.task_id,
-                self.status,
-                task_error.traceback,
-            )
-
-            console = Console()
-            console.print_exception(show_locals=True)
+            self.config.log.error(task=self)
 
     @property
     def status(self):
         if not self._status:
-            return TaskStatus.NOT_STARTED
+            return TypeStatus.NOT_STARTED
         return self._status
 
     @status.setter
-    def status(self, value: TaskStatus) -> None:
+    def status(self, value: TypeStatus) -> None:
         self._status = value
 
-        logger.info(
-            "ID %s - %s - %s",
-            self.workflow_id,
-            self.task_id,
-            self.status,
-        )
+        self.config.notify.send(task=self)
+        self.config.log.info(task=self)
 
     @property
     def config(self):
@@ -244,13 +228,11 @@ class Task(TaskInstance):
     def config(self, value: Config):
         self._config = value
 
-    def schema(self) -> SerializerTask:
-        return SerializerTask(
-            **self.__dict__
-        )
+    def schema(self, max: int = None) -> SerializerTask:
+        return SerializerTask(**self.__dict__, max=max)
 
-    def result(self) -> SerializerWorkflow:
-        item = self.schema().model_dump_json()
+    def result(self, max: int = None) -> SerializerWorkflow:
+        item = self.schema(max=max).model_dump_json()
         return json.loads(item)
 
 

@@ -7,7 +7,9 @@ copyright: Fernando Celmer
 nav:
     - Home: index.md
     - Learn:
-      - nav/getting-started.md
+      - nav/learn/getting-started.md
+      - nav/learn/notify-with-telegram.md
+      - nav/learn/dotflow-cli.md
     - Reference:
       - nav/reference/action.md
       - nav/reference/config.md
@@ -22,9 +24,11 @@ nav:
       - nav/reference/exception.md
       - ABC:
         - nav/reference/abc-flow.md
+        - nav/reference/abc-notify.md
         - nav/reference/abc-storage.md
         - nav/reference/abc-http.md
         - nav/reference/abc-tcp.md
+        - nav/reference/abc-log.md
       - Storages:
         - nav/reference/storage-init.md
         - nav/reference/storage-file.md
@@ -40,6 +44,23 @@ nav:
 
 theme:
   name: simple-blog
+  # palette:
+  #   - media: (prefers-color-scheme)
+  #     toggle:
+  #       icon: material/brightness-7
+  #       name: Switch to light mode
+  #   - media: '(prefers-color-scheme: light)'
+  #     scheme: default
+  #     primary: black
+  #     toggle:
+  #       icon: material/brightness-4
+  #       name: Switch to dark mode
+  #   - media: '(prefers-color-scheme: dark)'
+  #     scheme: slate
+  #     primary: black
+  #     toggle:
+  #       icon: material/lightbulb-outline
+  #       name: Switch to system preference
   theme_style: light
   favicon: assets/logo.ico
   logo: assets/logo.png
@@ -68,6 +89,7 @@ extra_css:
   - assets/style.css
 
 plugins:
+- search
 - mkdocstrings:
     handlers:
       python:

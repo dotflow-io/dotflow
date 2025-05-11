@@ -1,6 +1,7 @@
 """Execution module"""
 
 from uuid import UUID
+from datetime import datetime
 from typing import Callable, List, Tuple
 from inspect import getsourcelines
 from types import FunctionType
@@ -15,9 +16,8 @@ from dotflow.logging import logger
 from dotflow.core.action import Action
 from dotflow.core.context import Context
 from dotflow.core.task import Task
-from dotflow.core.types import TaskStatus
+from dotflow.core.types import TypeStatus
 
-from dotflow.core.decorators import time
 from dotflow.utils import basic_callback
 
 
@@ -50,7 +50,7 @@ class Execution:
         _flow_callback: Callable = basic_callback,
     ) -> None:
         self.task = task
-        self.task.status = TaskStatus.IN_PROGRESS
+        self.task.status = TypeStatus.IN_PROGRESS
         self.task.previous_context = previous_context
         self.task.workflow_id = workflow_id
 
@@ -106,14 +106,15 @@ class Execution:
             callable_list=callable_list, class_instance=class_instance
         )
 
-        for _, new in ordered_list:
-            new_object = getattr(class_instance, new)
+        for index, new in enumerate(ordered_list):
+            new_object = getattr(class_instance, new[1])
             try:
                 subcontext = new_object(
                     initial_context=self.task.initial_context,
                     previous_context=previous_context,
                     task=self.task,
                 )
+                subcontext.task_id = index
                 new_context.storage.append(subcontext)
                 previous_context = subcontext
 
@@ -127,6 +128,7 @@ class Execution:
                     previous_context=previous_context,
                     task=self.task,
                 )
+                subcontext.task_id = index
                 new_context.storage.append(subcontext)
                 previous_context = subcontext
 
@@ -135,9 +137,9 @@ class Execution:
 
         return new_context
 
-    @time
     def _excution(self, _flow_callback):
         try:
+            start = datetime.now()
             current_context = self.task.step(
                 initial_context=self.task.initial_context,
                 previous_context=self.task.previous_context,
@@ -149,16 +151,17 @@ class Execution:
                     class_instance=current_context.storage
                 )
 
-            self.task.status = TaskStatus.COMPLETED
             self.task.current_context = current_context
+            self.task.duration = (datetime.now() - start).total_seconds()
+            self.task.status = TypeStatus.COMPLETED
 
         except AssertionError as err:
             raise err
 
         except Exception as err:
-            self.task.status = TaskStatus.FAILED
-            self.task.current_context = None
             self.task.error = err
+            self.task.current_context = None
+            self.task.status = TypeStatus.FAILED
 
         finally:
             self.task.callback(task=self.task)
