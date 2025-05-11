@@ -1,13 +1,14 @@
 site_name: Dotflow
 repo_name: dotflow-io/dotflow
 repo_url: https://github.com/dotflow-io/dotflow
-site_url: http://dotflow-io
+site_url: https://dotflow.io
 copyright: Fernando Celmer
 
 nav:
     - Home: index.md
     - Learn:
       - nav/learn/getting-started.md
+      - nav/learn/examples.md
       - nav/learn/notify-with-telegram.md
       - nav/learn/dotflow-cli.md
     - Reference:
@@ -17,19 +18,16 @@ nav:
       - nav/reference/dotflow.md
       - nav/reference/settings.md
       - nav/reference/task.md
+      - nav/reference/task-error.md
       - nav/reference/task-builder.md
       - nav/reference/workflow.md
       - nav/reference/utils.md
       - nav/reference/decorators.md
       - nav/reference/exception.md
-      - ABC:
-        - nav/reference/abc-flow.md
-        - nav/reference/abc-notify.md
-        - nav/reference/abc-storage.md
-        - nav/reference/abc-http.md
-        - nav/reference/abc-tcp.md
-        - nav/reference/abc-log.md
-      - Storages:
+      - Providers:
+        - nav/reference/log-default.md
+        - nav/reference/notify-default.md
+        - nav/reference/notify-telegram.md
         - nav/reference/storage-init.md
         - nav/reference/storage-file.md
       - Instance:
@@ -38,52 +36,60 @@ nav:
       - Types:
         - nav/reference/type-execution.md
         - nav/reference/type-status.md
+      - Abstract methods:
+        - nav/reference/abc-tcp.md
+        - nav/reference/abc-log.md
+        - nav/reference/abc-flow.md
+        - nav/reference/abc-notify.md
+        - nav/reference/abc-storage.md
+        - nav/reference/abc-http.md
     - Development:
       - nav/development/development-guide.md
       - nav/development/release-notes.md
 
 theme:
-  name: simple-blog
-  # palette:
-  #   - media: (prefers-color-scheme)
-  #     toggle:
-  #       icon: material/brightness-7
-  #       name: Switch to light mode
-  #   - media: '(prefers-color-scheme: light)'
-  #     scheme: default
-  #     primary: black
-  #     toggle:
-  #       icon: material/brightness-4
-  #       name: Switch to dark mode
-  #   - media: '(prefers-color-scheme: dark)'
-  #     scheme: slate
-  #     primary: black
-  #     toggle:
-  #       icon: material/lightbulb-outline
-  #       name: Switch to system preference
-  theme_style: light
+  name: material
+  palette:
+    - media: (prefers-color-scheme)
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      primary: black
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: black
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to system preference
+
+  # theme_style: light
   favicon: assets/logo.ico
   logo: assets/logo.png
-  theme_style: light
-  site_name_style: bold
-  title_style: bold
-  sidebar: true
-  navigation_depth: 3
+  # theme_style: light
+  # site_name_style: bold
+  # title_style: bold
+  # sidebar: true
+  # navigation_depth: 3
   highlightjs: true
     - yaml
     - python
     - bash
-  colors:
-    text: black
-    title: black
-    primary: black
-    background: white
-  components:
-    site_name: true
-    title: false
-    menu: true
-    preview: true
-    footer: true
+  # colors:
+  #   text: black
+  #   title: black
+  #   primary: black
+  #   background: white
+  # components:
+  #   site_name: true
+  #   title: false
+  #   menu: true
+  #   preview: true
+  #   footer: true
 
 extra_css:
   - assets/style.css
@@ -103,3 +109,8 @@ plugins:
           show_symbol_type_toc: true
           extensions:
           - griffe_typingdoc
+
+extra:
+  version:
+    provider: mike
+  python_supported_version: 3.9

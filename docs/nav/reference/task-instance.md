@@ -14,3 +14,4 @@
             - _error 
             - _status 
             - _config 
+            - group_name

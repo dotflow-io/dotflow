@@ -6,6 +6,9 @@
             - func
             - task
             - retry
+            - timeout
+            - retry_delay
+            - backoff
             - params
             - _run_action
             - _set_params
