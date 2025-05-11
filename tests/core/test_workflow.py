@@ -34,8 +34,8 @@ class TestWorkflow(unittest.TestCase):
 
         self.assertListEqual(controller.tasks, self.tasks)
         self.assertIsInstance(controller.workflow_id, UUID)
-        self.assertIsInstance(controller.success, FunctionType)
-        self.assertIsInstance(controller.failure, FunctionType)
+        self.assertIsInstance(controller.on_success, FunctionType)
+        self.assertIsInstance(controller.on_failure, FunctionType)
 
     def test_workflow_with_function_completed(self):
         task = Task(
@@ -78,7 +78,7 @@ class TestWorkflow(unittest.TestCase):
         )
         mock_success = Mock()
 
-        Manager(tasks=[task], success=mock_success)
+        Manager(tasks=[task], on_success=mock_success)
         mock_success.assert_called()
 
     def test_callback_failure_called(self):
@@ -89,7 +89,7 @@ class TestWorkflow(unittest.TestCase):
         )
         mock_failure = Mock()
 
-        Manager(tasks=[task], failure=mock_failure)
+        Manager(tasks=[task], on_failure=mock_failure)
         mock_failure.assert_called()
 
     def test_workflow_with_class_completed(self):
