@@ -57,3 +57,20 @@ table {
     border-collapse: collapse;
     width: -webkit-fill-available !important;
 }
+
+[data-md-color-primary=black] .md-header {
+    background-color: black;
+}
+
+[data-md-color-scheme=slate] {
+    --md-default-bg-color: rgb(20, 20, 20);
+    --md-typeset-a-color: #f44236 !important;
+}
+
+[data-md-color-accent=indigo] {
+    --md-accent-fg-color: #a71c12 !important;
+}
+
+a:hover {
+    color: #f44236 !important;
+}
