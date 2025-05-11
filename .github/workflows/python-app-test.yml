@@ -28,6 +28,8 @@ jobs:
       run: |
         git submodule update --recursive --remote
         git submodule update --init --recursive
+        git submodule foreach git checkout master
+        git submodule foreach git pull
         ls examples/
     - name: ❤️️ Test with PyTest
       run: |
