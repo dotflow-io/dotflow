@@ -17,21 +17,21 @@ from examples.step_class_result_task import main as step_class_result_task
 from examples.step_function_result_context import main as step_function_result_context
 from examples.step_function_result_storage import main as step_function_result_storage
 from examples.step_function_result_task import main as step_function_result_task
+from examples.step_with_groups import main as step_with_groups
 from examples.step_with_initial_context import main as step_with_initial_context
 from examples.step_with_many_contexts import main as step_with_many_contexts
 from examples.step_with_previous_context import main as step_with_previous_context
 from examples.workflow_keep_going_true import main as workflow_keep_going_true
-from examples.workflow_step_callback import main as workflow_step_callback
-from examples.workflow_with_callback_failure import main as workflow_with_callback_failure
-from examples.workflow_with_callback_success import main as workflow_with_callback_success
-from examples.workflow_with_retry import main as workflow_with_retry
-from examples.step_with_groups import main as step_with_groups
 from examples.workflow_background_mode import main as workflow_background_mode
 from examples.workflow_parallel_mode import main as workflow_parallel_mode
 from examples.workflow_sequential_group_mode import main as workflow_sequential_group_mode
 from examples.workflow_sequential_mode import main as workflow_sequential_mode
+from examples.workflow_step_callback import main as workflow_step_callback
 from examples.workflow_with_backoff import main as workflow_with_backoff
+from examples.workflow_with_callback_failure import main as workflow_with_callback_failure
+from examples.workflow_with_callback_success import main as workflow_with_callback_success
 from examples.workflow_with_retry_delay import main as workflow_with_retry_delay
+from examples.workflow_with_retry import main as workflow_with_retry
 from examples.workflow_with_timeout import main as workflow_with_timeout
 
 
@@ -118,7 +118,7 @@ class TestIntegration(unittest.TestCase):
     def test_workflow_sequential_group_mode(self):
         workflow_sequential_group_mode()
 
-    def test_workflow_sequential_mode(sefl):
+    def test_workflow_sequential_mode(self):
         workflow_sequential_mode()
 
     def test_workflow_with_backoff(self):
