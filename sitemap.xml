@@ -2,138 +2,138 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://dotflow.io/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/development/development-guide/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/development/release-notes/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/learn/dotflow-cli/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/learn/examples/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/learn/getting-started/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/learn/notify-with-telegram/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/abc-flow/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/abc-http/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/abc-log/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/abc-notify/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/abc-storage/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/abc-tcp/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/action/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/config/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/context-instance/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/context/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/decorators/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/dotflow/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/exception/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/log-default/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/notify-default/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/notify-telegram/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/settings/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/storage-file/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/storage-init/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/task-builder/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/task-error/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/task-instance/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/task/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/type-execution/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/type-status/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/utils/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
     <url>
          <loc>https://dotflow.io/nav/reference/workflow/</loc>
-         <lastmod>2025-05-24</lastmod>
+         <lastmod>2025-08-04</lastmod>
     </url>
 </urlset>
