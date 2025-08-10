@@ -1,9 +1,5 @@
 # Notify with Telegram
 
-May 4, 2025
-
----
-
 ## Bot Telegram
 
 ### Create a bot on Telegram:

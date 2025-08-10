@@ -1,9 +1,5 @@
 # Dotflow CLI
 
-May 4, 2025
-
----
-
 The Dotflow CLI (Command-Line Interface) is a feature that simplifies the execution of workflows in environments that require running through terminal commands.
 
 ### Simple Start
