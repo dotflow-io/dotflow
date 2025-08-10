@@ -10,13 +10,13 @@
         <meta name="author" content="Fernando Celmer">
       
       
-        <link rel="canonical" href="https://dotflow.io/pt/nav/learn/process-mode-sequential-group/">
+        <link rel="canonical" href="https://dotflow.io/pt/nav/learn/process-mode-background/">
       
       
         <link rel="prev" href="../process-mode-sequential/">
       
       
-        <link rel="next" href="../../tutorial/install/">
+        <link rel="next" href="../process-mode-parallel/">
       
       
       <link rel="icon" href="../../../../assets/logo.ico">
@@ -24,7 +24,7 @@
     
     
       
-        <title>Sequential Group - Dotflow</title>
+        <title>Background - Dotflow</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#sequential-group" class="md-skip">
+        <a href="#background" class="md-skip">
           Ir para o conteúdo
         </a>
       
@@ -121,7 +121,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Sequential Group
+              Background
             
           </span>
         </div>
@@ -178,7 +178,7 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../../nav/learn/process-mode-sequential-group/" hreflang="en" class="md-select__link">
+            <a href="../../../../nav/learn/process-mode-background/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
@@ -572,6 +572,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -650,7 +654,7 @@
   
   
   <span class="md-ellipsis">
-    Sequential Group
+    Background
     
   </span>
   
@@ -663,7 +667,7 @@
   
   
   <span class="md-ellipsis">
-    Sequential Group
+    Background
     
   </span>
   
@@ -686,15 +690,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#implementation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implementation
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#workflow" class="md-nav__link">
     <span class="md-ellipsis">
       Workflow
@@ -707,6 +702,52 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../process-mode-parallel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parallel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../process-mode-parallel-group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parallel Group
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1985,15 +2026,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#implementation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implementation
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#workflow" class="md-nav__link">
     <span class="md-ellipsis">
       Workflow
@@ -2021,8 +2053,7 @@
   
 
 
-<h1 id="sequential-group">Sequential Group<a class="headerlink" href="#sequential-group" title="Permanent link">&para;</a></h1>
-<h2 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">&para;</a></h2>
+<h1 id="background">Background<a class="headerlink" href="#background" title="Permanent link">&para;</a></h1>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python 3.8+</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -2048,10 +2079,10 @@
 </span><span id="__span-0-20"><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
 </span><span id="__span-0-21">    <span class="n">workflow</span> <span class="o">=</span> <span class="n">DotFlow</span><span class="p">()</span>
 </span><span id="__span-0-22">
-</span><span id="__span-0-23">    <span class="n">workflow</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">task_foo</span><span class="p">,</span> <span class="n">initial_context</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">group_name</span><span class="o">=</span><span class="s2">&quot;foo&quot;</span><span class="p">)</span>
-</span><span id="__span-0-24">    <span class="n">workflow</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">task_bar</span><span class="p">,</span> <span class="n">initial_context</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">group_name</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+</span><span id="__span-0-23">    <span class="n">workflow</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">task_foo</span><span class="p">,</span> <span class="n">initial_context</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span><span id="__span-0-24">    <span class="n">workflow</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">task_bar</span><span class="p">,</span> <span class="n">initial_context</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </span><span id="__span-0-25">
-</span><span id="__span-0-26"><span class="hll">    <span class="n">workflow</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;sequential&quot;</span><span class="p">)</span>
+</span><span id="__span-0-26"><span class="hll">    <span class="n">workflow</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;background&quot;</span><span class="p">)</span>
 </span></span><span id="__span-0-27">
 </span><span id="__span-0-28">    <span class="k">return</span> <span class="n">workflow</span>
 </span><span id="__span-0-29">
@@ -2064,13 +2095,10 @@
 </div>
 <h2 id="workflow">Workflow<a class="headerlink" href="#workflow" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>flowchart TD
-    A[Start] --&gt;|run| C(Parallel Groups)
-    C --&gt;|run| D[task_a]
-    C --&gt;|run| E[task_c]
-    D --&gt;|response| X[task_b]
-    X --&gt; H[Finish]
-    E --&gt;|response| Y[task_d]
-    Y --&gt; H[Finish]</code></pre>
+A[Start] --&gt;|run| B
+B[task_foo] --&gt;|response to| C
+C[task_bar] --&gt;|response| D
+D[Finish]</code></pre>
 
 
 
@@ -2123,13 +2151,13 @@
         
         
           
-          <a href="../../tutorial/install/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Install">
+          <a href="../process-mode-parallel/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Parallel">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Próximo
               </span>
               <div class="md-ellipsis">
-                Install
+                Parallel
               </div>
             </div>
             <div class="md-footer__button md-icon">

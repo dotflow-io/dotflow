@@ -57,11 +57,25 @@
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/examples/"/>
     </url>
     <url>
-        <loc>https://dotflow.io/nav/learn/process-mode-sequential-group/</loc>
+        <loc>https://dotflow.io/nav/learn/process-mode-background/</loc>
         <lastmod>2025-08-10</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/process-mode-sequential-group/"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/process-mode-sequential-group/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/process-mode-background/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/process-mode-background/"/>
+    </url>
+    <url>
+        <loc>https://dotflow.io/nav/learn/process-mode-parallel-group/</loc>
+        <lastmod>2025-08-10</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/process-mode-parallel-group/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/process-mode-parallel-group/"/>
+    </url>
+    <url>
+        <loc>https://dotflow.io/nav/learn/process-mode-parallel/</loc>
+        <lastmod>2025-08-10</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/process-mode-parallel/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/process-mode-parallel/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/learn/process-mode-sequential/</loc>
@@ -344,11 +358,25 @@
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/examples/"/>
     </url>
     <url>
-        <loc>https://dotflow.io/pt/nav/learn/process-mode-sequential-group/</loc>
+        <loc>https://dotflow.io/pt/nav/learn/process-mode-background/</loc>
         <lastmod>2025-08-10</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/process-mode-sequential-group/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/process-mode-sequential-group/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/process-mode-background/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/process-mode-background/"/>
+    </url>
+    <url>
+        <loc>https://dotflow.io/pt/nav/learn/process-mode-parallel-group/</loc>
+        <lastmod>2025-08-10</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/process-mode-parallel-group/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/process-mode-parallel-group/"/>
+    </url>
+    <url>
+        <loc>https://dotflow.io/pt/nav/learn/process-mode-parallel/</loc>
+        <lastmod>2025-08-10</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/process-mode-parallel/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/process-mode-parallel/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/learn/process-mode-sequential/</loc>
