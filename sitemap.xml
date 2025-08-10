@@ -574,16 +574,4 @@
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial/previous-context/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/tutorial/previous-context/"/>
     </url>
-    <url>
-        <loc>https://dotflow.io/pt/nav/tutorial-user-guide/initial-context/</loc>
-        <lastmod>2025-08-10</lastmod>
-        <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial-user-guide/initial-context/"/>
-    </url>
-    <url>
-        <loc>https://dotflow.io/pt/nav/tutorial-user-guide/previous-context/</loc>
-        <lastmod>2025-08-10</lastmod>
-        <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial-user-guide/previous-context/"/>
-    </url>
 </urlset>
