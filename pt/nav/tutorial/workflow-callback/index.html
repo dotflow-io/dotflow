@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="pt" class="no-js">
   <head>
     
       <meta charset="utf-8">
@@ -10,28 +10,28 @@
         <meta name="author" content="Fernando Celmer">
       
       
-        <link rel="canonical" href="https://dotflow.io/nav/learn/cli/">
+        <link rel="canonical" href="https://dotflow.io/pt/nav/tutorial/workflow-callback/">
       
       
-        <link rel="prev" href="../../advanced/notify-with-telegram/">
+        <link rel="prev" href="../previous-context/">
       
       
-        <link rel="next" href="../../reference/action/">
+        <link rel="next" href="../task-callback/">
       
       
-      <link rel="icon" href="../../../assets/logo.ico">
+      <link rel="icon" href="../../../../assets/logo.ico">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
     
     
       
-        <title>Dotflow CLI - Dotflow</title>
+        <title>Workflow - Dotflow</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e37652d.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.7e37652d.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -50,11 +50,13 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../../assets/style.css">
+      <link rel="stylesheet" href="../../../../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+      <link rel="stylesheet" href="../../../../assets/style.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,8 +82,8 @@
     <div data-md-component="skip">
       
         
-        <a href="#dotflow-cli" class="md-skip">
-          Skip to content
+        <a href="#workflow" class="md-skip">
+          Ir para o conteúdo
         </a>
       
     </div>
@@ -99,10 +101,10 @@
   
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Dotflow" class="md-header__button md-logo" aria-label="Dotflow" data-md-component="logo">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../../" title="Dotflow" class="md-header__button md-logo" aria-label="Dotflow" data-md-component="logo">
       
-  <img src="../../../assets/logo.png" alt="logo">
+  <img src="../../../../assets/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -119,7 +121,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Dotflow CLI
+              Workflow
             
           </span>
         </div>
@@ -169,20 +171,20 @@
       <div class="md-header__option">
   <div class="md-select">
     
-    <button class="md-header__button md-icon" aria-label="Select language">
+    <button class="md-header__button md-icon" aria-label="Selecione o idioma">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
     </button>
     <div class="md-select__inner">
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="./" hreflang="en" class="md-select__link">
+            <a href="../../../../nav/tutorial/workflow-callback/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../pt/nav/learn/cli/" hreflang="pt" class="md-select__link">
+            <a href="./" hreflang="pt" class="md-select__link">
               Português
             </a>
           </li>
@@ -203,21 +205,21 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
-      <nav class="md-search__options" aria-label="Search">
+      <nav class="md-search__options" aria-label="Pesquisar">
         
-          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Compartilhar" aria-label="Compartilhar" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
             
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
           </a>
         
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
@@ -230,7 +232,7 @@
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
-            Initializing search
+            Inicializando a pesquisa
           </div>
           <ol class="md-search-result__list" role="presentation"></ol>
         </div>
@@ -242,7 +244,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/dotflow-io/dotflow" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/dotflow-io/dotflow" title="Ir ao repositório" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -257,7 +259,7 @@
   
     
       
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+<nav class="md-tabs" aria-label="Abas" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
       
@@ -267,13 +269,13 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../.." class="md-tabs__link">
+      <a href="../../../" class="md-tabs__link">
         
   
   
     
   
-  Home
+  Início
 
       </a>
     </li>
@@ -290,13 +292,13 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+        <a href="../../learn/" class="md-tabs__link">
           
   
   
     
   
-  Learn
+  Aprender
 
         </a>
       </li>
@@ -338,7 +340,7 @@
   
     
   
-  Development Guide
+  Guia de Desenvolvimento
 
       </a>
     </li>
@@ -357,7 +359,7 @@
   
     
   
-  Release Notes
+  Notas de Lançamento
 
       </a>
     </li>
@@ -390,18 +392,18 @@
   
 
 
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegação" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Dotflow" class="md-nav__button md-logo" aria-label="Dotflow" data-md-component="logo">
+    <a href="../../../" title="Dotflow" class="md-nav__button md-logo" aria-label="Dotflow" data-md-component="logo">
       
-  <img src="../../../assets/logo.png" alt="logo">
+  <img src="../../../../assets/logo.png" alt="logo">
 
     </a>
     Dotflow
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/dotflow-io/dotflow" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/dotflow-io/dotflow" title="Ir ao repositório" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -421,12 +423,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../../../" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Home
+    Início
     
   </span>
   
@@ -481,12 +483,12 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../learn/" class="md-nav__link ">
               
   
   
   <span class="md-ellipsis">
-    Learn
+    Aprender
     
   </span>
   
@@ -503,7 +505,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
-            Learn
+            Aprender
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -516,7 +518,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../examples/" class="md-nav__link">
+      <a href="../../learn/examples/" class="md-nav__link">
         
   
   
@@ -539,12 +541,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../concept-of-context/" class="md-nav__link">
+      <a href="../../learn/concept-of-context/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Concept of Context
+    Conceito de Contexto
     
   </span>
   
@@ -591,7 +593,7 @@
   
   
   <span class="md-ellipsis">
-    Process Mode
+    Modo de Processamento
     
   </span>
   
@@ -602,7 +604,7 @@
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_4">
             <span class="md-nav__icon md-icon"></span>
-            Process Mode
+            Modo de Processamento
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -613,7 +615,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../process-mode-sequential/" class="md-nav__link">
+      <a href="../../learn/process-mode-sequential/" class="md-nav__link">
         
   
   
@@ -636,7 +638,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../process-mode-background/" class="md-nav__link">
+      <a href="../../learn/process-mode-background/" class="md-nav__link">
         
   
   
@@ -659,7 +661,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../process-mode-parallel/" class="md-nav__link">
+      <a href="../../learn/process-mode-parallel/" class="md-nav__link">
         
   
   
@@ -682,7 +684,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../process-mode-parallel-group/" class="md-nav__link">
+      <a href="../../learn/process-mode-parallel-group/" class="md-nav__link">
         
   
   
@@ -710,8 +712,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -732,11 +736,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" checked>
         
           
           <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
@@ -752,7 +756,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_5">
             <span class="md-nav__icon md-icon"></span>
             Tutorial - User Guide
@@ -766,7 +770,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/install/" class="md-nav__link">
+      <a href="../install/" class="md-nav__link">
         
   
   
@@ -789,7 +793,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/first-steps/" class="md-nav__link">
+      <a href="../first-steps/" class="md-nav__link">
         
   
   
@@ -812,12 +816,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/initial-context/" class="md-nav__link">
+      <a href="../initial-context/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Initial Context
+    Contexto Inicial
     
   </span>
   
@@ -835,12 +839,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/previous-context/" class="md-nav__link">
+      <a href="../previous-context/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Previous Context
+    Contexto Anterior
     
   </span>
   
@@ -855,8 +859,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -871,11 +877,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_5" checked>
         
           
           <label class="md-nav__link" for="__nav_2_5_5" id="__nav_2_5_5_label" tabindex="0">
@@ -891,7 +897,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_5_5">
             <span class="md-nav__icon md-icon"></span>
             Callback
@@ -902,10 +908,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../tutorial/workflow-callback/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Workflow
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -916,6 +944,92 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#success-callback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success Callback
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Success Callback">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#including-callback-on-success" class="md-nav__link">
+    <span class="md-ellipsis">
+      Including callback on success
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiving-callback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Receiving callback
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#failure-callback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Failure Callback
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Failure Callback">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#including-callback-on-failure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Including callback on failure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiving-callback_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Receiving callback
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -928,7 +1042,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/task-callback/" class="md-nav__link">
+      <a href="../task-callback/" class="md-nav__link">
         
   
   
@@ -1040,32 +1154,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Dotflow CLI
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../learn/cli/" class="md-nav__link">
         
   
   
@@ -1076,62 +1168,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#simple-start" class="md-nav__link">
-    <span class="md-ellipsis">
-      Simple Start
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#with-initial-context" class="md-nav__link">
-    <span class="md-ellipsis">
-      With Initial Context
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#with-callback" class="md-nav__link">
-    <span class="md-ellipsis">
-      With Callback
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#with-mode" class="md-nav__link">
-    <span class="md-ellipsis">
-      With Mode
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2093,7 +2129,7 @@
   
   
   <span class="md-ellipsis">
-    Development Guide
+    Guia de Desenvolvimento
     
   </span>
   
@@ -2115,7 +2151,7 @@
   
   
   <span class="md-ellipsis">
-    Release Notes
+    Notas de Lançamento
     
   </span>
   
@@ -2138,7 +2174,7 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
   
   
   
@@ -2147,43 +2183,73 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      Índice
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#simple-start" class="md-nav__link">
+  <a href="#success-callback" class="md-nav__link">
     <span class="md-ellipsis">
-      Simple Start
+      Success Callback
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Success Callback">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#including-callback-on-success" class="md-nav__link">
+    <span class="md-ellipsis">
+      Including callback on success
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#with-initial-context" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#receiving-callback" class="md-nav__link">
     <span class="md-ellipsis">
-      With Initial Context
+      Receiving callback
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#with-callback" class="md-nav__link">
-    <span class="md-ellipsis">
-      With Callback
-    </span>
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#with-mode" class="md-nav__link">
+  <a href="#failure-callback" class="md-nav__link">
     <span class="md-ellipsis">
-      With Mode
+      Failure Callback
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Failure Callback">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#including-callback-on-failure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Including callback on failure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiving-callback_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Receiving callback
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2206,24 +2272,245 @@
   
 
 
-<h1 id="dotflow-cli">Dotflow CLI<a class="headerlink" href="#dotflow-cli" title="Permanent link">&para;</a></h1>
-<p>The Dotflow CLI (Command-Line Interface) is a feature that simplifies the execution of workflows in environments that require running through terminal commands.</p>
-<h3 id="simple-start">Simple Start<a class="headerlink" href="#simple-start" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span id="__span-0-1">dotflow<span class="w"> </span>start<span class="w"> </span>--step<span class="w"> </span>examples.cli_with_mode.simple_step
+<h1 id="workflow">Workflow<a class="headerlink" href="#workflow" title="Permanent link">&para;</a></h1>
+<p>The callback mechanism in a Workflow is global, meaning that it applies to all tasks added to the execution queue. There are two types of workflow callbacks:</p>
+<h2 id="success-callback">Success Callback<a class="headerlink" href="#success-callback" title="Permanent link">&para;</a></h2>
+<p>This callback is triggered only when the entire workflow completes successfully, with all tasks executed without errors.</p>
+<h3 id="including-callback-on-success">Including callback on success<a class="headerlink" href="#including-callback-on-success" title="Permanent link">&para;</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python 3.8+</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span id="__span-0-1"><span class="c1"># Code above omitted 👆</span>
+</span><span id="__span-0-2">
+</span><span id="__span-0-3"><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+</span><span id="__span-0-4">    <span class="n">workflow</span> <span class="o">=</span> <span class="n">DotFlow</span><span class="p">()</span>
+</span><span id="__span-0-5">
+</span><span id="__span-0-6">    <span class="n">workflow</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">simple_step</span><span class="p">)</span>
+</span><span id="__span-0-7"><span class="hll">    <span class="n">workflow</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">on_success</span><span class="o">=</span><span class="n">callback</span><span class="p">)</span>
+</span></span><span id="__span-0-8">
+</span><span id="__span-0-9">    <span class="k">return</span> <span class="n">workflow</span>
+</span><span id="__span-0-10">
+</span><span id="__span-0-11"><span class="c1"># Code below omitted 👇</span>
 </span></code></pre></div>
-<h3 id="with-initial-context">With Initial Context<a class="headerlink" href="#with-initial-context" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span id="__span-1-1">dotflow<span class="w"> </span>start<span class="w"> </span>--step<span class="w"> </span>examples.cli_with_initial_context.simple_step<span class="w"> </span>--initial-context<span class="w"> </span>abc
+</div>
+</div>
+</div>
+<details>
+<summary>👀 Full file preview</summary>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python 3.8+</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span id="__span-1-1"><span class="kn">from</span><span class="w"> </span><span class="nn">dotflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">DotFlow</span><span class="p">,</span> <span class="n">action</span>
+</span><span id="__span-1-2"><span class="kn">from</span><span class="w"> </span><span class="nn">dotflow.core.types.status</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeStatus</span>
+</span><span id="__span-1-3">
+</span><span id="__span-1-4">
+</span><span id="__span-1-5"><span class="k">def</span><span class="w"> </span><span class="nf">callback</span><span class="p">(</span><span class="n">tasks</span><span class="p">):</span>
+</span><span id="__span-1-6">    <span class="k">assert</span> <span class="n">tasks</span>
+</span><span id="__span-1-7">    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span>
+</span><span id="__span-1-8">
+</span><span id="__span-1-9">    <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">:</span>
+</span><span id="__span-1-10">        <span class="k">assert</span> <span class="n">task</span><span class="o">.</span><span class="n">status</span> <span class="ow">is</span> <span class="n">TypeStatus</span><span class="o">.</span><span class="n">COMPLETED</span>
+</span><span id="__span-1-11">        <span class="nb">print</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">task_id</span><span class="p">,</span> <span class="n">task</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="n">task</span><span class="o">.</span><span class="n">current_context</span><span class="o">.</span><span class="n">storage</span><span class="p">)</span>
+</span><span id="__span-1-12">
+</span><span id="__span-1-13">
+</span><span id="__span-1-14"><span class="nd">@action</span>
+</span><span id="__span-1-15"><span class="k">def</span><span class="w"> </span><span class="nf">simple_step</span><span class="p">():</span>
+</span><span id="__span-1-16">    <span class="k">return</span> <span class="s2">&quot;ok&quot;</span>
+</span><span id="__span-1-17">
+</span><span id="__span-1-18">
+</span><span id="__span-1-19"><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+</span><span id="__span-1-20">    <span class="n">workflow</span> <span class="o">=</span> <span class="n">DotFlow</span><span class="p">()</span>
+</span><span id="__span-1-21">
+</span><span id="__span-1-22">    <span class="n">workflow</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">simple_step</span><span class="p">)</span>
+</span><span id="__span-1-23"><span class="hll">    <span class="n">workflow</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">on_success</span><span class="o">=</span><span class="n">callback</span><span class="p">)</span>
+</span></span><span id="__span-1-24">
+</span><span id="__span-1-25">    <span class="k">return</span> <span class="n">workflow</span>
+</span><span id="__span-1-26">
+</span><span id="__span-1-27">
+</span><span id="__span-1-28"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span id="__span-1-29">    <span class="n">main</span><span class="p">()</span>
 </span></code></pre></div>
-<h3 id="with-callback">With Callback<a class="headerlink" href="#with-callback" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span id="__span-2-1">dotflow<span class="w"> </span>start<span class="w"> </span>--step<span class="w"> </span>examples.cli_with_callback.simple_step<span class="w"> </span>--callback<span class="w"> </span>examples.cli_with_callback.callback
+</div>
+</div>
+</div>
+</details>
+<h3 id="receiving-callback">Receiving callback<a class="headerlink" href="#receiving-callback" title="Permanent link">&para;</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Python 3.8+</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span id="__span-2-1"><span class="c1"># Code above omitted 👆</span>
+</span><span id="__span-2-2">
+</span><span id="__span-2-3"><span class="hll"><span class="k">def</span><span class="w"> </span><span class="nf">callback</span><span class="p">(</span><span class="n">tasks</span><span class="p">):</span>
+</span></span><span id="__span-2-4">    <span class="k">assert</span> <span class="n">tasks</span>
+</span><span id="__span-2-5">    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span>
+</span><span id="__span-2-6">
+</span><span id="__span-2-7">    <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">:</span>
+</span><span id="__span-2-8">        <span class="k">assert</span> <span class="n">task</span><span class="o">.</span><span class="n">status</span> <span class="ow">is</span> <span class="n">TypeStatus</span><span class="o">.</span><span class="n">COMPLETED</span>
+</span><span id="__span-2-9">        <span class="nb">print</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">task_id</span><span class="p">,</span> <span class="n">task</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="n">task</span><span class="o">.</span><span class="n">current_context</span><span class="o">.</span><span class="n">storage</span><span class="p">)</span>
+</span><span id="__span-2-10">
+</span><span id="__span-2-11"><span class="c1"># Code below omitted 👇</span>
 </span></code></pre></div>
-<h3 id="with-mode">With Mode<a class="headerlink" href="#with-mode" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span id="__span-3-1">dotflow<span class="w"> </span>start<span class="w"> </span>--step<span class="w"> </span>examples.cli_with_mode.simple_step<span class="w"> </span>--mode<span class="w"> </span>sequential
+</div>
+</div>
+</div>
+<details>
+<summary>👀 Full file preview</summary>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Python 3.8+</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span id="__span-3-1"><span class="kn">from</span><span class="w"> </span><span class="nn">dotflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">DotFlow</span><span class="p">,</span> <span class="n">action</span>
+</span><span id="__span-3-2"><span class="kn">from</span><span class="w"> </span><span class="nn">dotflow.core.types.status</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeStatus</span>
+</span><span id="__span-3-3">
+</span><span id="__span-3-4">
+</span><span id="__span-3-5"><span class="hll"><span class="k">def</span><span class="w"> </span><span class="nf">callback</span><span class="p">(</span><span class="n">tasks</span><span class="p">):</span>
+</span></span><span id="__span-3-6">    <span class="k">assert</span> <span class="n">tasks</span>
+</span><span id="__span-3-7">    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span>
+</span><span id="__span-3-8">
+</span><span id="__span-3-9">    <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">:</span>
+</span><span id="__span-3-10">        <span class="k">assert</span> <span class="n">task</span><span class="o">.</span><span class="n">status</span> <span class="ow">is</span> <span class="n">TypeStatus</span><span class="o">.</span><span class="n">COMPLETED</span>
+</span><span id="__span-3-11">        <span class="nb">print</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">task_id</span><span class="p">,</span> <span class="n">task</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="n">task</span><span class="o">.</span><span class="n">current_context</span><span class="o">.</span><span class="n">storage</span><span class="p">)</span>
+</span><span id="__span-3-12">
+</span><span id="__span-3-13">
+</span><span id="__span-3-14"><span class="nd">@action</span>
+</span><span id="__span-3-15"><span class="k">def</span><span class="w"> </span><span class="nf">simple_step</span><span class="p">():</span>
+</span><span id="__span-3-16">    <span class="k">return</span> <span class="s2">&quot;ok&quot;</span>
+</span><span id="__span-3-17">
+</span><span id="__span-3-18">
+</span><span id="__span-3-19"><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+</span><span id="__span-3-20">    <span class="n">workflow</span> <span class="o">=</span> <span class="n">DotFlow</span><span class="p">()</span>
+</span><span id="__span-3-21">
+</span><span id="__span-3-22">    <span class="n">workflow</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">simple_step</span><span class="p">)</span>
+</span><span id="__span-3-23">    <span class="n">workflow</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">on_success</span><span class="o">=</span><span class="n">callback</span><span class="p">)</span>
+</span><span id="__span-3-24">
+</span><span id="__span-3-25">    <span class="k">return</span> <span class="n">workflow</span>
+</span><span id="__span-3-26">
+</span><span id="__span-3-27">
+</span><span id="__span-3-28"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span id="__span-3-29">    <span class="n">main</span><span class="p">()</span>
 </span></code></pre></div>
-<div class="highlight"><pre><span></span><code><span id="__span-4-1">dotflow<span class="w"> </span>start<span class="w"> </span>--step<span class="w"> </span>examples.cli_with_mode.simple_step<span class="w"> </span>--mode<span class="w"> </span>background
+</div>
+</div>
+</div>
+</details>
+<h2 id="failure-callback">Failure Callback<a class="headerlink" href="#failure-callback" title="Permanent link">&para;</a></h2>
+<p>This callback is triggered if any task in the workflow fails during execution.</p>
+<p>These callbacks should be used to handle post-execution actions depending on the overall result of the workflow, such as logging, notifications, or cleanup operations.</p>
+<h3 id="including-callback-on-failure">Including callback on failure<a class="headerlink" href="#including-callback-on-failure" title="Permanent link">&para;</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Python 3.8+</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span id="__span-4-1"><span class="c1"># Code above omitted 👆</span>
+</span><span id="__span-4-2">
+</span><span id="__span-4-3"><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+</span><span id="__span-4-4">    <span class="n">workflow</span> <span class="o">=</span> <span class="n">DotFlow</span><span class="p">()</span>
+</span><span id="__span-4-5">
+</span><span id="__span-4-6">    <span class="n">workflow</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">simple_step</span><span class="p">)</span>
+</span><span id="__span-4-7"><span class="hll">    <span class="n">workflow</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">on_failure</span><span class="o">=</span><span class="n">callback</span><span class="p">)</span>
+</span></span><span id="__span-4-8">
+</span><span id="__span-4-9">    <span class="k">return</span> <span class="n">workflow</span>
+</span><span id="__span-4-10">
+</span><span id="__span-4-11"><span class="c1"># Code below omitted 👇</span>
 </span></code></pre></div>
-<div class="highlight"><pre><span></span><code><span id="__span-5-1">dotflow<span class="w"> </span>start<span class="w"> </span>--step<span class="w"> </span>examples.cli_with_mode.simple_step<span class="w"> </span>--mode<span class="w"> </span>parallel
+</div>
+</div>
+</div>
+<details>
+<summary>👀 Full file preview</summary>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Python 3.8+</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span id="__span-5-1"><span class="kn">from</span><span class="w"> </span><span class="nn">dotflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">DotFlow</span><span class="p">,</span> <span class="n">action</span>
+</span><span id="__span-5-2"><span class="kn">from</span><span class="w"> </span><span class="nn">dotflow.core.types.status</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeStatus</span>
+</span><span id="__span-5-3">
+</span><span id="__span-5-4">
+</span><span id="__span-5-5"><span class="k">def</span><span class="w"> </span><span class="nf">callback</span><span class="p">(</span><span class="n">tasks</span><span class="p">):</span>
+</span><span id="__span-5-6">    <span class="k">assert</span> <span class="n">tasks</span>
+</span><span id="__span-5-7">    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span>
+</span><span id="__span-5-8">
+</span><span id="__span-5-9">    <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">:</span>
+</span><span id="__span-5-10">        <span class="k">assert</span> <span class="n">task</span><span class="o">.</span><span class="n">status</span> <span class="ow">is</span> <span class="n">TypeStatus</span><span class="o">.</span><span class="n">FAILED</span>
+</span><span id="__span-5-11">        <span class="nb">print</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">task_id</span><span class="p">,</span> <span class="n">task</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="n">task</span><span class="o">.</span><span class="n">current_context</span><span class="o">.</span><span class="n">storage</span><span class="p">)</span>
+</span><span id="__span-5-12">
+</span><span id="__span-5-13">
+</span><span id="__span-5-14"><span class="nd">@action</span>
+</span><span id="__span-5-15"><span class="k">def</span><span class="w"> </span><span class="nf">simple_step</span><span class="p">():</span>
+</span><span id="__span-5-16">    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Fail!&quot;</span><span class="p">)</span>
+</span><span id="__span-5-17">
+</span><span id="__span-5-18">
+</span><span id="__span-5-19"><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+</span><span id="__span-5-20">    <span class="n">workflow</span> <span class="o">=</span> <span class="n">DotFlow</span><span class="p">()</span>
+</span><span id="__span-5-21">
+</span><span id="__span-5-22">    <span class="n">workflow</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">simple_step</span><span class="p">)</span>
+</span><span id="__span-5-23"><span class="hll">    <span class="n">workflow</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">on_failure</span><span class="o">=</span><span class="n">callback</span><span class="p">)</span>
+</span></span><span id="__span-5-24">
+</span><span id="__span-5-25">    <span class="k">return</span> <span class="n">workflow</span>
+</span><span id="__span-5-26">
+</span><span id="__span-5-27">
+</span><span id="__span-5-28"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span id="__span-5-29">    <span class="n">main</span><span class="p">()</span>
 </span></code></pre></div>
+</div>
+</div>
+</div>
+</details>
+<h3 id="receiving-callback_1">Receiving callback<a class="headerlink" href="#receiving-callback_1" title="Permanent link">&para;</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Python 3.8+</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span id="__span-6-1"><span class="c1"># Code above omitted 👆</span>
+</span><span id="__span-6-2">
+</span><span id="__span-6-3"><span class="hll"><span class="k">def</span><span class="w"> </span><span class="nf">callback</span><span class="p">(</span><span class="n">tasks</span><span class="p">):</span>
+</span></span><span id="__span-6-4">    <span class="k">assert</span> <span class="n">tasks</span>
+</span><span id="__span-6-5">    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span>
+</span><span id="__span-6-6">
+</span><span id="__span-6-7">    <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">:</span>
+</span><span id="__span-6-8">        <span class="k">assert</span> <span class="n">task</span><span class="o">.</span><span class="n">status</span> <span class="ow">is</span> <span class="n">TypeStatus</span><span class="o">.</span><span class="n">FAILED</span>
+</span><span id="__span-6-9">        <span class="nb">print</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">task_id</span><span class="p">,</span> <span class="n">task</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="n">task</span><span class="o">.</span><span class="n">current_context</span><span class="o">.</span><span class="n">storage</span><span class="p">)</span>
+</span><span id="__span-6-10">
+</span><span id="__span-6-11"><span class="c1"># Code below omitted 👇</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>👀 Full file preview</summary>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Python 3.8+</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span id="__span-7-1"><span class="kn">from</span><span class="w"> </span><span class="nn">dotflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">DotFlow</span><span class="p">,</span> <span class="n">action</span>
+</span><span id="__span-7-2"><span class="kn">from</span><span class="w"> </span><span class="nn">dotflow.core.types.status</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeStatus</span>
+</span><span id="__span-7-3">
+</span><span id="__span-7-4">
+</span><span id="__span-7-5"><span class="hll"><span class="k">def</span><span class="w"> </span><span class="nf">callback</span><span class="p">(</span><span class="n">tasks</span><span class="p">):</span>
+</span></span><span id="__span-7-6">    <span class="k">assert</span> <span class="n">tasks</span>
+</span><span id="__span-7-7">    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span>
+</span><span id="__span-7-8">
+</span><span id="__span-7-9">    <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">:</span>
+</span><span id="__span-7-10">        <span class="k">assert</span> <span class="n">task</span><span class="o">.</span><span class="n">status</span> <span class="ow">is</span> <span class="n">TypeStatus</span><span class="o">.</span><span class="n">FAILED</span>
+</span><span id="__span-7-11">        <span class="nb">print</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">task_id</span><span class="p">,</span> <span class="n">task</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="n">task</span><span class="o">.</span><span class="n">current_context</span><span class="o">.</span><span class="n">storage</span><span class="p">)</span>
+</span><span id="__span-7-12">
+</span><span id="__span-7-13">
+</span><span id="__span-7-14"><span class="nd">@action</span>
+</span><span id="__span-7-15"><span class="k">def</span><span class="w"> </span><span class="nf">simple_step</span><span class="p">():</span>
+</span><span id="__span-7-16">    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Fail!&quot;</span><span class="p">)</span>
+</span><span id="__span-7-17">
+</span><span id="__span-7-18">
+</span><span id="__span-7-19"><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+</span><span id="__span-7-20">    <span class="n">workflow</span> <span class="o">=</span> <span class="n">DotFlow</span><span class="p">()</span>
+</span><span id="__span-7-21">
+</span><span id="__span-7-22">    <span class="n">workflow</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">simple_step</span><span class="p">)</span>
+</span><span id="__span-7-23">    <span class="n">workflow</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">on_failure</span><span class="o">=</span><span class="n">callback</span><span class="p">)</span>
+</span><span id="__span-7-24">
+</span><span id="__span-7-25">    <span class="k">return</span> <span class="n">workflow</span>
+</span><span id="__span-7-26">
+</span><span id="__span-7-27">
+</span><span id="__span-7-28"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span id="__span-7-29">    <span class="n">main</span><span class="p">()</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+</details>
 
 
 
@@ -2247,7 +2534,7 @@
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Back to top
+  Voltar ao topo
 </button>
         
       </main>
@@ -2256,33 +2543,33 @@
   
     
       
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
         
           
-          <a href="../../advanced/notify-with-telegram/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Notify with Telegram">
+          <a href="../previous-context/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Contexto Anterior">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
             </div>
             <div class="md-footer__title">
               <span class="md-footer__direction">
-                Previous
+                Anterior
               </span>
               <div class="md-ellipsis">
-                Notify with Telegram
+                Contexto Anterior
               </div>
             </div>
           </a>
         
         
           
-          <a href="../../reference/action/" class="md-footer__link md-footer__link--next" aria-label="Next: Action">
+          <a href="../task-callback/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Task">
             <div class="md-footer__title">
               <span class="md-footer__direction">
-                Next
+                Próximo
               </span>
               <div class="md-ellipsis">
-                Action
+                Task
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -2322,10 +2609,10 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.tooltips", "navigation.footer", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.path", "navigation.indexes", "search.share", "search.suggest"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.tooltips", "navigation.footer", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.path", "navigation.indexes", "search.share", "search.suggest"], "search": "../../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.50899def.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.50899def.min.js"></script>
       
     
   </body>
