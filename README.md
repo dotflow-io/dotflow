@@ -234,31 +234,6 @@ D[Finish]
 
 </details>
 
-#### Sequential with Groups
-
-```python
-workflow.task.add(step=task_foo, group_name="foo")
-workflow.task.add(step=task_bar, group_name="bar")
-
-workflow.start()
-```
-
-<details>
-<summary>Click to see diagram</summary>
-
-```mermaid
-flowchart TD
-    A[Start] -->|run| C(Parallel Groups)
-    C -->|run| D[task_a]
-    C -->|run| E[task_c]
-    D -->|response| X[task_b]
-    X --> H[Finish]
-    E -->|response| Y[task_d]
-    Y --> H[Finish]
-```
-
-</details>
-
 #### Background
 
 ```python
@@ -305,6 +280,31 @@ flowchart TD
     B --> H[Finish]
     C --> H[Finish]
     D --> H[Finish]
+```
+
+</details>
+
+#### Parallel with Groups
+
+```python
+workflow.task.add(step=task_foo, group_name="foo")
+workflow.task.add(step=task_bar, group_name="bar")
+
+workflow.start()
+```
+
+<details>
+<summary>Click to see diagram</summary>
+
+```mermaid
+flowchart TD
+    A[Start] -->|run| C(Parallel Groups)
+    C -->|run| D[task_a]
+    C -->|run| E[task_c]
+    D -->|response| X[task_b]
+    X --> H[Finish]
+    E -->|response| Y[task_d]
+    Y --> H[Finish]
 ```
 
 </details>

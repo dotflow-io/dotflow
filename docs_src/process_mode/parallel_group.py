@@ -23,7 +23,7 @@ def main():
     workflow.task.add(step=task_foo, initial_context=10, group_name="foo")
     workflow.task.add(step=task_bar, initial_context=10, group_name="bar")
 
-    workflow.start(mode="sequential")
+    workflow.start()
 
     return workflow
 

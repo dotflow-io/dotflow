@@ -1,8 +1,8 @@
-# Sequential Group
+# Parallel Group
 
 ## Implementation
 
-{* ./docs_src/process_mode/sequential_group.py hl[26] *}
+{* ./docs_src/process_mode/parallel_group.py hl[26] *}
 
 ## Workflow
 
