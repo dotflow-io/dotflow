@@ -1,30 +1,25 @@
 from dotflow import DotFlow, action
 
 
-class TestException(Exception):
-    def __init__(self):
-        super(TestException, self).__init__("Unknown")
-
-
-@action(retry=5, backoff=True)  # HERE
+@action(retry=1, backoff=True)
 def simple_step():
-    raise TestException()
+    raise Exception("Unknown")
 
 
 @action
 class SimpleStepX:
 
-    @action(retry=5, backoff=True)  # HERE
+    @action(retry=1, backoff=True)
     def run(self):
-        raise TestException()
+        raise Exception("Unknown")
 
 
-@action(retry=5, backoff=True)  # HERE
+@action(retry=1, backoff=True)
 class SimpleStepY:
 
     @action
     def run(self):
-        raise TestException()
+        raise Exception("Unknown")
 
 
 def main():
@@ -32,20 +27,14 @@ def main():
 
     workflow.task.add(step=simple_step)
     workflow.start()
-
-    assert isinstance(workflow.task.queue[0].error.exception, TestException)
     workflow.task.clear()
 
     workflow.task.add(step=SimpleStepX)
     workflow.start()
-
-    assert isinstance(workflow.task.queue[0].error.exception, TestException)
     workflow.task.clear()
 
     workflow.task.add(step=SimpleStepY)
     workflow.start()
-
-    assert isinstance(workflow.task.queue[0].error.exception, TestException)
     workflow.task.clear()
 
     return workflow

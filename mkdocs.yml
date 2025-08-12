@@ -124,24 +124,28 @@ nav:
     - Home: index.md
     - Learn:
       - nav/learn/index.md
-      - nav/learn/examples.md
       - nav/learn/concept-of-context.md
-      - Process Mode:
-        - nav/learn/process-mode-sequential.md
-        - nav/learn/process-mode-background.md
-        - nav/learn/process-mode-parallel.md
-        - nav/learn/process-mode-parallel-group.md
       - Tutorial - User Guide:
         - nav/tutorial/install.md
         - nav/tutorial/first-steps.md
         - nav/tutorial/initial-context.md
         - nav/tutorial/previous-context.md
+        - Strategies:
+          - nav/tutorial/task-retry.md
+          - nav/tutorial/task-backoff.md
+          - nav/tutorial/task-timeout.md
         - Callback:
           - nav/tutorial/workflow-callback.md
           - nav/tutorial/task-callback.md
       - Advanced User Guide:
         - nav/advanced/notify-with-telegram.md
+      - Process Mode:
+        - nav/learn/process-mode-sequential.md
+        - nav/learn/process-mode-background.md
+        - nav/learn/process-mode-parallel.md
+        - nav/learn/process-mode-parallel-group.md
       - nav/learn/cli.md
+      - nav/learn/examples.md
     - Reference:
       - nav/reference/action.md
       - nav/reference/config.md
