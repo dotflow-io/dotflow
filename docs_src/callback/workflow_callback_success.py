@@ -1,8 +1,10 @@
-from dotflow import DotFlow, action
+from typing import List
+
+from dotflow import DotFlow, action, Task
 from dotflow.core.types.status import TypeStatus
 
 
-def callback(tasks):
+def callback(tasks: List[Task]):
     assert tasks
     assert len(tasks)
 

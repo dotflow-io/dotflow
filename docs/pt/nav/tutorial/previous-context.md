@@ -1,11 +1,10 @@
 # Contexto Anterior
 
-## Enviando Contexto:
+## Enviando Contexto
 
 Para enviar um contexto, basta retornar alguma informação na implementação da sua tarefa. Você pode retornar qualquer objeto, e ele fará parte do contexto.
 
 {* ./docs_src/previous_context/previous_context.py hl[15,23] *}
-
 
 ## Recebendo Contexto
 

@@ -1,17 +1,17 @@
 from time import sleep
 
-from dotflow import DotFlow, action
+from dotflow import DotFlow, action, Context
 
 
 @action
-def task_foo(initial_context):
+def task_foo(initial_context: Context):
     sleep(2)
     value = initial_context.storage
     return value * value * value
 
 
 @action
-def task_bar(initial_context):
+def task_bar(initial_context: Context):
     sleep(1)
     value = initial_context.storage
     return value * value * value

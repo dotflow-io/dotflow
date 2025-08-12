@@ -1,4 +1,4 @@
-from dotflow import DotFlow, action
+from dotflow import DotFlow, action, Context
 
 
 @action
@@ -8,7 +8,7 @@ def extract_task():
 
 
 @action
-def transform_task(previous_context):
+def transform_task(previous_context: Context):
     print(previous_context.storage, "transform")
     assert previous_context.storage == "extract"
 
@@ -16,7 +16,7 @@ def transform_task(previous_context):
 
 
 @action
-def load_task(previous_context):
+def load_task(previous_context: Context):
     print(previous_context.storage, "load")
     assert previous_context.storage == "transform"
 

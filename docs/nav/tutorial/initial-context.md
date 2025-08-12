@@ -1,6 +1,6 @@
 # Initial Context
 
-## Sending context:
+## Sending context
 
 The initial context can be sent when adding a task to the queue using the `initial_context` attribute.
 

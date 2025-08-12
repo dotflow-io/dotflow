@@ -1,6 +1,6 @@
 # Previous Context
 
-## Sending context:
+## Sending context
 
 To send a context, just return some information in your task implementation. You can return any object, and it will become part of the context.
 

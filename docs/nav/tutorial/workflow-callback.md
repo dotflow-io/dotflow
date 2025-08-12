@@ -8,11 +8,13 @@ This callback is triggered only when the entire workflow completes successfully,
 
 ### Including callback on success
 
-{* ./docs_src/callback/workflow_callback_success.py ln[19:25] hl[23] *}
+{* ./docs_src/callback/workflow_callback_success.py ln[21:27] hl[25] *}
 
 ### Receiving callback
 
-{* ./docs_src/callback/workflow_callback_success.py ln[5:11] hl[5] *}
+In this example, we receive a list containing the [Task](https://dotflow-io.github.io/dotflow/pt/nav/reference/task/ "Task class") object.
+
+{* ./docs_src/callback/workflow_callback_success.py ln[7:13] hl[7] *}
 
 
 ## Failure Callback
@@ -23,8 +25,10 @@ These callbacks should be used to handle post-execution actions depending on the
 
 ### Including callback on failure
 
-{* ./docs_src/callback/workflow_callback_failure.py ln[19:25] hl[23] *}
+{* ./docs_src/callback/workflow_callback_failure.py ln[21:27] hl[25] *}
 
 ### Receiving callback
 
-{* ./docs_src/callback/workflow_callback_failure.py ln[5:11] hl[5] *}
+In this example, we receive a list containing the [Task](https://dotflow-io.github.io/dotflow/pt/nav/reference/task/ "Task class") object.
+
+{* ./docs_src/callback/workflow_callback_failure.py ln[7:13] hl[7] *}
