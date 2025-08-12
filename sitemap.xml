@@ -2,630 +2,630 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <url>
         <loc>https://dotflow.io/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/advanced/notify-with-telegram/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/advanced/notify-with-telegram/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/advanced/notify-with-telegram/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/development/development-guide/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/development/development-guide/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/development/development-guide/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/development/release-notes/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/development/release-notes/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/development/release-notes/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/learn/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/learn/cli/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/cli/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/cli/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/learn/concept-of-context/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/concept-of-context/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/concept-of-context/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/learn/examples/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/examples/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/examples/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/learn/process-mode-background/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/process-mode-background/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/process-mode-background/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/learn/process-mode-parallel-group/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/process-mode-parallel-group/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/process-mode-parallel-group/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/learn/process-mode-parallel/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/process-mode-parallel/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/process-mode-parallel/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/learn/process-mode-sequential/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/process-mode-sequential/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/process-mode-sequential/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/abc-flow/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/abc-flow/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/abc-flow/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/abc-http/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/abc-http/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/abc-http/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/abc-log/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/abc-log/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/abc-log/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/abc-notify/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/abc-notify/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/abc-notify/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/abc-storage/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/abc-storage/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/abc-storage/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/abc-tcp/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/abc-tcp/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/abc-tcp/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/action/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/action/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/action/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/config/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/config/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/config/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/context-instance/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/context-instance/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/context-instance/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/context/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/context/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/context/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/decorators/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/decorators/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/decorators/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/dotflow/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/dotflow/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/dotflow/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/exception/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/exception/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/exception/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/log-default/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/log-default/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/log-default/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/notify-default/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/notify-default/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/notify-default/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/notify-telegram/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/notify-telegram/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/notify-telegram/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/settings/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/settings/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/settings/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/storage-file/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/storage-file/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/storage-file/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/storage-init/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/storage-init/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/storage-init/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/task-builder/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/task-builder/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/task-builder/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/task-error/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/task-error/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/task-error/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/task-instance/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/task-instance/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/task-instance/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/task/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/task/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/task/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/type-execution/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/type-execution/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/type-execution/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/type-status/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/type-status/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/type-status/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/utils/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/utils/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/utils/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/reference/workflow/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/workflow/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/workflow/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/tutorial/first-steps/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/tutorial/first-steps/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial/first-steps/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/tutorial/initial-context/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/tutorial/initial-context/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial/initial-context/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/tutorial/install/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/tutorial/install/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial/install/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/tutorial/previous-context/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/tutorial/previous-context/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial/previous-context/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/tutorial/task-callback/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/tutorial/task-callback/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial/task-callback/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/tutorial/workflow-callback/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/tutorial/workflow-callback/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial/workflow-callback/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/advanced/notify-with-telegram/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/advanced/notify-with-telegram/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/advanced/notify-with-telegram/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/development/development-guide/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/development/development-guide/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/development/development-guide/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/development/release-notes/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/development/release-notes/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/development/release-notes/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/learn/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/learn/cli/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/cli/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/cli/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/learn/concept-of-context/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/concept-of-context/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/concept-of-context/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/learn/examples/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/examples/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/examples/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/learn/process-mode-background/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/process-mode-background/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/process-mode-background/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/learn/process-mode-parallel-group/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/process-mode-parallel-group/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/process-mode-parallel-group/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/learn/process-mode-parallel/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/process-mode-parallel/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/process-mode-parallel/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/learn/process-mode-sequential/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/learn/process-mode-sequential/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/learn/process-mode-sequential/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/abc-flow/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/abc-flow/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/abc-flow/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/abc-http/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/abc-http/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/abc-http/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/abc-log/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/abc-log/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/abc-log/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/abc-notify/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/abc-notify/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/abc-notify/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/abc-storage/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/abc-storage/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/abc-storage/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/abc-tcp/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/abc-tcp/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/abc-tcp/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/action/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/action/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/action/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/config/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/config/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/config/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/context-instance/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/context-instance/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/context-instance/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/context/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/context/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/context/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/decorators/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/decorators/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/decorators/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/dotflow/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/dotflow/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/dotflow/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/exception/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/exception/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/exception/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/log-default/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/log-default/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/log-default/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/notify-default/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/notify-default/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/notify-default/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/notify-telegram/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/notify-telegram/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/notify-telegram/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/settings/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/settings/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/settings/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/storage-file/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/storage-file/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/storage-file/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/storage-init/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/storage-init/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/storage-init/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/task-builder/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/task-builder/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/task-builder/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/task-error/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/task-error/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/task-error/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/task-instance/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/task-instance/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/task-instance/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/task/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/task/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/task/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/type-execution/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/type-execution/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/type-execution/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/type-status/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/type-status/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/type-status/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/utils/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/utils/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/utils/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/reference/workflow/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/reference/workflow/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/reference/workflow/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/tutorial/first-steps/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial/first-steps/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/tutorial/first-steps/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/tutorial/initial-context/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial/initial-context/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/tutorial/initial-context/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/tutorial/install/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial/install/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/tutorial/install/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/tutorial/previous-context/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial/previous-context/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/tutorial/previous-context/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/tutorial/task-callback/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial/task-callback/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/tutorial/task-callback/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/tutorial/workflow-callback/</loc>
-        <lastmod>2025-08-11</lastmod>
+        <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial/workflow-callback/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/tutorial/workflow-callback/"/>
