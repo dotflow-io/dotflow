@@ -302,11 +302,32 @@
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial/previous-context/"/>
     </url>
     <url>
+        <loc>https://dotflow.io/nav/tutorial/task-backoff/</loc>
+        <lastmod>2025-08-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/tutorial/task-backoff/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial/task-backoff/"/>
+    </url>
+    <url>
         <loc>https://dotflow.io/nav/tutorial/task-callback/</loc>
         <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/tutorial/task-callback/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial/task-callback/"/>
+    </url>
+    <url>
+        <loc>https://dotflow.io/nav/tutorial/task-retry/</loc>
+        <lastmod>2025-08-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/tutorial/task-retry/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial/task-retry/"/>
+    </url>
+    <url>
+        <loc>https://dotflow.io/nav/tutorial/task-timeout/</loc>
+        <lastmod>2025-08-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/tutorial/task-timeout/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial/task-timeout/"/>
     </url>
     <url>
         <loc>https://dotflow.io/nav/tutorial/workflow-callback/</loc>
@@ -617,11 +638,32 @@
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/tutorial/previous-context/"/>
     </url>
     <url>
+        <loc>https://dotflow.io/pt/nav/tutorial/task-backoff/</loc>
+        <lastmod>2025-08-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial/task-backoff/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/tutorial/task-backoff/"/>
+    </url>
+    <url>
         <loc>https://dotflow.io/pt/nav/tutorial/task-callback/</loc>
         <lastmod>2025-08-12</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial/task-callback/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/tutorial/task-callback/"/>
+    </url>
+    <url>
+        <loc>https://dotflow.io/pt/nav/tutorial/task-retry/</loc>
+        <lastmod>2025-08-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial/task-retry/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/tutorial/task-retry/"/>
+    </url>
+    <url>
+        <loc>https://dotflow.io/pt/nav/tutorial/task-timeout/</loc>
+        <lastmod>2025-08-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://dotflow.io/pt/nav/tutorial/task-timeout/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://dotflow.io/nav/tutorial/task-timeout/"/>
     </url>
     <url>
         <loc>https://dotflow.io/pt/nav/tutorial/workflow-callback/</loc>
