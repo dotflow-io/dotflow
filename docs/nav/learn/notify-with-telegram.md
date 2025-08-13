@@ -92,7 +92,7 @@ workflow = DotFlow(
 Add your defined task as a step in the workflow:
 
 ```python
-workflow.task.add(step=simple_task)
+workflow.add(step=simple_task)
 ```
 
 ### Start

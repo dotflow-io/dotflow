@@ -20,27 +20,27 @@ from dotflow.core.types import TypeStatus
 
 from dotflow.utils import basic_callback
 
+VALID_OBJECTS = [
+    str,
+    int,
+    float,
+    complex,
+    dict,
+    list,
+    tuple,
+    set,
+    frozenset,
+    range,
+    bool,
+    FunctionType,
+    NoneType,
+    bytes,
+    bytearray,
+    memoryview,
+]
+
 
 class Execution:
-
-    VALID_OBJECTS = [
-        str,
-        int,
-        float,
-        complex,
-        dict,
-        list,
-        tuple,
-        set,
-        frozenset,
-        range,
-        bool,
-        FunctionType,
-        NoneType,
-        bytes,
-        bytearray,
-        memoryview,
-    ]
 
     def __init__(
         self,
@@ -146,7 +146,7 @@ class Execution:
                 task=self.task,
             )
 
-            if type(current_context.storage) not in self.VALID_OBJECTS:
+            if type(current_context.storage) not in VALID_OBJECTS:
                 current_context = self._execution_with_class(
                     class_instance=current_context.storage
                 )

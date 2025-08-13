@@ -35,7 +35,7 @@ def my_task():
     print("task")
 
 workflow = DotFlow()
-workflow.task.add(step=my_task, callback=my_callback)
+workflow.add(step=my_task, callback=my_callback)
 workflow.start()
 ```
 
@@ -78,7 +78,7 @@ workflow = DotFlow()
 Now, simply add the `my_task` and `my_callback` functions you created earlier to the workflow using the code below. This process is necessary to define which tasks will be executed and the order in which they will run. The execution order follows the sequence in which they were added to the workflow. [More details](https://dotflow-io.github.io/dotflow/nav/reference/task-builder/#dotflow.core.task.TaskBuilder.add)
 
 ```python
-workflow.task.add(step=my_task, callback=my_callback)
+workflow.add(step=my_task, callback=my_callback)
 ```
 
 ### 6. Start
