@@ -120,7 +120,7 @@ class Manager:
         many_groups = 1
         group: QueueGroup = kwargs.get("group")
 
-        if group.size() > many_groups:
+        if group.size() < many_groups:
             process = SequentialGroup(**kwargs)
             return process.transport()
 
@@ -268,8 +268,11 @@ class Background(Flow):
     def setup_queue(self) -> None:
         self.queue = []
 
-    def _flow_callback(self, task: Task) -> None:
+    def transport(self) -> List[Task]:
         return self.queue
+
+    def _flow_callback(self, task: Task) -> None:
+        self.queue.append(task)
 
     def run(self) -> None:
         thread = threading.Thread(
