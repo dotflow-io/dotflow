@@ -122,23 +122,23 @@ class Manager:
 
         if group.size() > many_groups:
             process = SequentialGroup(**kwargs)
-            return process.get_groups()
+            return process.transport()
 
         process = Sequential(**kwargs)
-        return process.get_groups()
+        return process.transport()
 
     def sequential_group(self, **kwargs):
         """Sequential Group execution"""
         process = SequentialGroup(**kwargs)
-        return process.get_groups()
+        return process.transport()
 
     def background(self, **kwargs) -> List[Task]:
         """Background execution"""
         process = Background(**kwargs)
-        return process.get_groups()
+        return process.transport()
 
     def parallel(self, **kwargs) -> List[Task]:
-        """Sequential execution"""
+        """Parallel execution"""
         if is_darwin_arm():
             warnings.warn(
                 "Parallel mode does not work with MacOS."
@@ -146,10 +146,10 @@ class Manager:
                 Warning
             )
             process = Sequential(**kwargs)
-            return process.get_groups()
+            return process.transport()
 
         process = Parallel(**kwargs)
-        return process.get_groups()
+        return process.transport()
 
 
 class Sequential(Flow):
@@ -158,7 +158,7 @@ class Sequential(Flow):
     def setup_queue(self) -> None:
         self.queue = []
 
-    def get_groups(self) -> List[Task]:
+    def transport(self) -> List[Task]:
         return self.queue
 
     def _flow_callback(self, task: Task) -> None:
@@ -186,25 +186,25 @@ class Sequential(Flow):
 
 
 class SequentialGroup(Flow):
-    """SequentialGroup"""
+    """Sequential Group"""
 
     def setup_queue(self) -> None:
         self.queue = Queue()
 
-    def get_tasks(self) -> List[Task]:
+    def transport(self) -> List[Task]:
         contexts = {}
-        while len(contexts) < len(self.tasks):
+        while len(contexts) < self.group.size():
             if not self.queue.empty():
                 contexts = {**contexts, **self.queue.get()}
 
         if contexts:
-            for task in self.tasks:
+            for task in self.group.tasks():
                 task.current_context = contexts[task.task_id]["current_context"]
                 task.duration = contexts[task.task_id]["duration"]
                 task.error = contexts[task.task_id]["error"]
                 task.status = contexts[task.task_id]["status"]
 
-        return self.tasks
+        return self.group.tasks()
 
     def _flow_callback(self, task: Task) -> None:
         current_task = {
@@ -221,10 +221,10 @@ class SequentialGroup(Flow):
         threads = []
         processes = []
 
-        for _, group_tasks in self.groups.items():
+        for _, queue in self.group.queue.items():
             thread = threading.Thread(
                 target=self._launch_group,
-                args=(processes, group_tasks,)
+                args=(processes, queue,)
             )
             thread.start()
             threads.append(thread)
@@ -235,18 +235,18 @@ class SequentialGroup(Flow):
         for thread in threads:
             thread.join()
 
-    def _launch_group(self, processes, group_tasks):
+    def _launch_group(self, processes, queue):
         process = Process(
             target=self._run_group,
-            args=(group_tasks,)
+            args=(queue,)
         )
         process.start()
         processes.append(process)
 
-    def _run_group(self, groups: List[Task]) -> None:
+    def _run_group(self, queue: List[Task]) -> None:
         previous_context = Context(workflow_id=self.workflow_id)
 
-        for task in groups:
+        for task in queue.tasks:
             Execution(
                 task=task,
                 workflow_id=self.workflow_id,
@@ -268,11 +268,8 @@ class Background(Flow):
     def setup_queue(self) -> None:
         self.queue = []
 
-    def get_groups(self) -> List[Task]:
-        return self.group
-
     def _flow_callback(self, task: Task) -> None:
-        pass
+        return self.queue
 
     def run(self) -> None:
         thread = threading.Thread(
@@ -293,17 +290,18 @@ class Parallel(Flow):
     def setup_queue(self) -> None:
         self.queue = Queue()
 
-    def get_groups(self) -> List[Task]:
+    def transport(self) -> List[Task]:
         contexts = {}
-        while len(contexts) < len(self.group.size()):
+        while len(contexts) < self.group.size():
             if not self.queue.empty():
                 contexts = {**contexts, **self.queue.get()}
 
-        for task in self.group.tasks():
-            task.current_context = contexts[task.task_id]["current_context"]
-            task.duration = contexts[task.task_id]["duration"]
-            task.error = contexts[task.task_id]["error"]
-            task.status = contexts[task.task_id]["status"]
+        if contexts:
+            for task in self.group.tasks():
+                task.current_context = contexts[task.task_id]["current_context"]
+                task.duration = contexts[task.task_id]["duration"]
+                task.error = contexts[task.task_id]["error"]
+                task.status = contexts[task.task_id]["status"]
 
         return self.group.tasks()
 
@@ -320,12 +318,19 @@ class Parallel(Flow):
 
     def run(self) -> None:
         processes = []
-        previous_context = Context(workflow_id=self.workflow_id)
+        previous_context = Context(
+            workflow_id=self.workflow_id
+        )
 
         for task in self.group.tasks():
             process = Process(
                 target=Execution,
-                args=(task, self.workflow_id, previous_context, self._flow_callback),
+                args=(
+                    task,
+                    self.workflow_id,
+                    previous_context,
+                    self._flow_callback
+                ),
             )
             process.start()
             processes.append(process)

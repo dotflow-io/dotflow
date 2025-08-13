@@ -28,7 +28,7 @@ class Flow(ABC):
         self.queue = []
 
     @abstractmethod
-    def get_groups(self) -> List[Task]:
+    def transport(self) -> List[Task]:
         return self.queue
 
     @abstractmethod

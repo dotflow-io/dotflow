@@ -55,7 +55,7 @@ class DotFlow:
             group=self.task.group,
             workflow_id=self.workflow_id
         )
-    
+
     def result_task(self):
         """
         Returns:
