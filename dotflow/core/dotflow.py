@@ -48,33 +48,34 @@ class DotFlow:
             config=config,
             workflow_id=self.workflow_id
         )
+        self.add = self.task.add
 
         self.start = partial(
             Manager,
-            tasks=self.task.queue,
+            group=self.task.group,
             workflow_id=self.workflow_id
         )
-
+    
     def result_task(self):
         """
         Returns:
             list (List[Task]): Returns a list of Task class.
         """
-        return self.task.queue
+        return self.task.group.tasks()
 
     def result_context(self):
         """
         Returns:
             list (List[Context]): Returns a list of Context class.
         """
-        return [task.current_context for task in self.task.queue]
+        return [task.current_context for task in self.task.group.tasks()]
 
     def result_storage(self):
         """
         Returns:
             list (List[Any]): Returns a list of assorted objects.
         """
-        return [task.current_context.storage for task in self.task.queue]
+        return [task.current_context.storage for task in self.task.group.tasks()]
 
     def result(self):
         return self.task.result()

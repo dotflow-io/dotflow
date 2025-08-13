@@ -110,5 +110,5 @@ class TestWorkflowSequential(unittest.TestCase):
         execution.setup_queue()
         execution._flow_callback(task=task)
 
-        tasks = execution.get_tasks()
+        tasks = execution.get_groups()
         self.assertEqual(tasks[0].task_id, 5)

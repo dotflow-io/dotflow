@@ -175,7 +175,7 @@ cython_debug/
 
 
 # Dotflow
-.output
+*.output
 .storage
 .dotflow-io
 *.json

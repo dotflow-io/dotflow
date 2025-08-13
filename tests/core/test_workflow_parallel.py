@@ -33,7 +33,7 @@ class TestWorkflowParallel(unittest.TestCase):
             groups=groups,
         )
 
-        tasks = execution.get_tasks()
+        tasks = execution.get_groups()
 
         self.assertListEqual(tasks, tasks)
         self.assertDictEqual(execution.groups, groups)
@@ -50,7 +50,7 @@ class TestWorkflowParallel(unittest.TestCase):
             groups=grouper(tasks=tasks),
         )
 
-        tasks = execution.get_tasks()
+        tasks = execution.get_groups()
 
         self.assertEqual(tasks[0].status, TypeStatus.COMPLETED)
         self.assertEqual(tasks[0].current_context.storage, {"foo": "bar"})
@@ -67,7 +67,7 @@ class TestWorkflowParallel(unittest.TestCase):
             groups=grouper(tasks=tasks),
         )
 
-        tasks = execution.get_tasks()
+        tasks = execution.get_groups()
 
         self.assertEqual(tasks[0].status, TypeStatus.FAILED)
         self.assertIsNone(tasks[0].current_context.storage)
@@ -103,5 +103,5 @@ class TestWorkflowParallel(unittest.TestCase):
         execution.setup_queue()
         execution._flow_callback(task=task)
 
-        tasks = execution.get_tasks()
+        tasks = execution.get_groups()
         self.assertEqual(tasks[0].task_id, 5)
