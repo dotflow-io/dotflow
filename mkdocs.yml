@@ -137,6 +137,10 @@ nav:
         - Callback:
           - nav/tutorial/workflow-callback.md
           - nav/tutorial/task-callback.md
+        - Output:
+          - nav/tutorial/output-context.md
+          - nav/tutorial/output-storage.md
+          - nav/tutorial/output-task.md
       - Advanced User Guide:
         - nav/advanced/notify-with-telegram.md
       - Process Mode:
