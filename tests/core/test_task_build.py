@@ -6,7 +6,7 @@ from uuid import uuid4
 from dotflow.core.config import Config
 from dotflow.core.context import Context
 from dotflow.core.exception import MissingActionDecorator
-from dotflow.core.task import Task, TaskBuilder, QueueGroup
+from dotflow.core.task import Task, TaskBuilder, QueueGroup, TASK_GROUP_NAME
 from dotflow.core.serializers.workflow import SerializerWorkflow
 from dotflow.core.serializers.task import SerializerTask
 from dotflow.utils import basic_callback
@@ -75,7 +75,7 @@ class TestTaskBuild(unittest.TestCase):
         task.add(step=action_step)
         self.assertEqual(task.group.size(), expected_count_before)
 
-        task.group.queue["default"].clear()
+        task.group.queue[TASK_GROUP_NAME].clear()
 
         self.assertEqual(task.group.size(), expected_count_after)
 

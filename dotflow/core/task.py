@@ -19,6 +19,8 @@ from dotflow.utils import (
     message_error
 )
 
+TASK_GROUP_NAME = "default"
+
 
 class TaskInstance:
     """
@@ -89,7 +91,7 @@ class Task(TaskInstance):
         initial_context: Any = None,
         workflow_id: UUID = None,
         config: Config = None,
-        group_name: str = "default"
+        group_name: str = TASK_GROUP_NAME
     ) -> None:
         super().__init__(
             task_id,
@@ -280,7 +282,7 @@ class TaskBuilder:
         step: Callable,
         callback: Callable = basic_callback,
         initial_context: Any = None,
-        group_name: str = "default"
+        group_name: str = TASK_GROUP_NAME
     ) -> None:
         """
         Args:
