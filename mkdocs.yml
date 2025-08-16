@@ -1,19 +1,155 @@
 site_name: Dotflow
 site_url: https://dotflow.io
 site_author: Fernando Celmer
-copyright: Fernando Celmer
 
+copyright: Fernando Celmer
 repo_name: dotflow-io/dotflow
 repo_url: https://github.com/dotflow-io/dotflow
-edit_uri: ""
 
+theme:
+  name: material
+  favicon: assets/logo.ico
+  logo: assets/logo.png
+  palette:
+    - media: (prefers-color-scheme)
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      primary: black
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: black
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to system preference
+  features:
+  - content.tooltips
+  - navigation.footer
+  - navigation.tabs
+  - navigation.tabs.sticky
+  - navigation.top
+  - navigation.path
+  - navigation.indexes
+  - search.share
+  - search.suggest
+
+extra_css:
+  - assets/style.css
+
+extra:
+  version:
+    provider: mike
+  python_supported_version: 3.9
+
+markdown_extensions:
+  abbr: null
+  attr_list: null
+  footnotes: null
+  md_in_html: null
+  tables: null
+  toc:
+    permalink: true
+  pymdownx.betterem: null
+  pymdownx.caret: null
+  pymdownx.highlight:
+    line_spans: __span
+  pymdownx.inlinehilite: null
+  pymdownx.keys: null
+  pymdownx.mark: null
+  pymdownx.superfences:
+    custom_fences:
+    - name: mermaid
+      class: mermaid
+      format: !!python/name:pymdownx.superfences.fence_code_format ''
+  pymdownx.tilde: null
+  pymdownx.blocks.admonition:
+    types:
+    - note
+    - attention
+    - caution
+    - danger
+    - error
+    - tip
+    - hint
+    - warning
+    - info
+    - check
+  pymdownx.blocks.details: null
+  pymdownx.blocks.tab:
+    alternate_style: true
+  mdx_include: null
+  markdown_include_variants: null
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [.]
+          options:
+            backlinks: tree
+            heading_level: 2
+            show_root_heading: true
+            show_if_no_docstring: true
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+            extensions:
+            - griffe_typingdoc
+  - i18n:
+      fallback_to_default: true
+      reconfigure_material: true
+      reconfigure_search: true
+      docs_structure: folder
+      languages:
+        - locale: en
+          default: true
+          name: English
+          build: true
+        - locale: pt
+          name: Português
+          build: true
+          nav_translations:
+            Home: Início
+            Learn: Aprender
+            Development Guide: Guia de Desenvolvimento
+            Release Notes: Notas de Lançamento
+            Process Mode: Modo de Processamento
+  
 nav:
     - Home: index.md
     - Learn:
-      - nav/learn/getting-started.md
+      - nav/learn/index.md
+      - nav/learn/concept-of-context.md
+      - Tutorial - User Guide:
+        - nav/tutorial/install.md
+        - nav/tutorial/first-steps.md
+        - nav/tutorial/initial-context.md
+        - nav/tutorial/previous-context.md
+        - Strategies:
+          - nav/tutorial/task-retry.md
+          - nav/tutorial/task-backoff.md
+          - nav/tutorial/task-timeout.md
+        - Callback:
+          - nav/tutorial/workflow-callback.md
+          - nav/tutorial/task-callback.md
+        # - Output:
+        #   - nav/tutorial/output-context.md
+        #   - nav/tutorial/output-storage.md
+        #   - nav/tutorial/output-task.md
+      - Advanced User Guide:
+        - nav/advanced/notify-with-telegram.md
+      - Process Mode:
+        - nav/learn/process-mode-sequential.md
+        - nav/learn/process-mode-background.md
+        - nav/learn/process-mode-parallel.md
+        - nav/learn/process-mode-parallel-group.md
+      - nav/learn/cli.md
       - nav/learn/examples.md
-      - nav/learn/notify-with-telegram.md
-      - nav/learn/dotflow-cli.md
     - Reference:
       - nav/reference/action.md
       - nav/reference/config.md
@@ -46,77 +182,5 @@ nav:
         - nav/reference/abc-notify.md
         - nav/reference/abc-storage.md
         - nav/reference/abc-http.md
-    - Development:
-      - nav/development/development-guide.md
-      - nav/development/release-notes.md
-
-theme:
-  name: material
-  favicon: assets/logo.ico
-  logo: assets/logo.png
-
-  # Material
-  palette:
-    - media: (prefers-color-scheme)
-      toggle:
-        icon: material/brightness-7
-        name: Switch to light mode
-    - media: '(prefers-color-scheme: light)'
-      scheme: default
-      primary: black
-      toggle:
-        icon: material/brightness-4
-        name: Switch to dark mode
-    - media: '(prefers-color-scheme: dark)'
-      scheme: slate
-      primary: black
-      toggle:
-        icon: material/lightbulb-outline
-        name: Switch to system preference
-
-  # Simple Blog
-  theme_style: light
-  theme_style: light
-  site_name_style: bold
-  title_style: bold
-  sidebar: true
-  navigation_depth: 3
-  highlightjs: true
-    - yaml
-    - python
-    - bash
-  colors:
-    text: black
-    title: black
-    primary: black
-    background: white
-  components:
-    site_name: true
-    title: false
-    menu: true
-    preview: true
-    footer: true
-
-extra_css:
-  - assets/style.css
-
-extra:
-  version:
-    provider: mike
-  python_supported_version: 3.9
-
-plugins:
-- search
-- mkdocstrings:
-    handlers:
-      python:
-        paths: [.]
-        options:
-          backlinks: tree
-          heading_level: 2
-          show_root_heading: true
-          show_if_no_docstring: true
-          show_symbol_type_heading: true
-          show_symbol_type_toc: true
-          extensions:
-          - griffe_typingdoc
+    - Development Guide: nav/development/development-guide.md
+    - Release Notes: nav/development/release-notes.md

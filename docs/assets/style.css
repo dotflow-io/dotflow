@@ -1,9 +1,9 @@
 body {
-    font-size: 1.2em;
+    /* font-size: 1.2em; */
     font-family: system-ui !important;
 }
 
-h2 {
+/* h2 {
     font-size: 1.8rem !important;
     line-height: 0.4rem;
 }
@@ -11,7 +11,7 @@ h2 {
 h3 {
     font-size: 1.3rem !important;
     line-height: 1.4rem;
-}
+} */
 
 p a {
     color: gray !important;
@@ -67,10 +67,32 @@ table {
     --md-typeset-a-color: #f44236 !important;
 }
 
-[data-md-color-accent=indigo] {
+[data-md-color-accent=#a71c12] {
     --md-accent-fg-color: #a71c12 !important;
 }
 
 a:hover {
     color: #f44236 !important;
+}
+
+.md-tabs {
+    background-color: black !important;
+    padding-top: 10px !important;
+    padding-bottom: 25px !important;
+}
+
+.md-tabs__link {
+    font-size: 0.8rem !important;
+}
+
+.md-footer {
+    background-color: black !important;
+}
+
+.md-footer-meta {
+    background-color: black !important;
+}
+
+.md-header__inner {
+    padding-top: 25px !important;
 }

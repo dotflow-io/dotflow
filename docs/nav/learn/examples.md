@@ -1,8 +1,4 @@
-# More Examples
-
-May 11, 2025
-
----
+# Examples
 
 Github: [dotflow/examples](https://github.com/dotflow-io/examples)
 

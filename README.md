@@ -26,7 +26,7 @@ With Dotflow, you get a powerful and easy-to-use library designed to create exec
 
 Our goal is to make task management faster and more secure, without overwhelming you with complexity. Simply instantiate the DotFlow class, add your tasks with the `add` method, and start execution with the `start` method.
 
-Start with the basics [here](https://dotflow-io.github.io/dotflow/nav/getting-started/).
+Start with the basics [here](https://dotflow-io.github.io/dotflow/).
 
 ## Table of Contents
 
@@ -60,8 +60,9 @@ Start with the basics [here](https://dotflow-io.github.io/dotflow/nav/getting-st
 We use GitHub issues for tracking bugs and feature requests and have limited bandwidth to address them. If you need anything, I ask you to please follow our templates for opening issues or discussions.
 
 - 🐛 [Bug Report](https://github.com/dotflow-io/dotflow/issues/new/choose)
-- 📕 [Documentation Issue](https://github.com/dotflow-io/dotflow/issues/new/choose)
+- 📕 [Documentation](https://github.com/dotflow-io/dotflow/issues/new/choose)
 - 🚀 [Feature Request](https://github.com/dotflow-io/dotflow/issues/new/choose)
+- ⚠️ [Security Issue](https://github.com/dotflow-io/dotflow/issues/new/choose)
 - 💬 [General Question](https://github.com/dotflow-io/dotflow/issues/new/choose)
 
 ## Getting Started
@@ -233,31 +234,6 @@ D[Finish]
 
 </details>
 
-#### Sequential with Groups
-
-```python
-workflow.add(step=task_foo, group_name="foo")
-workflow.add(step=task_bar, group_name="bar")
-
-workflow.start()
-```
-
-<details>
-<summary>Click to see diagram</summary>
-
-```mermaid
-flowchart TD
-    A[Start] -->|run| C(Parallel Groups)
-    C -->|run| D[task_a]
-    C -->|run| E[task_c]
-    D -->|response| X[task_b]
-    X --> H[Finish]
-    E -->|response| Y[task_d]
-    Y --> H[Finish]
-```
-
-</details>
-
 #### Background
 
 ```python
@@ -308,6 +284,31 @@ flowchart TD
 
 </details>
 
+#### Parallel with Groups
+
+```python
+workflow.task.add(step=task_foo, group_name="foo")
+workflow.task.add(step=task_bar, group_name="bar")
+
+workflow.start()
+```
+
+<details>
+<summary>Click to see diagram</summary>
+
+```mermaid
+flowchart TD
+    A[Start] -->|run| C(Parallel Groups)
+    C -->|run| D[task_a]
+    C -->|run| E[task_c]
+    D -->|response| X[task_b]
+    X --> H[Finish]
+    E -->|response| Y[task_d]
+    Y --> H[Finish]
+```
+
+</details>
+
 ## More Examples
 
 | Example | Command |
@@ -350,17 +351,20 @@ flowchart TD
 
 ## Commit Style
 
-- ⚙️ FEATURE
-- 📝 PEP8
-- 📌 ISSUE
-- 🪲 BUG
-- 📘 DOCS
-- 📦 PyPI
-- ❤️️ TEST
-- ⬆️ CI/CD
-- ⚠️ SECURITY
+| Icon | Type      | Description                                |
+|------|-----------|--------------------------------------------|
+| ⚙️   | FEATURE   | New feature                                |
+| 📝   | PEP8      | Formatting fixes following PEP8            |
+| 📌   | ISSUE     | Reference to issue                         |
+| 🪲   | BUG       | Bug fix                                    |
+| 📘   | DOCS      | Documentation changes                      |
+| 📦   | PyPI      | PyPI releases                              |
+| ❤️️   | TEST      | Automated tests                            |
+| ⬆️   | CI/CD     | Changes in continuous integration/delivery |
+| ⚠️   | SECURITY  | Security improvements                      |
 
 ## License
+
 ![GitHub License](https://img.shields.io/github/license/dotflow-io/dotflow)
 
 This project is licensed under the terms of the MIT License.
