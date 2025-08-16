@@ -26,7 +26,7 @@ With Dotflow, you get a powerful and easy-to-use library designed to create exec
 
 Our goal is to make task management faster and more secure, without overwhelming you with complexity. Simply instantiate the DotFlow class, add your tasks with the `add` method, and start execution with the `start` method.
 
-Start with the basics [here](https://dotflow-io.github.io/dotflow/nav/getting-started/).
+Start with the basics [here](https://dotflow-io.github.io/dotflow/).
 
 ## Table of Contents
 

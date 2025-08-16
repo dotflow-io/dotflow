@@ -21,7 +21,7 @@ Com o Dotflow, você tem em mãos uma biblioteca poderosa e fácil de usar, proj
 Nosso objetivo é tornar o gerenciamento de tarefas mais rápido e seguro, sem sobrecarregar você com complexidade.
 Basta instanciar a classe DotFlow, adicionar suas tarefas com o método `add` e iniciar a execução com o método `start`.
 
-Comece pelo básico [aqui](https://dotflow-io.github.io/dotflow/nav/getting-started/).
+Comece pelo básico [aqui](https://dotflow-io.github.io/dotflow/).
 
 ## Obtendo Ajuda
 
