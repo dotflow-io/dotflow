@@ -4,9 +4,9 @@ import unittest
 
 from uuid import uuid4
 
-from dotflow.core.workflow import Background, grouper
+from dotflow.core.workflow import Background
 from dotflow.core.types import TypeStatus
-from dotflow.core.task import Task, TaskError
+from dotflow.core.task import Task, TaskError, QueueGroup
 
 from tests.mocks import (
     action_step,
@@ -22,31 +22,34 @@ class TestWorkflowBackground(unittest.TestCase):
         self.ignore = False
 
     def test_instantiating_background_class(self):
-        tasks = [Task(task_id=0, step=action_step, callback=simple_callback)]
-        groups = grouper(tasks=tasks)
+        group = QueueGroup()
+        group.add(
+            item=Task(task_id=0, step=action_step, callback=simple_callback)
+        )
 
         execution = Background(
-            tasks=tasks,
             workflow_id=self.workflow_id,
             ignore=self.ignore,
-            groups=groups,
+            group=group,
         )
 
         tasks = execution.transport()
 
         self.assertListEqual(tasks, tasks)
-        self.assertDictEqual(execution.groups, groups)
+        self.assertIsInstance(execution.group, QueueGroup)
         self.assertEqual(execution.workflow_id, self.workflow_id)
         self.assertEqual(execution.ignore, self.ignore)
 
     def test_workflow_with_background_function_completed(self):
-        tasks = [Task(task_id=0, step=action_step, callback=simple_callback)]
+        group = QueueGroup()
+        group.add(
+            item=Task(task_id=0, step=action_step, callback=simple_callback)
+        )
 
         execution = Background(
-            tasks=tasks,
             workflow_id=self.workflow_id,
             ignore=self.ignore,
-            groups=grouper(tasks=tasks),
+            group=group,
         )
 
         tasks = execution.transport()
@@ -57,13 +60,15 @@ class TestWorkflowBackground(unittest.TestCase):
         self.assertEqual(tasks[0].error.message, "")
 
     def test_workflow_with_background_function_failed(self):
-        tasks = [Task(task_id=0, step=action_step_with_error, callback=simple_callback)]
+        group = QueueGroup()
+        group.add(
+            item=Task(task_id=0, step=action_step_with_error, callback=simple_callback)
+        )
 
         execution = Background(
-            tasks=tasks,
             workflow_id=self.workflow_id,
             ignore=self.ignore,
-            groups=grouper(tasks=tasks),
+            group=group,
         )
 
         tasks = execution.transport()
@@ -74,14 +79,15 @@ class TestWorkflowBackground(unittest.TestCase):
         self.assertEqual(tasks[0].error.message, "Fail!")
 
     def test_instantiating_background_setup_queue(self):
-        tasks = [Task(task_id=0, step=action_step, callback=simple_callback)]
-        groups = grouper(tasks=tasks)
+        group = QueueGroup()
+        group.add(
+            item=Task(task_id=0, step=action_step, callback=simple_callback)
+        )
 
         execution = Background(
-            tasks=tasks,
             workflow_id=self.workflow_id,
             ignore=self.ignore,
-            groups=groups,
+            group=group,
         )
 
         execution.setup_queue()
@@ -90,13 +96,13 @@ class TestWorkflowBackground(unittest.TestCase):
 
     def test_instantiating_background_flow_callback(self):
         task = Task(task_id=5, step=action_step, callback=simple_callback)
-        groups = grouper(tasks=[task])
+        group = QueueGroup()
+        group.add(item=task)
 
         execution = Background(
-            tasks=[task],
             workflow_id=self.workflow_id,
             ignore=self.ignore,
-            groups=groups,
+            group=group,
         )
 
         execution.setup_queue()

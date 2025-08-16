@@ -6,7 +6,7 @@ from uuid import uuid4
 from dotflow.core.config import Config
 from dotflow.core.context import Context
 from dotflow.core.exception import MissingActionDecorator
-from dotflow.core.task import Task, TaskBuilder
+from dotflow.core.task import Task, TaskBuilder, QueueGroup
 from dotflow.core.serializers.workflow import SerializerWorkflow
 from dotflow.core.serializers.task import SerializerTask
 from dotflow.utils import basic_callback
@@ -23,32 +23,36 @@ class TestTaskBuild(unittest.TestCase):
     def test_instantiating_task_build_class(self):
         task = TaskBuilder(config=self.config)
 
-        self.assertListEqual(task.queue, [])
+        self.assertIsInstance(task.group, QueueGroup)
 
     def test_add_method(self):
         task = TaskBuilder(config=self.config)
         task.add(step=action_step)
+        tasks = task.group.tasks()
 
-        self.assertEqual(task.queue[0].task_id, 0)
-        self.assertIsInstance(task.queue[0], Task)
-        self.assertEqual(task.queue[0].callback, basic_callback)
-        self.assertEqual(len(task.queue), 1)
+        self.assertTrue(task.group.size())
+        self.assertEqual(tasks[0].task_id, 0)
+        self.assertIsInstance(tasks[0], Task)
+        self.assertEqual(tasks[0].callback, basic_callback)
+        self.assertEqual(len(tasks), 1)
 
     def test_add_method_with_class_context(self):
         task = TaskBuilder(config=self.config)
         task.add(step=action_step, initial_context=Context(storage=self.content))
+        tasks = task.group.tasks()
 
-        self.assertEqual(task.queue[0].initial_context.storage, self.content)
+        self.assertEqual(tasks[0].initial_context.storage, self.content)
 
-        self.assertIsInstance(task.queue[0].initial_context, Context)
+        self.assertIsInstance(tasks[0].initial_context, Context)
 
     def test_add_method_without_class_context(self):
         task = TaskBuilder(config=self.config)
         task.add(step=action_step, initial_context=self.content)
+        tasks = task.group.tasks()
 
-        self.assertEqual(task.queue[0].initial_context.storage, self.content)
+        self.assertEqual(tasks[0].initial_context.storage, self.content)
 
-        self.assertIsInstance(task.queue[0].initial_context, Context)
+        self.assertIsInstance(tasks[0].initial_context, Context)
 
     def test_count_method(self):
         task = TaskBuilder(config=self.config)
@@ -56,11 +60,11 @@ class TestTaskBuild(unittest.TestCase):
         initial_count = 0
         final_count = 1
 
-        self.assertEqual(task.count(), initial_count)
+        self.assertEqual(task.group.size(), initial_count)
 
         task.add(step=action_step)
 
-        self.assertEqual(task.count(), final_count)
+        self.assertEqual(task.group.size(), final_count)
 
     def test_clear_method(self):
         task = TaskBuilder(config=self.config)
@@ -69,11 +73,11 @@ class TestTaskBuild(unittest.TestCase):
         expected_count_after = 0
 
         task.add(step=action_step)
-        self.assertEqual(task.count(), expected_count_before)
+        self.assertEqual(task.group.size(), expected_count_before)
 
-        task.clear()
+        task.group.queue["default"].clear()
 
-        self.assertEqual(task.count(), expected_count_after)
+        self.assertEqual(task.group.size(), expected_count_after)
 
     def test_with_method_step_without_decorator(self):
         task = TaskBuilder(config=self.config)

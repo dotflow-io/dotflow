@@ -1,9 +1,12 @@
 """Workflow module"""
 
+import sys
 import threading
 import warnings
 import platform
+import multiprocessing as mp
 
+from queue import Empty
 from datetime import datetime
 from multiprocessing import Process, Queue
 
@@ -17,6 +20,8 @@ from dotflow.core.exception import ExecutionModeNotExist
 from dotflow.core.types import TypeExecution, TypeStatus
 from dotflow.core.task import Task, QueueGroup
 from dotflow.utils import basic_callback
+
+# mp.set_start_method("spawn", force=True)
 
 
 def is_darwin_arm() -> bool:
@@ -42,8 +47,8 @@ class Manager:
             )
 
     Args:
-        tasks (List[Task]):
-            A list containing objects of type Task.
+        group (QueueGroup):
+            A group containing objects of type Task.
 
         on_success (Callable):
             Success function to be executed after the completion of the entire
@@ -159,7 +164,7 @@ class Sequential(Flow):
         self.queue = []
 
     def transport(self) -> List[Task]:
-        return self.queue
+        return self.group.tasks()
 
     def _flow_callback(self, task: Task) -> None:
         self.queue.append(task)
@@ -189,13 +194,21 @@ class SequentialGroup(Flow):
     """Sequential Group"""
 
     def setup_queue(self) -> None:
-        self.queue = Queue()
+        self.queue = None
+
+        if sys.version_info >= (3, 12):
+            self.queue = mp.Queue()
+        else:
+            self.queue = Queue()
 
     def transport(self) -> List[Task]:
         contexts = {}
         while len(contexts) < self.group.size():
-            if not self.queue.empty():
-                contexts = {**contexts, **self.queue.get()}
+            try:
+                data = self.queue.get(timeout=1)
+                contexts.update(data)
+            except Empty:
+                pass
 
         if contexts:
             for task in self.group.tasks():
@@ -229,14 +242,21 @@ class SequentialGroup(Flow):
             thread.start()
             threads.append(thread)
 
-        for process in processes:
-            process.join()
-
         for thread in threads:
             thread.join()
 
+        for process in processes:
+            process.join()
+
     def _launch_group(self, processes, queue):
-        process = Process(
+        new_process = None
+
+        if sys.version_info >= (3, 12):
+            new_process = mp.Process
+        else:
+            new_process = Process
+
+        process = new_process(
             target=self._run_group,
             args=(queue,)
         )
@@ -269,10 +289,10 @@ class Background(Flow):
         self.queue = []
 
     def transport(self) -> List[Task]:
-        return self.queue
+        return self.group.tasks()
 
     def _flow_callback(self, task: Task) -> None:
-        self.queue.append(task)
+        pass
 
     def run(self) -> None:
         thread = threading.Thread(
@@ -291,7 +311,12 @@ class Parallel(Flow):
     """Parallel"""
 
     def setup_queue(self) -> None:
-        self.queue = Queue()
+        self.queue = None
+
+        if sys.version_info >= (3, 12):
+            self.queue = mp.Queue()
+        else:
+            self.queue = Queue()
 
     def transport(self) -> List[Task]:
         contexts = {}
@@ -320,13 +345,20 @@ class Parallel(Flow):
         self.queue.put(current_task)
 
     def run(self) -> None:
+        new_process = None
+
+        if sys.version_info >= (3, 12):
+            new_process = mp.Process
+        else:
+            new_process = Process
+
         processes = []
         previous_context = Context(
             workflow_id=self.workflow_id
         )
 
         for task in self.group.tasks():
-            process = Process(
+            process = new_process(
                 target=Execution,
                 args=(
                     task,
