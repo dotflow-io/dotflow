@@ -15,7 +15,7 @@ class TestDotFlow(unittest.TestCase):
 
     def setUp(self):
         self.workflow = DotFlow()
-        self.workflow.task.add(step=action_step)
+        self.workflow.add(step=action_step)
 
     def test_instantiating_dotflow_class(self):
         self.assertIsInstance(self.workflow.task, TaskBuilder)

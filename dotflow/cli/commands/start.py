@@ -13,7 +13,7 @@ class StartCommand(Command):
     def setup(self):
         workflow = self._new_workflow()
 
-        workflow.task.add(
+        workflow.add(
             step=self.params.step,
             callback=self.params.callback,
             initial_context=self.params.initial_context,

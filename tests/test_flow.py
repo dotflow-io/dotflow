@@ -95,19 +95,19 @@ def load_task_y(previous_context):
 def main():
     workflow = DotFlow()
 
-    workflow.task.add(step=StepX)
-    workflow.task.add(step=StepY, initial_context={"foo": "bar"})
-    workflow.task.add(step=simple_step)
-    workflow.task.add(step=extract_task_x)
-    workflow.task.add(step=transform_task_x, initial_context={"foo": True})
-    workflow.task.add(step=load_task_x)
-    workflow.task.add(step=extract_task_y)
-    workflow.task.add(step=transform_task_y)
-    workflow.task.add(step=load_task_y)
+    workflow.add(step=StepX)
+    workflow.add(step=StepY, initial_context={"foo": "bar"})
+    workflow.add(step=simple_step)
+    workflow.add(step=extract_task_x)
+    workflow.add(step=transform_task_x, initial_context={"foo": True})
+    workflow.add(step=load_task_x)
+    workflow.add(step=extract_task_y)
+    workflow.add(step=transform_task_y)
+    workflow.add(step=load_task_y)
     workflow.start()
 
     workflow = DotFlow()
-    workflow.task.add(
+    workflow.add(
         [
             StepX,
             StepY,
@@ -120,7 +120,7 @@ def main():
     workflow.start()
 
     workflow = DotFlow()
-    workflow.task.add(
+    workflow.add(
         [
             "tests.test_flow.StepX",
             "tests.test_flow.StepY",

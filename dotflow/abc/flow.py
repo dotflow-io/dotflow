@@ -11,16 +11,14 @@ class Flow(ABC):
 
     def __init__(
             self,
-            tasks: List[Task],
             workflow_id: UUID,
             ignore: bool,
-            groups: Dict[str, List[Task]]
+            group: Dict[str, List[Task]]
     ) -> None:
         self.queue = None
-        self.tasks = tasks
         self.workflow_id = workflow_id
         self.ignore = ignore
-        self.groups = groups
+        self.group = group
 
         self.setup_queue()
         self.run()
@@ -30,7 +28,7 @@ class Flow(ABC):
         self.queue = []
 
     @abstractmethod
-    def get_tasks(self) -> List[Task]:
+    def transport(self) -> List[Task]:
         return self.queue
 
     @abstractmethod

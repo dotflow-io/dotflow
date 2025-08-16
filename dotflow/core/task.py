@@ -3,7 +3,7 @@
 import json
 
 from uuid import UUID
-from typing import Any, Callable, List
+from typing import Any, Callable, List, Dict
 
 from dotflow.core.config import Config
 from dotflow.core.action import Action
@@ -18,6 +18,8 @@ from dotflow.utils import (
     traceback_error,
     message_error
 )
+
+TASK_GROUP_NAME = "default"
 
 
 class TaskInstance:
@@ -89,7 +91,7 @@ class Task(TaskInstance):
         initial_context: Any = None,
         workflow_id: UUID = None,
         config: Config = None,
-        group_name: str = "default"
+        group_name: str = TASK_GROUP_NAME
     ) -> None:
         super().__init__(
             task_id,
@@ -271,7 +273,7 @@ class TaskBuilder:
             config: Config,
             workflow_id: UUID = None
     ) -> None:
-        self.queue: List[Callable] = []
+        self.group: QueueGroup = QueueGroup()
         self.workflow_id = workflow_id
         self.config = config
 
@@ -280,7 +282,7 @@ class TaskBuilder:
         step: Callable,
         callback: Callable = basic_callback,
         initial_context: Any = None,
-        group_name: str = "default"
+        group_name: str = TASK_GROUP_NAME
     ) -> None:
         """
         Args:
@@ -313,9 +315,9 @@ class TaskBuilder:
                 )
             return self
 
-        self.queue.append(
-            Task(
-                task_id=len(self.queue),
+        self.group.add(
+            item=Task(
+                task_id=self.group.size(),
                 step=step,
                 callback=Module(value=callback),
                 initial_context=initial_context,
@@ -339,9 +341,64 @@ class TaskBuilder:
     def schema(self) -> SerializerWorkflow:
         return SerializerWorkflow(
             workflow_id=self.workflow_id,
-            tasks=[item.schema() for item in self.queue]
+            tasks=[item.schema() for item in self.group.tasks()]
         )
 
     def result(self) -> SerializerWorkflow:
         item = self.schema().model_dump_json()
         return json.loads(item)
+
+
+class QueueGroup:
+
+    def __init__(self):
+        self.queue: Dict[str, Queue] = {}
+
+    def add(self, item: Task) -> None:
+        if not self.queue.get(item.group_name):
+            self.queue[item.group_name] = Queue()
+
+        self.queue[item.group_name].add(item=item)
+
+    def size(self) -> int:
+        current_size = 0
+        for _, group in self.queue.items():
+            current_size += group.size()
+
+        return current_size
+
+    def count(self) -> int:
+        return len(self.queue)
+
+    def tasks(self) -> List[Task]:
+        tasks = []
+        for _, queue in self.queue.items():
+            tasks += queue.tasks
+
+        return tasks
+
+
+class Queue:
+
+    INITIAL_INDEX = 0
+
+    def __init__(self):
+        self.tasks: List[Task] = []
+
+    def add(self, item: Task) -> None:
+        self.tasks.append(item)
+
+    def remove(self) -> Task:
+        return self.tasks.pop(self.INITIAL_INDEX)
+
+    def size(self) -> int:
+        return len(self.tasks)
+
+    def reverse(self) -> None:
+        self.tasks.reverse()
+
+    def clear(self) -> None:
+        self.tasks.clear()
+
+    def get(self) -> List[Task]:
+        return self.tasks
