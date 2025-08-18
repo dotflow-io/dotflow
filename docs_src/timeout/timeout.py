@@ -26,15 +26,15 @@ class SimpleStepY:
 def main():
     workflow = DotFlow()
 
-    workflow.task.add(step=simple_step)
+    workflow.add(step=simple_step)
     workflow.start()
     workflow.task.clear()
 
-    workflow.task.add(step=SimpleStepX)
+    workflow.add(step=SimpleStepX)
     workflow.start()
     workflow.task.clear()
 
-    workflow.task.add(step=SimpleStepY)
+    workflow.add(step=SimpleStepY)
     workflow.start()
     workflow.task.clear()
 

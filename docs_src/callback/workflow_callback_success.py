@@ -21,7 +21,7 @@ def simple_step():
 def main():
     workflow = DotFlow()
 
-    workflow.task.add(step=simple_step)
+    workflow.add(step=simple_step)
     workflow.start(on_success=callback)
 
     return workflow

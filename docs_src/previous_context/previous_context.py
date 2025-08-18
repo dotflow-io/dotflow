@@ -26,9 +26,9 @@ def load_task(previous_context: Context):
 def main():
     workflow = DotFlow()
 
-    workflow.task.add(step=extract_task)
-    workflow.task.add(step=transform_task)
-    workflow.task.add(step=load_task)
+    workflow.add(step=extract_task)
+    workflow.add(step=transform_task)
+    workflow.add(step=load_task)
 
     workflow.start()
 

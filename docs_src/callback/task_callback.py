@@ -25,8 +25,8 @@ def simple_two():
 def main():
     workflow = DotFlow()
 
-    workflow.task.add(step=simple_one, callback=callback_one)
-    workflow.task.add(step=simple_two, callback=callback_two)
+    workflow.add(step=simple_one, callback=callback_one)
+    workflow.add(step=simple_two, callback=callback_two)
     workflow.start(keep_going=True)
 
     return workflow
