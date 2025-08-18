@@ -33,20 +33,5 @@ class Logs(ABC):
     """Logs"""
 
     @abstractmethod
-    def post_task(
-        self,
-        task_id: int,
-        wotkflow_id: str,
-        status: str,
-        type: TYPE_LOG
-    ) -> None:
-        pass
-
-    @abstractmethod
-    def post_workflow(
-        self,
-        wotkflow_id: str,
-        status: str,
-        type: TYPE_LOG
-    ) -> None:
+    def post_task(self, task_object, type: TYPE_LOG) -> None:
         pass
