@@ -1,3 +1,3 @@
-# Log
+# Logs
 
-::: dotflow.abc.log.Log
+::: dotflow.abc.log.Logs

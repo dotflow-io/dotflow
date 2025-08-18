@@ -18,4 +18,4 @@ class LogCommand(Command):
                 f"To access all logs, open the file ({settings.LOG_PATH.resolve()})."
             )
         else:
-            print(settings.WARNING_ALERT, "Log file not found.")
+            print(settings.WARNING_ALERT, "Logs file not found.")

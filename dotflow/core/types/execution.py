@@ -1,5 +1,6 @@
 """Type Execution mode module"""
 
+from typing import Literal
 from typing_extensions import Annotated, Doc
 
 
@@ -14,3 +15,10 @@ class TypeExecution:
     SEQUENTIAL: Annotated[str, Doc("Sequential execution.")] = "sequential"
     BACKGROUND:  Annotated[str, Doc("Background execution.")] = "background"
     PARALLEL:  Annotated[str, Doc("Parallel execution.")] = "parallel"
+
+
+TYPE_EXECUTION = Literal[
+    TypeExecution.SEQUENTIAL,
+    TypeExecution.BACKGROUND,
+    TypeExecution.PARALLEL
+]

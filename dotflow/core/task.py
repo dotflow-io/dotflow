@@ -5,6 +5,7 @@ import json
 from uuid import UUID
 from typing import Any, Callable, List, Dict
 
+from dotflow.abc.logs import TypeLog
 from dotflow.core.config import Config
 from dotflow.core.action import Action
 from dotflow.core.context import Context
@@ -205,7 +206,12 @@ class Task(TaskInstance):
             task_error = TaskError(value)
             self._error = task_error
 
-            self.config.log.error(task=self)
+            self.config.log.post_task(
+                task_id=self.task_id,
+                wotkflow_id=self.workflow_id,
+                status=self.status,
+                type=TypeLog.ERROR
+            )
 
     @property
     def status(self):
@@ -218,7 +224,12 @@ class Task(TaskInstance):
         self._status = value
 
         self.config.notify.send(task=self)
-        self.config.log.info(task=self)
+        self.config.log.post_task(
+            task_id=self.task_id,
+            wotkflow_id=self.workflow_id,
+            status=self.status,
+            type=TypeLog.INFO
+        )
 
     @property
     def config(self):
