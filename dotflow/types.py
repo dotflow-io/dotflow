@@ -1,9 +1,9 @@
 """Types module"""
 
-from dotflow.core.types.status import TypeStatus
-from dotflow.core.types.storage import TypeStorage
+from dotflow.core.types.status import StatusTaskType
+from dotflow.core.types.storage import StorageType
 
 __all__ = [
-    "TypeStatus",
-    "TypeStorage"
+    "StatusTaskType",
+    "StorageType"
 ]

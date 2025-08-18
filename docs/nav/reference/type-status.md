@@ -1,6 +1,6 @@
-# TypeStatus
+# StatusTaskType
 
-::: dotflow.core.types.status.TypeStatus
+::: dotflow.core.types.status.StatusTaskType
     options:
         members:
             - NOT_STARTED

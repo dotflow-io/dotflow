@@ -5,7 +5,7 @@ import unittest
 from uuid import uuid4
 
 from dotflow.core.workflow import Background
-from dotflow.core.types import TypeStatus
+from dotflow.core.types import StatusTaskType
 from dotflow.core.task import Task, TaskError, QueueGroup
 
 from tests.mocks import (
@@ -54,7 +54,7 @@ class TestWorkflowBackground(unittest.TestCase):
 
         tasks = execution.transport()
 
-        self.assertEqual(tasks[0].status, TypeStatus.COMPLETED)
+        self.assertEqual(tasks[0].status, StatusTaskType.COMPLETED)
         self.assertEqual(tasks[0].current_context.storage, {"foo": "bar"})
         self.assertIsInstance(tasks[0].error, TaskError)
         self.assertEqual(tasks[0].error.message, "")
@@ -73,7 +73,7 @@ class TestWorkflowBackground(unittest.TestCase):
 
         tasks = execution.transport()
 
-        self.assertEqual(tasks[0].status, TypeStatus.FAILED)
+        self.assertEqual(tasks[0].status, StatusTaskType.FAILED)
         self.assertIsNone(tasks[0].current_context.storage)
         self.assertIsInstance(tasks[0].error, TaskError)
         self.assertEqual(tasks[0].error.message, "Fail!")

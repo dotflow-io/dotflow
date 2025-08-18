@@ -1,7 +1,7 @@
 from typing import List
 
 from dotflow import DotFlow, action, Task
-from dotflow.core.types.status import TypeStatus
+from dotflow.core.types.status import StatusTaskType
 
 
 def callback(tasks: List[Task]):
@@ -9,7 +9,7 @@ def callback(tasks: List[Task]):
     assert len(tasks)
 
     for task in tasks:
-        assert task.status is TypeStatus.COMPLETED
+        assert task.status is StatusTaskType.COMPLETED
         print(task.task_id, task.status, task.current_context.storage)
 
 

@@ -7,7 +7,7 @@ from unittest.mock import Mock
 from types import FunctionType
 
 from dotflow.core.workflow import Manager
-from dotflow.core.types import TypeExecution, TypeStatus
+from dotflow.core.types import ExecutionModeType, StatusTaskType
 from dotflow.core.exception import ExecutionModeNotExist
 from dotflow.core.task import Task, QueueGroup
 
@@ -50,7 +50,7 @@ class TestWorkflow(unittest.TestCase):
         )
 
         controller = Manager(group=group)
-        self.assertEqual(controller.group.tasks()[0].status, TypeStatus.COMPLETED)
+        self.assertEqual(controller.group.tasks()[0].status, StatusTaskType.COMPLETED)
 
     def test_workflow_with_function_failed(self):
         group = QueueGroup()
@@ -63,20 +63,20 @@ class TestWorkflow(unittest.TestCase):
         )
 
         controller = Manager(group=group)
-        self.assertEqual(controller.group.tasks()[0].status, TypeStatus.FAILED)
+        self.assertEqual(controller.group.tasks()[0].status, StatusTaskType.FAILED)
 
     def test_with_execution_mode_that_does_not_exist(self):
         with self.assertRaises(ExecutionModeNotExist):
             Manager(group=self.group, mode="unknown")
 
     def test_with_execution_mode_sequential(self):
-        Manager(group=self.group, mode=TypeExecution.SEQUENTIAL)
+        Manager(group=self.group, mode=ExecutionModeType.SEQUENTIAL)
 
     def test_with_execution_mode_background(self):
-        Manager(group=self.group, mode=TypeExecution.BACKGROUND)
+        Manager(group=self.group, mode=ExecutionModeType.BACKGROUND)
 
     def test_with_execution_mode_parallel(self):
-        Manager(group=self.group, mode=TypeExecution.PARALLEL)
+        Manager(group=self.group, mode=ExecutionModeType.PARALLEL)
 
     def test_callback_success_called(self):
         group = QueueGroup()
@@ -117,4 +117,4 @@ class TestWorkflow(unittest.TestCase):
         )
 
         controller = Manager(group=group)
-        self.assertEqual(controller.group.tasks()[0].status, TypeStatus.COMPLETED)
+        self.assertEqual(controller.group.tasks()[0].status, StatusTaskType.COMPLETED)

@@ -1,31 +1,42 @@
-"""Type TypeStatus mode module"""
+"""Status Task Type module"""
 
-from typing_extensions import Annotated, Doc
+from enum import StrEnum
+from typing_extensions import Literal
 
 
-class TypeStatus:
+class StatusTaskType(StrEnum):
     """
     Import:
-        You can import the **TypeStatus** class with:
+        You can import the **StatusTaskType** class with:
 
-            from dotflow.core.types import TypeStatus
+            from dotflow.core.types import StatusTaskType
     """
 
-    NOT_STARTED: Annotated[str, Doc("Status not started.")] = "Not started"
-    IN_PROGRESS: Annotated[str, Doc("Status in progress.")] = "In progress"
-    COMPLETED: Annotated[str, Doc("Status completed.")] = "Completed"
-    PAUSED: Annotated[str, Doc("Status paused.")] = "Paused"
-    RETRY: Annotated[str, Doc("Status retry.")] = "Retry"
-    FAILED: Annotated[str, Doc("Status failed.")] = "Failed"
+    NOT_STARTED = "Not started"
+    IN_PROGRESS = "In progress"
+    COMPLETED = "Completed"
+    PAUSED = "Paused"
+    RETRY = "Retry"
+    FAILED = "Failed"
 
     @classmethod
     def get_symbol(cls, value: str) -> str:
         status = {
-           TypeStatus.NOT_STARTED: "⚪",
-           TypeStatus.IN_PROGRESS: "🔵",
-           TypeStatus.COMPLETED: "✅",
-           TypeStatus.PAUSED: "◼️",
-           TypeStatus.RETRY: "❗",
-           TypeStatus.FAILED: "❌"
+           StatusTaskType.NOT_STARTED: "⚪",
+           StatusTaskType.IN_PROGRESS: "🔵",
+           StatusTaskType.COMPLETED: "✅",
+           StatusTaskType.PAUSED: "◼️",
+           StatusTaskType.RETRY: "❗",
+           StatusTaskType.FAILED: "❌"
         }
         return status.get(value)
+
+
+TYPE_STATUS_TASK = Literal[
+    StatusTaskType.NOT_STARTED,
+    StatusTaskType.IN_PROGRESS,
+    StatusTaskType.COMPLETED,
+    StatusTaskType.PAUSED,
+    StatusTaskType.RETRY,
+    StatusTaskType.FAILED
+]

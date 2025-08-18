@@ -8,7 +8,7 @@ from uuid import uuid4
 from dotflow.core.action import Action
 from dotflow.core.config import Config
 from dotflow.core.context import Context
-from dotflow.core.types.status import TypeStatus
+from dotflow.core.types.status import StatusTaskType
 from dotflow.core.serializers.task import SerializerTaskError, SerializerTask
 from dotflow.core.exception import (
     MissingActionDecorator,
@@ -92,7 +92,7 @@ class TestTask(unittest.TestCase):
 
         self.assertEqual(schema.task_id, 0)
         self.assertEqual(schema.workflow_id, expected_workflow_id)
-        self.assertEqual(schema.status, TypeStatus.NOT_STARTED)
+        self.assertEqual(schema.status, StatusTaskType.NOT_STARTED)
         self.assertEqual(schema.error.message, expected_error_message)
         self.assertEqual(schema.duration, expected_duration)
         self.assertEqual(schema.initial_context, json.dumps(self.content))
@@ -221,7 +221,7 @@ class TestTaskSetter(unittest.TestCase):
         self.assertIsInstance(self.task.error.exception, Exception)
 
     def test_set_status(self):
-        expected_value = TypeStatus.COMPLETED
+        expected_value = StatusTaskType.COMPLETED
 
         self.task.status = expected_value
         self.assertEqual(self.task.status, expected_value)

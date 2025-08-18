@@ -1,24 +1,24 @@
-"""Type Execution mode module"""
+"""Execution Mode Type module"""
 
+from enum import StrEnum
 from typing import Literal
-from typing_extensions import Annotated, Doc
 
 
-class TypeExecution:
+class ExecutionModeType(StrEnum):
     """
     Import:
-        You can import the **TypeExecution** class with:
+        You can import the **ExecutionModeType** class with:
 
-            from dotflow.core.types import TypeExecution
+            from dotflow.core.types import ExecutionModeType
     """
 
-    SEQUENTIAL: Annotated[str, Doc("Sequential execution.")] = "sequential"
-    BACKGROUND:  Annotated[str, Doc("Background execution.")] = "background"
-    PARALLEL:  Annotated[str, Doc("Parallel execution.")] = "parallel"
+    SEQUENTIAL = "sequential"
+    BACKGROUND = "background"
+    PARALLEL = "parallel"
 
 
-TYPE_EXECUTION = Literal[
-    TypeExecution.SEQUENTIAL,
-    TypeExecution.BACKGROUND,
-    TypeExecution.PARALLEL
+TYPE_MODE_EXECUTION = Literal[
+    ExecutionModeType.SEQUENTIAL,
+    ExecutionModeType.BACKGROUND,
+    ExecutionModeType.PARALLEL
 ]

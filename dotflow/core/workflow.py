@@ -17,7 +17,7 @@ from dotflow.abc.flow import Flow
 from dotflow.core.context import Context
 from dotflow.core.execution import Execution
 from dotflow.core.exception import ExecutionModeNotExist
-from dotflow.core.types import TypeExecution, TypeStatus
+from dotflow.core.types import ExecutionModeType, StatusTaskType
 from dotflow.core.task import Task, QueueGroup
 from dotflow.utils import basic_callback
 
@@ -58,7 +58,7 @@ class Manager:
             Failure function to be executed after the completion of the entire
             workflow. It's essentially a callback for error scenarios
 
-        mode (TypeExecution):
+        mode (ExecutionModeType):
             Parameter that defines the execution mode of the workflow. Currently,
             there are options to execute in **sequential**, **background**, or **parallel** mode.
             The sequential mode is used by default.
@@ -87,7 +87,7 @@ class Manager:
         group: QueueGroup,
         on_success: Callable = basic_callback,
         on_failure: Callable = basic_callback,
-        mode: TypeExecution = TypeExecution.SEQUENTIAL,
+        mode: ExecutionModeType = ExecutionModeType.SEQUENTIAL,
         keep_going: bool = False,
         workflow_id: UUID = None,
     ) -> None:
@@ -115,7 +115,7 @@ class Manager:
         tasks = queue_group.tasks()
         final_status = [task.status for task in tasks]
 
-        if TypeStatus.FAILED in final_status:
+        if StatusTaskType.FAILED in final_status:
             self.on_failure(tasks=tasks)
         else:
             self.on_success(tasks=tasks)
@@ -186,7 +186,7 @@ class Sequential(Flow):
                 key=task.config.storage.key(task=task)
             )
 
-            if not self.ignore and task.status == TypeStatus.FAILED:
+            if not self.ignore and task.status == StatusTaskType.FAILED:
                 break
 
 
@@ -278,7 +278,7 @@ class SequentialGroup(Flow):
                 key=task.config.storage.key(task=task)
             )
 
-            if not self.ignore and task.status == TypeStatus.FAILED:
+            if not self.ignore and task.status == StatusTaskType.FAILED:
                 break
 
 

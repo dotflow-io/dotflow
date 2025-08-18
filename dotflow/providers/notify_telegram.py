@@ -5,7 +5,7 @@ from typing import Any, Optional
 
 from requests import post
 
-from dotflow.core.types.status import TypeStatus
+from dotflow.core.types.status import StatusTaskType
 from dotflow.abc.notify import Notify
 from dotflow.logging import logger
 
@@ -19,7 +19,7 @@ class NotifyTelegram(Notify):
         self,
         token: str,
         chat_id: int,
-        notification_type: Optional[TypeStatus] = None,
+        notification_type: Optional[StatusTaskType] = None,
         timeout: int = 1.5
     ):
         self.token = token
@@ -50,7 +50,7 @@ class NotifyTelegram(Notify):
 
     def _get_text(self, task: Any) -> str:
         return self.MESSAGE.format(
-            symbol=TypeStatus.get_symbol(task.status),
+            symbol=StatusTaskType.get_symbol(task.status),
             status=task.status,
             workflow_id=task.workflow_id,
             task_id=task.task_id,

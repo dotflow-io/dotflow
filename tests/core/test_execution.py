@@ -9,7 +9,7 @@ from uuid import uuid4
 
 from dotflow.core.context import Context
 from dotflow.core.execution import Execution
-from dotflow.core.types import TypeStatus
+from dotflow.core.types import StatusTaskType
 from dotflow.core.task import Task
 
 from tests.mocks import (
@@ -49,7 +49,7 @@ class TestExecution(unittest.TestCase):
             task=task, workflow_id=workflow_id, previous_context=Context()
         )
 
-        self.assertEqual(controller.task.status, TypeStatus.COMPLETED)
+        self.assertEqual(controller.task.status, StatusTaskType.COMPLETED)
         self.assertEqual(controller.task.workflow_id, workflow_id)
 
     def test_execution_with_function_failed(self):
@@ -59,7 +59,7 @@ class TestExecution(unittest.TestCase):
             task=task, workflow_id=workflow_id, previous_context=Context()
         )
 
-        self.assertEqual(controller.task.status, TypeStatus.FAILED)
+        self.assertEqual(controller.task.status, StatusTaskType.FAILED)
         self.assertEqual(controller.task.workflow_id, workflow_id)
 
     def test_execution_with_class_completed(self):
@@ -78,7 +78,7 @@ class TestExecution(unittest.TestCase):
                     execution_log = log.message
 
         self.assertEqual(execution_log, "ActionStep: Run function executed")
-        self.assertEqual(controller.task.status, TypeStatus.COMPLETED)
+        self.assertEqual(controller.task.status, StatusTaskType.COMPLETED)
         self.assertEqual(controller.task.workflow_id, workflow_id)
 
     def test_execution_with_class_failed(self):
@@ -97,7 +97,7 @@ class TestExecution(unittest.TestCase):
                     execution_log = log.message
 
         self.assertEqual(execution_log, "ActionStepWithError: Run function executed")
-        self.assertEqual(controller.task.status, TypeStatus.FAILED)
+        self.assertEqual(controller.task.status, StatusTaskType.FAILED)
         self.assertEqual(controller.task.workflow_id, workflow_id)
 
     def test_execution_function_with_initial_context(self):
@@ -111,7 +111,7 @@ class TestExecution(unittest.TestCase):
             task=task, workflow_id=self.workflow_id, previous_context=None
         )
 
-        self.assertEqual(controller.task.status, TypeStatus.COMPLETED)
+        self.assertEqual(controller.task.status, StatusTaskType.COMPLETED)
         self.assertEqual(controller.task.initial_context.storage, self.context)
 
     def test_execution_function_with_previous_context(self):
@@ -122,7 +122,7 @@ class TestExecution(unittest.TestCase):
             task=task, workflow_id=self.workflow_id, previous_context=self.context
         )
 
-        self.assertEqual(controller.task.status, TypeStatus.COMPLETED)
+        self.assertEqual(controller.task.status, StatusTaskType.COMPLETED)
         self.assertEqual(controller.task._previous_context.storage, self.context)
 
     def test_execution_function_with_contexts(self):
@@ -136,7 +136,7 @@ class TestExecution(unittest.TestCase):
             task=task, workflow_id=self.workflow_id, previous_context=self.context
         )
 
-        self.assertEqual(controller.task.status, TypeStatus.COMPLETED)
+        self.assertEqual(controller.task.status, StatusTaskType.COMPLETED)
         self.assertEqual(controller.task.initial_context.storage, self.context)
         self.assertEqual(controller.task.previous_context.storage, self.context)
 
@@ -151,7 +151,7 @@ class TestExecution(unittest.TestCase):
             task=task, workflow_id=self.workflow_id, previous_context=None
         )
 
-        self.assertEqual(controller.task.status, TypeStatus.COMPLETED)
+        self.assertEqual(controller.task.status, StatusTaskType.COMPLETED)
         self.assertEqual(controller.task.initial_context.storage, self.context)
 
     def test_execution_class_with_previous_context(self):
@@ -162,7 +162,7 @@ class TestExecution(unittest.TestCase):
             task=task, workflow_id=self.workflow_id, previous_context=self.context
         )
 
-        self.assertEqual(controller.task.status, TypeStatus.COMPLETED)
+        self.assertEqual(controller.task.status, StatusTaskType.COMPLETED)
         self.assertEqual(controller.task.previous_context.storage, self.context)
 
         self.assertEqual(
@@ -183,7 +183,7 @@ class TestExecution(unittest.TestCase):
             task=task, workflow_id=self.workflow_id, previous_context=self.context
         )
 
-        self.assertEqual(controller.task.status, TypeStatus.COMPLETED)
+        self.assertEqual(controller.task.status, StatusTaskType.COMPLETED)
         self.assertEqual(controller.task.initial_context.storage, self.context)
         self.assertEqual(controller.task.previous_context.storage, self.context)
 
@@ -289,5 +289,5 @@ class TestExecution(unittest.TestCase):
                 previous_context=None
             )
 
-            self.assertEqual(controller.task.status, TypeStatus.COMPLETED)
+            self.assertEqual(controller.task.status, StatusTaskType.COMPLETED)
             self.assertEqual(controller.task.current_context.storage, input_value)

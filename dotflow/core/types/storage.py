@@ -1,15 +1,22 @@
-"""Type Storage mode"""
+"""Storage Type module"""
 
-from typing_extensions import Annotated, Doc
+from enum import StrEnum
+from typing import Literal
 
 
-class TypeStorage:
+class StorageType(StrEnum):
     """
     Import:
-        You can import the **TypeStorage** class with:
+        You can import the **StorageType** class with:
 
-            from dotflow.core.types import TypeStorage
+            from dotflow.core.types import StorageType
     """
 
-    DEFAULT: Annotated[str, Doc("Default storage.")] = "default"
-    FILE:  Annotated[str, Doc("File storage.")] = "file"
+    DEFAULT = "default"
+    FILE = "file"
+
+
+STORAGE_TYPE = Literal[
+    StorageType.DEFAULT,
+    StorageType.FILE
+]

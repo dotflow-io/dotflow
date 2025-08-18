@@ -13,7 +13,7 @@ from dotflow.core.module import Module
 from dotflow.core.serializers.task import SerializerTask
 from dotflow.core.serializers.workflow import SerializerWorkflow
 from dotflow.core.exception import MissingActionDecorator, NotCallableObject
-from dotflow.core.types.status import TypeStatus
+from dotflow.core.types.status import StatusTaskType, TYPE_STATUS_TASK
 from dotflow.utils import (
     basic_callback,
     traceback_error,
@@ -110,7 +110,7 @@ class Task(TaskInstance):
         self.step = step
         self.callback = callback
         self.initial_context = initial_context
-        self.status = TypeStatus.NOT_STARTED
+        self.status = StatusTaskType.NOT_STARTED
 
     @property
     def step(self):
@@ -206,30 +206,20 @@ class Task(TaskInstance):
             task_error = TaskError(value)
             self._error = task_error
 
-            self.config.log.post_task(
-                task_id=self.task_id,
-                wotkflow_id=self.workflow_id,
-                status=self.status,
-                type=TypeLog.ERROR
-            )
+            self.config.log.post_task(task_object=self, type=TypeLog.ERROR)
 
     @property
     def status(self):
         if not self._status:
-            return TypeStatus.NOT_STARTED
+            return StatusTaskType.NOT_STARTED
         return self._status
 
     @status.setter
-    def status(self, value: TypeStatus) -> None:
+    def status(self, value: TYPE_STATUS_TASK) -> None:
         self._status = value
 
         self.config.notify.send(task=self)
-        self.config.log.post_task(
-            task_id=self.task_id,
-            wotkflow_id=self.workflow_id,
-            status=self.status,
-            type=TypeLog.INFO
-        )
+        self.config.log.post_task(task_object=self, type=TypeLog.INFO)
 
     @property
     def config(self):
