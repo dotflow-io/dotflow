@@ -31,7 +31,7 @@ class TaskInstance:
             from dotflow.core.task import TaskInstance
     """
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *_args, **_kwargs) -> None:
         self.task_id = None
         self.workflow_id = None
         self._step = None
@@ -206,7 +206,8 @@ class Task(TaskInstance):
             task_error = TaskError(value)
             self._error = task_error
 
-            self.config.log.post_task(task_object=self, type=TypeLog.ERROR)
+        for log in self.config.logs:
+            log.on_task_status_change(task_object=self, type=TypeLog.ERROR)
 
     @property
     def status(self):
@@ -219,7 +220,9 @@ class Task(TaskInstance):
         self._status = value
 
         self.config.notify.send(task=self)
-        self.config.log.post_task(task_object=self, type=TypeLog.INFO)
+
+        for log in self.config.logs:
+            log.on_task_status_change(task_object=self, type=TypeLog.INFO)
 
     @property
     def config(self):

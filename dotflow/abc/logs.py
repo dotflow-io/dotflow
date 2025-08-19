@@ -33,5 +33,5 @@ class Logs(ABC):
     """Logs"""
 
     @abstractmethod
-    def post_task(self, task_object, type: TYPE_LOG) -> None:
+    def on_task_status_change(self, task_object, type: TYPE_LOG) -> None:
         pass

@@ -10,7 +10,7 @@ from dotflow.logging import logger
 
 class LogsHandler(Logs):
 
-    def post_task(self, task_object, type: TYPE_LOG) -> None:
+    def on_task_status_change(self, task_object, type: TYPE_LOG) -> None:
         new_log = getattr(logger, type.lower())
         new_log(
             TASK_LOG_FORMAT.format(
