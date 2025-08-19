@@ -68,12 +68,12 @@ class Task(TaskInstance):
         step (Callable):
             A argument that receives an object of the callable type,
             which is basically a function. You can see in this
-            [example](https://dotflow-io.github.io/dotflow/#3-task-function).
+            [example](https://dotflow-io.github.io/dotflow/nav/tutorial/first-steps/#3-task-function).
 
         callback (Callable):
             Any callable object that receives **args** or **kwargs**,
             which is basically a function. You can see in this
-            [example](https://dotflow-io.github.io/dotflow/#2-callback-function).
+            [example](https://dotflow-io.github.io/dotflow/nav/tutorial/first-steps/#2-callback-function).
 
         initial_context (Any): Any python object.
 
@@ -293,12 +293,12 @@ class TaskBuilder:
             step (Callable):
                 A argument that receives an object of the callable type,
                 which is basically a function. You can see in this
-                [example](https://dotflow-io.github.io/dotflow/#3-task-function).
+                [example](https://dotflow-io.github.io/dotflow/nav/tutorial/first-steps/#3-task-function).
 
             callback (Callable):
                 Any callable object that receives **args** or **kwargs**,
                 which is basically a function. You can see in this
-                [example](https://dotflow-io.github.io/dotflow/#2-callback-function).
+                [example](https://dotflow-io.github.io/dotflow/nav/tutorial/first-steps/#2-callback-function).
 
             initial_context (Context):
                 The argument exists to include initial data in the execution
