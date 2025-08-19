@@ -10,6 +10,18 @@ from dotflow.abc.notify import Notify
 from dotflow.logging import logger
 
 
+def get_symbol(value: str) -> str:
+    status = {
+        StatusTaskType.NOT_STARTED: "⚪",
+        StatusTaskType.IN_PROGRESS: "🔵",
+        StatusTaskType.COMPLETED: "✅",
+        StatusTaskType.PAUSED: "◼️",
+        StatusTaskType.RETRY: "❗",
+        StatusTaskType.FAILED: "❌"
+    }
+    return status.get(value)
+
+
 class NotifyTelegram(Notify):
 
     MESSAGE = "{symbol} {status}\n```json\n{task}```\n{workflow_id}-{task_id}"
@@ -50,7 +62,7 @@ class NotifyTelegram(Notify):
 
     def _get_text(self, task: Any) -> str:
         return self.MESSAGE.format(
-            symbol=StatusTaskType.get_symbol(task.status),
+            symbol=get_symbol(task.status),
             status=task.status,
             workflow_id=task.workflow_id,
             task_id=task.task_id,

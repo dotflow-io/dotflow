@@ -1,7 +1,8 @@
 """Storage Type module"""
 
-from enum import StrEnum
 from typing import Literal
+
+from dotflow.core.types.enum import StrEnum
 
 
 class StorageType(StrEnum):

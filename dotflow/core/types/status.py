@@ -1,7 +1,8 @@
 """Status Task Type module"""
 
-from enum import StrEnum
 from typing_extensions import Literal
+
+from dotflow.core.types.enum import StrEnum
 
 
 class StatusTaskType(StrEnum):
@@ -18,18 +19,6 @@ class StatusTaskType(StrEnum):
     PAUSED = "Paused"
     RETRY = "Retry"
     FAILED = "Failed"
-
-    @classmethod
-    def get_symbol(cls, value: str) -> str:
-        status = {
-           StatusTaskType.NOT_STARTED: "⚪",
-           StatusTaskType.IN_PROGRESS: "🔵",
-           StatusTaskType.COMPLETED: "✅",
-           StatusTaskType.PAUSED: "◼️",
-           StatusTaskType.RETRY: "❗",
-           StatusTaskType.FAILED: "❌"
-        }
-        return status.get(value)
 
 
 TYPE_STATUS_TASK = Literal[

@@ -1,9 +1,10 @@
 """Logs ABC"""
 
 from typing import Literal
-from enum import StrEnum
 
 from abc import ABC, abstractmethod
+
+from dotflow.core.types.enum import StrEnum
 
 
 class TypeLog(StrEnum):
