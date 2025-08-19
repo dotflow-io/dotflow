@@ -1,6 +1,6 @@
-# TypeExecution
+# ExecutionModeType
 
-::: dotflow.core.types.execution.TypeExecution
+::: dotflow.core.types.execution.ExecutionModeType
     options:
         members:
             - SEQUENTIAL

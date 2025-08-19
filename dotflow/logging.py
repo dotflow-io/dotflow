@@ -1,4 +1,4 @@
-"""Log"""
+"""Logs"""
 
 import logging
 import logging.config

@@ -5,9 +5,9 @@ import unittest
 from uuid import uuid4
 from multiprocessing.queues import Queue
 
-from dotflow.core.workflow import Parallel, grouper
-from dotflow.core.types import TypeStatus
-from dotflow.core.task import Task, TaskError
+from dotflow.core.workflow import Parallel
+from dotflow.core.types import StatusTaskType
+from dotflow.core.task import Task, TaskError, QueueGroup
 
 from tests.mocks import (
     action_step,
@@ -23,66 +23,72 @@ class TestWorkflowParallel(unittest.TestCase):
         self.ignore = False
 
     def test_instantiating_parallel_class(self):
-        tasks = [Task(task_id=0, step=action_step, callback=simple_callback)]
-        groups = grouper(tasks=tasks)
-
-        execution = Parallel(
-            tasks=tasks,
-            workflow_id=self.workflow_id,
-            ignore=self.ignore,
-            groups=groups,
+        group = QueueGroup()
+        group.add(
+            item=Task(task_id=0, step=action_step, callback=simple_callback)
         )
 
-        tasks = execution.get_tasks()
+        execution = Parallel(
+            workflow_id=self.workflow_id,
+            ignore=self.ignore,
+            group=group,
+        )
+
+        tasks = execution.transport()
 
         self.assertListEqual(tasks, tasks)
-        self.assertDictEqual(execution.groups, groups)
+        self.assertIsInstance(execution.group, QueueGroup)
         self.assertEqual(execution.workflow_id, self.workflow_id)
         self.assertEqual(execution.ignore, self.ignore)
 
     def test_workflow_with_parallel_function_completed(self):
-        tasks = [Task(task_id=0, step=action_step, callback=simple_callback)]
-
-        execution = Parallel(
-            tasks=tasks,
-            workflow_id=self.workflow_id,
-            ignore=self.ignore,
-            groups=grouper(tasks=tasks),
+        group = QueueGroup()
+        group.add(
+            item=Task(task_id=0, step=action_step, callback=simple_callback)
         )
 
-        tasks = execution.get_tasks()
+        execution = Parallel(
+            workflow_id=self.workflow_id,
+            ignore=self.ignore,
+            group=group,
+        )
 
-        self.assertEqual(tasks[0].status, TypeStatus.COMPLETED)
+        tasks = execution.transport()
+
+        self.assertEqual(tasks[0].status, StatusTaskType.COMPLETED)
         self.assertEqual(tasks[0].current_context.storage, {"foo": "bar"})
         self.assertIsInstance(tasks[0].error, TaskError)
         self.assertEqual(tasks[0].error.message, "")
 
     def test_workflow_with_parallel_function_failed(self):
-        tasks = [Task(task_id=0, step=action_step_with_error, callback=simple_callback)]
-
-        execution = Parallel(
-            tasks=tasks,
-            workflow_id=self.workflow_id,
-            ignore=self.ignore,
-            groups=grouper(tasks=tasks),
+        group = QueueGroup()
+        group.add(
+            item=Task(task_id=0, step=action_step_with_error, callback=simple_callback)
         )
 
-        tasks = execution.get_tasks()
+        execution = Parallel(
+            workflow_id=self.workflow_id,
+            ignore=self.ignore,
+            group=group,
+        )
 
-        self.assertEqual(tasks[0].status, TypeStatus.FAILED)
+        tasks = execution.transport()
+
+        self.assertEqual(tasks[0].status, StatusTaskType.FAILED)
         self.assertIsNone(tasks[0].current_context.storage)
         self.assertIsInstance(tasks[0].error, TaskError)
         self.assertEqual(tasks[0].error.message, "Fail!")
 
     def test_instantiating_parallel_setup_queue(self):
-        tasks = [Task(task_id=0, step=action_step, callback=simple_callback)]
-        groups = grouper(tasks=tasks)
+        group = QueueGroup()
+        group.add(
+            item=Task(task_id=0, step=action_step, callback=simple_callback)
+        )
 
         execution = Parallel(
-            tasks=tasks,
             workflow_id=self.workflow_id,
             ignore=self.ignore,
-            groups=groups,
+            group=group,
         )
 
         execution.setup_queue()
@@ -91,17 +97,19 @@ class TestWorkflowParallel(unittest.TestCase):
 
     def test_instantiating_parallel_flow_callback(self):
         task = Task(task_id=5, step=action_step, callback=simple_callback)
-        groups = grouper(tasks=[task])
+        group = QueueGroup()
+        group.add(
+            item=Task(task_id=5, step=action_step, callback=simple_callback)
+        )
 
         execution = Parallel(
-            tasks=[task],
             workflow_id=self.workflow_id,
             ignore=self.ignore,
-            groups=groups,
+            group=group,
         )
 
         execution.setup_queue()
         execution._flow_callback(task=task)
 
-        tasks = execution.get_tasks()
+        tasks = execution.transport()
         self.assertEqual(tasks[0].task_id, 5)

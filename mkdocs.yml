@@ -163,8 +163,9 @@ nav:
       - nav/reference/utils.md
       - nav/reference/decorators.md
       - nav/reference/exception.md
+      - Plugin:
+        - nav/reference/logs-handler.md
       - Providers:
-        - nav/reference/log-default.md
         - nav/reference/notify-default.md
         - nav/reference/notify-telegram.md
         - nav/reference/storage-init.md
@@ -175,9 +176,9 @@ nav:
       - Types:
         - nav/reference/type-execution.md
         - nav/reference/type-status.md
-      - Abstract methods:
+      - Abstract Methods:
         - nav/reference/abc-tcp.md
-        - nav/reference/abc-log.md
+        - nav/reference/abc-logs.md
         - nav/reference/abc-flow.md
         - nav/reference/abc-notify.md
         - nav/reference/abc-storage.md

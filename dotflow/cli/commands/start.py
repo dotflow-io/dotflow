@@ -4,7 +4,7 @@ from os import system
 
 from dotflow import DotFlow, Config
 from dotflow.providers import StorageDefault, StorageFile
-from dotflow.core.types.execution import TypeExecution
+from dotflow.core.types.execution import ExecutionModeType
 from dotflow.cli.command import Command
 
 
@@ -13,7 +13,7 @@ class StartCommand(Command):
     def setup(self):
         workflow = self._new_workflow()
 
-        workflow.task.add(
+        workflow.add(
             step=self.params.step,
             callback=self.params.callback,
             initial_context=self.params.initial_context,
@@ -21,7 +21,7 @@ class StartCommand(Command):
 
         workflow.start(mode=self.params.mode)
 
-        if self.params.mode == TypeExecution.BACKGROUND:
+        if self.params.mode == ExecutionModeType.BACKGROUND:
             system("/bin/bash")
 
     def _new_workflow(self):

@@ -16,31 +16,31 @@ from dotflow.logging import logger
 from dotflow.core.action import Action
 from dotflow.core.context import Context
 from dotflow.core.task import Task
-from dotflow.core.types import TypeStatus
+from dotflow.core.types import StatusTaskType
 
 from dotflow.utils import basic_callback
 
+VALID_OBJECTS = [
+    str,
+    int,
+    float,
+    complex,
+    dict,
+    list,
+    tuple,
+    set,
+    frozenset,
+    range,
+    bool,
+    FunctionType,
+    NoneType,
+    bytes,
+    bytearray,
+    memoryview,
+]
+
 
 class Execution:
-
-    VALID_OBJECTS = [
-        str,
-        int,
-        float,
-        complex,
-        dict,
-        list,
-        tuple,
-        set,
-        frozenset,
-        range,
-        bool,
-        FunctionType,
-        NoneType,
-        bytes,
-        bytearray,
-        memoryview,
-    ]
 
     def __init__(
         self,
@@ -50,7 +50,7 @@ class Execution:
         _flow_callback: Callable = basic_callback,
     ) -> None:
         self.task = task
-        self.task.status = TypeStatus.IN_PROGRESS
+        self.task.status = StatusTaskType.IN_PROGRESS
         self.task.previous_context = previous_context
         self.task.workflow_id = workflow_id
 
@@ -146,14 +146,14 @@ class Execution:
                 task=self.task,
             )
 
-            if type(current_context.storage) not in self.VALID_OBJECTS:
+            if type(current_context.storage) not in VALID_OBJECTS:
                 current_context = self._execution_with_class(
                     class_instance=current_context.storage
                 )
 
             self.task.current_context = current_context
             self.task.duration = (datetime.now() - start).total_seconds()
-            self.task.status = TypeStatus.COMPLETED
+            self.task.status = StatusTaskType.COMPLETED
 
         except AssertionError as err:
             raise err
@@ -161,7 +161,7 @@ class Execution:
         except Exception as err:
             self.task.error = err
             self.task.current_context = None
-            self.task.status = TypeStatus.FAILED
+            self.task.status = StatusTaskType.FAILED
 
         finally:
             self.task.callback(task=self.task)

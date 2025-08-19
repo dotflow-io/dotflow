@@ -20,8 +20,8 @@ def task_bar(initial_context: Context):
 def main():
     workflow = DotFlow()
 
-    workflow.task.add(step=task_foo, initial_context=10)
-    workflow.task.add(step=task_bar, initial_context=10)
+    workflow.add(step=task_foo, initial_context=10)
+    workflow.add(step=task_bar, initial_context=10)
 
     workflow.start(mode="background")
 

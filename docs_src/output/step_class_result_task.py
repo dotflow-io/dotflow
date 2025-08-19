@@ -21,7 +21,7 @@ class Step:
 def main():
     workflow = DotFlow()
 
-    workflow.task.add(step=Step)
+    workflow.add(step=Step)
     workflow.start()
 
     for task in workflow.result_task():

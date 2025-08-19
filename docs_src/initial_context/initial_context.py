@@ -1,8 +1,8 @@
-from dotflow import DotFlow, action
+from dotflow import DotFlow, action, Context
 
 
 @action
-def extract_task(initial_context):
+def extract_task(initial_context: Context):
     print(initial_context.storage, "extract")
     assert initial_context.storage == {"foo": True}
 
@@ -10,7 +10,7 @@ def extract_task(initial_context):
 
 
 @action
-def transform_task(initial_context):
+def transform_task(initial_context: Context):
     print(initial_context.storage, "transform")
     assert initial_context.storage == {"bar": True}
 
@@ -25,9 +25,9 @@ def load_task():
 def main():
     workflow = DotFlow()
 
-    workflow.task.add(step=extract_task, initial_context={"foo": True})
-    workflow.task.add(step=transform_task, initial_context={"bar": True})
-    workflow.task.add(step=load_task)
+    workflow.add(step=extract_task, initial_context={"foo": True})
+    workflow.add(step=transform_task, initial_context={"bar": True})
+    workflow.add(step=load_task)
 
     workflow.start()
 

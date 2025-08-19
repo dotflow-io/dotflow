@@ -103,8 +103,8 @@ def my_task_y():
 
 workflow = DotFlow()
 
-workflow.task.add(step=my_task_x, callback=my_callback)
-workflow.task.add(step=my_task_y, callback=my_callback)
+workflow.add(step=my_task_x, callback=my_callback)
+workflow.add(step=my_task_y, callback=my_callback)
 
 workflow.start()
 ```
@@ -153,20 +153,20 @@ Now, simply add the `my_task_x` and `my_callback` functions you created earlier 
 - Adding one step at a time:
 
 ```python
-workflow.task.add(step=my_task_x, callback=my_callback)
-workflow.task.add(step=my_task_y, callback=my_callback)
+workflow.add(step=my_task_x, callback=my_callback)
+workflow.add(step=my_task_y, callback=my_callback)
 ```
 
 - Adding multiple steps at the same time:
 
 ```python
-workflow.task.add(step=[my_task_x, my_task_y], callback=my_callback)
+workflow.add(step=[my_task_x, my_task_y], callback=my_callback)
 ```
 
 - Adding a step with the module path:
 
 ```python
-workflow.task.add(step="module.task.my_task_x", callback=my_callback)
+workflow.add(step="module.task.my_task_x", callback=my_callback)
 ```
 
 #### 6. Start
@@ -216,8 +216,8 @@ dotflow start --step examples.cli_with_mode.simple_step --mode parallel
 #### Sequential
 
 ```python
-workflow.task.add(step=task_foo)
-workflow.task.add(step=task_bar)
+workflow.add(step=task_foo)
+workflow.add(step=task_bar)
 
 workflow.start()
 ```
@@ -237,8 +237,8 @@ D[Finish]
 #### Background
 
 ```python
-workflow.task.add(step=task_foo)
-workflow.task.add(step=task_bar)
+workflow.add(step=task_foo)
+workflow.add(step=task_bar)
 
 workflow.start(mode="background")
 ```
@@ -259,10 +259,10 @@ D[Finish]
 #### Parallel
 
 ```python
-workflow.task.add(step=task_a)
-workflow.task.add(step=task_b)
-workflow.task.add(step=task_c)
-workflow.task.add(step=task_d)
+workflow.add(step=task_a)
+workflow.add(step=task_b)
+workflow.add(step=task_c)
+workflow.add(step=task_d)
 
 workflow.start(mode="parallel")
 ```

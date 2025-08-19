@@ -1,14 +1,14 @@
 from dotflow import DotFlow, action, Task
-from dotflow.core.types.status import TypeStatus
+from dotflow.core.types.status import StatusTaskType
 
 
 def callback_one(task: Task):
-    assert task.status is TypeStatus.COMPLETED
+    assert task.status is StatusTaskType.COMPLETED
     print(task.task_id, task.status, task.current_context.storage)
 
 
 def callback_two(task: Task):
-    assert task.status is TypeStatus.FAILED
+    assert task.status is StatusTaskType.FAILED
     print(task.task_id, task.status, task.current_context.storage)
 
 
@@ -25,8 +25,8 @@ def simple_two():
 def main():
     workflow = DotFlow()
 
-    workflow.task.add(step=simple_one, callback=callback_one)
-    workflow.task.add(step=simple_two, callback=callback_two)
+    workflow.add(step=simple_one, callback=callback_one)
+    workflow.add(step=simple_two, callback=callback_two)
     workflow.start(keep_going=True)
 
     return workflow
