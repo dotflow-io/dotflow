@@ -15,24 +15,22 @@ class TestQueue(unittest.TestCase):
             step=action_step,
             callback=simple_callback
         )
+        self.index = 0
 
     def test_instantiating_queue_class(self):
         expected_tasks = []
         queue = Queue()
-
         self.assertIsInstance(queue, Queue)
         self.assertListEqual(queue.tasks, expected_tasks)
 
     def test_queue_add(self):
         queue = Queue()
-
         queue.add(item=self.task)
 
-        self.assertEqual(queue.tasks[0], self.task)
+        self.assertEqual(queue.tasks[self.index], self.task)
 
     def test_queue_remove(self):
         queue = Queue()
-
         queue.add(item=self.task)
         queue.remove()
 
@@ -41,7 +39,6 @@ class TestQueue(unittest.TestCase):
     def test_queue_size(self):
         expected_size = 1
         queue = Queue()
-
         queue.add(item=self.task)
 
         self.assertEqual(queue.size(), expected_size)
@@ -53,26 +50,21 @@ class TestQueue(unittest.TestCase):
             callback=simple_callback
         )
         queue = Queue()
-
         queue.add(item=self.task)
         queue.add(item=expected_task)
-
         queue.reverse()
 
-        self.assertEqual(queue.tasks[0], expected_task)
+        self.assertEqual(queue.tasks[self.index], expected_task)
 
     def test_queue_clear(self):
         queue = Queue()
-
         queue.add(item=self.task)
-
         queue.clear()
 
         self.assertFalse(queue.tasks)
 
     def test_queue_get(self):
         queue = Queue()
-
         queue.add(item=self.task)
 
         self.assertListEqual(queue.get(), [self.task])
@@ -86,6 +78,7 @@ class TestQueueGroup(unittest.TestCase):
             step=action_step,
             callback=simple_callback
         )
+        self.index = 0
 
     def test_instantiating_queue_group_class(self):
         expected_queue = {}
@@ -101,7 +94,7 @@ class TestQueueGroup(unittest.TestCase):
 
         self.assertIsNotNone(queue_group.queue.get(TASK_GROUP_NAME))
         self.assertIsInstance(queue_group.queue.get(TASK_GROUP_NAME), Queue)
-        self.assertEqual(queue_group.queue[TASK_GROUP_NAME].tasks[0], self.task)
+        self.assertEqual(queue_group.queue[TASK_GROUP_NAME].tasks[self.index], self.task)
 
     def test_queue_group_size(self):
         expected_size = 1
@@ -120,7 +113,6 @@ class TestQueueGroup(unittest.TestCase):
             group_name="new_group"
         )
         queue = QueueGroup()
-
         queue.add(item=self.task)
         queue.add(item=task)
 
@@ -128,7 +120,6 @@ class TestQueueGroup(unittest.TestCase):
 
     def test_queue_group_tasks(self):
         queue = QueueGroup()
-
         queue.add(item=self.task)
 
         self.assertIsNotNone(queue.tasks())
