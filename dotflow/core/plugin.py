@@ -51,8 +51,9 @@ class PluginInstance(BaseModel):
 
 class Plugin:
 
-    def __init__(self):
-        self._plugins = self._loading_native_plugins()
+    def __init__(self) -> None:
+        self._plugins = {}
+        self._loading_native_plugins()
 
         if not self._plugins:
             self._loading_external_plugins(
@@ -64,33 +65,30 @@ class Plugin:
                 ]
             )
 
-    def _loading_native_plugins(self):
-        plugin_map = {}
+    def _include(self, plugin_object) -> None:
+        plugin = PluginInstance(instance=plugin_object)
+        self._plugins[plugin.group] = plugin.instance
+        setattr(self, plugin.group, plugin.instance)
+
+    def _loading_native_plugins(self) -> dict[str, EntryPoint]:
         plugins = entry_points(group="dotflow.plugins")
 
         for plugin in plugins:
-            plugin_cls = plugin.load()
-            included_plugin = PluginInstance(instance=plugin_cls)
+            plugin_object = plugin.load()
+            self._include(plugin_object=plugin_object)
 
-            plugin_map[included_plugin.group] = included_plugin.instance
-            setattr(self, plugin.name, included_plugin.instance)
+        return self._plugins
 
-        return plugin_map
-
-    def _loading_external_plugins(self, plugins):
+    def _loading_external_plugins(self, plugins) -> dict[str, EntryPoint]:
         if isinstance(plugins, list):
             for plugin in plugins:
-                current_plugin = PluginInstance(instance=plugin)
-                self._plugins[current_plugin.group] = current_plugin.instance
-                setattr(self, current_plugin.group, current_plugin.instance)
+                self._include(plugin_object=plugin)
         else:
-            current_plugin = PluginInstance(instance=plugins)
-            self._plugins[current_plugin.group] = current_plugin.instance
-            setattr(self, current_plugin.group, current_plugin.instance)
+            self._include(plugin_object=plugins)
 
-        return self
+        return self._plugins
 
-    def handler(self, option: str, value: str, **kwargs):
+    def handler(self, option: str, value: str, **kwargs) -> None:
         callable_group = getattr(self.plugins, option)
         new_callable = getattr(callable_group, value)
 
