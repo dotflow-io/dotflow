@@ -9,6 +9,7 @@ from multiprocessing.queues import Queue
 from dotflow.core.workflow import SequentialGroup
 from dotflow.core.types import StatusTaskType
 from dotflow.core.task import Task, TaskError, QueueGroup
+from dotflow.core.plugin import Plugin
 
 from tests.mocks import (
     action_step,
@@ -20,13 +21,19 @@ from tests.mocks import (
 class TestWorkflowSequentialGroup(unittest.TestCase):
 
     def setUp(self):
+        self.plugins = Plugin()
         self.workflow_id = uuid4()
         self.ignore = False
 
     def test_instantiating_sequential_group_class(self):
         group = QueueGroup()
         group.add(
-            item=Task(task_id=0, step=action_step, callback=simple_callback)
+            item=Task(
+                task_id=0,
+                step=action_step,
+                plugins=self.plugins,
+                callback=simple_callback
+            )
         )
 
         execution = SequentialGroup(
@@ -45,7 +52,12 @@ class TestWorkflowSequentialGroup(unittest.TestCase):
     def test_workflow_with_sequential_group_function_completed(self):
         group = QueueGroup()
         group.add(
-            item=Task(task_id=0, step=action_step, callback=simple_callback)
+            item=Task(
+                task_id=0,
+                step=action_step,
+                plugins=self.plugins,
+                callback=simple_callback
+            )
         )
 
         execution = SequentialGroup(
@@ -64,7 +76,12 @@ class TestWorkflowSequentialGroup(unittest.TestCase):
     def test_workflow_with_sequential_group_function_failed(self):
         group = QueueGroup()
         group.add(
-            item=Task(task_id=0, step=action_step_with_error, callback=simple_callback)
+            item=Task(
+                task_id=0,
+                step=action_step_with_error,
+                plugins=self.plugins,
+                callback=simple_callback
+            )
         )
 
         execution = SequentialGroup(
@@ -83,7 +100,12 @@ class TestWorkflowSequentialGroup(unittest.TestCase):
     def test_instantiating_sequential_group_setup_queue(self):
         group = QueueGroup()
         group.add(
-            item=Task(task_id=0, step=action_step, callback=simple_callback)
+            item=Task(
+                task_id=0,
+                step=action_step,
+                plugins=self.plugins,
+                callback=simple_callback
+            )
         )
 
         execution = SequentialGroup(
@@ -97,7 +119,13 @@ class TestWorkflowSequentialGroup(unittest.TestCase):
         self.assertIsInstance(execution.queue, Queue)
 
     def test_instantiating_sequential_group_flow_callback(self):
-        task = Task(task_id=5, step=action_step, callback=simple_callback)
+        task = Task(
+            task_id=5,
+            step=action_step,
+            plugins=self.plugins,
+            callback=simple_callback
+        )
+
         group = QueueGroup()
         group.add(item=task)
 

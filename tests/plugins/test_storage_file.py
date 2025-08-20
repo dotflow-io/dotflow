@@ -10,6 +10,7 @@ from json import dumps, loads
 from dotflow.core.task import Task
 from dotflow.core.context import Context
 from dotflow.providers.storage_file import StorageFile
+from dotflow.core.plugin import Plugin
 
 from tests.mocks import action_step
 
@@ -17,6 +18,7 @@ from tests.mocks import action_step
 class TestStorageFile(unittest.TestCase):
 
     def setUp(self):
+        self.plugins = Plugin()
         self.path = Path("tests")
         self.file_name = "file.json"
 
@@ -119,6 +121,7 @@ class TestStorageFile(unittest.TestCase):
             task_id=0,
             workflow_id=workflow_id,
             step=action_step,
+            plugins=self.plugins
         )
 
         storage = StorageFile(path=self.path)
