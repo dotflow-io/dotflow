@@ -1,14 +1,10 @@
 """Plugins module."""
 
-import sys
 import threading
 
 from typing import Union
 
-if sys.version_info >= (3, 10):
-    from importlib.metadata import EntryPoint, entry_points
-else:
-    from importlib_metadata import EntryPoint, entry_points
+from importlib.metadata import EntryPoint, entry_points
 
 from pydantic import (
     BaseModel,

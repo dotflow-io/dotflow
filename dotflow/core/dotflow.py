@@ -65,14 +65,10 @@ class DotFlow(DotflowInstance):
 
     @plugins.setter
     def plugins(self, value):
-        base_plugins = Plugin()
+        self._plugins = Plugin()
 
-        if not value:
-            self._plugins = base_plugins
-        else:
-            self._plugins = base_plugins._loading_external_plugins(
-                plugins=value
-            )
+        if value:
+            self._plugins._loading_external_plugins(plugins=value)
 
     @property
     def workflow_id(self):
