@@ -1,4 +1,4 @@
-"""Logs Default"""
+"""Logs Handler"""
 
 from dotflow.abc.logs import (
     Logs,
@@ -9,6 +9,8 @@ from dotflow.logging import logger
 
 
 class LogsHandler(Logs):
+    """Logs
+    """
 
     def on_task_status_change(self, task_object, type: TYPE_LOG) -> None:
         new_log = getattr(logger, type.lower())

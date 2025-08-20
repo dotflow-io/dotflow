@@ -24,7 +24,7 @@ def get_symbol(value: str) -> str:
 
 class NotifyTelegram(Notify):
 
-    MESSAGE = "{symbol} {status}\n```json\n{task}```\n{workflow_id}-{task_id}"
+    MESSAGE = "{symbol} {status}\n```json\n{task_object}```\n{workflow_id}-{task_id}"
     API_TELEGRAM = "https://api.telegram.org/bot{token}/sendMessage"
 
     def __init__(
@@ -39,11 +39,11 @@ class NotifyTelegram(Notify):
         self.notification_type = notification_type
         self.timeout = timeout
 
-    def send(self, task: Any) -> None:
-        if not self.notification_type or self.notification_type == task.status:
+    def send(self, task_object) -> None:
+        if not self.notification_type or self.notification_type == task_object.status:
             data = {
                 "chat_id": self.chat_id,
-                "text": self._get_text(task=task),
+                "text": self._get_text(task_object=task_object),
                 "parse_mode": "markdown",
             }
             try:
@@ -60,11 +60,11 @@ class NotifyTelegram(Notify):
                     str(error),
                 )
 
-    def _get_text(self, task: Any) -> str:
+    def _get_text(self, task_object: Any) -> str:
         return self.MESSAGE.format(
-            symbol=get_symbol(task.status),
-            status=task.status,
-            workflow_id=task.workflow_id,
-            task_id=task.task_id,
-            task=task.result(max=4000),
+            symbol=get_symbol(task_object.status),
+            status=task_object.status,
+            workflow_id=task_object.workflow_id,
+            task_id=task_object.task_id,
+            task_object=task_object.result(max=4000),
         )

@@ -7,9 +7,9 @@ from os import system
 
 
 def write_file_system(
-        path: str,
-        content: str,
-        mode: str = "w"
+    path: str,
+    content: str,
+    mode: str = "w"
 ) -> None:
     """Write file system
     """
@@ -21,10 +21,10 @@ def write_file_system(
 
 
 def write_file(
-        path: str,
-        content: Any,
-        mode: str = "w",
-        encoding: str = "utf-8"
+    path: str,
+    content: Any,
+    mode: str = "w",
+    encoding: str = "utf-8"
 ) -> None:
     """Write file
     """
@@ -37,8 +37,8 @@ def write_file(
 
 
 def read_file(
-        path: Path,
-        encoding: str = "utf-8"
+    path: Path,
+    encoding: str = "utf-8"
 ) -> Any:
     """Read file
     """

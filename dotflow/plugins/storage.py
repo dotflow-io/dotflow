@@ -1,4 +1,4 @@
-"""Storage Default"""
+"""Storage Handler"""
 
 from typing import Callable
 from ctypes import cast, py_object
@@ -7,8 +7,9 @@ from dotflow.abc.storage import Storage
 from dotflow.core.context import Context
 
 
-class StorageDefault(Storage):
-    """Storage"""
+class StorageHandler(Storage):
+    """Storage
+    """
 
     def post(self, key: str, context: Context) -> None:
         return None
