@@ -1,5 +1,7 @@
 """Plugins module."""
 
+import sys
+
 import threading
 
 from typing import Union
@@ -67,7 +69,13 @@ class Plugin:
         setattr(self, plugin.group, plugin.instance)
 
     def _loading_native_plugins(self) -> dict[str, EntryPoint]:
-        plugins = entry_points(group="dotflow.plugins")
+        plugins = []
+        groups = "dotflow.plugins"
+
+        if sys.version_info >= (3, 10):
+            plugins = entry_points(group=groups)
+        else:
+            plugins = entry_points().get(groups, [])
 
         for plugin in plugins:
             plugin_object = plugin.load()
