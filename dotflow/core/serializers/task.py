@@ -53,7 +53,10 @@ class SerializerTask(BaseModel):
         return None
 
     @field_validator(
-        "initial_context", "current_context", "previous_context", mode="before"
+        "initial_context",
+        "current_context",
+        "previous_context",
+        mode="before"
     )
     @classmethod
     def context_validator(cls, value: str) -> str:

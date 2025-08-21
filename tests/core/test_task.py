@@ -14,7 +14,7 @@ from dotflow.core.exception import (
     NotCallableObject,
     ImportModuleError,
 )
-from dotflow.core.task import Task, TaskError
+from dotflow.core.task import Task, TaskError, TASK_GROUP_NAME
 from dotflow.core.plugin import Plugin
 
 from tests.mocks import action_step, simple_callback, simple_step
@@ -45,7 +45,7 @@ class TestTask(unittest.TestCase):
         self.assertIsInstance(task.current_context, Context)
         self.assertIsInstance(task.previous_context, Context)
         self.assertIsInstance(task.error, TaskError)
-        self.assertEqual(task.group_name, "default")
+        self.assertEqual(task.group_name, TASK_GROUP_NAME)
 
     def test_task_id(self):
         task = Task(
@@ -108,7 +108,7 @@ class TestTask(unittest.TestCase):
         self.assertEqual(schema.initial_context, json.dumps(self.content))
         self.assertEqual(schema.current_context, json.dumps(self.content))
         self.assertEqual(schema.previous_context, json.dumps(self.content))
-        self.assertEqual(schema.group_name, "default")
+        self.assertEqual(schema.group_name, TASK_GROUP_NAME)
 
     def test_task_result(self):
         expected_duration = 1.0
@@ -117,12 +117,12 @@ class TestTask(unittest.TestCase):
             "task_id": 0,
             "workflow_id": str(expected_workflow_id),
             "status": "In queue",
-            "error": None,
+            "error": {"traceback": "", "message": ""},
             "duration": expected_duration,
             "initial_context": '{"foo": "bar"}',
             "current_context": '{"foo": "bar"}',
             "previous_context": '{"foo": "bar"}',
-            "group_name": "default",
+            "group_name": TASK_GROUP_NAME,
         }
 
         task = Task(

@@ -21,7 +21,7 @@ from dotflow.utils import (
 )
 
 INITIAL_INDEX = 0
-TASK_GROUP_NAME = "default"
+TASK_GROUP_NAME = "standard"
 
 
 class TaskInstance:
@@ -34,16 +34,17 @@ class TaskInstance:
 
     def __init__(self, *_args, **_kwargs) -> None:
         self.task_id = None
-        self.workflow_id = None
         self._step = None
+        self.plugins = None
         self._callback = None
-        self._previous_context = None
         self._initial_context = None
+        self.workflow_id = None
+        self.group_name = None
+        self._previous_context = None
         self._current_context = None
         self._duration = None
         self._error = None
         self._status = None
-        self.group_name = None
 
 
 class Task(TaskInstance):
@@ -98,19 +99,23 @@ class Task(TaskInstance):
         super().__init__(
             task_id,
             step,
+            plugins,
             callback,
             initial_context,
             workflow_id,
-            plugins,
             group_name
         )
-        self.plugins = plugins
-        self.group_name = group_name
         self.task_id = task_id
-        self.workflow_id = workflow_id
         self.step = step
+        self.plugins = plugins
         self.callback = callback
         self.initial_context = initial_context
+        self.workflow_id = workflow_id
+        self.group_name = group_name
+        self.previous_context = None
+        self.current_context = None
+        self.duration = None
+        self.error = None
         self.status = StatusTaskType.IN_QUEUE
 
     @property
@@ -200,17 +205,15 @@ class Task(TaskInstance):
 
     @error.setter
     def error(self, value: Exception) -> None:
+        if not value:
+            self._error = TaskError()
+
         if isinstance(value, TaskError):
             self._error = value
 
         if isinstance(value, Exception):
-            task_error = TaskError(value)
+            task_error = TaskError(error=value)
             self._error = task_error
-
-        self.plugins.logs.on_task_status_change(
-            task_object=self,
-            type=TypeLog.ERROR
-        )
 
     @property
     def status(self):

@@ -111,12 +111,12 @@ class TestTaskBuild(unittest.TestCase):
                     "task_id": 0,
                     "workflow_id": str(expected_workflow_id),
                     "status": "In queue",
-                    "error": None,
+                    "error": {"message": "", "traceback": ""},
                     "duration": None,
                     "initial_context": '{"foo": "bar"}',
                     "current_context": None,
                     "previous_context": None,
-                    "group_name": "default",
+                    "group_name": TASK_GROUP_NAME,
                 }
             ],
         }
