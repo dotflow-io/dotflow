@@ -112,8 +112,9 @@ class DotFlow(DotflowInstance):
         if not value:
             value = partial(
                 Manager,
+                workflow_id=self.workflow_id,
                 group=self.task.group,
-                workflow_id=self.workflow_id
+                plugins=self.plugins
             )
         self._start = value
 

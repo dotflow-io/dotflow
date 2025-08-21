@@ -14,7 +14,7 @@ def get_symbol(value: str) -> str:
     status = {
         StatusTaskType.IN_QUEUE: "⚪",
         StatusTaskType.IN_PROGRESS: "🔵",
-        StatusTaskType.COMPLETED: "✅",
+        StatusTaskType.SUCCESS: "✅",
         StatusTaskType.PAUSED: "◼️",
         StatusTaskType.RETRY: "❗",
         StatusTaskType.FAILED: "❌"

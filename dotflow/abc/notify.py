@@ -18,7 +18,7 @@ class Notify(ABC):
     def send_on_status_in_progress(self):
         pass
 
-    def send_on_status_completed(self):
+    def send_on_status_success(self):
         pass
 
     def send_on_status_paused(self):

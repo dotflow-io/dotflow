@@ -5,7 +5,7 @@
         members:
             - IN_QUEUE
             - IN_PROGRESS
-            - COMPLETED
+            - SUCCESS
             - PAUSED
             - RETRY
             - FAILED

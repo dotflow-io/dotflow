@@ -153,7 +153,7 @@ class Execution:
 
             self.task.current_context = current_context
             self.task.duration = (datetime.now() - start).total_seconds()
-            self.task.status = StatusTaskType.COMPLETED
+            self.task.status = StatusTaskType.SUCCESS
 
         except AssertionError as err:
             raise err

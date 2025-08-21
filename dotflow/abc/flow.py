@@ -5,6 +5,7 @@ from uuid import UUID
 from typing import Dict, List
 
 from dotflow.core.task import Task
+from dotflow.core.plugin import Plugin
 
 
 class Flow(ABC):
@@ -13,12 +14,14 @@ class Flow(ABC):
             self,
             workflow_id: UUID,
             ignore: bool,
-            group: Dict[str, List[Task]]
+            group: Dict[str, List[Task]],
+            plugins: Plugin,
     ) -> None:
         self.queue = None
         self.workflow_id = workflow_id
         self.ignore = ignore
         self.group = group
+        self.plugins = plugins
 
         self.setup_queue()
         self.run()

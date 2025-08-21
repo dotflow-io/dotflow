@@ -39,6 +39,7 @@ class TestWorkflowParallel(unittest.TestCase):
             workflow_id=self.workflow_id,
             ignore=self.ignore,
             group=group,
+            plugins=self.plugins
         )
 
         tasks = execution.transport()
@@ -48,7 +49,7 @@ class TestWorkflowParallel(unittest.TestCase):
         self.assertEqual(execution.workflow_id, self.workflow_id)
         self.assertEqual(execution.ignore, self.ignore)
 
-    def test_workflow_with_parallel_function_completed(self):
+    def test_workflow_with_parallel_function_success(self):
         group = QueueGroup()
         group.add(
             item=Task(
@@ -63,11 +64,12 @@ class TestWorkflowParallel(unittest.TestCase):
             workflow_id=self.workflow_id,
             ignore=self.ignore,
             group=group,
+            plugins=self.plugins
         )
 
         tasks = execution.transport()
 
-        self.assertEqual(tasks[0].status, StatusTaskType.COMPLETED)
+        self.assertEqual(tasks[0].status, StatusTaskType.SUCCESS)
         self.assertEqual(tasks[0].current_context.storage, {"foo": "bar"})
         self.assertIsInstance(tasks[0].error, TaskError)
         self.assertEqual(tasks[0].error.message, "")
@@ -87,6 +89,7 @@ class TestWorkflowParallel(unittest.TestCase):
             workflow_id=self.workflow_id,
             ignore=self.ignore,
             group=group,
+            plugins=self.plugins
         )
 
         tasks = execution.transport()
@@ -111,6 +114,7 @@ class TestWorkflowParallel(unittest.TestCase):
             workflow_id=self.workflow_id,
             ignore=self.ignore,
             group=group,
+            plugins=self.plugins
         )
 
         execution.setup_queue()
@@ -138,6 +142,7 @@ class TestWorkflowParallel(unittest.TestCase):
             workflow_id=self.workflow_id,
             ignore=self.ignore,
             group=group,
+            plugins=self.plugins
         )
 
         execution.setup_queue()

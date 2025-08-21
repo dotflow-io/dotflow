@@ -93,7 +93,7 @@ class Plugin:
         return self._plugins
 
     def handler(self, option: str, value: str, **kwargs) -> None:
-        callable_group = getattr(self.plugins, option)
+        callable_group = getattr(self._plugins, option)
         new_callable = getattr(callable_group, value)
 
         thread = threading.Thread(

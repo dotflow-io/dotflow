@@ -3,7 +3,7 @@ from dotflow.core.types.status import StatusTaskType
 
 
 def callback_one(task: Task):
-    assert task.status is StatusTaskType.COMPLETED
+    assert task.status is StatusTaskType.SUCCESS
     print(task.task_id, task.status, task.current_context.storage)
 
 

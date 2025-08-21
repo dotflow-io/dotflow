@@ -39,6 +39,7 @@ class TestWorkflowSequential(unittest.TestCase):
             workflow_id=self.workflow_id,
             ignore=self.ignore,
             group=group,
+            plugins=self.plugins
         )
 
         self.assertIsInstance(execution.group, QueueGroup)
@@ -61,11 +62,12 @@ class TestWorkflowSequential(unittest.TestCase):
             workflow_id=self.workflow_id,
             ignore=self.ignore,
             group=group,
+            plugins=self.plugins
         )
 
         mock_callback.assert_called()
 
-    def test_workflow_with_function_completed(self):
+    def test_workflow_with_function_success(self):
         group = QueueGroup()
         group.add(
             item=Task(
@@ -80,10 +82,11 @@ class TestWorkflowSequential(unittest.TestCase):
             workflow_id=self.workflow_id,
             ignore=self.ignore,
             group=group,
+            plugins=self.plugins
         )
         tasks = execution.group.tasks()
 
-        self.assertEqual(tasks[0].status, StatusTaskType.COMPLETED)
+        self.assertEqual(tasks[0].status, StatusTaskType.SUCCESS)
         self.assertEqual(tasks[0].current_context.storage, {"foo": "bar"})
         self.assertIsInstance(tasks[0].error, TaskError)
         self.assertEqual(tasks[0].error.message, "")
@@ -103,6 +106,7 @@ class TestWorkflowSequential(unittest.TestCase):
             workflow_id=self.workflow_id,
             ignore=self.ignore,
             group=group,
+            plugins=self.plugins
         )
         tasks = execution.group.tasks()
 
@@ -126,6 +130,7 @@ class TestWorkflowSequential(unittest.TestCase):
             workflow_id=self.workflow_id,
             ignore=self.ignore,
             group=group,
+            plugins=self.plugins
         )
 
         execution.setup_queue()
@@ -147,6 +152,7 @@ class TestWorkflowSequential(unittest.TestCase):
             workflow_id=self.workflow_id,
             ignore=self.ignore,
             group=group,
+            plugins=self.plugins
         )
 
         execution.setup_queue()

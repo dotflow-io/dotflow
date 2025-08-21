@@ -13,13 +13,11 @@ class WorkflowStatusType(StrEnum):
             from dotflow.core.types import WorkflowStatusType
     """
 
-    NEW = "New"
     IN_PROGRESS = "In progress"
     COMPLETED = "Completed"
 
 
 WORKFLOW_STATUS_TYPE = Literal[
-    WorkflowStatusType.NEW,
     WorkflowStatusType.IN_PROGRESS,
     WorkflowStatusType.COMPLETED
 ]

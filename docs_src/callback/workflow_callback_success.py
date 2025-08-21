@@ -9,7 +9,7 @@ def callback(tasks: List[Task]):
     assert len(tasks)
 
     for task in tasks:
-        assert task.status is StatusTaskType.COMPLETED
+        assert task.status is StatusTaskType.SUCCESS
         print(task.task_id, task.status, task.current_context.storage)
 
 

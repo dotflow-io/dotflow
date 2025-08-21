@@ -15,17 +15,17 @@ class StatusTaskType(StrEnum):
 
     IN_QUEUE = "In queue"
     IN_PROGRESS = "In progress"
-    COMPLETED = "Completed"
     PAUSED = "Paused"
     RETRY = "Retry"
+    SUCCESS = "Success"
     FAILED = "Failed"
 
 
 TYPE_STATUS_TASK = Literal[
     StatusTaskType.IN_QUEUE,
     StatusTaskType.IN_PROGRESS,
-    StatusTaskType.COMPLETED,
-    StatusTaskType.PAUSED,
     StatusTaskType.RETRY,
+    StatusTaskType.PAUSED,
+    StatusTaskType.SUCCESS,
     StatusTaskType.FAILED
 ]

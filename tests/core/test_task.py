@@ -273,7 +273,7 @@ class TestTaskSetter(unittest.TestCase):
         self.assertIsInstance(self.task.error.exception, Exception)
 
     def test_set_status(self):
-        expected_value = StatusTaskType.COMPLETED
+        expected_value = StatusTaskType.SUCCESS
 
         self.task.status = expected_value
         self.assertEqual(self.task.status, expected_value)

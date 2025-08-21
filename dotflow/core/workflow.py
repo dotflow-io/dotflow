@@ -19,6 +19,7 @@ from dotflow.core.execution import Execution
 from dotflow.core.exception import ExecutionModeNotExist
 from dotflow.core.types import ExecutionModeType, StatusTaskType
 from dotflow.core.task import Task, QueueGroup
+from dotflow.core.plugin import Plugin
 from dotflow.utils import basic_callback
 
 # mp.set_start_method("spawn", force=True)
@@ -85,6 +86,7 @@ class Manager:
     def __init__(
         self,
         group: QueueGroup,
+        plugins: Plugin,
         on_success: Callable = basic_callback,
         on_failure: Callable = basic_callback,
         mode: ExecutionModeType = ExecutionModeType.SEQUENTIAL,
@@ -92,6 +94,7 @@ class Manager:
         workflow_id: UUID = None,
     ) -> None:
         self.group = group
+        self.plugins = plugins
         self.on_success = on_success
         self.on_failure = on_failure
         self.workflow_id = workflow_id or uuid4()
@@ -106,7 +109,8 @@ class Manager:
         self.tasks = execution(
             workflow_id=workflow_id,
             ignore=keep_going,
-            group=group
+            group=group,
+            plugins=plugins
         )
 
         self._callback_workflow(queue_group=self.group)
@@ -301,6 +305,7 @@ class Background(Flow):
                 self.workflow_id,
                 self.ignore,
                 self.group,
+                self.plugins
             ),
         )
         thread.start()
