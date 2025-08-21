@@ -2,7 +2,7 @@
 
 from dotflow.core.exception import ModuleNotFound
 
-from .providers.storage_default import StorageDefault
+from .plugins.storage import StorageHandler
 from .providers.storage_file import StorageFile
 
 
@@ -18,4 +18,4 @@ except ModuleNotFoundError:
     StorageMongoDB = _MongoDBModuleNotFound
 
 
-__all__ = ["StorageDefault", "StorageFile", "StorageMongoDB"]
+__all__ = ["StorageHandler", "StorageFile", "StorageMongoDB"]

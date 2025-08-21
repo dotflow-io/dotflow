@@ -7,7 +7,10 @@ from dotflow.core.context import Context
 
 
 class Storage(ABC):
-    """Storage"""
+    """Storage
+    """
+
+    group = "storage"
 
     def __init__(self, *args, **kwargs):
         pass

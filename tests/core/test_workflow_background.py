@@ -7,6 +7,7 @@ from uuid import uuid4
 from dotflow.core.workflow import Background
 from dotflow.core.types import StatusTaskType
 from dotflow.core.task import Task, TaskError, QueueGroup
+from dotflow.core.plugin import Plugin
 
 from tests.mocks import (
     action_step,
@@ -18,13 +19,19 @@ from tests.mocks import (
 class TestWorkflowBackground(unittest.TestCase):
 
     def setUp(self):
+        self.plugins = Plugin()
         self.workflow_id = uuid4()
         self.ignore = False
 
     def test_instantiating_background_class(self):
         group = QueueGroup()
         group.add(
-            item=Task(task_id=0, step=action_step, callback=simple_callback)
+            item=Task(
+                task_id=0,
+                step=action_step,
+                plugins=self.plugins,
+                callback=simple_callback
+            )
         )
 
         execution = Background(
@@ -43,7 +50,12 @@ class TestWorkflowBackground(unittest.TestCase):
     def test_workflow_with_background_function_completed(self):
         group = QueueGroup()
         group.add(
-            item=Task(task_id=0, step=action_step, callback=simple_callback)
+            item=Task(
+                task_id=0,
+                step=action_step,
+                plugins=self.plugins,
+                callback=simple_callback
+            )
         )
 
         execution = Background(
@@ -62,7 +74,12 @@ class TestWorkflowBackground(unittest.TestCase):
     def test_workflow_with_background_function_failed(self):
         group = QueueGroup()
         group.add(
-            item=Task(task_id=0, step=action_step_with_error, callback=simple_callback)
+            item=Task(
+                task_id=0,
+                step=action_step_with_error,
+                plugins=self.plugins,
+                callback=simple_callback
+            )
         )
 
         execution = Background(
@@ -81,7 +98,12 @@ class TestWorkflowBackground(unittest.TestCase):
     def test_instantiating_background_setup_queue(self):
         group = QueueGroup()
         group.add(
-            item=Task(task_id=0, step=action_step, callback=simple_callback)
+            item=Task(
+                task_id=0,
+                step=action_step,
+                plugins=self.plugins,
+                callback=simple_callback
+            )
         )
 
         execution = Background(
@@ -95,7 +117,13 @@ class TestWorkflowBackground(unittest.TestCase):
         self.assertListEqual(execution.queue, [])
 
     def test_instantiating_background_flow_callback(self):
-        task = Task(task_id=5, step=action_step, callback=simple_callback)
+        task = Task(
+            task_id=5,
+            step=action_step,
+            plugins=self.plugins,
+            callback=simple_callback
+        )
+
         group = QueueGroup()
         group.add(item=task)
 

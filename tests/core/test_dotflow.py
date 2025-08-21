@@ -4,12 +4,12 @@ import unittest
 
 from uuid import UUID
 
-from dotflow.core.config import Config
 from dotflow.core.workflow import Manager
 from dotflow.core.context import Context
 from dotflow.core.task import Task, TaskBuilder
 from dotflow.core.dotflow import DotFlow, DotflowInstance
 from dotflow.core.types.status import StatusTaskType
+from dotflow.core.plugin import Plugin
 
 from tests.mocks import action_step
 
@@ -20,7 +20,7 @@ class TestDotflowInstance(unittest.TestCase):
         self.instance = DotflowInstance()
 
     def test_instantiating_dotflow_instance_class(self):
-        self.assertIsNone(self.instance._config)
+        self.assertIsNone(self.instance._plugins)
         self.assertIsNone(self.instance._workflow_id)
         self.assertIsNone(self.instance._task)
         self.assertIsNone(self.instance._add)
@@ -36,7 +36,7 @@ class TestDotFlow(unittest.TestCase):
         self.size = 1
 
     def test_instantiating_dotflow_class(self):
-        self.assertIsInstance(self.dotflow.config, Config)
+        self.assertIsInstance(self.dotflow.plugins, Plugin)
         self.assertIsInstance(self.dotflow.workflow_id, UUID)
         self.assertIsInstance(self.dotflow.task, TaskBuilder)
         self.assertIsInstance(self.dotflow.start(), Manager)
@@ -68,7 +68,7 @@ class TestDotFlow(unittest.TestCase):
 
         self.assertEqual(len(result), self.size)
         self.assertIsInstance(result[self.index], Task)
-        self.assertEqual(result[self.index].status, StatusTaskType.NOT_STARTED)
+        self.assertEqual(result[self.index].status, StatusTaskType.IN_QUEUE)
 
     def test_result_context_without_start(self):
         result = self.dotflow.result_context()
@@ -82,9 +82,9 @@ class TestDotFlow(unittest.TestCase):
         self.assertEqual(len(result), self.size)
         self.assertEqual(result[self.index], None)
 
-    def test_dotflow_config_object(self):
-        self.assertIsNotNone(self.dotflow.config)
-        self.assertFalse(callable(self.dotflow.config))
+    def test_dotflow_plugins_object(self):
+        self.assertIsNotNone(self.dotflow.plugins)
+        self.assertFalse(callable(self.dotflow.plugins))
 
     def test_dotflow_workflow_id_object(self):
         self.assertIsNotNone(self.dotflow.workflow_id)

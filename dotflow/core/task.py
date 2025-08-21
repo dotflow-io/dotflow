@@ -6,10 +6,10 @@ from uuid import UUID
 from typing import Any, Callable, List, Dict
 
 from dotflow.abc.logs import TypeLog
-from dotflow.core.config import Config
 from dotflow.core.action import Action
 from dotflow.core.context import Context
 from dotflow.core.module import Module
+from dotflow.core.plugin import Plugin
 from dotflow.core.serializers.task import SerializerTask
 from dotflow.core.serializers.workflow import SerializerWorkflow
 from dotflow.core.exception import MissingActionDecorator, NotCallableObject
@@ -20,6 +20,7 @@ from dotflow.utils import (
     message_error
 )
 
+INITIAL_INDEX = 0
 TASK_GROUP_NAME = "default"
 
 
@@ -79,7 +80,7 @@ class Task(TaskInstance):
 
         workflow_id (UUID): Workflow ID.
 
-        config (Config): Configuration class.
+        plugins (Plugin): Plugin class.
 
         group_name (str): Group name of tasks.
     """
@@ -88,10 +89,10 @@ class Task(TaskInstance):
         self,
         task_id: int,
         step: Callable,
+        plugins: Plugin,
         callback: Callable = basic_callback,
         initial_context: Any = None,
         workflow_id: UUID = None,
-        config: Config = None,
         group_name: str = TASK_GROUP_NAME
     ) -> None:
         super().__init__(
@@ -100,17 +101,17 @@ class Task(TaskInstance):
             callback,
             initial_context,
             workflow_id,
-            config,
+            plugins,
             group_name
         )
-        self.config = config
+        self.plugins = plugins
         self.group_name = group_name
         self.task_id = task_id
         self.workflow_id = workflow_id
         self.step = step
         self.callback = callback
         self.initial_context = initial_context
-        self.status = StatusTaskType.NOT_STARTED
+        self.status = StatusTaskType.IN_QUEUE
 
     @property
     def step(self):
@@ -178,8 +179,8 @@ class Task(TaskInstance):
             storage=value
         )
 
-        self.config.storage.post(
-            key=self.config.storage.key(task=self),
+        self.plugins.storage.post(
+            key=self.plugins.storage.key(task=self),
             context=self.current_context
         )
 
@@ -206,33 +207,27 @@ class Task(TaskInstance):
             task_error = TaskError(value)
             self._error = task_error
 
-        for log in self.config.logs:
-            log.on_task_status_change(task_object=self, type=TypeLog.ERROR)
+        self.plugins.logs.on_task_status_change(
+            task_object=self,
+            type=TypeLog.ERROR
+        )
 
     @property
     def status(self):
         if not self._status:
-            return StatusTaskType.NOT_STARTED
+            return StatusTaskType.IN_QUEUE
         return self._status
 
     @status.setter
     def status(self, value: TYPE_STATUS_TASK) -> None:
         self._status = value
 
-        self.config.notify.send(task=self)
+        self.plugins.notify.send(task_object=self)
 
-        for log in self.config.logs:
-            log.on_task_status_change(task_object=self, type=TypeLog.INFO)
-
-    @property
-    def config(self):
-        if not self._config:
-            return Config()
-        return self._config
-
-    @config.setter
-    def config(self, value: Config):
-        self._config = value
+        self.plugins.logs.on_task_status_change(
+            task_object=self,
+            type=TypeLog.INFO
+        )
 
     def schema(self, max: int = None) -> SerializerTask:
         return SerializerTask(**self.__dict__, max=max)
@@ -263,23 +258,23 @@ class TaskBuilder:
             from uuid import uuid4
 
             build = TaskBuilder(
-                config=config
+                plugins=plugins
                 workflow_id=uuid4()
             )
 
     Args:
-        config (Config): Configuration class.
+        plugins (Plugin): Plugin class.
         workflow_id (UUID): Workflow ID.
     """
 
     def __init__(
             self,
-            config: Config,
+            plugins: Plugin,
             workflow_id: UUID = None
     ) -> None:
         self.group: QueueGroup = QueueGroup()
         self.workflow_id = workflow_id
-        self.config = config
+        self.plugins = plugins
 
     def add(
         self,
@@ -326,21 +321,21 @@ class TaskBuilder:
                 callback=Module(value=callback),
                 initial_context=initial_context,
                 workflow_id=self.workflow_id,
-                config=self.config,
+                plugins=self.plugins,
                 group_name=group_name
             )
         )
 
         return self
 
-    def count(self) -> int:
-        return len(self.queue)
+    def count(self, group_name: str = TASK_GROUP_NAME) -> int:
+        return self.group.queue[group_name].size()
 
-    def clear(self) -> None:
-        self.queue.clear()
+    def clear(self, group_name: str = TASK_GROUP_NAME) -> None:
+        self.group.queue[group_name].clear()
 
-    def reverse(self) -> None:
-        self.queue.reverse()
+    def reverse(self, group_name: str = TASK_GROUP_NAME) -> None:
+        self.group.queue[group_name].reverse()
 
     def schema(self) -> SerializerWorkflow:
         return SerializerWorkflow(
@@ -384,8 +379,6 @@ class QueueGroup:
 
 class Queue:
 
-    INITIAL_INDEX = 0
-
     def __init__(self):
         self.tasks: List[Task] = []
 
@@ -393,7 +386,7 @@ class Queue:
         self.tasks.append(item)
 
     def remove(self) -> Task:
-        return self.tasks.pop(self.INITIAL_INDEX)
+        return self.tasks.pop(INITIAL_INDEX)
 
     def size(self) -> int:
         return len(self.tasks)

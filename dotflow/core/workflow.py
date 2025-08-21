@@ -182,8 +182,8 @@ class Sequential(Flow):
                 _flow_callback=self._flow_callback,
             )
 
-            previous_context = task.config.storage.get(
-                key=task.config.storage.key(task=task)
+            previous_context = task.plugins.storage.get(
+                key=task.plugins.storage.key(task=task)
             )
 
             if not self.ignore and task.status == StatusTaskType.FAILED:
@@ -274,8 +274,8 @@ class SequentialGroup(Flow):
                 _flow_callback=self._flow_callback,
             )
 
-            previous_context = task.config.storage.get(
-                key=task.config.storage.key(task=task)
+            previous_context = task.plugins.storage.get(
+                key=task.plugins.storage.key(task=task)
             )
 
             if not self.ignore and task.status == StatusTaskType.FAILED:

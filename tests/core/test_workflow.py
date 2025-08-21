@@ -10,6 +10,7 @@ from dotflow.core.workflow import Manager
 from dotflow.core.types import ExecutionModeType, StatusTaskType
 from dotflow.core.exception import ExecutionModeNotExist
 from dotflow.core.task import Task, QueueGroup
+from dotflow.core.plugin import Plugin
 
 from tests.mocks import (
     ActionStep,
@@ -22,11 +23,13 @@ from tests.mocks import (
 class TestWorkflow(unittest.TestCase):
 
     def setUp(self):
+        self.plugins = Plugin()
         self.group = QueueGroup()
         self.group.add(
                 item=Task(
                     task_id=0,
                     step=action_step,
+                    plugins=self.plugins,
                     callback=simple_callback
                 )
         )
@@ -45,6 +48,7 @@ class TestWorkflow(unittest.TestCase):
             item=Task(
                 task_id=0,
                 step=action_step,
+                plugins=self.plugins,
                 callback=simple_callback
             )
         )
@@ -58,6 +62,7 @@ class TestWorkflow(unittest.TestCase):
             item=Task(
                 task_id=0,
                 step=action_step_with_error,
+                plugins=self.plugins,
                 callback=simple_callback
             )
         )
@@ -84,6 +89,7 @@ class TestWorkflow(unittest.TestCase):
             item=Task(
                 task_id=0,
                 step=action_step,
+                plugins=self.plugins,
                 callback=simple_callback
             )
         )
@@ -98,6 +104,7 @@ class TestWorkflow(unittest.TestCase):
             item=Task(
                 task_id=0,
                 step=action_step_with_error,
+                plugins=self.plugins,
                 callback=simple_callback
             )
         )
@@ -112,6 +119,7 @@ class TestWorkflow(unittest.TestCase):
             item=Task(
                 task_id=0,
                 step=ActionStep,
+                plugins=self.plugins,
                 callback=simple_callback
             )
         )

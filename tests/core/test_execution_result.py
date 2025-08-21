@@ -10,6 +10,7 @@ from dotflow.core.action import Action as action
 from dotflow.core.context import Context
 from dotflow.core.execution import Execution
 from dotflow.core.task import Task
+from dotflow.core.plugin import Plugin
 
 from tests.mocks import simple_callback
 
@@ -66,7 +67,13 @@ def task_class():
 class TestExecutionResult(unittest.TestCase):
 
     def setUp(self):
-        self.task = partial(Task, task_id=0, callback=simple_callback)
+        self.plugins = Plugin()
+        self.task = partial(
+            Task,
+            task_id=0,
+            callback=simple_callback,
+            plugins=self.plugins
+        )
         self.workflow_id = uuid4()
 
     def test_execution_result_str(self):

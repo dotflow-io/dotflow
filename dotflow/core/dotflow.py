@@ -3,18 +3,22 @@
 from uuid import uuid4, UUID
 from functools import partial
 
-from typing import Callable, Optional
+from typing import Callable, Union
 
-from dotflow.core.config import Config
+from dotflow.abc.logs import Logs
+from dotflow.abc.metrics import Metrics
+from dotflow.abc.notify import Notify
+from dotflow.abc.storage import Storage
+from dotflow.core.plugin import Plugin
+
 from dotflow.core.workflow import Manager
 from dotflow.core.task import TaskBuilder
-from dotflow.utils.tools import start_and_validate_instance
 
 
 class DotflowInstance:
 
     def __init__(self, *_args, **_kwargs):
-        self._config: Config = None
+        self._plugins: Plugin = None
         self._workflow_id: UUID = None
         self._task: TaskBuilder = None
         self._add: Callable = None
@@ -26,20 +30,13 @@ class DotFlow(DotflowInstance):
     Import:
         You can import the **Dotflow** class directly from dotflow:
 
-            from dotflow import DotFlow, Config
-            from dotflow.providers import StorageFile
-
     Example:
         `class` dotflow.core.dotflow.Dotflow
 
-            config = Config(
-                storage=StorageFile()
-            )
-
-            workflow = DotFlow(config=config)
+            workflow = DotFlow()
 
     Args:
-        config (Optional[Config]): Config class.
+        plugins (Union[Logs, Metrics, Notify, Storage]): Plugin class.
 
     Attributes:
         workflow_id (UUID):
@@ -51,24 +48,27 @@ class DotFlow(DotflowInstance):
         start (Manager):
     """
 
-    def __init__(self, config: Optional[Config] = Config) -> None:
+    def __init__(
+        self,
+        plugins: Union[Logs, Metrics, Notify, Storage] = None,
+    ) -> None:
         super().__init__()
-        self.config: Config = config
+        self.plugins: Plugin = plugins
         self.workflow_id: UUID = None
         self.task: TaskBuilder = None
         self.add: Callable = None
         self.start: Manager = None
 
     @property
-    def config(self):
-        return self._config
+    def plugins(self):
+        return self._plugins
 
-    @config.setter
-    def config(self, value):
-        if not value:
-            value = Config()
+    @plugins.setter
+    def plugins(self, value):
+        self._plugins = Plugin()
 
-        self._config = start_and_validate_instance(value, Config)
+        if value:
+            self._plugins._loading_external_plugins(plugins=value)
 
     @property
     def workflow_id(self):
@@ -88,7 +88,7 @@ class DotFlow(DotflowInstance):
     def task(self, value):
         if not value:
             value = TaskBuilder(
-                config=self.config,
+                plugins=self.plugins,
                 workflow_id=self.workflow_id
             )
         self._task = value

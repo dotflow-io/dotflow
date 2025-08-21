@@ -1,4 +1,5 @@
-from dotflow import Config, DotFlow, action
+from dotflow import DotFlow, action
+from dotflow.plugins import MetricsHandler
 
 
 @action
@@ -7,9 +8,8 @@ def my_task():
 
 
 def main():
-    my_config = Config()
+    workflow = DotFlow(plugins=MetricsHandler)
 
-    workflow = DotFlow(config=my_config)
     workflow.add(step=my_task)
     workflow.start()
 

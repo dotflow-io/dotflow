@@ -3,6 +3,7 @@
 import unittest
 
 from dotflow.core.task import Task, Queue, QueueGroup, TASK_GROUP_NAME
+from dotflow.core.plugin import Plugin
 
 from tests.mocks import action_step, simple_callback
 
@@ -10,9 +11,11 @@ from tests.mocks import action_step, simple_callback
 class TestQueue(unittest.TestCase):
 
     def setUp(self):
+        self.plugins = Plugin()
         self.task = Task(
             task_id=0,
             step=action_step,
+            plugins=self.plugins,
             callback=simple_callback
         )
         self.index = 0
@@ -47,6 +50,7 @@ class TestQueue(unittest.TestCase):
         expected_task = Task(
             task_id=1,
             step=action_step,
+            plugins=self.plugins,
             callback=simple_callback
         )
         queue = Queue()
@@ -73,9 +77,11 @@ class TestQueue(unittest.TestCase):
 class TestQueueGroup(unittest.TestCase):
 
     def setUp(self):
+        self.plugins = Plugin()
         self.task = Task(
             task_id=0,
             step=action_step,
+            plugins=self.plugins,
             callback=simple_callback
         )
         self.index = 0
@@ -109,6 +115,7 @@ class TestQueueGroup(unittest.TestCase):
         task = Task(
             task_id=0,
             step=action_step,
+            plugins=self.plugins,
             callback=simple_callback,
             group_name="new_group"
         )

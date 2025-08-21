@@ -2,8 +2,8 @@
 
 from os import system
 
-from dotflow import DotFlow, Config
-from dotflow.providers import StorageDefault, StorageFile
+from dotflow import DotFlow
+from dotflow.providers import StorageHandler, StorageFile
 from dotflow.core.types.execution import ExecutionModeType
 from dotflow.cli.command import Command
 
@@ -29,14 +29,12 @@ class StartCommand(Command):
             return DotFlow()
 
         storage_classes = {
-            "default": StorageDefault,
+            "default": StorageHandler,
             "file": StorageFile
         }
 
-        config = Config(
-            storage=storage_classes.get(self.params.storage)(
-                path=self.params.path,
-            )
+        storage_plugin = storage_classes.get(self.params.storage)(
+            path=self.params.path,
         )
 
-        return DotFlow(config=config)
+        return DotFlow(plugins=[storage_plugin])

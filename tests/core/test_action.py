@@ -3,11 +3,14 @@
 import unittest
 import logging
 
+from uuid import uuid4
+
 from pytest import fixture  # type: ignore
 
 from dotflow.core.task import Task
 from dotflow.core.context import Context
 from dotflow.core.action import Action
+from dotflow.core.plugin import Plugin
 
 from tests.mocks import (
     action_step,
@@ -24,9 +27,15 @@ class TestClassActions(unittest.TestCase):
     @fixture(autouse=True)
     def inject_fixtures(self, caplog):
         self._caplog = caplog
+
+    def setUp(self):
+        self.workflow_id = uuid4()
+        self.plugins = Plugin()
         self.task = Task(
             task_id=1,
-            step=action_step
+            workflow_id=self.workflow_id,
+            step=action_step,
+            plugins=self.plugins,
         )
 
     def test_instantiating_action_class(self):
@@ -51,6 +60,7 @@ class TestClassActions(unittest.TestCase):
 
     def test_instantiating_action_class_with_fail_retry(self):
         error_message = "Fail!"
+        number_of_retries = 0
         number_of_retries = 5
 
         inside = Action(simple_step_with_fail, retry=number_of_retries)
@@ -61,17 +71,18 @@ class TestClassActions(unittest.TestCase):
             except Exception as error:
                 self.assertEqual(error.args[0], error_message)
 
-            self.assertEqual(len(self._caplog.records), number_of_retries)
+            log_list = [log.message for log in self._caplog.records if log.levelno == logging.ERROR]
+            self.assertEqual(len(log_list), number_of_retries)
 
-            for record in self._caplog.records:
-                self.assertEqual(record.message, error_message)
+            for message in log_list:
+                self.assertEqual(message, error_message)
 
     def test_action_class_with_previous_context(self):
         inside = Action(simple_step_with_previous_context, task=self.task)
 
         with self._caplog.at_level(logging.DEBUG):
             inside(task=self.task)
-            self.assertEqual(self._caplog.records[0].message, 'None')
+            self.assertEqual(self._caplog.records[0].message, f"1: {str(self.workflow_id)} - In queue")
 
     def test_set_params_previous_context(self):
         inside = Action(simple_step_with_previous_context)

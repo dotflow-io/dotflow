@@ -13,7 +13,7 @@ class StatusTaskType(StrEnum):
             from dotflow.core.types import StatusTaskType
     """
 
-    NOT_STARTED = "Not started"
+    IN_QUEUE = "In queue"
     IN_PROGRESS = "In progress"
     COMPLETED = "Completed"
     PAUSED = "Paused"
@@ -22,7 +22,7 @@ class StatusTaskType(StrEnum):
 
 
 TYPE_STATUS_TASK = Literal[
-    StatusTaskType.NOT_STARTED,
+    StatusTaskType.IN_QUEUE,
     StatusTaskType.IN_PROGRESS,
     StatusTaskType.COMPLETED,
     StatusTaskType.PAUSED,

@@ -61,6 +61,12 @@ classifiers = [
 [tool.poetry.scripts]
 dotflow = 'dotflow.main:main'
 
+[project.entry-points."dotflow.plugins"]
+logs = "dotflow.plugins.logs:LogsHandler"
+metrics = "dotflow.plugins.metrics:MetricsHandler"
+notify = "dotflow.plugins.notify:NotifyHandler"
+storage = "dotflow.plugins.storage:StorageHandler"
+
 [tool.poetry.dependencies]
 python = ">=3.9.0"
 rich = "^14.1.0"
