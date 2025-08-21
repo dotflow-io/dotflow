@@ -1,9 +1,9 @@
-# StatusTaskType
+# Status Task Type
 
 ::: dotflow.core.types.status.StatusTaskType
     options:
         members:
-            - NOT_STARTED
+            - IN_QUEUE
             - IN_PROGRESS
             - COMPLETED
             - PAUSED

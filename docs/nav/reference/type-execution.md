@@ -1,4 +1,4 @@
-# ExecutionModeType
+# Execution Mode Type
 
 ::: dotflow.core.types.execution.ExecutionModeType
     options:

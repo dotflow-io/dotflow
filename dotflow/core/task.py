@@ -43,7 +43,6 @@ class TaskInstance:
         self._duration = None
         self._error = None
         self._status = None
-        self._config = None
         self.group_name = None
 
 
@@ -60,6 +59,7 @@ class Task(TaskInstance):
             task = Task(
                 task_id=1,
                 step=my_step,
+                plugins=plugins,
                 callback=my_callback
             )
 
@@ -71,6 +71,8 @@ class Task(TaskInstance):
             which is basically a function. You can see in this
             [example](https://dotflow-io.github.io/dotflow/nav/tutorial/first-steps/#3-task-function).
 
+        plugins (Plugin): Plugin class.
+
         callback (Callable):
             Any callable object that receives **args** or **kwargs**,
             which is basically a function. You can see in this
@@ -79,8 +81,6 @@ class Task(TaskInstance):
         initial_context (Any): Any python object.
 
         workflow_id (UUID): Workflow ID.
-
-        plugins (Plugin): Plugin class.
 
         group_name (str): Group name of tasks.
     """
@@ -248,7 +248,7 @@ class TaskError:
 class TaskBuilder:
     """
     Import:
-        You can import the **Task** class with:
+        You can import the **TaskBuilder** class with:
 
             from dotflow.core.task import TaskBuilder
 
@@ -264,7 +264,16 @@ class TaskBuilder:
 
     Args:
         plugins (Plugin): Plugin class.
+
         workflow_id (UUID): Workflow ID.
+
+    Attributes:
+        group (QueueGroup):
+
+        workflow_id (UUID):
+
+        plugins (Plugin)
+
     """
 
     def __init__(

@@ -1,4 +1,4 @@
-# ContextInstance
+# Context Instance
 
 ::: dotflow.core.context.ContextInstance
     options:

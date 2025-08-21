@@ -151,37 +151,36 @@ nav:
       - nav/learn/cli.md
       - nav/learn/examples.md
     - Reference:
+      - nav/reference/index.md
+      - Abstract Methods:
+        - nav/reference/abc-logs.md
+        - nav/reference/abc-metrics.md
+        - nav/reference/abc-notify.md
+        - nav/reference/abc-storage.md
+        - nav/reference/abc-flow.md
+      - Initial instances:
+        - nav/reference/context-instance.md
+        - nav/reference/dotflow-instance.md
+        - nav/reference/task-instance.md
+      - Plugins:
+        - nav/reference/logs-handler.md
+        - nav/reference/metrics-handler.md
+        - nav/reference/notify-handler.md
+        - nav/reference/storage-handler.md
+      - Types:
+        - nav/reference/type-execution.md
+        - nav/reference/type-status.md
       - nav/reference/action.md
-      - nav/reference/config.md
       - nav/reference/context.md
+      - nav/reference/decorators.md
       - nav/reference/dotflow.md
+      - nav/reference/exception.md
+      - nav/reference/plugin.md
       - nav/reference/settings.md
       - nav/reference/task.md
       - nav/reference/task-error.md
       - nav/reference/task-builder.md
-      - nav/reference/workflow.md
       - nav/reference/utils.md
-      - nav/reference/decorators.md
-      - nav/reference/exception.md
-      - Plugin:
-        - nav/reference/logs-handler.md
-      - Providers:
-        - nav/reference/notify-default.md
-        - nav/reference/notify-telegram.md
-        - nav/reference/storage-init.md
-        - nav/reference/storage-file.md
-      - Instance:
-        - nav/reference/task-instance.md
-        - nav/reference/context-instance.md
-      - Types:
-        - nav/reference/type-execution.md
-        - nav/reference/type-status.md
-      - Abstract Methods:
-        - nav/reference/abc-tcp.md
-        - nav/reference/abc-logs.md
-        - nav/reference/abc-flow.md
-        - nav/reference/abc-notify.md
-        - nav/reference/abc-storage.md
-        - nav/reference/abc-http.md
+      - nav/reference/workflow.md
     - Development Guide: nav/development/development-guide.md
     - Release Notes: nav/development/release-notes.md

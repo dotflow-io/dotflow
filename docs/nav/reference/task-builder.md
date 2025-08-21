@@ -1,4 +1,4 @@
-# TaskBuilder
+# Task Builder
 
 ::: dotflow.core.task.TaskBuilder
     options:
@@ -7,3 +7,5 @@
             - count
             - clear
             - reverse
+            - schema
+            - result

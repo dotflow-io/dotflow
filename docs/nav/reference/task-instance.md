@@ -1,4 +1,4 @@
-# TaskInstance
+# Task Instance
 
 ::: dotflow.core.task.TaskInstance
     options:
@@ -13,5 +13,4 @@
             - _duration 
             - _error 
             - _status 
-            - _config 
             - group_name
