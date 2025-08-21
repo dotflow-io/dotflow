@@ -82,7 +82,7 @@ class TestClassActions(unittest.TestCase):
 
         with self._caplog.at_level(logging.DEBUG):
             inside(task=self.task)
-            self.assertEqual(self._caplog.records[0].message, f"1: {str(self.workflow_id)} - Not started")
+            self.assertEqual(self._caplog.records[0].message, f"1: {str(self.workflow_id)} - In queue")
 
     def test_set_params_previous_context(self):
         inside = Action(simple_step_with_previous_context)

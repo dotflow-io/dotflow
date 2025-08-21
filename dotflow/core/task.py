@@ -111,7 +111,7 @@ class Task(TaskInstance):
         self.step = step
         self.callback = callback
         self.initial_context = initial_context
-        self.status = StatusTaskType.NOT_STARTED
+        self.status = StatusTaskType.IN_QUEUE
 
     @property
     def step(self):
@@ -215,7 +215,7 @@ class Task(TaskInstance):
     @property
     def status(self):
         if not self._status:
-            return StatusTaskType.NOT_STARTED
+            return StatusTaskType.IN_QUEUE
         return self._status
 
     @status.setter

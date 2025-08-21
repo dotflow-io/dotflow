@@ -102,7 +102,7 @@ class TestTask(unittest.TestCase):
 
         self.assertEqual(schema.task_id, 0)
         self.assertEqual(schema.workflow_id, expected_workflow_id)
-        self.assertEqual(schema.status, StatusTaskType.NOT_STARTED)
+        self.assertEqual(schema.status, StatusTaskType.IN_QUEUE)
         self.assertEqual(schema.error.message, expected_error_message)
         self.assertEqual(schema.duration, expected_duration)
         self.assertEqual(schema.initial_context, json.dumps(self.content))
@@ -116,7 +116,7 @@ class TestTask(unittest.TestCase):
         expected_result = {
             "task_id": 0,
             "workflow_id": str(expected_workflow_id),
-            "status": "Not started",
+            "status": "In queue",
             "error": None,
             "duration": expected_duration,
             "initial_context": '{"foo": "bar"}',

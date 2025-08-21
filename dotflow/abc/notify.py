@@ -12,7 +12,7 @@ class Notify(ABC):
     def send(self, task_object) -> None:
         """Send"""
 
-    def send_on_status_not_started(self):
+    def send_on_status_in_queue(self):
         pass
 
     def send_on_status_in_progress(self):

@@ -12,7 +12,7 @@ from dotflow.logging import logger
 
 def get_symbol(value: str) -> str:
     status = {
-        StatusTaskType.NOT_STARTED: "⚪",
+        StatusTaskType.IN_QUEUE: "⚪",
         StatusTaskType.IN_PROGRESS: "🔵",
         StatusTaskType.COMPLETED: "✅",
         StatusTaskType.PAUSED: "◼️",

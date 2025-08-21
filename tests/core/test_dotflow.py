@@ -68,7 +68,7 @@ class TestDotFlow(unittest.TestCase):
 
         self.assertEqual(len(result), self.size)
         self.assertIsInstance(result[self.index], Task)
-        self.assertEqual(result[self.index].status, StatusTaskType.NOT_STARTED)
+        self.assertEqual(result[self.index].status, StatusTaskType.IN_QUEUE)
 
     def test_result_context_without_start(self):
         result = self.dotflow.result_context()

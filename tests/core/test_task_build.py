@@ -110,7 +110,7 @@ class TestTaskBuild(unittest.TestCase):
                 {
                     "task_id": 0,
                     "workflow_id": str(expected_workflow_id),
-                    "status": "Not started",
+                    "status": "In queue",
                     "error": None,
                     "duration": None,
                     "initial_context": '{"foo": "bar"}',
