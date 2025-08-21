@@ -26,7 +26,7 @@ TYPE_LOG = Literal[
     TypeLog.NOTSET,
 ]
 
-TASK_LOG_FORMAT = "{task_id}: {workflow_id} - {status}"
+TASK_LOG_FORMAT = "{task_id}: {workflow_id} - {status} {traceback}"
 WORKFLOW_LOG_FORMAT = "{workflow_id}: {status}"
 
 

@@ -19,5 +19,6 @@ class LogsHandler(Logs):
                 task_id=task_object.task_id,
                 workflow_id=task_object.workflow_id,
                 status=task_object.status,
+                traceback=task_object.error.traceback
             )
         )

@@ -13,7 +13,7 @@ def traceback_error(error: Exception) -> str:
     message = "".join(exception_list)
     message = message[:-1]
 
-    return message
+    return f"\n{message}"
 
 
 def message_error(error: Exception) -> str:
