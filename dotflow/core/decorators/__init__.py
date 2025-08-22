@@ -1,6 +1,6 @@
 """Decorators __init__ module."""
 
-from dotflow.core.decorators.time import time
+from dotflow.core.decorators.tools import time
 
 
 __all__ = [

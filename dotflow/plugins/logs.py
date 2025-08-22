@@ -1,14 +1,17 @@
 """Logs Handler"""
 
+import sys
 import json
 
 from uuid import UUID
+from typing import Any
 
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, model_validator, field_validator
 
 from dotflow.abc.logs import Logs
+from dotflow.core.decorators.tools import _threading
 from dotflow.core.types.task import StatusTaskType
-from dotflow.core.logging import logger
+from dotflow.providers.otel.logs import client
 
 WORKFLOW_LOG_FORMAT = "{workflow_id}: {status}"
 
@@ -20,6 +23,12 @@ class TaskFields(BaseModel):
     group_name: str
     status: str = Field(alias="_status")
     duration: float = Field(alias="_duration")
+    current_context_bytes: Any = Field(default=0, alias="_current_context")
+
+    @field_validator("current_context_bytes", mode='after')
+    @classmethod
+    def _current_context(cls, value: int) -> int:
+        return sys.getsizeof(value.storage)
 
 
 class TaskLogResponse(BaseModel):
@@ -42,11 +51,13 @@ class LogsHandler(Logs):
     """Logs"""
 
     def __init__(self):
-        self.logger = logger
+        self.client = client
 
+    @_threading
     def on_workflow_status_change(self, *_args, **_kwargs) -> None:
         pass
 
+    @_threading
     def on_task_status_change(self, task_object) -> None:
         data = TaskLogResponse(
             extra=task_object.__dict__,
@@ -57,8 +68,9 @@ class LogsHandler(Logs):
             return
 
         data = json.loads(data.model_dump_json())
-        self.logger.info(**data)
+        self.client.info(**data)
 
+    @_threading
     def on_status_failed(self, task_object) -> None:
         data = TaskLogResponse(
             extra=task_object.__dict__,
@@ -66,8 +78,9 @@ class LogsHandler(Logs):
         )
 
         data = json.loads(data.model_dump_json())
-        self.logger.error(**data, exc_info=True)
+        self.client.error(**data, exc_info=True)
 
+    @_threading
     def when_context_assigned(self, task_object) -> None:
         data = TaskLogResponse(
             extra=task_object.__dict__,
@@ -75,4 +88,4 @@ class LogsHandler(Logs):
         )
 
         data = json.loads(data.model_dump_json())
-        self.logger.info(**data, exc_info=True)
+        self.client.info(**data)

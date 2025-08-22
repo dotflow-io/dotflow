@@ -12,7 +12,7 @@ except ImportError:
     NoneType = type(None)
 
 from dotflow.core.exception import ExecutionWithClassError
-from dotflow.core.logging import logger
+from dotflow.providers.otel.logs import client
 from dotflow.core.action import Action
 from dotflow.core.context import Context
 from dotflow.core.task import Task
@@ -83,7 +83,7 @@ class Execution:
             return ordered_list
 
         except TypeError as err:
-            logger.error(
+            client.error(
                 "Internal problem with ordering the class functions, but don't worry, it was executed.: %s",
                 str(err),
             )

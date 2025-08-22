@@ -3,7 +3,7 @@
 from rich import print  # type: ignore
 
 from dotflow import __version__, __description__
-from dotflow.core.logging import logger
+from dotflow.providers.otel.logs import client
 from dotflow.settings import Settings as settings
 from dotflow.utils.basic_functions import basic_callback
 from dotflow.core.types import ExecutionModeType, StorageType
@@ -91,5 +91,5 @@ class Command:
             print(settings.WARNING_ALERT, err)
 
         except Exception as err:
-            logger.error(f"Internal problem: {str(err)}")
+            client.error(f"Internal problem: {str(err)}")
             print(settings.ERROR_ALERT, MESSAGE_UNKNOWN_ERROR)

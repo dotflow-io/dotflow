@@ -116,6 +116,7 @@ class Task(TaskInstance):
         self.duration = 0
         self.error = None
         self.status = StatusTaskType.IN_QUEUE
+        self.plugins.metrics.task_count(task_objetc=self)
 
     @property
     def step(self):
@@ -177,9 +178,6 @@ class Task(TaskInstance):
 
     @current_context.setter
     def current_context(self, value: Context):
-        if value:
-            self.plugins.logs.when_context_assigned(task_object=self)
-
         self._current_context = Context(
             task_id=self.task_id,
             workflow_id=self.workflow_id,
@@ -190,6 +188,9 @@ class Task(TaskInstance):
             key=self.plugins.storage.key(task=self),
             context=self.current_context
         )
+
+        if value and value.storage:
+            self.plugins.logs.when_context_assigned(task_object=self)
 
     @property
     def duration(self):
