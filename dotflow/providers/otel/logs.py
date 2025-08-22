@@ -1,7 +1,5 @@
 """Opentelemetry"""
 
-import os
-
 import logging
 
 from opentelemetry._logs import set_logger_provider
@@ -10,12 +8,12 @@ from opentelemetry.sdk._logs.export import BatchLogRecordProcessor
 from opentelemetry.exporter.otlp.proto.grpc._log_exporter import OTLPLogExporter
 
 from dotflow.providers.otel import (
-    setup_service,
+    _setup_service,
     OTEL_SERVICE_NAME,
     OTEL_EXPORTER_OTLP_ENDPOINT,
     OTEL_EXPORTER_OTLP_INSECURE,
-    OTEL_LOGS_LEVEL,
-    OTEL_LOGS_SCHEDULE_DELAY_MILLIS
+    OTEL_PYTHON_LOG_LEVEL,
+    OTEL_PYTHON_LOGGING_SCHEDULE_DELAY_MILLIS
 )
 
 
@@ -32,7 +30,7 @@ def setup_opentelemetry_logs_handler(
     )
 
     provider = LoggerProvider(
-        resource=setup_service(service_name=service_name)
+        resource=_setup_service(service_name=service_name)
     )
 
     processor = BatchLogRecordProcessor(
@@ -54,18 +52,18 @@ def setup_opentelemetry_logs_handler(
         level=logging.INFO,
     )
 
-    client = logging.getLogger(__name__)
+    logger = logging.getLogger(__name__)
 
-    client.addHandler(handler)
-    client.setLevel(level=level)
+    logger.addHandler(handler)
+    logger.setLevel(level=level)
 
-    return client
+    return logger
 
 
 client = setup_opentelemetry_logs_handler(
-    service_name=os.getenv("OTEL_SERVICE_NAME", OTEL_SERVICE_NAME),
-    endpoint=os.getenv("OTEL_EXPORTER_OTLP_ENDPOINT", OTEL_EXPORTER_OTLP_ENDPOINT),
-    insecure=os.getenv("OTEL_EXPORTER_OTLP_INSECURE", OTEL_EXPORTER_OTLP_INSECURE),
-    level=os.getenv("OTEL_LOGS_LEVEL", OTEL_LOGS_LEVEL),
-    schedule_delay_millis=os.getenv("OTEL_LOGS_SCHEDULE_DELAY_MILLIS", OTEL_LOGS_SCHEDULE_DELAY_MILLIS)
+    service_name=OTEL_SERVICE_NAME,
+    endpoint=OTEL_EXPORTER_OTLP_ENDPOINT,
+    insecure=OTEL_EXPORTER_OTLP_INSECURE,
+    level=OTEL_PYTHON_LOG_LEVEL,
+    schedule_delay_millis=OTEL_PYTHON_LOGGING_SCHEDULE_DELAY_MILLIS
 )
