@@ -11,8 +11,9 @@ requires-python = ">=3.9"
 dependencies = [
 	"rich",
   "pydantic",
-  "typing-extensions",
-  "requests"
+  "requests",
+  "opentelemetry-distro",
+  "opentelemetry-exporter-otlp"
 ]
 classifiers = [
   'Development Status :: 4 - Beta',
@@ -71,9 +72,9 @@ storage = "dotflow.plugins.storage:StorageHandler"
 python = ">=3.9.0"
 rich = "^14.1.0"
 pydantic = "^2.11.7"
-typing-extensions = "^4.14.1"
 python-dotenv = "^1.1.0"
-requests = "^2.32.4"
+opentelemetry-distro = "^0.57b0"
+opentelemetry-exporter-otlp = "^1.36.0"
 
 [tool.poetry.group.dev.dependencies]
 build = "^1.2.2.post1"

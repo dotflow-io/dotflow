@@ -3,7 +3,7 @@
 from rich import print  # type: ignore
 
 from dotflow import __version__, __description__
-from dotflow.logging import logger
+from dotflow.core.logging import logger
 from dotflow.settings import Settings as settings
 from dotflow.utils.basic_functions import basic_callback
 from dotflow.core.types import ExecutionModeType, StorageType

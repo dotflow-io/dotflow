@@ -7,7 +7,7 @@ from uuid import uuid4
 
 from dotflow.core.action import Action
 from dotflow.core.context import Context
-from dotflow.core.types.status import StatusTaskType
+from dotflow.core.types.task import StatusTaskType
 from dotflow.core.serializers.task import SerializerTaskError, SerializerTask
 from dotflow.core.exception import (
     MissingActionDecorator,

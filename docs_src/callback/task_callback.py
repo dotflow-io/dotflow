@@ -1,5 +1,5 @@
 from dotflow import DotFlow, action, Task
-from dotflow.core.types.status import StatusTaskType
+from dotflow.core.types.task import StatusTaskType
 
 
 def callback_one(task: Task):

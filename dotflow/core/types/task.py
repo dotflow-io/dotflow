@@ -1,6 +1,6 @@
 """Status Task Type module"""
 
-from typing_extensions import Literal
+from typing import Literal
 
 from dotflow.core.types.enum import StrEnum
 

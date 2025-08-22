@@ -5,7 +5,6 @@ import json
 from uuid import UUID
 from typing import Any, Callable, List, Dict
 
-from dotflow.abc.logs import TypeLog
 from dotflow.core.action import Action
 from dotflow.core.context import Context
 from dotflow.core.module import Module
@@ -13,7 +12,7 @@ from dotflow.core.plugin import Plugin
 from dotflow.core.serializers.task import SerializerTask
 from dotflow.core.serializers.workflow import SerializerWorkflow
 from dotflow.core.exception import MissingActionDecorator, NotCallableObject
-from dotflow.core.types.status import StatusTaskType, TYPE_STATUS_TASK
+from dotflow.core.types.task import StatusTaskType, TYPE_STATUS_TASK
 from dotflow.utils import (
     basic_callback,
     traceback_error,
@@ -114,7 +113,7 @@ class Task(TaskInstance):
         self.group_name = group_name
         self.previous_context = None
         self.current_context = None
-        self.duration = None
+        self.duration = 0
         self.error = None
         self.status = StatusTaskType.IN_QUEUE
 
@@ -178,6 +177,9 @@ class Task(TaskInstance):
 
     @current_context.setter
     def current_context(self, value: Context):
+        if value:
+            self.plugins.logs.when_context_assigned(task_object=self)
+
         self._current_context = Context(
             task_id=self.task_id,
             workflow_id=self.workflow_id,
@@ -214,6 +216,7 @@ class Task(TaskInstance):
         if isinstance(value, Exception):
             task_error = TaskError(error=value)
             self._error = task_error
+            self.plugins.logs.on_status_failed(task_object=self)
 
     @property
     def status(self):
@@ -226,11 +229,7 @@ class Task(TaskInstance):
         self._status = value
 
         self.plugins.notify.send(task_object=self)
-
-        self.plugins.logs.on_task_status_change(
-            task_object=self,
-            type=TypeLog.INFO
-        )
+        self.plugins.logs.on_task_status_change(task_object=self)
 
     def schema(self, max: int = None) -> SerializerTask:
         return SerializerTask(**self.__dict__, max=max)

@@ -12,7 +12,7 @@ except ImportError:
     NoneType = type(None)
 
 from dotflow.core.exception import ExecutionWithClassError
-from dotflow.logging import logger
+from dotflow.core.logging import logger
 from dotflow.core.action import Action
 from dotflow.core.context import Context
 from dotflow.core.task import Task
@@ -159,9 +159,9 @@ class Execution:
             raise err
 
         except Exception as err:
-            self.task.error = err
-            self.task.current_context = None
             self.task.status = StatusTaskType.FAILED
+            self.task.current_context = None
+            self.task.error = err
 
         finally:
             self.task.callback(task=self.task)
