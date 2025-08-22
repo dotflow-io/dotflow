@@ -7,8 +7,16 @@ class Metrics(ABC):
     """Metrics
     """
 
-    group = "metrics"
+    group = "metrics"  # Do not remove
+
+    def __init__(self, *_args, **_kwargs):
+        """Init not implemented."""
+        self.client = None
 
     @abstractmethod
-    def post_status_count(self) -> None:
+    def workflow_count(self, workflow_objetc) -> None:
+        pass
+
+    @abstractmethod
+    def task_count(self, task_objetc) -> None:
         pass

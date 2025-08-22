@@ -6,26 +6,12 @@ from abc import ABC, abstractmethod
 class Notify(ABC):
     """Notify"""
 
-    group = "notify"
+    group = "notify"  # Do not remove
+
+    def __init__(self, *_args, **_kwargs):
+        """Init not implemented."""
+        self.client = None
 
     @abstractmethod
     def send(self, task_object) -> None:
         """Send"""
-
-    def send_on_status_in_queue(self):
-        pass
-
-    def send_on_status_in_progress(self):
-        pass
-
-    def send_on_status_success(self):
-        pass
-
-    def send_on_status_paused(self):
-        pass
-
-    def send_on_status_retry(self):
-        pass
-
-    def send_on_status_failed(self):
-        pass
