@@ -2,7 +2,7 @@
 
 from dotflow.utils.error_handler import traceback_error, message_error
 from dotflow.utils.basic_functions import basic_function, basic_callback
-from dotflow.utils.tools import write_file, read_file
+from dotflow.utils.tools import write_file, read_file, _type
 
 
 __all__ = [
@@ -11,5 +11,6 @@ __all__ = [
     "basic_function",
     "basic_callback",
     "write_file",
-    "read_file"
+    "read_file",
+    "_type"
 ]

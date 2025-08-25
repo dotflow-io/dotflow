@@ -33,11 +33,11 @@ class TaskInstance:
 
     def __init__(self, *_args, **_kwargs) -> None:
         self.task_id = None
+        self.workflow_id = None
         self._step = None
         self.plugins = None
         self._callback = None
         self._initial_context = None
-        self.workflow_id = None
         self.group_name = None
         self._previous_context = None
         self._current_context = None
@@ -88,28 +88,28 @@ class Task(TaskInstance):
     def __init__(
         self,
         task_id: int,
+        workflow_id: UUID,
         step: Callable,
         plugins: Plugin,
         callback: Callable = basic_callback,
         initial_context: Any = None,
-        workflow_id: UUID = None,
         group_name: str = TASK_GROUP_NAME
     ) -> None:
         super().__init__(
             task_id,
+            workflow_id,
             step,
             plugins,
             callback,
             initial_context,
-            workflow_id,
             group_name
         )
         self.task_id = task_id
+        self.workflow_id = workflow_id
         self.step = step
         self.plugins = plugins
         self.callback = callback
         self.initial_context = initial_context
-        self.workflow_id = workflow_id
         self.group_name = group_name
         self.previous_context = None
         self.current_context = None
@@ -188,8 +188,7 @@ class Task(TaskInstance):
             key=self.plugins.storage.key(task=self),
             context=self.current_context
         )
-
-        if value and value.storage:
+        if self._current_context and self._current_context.storage:
             self.plugins.logs.when_context_assigned(task_object=self)
 
     @property
@@ -282,11 +281,11 @@ class TaskBuilder:
     def __init__(
             self,
             plugins: Plugin,
-            workflow_id: UUID = None
+            workflow_id: UUID
     ) -> None:
-        self.group: QueueGroup = QueueGroup()
-        self.workflow_id = workflow_id
         self.plugins = plugins
+        self.workflow_id = workflow_id
+        self.group: QueueGroup = QueueGroup()
 
     def add(
         self,
@@ -329,10 +328,10 @@ class TaskBuilder:
         self.group.add(
             item=Task(
                 task_id=self.group.size(),
+                workflow_id=self.workflow_id,
                 step=step,
                 callback=Module(value=callback),
                 initial_context=initial_context,
-                workflow_id=self.workflow_id,
                 plugins=self.plugins,
                 group_name=group_name
             )

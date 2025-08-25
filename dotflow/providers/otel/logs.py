@@ -4,7 +4,11 @@ import logging
 
 from opentelemetry._logs import set_logger_provider
 from opentelemetry.sdk._logs import LoggerProvider, LoggingHandler
-from opentelemetry.sdk._logs.export import BatchLogRecordProcessor
+from opentelemetry.sdk._logs.export import (
+    BatchLogRecordProcessor,
+    ConsoleLogExporter,
+    LogExportResult
+)
 from opentelemetry.exporter.otlp.proto.grpc._log_exporter import OTLPLogExporter
 
 from dotflow.providers.otel import (
@@ -13,8 +17,26 @@ from dotflow.providers.otel import (
     OTEL_EXPORTER_OTLP_ENDPOINT,
     OTEL_EXPORTER_OTLP_INSECURE,
     OTEL_PYTHON_LOG_LEVEL,
-    OTEL_PYTHON_LOGGING_SCHEDULE_DELAY_MILLIS
+    OTEL_PYTHON_LOGGING_SCHEDULE_DELAY_MILLIS,
+    OTEL_PYTHON_LOG_FORMAT
 )
+
+
+class _ConsoleLogExporter(ConsoleLogExporter):
+
+    def export(self, *_args, **kwargs):
+        return LogExportResult.SUCCESS
+
+
+def _otlp_exporter(endpoint: str, insecure: bool):
+    return OTLPLogExporter(
+        endpoint=endpoint,
+        insecure=insecure
+    )
+
+
+def _console_exporter():
+    return _ConsoleLogExporter()
 
 
 def setup_opentelemetry_logs_handler(
@@ -22,16 +44,19 @@ def setup_opentelemetry_logs_handler(
     endpoint: str,
     insecure: bool,
     level: int,
-    schedule_delay_millis: int
+    schedule_delay_millis: int,
+    format: str = "%(asctime)s - %(levelname)s [%(name)s]: %(message)s"
 ):
-    exporter = OTLPLogExporter(
-        endpoint=endpoint,
-        insecure=insecure
+    provider = LoggerProvider(
+        resource=_setup_service(
+            service_name=service_name
+        )
     )
 
-    provider = LoggerProvider(
-        resource=_setup_service(service_name=service_name)
-    )
+    if endpoint:
+        exporter = _otlp_exporter(endpoint=endpoint, insecure=insecure)
+    else:
+        exporter = _console_exporter()
 
     processor = BatchLogRecordProcessor(
         exporter=exporter,
@@ -48,7 +73,7 @@ def setup_opentelemetry_logs_handler(
     )
 
     logging.basicConfig(
-        format="%(asctime)s - %(levelname)s [%(name)s]: %(message)s",
+        format=format,
         level=logging.INFO,
     )
 
@@ -65,5 +90,6 @@ client = setup_opentelemetry_logs_handler(
     endpoint=OTEL_EXPORTER_OTLP_ENDPOINT,
     insecure=OTEL_EXPORTER_OTLP_INSECURE,
     level=OTEL_PYTHON_LOG_LEVEL,
-    schedule_delay_millis=OTEL_PYTHON_LOGGING_SCHEDULE_DELAY_MILLIS
+    schedule_delay_millis=OTEL_PYTHON_LOGGING_SCHEDULE_DELAY_MILLIS,
+    format=OTEL_PYTHON_LOG_FORMAT
 )

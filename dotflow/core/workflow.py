@@ -10,7 +10,7 @@ from queue import Empty
 from datetime import datetime
 from multiprocessing import Process, Queue
 
-from uuid import UUID, uuid4
+from uuid import UUID
 from typing import Callable, List
 
 from dotflow.abc.flow import Flow
@@ -87,17 +87,17 @@ class Manager:
         self,
         group: QueueGroup,
         plugins: Plugin,
+        workflow_id: UUID,
         on_success: Callable = basic_callback,
         on_failure: Callable = basic_callback,
         mode: ExecutionModeType = ExecutionModeType.SEQUENTIAL,
         keep_going: bool = False,
-        workflow_id: UUID = None,
     ) -> None:
         self.group = group
         self.plugins = plugins
+        self.workflow_id = workflow_id
         self.on_success = on_success
         self.on_failure = on_failure
-        self.workflow_id = workflow_id or uuid4()
         self.started = datetime.now()
         execution = None
 

@@ -65,3 +65,12 @@ def start_and_validate_instance(current_class, instance):
         )
 
     return current_class
+
+
+def _type(value: str) -> Any:
+    try:
+        return eval(str(value).capitalize())
+    except Exception:
+        pass
+
+    return value
