@@ -1,6 +1,6 @@
 [project]
 name = "dotflow"
-version = "1.0.0-dev-1"
+version = "1.0.0-beta-1"
 authors = [
   { name="Fernando Celmer", email="email@fernandocelmer.com" },
 ]
@@ -38,7 +38,7 @@ mongodb = ["dotflow-mongodb"]
 
 [tool.poetry]
 name = "dotflow"
-version = "1.0.0-dev-1"
+version = "1.0.0-beta-1"
 description = "🎲 Dotflow turns an idea into flow!"
 authors = ["Fernando Celmer <email@fernandocelmer.com>"]
 readme = "README.md"

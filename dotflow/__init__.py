@@ -1,6 +1,6 @@
 """Dotflow __init__ module."""
 
-__version__ = "1.0.0-dev-1"
+__version__ = "1.0.0-beta-1"
 __description__ = "🎲 Dotflow turns an idea into flow!"
 
 from .core.action import Action as action
