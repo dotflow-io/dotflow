@@ -23,9 +23,11 @@ from tests.mocks import action_step, simple_callback, simple_step
 class TestTask(unittest.TestCase):
 
     def setUp(self):
+        self.workflow_id = uuid4()
         self.plugins = Plugin()
         self.task = Task(
             task_id=0,
+            workflow_id=self.workflow_id,
             step=action_step,
             plugins=self.plugins,
             callback=simple_callback
@@ -35,6 +37,7 @@ class TestTask(unittest.TestCase):
     def test_instantiating_task_class(self):
         task = Task(
             task_id=0,
+            workflow_id=self.workflow_id,
             initial_context=Context(storage=self.content),
             step=action_step,
             plugins=self.plugins,
@@ -50,6 +53,7 @@ class TestTask(unittest.TestCase):
     def test_task_id(self):
         task = Task(
             task_id=0,
+            workflow_id=self.workflow_id,
             initial_context=Context(storage=self.content),
             step=action_step,
             plugins=self.plugins,
@@ -124,7 +128,6 @@ class TestTask(unittest.TestCase):
             "previous_context": '{"foo": "bar"}',
             "group_name": TASK_GROUP_NAME,
         }
-
         task = Task(
             task_id=0,
             workflow_id=expected_workflow_id,
@@ -145,9 +148,11 @@ class TestTask(unittest.TestCase):
 class TestTaskSetter(unittest.TestCase):
 
     def setUp(self):
+        self.workflow_id = uuid4()
         self.plugins = Plugin()
         self.task = Task(
             task_id=0,
+            workflow_id=self.workflow_id,
             step=action_step,
             plugins=self.plugins,
             callback=simple_callback
@@ -160,6 +165,7 @@ class TestTaskSetter(unittest.TestCase):
 
         task = Task(
             task_id=0,
+            workflow_id=self.workflow_id,
             step=input_value,
             plugins=self.plugins,
             callback=simple_callback
@@ -173,6 +179,7 @@ class TestTaskSetter(unittest.TestCase):
         with self.assertRaises(ImportModuleError):
             Task(
                 task_id=0,
+                workflow_id=self.workflow_id,
                 step=input_value,
                 plugins=self.plugins,
                 callback=simple_callback
@@ -184,6 +191,7 @@ class TestTaskSetter(unittest.TestCase):
 
         task = Task(
             task_id=0,
+            workflow_id=self.workflow_id,
             step=input_value,
             plugins=self.plugins,
             callback=simple_callback
@@ -197,6 +205,7 @@ class TestTaskSetter(unittest.TestCase):
         with self.assertRaises(MissingActionDecorator):
             Task(
                 task_id=0,
+                workflow_id=self.workflow_id,
                 step=input_value,
                 plugins=self.plugins,
                 callback=simple_callback
@@ -208,6 +217,7 @@ class TestTaskSetter(unittest.TestCase):
 
         task = Task(
             task_id=0,
+            workflow_id=self.workflow_id,
             step=action_step,
             plugins=self.plugins,
             callback=input_value
@@ -221,6 +231,7 @@ class TestTaskSetter(unittest.TestCase):
         with self.assertRaises(ImportModuleError):
             Task(
                 task_id=0,
+                workflow_id=self.workflow_id,
                 step=action_step,
                 plugins=self.plugins,
                 callback=input_value
@@ -232,6 +243,7 @@ class TestTaskSetter(unittest.TestCase):
         with self.assertRaises(NotCallableObject):
             Task(
                 task_id=0,
+                workflow_id=self.workflow_id,
                 step=action_step,
                 plugins=self.plugins,
                 callback=input_value

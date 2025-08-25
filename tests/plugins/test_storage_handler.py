@@ -15,6 +15,7 @@ from tests.mocks import action_step
 class TestStorageHandler(unittest.TestCase):
 
     def setUp(self):
+        self.workflow_id = uuid4()
         self.plugins = Plugin()
 
     def test_storage_default_instance(self):
@@ -25,7 +26,7 @@ class TestStorageHandler(unittest.TestCase):
 
         task = Task(
             task_id=0,
-            workflow_id=uuid4(),
+            workflow_id=self.workflow_id,
             plugins=self.plugins,
             step=action_step,
         )

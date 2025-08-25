@@ -28,6 +28,7 @@ class TestWorkflowBackground(unittest.TestCase):
         group.add(
             item=Task(
                 task_id=0,
+                workflow_id=self.workflow_id,
                 step=action_step,
                 plugins=self.plugins,
                 callback=simple_callback
@@ -53,6 +54,7 @@ class TestWorkflowBackground(unittest.TestCase):
         group.add(
             item=Task(
                 task_id=0,
+                workflow_id=self.workflow_id,
                 step=action_step,
                 plugins=self.plugins,
                 callback=simple_callback
@@ -78,6 +80,7 @@ class TestWorkflowBackground(unittest.TestCase):
         group.add(
             item=Task(
                 task_id=0,
+                workflow_id=self.workflow_id,
                 step=action_step_with_error,
                 plugins=self.plugins,
                 callback=simple_callback
@@ -103,6 +106,7 @@ class TestWorkflowBackground(unittest.TestCase):
         group.add(
             item=Task(
                 task_id=0,
+                workflow_id=self.workflow_id,
                 step=action_step,
                 plugins=self.plugins,
                 callback=simple_callback
@@ -123,6 +127,7 @@ class TestWorkflowBackground(unittest.TestCase):
     def test_instantiating_background_flow_callback(self):
         task = Task(
             task_id=5,
+            workflow_id=self.workflow_id,
             step=action_step,
             plugins=self.plugins,
             callback=simple_callback

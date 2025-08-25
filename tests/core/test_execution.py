@@ -45,6 +45,7 @@ class TestExecution(unittest.TestCase):
 
         self.task = Task(
             task_id=0,
+            workflow_id=self.workflow_id,
             step=action_step,
             plugins=self.plugins,
             callback=simple_callback
@@ -54,6 +55,7 @@ class TestExecution(unittest.TestCase):
         workflow_id = uuid4()
         task = Task(
             task_id=0,
+            workflow_id=self.workflow_id,
             step=action_step,
             plugins=self.plugins,
             callback=simple_callback
@@ -70,6 +72,7 @@ class TestExecution(unittest.TestCase):
         workflow_id = uuid4()
         task = Task(
             task_id=0,
+            workflow_id=self.workflow_id,
             step=action_step_with_error,
             plugins=self.plugins,
             callback=simple_callback
@@ -88,6 +91,7 @@ class TestExecution(unittest.TestCase):
 
         task = Task(
             task_id=0,
+            workflow_id=self.workflow_id,
             step=ActionStep,
             plugins=self.plugins,
             callback=simple_callback
@@ -112,6 +116,7 @@ class TestExecution(unittest.TestCase):
 
         task = Task(
             task_id=0,
+            workflow_id=self.workflow_id,
             step=ActionStepWithError,
             plugins=self.plugins,
             callback=simple_callback
@@ -133,6 +138,7 @@ class TestExecution(unittest.TestCase):
     def test_execution_function_with_initial_context(self):
         task = Task(
             task_id=0,
+            workflow_id=self.workflow_id,
             step=action_step_with_initial_context,
             plugins=self.plugins,
             callback=simple_callback,
@@ -148,6 +154,7 @@ class TestExecution(unittest.TestCase):
     def test_execution_function_with_previous_context(self):
         task = Task(
             task_id=0,
+            workflow_id=self.workflow_id,
             step=action_step_with_previous_context,
             plugins=self.plugins,
             callback=simple_callback
@@ -162,6 +169,7 @@ class TestExecution(unittest.TestCase):
     def test_execution_function_with_contexts(self):
         task = Task(
             task_id=0,
+            workflow_id=self.workflow_id,
             step=action_step_with_contexts,
             plugins=self.plugins,
             callback=simple_callback,
@@ -178,6 +186,7 @@ class TestExecution(unittest.TestCase):
     def test_execution_class_with_initial_context(self):
         task = Task(
             task_id=0,
+            workflow_id=self.workflow_id,
             step=ActionStepWithInitialContext,
             plugins=self.plugins,
             callback=simple_callback,
@@ -193,6 +202,7 @@ class TestExecution(unittest.TestCase):
     def test_execution_class_with_previous_context(self):
         task = Task(
             task_id=0,
+            workflow_id=self.workflow_id,
             step=ActionStepWithPreviousContext,
             plugins=self.plugins,
             callback=simple_callback
@@ -214,6 +224,7 @@ class TestExecution(unittest.TestCase):
     def test_execution_class_with_contexts(self):
         task = Task(
             task_id=0,
+            workflow_id=self.workflow_id,
             step=ActionStepWithContexts,
             plugins=self.plugins,
             callback=simple_callback,
@@ -318,6 +329,7 @@ class TestExecution(unittest.TestCase):
         for input_value in valid_objects:
             task = Task(
                 task_id=0,
+                workflow_id=self.workflow_id,
                 step=action_step_valid_object,
                 plugins=self.plugins,
                 callback=simple_callback,
