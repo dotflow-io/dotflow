@@ -7,11 +7,12 @@ from os import system
 
 
 def write_file_system(
-        path: str,
-        content: str,
-        mode: str = "w"
+    path: str,
+    content: str,
+    mode: str = "w"
 ) -> None:
-    """Write file system"""
+    """Write file system
+    """
     if mode == "a":
         system(f"echo '{content}' >> {path}")
 
@@ -20,12 +21,13 @@ def write_file_system(
 
 
 def write_file(
-        path: str,
-        content: Any,
-        mode: str = "w",
-        encoding: str = "utf-8"
+    path: str,
+    content: Any,
+    mode: str = "w",
+    encoding: str = "utf-8"
 ) -> None:
-    """Write file"""
+    """Write file
+    """
     try:
         with open(file=path, mode=mode, encoding=encoding) as file:
             file.write(dumps(content))
@@ -35,10 +37,11 @@ def write_file(
 
 
 def read_file(
-        path: Path,
-        encoding: str = "utf-8"
+    path: Path,
+    encoding: str = "utf-8"
 ) -> Any:
-    """Read file"""
+    """Read file
+    """
     if path.exists():
         with open(file=path, mode="r", encoding=encoding) as file:
             try:
@@ -46,3 +49,28 @@ def read_file(
             except JSONDecodeError:
                 return file.read()
     return None
+
+
+def start_and_validate_instance(current_class, instance):
+    """
+    This function starts a class if it is not instantiated and also
+    performs validation that the class instance matches what is expected.
+    """
+    if callable(current_class):
+        current_class = current_class()
+
+    if not isinstance(current_class, instance):
+        raise ValueError(
+            f"Not a valid {current_class.__name__} instance class."
+        )
+
+    return current_class
+
+
+def _type(value: str) -> Any:
+    try:
+        return eval(str(value).capitalize())
+    except Exception:
+        pass
+
+    return value

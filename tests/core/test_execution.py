@@ -9,8 +9,9 @@ from uuid import uuid4
 
 from dotflow.core.context import Context
 from dotflow.core.execution import Execution
-from dotflow.core.types import TypeStatus
+from dotflow.core.types import StatusTaskType
 from dotflow.core.task import Task
+from dotflow.core.plugin import Plugin
 
 from tests.mocks import (
     ActionStep,
@@ -38,35 +39,63 @@ class TestExecution(unittest.TestCase):
         self._caplog = caplog
 
     def setUp(self):
+        self.plugins = Plugin()
         self.workflow_id = uuid4()
         self.context = {"context": True}
-        self.task = Task(task_id=0, step=action_step, callback=simple_callback)
 
-    def test_execution_with_function_completed(self):
+        self.task = Task(
+            task_id=0,
+            workflow_id=self.workflow_id,
+            step=action_step,
+            plugins=self.plugins,
+            callback=simple_callback
+        )
+
+    def test_execution_with_function_success(self):
         workflow_id = uuid4()
-        task = Task(task_id=0, step=action_step, callback=simple_callback)
+        task = Task(
+            task_id=0,
+            workflow_id=self.workflow_id,
+            step=action_step,
+            plugins=self.plugins,
+            callback=simple_callback
+        )
+
         controller = Execution(
             task=task, workflow_id=workflow_id, previous_context=Context()
         )
 
-        self.assertEqual(controller.task.status, TypeStatus.COMPLETED)
+        self.assertEqual(controller.task.status, StatusTaskType.SUCCESS)
         self.assertEqual(controller.task.workflow_id, workflow_id)
 
     def test_execution_with_function_failed(self):
         workflow_id = uuid4()
-        task = Task(task_id=0, step=action_step_with_error, callback=simple_callback)
+        task = Task(
+            task_id=0,
+            workflow_id=self.workflow_id,
+            step=action_step_with_error,
+            plugins=self.plugins,
+            callback=simple_callback
+        )
+
         controller = Execution(
             task=task, workflow_id=workflow_id, previous_context=Context()
         )
 
-        self.assertEqual(controller.task.status, TypeStatus.FAILED)
+        self.assertEqual(controller.task.status, StatusTaskType.FAILED)
         self.assertEqual(controller.task.workflow_id, workflow_id)
 
-    def test_execution_with_class_completed(self):
+    def test_execution_with_class_success(self):
         execution_log = ""
         workflow_id = uuid4()
 
-        task = Task(task_id=0, step=ActionStep, callback=simple_callback)
+        task = Task(
+            task_id=0,
+            workflow_id=self.workflow_id,
+            step=ActionStep,
+            plugins=self.plugins,
+            callback=simple_callback
+        )
 
         with self._caplog.at_level(logging.NOTSET):
             controller = Execution(
@@ -78,14 +107,20 @@ class TestExecution(unittest.TestCase):
                     execution_log = log.message
 
         self.assertEqual(execution_log, "ActionStep: Run function executed")
-        self.assertEqual(controller.task.status, TypeStatus.COMPLETED)
+        self.assertEqual(controller.task.status, StatusTaskType.SUCCESS)
         self.assertEqual(controller.task.workflow_id, workflow_id)
 
     def test_execution_with_class_failed(self):
         execution_log = ""
         workflow_id = uuid4()
 
-        task = Task(task_id=0, step=ActionStepWithError, callback=simple_callback)
+        task = Task(
+            task_id=0,
+            workflow_id=self.workflow_id,
+            step=ActionStepWithError,
+            plugins=self.plugins,
+            callback=simple_callback
+        )
 
         with self._caplog.at_level(logging.NOTSET):
             controller = Execution(
@@ -97,13 +132,15 @@ class TestExecution(unittest.TestCase):
                     execution_log = log.message
 
         self.assertEqual(execution_log, "ActionStepWithError: Run function executed")
-        self.assertEqual(controller.task.status, TypeStatus.FAILED)
+        self.assertEqual(controller.task.status, StatusTaskType.FAILED)
         self.assertEqual(controller.task.workflow_id, workflow_id)
 
     def test_execution_function_with_initial_context(self):
         task = Task(
             task_id=0,
+            workflow_id=self.workflow_id,
             step=action_step_with_initial_context,
+            plugins=self.plugins,
             callback=simple_callback,
             initial_context=self.context,
         )
@@ -111,24 +148,30 @@ class TestExecution(unittest.TestCase):
             task=task, workflow_id=self.workflow_id, previous_context=None
         )
 
-        self.assertEqual(controller.task.status, TypeStatus.COMPLETED)
+        self.assertEqual(controller.task.status, StatusTaskType.SUCCESS)
         self.assertEqual(controller.task.initial_context.storage, self.context)
 
     def test_execution_function_with_previous_context(self):
         task = Task(
-            task_id=0, step=action_step_with_previous_context, callback=simple_callback
+            task_id=0,
+            workflow_id=self.workflow_id,
+            step=action_step_with_previous_context,
+            plugins=self.plugins,
+            callback=simple_callback
         )
         controller = Execution(
             task=task, workflow_id=self.workflow_id, previous_context=self.context
         )
 
-        self.assertEqual(controller.task.status, TypeStatus.COMPLETED)
+        self.assertEqual(controller.task.status, StatusTaskType.SUCCESS)
         self.assertEqual(controller.task._previous_context.storage, self.context)
 
     def test_execution_function_with_contexts(self):
         task = Task(
             task_id=0,
+            workflow_id=self.workflow_id,
             step=action_step_with_contexts,
+            plugins=self.plugins,
             callback=simple_callback,
             initial_context=self.context,
         )
@@ -136,14 +179,16 @@ class TestExecution(unittest.TestCase):
             task=task, workflow_id=self.workflow_id, previous_context=self.context
         )
 
-        self.assertEqual(controller.task.status, TypeStatus.COMPLETED)
+        self.assertEqual(controller.task.status, StatusTaskType.SUCCESS)
         self.assertEqual(controller.task.initial_context.storage, self.context)
         self.assertEqual(controller.task.previous_context.storage, self.context)
 
     def test_execution_class_with_initial_context(self):
         task = Task(
             task_id=0,
+            workflow_id=self.workflow_id,
             step=ActionStepWithInitialContext,
+            plugins=self.plugins,
             callback=simple_callback,
             initial_context=self.context,
         )
@@ -151,18 +196,22 @@ class TestExecution(unittest.TestCase):
             task=task, workflow_id=self.workflow_id, previous_context=None
         )
 
-        self.assertEqual(controller.task.status, TypeStatus.COMPLETED)
+        self.assertEqual(controller.task.status, StatusTaskType.SUCCESS)
         self.assertEqual(controller.task.initial_context.storage, self.context)
 
     def test_execution_class_with_previous_context(self):
         task = Task(
-            task_id=0, step=ActionStepWithPreviousContext, callback=simple_callback
+            task_id=0,
+            workflow_id=self.workflow_id,
+            step=ActionStepWithPreviousContext,
+            plugins=self.plugins,
+            callback=simple_callback
         )
         controller = Execution(
             task=task, workflow_id=self.workflow_id, previous_context=self.context
         )
 
-        self.assertEqual(controller.task.status, TypeStatus.COMPLETED)
+        self.assertEqual(controller.task.status, StatusTaskType.SUCCESS)
         self.assertEqual(controller.task.previous_context.storage, self.context)
 
         self.assertEqual(
@@ -175,7 +224,9 @@ class TestExecution(unittest.TestCase):
     def test_execution_class_with_contexts(self):
         task = Task(
             task_id=0,
+            workflow_id=self.workflow_id,
             step=ActionStepWithContexts,
+            plugins=self.plugins,
             callback=simple_callback,
             initial_context=self.context,
         )
@@ -183,7 +234,7 @@ class TestExecution(unittest.TestCase):
             task=task, workflow_id=self.workflow_id, previous_context=self.context
         )
 
-        self.assertEqual(controller.task.status, TypeStatus.COMPLETED)
+        self.assertEqual(controller.task.status, StatusTaskType.SUCCESS)
         self.assertEqual(controller.task.initial_context.storage, self.context)
         self.assertEqual(controller.task.previous_context.storage, self.context)
 
@@ -278,7 +329,9 @@ class TestExecution(unittest.TestCase):
         for input_value in valid_objects:
             task = Task(
                 task_id=0,
+                workflow_id=self.workflow_id,
                 step=action_step_valid_object,
+                plugins=self.plugins,
                 callback=simple_callback,
                 initial_context=input_value,
             )
@@ -289,5 +342,5 @@ class TestExecution(unittest.TestCase):
                 previous_context=None
             )
 
-            self.assertEqual(controller.task.status, TypeStatus.COMPLETED)
+            self.assertEqual(controller.task.status, StatusTaskType.SUCCESS)
             self.assertEqual(controller.task.current_context.storage, input_value)

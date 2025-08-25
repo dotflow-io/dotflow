@@ -2,14 +2,17 @@
 
 import unittest
 
+from uuid import uuid4
+
 from uuid import UUID
 from unittest.mock import Mock
 from types import FunctionType
 
 from dotflow.core.workflow import Manager
-from dotflow.core.types import TypeExecution, TypeStatus
+from dotflow.core.types import ExecutionModeType, StatusTaskType
 from dotflow.core.exception import ExecutionModeNotExist
-from dotflow.core.task import Task
+from dotflow.core.task import Task, QueueGroup
+from dotflow.core.plugin import Plugin
 
 from tests.mocks import (
     ActionStep,
@@ -22,82 +25,159 @@ from tests.mocks import (
 class TestWorkflow(unittest.TestCase):
 
     def setUp(self):
-        task = Task(
-            task_id=0,
-            step=action_step,
-            callback=simple_callback
+        self.workflow_id = uuid4()
+        self.plugins = Plugin()
+        self.group = QueueGroup()
+        self.group.add(
+                item=Task(
+                    task_id=0,
+                    workflow_id=self.workflow_id,
+                    step=action_step,
+                    plugins=self.plugins,
+                    callback=simple_callback
+                )
         )
-        self.tasks = [task]
 
     def test_instantiating_workflow_class(self):
-        controller = Manager(tasks=self.tasks)
+        controller = Manager(
+            group=self.group,
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
 
-        self.assertListEqual(controller.tasks, self.tasks)
+        self.assertEqual(controller.group, self.group)
         self.assertIsInstance(controller.workflow_id, UUID)
         self.assertIsInstance(controller.on_success, FunctionType)
         self.assertIsInstance(controller.on_failure, FunctionType)
 
-    def test_workflow_with_function_completed(self):
-        task = Task(
-            task_id=0,
-            step=action_step,
-            callback=simple_callback
+    def test_workflow_with_function_success(self):
+        group = QueueGroup()
+        group.add(
+            item=Task(
+                task_id=0,
+                workflow_id=self.workflow_id,
+                step=action_step,
+                plugins=self.plugins,
+                callback=simple_callback
+            )
         )
 
-        controller = Manager(tasks=[task])
-        self.assertEqual(controller.tasks[0].status, TypeStatus.COMPLETED)
+        controller = Manager(
+            group=group,
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
+        self.assertEqual(controller.group.tasks()[0].status, StatusTaskType.SUCCESS)
 
     def test_workflow_with_function_failed(self):
-        task = Task(
-            task_id=0,
-            step=action_step_with_error,
-            callback=simple_callback
+        group = QueueGroup()
+        group.add(
+            item=Task(
+                task_id=0,
+                workflow_id=self.workflow_id,
+                step=action_step_with_error,
+                plugins=self.plugins,
+                callback=simple_callback
+            )
         )
 
-        controller = Manager(tasks=[task])
-        self.assertEqual(controller.tasks[0].status, TypeStatus.FAILED)
+        controller = Manager(
+            group=group,
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
+        self.assertEqual(controller.group.tasks()[0].status, StatusTaskType.FAILED)
 
     def test_with_execution_mode_that_does_not_exist(self):
         with self.assertRaises(ExecutionModeNotExist):
-            Manager(tasks=self.tasks, mode="unknown")
+            Manager(
+                group=self.group,
+                mode="unknown",
+                plugins=self.plugins,
+                workflow_id=self.workflow_id
+            )
 
     def test_with_execution_mode_sequential(self):
-        Manager(tasks=self.tasks, mode=TypeExecution.SEQUENTIAL)
+        Manager(
+            group=self.group,
+            mode=ExecutionModeType.SEQUENTIAL,
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
 
     def test_with_execution_mode_background(self):
-        Manager(tasks=self.tasks, mode=TypeExecution.BACKGROUND)
+        Manager(
+            group=self.group,
+            mode=ExecutionModeType.BACKGROUND,
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
 
     def test_with_execution_mode_parallel(self):
-        Manager(tasks=self.tasks, mode=TypeExecution.PARALLEL)
+        Manager(
+            group=self.group,
+            mode=ExecutionModeType.PARALLEL,
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
 
     def test_callback_success_called(self):
-        task = Task(
-            task_id=0,
-            step=action_step,
-            callback=simple_callback
+        group = QueueGroup()
+        group.add(
+            item=Task(
+                task_id=0,
+                workflow_id=self.workflow_id,
+                step=action_step,
+                plugins=self.plugins,
+                callback=simple_callback
+            )
         )
         mock_success = Mock()
 
-        Manager(tasks=[task], on_success=mock_success)
+        Manager(
+            group=group,
+            on_success=mock_success,
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
         mock_success.assert_called()
 
     def test_callback_failure_called(self):
-        task = Task(
-            task_id=0,
-            step=action_step_with_error,
-            callback=simple_callback
+        group = QueueGroup()
+        group.add(
+            item=Task(
+                task_id=0,
+                workflow_id=self.workflow_id,
+                step=action_step_with_error,
+                plugins=self.plugins,
+                callback=simple_callback
+            )
         )
         mock_failure = Mock()
 
-        Manager(tasks=[task], on_failure=mock_failure)
+        Manager(
+            group=group,
+            on_failure=mock_failure,
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
         mock_failure.assert_called()
 
-    def test_workflow_with_class_completed(self):
-        task = Task(
-            task_id=0,
-            step=ActionStep,
-            callback=simple_callback
+    def test_workflow_with_class_success(self):
+        group = QueueGroup()
+        group.add(
+            item=Task(
+                task_id=0,
+                workflow_id=self.workflow_id,
+                step=ActionStep,
+                plugins=self.plugins,
+                callback=simple_callback
+            )
         )
 
-        controller = Manager(tasks=[task])
-        self.assertEqual(controller.tasks[0].status, TypeStatus.COMPLETED)
+        controller = Manager(
+            group=group,
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
+        self.assertEqual(controller.group.tasks()[0].status, StatusTaskType.SUCCESS)

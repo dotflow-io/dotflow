@@ -5,22 +5,23 @@ from uuid import UUID
 from typing import Dict, List
 
 from dotflow.core.task import Task
+from dotflow.core.plugin import Plugin
 
 
 class Flow(ABC):
 
     def __init__(
             self,
-            tasks: List[Task],
             workflow_id: UUID,
             ignore: bool,
-            groups: Dict[str, List[Task]]
+            group: Dict[str, List[Task]],
+            plugins: Plugin,
     ) -> None:
         self.queue = None
-        self.tasks = tasks
         self.workflow_id = workflow_id
         self.ignore = ignore
-        self.groups = groups
+        self.group = group
+        self.plugins = plugins
 
         self.setup_queue()
         self.run()
@@ -30,7 +31,7 @@ class Flow(ABC):
         self.queue = []
 
     @abstractmethod
-    def get_tasks(self) -> List[Task]:
+    def transport(self) -> List[Task]:
         return self.queue
 
     @abstractmethod

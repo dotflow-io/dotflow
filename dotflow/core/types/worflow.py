@@ -1,14 +1,23 @@
-"""Step Workflow Status module"""
+"""Workflow Status Type module"""
+
+from typing import Literal
+
+from dotflow.core.types.enum import StrEnum
 
 
-class WorkflowStatus:
+class WorkflowStatusType(StrEnum):
     """
     Import:
-        You can import the **WorkflowStatus** class with:
+        You can import the **WorkflowStatusType** class with:
 
-            from dotflow.core.types import WorkflowStatus
+            from dotflow.core.types import WorkflowStatusType
     """
 
-    NEW = "New"
     IN_PROGRESS = "In progress"
     COMPLETED = "Completed"
+
+
+WORKFLOW_STATUS_TYPE = Literal[
+    WorkflowStatusType.IN_PROGRESS,
+    WorkflowStatusType.COMPLETED
+]

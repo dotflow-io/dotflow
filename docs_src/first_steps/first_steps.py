@@ -1,8 +1,8 @@
-from dotflow import DotFlow, action
+from dotflow import DotFlow, action, Task
 
 
-def my_callback(*args, **kwargs):
-    print(args, kwargs)
+def my_callback(task: Task):
+    print(task.status)
 
 
 @action
@@ -11,5 +11,5 @@ def my_task():
 
 
 workflow = DotFlow()
-workflow.task.add(step=my_task, callback=my_callback)
+workflow.add(step=my_task, callback=my_callback)
 workflow.start()

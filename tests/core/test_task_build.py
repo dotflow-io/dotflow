@@ -3,12 +3,12 @@
 import unittest
 from uuid import uuid4
 
-from dotflow.core.config import Config
 from dotflow.core.context import Context
 from dotflow.core.exception import MissingActionDecorator
-from dotflow.core.task import Task, TaskBuilder
+from dotflow.core.task import Task, TaskBuilder, QueueGroup, TASK_GROUP_NAME
 from dotflow.core.serializers.workflow import SerializerWorkflow
 from dotflow.core.serializers.task import SerializerTask
+from dotflow.core.plugin import Plugin
 from dotflow.utils import basic_callback
 
 from tests.mocks import action_step, simple_step, SimpleStep
@@ -17,72 +17,104 @@ from tests.mocks import action_step, simple_step, SimpleStep
 class TestTaskBuild(unittest.TestCase):
 
     def setUp(self):
-        self.config = Config()
+        self.workflow_id = uuid4()
+        self.plugins = Plugin()
         self.content = {"foo": "bar"}
 
     def test_instantiating_task_build_class(self):
-        task = TaskBuilder(config=self.config)
+        task = TaskBuilder(
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
 
-        self.assertListEqual(task.queue, [])
+        self.assertIsInstance(task.group, QueueGroup)
 
     def test_add_method(self):
-        task = TaskBuilder(config=self.config)
-        task.add(step=action_step)
+        task = TaskBuilder(
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
 
-        self.assertEqual(task.queue[0].task_id, 0)
-        self.assertIsInstance(task.queue[0], Task)
-        self.assertEqual(task.queue[0].callback, basic_callback)
-        self.assertEqual(len(task.queue), 1)
+        task.add(step=action_step)
+        tasks = task.group.tasks()
+
+        self.assertTrue(task.group.size())
+        self.assertEqual(tasks[0].task_id, 0)
+        self.assertIsInstance(tasks[0], Task)
+        self.assertEqual(tasks[0].callback, basic_callback)
+        self.assertEqual(len(tasks), 1)
 
     def test_add_method_with_class_context(self):
-        task = TaskBuilder(config=self.config)
+        task = TaskBuilder(
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
+
         task.add(step=action_step, initial_context=Context(storage=self.content))
+        tasks = task.group.tasks()
 
-        self.assertEqual(task.queue[0].initial_context.storage, self.content)
+        self.assertEqual(tasks[0].initial_context.storage, self.content)
 
-        self.assertIsInstance(task.queue[0].initial_context, Context)
+        self.assertIsInstance(tasks[0].initial_context, Context)
 
     def test_add_method_without_class_context(self):
-        task = TaskBuilder(config=self.config)
+        task = TaskBuilder(
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
+
         task.add(step=action_step, initial_context=self.content)
+        tasks = task.group.tasks()
 
-        self.assertEqual(task.queue[0].initial_context.storage, self.content)
+        self.assertEqual(tasks[0].initial_context.storage, self.content)
 
-        self.assertIsInstance(task.queue[0].initial_context, Context)
+        self.assertIsInstance(tasks[0].initial_context, Context)
 
     def test_count_method(self):
-        task = TaskBuilder(config=self.config)
+        task = TaskBuilder(
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
 
         initial_count = 0
         final_count = 1
 
-        self.assertEqual(task.count(), initial_count)
+        self.assertEqual(task.group.size(), initial_count)
 
         task.add(step=action_step)
 
-        self.assertEqual(task.count(), final_count)
+        self.assertEqual(task.group.size(), final_count)
 
     def test_clear_method(self):
-        task = TaskBuilder(config=self.config)
+        task = TaskBuilder(
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
 
         expected_count_before = 1
         expected_count_after = 0
 
         task.add(step=action_step)
-        self.assertEqual(task.count(), expected_count_before)
+        self.assertEqual(task.group.size(), expected_count_before)
 
-        task.clear()
+        task.group.queue[TASK_GROUP_NAME].clear()
 
-        self.assertEqual(task.count(), expected_count_after)
+        self.assertEqual(task.group.size(), expected_count_after)
 
     def test_with_method_step_without_decorator(self):
-        task = TaskBuilder(config=self.config)
+        task = TaskBuilder(
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
 
         with self.assertRaises(MissingActionDecorator):
             task.add(step=simple_step)
 
     def test_with_class_step_without_decorator(self):
-        task = TaskBuilder(config=self.config)
+        task = TaskBuilder(
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
 
         with self.assertRaises(MissingActionDecorator):
             task.add(step=SimpleStep)
@@ -90,7 +122,10 @@ class TestTaskBuild(unittest.TestCase):
     def test_task_build_schema(self):
         expected_workflow_id = uuid4()
 
-        task = TaskBuilder(config=self.config, workflow_id=expected_workflow_id)
+        task = TaskBuilder(
+            plugins=self.plugins,
+            workflow_id=expected_workflow_id
+        )
         task.add(step=action_step, initial_context=self.content)
 
         schema = task.schema()
@@ -106,18 +141,21 @@ class TestTaskBuild(unittest.TestCase):
                 {
                     "task_id": 0,
                     "workflow_id": str(expected_workflow_id),
-                    "status": "Not started",
-                    "error": None,
-                    "duration": None,
+                    "status": "In queue",
+                    "error": {"message": "", "traceback": ""},
+                    "duration": 0.0,
                     "initial_context": '{"foo": "bar"}',
                     "current_context": None,
                     "previous_context": None,
-                    "group_name": "default",
+                    "group_name": TASK_GROUP_NAME,
                 }
             ],
         }
 
-        task = TaskBuilder(config=self.config, workflow_id=expected_workflow_id)
+        task = TaskBuilder(
+            plugins=self.plugins,
+            workflow_id=expected_workflow_id
+        )
         task.add(step=action_step, initial_context=self.content)
 
         result = task.result()

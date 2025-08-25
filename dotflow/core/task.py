@@ -3,21 +3,24 @@
 import json
 
 from uuid import UUID
-from typing import Any, Callable, List
+from typing import Any, Callable, List, Dict
 
-from dotflow.core.config import Config
 from dotflow.core.action import Action
 from dotflow.core.context import Context
 from dotflow.core.module import Module
+from dotflow.core.plugin import Plugin
 from dotflow.core.serializers.task import SerializerTask
 from dotflow.core.serializers.workflow import SerializerWorkflow
 from dotflow.core.exception import MissingActionDecorator, NotCallableObject
-from dotflow.core.types.status import TypeStatus
+from dotflow.core.types.task import StatusTaskType, TYPE_STATUS_TASK
 from dotflow.utils import (
     basic_callback,
     traceback_error,
     message_error
 )
+
+INITIAL_INDEX = 0
+TASK_GROUP_NAME = "standard"
 
 
 class TaskInstance:
@@ -28,19 +31,19 @@ class TaskInstance:
             from dotflow.core.task import TaskInstance
     """
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *_args, **_kwargs) -> None:
         self.task_id = None
         self.workflow_id = None
         self._step = None
+        self.plugins = None
         self._callback = None
-        self._previous_context = None
         self._initial_context = None
+        self.group_name = None
+        self._previous_context = None
         self._current_context = None
         self._duration = None
         self._error = None
         self._status = None
-        self._config = None
-        self.group_name = None
 
 
 class Task(TaskInstance):
@@ -56,6 +59,7 @@ class Task(TaskInstance):
             task = Task(
                 task_id=1,
                 step=my_step,
+                plugins=plugins,
                 callback=my_callback
             )
 
@@ -65,18 +69,18 @@ class Task(TaskInstance):
         step (Callable):
             A argument that receives an object of the callable type,
             which is basically a function. You can see in this
-            [example](https://dotflow-io.github.io/dotflow/#3-task-function).
+            [example](https://dotflow-io.github.io/dotflow/nav/tutorial/first-steps/#3-task-function).
+
+        plugins (Plugin): Plugin class.
 
         callback (Callable):
             Any callable object that receives **args** or **kwargs**,
             which is basically a function. You can see in this
-            [example](https://dotflow-io.github.io/dotflow/#2-callback-function).
+            [example](https://dotflow-io.github.io/dotflow/nav/tutorial/first-steps/#2-callback-function).
 
         initial_context (Any): Any python object.
 
         workflow_id (UUID): Workflow ID.
-
-        config (Config): Configuration class.
 
         group_name (str): Group name of tasks.
     """
@@ -84,30 +88,35 @@ class Task(TaskInstance):
     def __init__(
         self,
         task_id: int,
+        workflow_id: UUID,
         step: Callable,
+        plugins: Plugin,
         callback: Callable = basic_callback,
         initial_context: Any = None,
-        workflow_id: UUID = None,
-        config: Config = None,
-        group_name: str = "default"
+        group_name: str = TASK_GROUP_NAME
     ) -> None:
         super().__init__(
             task_id,
+            workflow_id,
             step,
+            plugins,
             callback,
             initial_context,
-            workflow_id,
-            config,
             group_name
         )
-        self.config = config
-        self.group_name = group_name
         self.task_id = task_id
         self.workflow_id = workflow_id
         self.step = step
+        self.plugins = plugins
         self.callback = callback
         self.initial_context = initial_context
-        self.status = TypeStatus.NOT_STARTED
+        self.group_name = group_name
+        self.previous_context = None
+        self.current_context = None
+        self.duration = 0
+        self.error = None
+        self.status = StatusTaskType.IN_QUEUE
+        self.plugins.metrics.task_count(task_objetc=self)
 
     @property
     def step(self):
@@ -175,10 +184,12 @@ class Task(TaskInstance):
             storage=value
         )
 
-        self.config.storage.post(
-            key=self.config.storage.key(task=self),
+        self.plugins.storage.post(
+            key=self.plugins.storage.key(task=self),
             context=self.current_context
         )
+        if self._current_context and self._current_context.storage:
+            self.plugins.logs.when_context_assigned(task_object=self)
 
     @property
     def duration(self):
@@ -196,37 +207,29 @@ class Task(TaskInstance):
 
     @error.setter
     def error(self, value: Exception) -> None:
+        if not value:
+            self._error = TaskError()
+
         if isinstance(value, TaskError):
             self._error = value
 
         if isinstance(value, Exception):
-            task_error = TaskError(value)
+            task_error = TaskError(error=value)
             self._error = task_error
-
-            self.config.log.error(task=self)
+            self.plugins.logs.on_status_failed(task_object=self)
 
     @property
     def status(self):
         if not self._status:
-            return TypeStatus.NOT_STARTED
+            return StatusTaskType.IN_QUEUE
         return self._status
 
     @status.setter
-    def status(self, value: TypeStatus) -> None:
+    def status(self, value: TYPE_STATUS_TASK) -> None:
         self._status = value
 
-        self.config.notify.send(task=self)
-        self.config.log.info(task=self)
-
-    @property
-    def config(self):
-        if not self._config:
-            return Config()
-        return self._config
-
-    @config.setter
-    def config(self, value: Config):
-        self._config = value
+        self.plugins.notify.send(task_object=self)
+        self.plugins.logs.on_task_status_change(task_object=self)
 
     def schema(self, max: int = None) -> SerializerTask:
         return SerializerTask(**self.__dict__, max=max)
@@ -247,7 +250,7 @@ class TaskError:
 class TaskBuilder:
     """
     Import:
-        You can import the **Task** class with:
+        You can import the **TaskBuilder** class with:
 
             from dotflow.core.task import TaskBuilder
 
@@ -257,42 +260,51 @@ class TaskBuilder:
             from uuid import uuid4
 
             build = TaskBuilder(
-                config=config
+                plugins=plugins
                 workflow_id=uuid4()
             )
 
     Args:
-        config (Config): Configuration class.
+        plugins (Plugin): Plugin class.
+
         workflow_id (UUID): Workflow ID.
+
+    Attributes:
+        group (QueueGroup):
+
+        workflow_id (UUID):
+
+        plugins (Plugin)
+
     """
 
     def __init__(
             self,
-            config: Config,
-            workflow_id: UUID = None
+            plugins: Plugin,
+            workflow_id: UUID
     ) -> None:
-        self.queue: List[Callable] = []
+        self.plugins = plugins
         self.workflow_id = workflow_id
-        self.config = config
+        self.group: QueueGroup = QueueGroup()
 
     def add(
         self,
         step: Callable,
         callback: Callable = basic_callback,
         initial_context: Any = None,
-        group_name: str = "default"
+        group_name: str = TASK_GROUP_NAME
     ) -> None:
         """
         Args:
             step (Callable):
                 A argument that receives an object of the callable type,
                 which is basically a function. You can see in this
-                [example](https://dotflow-io.github.io/dotflow/#3-task-function).
+                [example](https://dotflow-io.github.io/dotflow/nav/tutorial/first-steps/#3-task-function).
 
             callback (Callable):
                 Any callable object that receives **args** or **kwargs**,
                 which is basically a function. You can see in this
-                [example](https://dotflow-io.github.io/dotflow/#2-callback-function).
+                [example](https://dotflow-io.github.io/dotflow/nav/tutorial/first-steps/#2-callback-function).
 
             initial_context (Context):
                 The argument exists to include initial data in the execution
@@ -313,35 +325,88 @@ class TaskBuilder:
                 )
             return self
 
-        self.queue.append(
-            Task(
-                task_id=len(self.queue),
+        self.group.add(
+            item=Task(
+                task_id=self.group.size(),
+                workflow_id=self.workflow_id,
                 step=step,
                 callback=Module(value=callback),
                 initial_context=initial_context,
-                workflow_id=self.workflow_id,
-                config=self.config,
+                plugins=self.plugins,
                 group_name=group_name
             )
         )
 
         return self
 
-    def count(self) -> int:
-        return len(self.queue)
+    def count(self, group_name: str = TASK_GROUP_NAME) -> int:
+        return self.group.queue[group_name].size()
 
-    def clear(self) -> None:
-        self.queue.clear()
+    def clear(self, group_name: str = TASK_GROUP_NAME) -> None:
+        self.group.queue[group_name].clear()
 
-    def reverse(self) -> None:
-        self.queue.reverse()
+    def reverse(self, group_name: str = TASK_GROUP_NAME) -> None:
+        self.group.queue[group_name].reverse()
 
     def schema(self) -> SerializerWorkflow:
         return SerializerWorkflow(
             workflow_id=self.workflow_id,
-            tasks=[item.schema() for item in self.queue]
+            tasks=[item.schema() for item in self.group.tasks()]
         )
 
     def result(self) -> SerializerWorkflow:
         item = self.schema().model_dump_json()
         return json.loads(item)
+
+
+class QueueGroup:
+
+    def __init__(self):
+        self.queue: Dict[str, Queue] = {}
+
+    def add(self, item: Task) -> None:
+        if not self.queue.get(item.group_name):
+            self.queue[item.group_name] = Queue()
+
+        self.queue[item.group_name].add(item=item)
+
+    def size(self) -> int:
+        current_size = 0
+        for _, group in self.queue.items():
+            current_size += group.size()
+
+        return current_size
+
+    def count(self) -> int:
+        return len(self.queue)
+
+    def tasks(self) -> List[Task]:
+        tasks = []
+        for _, queue in self.queue.items():
+            tasks += queue.tasks
+
+        return tasks
+
+
+class Queue:
+
+    def __init__(self):
+        self.tasks: List[Task] = []
+
+    def add(self, item: Task) -> None:
+        self.tasks.append(item)
+
+    def remove(self) -> Task:
+        return self.tasks.pop(INITIAL_INDEX)
+
+    def size(self) -> int:
+        return len(self.tasks)
+
+    def reverse(self) -> None:
+        self.tasks.reverse()
+
+    def clear(self) -> None:
+        self.tasks.clear()
+
+    def get(self) -> List[Task]:
+        return self.tasks

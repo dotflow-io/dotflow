@@ -10,6 +10,7 @@ from dotflow.core.action import Action as action
 from dotflow.core.context import Context
 from dotflow.core.execution import Execution
 from dotflow.core.task import Task
+from dotflow.core.plugin import Plugin
 
 from tests.mocks import simple_callback
 
@@ -66,12 +67,19 @@ def task_class():
 class TestExecutionResult(unittest.TestCase):
 
     def setUp(self):
-        self.task = partial(Task, task_id=0, callback=simple_callback)
         self.workflow_id = uuid4()
+        self.plugins = Plugin()
+        self.task = partial(
+            Task,
+            task_id=0,
+            workflow_id=self.workflow_id,
+            callback=simple_callback,
+            plugins=self.plugins
+        )
 
     def test_execution_result_str(self):
         controller = Execution(
-            task=self.task(step=task_str),
+            task=self.task(step=task_str, workflow_id=self.workflow_id),
             workflow_id=self.workflow_id,
             previous_context=Context()
         )
@@ -80,7 +88,7 @@ class TestExecutionResult(unittest.TestCase):
 
     def test_execution_result_int(self):
         controller = Execution(
-            task=self.task(step=task_int),
+            task=self.task(step=task_int, workflow_id=self.workflow_id),
             workflow_id=self.workflow_id,
             previous_context=Context()
         )
@@ -89,7 +97,7 @@ class TestExecutionResult(unittest.TestCase):
 
     def test_execution_result_float(self):
         controller = Execution(
-            task=self.task(step=task_float),
+            task=self.task(step=task_float, workflow_id=self.workflow_id),
             workflow_id=self.workflow_id,
             previous_context=Context()
         )
@@ -98,7 +106,7 @@ class TestExecutionResult(unittest.TestCase):
 
     def test_execution_result_dict(self):
         controller = Execution(
-            task=self.task(step=task_dict),
+            task=self.task(step=task_dict, workflow_id=self.workflow_id),
             workflow_id=self.workflow_id,
             previous_context=Context()
         )
@@ -107,7 +115,7 @@ class TestExecutionResult(unittest.TestCase):
 
     def test_execution_result_list(self):
         controller = Execution(
-            task=self.task(step=task_list),
+            task=self.task(step=task_list, workflow_id=self.workflow_id),
             workflow_id=self.workflow_id,
             previous_context=Context()
         )
@@ -116,7 +124,7 @@ class TestExecutionResult(unittest.TestCase):
 
     def test_execution_result_tuple(self):
         controller = Execution(
-            task=self.task(step=task_tuple),
+            task=self.task(step=task_tuple, workflow_id=self.workflow_id),
             workflow_id=self.workflow_id,
             previous_context=Context()
         )
@@ -125,7 +133,7 @@ class TestExecutionResult(unittest.TestCase):
 
     def test_execution_result_function(self):
         controller = Execution(
-            task=self.task(step=task_function),
+            task=self.task(step=task_function, workflow_id=self.workflow_id),
             workflow_id=self.workflow_id,
             previous_context=Context()
         )
@@ -133,7 +141,7 @@ class TestExecutionResult(unittest.TestCase):
 
     def test_execution_result_class(self):
         controller = Execution(
-            task=self.task(step=task_class),
+            task=self.task(step=task_class, workflow_id=self.workflow_id),
             workflow_id=self.workflow_id,
             previous_context=Context()
         )

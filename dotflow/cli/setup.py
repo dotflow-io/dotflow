@@ -1,19 +1,19 @@
 """Setup module"""
 
-from rich import print  # type: ignore
+from pathlib import Path
 
 from dotflow import __version__, __description__
-from dotflow.logging import logger
-from dotflow.settings import Settings as settings
+from dotflow.providers.otel.logs import client
 from dotflow.utils.basic_functions import basic_callback
-from dotflow.core.types import TypeExecution, TypeStorage
+from dotflow.core.types import ExecutionModeType, StorageType
 from dotflow.core.exception import (
     MissingActionDecorator,
     ExecutionModeNotExist,
     ImportModuleError,
     MESSAGE_UNKNOWN_ERROR,
 )
-from dotflow.cli.commands import InitCommand, LogCommand, StartCommand
+from dotflow.cli.commands import InitCommand, StartCommand
+from dotflow.utils.print import print_error, print_warning
 
 
 class Command:
@@ -32,7 +32,6 @@ class Command:
         )
 
         self.setup_init()
-        self.setup_logs()
         self.setup_start()
         self.command()
 
@@ -53,26 +52,21 @@ class Command:
         self.cmd_start.add_argument("-c", "--callback", default=basic_callback)
         self.cmd_start.add_argument("-i", "--initial-context")
         self.cmd_start.add_argument(
-            "-o", "--storage", choices=[TypeStorage.DEFAULT, TypeStorage.FILE]
+            "-o", "--storage", choices=[StorageType.DEFAULT, StorageType.FILE]
         )
-        self.cmd_start.add_argument("-p", "--path", default=settings.START_PATH)
+        self.cmd_start.add_argument("-p", "--path", default=Path())
         self.cmd_start.add_argument(
             "-m",
             "--mode",
-            default=TypeExecution.SEQUENTIAL,
+            default=ExecutionModeType.SEQUENTIAL,
             choices=[
-                TypeExecution.SEQUENTIAL,
-                TypeExecution.BACKGROUND,
-                TypeExecution.PARALLEL,
+                ExecutionModeType.SEQUENTIAL,
+                ExecutionModeType.BACKGROUND,
+                ExecutionModeType.PARALLEL,
             ],
         )
 
         self.cmd_start.set_defaults(exec=StartCommand)
-
-    def setup_logs(self):
-        self.cmd_logs = self.subparsers.add_parser("logs", help="Logs")
-        self.cmd_logs = self.cmd_logs.add_argument_group("Usage: dotflow log [OPTIONS]")
-        self.cmd_logs.set_defaults(exec=LogCommand)
 
     def command(self):
         try:
@@ -82,14 +76,14 @@ class Command:
             else:
                 print(__description__)
         except MissingActionDecorator as err:
-            print(settings.WARNING_ALERT, err)
+            print_warning(err)
 
         except ExecutionModeNotExist as err:
-            print(settings.WARNING_ALERT, err)
+            print_warning(err)
 
         except ImportModuleError as err:
-            print(settings.WARNING_ALERT, err)
+            print_warning(err)
 
         except Exception as err:
-            logger.error(f"Internal problem: {str(err)}")
-            print(settings.ERROR_ALERT, MESSAGE_UNKNOWN_ERROR)
+            client.error(f"Internal problem: {str(err)}")
+            print_error(MESSAGE_UNKNOWN_ERROR)

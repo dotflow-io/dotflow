@@ -47,7 +47,7 @@ import os
 
 from dotflow import Config, DotFlow, action
 from dotflow.notify import NotifyTelegram
-from dotflow.types import TypeStatus
+from dotflow.types import StatusTaskType
 ```
 
 ### Task function
@@ -69,7 +69,7 @@ Instantiate the `NotifyTelegram` class with your Telegram bot credentials. You c
 notify = NotifyTelegram(
     token=os.getenv("TOKEN"),
     chat_id=os.getenv("CHAT_ID"),
-    notification_type=TypeStatus.FAILED  # Notify only on failure
+    notification_type=StatusTaskType.FAILED  # Notify only on failure
 )
 ```
 
@@ -88,7 +88,7 @@ workflow = DotFlow(
 Add your defined task as a step in the workflow:
 
 ```python
-workflow.task.add(step=simple_task)
+workflow.add(step=simple_task)
 ```
 
 ### Start

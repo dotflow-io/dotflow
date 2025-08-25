@@ -1,12 +1,14 @@
 """Types __init__ module."""
 
-from dotflow.core.types.execution import TypeExecution
-from dotflow.core.types.status import TypeStatus
-from dotflow.core.types.storage import TypeStorage
+from dotflow.core.types.execution import ExecutionModeType
+from dotflow.core.types.task import StatusTaskType
+from dotflow.core.types.storage import StorageType
+from dotflow.core.types.worflow import WorkflowStatusType
 
 
 __all__ = [
-    "TypeExecution",
-    "TypeStatus",
-    "TypeStorage"
+    "ExecutionModeType",
+    "StatusTaskType",
+    "StorageType",
+    "WorkflowStatusType"
 ]
