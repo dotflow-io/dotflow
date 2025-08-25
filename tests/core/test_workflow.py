@@ -2,6 +2,8 @@
 
 import unittest
 
+from uuid import uuid4
+
 from uuid import UUID
 from unittest.mock import Mock
 from types import FunctionType
@@ -23,11 +25,13 @@ from tests.mocks import (
 class TestWorkflow(unittest.TestCase):
 
     def setUp(self):
+        self.workflow_id = uuid4()
         self.plugins = Plugin()
         self.group = QueueGroup()
         self.group.add(
                 item=Task(
                     task_id=0,
+                    workflow_id=self.workflow_id,
                     step=action_step,
                     plugins=self.plugins,
                     callback=simple_callback
@@ -37,7 +41,8 @@ class TestWorkflow(unittest.TestCase):
     def test_instantiating_workflow_class(self):
         controller = Manager(
             group=self.group,
-            plugins=self.plugins
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
         )
 
         self.assertEqual(controller.group, self.group)
@@ -50,6 +55,7 @@ class TestWorkflow(unittest.TestCase):
         group.add(
             item=Task(
                 task_id=0,
+                workflow_id=self.workflow_id,
                 step=action_step,
                 plugins=self.plugins,
                 callback=simple_callback
@@ -58,7 +64,8 @@ class TestWorkflow(unittest.TestCase):
 
         controller = Manager(
             group=group,
-            plugins=self.plugins
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
         )
         self.assertEqual(controller.group.tasks()[0].status, StatusTaskType.SUCCESS)
 
@@ -67,6 +74,7 @@ class TestWorkflow(unittest.TestCase):
         group.add(
             item=Task(
                 task_id=0,
+                workflow_id=self.workflow_id,
                 step=action_step_with_error,
                 plugins=self.plugins,
                 callback=simple_callback
@@ -75,7 +83,8 @@ class TestWorkflow(unittest.TestCase):
 
         controller = Manager(
             group=group,
-            plugins=self.plugins
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
         )
         self.assertEqual(controller.group.tasks()[0].status, StatusTaskType.FAILED)
 
@@ -84,28 +93,32 @@ class TestWorkflow(unittest.TestCase):
             Manager(
                 group=self.group,
                 mode="unknown",
-                plugins=self.plugins
+                plugins=self.plugins,
+                workflow_id=self.workflow_id
             )
 
     def test_with_execution_mode_sequential(self):
         Manager(
             group=self.group,
             mode=ExecutionModeType.SEQUENTIAL,
-            plugins=self.plugins
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
         )
 
     def test_with_execution_mode_background(self):
         Manager(
             group=self.group,
             mode=ExecutionModeType.BACKGROUND,
-            plugins=self.plugins
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
         )
 
     def test_with_execution_mode_parallel(self):
         Manager(
             group=self.group,
             mode=ExecutionModeType.PARALLEL,
-            plugins=self.plugins
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
         )
 
     def test_callback_success_called(self):
@@ -113,6 +126,7 @@ class TestWorkflow(unittest.TestCase):
         group.add(
             item=Task(
                 task_id=0,
+                workflow_id=self.workflow_id,
                 step=action_step,
                 plugins=self.plugins,
                 callback=simple_callback
@@ -123,7 +137,8 @@ class TestWorkflow(unittest.TestCase):
         Manager(
             group=group,
             on_success=mock_success,
-            plugins=self.plugins
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
         )
         mock_success.assert_called()
 
@@ -132,6 +147,7 @@ class TestWorkflow(unittest.TestCase):
         group.add(
             item=Task(
                 task_id=0,
+                workflow_id=self.workflow_id,
                 step=action_step_with_error,
                 plugins=self.plugins,
                 callback=simple_callback
@@ -142,7 +158,8 @@ class TestWorkflow(unittest.TestCase):
         Manager(
             group=group,
             on_failure=mock_failure,
-            plugins=self.plugins
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
         )
         mock_failure.assert_called()
 
@@ -151,6 +168,7 @@ class TestWorkflow(unittest.TestCase):
         group.add(
             item=Task(
                 task_id=0,
+                workflow_id=self.workflow_id,
                 step=ActionStep,
                 plugins=self.plugins,
                 callback=simple_callback
@@ -159,6 +177,7 @@ class TestWorkflow(unittest.TestCase):
 
         controller = Manager(
             group=group,
-            plugins=self.plugins
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
         )
         self.assertEqual(controller.group.tasks()[0].status, StatusTaskType.SUCCESS)

@@ -5,7 +5,7 @@ import logging
 
 from uuid import uuid4
 
-from pytest import fixture  # type: ignore
+from pytest import fixture
 
 from dotflow.core.task import Task
 from dotflow.core.context import Context
@@ -82,7 +82,7 @@ class TestClassActions(unittest.TestCase):
 
         with self._caplog.at_level(logging.DEBUG):
             inside(task=self.task)
-            self.assertEqual(self._caplog.records[0].message, f"1: {str(self.workflow_id)} - In queue ")
+            self.assertEqual(self._caplog.records[0].message, f"{str(self.workflow_id)}: TASK 1 - In queue")
 
     def test_set_params_previous_context(self):
         inside = Action(simple_step_with_previous_context)

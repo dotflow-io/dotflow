@@ -1,19 +1,19 @@
 """Command init module"""
 
+from pathlib import Path
 from os import system
 
-from rich import print  # type: ignore
-
-from dotflow.settings import Settings as settings
 from dotflow.cli.command import Command
+from dotflow.utils.print import print_info
 
 
 class InitCommand(Command):
 
+    GITIGNORE = Path(".gitignore")
+
     def setup(self):
-        if settings.GITIGNORE.exists():
+        if self.GITIGNORE.exists():
             system("echo '\n\n# Dotflow\n.output' >> .gitignore")
-            print(
-                settings.INFO_ALERT,
-                f"Installation complete! The ({settings.GITIGNORE.resolve()}) file has been modified."
+            print_info(
+                f"Installation complete! The ({self.GITIGNORE.resolve()}) file has been modified."
             )

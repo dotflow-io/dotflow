@@ -17,16 +17,24 @@ from tests.mocks import action_step, simple_step, SimpleStep
 class TestTaskBuild(unittest.TestCase):
 
     def setUp(self):
+        self.workflow_id = uuid4()
         self.plugins = Plugin()
         self.content = {"foo": "bar"}
 
     def test_instantiating_task_build_class(self):
-        task = TaskBuilder(plugins=self.plugins)
+        task = TaskBuilder(
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
 
         self.assertIsInstance(task.group, QueueGroup)
 
     def test_add_method(self):
-        task = TaskBuilder(plugins=self.plugins)
+        task = TaskBuilder(
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
+
         task.add(step=action_step)
         tasks = task.group.tasks()
 
@@ -37,7 +45,11 @@ class TestTaskBuild(unittest.TestCase):
         self.assertEqual(len(tasks), 1)
 
     def test_add_method_with_class_context(self):
-        task = TaskBuilder(plugins=self.plugins)
+        task = TaskBuilder(
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
+
         task.add(step=action_step, initial_context=Context(storage=self.content))
         tasks = task.group.tasks()
 
@@ -46,7 +58,11 @@ class TestTaskBuild(unittest.TestCase):
         self.assertIsInstance(tasks[0].initial_context, Context)
 
     def test_add_method_without_class_context(self):
-        task = TaskBuilder(plugins=self.plugins)
+        task = TaskBuilder(
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
+
         task.add(step=action_step, initial_context=self.content)
         tasks = task.group.tasks()
 
@@ -55,7 +71,10 @@ class TestTaskBuild(unittest.TestCase):
         self.assertIsInstance(tasks[0].initial_context, Context)
 
     def test_count_method(self):
-        task = TaskBuilder(plugins=self.plugins)
+        task = TaskBuilder(
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
 
         initial_count = 0
         final_count = 1
@@ -67,7 +86,10 @@ class TestTaskBuild(unittest.TestCase):
         self.assertEqual(task.group.size(), final_count)
 
     def test_clear_method(self):
-        task = TaskBuilder(plugins=self.plugins)
+        task = TaskBuilder(
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
 
         expected_count_before = 1
         expected_count_after = 0
@@ -80,13 +102,19 @@ class TestTaskBuild(unittest.TestCase):
         self.assertEqual(task.group.size(), expected_count_after)
 
     def test_with_method_step_without_decorator(self):
-        task = TaskBuilder(plugins=self.plugins)
+        task = TaskBuilder(
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
 
         with self.assertRaises(MissingActionDecorator):
             task.add(step=simple_step)
 
     def test_with_class_step_without_decorator(self):
-        task = TaskBuilder(plugins=self.plugins)
+        task = TaskBuilder(
+            plugins=self.plugins,
+            workflow_id=self.workflow_id
+        )
 
         with self.assertRaises(MissingActionDecorator):
             task.add(step=SimpleStep)
@@ -94,7 +122,10 @@ class TestTaskBuild(unittest.TestCase):
     def test_task_build_schema(self):
         expected_workflow_id = uuid4()
 
-        task = TaskBuilder(plugins=self.plugins, workflow_id=expected_workflow_id)
+        task = TaskBuilder(
+            plugins=self.plugins,
+            workflow_id=expected_workflow_id
+        )
         task.add(step=action_step, initial_context=self.content)
 
         schema = task.schema()
@@ -112,7 +143,7 @@ class TestTaskBuild(unittest.TestCase):
                     "workflow_id": str(expected_workflow_id),
                     "status": "In queue",
                     "error": {"message": "", "traceback": ""},
-                    "duration": None,
+                    "duration": 0.0,
                     "initial_context": '{"foo": "bar"}',
                     "current_context": None,
                     "previous_context": None,
@@ -121,7 +152,10 @@ class TestTaskBuild(unittest.TestCase):
             ],
         }
 
-        task = TaskBuilder(plugins=self.plugins, workflow_id=expected_workflow_id)
+        task = TaskBuilder(
+            plugins=self.plugins,
+            workflow_id=expected_workflow_id
+        )
         task.add(step=action_step, initial_context=self.content)
 
         result = task.result()

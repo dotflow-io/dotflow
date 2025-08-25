@@ -3,7 +3,6 @@
 from os import system
 
 from dotflow import DotFlow
-from dotflow.providers import StorageHandler, StorageFile
 from dotflow.core.types.execution import ExecutionModeType
 from dotflow.cli.command import Command
 
@@ -25,16 +24,4 @@ class StartCommand(Command):
             system("/bin/bash")
 
     def _new_workflow(self):
-        if not self.params.storage:
-            return DotFlow()
-
-        storage_classes = {
-            "default": StorageHandler,
-            "file": StorageFile
-        }
-
-        storage_plugin = storage_classes.get(self.params.storage)(
-            path=self.params.path,
-        )
-
-        return DotFlow(plugins=[storage_plugin])
+        return DotFlow()

@@ -8,7 +8,7 @@ from dotflow.core.workflow import Manager
 from dotflow.core.context import Context
 from dotflow.core.task import Task, TaskBuilder
 from dotflow.core.dotflow import DotFlow, DotflowInstance
-from dotflow.core.types.status import StatusTaskType
+from dotflow.core.types.task import StatusTaskType
 from dotflow.core.plugin import Plugin
 
 from tests.mocks import action_step

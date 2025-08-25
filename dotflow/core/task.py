@@ -5,7 +5,6 @@ import json
 from uuid import UUID
 from typing import Any, Callable, List, Dict
 
-from dotflow.abc.logs import TypeLog
 from dotflow.core.action import Action
 from dotflow.core.context import Context
 from dotflow.core.module import Module
@@ -13,7 +12,7 @@ from dotflow.core.plugin import Plugin
 from dotflow.core.serializers.task import SerializerTask
 from dotflow.core.serializers.workflow import SerializerWorkflow
 from dotflow.core.exception import MissingActionDecorator, NotCallableObject
-from dotflow.core.types.status import StatusTaskType, TYPE_STATUS_TASK
+from dotflow.core.types.task import StatusTaskType, TYPE_STATUS_TASK
 from dotflow.utils import (
     basic_callback,
     traceback_error,
@@ -34,11 +33,11 @@ class TaskInstance:
 
     def __init__(self, *_args, **_kwargs) -> None:
         self.task_id = None
+        self.workflow_id = None
         self._step = None
         self.plugins = None
         self._callback = None
         self._initial_context = None
-        self.workflow_id = None
         self.group_name = None
         self._previous_context = None
         self._current_context = None
@@ -89,34 +88,35 @@ class Task(TaskInstance):
     def __init__(
         self,
         task_id: int,
+        workflow_id: UUID,
         step: Callable,
         plugins: Plugin,
         callback: Callable = basic_callback,
         initial_context: Any = None,
-        workflow_id: UUID = None,
         group_name: str = TASK_GROUP_NAME
     ) -> None:
         super().__init__(
             task_id,
+            workflow_id,
             step,
             plugins,
             callback,
             initial_context,
-            workflow_id,
             group_name
         )
         self.task_id = task_id
+        self.workflow_id = workflow_id
         self.step = step
         self.plugins = plugins
         self.callback = callback
         self.initial_context = initial_context
-        self.workflow_id = workflow_id
         self.group_name = group_name
         self.previous_context = None
         self.current_context = None
-        self.duration = None
+        self.duration = 0
         self.error = None
         self.status = StatusTaskType.IN_QUEUE
+        self.plugins.metrics.task_count(task_objetc=self)
 
     @property
     def step(self):
@@ -188,6 +188,8 @@ class Task(TaskInstance):
             key=self.plugins.storage.key(task=self),
             context=self.current_context
         )
+        if self._current_context and self._current_context.storage:
+            self.plugins.logs.when_context_assigned(task_object=self)
 
     @property
     def duration(self):
@@ -214,6 +216,7 @@ class Task(TaskInstance):
         if isinstance(value, Exception):
             task_error = TaskError(error=value)
             self._error = task_error
+            self.plugins.logs.on_status_failed(task_object=self)
 
     @property
     def status(self):
@@ -226,11 +229,7 @@ class Task(TaskInstance):
         self._status = value
 
         self.plugins.notify.send(task_object=self)
-
-        self.plugins.logs.on_task_status_change(
-            task_object=self,
-            type=TypeLog.INFO
-        )
+        self.plugins.logs.on_task_status_change(task_object=self)
 
     def schema(self, max: int = None) -> SerializerTask:
         return SerializerTask(**self.__dict__, max=max)
@@ -282,11 +281,11 @@ class TaskBuilder:
     def __init__(
             self,
             plugins: Plugin,
-            workflow_id: UUID = None
+            workflow_id: UUID
     ) -> None:
-        self.group: QueueGroup = QueueGroup()
-        self.workflow_id = workflow_id
         self.plugins = plugins
+        self.workflow_id = workflow_id
+        self.group: QueueGroup = QueueGroup()
 
     def add(
         self,
@@ -329,10 +328,10 @@ class TaskBuilder:
         self.group.add(
             item=Task(
                 task_id=self.group.size(),
+                workflow_id=self.workflow_id,
                 step=step,
                 callback=Module(value=callback),
                 initial_context=initial_context,
-                workflow_id=self.workflow_id,
                 plugins=self.plugins,
                 group_name=group_name
             )
