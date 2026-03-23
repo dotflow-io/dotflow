@@ -8,7 +8,7 @@ The `log` provider defines how execution logs are produced.
 
 ## Example
 
-{* ./docs_src/config/log_provider.py *}
+{* ./docs_src/config/log_provider.py ln[1:19] hl[12:14] *}
 
 ## Reference
 

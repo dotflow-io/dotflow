@@ -9,7 +9,13 @@ The `storage` provider defines where task outputs are persisted.
 
 ## Example
 
-{* ./docs_src/config/storage_provider.py *}
+{* ./docs_src/config/storage_provider.py ln[1:25] hl[12:14,17:19] *}
+
+## Extra examples
+
+File storage only:
+
+{* ./docs_src/storage/storage_file.py ln[1:21] hl[11,13:15] *}
 
 ## References
 

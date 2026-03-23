@@ -9,7 +9,11 @@ The `notify` provider defines how workflow/task notifications are emitted.
 
 ## Example
 
-{* ./docs_src/config/notify_provider.py *}
+{* ./docs_src/config/notify_provider.py ln[1:32] hl[13:14,17:23,26] *}
+
+Telegram setup example:
+
+{* ./docs_src/notify/notify_telegram.py ln[1:41] hl[26:30,32:35] *}
 
 ## References
 
