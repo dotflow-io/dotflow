@@ -125,6 +125,10 @@ nav:
     - Learn:
       - nav/learn/index.md
       - nav/learn/concept-of-context.md
+      - Providers:
+        - nav/tutorial/provider-storage.md
+        - nav/tutorial/provider-notify.md
+        - nav/tutorial/provider-log.md
       - Tutorial - User Guide:
         - nav/tutorial/install.md
         - nav/tutorial/first-steps.md
