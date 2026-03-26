@@ -258,16 +258,26 @@ class Background(Flow):
     def _flow_callback(self, task: Task) -> None:
         self.queue.append(task)
 
+    def _run_sequential(self) -> None:
+        previous_context = Context(workflow_id=self.workflow_id)
+
+        for task in self.tasks:
+            Execution(
+                task=task,
+                workflow_id=self.workflow_id,
+                previous_context=previous_context,
+                _flow_callback=self._flow_callback,
+            )
+
+            previous_context = task.config.storage.get(
+                key=task.config.storage.key(task=task)
+            )
+
+            if not self.ignore and task.status == TypeStatus.FAILED:
+                break
+
     def run(self) -> None:
-        thread = threading.Thread(
-            target=Sequential,
-            args=(
-                self.tasks,
-                self.workflow_id,
-                self.ignore,
-                self.groups,
-            ),
-        )
+        thread = threading.Thread(target=self._run_sequential)
         thread.start()
         thread.join()
 
