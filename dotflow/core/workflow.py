@@ -256,7 +256,7 @@ class Background(Flow):
         return self.tasks
 
     def _flow_callback(self, task: Task) -> None:
-        pass
+        self.queue.append(task)
 
     def run(self) -> None:
         thread = threading.Thread(
