@@ -2,10 +2,8 @@
 
 import unittest
 
-from uuid import uuid4
-
 from multiprocessing import get_context
-Queue = type(get_context("fork").Queue())
+from uuid import uuid4
 
 from dotflow.core.workflow import SequentialGroup, grouper
 from dotflow.core.types import TypeStatus
@@ -16,6 +14,8 @@ from tests.mocks import (
     action_step_with_error,
     simple_callback,
 )
+
+Queue = type(get_context("fork").Queue())
 
 
 class TestWorkflowSequentialGroup(unittest.TestCase):

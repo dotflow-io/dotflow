@@ -28,6 +28,6 @@ class TestMultiprocessingContext(unittest.TestCase):
     def test_workflow_importable_on_current_platform(self):
         """Importing workflow module must never raise on any supported platform."""
         try:
-            from dotflow.core.workflow import Manager, Parallel, SequentialGroup
+            from dotflow.core.workflow import Manager, Parallel, SequentialGroup  # noqa: F401
         except Exception as e:
             self.fail(f"Import raised an exception: {e}")
