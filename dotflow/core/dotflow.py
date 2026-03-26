@@ -68,5 +68,10 @@ class DotFlow:
         """
         return [task.current_context.storage for task in self.task.queue]
 
-    def result(self):
+    def result(self) -> dict:
+        """
+        Returns:
+            dict: Returns the full workflow result serialized as a dictionary,
+                  including workflow ID and all task schemas.
+        """
         return self.task.result()
