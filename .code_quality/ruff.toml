@@ -37,9 +37,12 @@ select = [
 
 # Ignore specific rules
 ignore = [
-    "E501",  # Line too long (handled by formatter)
-    "B008",  # Do not perform function calls in argument defaults
-    "E203",  # Whitespace before ':' (flake8 compatibility - handled separately)
+    "E501",   # Line too long (handled by formatter)
+    "B008",   # Do not perform function calls in argument defaults
+    "E203",   # Whitespace before ':' (flake8 compatibility - handled separately)
+    "B027",   # Empty method in ABC without abstractmethod (intentional in base providers)
+    "ARG001", # Unused function argument (intentional in interface implementations)
+    "ARG002", # Unused method argument (intentional in *args/**kwargs constructors and providers)
 ]
 
 # Allowed configurations for specific rules
@@ -49,7 +52,7 @@ ignore = [
 
 # Import sorting (isort)
 [lint.isort]
-known-first-party = ["mkdocs_simple_blog"]
+known-first-party = ["dotflow"]
 force-single-line = false
 
 # Formatting (alternative to black)
