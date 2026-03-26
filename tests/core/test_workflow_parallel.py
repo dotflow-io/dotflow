@@ -3,7 +3,8 @@
 import unittest
 
 from uuid import uuid4
-from multiprocessing.queues import Queue
+from multiprocessing import get_context
+Queue = type(get_context("fork").Queue())
 
 from dotflow.core.workflow import Parallel, grouper
 from dotflow.core.types import TypeStatus
