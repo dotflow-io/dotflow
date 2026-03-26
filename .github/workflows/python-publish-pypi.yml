@@ -24,7 +24,7 @@ jobs:
           if git rev-parse --verify "$BRANCH"^{tag} >/dev/null 2>&1 2>&1 || [[ "$TARGET" == refs/tags/* ]]; then
             git fetch --all --tags
             TAG_NAME="${TARGET#refs/tags/}"
-            BRANCH=$(git branch -r --contains "$TAG_NAME" | grep -E "(main|master)" | head -1 | sed 's|origin/||' | xargs || \
+            BRANCH=$(git branch -r --contains "$TAG_NAME" | grep -E "(main|master|develop)" | head -1 | sed 's|origin/||' | xargs || \
                      git branch -r --contains "$TAG_NAME" | head -1 | sed 's|origin/||' | xargs || \
                      echo "master")
           fi
@@ -89,7 +89,7 @@ jobs:
 
           if [[ "$TARGET" == refs/tags/* ]] || git rev-parse --verify "$BRANCH"^{tag} >/dev/null 2>&1; then
             TAG_NAME="${TARGET#refs/tags/}"
-            BRANCH=$(git branch -r --contains "$TAG_NAME" | grep -E "(main|master)" | head -1 | sed 's|origin/||' | xargs || \
+            BRANCH=$(git branch -r --contains "$TAG_NAME" | grep -E "(main|master|develop)" | head -1 | sed 's|origin/||' | xargs || \
                      git branch -r --contains "$TAG_NAME" | head -1 | sed 's|origin/||' | xargs || \
                      echo "master")
           fi

@@ -43,7 +43,7 @@ runs:
     - name: 🔒 Update lock file if needed
       shell: bash
       run: |
-        poetry lock --no-update || true
+        poetry lock --no-update 2>/dev/null || poetry lock
 
     - name: ⚙️ Install dependencies
       if: inputs.install-deps != ''
