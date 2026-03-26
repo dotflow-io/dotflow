@@ -43,6 +43,7 @@ class DotFlow:
     ) -> None:
         self.workflow_id = uuid4()
         config = config if config else Config()
+        config.api.create_workflow(workflow=self.workflow_id)
 
         self.task = TaskBuilder(
             config=config,

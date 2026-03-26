@@ -108,6 +108,7 @@ class Task(TaskInstance):
         self.callback = callback
         self.initial_context = initial_context
         self.status = TypeStatus.NOT_STARTED
+        self.config.api.create_task(task=self)
 
     @property
     def step(self):
