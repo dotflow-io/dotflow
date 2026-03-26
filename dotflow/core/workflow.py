@@ -1,5 +1,6 @@
 """Workflow module"""
 
+import sys
 import threading
 
 from datetime import datetime
@@ -16,7 +17,7 @@ from dotflow.core.types import TypeExecution, TypeStatus
 from dotflow.core.task import Task
 from dotflow.utils import basic_callback
 
-_mp = get_context("fork")
+_mp = get_context("fork") if sys.platform != "win32" else get_context("spawn")
 
 
 def grouper(tasks: List[Task]) -> Dict[str, List[Task]]:
