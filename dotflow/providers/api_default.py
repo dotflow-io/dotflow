@@ -15,7 +15,7 @@ there is no tasks endpoint), this client:
 from __future__ import annotations
 
 import os
-from typing import Any, Optional
+from typing import Any
 from uuid import UUID
 
 from dotflow.abc.api import Api
@@ -32,13 +32,15 @@ class ApiDefault(Api):
 
     def __init__(
         self,
-        base_url: Optional[str] = None,
-        user_token: Optional[str] = None,
+        base_url: str | None = None,
+        user_token: str | None = None,
         timeout: float = 5.0,
-        enabled: Optional[bool] = None,
+        enabled: bool | None = None,
     ) -> None:
         env_enabled = os.getenv("DOTFLOW_API_ENABLED")
-        self.base_url = (base_url or os.getenv("DOTFLOW_API_URL") or "").rstrip("/")
+        self.base_url = (
+            base_url or os.getenv("DOTFLOW_API_URL") or ""
+        ).rstrip("/")
         self.user_token = user_token or os.getenv("DOTFLOW_USER_TOKEN")
         self.timeout = timeout
 
@@ -57,12 +59,14 @@ class ApiDefault(Api):
             logger.error("DOTFLOW_API_URL missing; cannot call dotflow-api.")
             return False
         if not self.user_token:
-            logger.error("DOTFLOW_USER_TOKEN missing; cannot call dotflow-api.")
+            logger.error(
+                "DOTFLOW_USER_TOKEN missing; cannot call dotflow-api."
+            )
             return False
         return True
 
     @staticmethod
-    def _callable_path(obj: Any) -> Optional[str]:
+    def _callable_path(obj: Any) -> str | None:
         if obj is None:
             return None
         if isinstance(obj, str):
@@ -77,7 +81,7 @@ class ApiDefault(Api):
         tasks_payload: list[dict[str, Any]] = []
 
         workflow_tasks = getattr(workflow, "tasks", None)
-        if isinstance(workflow_tasks, (list, tuple)):
+        if isinstance(workflow_tasks, (list, tuple)):  # noqa: UP038
             for t in workflow_tasks:
                 initial_context = getattr(
                     getattr(t, "initial_context", None),
@@ -92,7 +96,8 @@ class ApiDefault(Api):
                             getattr(t, "callback", None)
                         ),
                         "initial_context": initial_context,
-                        "group_name": getattr(t, "group_name", None) or "default",
+                        "group_name": getattr(t, "group_name", None)
+                        or "default",
                     }
                 )
 
@@ -130,7 +135,9 @@ class ApiDefault(Api):
             )
             response.raise_for_status()
         except Exception as error:
-            logger.error("Failed to create workflow in dotflow-api: %s", str(error))
+            logger.error(
+                "Failed to create workflow in dotflow-api: %s", str(error)
+            )
 
         return None
 

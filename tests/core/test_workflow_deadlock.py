@@ -1,24 +1,27 @@
 """Tests to ensure queue.get() does not deadlock when a task fails early."""
 
 import unittest
-
 from uuid import uuid4
 
-from dotflow.core.workflow import Parallel, SequentialGroup, grouper
-from dotflow.core.types import TypeStatus
 from dotflow.core.task import Task
-
+from dotflow.core.types import TypeStatus
+from dotflow.core.workflow import Parallel, SequentialGroup, grouper
 from tests.mocks import action_step, action_step_with_error, simple_callback
 
 
 class TestWorkflowParallelDeadlock(unittest.TestCase):
-
     def setUp(self):
         self.workflow_id = uuid4()
 
     def test_parallel_does_not_deadlock_on_failed_task(self):
         """get_tasks() must return even when a task fails (never puts to queue)."""
-        tasks = [Task(task_id=0, step=action_step_with_error, callback=simple_callback)]
+        tasks = [
+            Task(
+                task_id=0,
+                step=action_step_with_error,
+                callback=simple_callback,
+            )
+        ]
 
         execution = Parallel(
             tasks=tasks,
@@ -47,13 +50,18 @@ class TestWorkflowParallelDeadlock(unittest.TestCase):
 
 
 class TestWorkflowSequentialGroupDeadlock(unittest.TestCase):
-
     def setUp(self):
         self.workflow_id = uuid4()
 
     def test_sequential_group_does_not_deadlock_on_failed_task(self):
         """get_tasks() must return even when a group task fails early."""
-        tasks = [Task(task_id=0, step=action_step_with_error, callback=simple_callback)]
+        tasks = [
+            Task(
+                task_id=0,
+                step=action_step_with_error,
+                callback=simple_callback,
+            )
+        ]
 
         execution = SequentialGroup(
             tasks=tasks,

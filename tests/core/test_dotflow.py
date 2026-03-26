@@ -2,17 +2,15 @@
 
 import unittest
 
-from dotflow.core.workflow import Manager
 from dotflow.core.context import Context
-from dotflow.core.task import Task, TaskBuilder
 from dotflow.core.dotflow import DotFlow
+from dotflow.core.task import Task, TaskBuilder
 from dotflow.core.types.status import TypeStatus
-
+from dotflow.core.workflow import Manager
 from tests.mocks import action_step
 
 
 class TestDotFlow(unittest.TestCase):
-
     def setUp(self):
         self.workflow = DotFlow()
         self.workflow.task.add(step=action_step)

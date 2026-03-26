@@ -1,13 +1,14 @@
 """Storage File"""
 
-from pathlib import Path
-from typing import Any, Callable
+from collections.abc import Callable
 from json import dumps, loads
+from pathlib import Path
+from typing import Any
 
 from dotflow.abc.storage import Storage
 from dotflow.core.context import Context
-from dotflow.utils import read_file, write_file
 from dotflow.settings import Settings as settings
+from dotflow.utils import read_file, write_file
 
 
 class StorageFile(Storage):
@@ -28,7 +29,9 @@ class StorageFile(Storage):
                 if isinstance(item, Context):
                     task_context.append(self._dumps(storage=item.storage))
 
-            write_file(path=Path(self.path, key), content=task_context, mode="a")
+            write_file(
+                path=Path(self.path, key), content=task_context, mode="a"
+            )
             return None
 
         task_context.append(self._dumps(storage=context.storage))

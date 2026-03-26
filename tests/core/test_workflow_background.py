@@ -1,13 +1,11 @@
 """Test context of controller"""
 
 import unittest
-
 from uuid import uuid4
 
-from dotflow.core.workflow import Background, grouper
-from dotflow.core.types import TypeStatus
 from dotflow.core.task import Task, TaskError
-
+from dotflow.core.types import TypeStatus
+from dotflow.core.workflow import Background, grouper
 from tests.mocks import (
     action_step,
     action_step_with_error,
@@ -16,7 +14,6 @@ from tests.mocks import (
 
 
 class TestWorkflowBackground(unittest.TestCase):
-
     def setUp(self):
         self.workflow_id = uuid4()
         self.ignore = False
@@ -57,7 +54,13 @@ class TestWorkflowBackground(unittest.TestCase):
         self.assertEqual(tasks[0].error.message, "")
 
     def test_workflow_with_background_function_failed(self):
-        tasks = [Task(task_id=0, step=action_step_with_error, callback=simple_callback)]
+        tasks = [
+            Task(
+                task_id=0,
+                step=action_step_with_error,
+                callback=simple_callback,
+            )
+        ]
 
         execution = Background(
             tasks=tasks,

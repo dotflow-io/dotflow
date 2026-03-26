@@ -1,11 +1,10 @@
 """TCP module"""
 
 from abc import ABC, abstractmethod
-from typing import Callable
+from collections.abc import Callable
 
 
 class TCPClient(ABC):
-
     def __init__(self, url: str):
         self.url = url
         self.context = None
@@ -16,7 +15,6 @@ class TCPClient(ABC):
 
 
 class TCPServer(ABC):
-
     def __init__(self, url: str, handler: Callable):
         self.url = url
         self.handler = handler

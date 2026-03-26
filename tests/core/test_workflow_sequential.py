@@ -1,14 +1,12 @@
 """Test context of controller"""
 
 import unittest
-
-from uuid import uuid4
 from unittest.mock import Mock
+from uuid import uuid4
 
-from dotflow.core.workflow import Sequential, grouper
-from dotflow.core.types import TypeStatus
 from dotflow.core.task import Task, TaskError
-
+from dotflow.core.types import TypeStatus
+from dotflow.core.workflow import Sequential, grouper
 from tests.mocks import (
     action_step,
     action_step_with_error,
@@ -17,7 +15,6 @@ from tests.mocks import (
 
 
 class TestWorkflowSequential(unittest.TestCase):
-
     def setUp(self):
         self.workflow_id = uuid4()
         self.ignore = False
@@ -62,12 +59,20 @@ class TestWorkflowSequential(unittest.TestCase):
         )
 
         self.assertEqual(execution.tasks[0].status, TypeStatus.COMPLETED)
-        self.assertEqual(execution.tasks[0].current_context.storage, {"foo": "bar"})
+        self.assertEqual(
+            execution.tasks[0].current_context.storage, {"foo": "bar"}
+        )
         self.assertIsInstance(execution.tasks[0].error, TaskError)
         self.assertEqual(execution.tasks[0].error.message, "")
 
     def test_workflow_with_function_failed(self):
-        tasks = [Task(task_id=0, step=action_step_with_error, callback=simple_callback)]
+        tasks = [
+            Task(
+                task_id=0,
+                step=action_step_with_error,
+                callback=simple_callback,
+            )
+        ]
 
         execution = Sequential(
             tasks=tasks,
