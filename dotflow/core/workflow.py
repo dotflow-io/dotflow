@@ -15,7 +15,7 @@ from dotflow.core.context import Context
 from dotflow.core.execution import Execution
 from dotflow.core.exception import ExecutionModeNotExist
 from dotflow.core.types import TypeExecution, TypeStatus
-from dotflow.core.task import Task
+from dotflow.core.task import Task, TaskError
 from dotflow.utils import basic_callback
 
 _mp = get_context("fork") if sys.platform != "win32" else get_context("spawn")
@@ -196,6 +196,11 @@ class SequentialGroup(Flow):
                 task.duration = contexts[task.task_id]["duration"]
                 task.error = contexts[task.task_id]["error"]
                 task.status = contexts[task.task_id]["status"]
+            else:
+                task.status = TypeStatus.FAILED
+                task.error = TaskError(
+                    RuntimeError("Worker process terminated without reporting a result")
+                )
 
         return self.tasks
 
@@ -289,6 +294,11 @@ class Parallel(Flow):
                 task.duration = contexts[task.task_id]["duration"]
                 task.error = contexts[task.task_id]["error"]
                 task.status = contexts[task.task_id]["status"]
+            else:
+                task.status = TypeStatus.FAILED
+                task.error = TaskError(
+                    RuntimeError("Worker process terminated without reporting a result")
+                )
 
         return self.tasks
 
