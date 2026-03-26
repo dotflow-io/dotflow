@@ -14,6 +14,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.event.release.target_commitish }}
+          fetch-depth: 0
+
       - name: 🔍 Determine branch
         id: get_branch
         run: |
@@ -21,7 +28,7 @@ jobs:
           BRANCH="${TARGET#refs/heads/}"
           BRANCH="${BRANCH#refs/tags/}"
 
-          if git rev-parse --verify "$BRANCH"^{tag} >/dev/null 2>&1 2>&1 || [[ "$TARGET" == refs/tags/* ]]; then
+          if git rev-parse --verify "$BRANCH"^{tag} >/dev/null 2>&1 || [[ "$TARGET" == refs/tags/* ]]; then
             git fetch --all --tags
             TAG_NAME="${TARGET#refs/tags/}"
             BRANCH=$(git branch -r --contains "$TAG_NAME" | grep -E "(main|master|develop)" | head -1 | sed 's|origin/||' | xargs || \
@@ -32,12 +39,10 @@ jobs:
           echo "branch=$BRANCH" >> $GITHUB_OUTPUT
           echo "Using branch: $BRANCH"
 
-      - name: 📥 Checkout code
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          ref: ${{ steps.get_branch.outputs.branch }}
-          fetch-depth: 0
+      - name: 🔄 Checkout resolved branch
+        run: |
+          git checkout ${{ steps.get_branch.outputs.branch }}
+          git pull origin ${{ steps.get_branch.outputs.branch }}
 
       - name: 🔍 Extract version from tag
         id: extract_version
