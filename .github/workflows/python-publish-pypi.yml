@@ -5,28 +5,121 @@ on:
     types: [published]
 
 permissions:
-  contents: read
+  contents: write
+  id-token: write
 
 jobs:
-  deploy:
+  update-version:
+    name: Update Version Files
     runs-on: ubuntu-latest
-    environment: master
 
     steps:
-    - uses: actions/checkout@v3
-    - name: ⚙️ Set up Python 3.12
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.12"
-    - name: ⚙️ Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install build
-    - name: 📦 Build Package
-      run: |
-        python -m build
-    - name: 📦 Publish Package to PyPI
-      uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
-      with:
-        user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN }}
+      - name: 🔍 Determine branch
+        id: get_branch
+        run: |
+          TARGET="${{ github.event.release.target_commitish }}"
+          BRANCH="${TARGET#refs/heads/}"
+          BRANCH="${BRANCH#refs/tags/}"
+
+          if git rev-parse --verify "$BRANCH"^{tag} >/dev/null 2>&1 2>&1 || [[ "$TARGET" == refs/tags/* ]]; then
+            git fetch --all --tags
+            TAG_NAME="${TARGET#refs/tags/}"
+            BRANCH=$(git branch -r --contains "$TAG_NAME" | grep -E "(main|master)" | head -1 | sed 's|origin/||' | xargs || \
+                     git branch -r --contains "$TAG_NAME" | head -1 | sed 's|origin/||' | xargs || \
+                     echo "master")
+          fi
+
+          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+          echo "Using branch: $BRANCH"
+
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ steps.get_branch.outputs.branch }}
+          fetch-depth: 0
+
+      - name: 🔍 Extract version from tag
+        id: extract_version
+        uses: ./.github/actions/extract-version
+        with:
+          tag: ${{ github.event.release.tag_name }}
+
+      - name: 📝 Update version files
+        uses: ./.github/actions/update-version
+        with:
+          version: ${{ steps.extract_version.outputs.version }}
+
+      - name: 💾 Commit and push
+        uses: ./.github/actions/commit-push
+        with:
+          message: "📦 PyPI: Update version to ${{ steps.extract_version.outputs.version }}"
+          files: "LAST_VERSION pyproject.toml dotflow/__init__.py"
+          branch: ${{ steps.get_branch.outputs.branch }}
+
+  test:
+    name: Run Tests
+    needs: [update-version]
+    uses: ./.github/workflows/test.yml
+    secrets: inherit
+
+  code-quality:
+    name: Code Quality Checks
+    needs: [update-version]
+    uses: ./.github/workflows/code-quality.yml
+    secrets: inherit
+
+  deploy:
+    name: Deploy to PyPI
+    needs: [update-version, test, code-quality]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🔍 Determine branch
+        id: get_branch_deploy
+        run: |
+          TARGET="${{ github.event.release.target_commitish }}"
+          BRANCH="${TARGET#refs/heads/}"
+          BRANCH="${BRANCH#refs/tags/}"
+
+          if [[ "$TARGET" == refs/tags/* ]] || git rev-parse --verify "$BRANCH"^{tag} >/dev/null 2>&1; then
+            TAG_NAME="${TARGET#refs/tags/}"
+            BRANCH=$(git branch -r --contains "$TAG_NAME" | grep -E "(main|master)" | head -1 | sed 's|origin/||' | xargs || \
+                     git branch -r --contains "$TAG_NAME" | head -1 | sed 's|origin/||' | xargs || \
+                     echo "master")
+          fi
+
+          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+          echo "Using branch: $BRANCH"
+
+      - name: 🔄 Checkout branch and pull latest
+        run: |
+          git checkout ${{ steps.get_branch_deploy.outputs.branch }}
+          git pull origin ${{ steps.get_branch_deploy.outputs.branch }}
+
+      - name: 🔍 Verify version
+        run: |
+          EXPECTED="${{ github.event.release.tag_name }}"
+          EXPECTED="${EXPECTED#v}"
+          echo "Expected version: $EXPECTED"
+          echo "LAST_VERSION: $(cat LAST_VERSION)"
+          echo "pyproject.toml: $(grep '^version = ' pyproject.toml | head -1)"
+          echo "__init__.py: $(grep '^__version__ = ' dotflow/__init__.py)"
+
+          if [ "$(cat LAST_VERSION)" != "$EXPECTED" ]; then
+            echo "ERROR: Version mismatch!"
+            exit 1
+          fi
+
+      - name: 📦 Build Package
+        uses: ./.github/actions/build-package
+        with:
+          python-version: "3.10"
+
+      - name: 📦 Publish Package to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
