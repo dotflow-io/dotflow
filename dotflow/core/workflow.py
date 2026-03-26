@@ -253,7 +253,7 @@ class Background(Flow):
         self.queue = []
 
     def get_tasks(self) -> List[Task]:
-        return self.tasks
+        return self.queue
 
     def _flow_callback(self, task: Task) -> None:
         self.queue.append(task)
