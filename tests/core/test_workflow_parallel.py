@@ -2,8 +2,8 @@
 
 import unittest
 
+from multiprocessing import get_context
 from uuid import uuid4
-from multiprocessing.queues import Queue
 
 from dotflow.core.workflow import Parallel, grouper
 from dotflow.core.types import TypeStatus
@@ -14,6 +14,8 @@ from tests.mocks import (
     action_step_with_error,
     simple_callback,
 )
+
+Queue = type(get_context("fork").Queue())
 
 
 class TestWorkflowParallel(unittest.TestCase):

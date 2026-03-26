@@ -1,3 +1,4 @@
 rich
 pydantic
 typing-extensions
+requests

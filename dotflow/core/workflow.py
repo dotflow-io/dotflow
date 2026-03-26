@@ -1,11 +1,11 @@
 """Workflow module"""
 
+import sys
 import threading
-import warnings
-import platform
 
 from datetime import datetime
-from multiprocessing import Process, Queue
+from multiprocessing import get_context
+from queue import Empty
 
 from uuid import UUID, uuid4
 from typing import Callable, Dict, List
@@ -15,13 +15,10 @@ from dotflow.core.context import Context
 from dotflow.core.execution import Execution
 from dotflow.core.exception import ExecutionModeNotExist
 from dotflow.core.types import TypeExecution, TypeStatus
-from dotflow.core.task import Task
+from dotflow.core.task import Task, TaskError
 from dotflow.utils import basic_callback
 
-
-def is_darwin() -> bool:
-    """Is Darwin"""
-    return platform.system() == "Darwin"
+_mp = get_context("fork") if sys.platform != "win32" else get_context("spawn")
 
 
 def grouper(tasks: List[Task]) -> Dict[str, List[Task]]:
@@ -126,7 +123,7 @@ class Manager:
             self.on_success(tasks=tasks)
 
     def sequential(self, **kwargs) -> List[Task]:
-        if len(kwargs.get("groups", {})) > 1 and not is_darwin():
+        if len(kwargs.get("groups", {})) > 1:
             process = SequentialGroup(**kwargs)
             return process.get_tasks()
 
@@ -142,15 +139,6 @@ class Manager:
         return process.get_tasks()
 
     def parallel(self, **kwargs) -> List[Task]:
-        if is_darwin():
-            warnings.warn(
-                "Parallel mode does not work with MacOS."
-                " Running tasks in sequence.",
-                Warning
-            )
-            process = Sequential(**kwargs)
-            return process.get_tasks()
-
         process = Parallel(**kwargs)
         return process.get_tasks()
 
@@ -190,20 +178,29 @@ class SequentialGroup(Flow):
     """SequentialGroup"""
 
     def setup_queue(self) -> None:
-        self.queue = Queue()
+        self.queue = _mp.Queue()
+        self._processes = []
 
     def get_tasks(self) -> List[Task]:
         contexts = {}
         while len(contexts) < len(self.tasks):
-            if not self.queue.empty():
-                contexts = {**contexts, **self.queue.get()}
+            try:
+                contexts.update(self.queue.get(timeout=0.1))
+            except Empty:
+                if all(not p.is_alive() for p in self._processes):
+                    break
 
-        if contexts:
-            for task in self.tasks:
+        for task in self.tasks:
+            if task.task_id in contexts:
                 task.current_context = contexts[task.task_id]["current_context"]
                 task.duration = contexts[task.task_id]["duration"]
                 task.error = contexts[task.task_id]["error"]
                 task.status = contexts[task.task_id]["status"]
+            else:
+                task.status = TypeStatus.FAILED
+                task.error = TaskError(
+                    RuntimeError("Worker process terminated without reporting a result")
+                )
 
         return self.tasks
 
@@ -219,30 +216,16 @@ class SequentialGroup(Flow):
         self.queue.put(current_task)
 
     def run(self) -> None:
-        threads = []
-        processes = []
-
         for _, group_tasks in self.groups.items():
-            thread = threading.Thread(
-                target=self._launch_group,
-                args=(processes, group_tasks,)
+            process = _mp.Process(
+                target=self._run_group,
+                args=(group_tasks,)
             )
-            thread.start()
-            threads.append(thread)
+            process.start()
+            self._processes.append(process)
 
-        for process in processes:
+        for process in self._processes:
             process.join()
-
-        for thread in threads:
-            thread.join()
-
-    def _launch_group(self, processes, group_tasks):
-        process = Process(
-            target=self._run_group,
-            args=(group_tasks,)
-        )
-        process.start()
-        processes.append(process)
 
     def _run_group(self, groups: List[Task]) -> None:
         previous_context = Context(workflow_id=self.workflow_id)
@@ -293,19 +276,29 @@ class Parallel(Flow):
     """Parallel"""
 
     def setup_queue(self) -> None:
-        self.queue = Queue()
+        self.queue = _mp.Queue()
+        self._processes = []
 
     def get_tasks(self) -> List[Task]:
         contexts = {}
         while len(contexts) < len(self.tasks):
-            if not self.queue.empty():
-                contexts = {**contexts, **self.queue.get()}
+            try:
+                contexts.update(self.queue.get(timeout=0.1))
+            except Empty:
+                if all(not p.is_alive() for p in self._processes):
+                    break
 
         for task in self.tasks:
-            task.current_context = contexts[task.task_id]["current_context"]
-            task.duration = contexts[task.task_id]["duration"]
-            task.error = contexts[task.task_id]["error"]
-            task.status = contexts[task.task_id]["status"]
+            if task.task_id in contexts:
+                task.current_context = contexts[task.task_id]["current_context"]
+                task.duration = contexts[task.task_id]["duration"]
+                task.error = contexts[task.task_id]["error"]
+                task.status = contexts[task.task_id]["status"]
+            else:
+                task.status = TypeStatus.FAILED
+                task.error = TaskError(
+                    RuntimeError("Worker process terminated without reporting a result")
+                )
 
         return self.tasks
 
@@ -321,16 +314,15 @@ class Parallel(Flow):
         self.queue.put(current_task)
 
     def run(self) -> None:
-        processes = []
         previous_context = Context(workflow_id=self.workflow_id)
 
         for task in self.tasks:
-            process = Process(
+            process = _mp.Process(
                 target=Execution,
                 args=(task, self.workflow_id, previous_context, self._flow_callback),
             )
             process.start()
-            processes.append(process)
+            self._processes.append(process)
 
-        for process in processes:
+        for process in self._processes:
             process.join()
