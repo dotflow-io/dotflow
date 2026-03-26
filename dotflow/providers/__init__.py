@@ -11,5 +11,5 @@ __all__ = [
     "NotifyDefault",
     "NotifyTelegram",
     "StorageDefault",
-    "StorageFile"
+    "StorageFile",
 ]

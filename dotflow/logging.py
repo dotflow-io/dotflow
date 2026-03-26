@@ -20,9 +20,7 @@ logger.setLevel(logging.INFO)
 ch = logging.StreamHandler()
 ch.setLevel(logging.INFO)
 
-formatter = logging.Formatter(
-    settings.LOG_FORMAT
-)
+formatter = logging.Formatter(settings.LOG_FORMAT)
 
 ch.setFormatter(formatter)
 

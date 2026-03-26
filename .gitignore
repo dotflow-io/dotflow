@@ -180,3 +180,6 @@ cython_debug/
 .dotflow-io
 *.json
 *tasks
+
+# macOS
+.DS_Store

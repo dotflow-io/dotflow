@@ -1,6 +1,8 @@
 """Type TypeStatus mode module"""
 
-from typing_extensions import Annotated, Doc
+from typing import Annotated
+
+from typing_extensions import Doc
 
 
 class TypeStatus:
@@ -21,11 +23,11 @@ class TypeStatus:
     @classmethod
     def get_symbol(cls, value: str) -> str:
         status = {
-           TypeStatus.NOT_STARTED: "⚪",
-           TypeStatus.IN_PROGRESS: "🔵",
-           TypeStatus.COMPLETED: "✅",
-           TypeStatus.PAUSED: "◼️",
-           TypeStatus.RETRY: "❗",
-           TypeStatus.FAILED: "❌"
+            TypeStatus.NOT_STARTED: "⚪",
+            TypeStatus.IN_PROGRESS: "🔵",
+            TypeStatus.COMPLETED: "✅",
+            TypeStatus.PAUSED: "◼️",
+            TypeStatus.RETRY: "❗",
+            TypeStatus.FAILED: "❌",
         }
         return status.get(value)

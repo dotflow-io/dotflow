@@ -1,27 +1,24 @@
 """Test context of task"""
 
 import json
-
 import unittest
 from uuid import uuid4
 
 from dotflow.core.action import Action
 from dotflow.core.config import Config
 from dotflow.core.context import Context
-from dotflow.core.types.status import TypeStatus
-from dotflow.core.serializers.task import SerializerTaskError, SerializerTask
 from dotflow.core.exception import (
+    ImportModuleError,
     MissingActionDecorator,
     NotCallableObject,
-    ImportModuleError,
 )
+from dotflow.core.serializers.task import SerializerTask, SerializerTaskError
 from dotflow.core.task import Task, TaskError
-
+from dotflow.core.types.status import TypeStatus
 from tests.mocks import action_step, simple_callback, simple_step
 
 
 class TestTask(unittest.TestCase):
-
     def setUp(self):
         self.task = Task(task_id=0, step=action_step, callback=simple_callback)
         self.content = {"foo": "bar"}
@@ -132,7 +129,6 @@ class TestTask(unittest.TestCase):
 
 
 class TestTaskSetter(unittest.TestCase):
-
     def setUp(self):
         self.task = Task(task_id=0, step=action_step, callback=simple_callback)
         self.content = {"foo": "bar"}
@@ -189,19 +185,25 @@ class TestTaskSetter(unittest.TestCase):
         expected_value = Context(storage=self.content)
 
         self.task.initial_context = expected_value
-        self.assertEqual(self.task.initial_context.storage, expected_value.storage)
+        self.assertEqual(
+            self.task.initial_context.storage, expected_value.storage
+        )
 
     def test_set_previous_context(self):
         expected_value = Context(storage=self.content)
 
         self.task.previous_context = expected_value
-        self.assertEqual(self.task.previous_context.storage, expected_value.storage)
+        self.assertEqual(
+            self.task.previous_context.storage, expected_value.storage
+        )
 
     def test_set_current_context(self):
         expected_value = Context(storage=self.content)
 
         self.task.current_context = expected_value
-        self.assertEqual(self.task.current_context.storage, expected_value.storage)
+        self.assertEqual(
+            self.task.current_context.storage, expected_value.storage
+        )
 
     def test_set_duration(self):
         expected_value = 42

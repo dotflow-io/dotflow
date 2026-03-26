@@ -1,23 +1,19 @@
 """Task module"""
 
 import json
-
+from collections.abc import Callable
+from typing import Any
 from uuid import UUID
-from typing import Any, Callable, List
 
-from dotflow.core.config import Config
 from dotflow.core.action import Action
+from dotflow.core.config import Config
 from dotflow.core.context import Context
+from dotflow.core.exception import MissingActionDecorator, NotCallableObject
 from dotflow.core.module import Module
 from dotflow.core.serializers.task import SerializerTask
 from dotflow.core.serializers.workflow import SerializerWorkflow
-from dotflow.core.exception import MissingActionDecorator, NotCallableObject
 from dotflow.core.types.status import TypeStatus
-from dotflow.utils import (
-    basic_callback,
-    traceback_error,
-    message_error
-)
+from dotflow.utils import basic_callback, message_error, traceback_error
 
 
 class TaskInstance:
@@ -89,7 +85,7 @@ class Task(TaskInstance):
         initial_context: Any = None,
         workflow_id: UUID = None,
         config: Config = None,
-        group_name: str = "default"
+        group_name: str = "default",
     ) -> None:
         super().__init__(
             task_id,
@@ -98,7 +94,7 @@ class Task(TaskInstance):
             initial_context,
             workflow_id,
             config,
-            group_name
+            group_name,
         )
         self.config = config
         self.group_name = group_name
@@ -108,6 +104,7 @@ class Task(TaskInstance):
         self.callback = callback
         self.initial_context = initial_context
         self.status = TypeStatus.NOT_STARTED
+        self.config.api.create_task(task=self)
 
     @property
     def step(self):
@@ -170,14 +167,12 @@ class Task(TaskInstance):
     @current_context.setter
     def current_context(self, value: Context):
         self._current_context = Context(
-            task_id=self.task_id,
-            workflow_id=self.workflow_id,
-            storage=value
+            task_id=self.task_id, workflow_id=self.workflow_id, storage=value
         )
 
         self.config.storage.post(
             key=self.config.storage.key(task=self),
-            context=self.current_context
+            context=self.current_context,
         )
 
     @property
@@ -237,7 +232,6 @@ class Task(TaskInstance):
 
 
 class TaskError:
-
     def __init__(self, error: Exception = None) -> None:
         self.exception = error
         self.traceback = traceback_error(error=error) if error else ""
@@ -266,12 +260,8 @@ class TaskBuilder:
         workflow_id (UUID): Workflow ID.
     """
 
-    def __init__(
-            self,
-            config: Config,
-            workflow_id: UUID = None
-    ) -> None:
-        self.queue: List[Callable] = []
+    def __init__(self, config: Config, workflow_id: UUID = None) -> None:
+        self.queue: list[Callable] = []
         self.workflow_id = workflow_id
         self.config = config
 
@@ -280,7 +270,7 @@ class TaskBuilder:
         step: Callable,
         callback: Callable = basic_callback,
         initial_context: Any = None,
-        group_name: str = "default"
+        group_name: str = "default",
     ) -> "TaskBuilder":
         """
         Args:
@@ -309,7 +299,7 @@ class TaskBuilder:
                     step=inside_step,
                     callback=callback,
                     initial_context=initial_context,
-                    group_name=group_name
+                    group_name=group_name,
                 )
             return self
 
@@ -321,7 +311,7 @@ class TaskBuilder:
                 initial_context=initial_context,
                 workflow_id=self.workflow_id,
                 config=self.config,
-                group_name=group_name
+                group_name=group_name,
             )
         )
 
@@ -339,7 +329,7 @@ class TaskBuilder:
     def schema(self) -> SerializerWorkflow:
         return SerializerWorkflow(
             workflow_id=self.workflow_id,
-            tasks=[item.schema() for item in self.queue]
+            tasks=[item.schema() for item in self.queue],
         )
 
     def result(self) -> SerializerWorkflow:

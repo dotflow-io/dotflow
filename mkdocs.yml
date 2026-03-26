@@ -125,11 +125,18 @@ nav:
     - Learn:
       - nav/learn/index.md
       - nav/learn/concept-of-context.md
+      - Providers:
+        - nav/tutorial/provider-storage.md
+        - nav/tutorial/provider-notify.md
+        - nav/tutorial/provider-log.md
       - Tutorial - User Guide:
         - nav/tutorial/install.md
         - nav/tutorial/first-steps.md
         - nav/tutorial/initial-context.md
         - nav/tutorial/previous-context.md
+        - nav/tutorial/many-contexts.md
+        - nav/tutorial/keep-going.md
+        - nav/tutorial/groups.md
         - Strategies:
           - nav/tutorial/task-retry.md
           - nav/tutorial/task-backoff.md
@@ -148,7 +155,13 @@ nav:
         - nav/learn/process-mode-background.md
         - nav/learn/process-mode-parallel.md
         - nav/learn/process-mode-parallel-group.md
-      - nav/learn/cli.md
+      - Dotflow CLI:
+        - nav/learn/cli/simple-start.md
+        - nav/learn/cli/with-initial-context.md
+        - nav/learn/cli/with-callback.md
+        - nav/learn/cli/with-mode.md
+        - nav/learn/cli/with-output-context.md
+        - nav/learn/cli/with-custom-path.md
       - nav/learn/examples.md
     - Reference:
       - nav/reference/action.md
