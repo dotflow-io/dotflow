@@ -17,6 +17,13 @@ jobs:
     steps:
       - name: 📥 Checkout code
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: 🔄 Update submodules
+        run: |
+          git submodule foreach git checkout master
+          git submodule foreach git pull
 
       - name: 📦 Setup Poetry
         uses: ./.github/actions/setup-poetry
