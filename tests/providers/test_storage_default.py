@@ -1,18 +1,15 @@
 """Test StorageFile"""
 
 import unittest
-
 from uuid import uuid4
 
-from dotflow.core.task import Task
 from dotflow.core.context import Context
+from dotflow.core.task import Task
 from dotflow.providers.storage_default import StorageDefault
-
 from tests.mocks import action_step
 
 
 class TestStorageDefault(unittest.TestCase):
-
     def test_storage_default_instance(self):
         StorageDefault()
 

@@ -2,22 +2,21 @@
 
 from rich import print  # type: ignore
 
-from dotflow import __version__, __description__
+from dotflow import __description__, __version__
+from dotflow.cli.commands import InitCommand, LogCommand, StartCommand
+from dotflow.core.exception import (
+    MESSAGE_UNKNOWN_ERROR,
+    ExecutionModeNotExist,
+    ImportModuleError,
+    MissingActionDecorator,
+)
+from dotflow.core.types import TypeExecution, TypeStorage
 from dotflow.logging import logger
 from dotflow.settings import Settings as settings
 from dotflow.utils.basic_functions import basic_callback
-from dotflow.core.types import TypeExecution, TypeStorage
-from dotflow.core.exception import (
-    MissingActionDecorator,
-    ExecutionModeNotExist,
-    ImportModuleError,
-    MESSAGE_UNKNOWN_ERROR,
-)
-from dotflow.cli.commands import InitCommand, LogCommand, StartCommand
 
 
 class Command:
-
     def __init__(self, parser):
         self.parser = parser
         self.subparsers = self.parser.add_subparsers()
@@ -55,7 +54,9 @@ class Command:
         self.cmd_start.add_argument(
             "-o", "--storage", choices=[TypeStorage.DEFAULT, TypeStorage.FILE]
         )
-        self.cmd_start.add_argument("-p", "--path", default=settings.START_PATH)
+        self.cmd_start.add_argument(
+            "-p", "--path", default=settings.START_PATH
+        )
         self.cmd_start.add_argument(
             "-m",
             "--mode",
@@ -71,7 +72,9 @@ class Command:
 
     def setup_logs(self):
         self.cmd_logs = self.subparsers.add_parser("logs", help="Logs")
-        self.cmd_logs = self.cmd_logs.add_argument_group("Usage: dotflow log [OPTIONS]")
+        self.cmd_logs = self.cmd_logs.add_argument_group(
+            "Usage: dotflow log [OPTIONS]"
+        )
         self.cmd_logs.set_defaults(exec=LogCommand)
 
     def command(self):

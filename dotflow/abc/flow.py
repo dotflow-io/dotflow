@@ -2,19 +2,17 @@
 
 from abc import ABC, abstractmethod
 from uuid import UUID
-from typing import Dict, List
 
 from dotflow.core.task import Task
 
 
 class Flow(ABC):
-
     def __init__(
-            self,
-            tasks: List[Task],
-            workflow_id: UUID,
-            ignore: bool,
-            groups: Dict[str, List[Task]]
+        self,
+        tasks: list[Task],
+        workflow_id: UUID,
+        ignore: bool,
+        groups: dict[str, list[Task]],
     ) -> None:
         self.queue = None
         self.tasks = tasks
@@ -30,7 +28,7 @@ class Flow(ABC):
         self.queue = []
 
     @abstractmethod
-    def get_tasks(self) -> List[Task]:
+    def get_tasks(self) -> list[Task]:
         return self.queue
 
     @abstractmethod

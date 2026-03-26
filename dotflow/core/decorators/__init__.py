@@ -2,7 +2,4 @@
 
 from dotflow.core.decorators.time import time
 
-
-__all__ = [
-    "time"
-]
+__all__ = ["time"]

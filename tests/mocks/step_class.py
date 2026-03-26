@@ -7,7 +7,6 @@ from dotflow.core.action import Action as action
 
 @action
 class ActionStep:
-
     @action
     def run() -> None:
         logging.info("ActionStep: Run function executed")
@@ -16,7 +15,6 @@ class ActionStep:
 
 @action
 class ActionStepExecutionOrderer:
-
     @action
     def func_f() -> None:
         return True
@@ -44,7 +42,6 @@ class ActionStepExecutionOrderer:
 
 @action
 class ActionStepWithInitialContext:
-
     @action
     def run(initial_context) -> None:
         logging.debug("Run function executed")
@@ -54,7 +51,6 @@ class ActionStepWithInitialContext:
 
 @action
 class ActionStepWithPreviousContext:
-
     @action
     def run_x(previous_context) -> None:
         assert previous_context.storage, {"context": True}
@@ -68,7 +64,6 @@ class ActionStepWithPreviousContext:
 
 @action
 class ActionStepWithContexts:
-
     @action
     def run(initial_context, previous_context) -> None:
         assert initial_context.storage, {"context": True}
@@ -78,7 +73,6 @@ class ActionStepWithContexts:
 
 @action
 class ActionStepWithError:
-
     @action
     def run() -> None:
         logging.debug("ActionStepWithError: Run function executed")
@@ -87,13 +81,11 @@ class ActionStepWithError:
 
 @action
 class ActionStepWithoutInit:
-
     @action
     def run() -> None:
         return {"foo": "bar"}
 
 
 class SimpleStep:
-
     def run() -> None:
         return {"foo": "bar"}
