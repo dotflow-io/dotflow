@@ -6,4 +6,3 @@
             - SEQUENTIAL
             - BACKGROUND
             - PARALLEL
-            - DATA_STORE
