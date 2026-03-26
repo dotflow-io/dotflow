@@ -81,7 +81,7 @@ class ApiDefault(Api):
         tasks_payload: list[dict[str, Any]] = []
 
         workflow_tasks = getattr(workflow, "tasks", None)
-        if isinstance(workflow_tasks, (list, tuple)):
+        if isinstance(workflow_tasks, (list, tuple)):  # noqa: UP038
             for t in workflow_tasks:
                 initial_context = getattr(
                     getattr(t, "initial_context", None),
