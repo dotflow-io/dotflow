@@ -262,12 +262,12 @@ class TestExecution(unittest.TestCase):
 
     def test_execution_orderer(self):
         expected_value = [
-            (4, "func_f"),
-            (8, "func_e"),
-            (12, "func_d"),
-            (16, "func_c"),
-            (20, "func_b"),
-            (24, "func_a"),
+            (3, "func_f"),
+            (7, "func_e"),
+            (11, "func_d"),
+            (15, "func_c"),
+            (19, "func_b"),
+            (23, "func_a"),
         ]
 
         controller = Execution(
