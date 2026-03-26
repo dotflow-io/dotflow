@@ -10,5 +10,5 @@ __all__ = [
     "TypeExecution",
     "TypeStatus",
     "TypeStorage",
-    "WorkflowStatus"
+    "WorkflowStatus",
 ]

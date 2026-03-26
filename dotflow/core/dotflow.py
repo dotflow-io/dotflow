@@ -1,12 +1,11 @@
 """DotFlow"""
 
-from uuid import uuid4
 from functools import partial
-from typing import Optional
+from uuid import uuid4
 
 from dotflow.core.config import Config
-from dotflow.core.workflow import Manager
 from dotflow.core.task import TaskBuilder
+from dotflow.core.workflow import Manager
 
 
 class DotFlow:
@@ -37,22 +36,15 @@ class DotFlow:
         start (Manager):
     """
 
-    def __init__(
-            self,
-            config: Optional[Config] = None
-    ) -> None:
+    def __init__(self, config: Config | None = None) -> None:
         self.workflow_id = uuid4()
         config = config if config else Config()
+        config.api.create_workflow(workflow=self.workflow_id)
 
-        self.task = TaskBuilder(
-            config=config,
-            workflow_id=self.workflow_id
-        )
+        self.task = TaskBuilder(config=config, workflow_id=self.workflow_id)
 
         self.start = partial(
-            Manager,
-            tasks=self.task.queue,
-            workflow_id=self.workflow_id
+            Manager, tasks=self.task.queue, workflow_id=self.workflow_id
         )
 
     def result_task(self):
@@ -76,5 +68,10 @@ class DotFlow:
         """
         return [task.current_context.storage for task in self.task.queue]
 
-    def result(self):
+    def result(self) -> dict:
+        """
+        Returns:
+            dict: Returns the full workflow result serialized as a dictionary,
+                  including workflow ID and all task schemas.
+        """
         return self.task.result()

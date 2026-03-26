@@ -1,6 +1,8 @@
 """Type Storage mode"""
 
-from typing_extensions import Annotated, Doc
+from typing import Annotated
+
+from typing_extensions import Doc
 
 
 class TypeStorage:
@@ -12,4 +14,4 @@ class TypeStorage:
     """
 
     DEFAULT: Annotated[str, Doc("Default storage.")] = "default"
-    FILE:  Annotated[str, Doc("File storage.")] = "file"
+    FILE: Annotated[str, Doc("File storage.")] = "file"

@@ -1,7 +1,7 @@
 """Storage ABC"""
 
-from typing import Callable
 from abc import ABC, abstractmethod
+from collections.abc import Callable
 
 from dotflow.core.context import Context
 

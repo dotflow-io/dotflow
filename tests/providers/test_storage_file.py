@@ -1,21 +1,18 @@
 """Test StorageFile"""
 
 import unittest
-
-from uuid import uuid4
+from json import dumps, loads
 from pathlib import Path
 from shutil import rmtree
-from json import dumps, loads
+from uuid import uuid4
 
-from dotflow.core.task import Task
 from dotflow.core.context import Context
+from dotflow.core.task import Task
 from dotflow.providers.storage_file import StorageFile
-
 from tests.mocks import action_step
 
 
 class TestStorageFile(unittest.TestCase):
-
     def setUp(self):
         self.path = Path("tests")
         self.file_name = "file.json"
@@ -32,11 +29,13 @@ class TestStorageFile(unittest.TestCase):
         expected_value = {"foo": "bar"}
 
         storage = StorageFile(path=self.path)
-        storage.post(key=self.file_name, context=Context(storage=expected_value))
+        storage.post(
+            key=self.file_name, context=Context(storage=expected_value)
+        )
 
         self.assertTrue(storage.path.joinpath(self.file_name).exists())
 
-        with open(file=self.path.joinpath("tasks", self.file_name), mode="r") as file:
+        with open(file=self.path.joinpath("tasks", self.file_name)) as file:
             result = loads(file.read())
 
             self.assertEqual(loads(result[0]), expected_value)
@@ -57,7 +56,7 @@ class TestStorageFile(unittest.TestCase):
 
         self.assertTrue(storage.path.joinpath(self.file_name).exists())
 
-        with open(file=self.path.joinpath("tasks", self.file_name), mode="r") as file:
+        with open(file=self.path.joinpath("tasks", self.file_name)) as file:
             result = loads(file.read())
 
             self.assertEqual(loads(result[0]), expected_value_one)
@@ -69,15 +68,19 @@ class TestStorageFile(unittest.TestCase):
 
         self.path.joinpath("tasks").mkdir()
 
-        with open(file=self.path.joinpath("tasks", self.file_name), mode="w") as file:
+        with open(
+            file=self.path.joinpath("tasks", self.file_name), mode="w"
+        ) as file:
             file.write(dumps([dumps(expected_value_one)]))
 
         storage = StorageFile(path=self.path)
-        storage.post(key=self.file_name, context=Context(storage=expected_value_two))
+        storage.post(
+            key=self.file_name, context=Context(storage=expected_value_two)
+        )
 
         self.assertTrue(storage.path.joinpath(self.file_name).exists())
 
-        with open(file=self.path.joinpath("tasks", self.file_name), mode="r") as file:
+        with open(file=self.path.joinpath("tasks", self.file_name)) as file:
             result = loads(file.read())
 
             self.assertEqual(loads(result[0]), expected_value_one)
@@ -87,7 +90,9 @@ class TestStorageFile(unittest.TestCase):
         expected_value = [{"foo": "bar"}]
         self.path.joinpath("tasks").mkdir()
 
-        with open(file=self.path.joinpath("tasks", self.file_name), mode="w") as file:
+        with open(
+            file=self.path.joinpath("tasks", self.file_name), mode="w"
+        ) as file:
             file.write(dumps(expected_value))
 
         storage = StorageFile(path=self.path)
@@ -102,7 +107,9 @@ class TestStorageFile(unittest.TestCase):
 
         self.path.joinpath("tasks").mkdir()
 
-        with open(file=self.path.joinpath("tasks", self.file_name), mode="w") as file:
+        with open(
+            file=self.path.joinpath("tasks", self.file_name), mode="w"
+        ) as file:
             file.write(dumps([expected_value_one, expected_value_two]))
 
         storage = StorageFile(path=self.path)

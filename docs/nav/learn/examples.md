@@ -26,7 +26,6 @@ Github: [dotflow/examples](https://github.com/dotflow-io/examples)
 | [step_with_notify_telegram](https://github.com/dotflow-io/examples/blob/master/step_with_notify_telegram.py) | `python examples/step_with_notify_telegram.py` |
 | [step_with_previous_context](https://github.com/dotflow-io/examples/blob/master/step_with_previous_context.py) | `python examples/step_with_previous_context.py` |
 | [step_with_storage_file](https://github.com/dotflow-io/examples/blob/master/step_with_storage_file.py) | `python examples/step_with_storage_file.py` |
-| [step_with_storage_mongodb](https://github.com/dotflow-io/examples/blob/master/step_with_storage_mongodb.py) | `python examples/step_with_storage_mongodb.py` |
 | [workflow_background_mode](https://github.com/dotflow-io/examples/blob/master/workflow_background_mode.py) | `python examples/workflow_background_mode.py` |
 | [workflow_keep_going_true](https://github.com/dotflow-io/examples/blob/master/workflow_keep_going_true.py) | `python examples/workflow_keep_going_true.py` |
 | [workflow_parallel_mode](https://github.com/dotflow-io/examples/blob/master/workflow_parallel_mode.py) | `python examples/workflow_parallel_mode.py` |

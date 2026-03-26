@@ -38,63 +38,6 @@ curl --location --globoff 'https://api.telegram.org/bot<YOUR_BOT_TOKEN>/getUpdat
 
 ## DotFlow Config
 
-### Import
+Use the runnable example below:
 
-Start with the basics, which is importing the necessary classes and methods.
-
-```python
-import os
-
-from dotflow import Config, DotFlow, action
-from dotflow.notify import NotifyTelegram
-from dotflow.types import TypeStatus
-```
-
-### Task function
-
-Use the `@action` decorator to define a simple task that will be executed in the workflow:
-
-```python
-@action
-def simple_task():
-    return "ok"
-```
-
-
-### Notify Class
-
-Instantiate the `NotifyTelegram` class with your Telegram bot credentials. You can use environment variables for security:
-
-```python
-notify = NotifyTelegram(
-    token=os.getenv("TOKEN"),
-    chat_id=os.getenv("CHAT_ID"),
-    notification_type=TypeStatus.FAILED  # Notify only on failure
-)
-```
-
-### Dotflow Class
-
-Pass the `notify` instance into the `Config` class and initialize the `DotFlow` workflow:
-
-```python
-workflow = DotFlow(
-    config=Config(notify=notify)
-)
-```
-
-### Add Task
-
-Add your defined task as a step in the workflow:
-
-```python
-workflow.task.add(step=simple_task)
-```
-
-### Start
-
-Start the workflow execution:
-
-```python
-workflow.start()
-```
+{* ./docs_src/notify/notify_telegram.py ln[1:41] hl[26:30,32:35] *}

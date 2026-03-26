@@ -9,7 +9,6 @@ from dotflow.logging import logger
 
 
 class LogDefault(Log):
-
     def info(self, task: Any) -> None:
         logger.info(
             "ID %s - %s - %s",
