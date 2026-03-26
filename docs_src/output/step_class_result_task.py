@@ -3,7 +3,6 @@ from dotflow import DotFlow, action
 
 @action(retry=5)
 class Step:
-
     def auxiliary_function(self):
         """This function will not be executed, because
         it does not have an 'action' decorator.

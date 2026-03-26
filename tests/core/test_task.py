@@ -185,25 +185,19 @@ class TestTaskSetter(unittest.TestCase):
         expected_value = Context(storage=self.content)
 
         self.task.initial_context = expected_value
-        self.assertEqual(
-            self.task.initial_context.storage, expected_value.storage
-        )
+        self.assertEqual(self.task.initial_context.storage, expected_value.storage)
 
     def test_set_previous_context(self):
         expected_value = Context(storage=self.content)
 
         self.task.previous_context = expected_value
-        self.assertEqual(
-            self.task.previous_context.storage, expected_value.storage
-        )
+        self.assertEqual(self.task.previous_context.storage, expected_value.storage)
 
     def test_set_current_context(self):
         expected_value = Context(storage=self.content)
 
         self.task.current_context = expected_value
-        self.assertEqual(
-            self.task.current_context.storage, expected_value.storage
-        )
+        self.assertEqual(self.task.current_context.storage, expected_value.storage)
 
     def test_set_duration(self):
         expected_value = 42

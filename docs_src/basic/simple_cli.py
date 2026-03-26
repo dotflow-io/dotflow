@@ -9,7 +9,6 @@ def simple_step():
 
 
 def main():
-
     system("dotflow start --step docs_src.basic.simple_cli.simple_step")
 
 

@@ -8,30 +8,27 @@ CONTEXT = Path.cwd()
 
 
 def install_package() -> None:
-    version = open(file='LAST_VERSION').read().replace('-', '.')
+    version = open(file="LAST_VERSION").read().replace("-", ".")
 
-    main(['uninstall', 'dotflow', '-y'])
-    main(['install', f'dist/dotflow-{version}.tar.gz', '--no-cache-dir'])
+    main(["uninstall", "dotflow", "-y"])
+    main(["install", f"dist/dotflow-{version}.tar.gz", "--no-cache-dir"])
 
 
 def build_package() -> None:
-    system('python -m build')
+    system("python -m build")
 
 
 def install_requirements() -> None:
-    main(['install', '--upgrade', 'pip'])
-    main(['install', 'build'])
+    main(["install", "--upgrade", "pip"])
+    main(["install", "build"])
 
 
 def remove_tree(path: Path) -> None:
     rmtree(path=path)
 
 
-if __name__ == '__main__':
-    _folders = [
-        CONTEXT.joinpath('dist'),
-        CONTEXT.joinpath('dotflow.egg-info')
-    ]
+if __name__ == "__main__":
+    _folders = [CONTEXT.joinpath("dist"), CONTEXT.joinpath("dotflow.egg-info")]
 
     for folder in _folders:
         if folder.exists():

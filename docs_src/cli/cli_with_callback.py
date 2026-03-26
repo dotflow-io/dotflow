@@ -13,7 +13,6 @@ def simple_step():
 
 
 def main():
-
     system(
         "dotflow start --step docs_src.cli.cli_with_callback.simple_step "
         "--callback docs_src.cli.cli_with_callback.callback"

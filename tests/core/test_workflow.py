@@ -37,9 +37,7 @@ class TestWorkflow(unittest.TestCase):
         self.assertEqual(controller.tasks[0].status, TypeStatus.COMPLETED)
 
     def test_workflow_with_function_failed(self):
-        task = Task(
-            task_id=0, step=action_step_with_error, callback=simple_callback
-        )
+        task = Task(task_id=0, step=action_step_with_error, callback=simple_callback)
 
         controller = Manager(tasks=[task])
         self.assertEqual(controller.tasks[0].status, TypeStatus.FAILED)
@@ -65,9 +63,7 @@ class TestWorkflow(unittest.TestCase):
         mock_success.assert_called()
 
     def test_callback_failure_called(self):
-        task = Task(
-            task_id=0, step=action_step_with_error, callback=simple_callback
-        )
+        task = Task(task_id=0, step=action_step_with_error, callback=simple_callback)
         mock_failure = Mock()
 
         Manager(tasks=[task], on_failure=mock_failure)

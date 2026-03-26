@@ -193,18 +193,14 @@ class SequentialGroup(Flow):
 
         for task in self.tasks:
             if task.task_id in contexts:
-                task.current_context = contexts[task.task_id][
-                    "current_context"
-                ]
+                task.current_context = contexts[task.task_id]["current_context"]
                 task.duration = contexts[task.task_id]["duration"]
                 task.error = contexts[task.task_id]["error"]
                 task.status = contexts[task.task_id]["status"]
             else:
                 task.status = TypeStatus.FAILED
                 task.error = TaskError(
-                    RuntimeError(
-                        "Worker process terminated without reporting a result"
-                    )
+                    RuntimeError("Worker process terminated without reporting a result")
                 )
 
         return self.tasks
@@ -302,18 +298,14 @@ class Parallel(Flow):
 
         for task in self.tasks:
             if task.task_id in contexts:
-                task.current_context = contexts[task.task_id][
-                    "current_context"
-                ]
+                task.current_context = contexts[task.task_id]["current_context"]
                 task.duration = contexts[task.task_id]["duration"]
                 task.error = contexts[task.task_id]["error"]
                 task.status = contexts[task.task_id]["status"]
             else:
                 task.status = TypeStatus.FAILED
                 task.error = TaskError(
-                    RuntimeError(
-                        "Worker process terminated without reporting a result"
-                    )
+                    RuntimeError("Worker process terminated without reporting a result")
                 )
 
         return self.tasks

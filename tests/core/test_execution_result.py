@@ -126,9 +126,7 @@ class TestExecutionResult(unittest.TestCase):
             workflow_id=self.workflow_id,
             previous_context=Context(),
         )
-        self.assertIsInstance(
-            controller.task.current_context.storage, FunctionType
-        )
+        self.assertIsInstance(controller.task.current_context.storage, FunctionType)
 
     def test_execution_result_class(self):
         controller = Execution(

@@ -29,9 +29,7 @@ class StorageFile(Storage):
                 if isinstance(item, Context):
                     task_context.append(self._dumps(storage=item.storage))
 
-            write_file(
-                path=Path(self.path, key), content=task_context, mode="a"
-            )
+            write_file(path=Path(self.path, key), content=task_context, mode="a")
             return None
 
         task_context.append(self._dumps(storage=context.storage))

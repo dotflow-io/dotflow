@@ -59,9 +59,7 @@ class TestWorkflowSequential(unittest.TestCase):
         )
 
         self.assertEqual(execution.tasks[0].status, TypeStatus.COMPLETED)
-        self.assertEqual(
-            execution.tasks[0].current_context.storage, {"foo": "bar"}
-        )
+        self.assertEqual(execution.tasks[0].current_context.storage, {"foo": "bar"})
         self.assertIsInstance(execution.tasks[0].error, TaskError)
         self.assertEqual(execution.tasks[0].error.message, "")
 

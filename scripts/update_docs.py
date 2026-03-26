@@ -14,7 +14,9 @@ def main():
     for index, file in enumerate(files):
         if file.endswith(".py"):
             file_name = file.replace(".py", "")
-            system(f"echo '| [{file_name}]({url.format(file)}) | `python examples/{file}` |' >> file.txt")
+            system(
+                f"echo '| [{file_name}]({url.format(file)}) | `python examples/{file}` |' >> file.txt"
+            )
 
 
 if __name__ == "__main__":

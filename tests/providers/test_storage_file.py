@@ -29,9 +29,7 @@ class TestStorageFile(unittest.TestCase):
         expected_value = {"foo": "bar"}
 
         storage = StorageFile(path=self.path)
-        storage.post(
-            key=self.file_name, context=Context(storage=expected_value)
-        )
+        storage.post(key=self.file_name, context=Context(storage=expected_value))
 
         self.assertTrue(storage.path.joinpath(self.file_name).exists())
 
@@ -68,15 +66,11 @@ class TestStorageFile(unittest.TestCase):
 
         self.path.joinpath("tasks").mkdir()
 
-        with open(
-            file=self.path.joinpath("tasks", self.file_name), mode="w"
-        ) as file:
+        with open(file=self.path.joinpath("tasks", self.file_name), mode="w") as file:
             file.write(dumps([dumps(expected_value_one)]))
 
         storage = StorageFile(path=self.path)
-        storage.post(
-            key=self.file_name, context=Context(storage=expected_value_two)
-        )
+        storage.post(key=self.file_name, context=Context(storage=expected_value_two))
 
         self.assertTrue(storage.path.joinpath(self.file_name).exists())
 
@@ -90,9 +84,7 @@ class TestStorageFile(unittest.TestCase):
         expected_value = [{"foo": "bar"}]
         self.path.joinpath("tasks").mkdir()
 
-        with open(
-            file=self.path.joinpath("tasks", self.file_name), mode="w"
-        ) as file:
+        with open(file=self.path.joinpath("tasks", self.file_name), mode="w") as file:
             file.write(dumps(expected_value))
 
         storage = StorageFile(path=self.path)
@@ -107,9 +99,7 @@ class TestStorageFile(unittest.TestCase):
 
         self.path.joinpath("tasks").mkdir()
 
-        with open(
-            file=self.path.joinpath("tasks", self.file_name), mode="w"
-        ) as file:
+        with open(file=self.path.joinpath("tasks", self.file_name), mode="w") as file:
             file.write(dumps([expected_value_one, expected_value_two]))
 
         storage = StorageFile(path=self.path)
