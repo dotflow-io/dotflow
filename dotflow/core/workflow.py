@@ -178,17 +178,23 @@ class SequentialGroup(Flow):
 
     def setup_queue(self) -> None:
         self.queue = _mp.Queue()
+        self._processes = []
 
     def get_tasks(self) -> List[Task]:
         contexts = {}
         while len(contexts) < len(self.tasks):
-            contexts.update(self.queue.get())
+            try:
+                contexts.update(self.queue.get(timeout=0.1))
+            except Exception:
+                if all(not p.is_alive() for p in self._processes):
+                    break
 
         for task in self.tasks:
-            task.current_context = contexts[task.task_id]["current_context"]
-            task.duration = contexts[task.task_id]["duration"]
-            task.error = contexts[task.task_id]["error"]
-            task.status = contexts[task.task_id]["status"]
+            if task.task_id in contexts:
+                task.current_context = contexts[task.task_id]["current_context"]
+                task.duration = contexts[task.task_id]["duration"]
+                task.error = contexts[task.task_id]["error"]
+                task.status = contexts[task.task_id]["status"]
 
         return self.tasks
 
@@ -204,17 +210,15 @@ class SequentialGroup(Flow):
         self.queue.put(current_task)
 
     def run(self) -> None:
-        processes = []
-
         for _, group_tasks in self.groups.items():
             process = _mp.Process(
                 target=self._run_group,
                 args=(group_tasks,)
             )
             process.start()
-            processes.append(process)
+            self._processes.append(process)
 
-        for process in processes:
+        for process in self._processes:
             process.join()
 
     def _run_group(self, groups: List[Task]) -> None:
@@ -267,17 +271,23 @@ class Parallel(Flow):
 
     def setup_queue(self) -> None:
         self.queue = _mp.Queue()
+        self._processes = []
 
     def get_tasks(self) -> List[Task]:
         contexts = {}
         while len(contexts) < len(self.tasks):
-            contexts.update(self.queue.get())
+            try:
+                contexts.update(self.queue.get(timeout=0.1))
+            except Exception:
+                if all(not p.is_alive() for p in self._processes):
+                    break
 
         for task in self.tasks:
-            task.current_context = contexts[task.task_id]["current_context"]
-            task.duration = contexts[task.task_id]["duration"]
-            task.error = contexts[task.task_id]["error"]
-            task.status = contexts[task.task_id]["status"]
+            if task.task_id in contexts:
+                task.current_context = contexts[task.task_id]["current_context"]
+                task.duration = contexts[task.task_id]["duration"]
+                task.error = contexts[task.task_id]["error"]
+                task.status = contexts[task.task_id]["status"]
 
         return self.tasks
 
@@ -293,7 +303,6 @@ class Parallel(Flow):
         self.queue.put(current_task)
 
     def run(self) -> None:
-        processes = []
         previous_context = Context(workflow_id=self.workflow_id)
 
         for task in self.tasks:
@@ -302,7 +311,7 @@ class Parallel(Flow):
                 args=(task, self.workflow_id, previous_context, self._flow_callback),
             )
             process.start()
-            processes.append(process)
+            self._processes.append(process)
 
-        for process in processes:
+        for process in self._processes:
             process.join()
