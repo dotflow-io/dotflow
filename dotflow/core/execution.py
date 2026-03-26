@@ -52,7 +52,7 @@ class Execution:
         self.task.previous_context = previous_context
         self.task.workflow_id = workflow_id
 
-        self._excution(_flow_callback)
+        self._execution(_flow_callback)
 
     def _is_action(self, class_instance: Callable, func: Callable):
         try:
@@ -136,7 +136,7 @@ class Execution:
 
         return new_context
 
-    def _excution(self, _flow_callback):
+    def _execution(self, _flow_callback):
         try:
             start = datetime.now()
             current_context = self.task.step(
