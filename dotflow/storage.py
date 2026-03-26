@@ -7,9 +7,10 @@ from .providers.storage_file import StorageFile
 
 
 class _MongoDBModuleNotFound:
-
     def __init__(self, *args, **kwargs):
-        raise ModuleNotFound(module="StorageMongoDB", library="dotflow-mongodb")
+        raise ModuleNotFound(
+            module="StorageMongoDB", library="dotflow-mongodb"
+        )
 
 
 try:

@@ -1,16 +1,13 @@
 """Config module"""
 
-from typing import Optional
-
-from dotflow.abc.log import Log
-from dotflow.abc.storage import Storage
-from dotflow.abc.notify import Notify
 from dotflow.abc.api import Api
-
-from dotflow.providers.log_default import LogDefault
-from dotflow.providers.storage_default import StorageDefault
-from dotflow.providers.notify_default import NotifyDefault
+from dotflow.abc.log import Log
+from dotflow.abc.notify import Notify
+from dotflow.abc.storage import Storage
 from dotflow.providers.api_default import ApiDefault
+from dotflow.providers.log_default import LogDefault
+from dotflow.providers.notify_default import NotifyDefault
+from dotflow.providers.storage_default import StorageDefault
 
 
 class Config:
@@ -48,10 +45,10 @@ class Config:
 
     def __init__(
         self,
-        storage: Optional[Storage] = StorageDefault(),
-        notify: Optional[Notify] = NotifyDefault(),
-        log: Optional[Log] = LogDefault(),
-        api: Optional[Api] = ApiDefault(),
+        storage: Storage | None = StorageDefault(),
+        notify: Notify | None = NotifyDefault(),
+        log: Log | None = LogDefault(),
+        api: Api | None = ApiDefault(),
     ) -> None:
         self.storage = storage
         self.notify = notify

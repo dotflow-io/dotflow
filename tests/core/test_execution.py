@@ -2,37 +2,34 @@
 
 import logging
 import unittest
+from uuid import uuid4
 
 from pytest import fixture  # type: ignore
 
-from uuid import uuid4
-
 from dotflow.core.context import Context
 from dotflow.core.execution import Execution
-from dotflow.core.types import TypeStatus
 from dotflow.core.task import Task
-
+from dotflow.core.types import TypeStatus
 from tests.mocks import (
     ActionStep,
-    ActionStepWithInitialContext,
-    ActionStepWithPreviousContext,
+    ActionStepExecutionOrderer,
     ActionStepWithContexts,
     ActionStepWithError,
+    ActionStepWithInitialContext,
+    ActionStepWithPreviousContext,
     SimpleStep,
-    ActionStepExecutionOrderer,
     action_step,
     action_step_valid_object,
-    action_step_with_initial_context,
-    action_step_with_previous_context,
     action_step_with_contexts,
     action_step_with_error,
+    action_step_with_initial_context,
+    action_step_with_previous_context,
     simple_callback,
     simple_step,
 )
 
 
 class TestExecution(unittest.TestCase):
-
     @fixture(autouse=True)
     def inject_fixtures(self, caplog):
         self._caplog = caplog
@@ -54,7 +51,9 @@ class TestExecution(unittest.TestCase):
 
     def test_execution_with_function_failed(self):
         workflow_id = uuid4()
-        task = Task(task_id=0, step=action_step_with_error, callback=simple_callback)
+        task = Task(
+            task_id=0, step=action_step_with_error, callback=simple_callback
+        )
         controller = Execution(
             task=task, workflow_id=workflow_id, previous_context=Context()
         )
@@ -85,7 +84,9 @@ class TestExecution(unittest.TestCase):
         execution_log = ""
         workflow_id = uuid4()
 
-        task = Task(task_id=0, step=ActionStepWithError, callback=simple_callback)
+        task = Task(
+            task_id=0, step=ActionStepWithError, callback=simple_callback
+        )
 
         with self._caplog.at_level(logging.NOTSET):
             controller = Execution(
@@ -96,7 +97,9 @@ class TestExecution(unittest.TestCase):
                 if log.funcName == "run":
                     execution_log = log.message
 
-        self.assertEqual(execution_log, "ActionStepWithError: Run function executed")
+        self.assertEqual(
+            execution_log, "ActionStepWithError: Run function executed"
+        )
         self.assertEqual(controller.task.status, TypeStatus.FAILED)
         self.assertEqual(controller.task.workflow_id, workflow_id)
 
@@ -116,14 +119,20 @@ class TestExecution(unittest.TestCase):
 
     def test_execution_function_with_previous_context(self):
         task = Task(
-            task_id=0, step=action_step_with_previous_context, callback=simple_callback
+            task_id=0,
+            step=action_step_with_previous_context,
+            callback=simple_callback,
         )
         controller = Execution(
-            task=task, workflow_id=self.workflow_id, previous_context=self.context
+            task=task,
+            workflow_id=self.workflow_id,
+            previous_context=self.context,
         )
 
         self.assertEqual(controller.task.status, TypeStatus.COMPLETED)
-        self.assertEqual(controller.task._previous_context.storage, self.context)
+        self.assertEqual(
+            controller.task._previous_context.storage, self.context
+        )
 
     def test_execution_function_with_contexts(self):
         task = Task(
@@ -133,12 +142,16 @@ class TestExecution(unittest.TestCase):
             initial_context=self.context,
         )
         controller = Execution(
-            task=task, workflow_id=self.workflow_id, previous_context=self.context
+            task=task,
+            workflow_id=self.workflow_id,
+            previous_context=self.context,
         )
 
         self.assertEqual(controller.task.status, TypeStatus.COMPLETED)
         self.assertEqual(controller.task.initial_context.storage, self.context)
-        self.assertEqual(controller.task.previous_context.storage, self.context)
+        self.assertEqual(
+            controller.task.previous_context.storage, self.context
+        )
 
     def test_execution_class_with_initial_context(self):
         task = Task(
@@ -156,20 +169,28 @@ class TestExecution(unittest.TestCase):
 
     def test_execution_class_with_previous_context(self):
         task = Task(
-            task_id=0, step=ActionStepWithPreviousContext, callback=simple_callback
+            task_id=0,
+            step=ActionStepWithPreviousContext,
+            callback=simple_callback,
         )
         controller = Execution(
-            task=task, workflow_id=self.workflow_id, previous_context=self.context
+            task=task,
+            workflow_id=self.workflow_id,
+            previous_context=self.context,
         )
 
         self.assertEqual(controller.task.status, TypeStatus.COMPLETED)
-        self.assertEqual(controller.task.previous_context.storage, self.context)
+        self.assertEqual(
+            controller.task.previous_context.storage, self.context
+        )
 
         self.assertEqual(
-            controller.task.current_context.storage[0].storage, {"func": "run_x"}
+            controller.task.current_context.storage[0].storage,
+            {"func": "run_x"},
         )
         self.assertEqual(
-            controller.task.current_context.storage[1].storage, {"func": "run_y"}
+            controller.task.current_context.storage[1].storage,
+            {"func": "run_y"},
         )
 
     def test_execution_class_with_contexts(self):
@@ -180,15 +201,23 @@ class TestExecution(unittest.TestCase):
             initial_context=self.context,
         )
         controller = Execution(
-            task=task, workflow_id=self.workflow_id, previous_context=self.context
+            task=task,
+            workflow_id=self.workflow_id,
+            previous_context=self.context,
         )
 
         self.assertEqual(controller.task.status, TypeStatus.COMPLETED)
         self.assertEqual(controller.task.initial_context.storage, self.context)
-        self.assertEqual(controller.task.previous_context.storage, self.context)
+        self.assertEqual(
+            controller.task.previous_context.storage, self.context
+        )
 
-        self.assertEqual(controller.task.initial_context.storage, {"context": True})
-        self.assertEqual(controller.task.previous_context.storage, {"context": True})
+        self.assertEqual(
+            controller.task.initial_context.storage, {"context": True}
+        )
+        self.assertEqual(
+            controller.task.previous_context.storage, {"context": True}
+        )
         self.assertEqual(
             controller.task.current_context.storage[0].storage, {"foo": "bar"}
         )
@@ -197,7 +226,7 @@ class TestExecution(unittest.TestCase):
         controller = Execution(
             task=self.task,
             workflow_id=self.workflow_id,
-            previous_context=Context()
+            previous_context=Context(),
         )
 
         class_instance = ActionStep(task=controller.task).storage
@@ -207,7 +236,9 @@ class TestExecution(unittest.TestCase):
 
     def test_is_action_false(self):
         controller = Execution(
-            task=self.task, workflow_id=self.workflow_id, previous_context=Context()
+            task=self.task,
+            workflow_id=self.workflow_id,
+            previous_context=Context(),
         )
 
         class_instance = SimpleStep()
@@ -217,12 +248,16 @@ class TestExecution(unittest.TestCase):
 
     def test_is_action_init_false(self):
         controller = Execution(
-            task=self.task, workflow_id=self.workflow_id, previous_context=Context()
+            task=self.task,
+            workflow_id=self.workflow_id,
+            previous_context=Context(),
         )
 
         class_instance = SimpleStep()
         self.assertFalse(
-            controller._is_action(class_instance=class_instance, func="__init__")
+            controller._is_action(
+                class_instance=class_instance, func="__init__"
+            )
         )
 
     def test_execution_orderer(self):
@@ -238,10 +273,12 @@ class TestExecution(unittest.TestCase):
         controller = Execution(
             task=self.task,
             workflow_id=self.workflow_id,
-            previous_context=Context()
+            previous_context=Context(),
         )
 
-        class_instance = ActionStepExecutionOrderer(task=controller.task).storage
+        class_instance = ActionStepExecutionOrderer(
+            task=controller.task
+        ).storage
         callable_list = [
             func
             for func in dir(class_instance)
@@ -272,7 +309,7 @@ class TestExecution(unittest.TestCase):
             None,
             b"Hello",
             bytearray(5),
-            memoryview(bytes(5))
+            memoryview(bytes(5)),
         ]
 
         for input_value in valid_objects:
@@ -284,10 +321,10 @@ class TestExecution(unittest.TestCase):
             )
 
             controller = Execution(
-                task=task,
-                workflow_id=self.workflow_id,
-                previous_context=None
+                task=task, workflow_id=self.workflow_id, previous_context=None
             )
 
             self.assertEqual(controller.task.status, TypeStatus.COMPLETED)
-            self.assertEqual(controller.task.current_context.storage, input_value)
+            self.assertEqual(
+                controller.task.current_context.storage, input_value
+            )

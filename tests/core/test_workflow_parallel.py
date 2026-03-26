@@ -1,14 +1,12 @@
 """Test context of controller"""
 
 import unittest
-
 from multiprocessing import get_context
 from uuid import uuid4
 
-from dotflow.core.workflow import Parallel, grouper
-from dotflow.core.types import TypeStatus
 from dotflow.core.task import Task, TaskError
-
+from dotflow.core.types import TypeStatus
+from dotflow.core.workflow import Parallel, grouper
 from tests.mocks import (
     action_step,
     action_step_with_error,
@@ -19,7 +17,6 @@ Queue = type(get_context("fork").Queue())
 
 
 class TestWorkflowParallel(unittest.TestCase):
-
     def setUp(self):
         self.workflow_id = uuid4()
         self.ignore = False
@@ -60,7 +57,13 @@ class TestWorkflowParallel(unittest.TestCase):
         self.assertEqual(tasks[0].error.message, "")
 
     def test_workflow_with_parallel_function_failed(self):
-        tasks = [Task(task_id=0, step=action_step_with_error, callback=simple_callback)]
+        tasks = [
+            Task(
+                task_id=0,
+                step=action_step_with_error,
+                callback=simple_callback,
+            )
+        ]
 
         execution = Parallel(
             tasks=tasks,

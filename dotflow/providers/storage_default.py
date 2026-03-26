@@ -1,6 +1,6 @@
 """Storage Default"""
 
-from typing import Callable
+from collections.abc import Callable
 from ctypes import cast, py_object
 
 from dotflow.abc.storage import Storage
