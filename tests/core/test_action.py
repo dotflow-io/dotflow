@@ -8,6 +8,7 @@ from pytest import fixture  # type: ignore
 from dotflow.core.task import Task
 from dotflow.core.context import Context
 from dotflow.core.action import Action
+from dotflow.core.types.status import TypeStatus
 
 from tests.mocks import (
     action_step,
@@ -65,6 +66,27 @@ class TestClassActions(unittest.TestCase):
 
             for record in self._caplog.records:
                 self.assertEqual(record.message, error_message)
+
+    def test_sets_retry_status_before_retrying(self):
+        calls = {"count": 0}
+        statuses = []
+
+        def flaky_step():
+            calls["count"] += 1
+            if calls["count"] == 1:
+                raise Exception("Fail once")
+            # On second attempt, capture status (should be RETRY)
+            statuses.append(self.task.status)
+            return "ok"
+
+        inside = Action(flaky_step, retry=2, retry_delay=0)
+        inside(task=self.task)
+
+        # Verify status was RETRY during the retry attempt
+        self.assertEqual(len(statuses), 1)
+        self.assertEqual(statuses[0], TypeStatus.RETRY)
+        # Verify status was reset to IN_PROGRESS after successful retry
+        self.assertEqual(self.task.status, TypeStatus.IN_PROGRESS)
 
     def test_action_class_with_previous_context(self):
         inside = Action(simple_step_with_previous_context, task=self.task)

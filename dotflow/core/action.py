@@ -8,6 +8,7 @@ from types import FunctionType
 
 from dotflow.core.exception import ExecutionWithClassError
 from dotflow.core.context import Context
+from dotflow.core.types.status import TypeStatus
 
 
 def is_execution_with_class_internal_error(error: Exception) -> bool:
@@ -98,20 +99,20 @@ class Action(object):
         if self.func:
             self._set_params()
 
-            task = self._get_task(kwargs=kwargs)
+            self._current_task = self._get_task(kwargs=kwargs)
             contexts = self._get_context(kwargs=kwargs)
 
             if contexts:
                 return Context(
                     storage=self._run_action(*args, **contexts),
-                    task_id=task.task_id,
-                    workflow_id=task.workflow_id,
+                    task_id=self._current_task.task_id,
+                    workflow_id=self._current_task.workflow_id,
                 )
 
             return Context(
                 storage=self._run_action(*args),
-                task_id=task.task_id,
-                workflow_id=task.workflow_id,
+                task_id=self._current_task.task_id,
+                workflow_id=self._current_task.workflow_id,
             )
 
         # No parameters
@@ -119,33 +120,41 @@ class Action(object):
             self.func = args[0]
             self._set_params()
 
-            task = self._get_task(kwargs=_kwargs)
+            self._current_task = self._get_task(kwargs=_kwargs)
             contexts = self._get_context(kwargs=_kwargs)
 
             if contexts:
                 return Context(
                     storage=self._run_action(*_args, **contexts),
-                    task_id=task.task_id,
-                    workflow_id=task.workflow_id,
+                    task_id=self._current_task.task_id,
+                    workflow_id=self._current_task.workflow_id,
                 )
 
             return Context(
                 storage=self._run_action(*_args),
-                task_id=task.task_id,
-                workflow_id=task.workflow_id,
+                task_id=self._current_task.task_id,
+                workflow_id=self._current_task.workflow_id,
             )
 
         return action
 
     def _run_action(self, *args, **kwargs):
+        task = getattr(self, '_current_task', None)
+
         for attempt in range(1, self.retry + 1):
             try:
                 if self.timeout:
                     with ThreadPoolExecutor(max_workers=1) as executor:
                         future = executor.submit(self.func, *args, **kwargs)
-                        return future.result(timeout=self.timeout)
+                        result = future.result(timeout=self.timeout)
+                else:
+                    result = self.func(*args, **kwargs)
 
-                return self.func(*args, **kwargs)
+                # Reset status to IN_PROGRESS after successful retry
+                if task and attempt > 1:
+                    task.status = TypeStatus.IN_PROGRESS
+
+                return result
 
             except Exception as error:
                 last_exception = error
@@ -155,6 +164,9 @@ class Action(object):
 
                 if attempt == self.retry:
                     raise last_exception
+
+                if task:
+                    task.status = TypeStatus.RETRY
 
                 sleep(self.retry_delay)
                 if self.backoff:
