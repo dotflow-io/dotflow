@@ -5,6 +5,7 @@ import threading
 
 from datetime import datetime
 from multiprocessing import get_context
+from queue import Empty
 
 from uuid import UUID, uuid4
 from typing import Callable, Dict, List
@@ -185,7 +186,7 @@ class SequentialGroup(Flow):
         while len(contexts) < len(self.tasks):
             try:
                 contexts.update(self.queue.get(timeout=0.1))
-            except Exception:
+            except Empty:
                 if all(not p.is_alive() for p in self._processes):
                     break
 
@@ -278,7 +279,7 @@ class Parallel(Flow):
         while len(contexts) < len(self.tasks):
             try:
                 contexts.update(self.queue.get(timeout=0.1))
-            except Exception:
+            except Empty:
                 if all(not p.is_alive() for p in self._processes):
                     break
 
