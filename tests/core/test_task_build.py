@@ -34,7 +34,9 @@ class TestTaskBuild(unittest.TestCase):
 
     def test_add_method_with_class_context(self):
         task = TaskBuilder(config=self.config)
-        task.add(step=action_step, initial_context=Context(storage=self.content))
+        task.add(
+            step=action_step, initial_context=Context(storage=self.content)
+        )
 
         self.assertEqual(task.queue[0].initial_context.storage, self.content)
 
@@ -88,7 +90,9 @@ class TestTaskBuild(unittest.TestCase):
     def test_task_build_schema(self):
         expected_workflow_id = uuid4()
 
-        task = TaskBuilder(config=self.config, workflow_id=expected_workflow_id)
+        task = TaskBuilder(
+            config=self.config, workflow_id=expected_workflow_id
+        )
         task.add(step=action_step, initial_context=self.content)
 
         schema = task.schema()
@@ -115,7 +119,9 @@ class TestTaskBuild(unittest.TestCase):
             ],
         }
 
-        task = TaskBuilder(config=self.config, workflow_id=expected_workflow_id)
+        task = TaskBuilder(
+            config=self.config, workflow_id=expected_workflow_id
+        )
         task.add(step=action_step, initial_context=self.content)
 
         result = task.result()

@@ -54,7 +54,9 @@ class Command:
         self.cmd_start.add_argument(
             "-o", "--storage", choices=[TypeStorage.DEFAULT, TypeStorage.FILE]
         )
-        self.cmd_start.add_argument("-p", "--path", default=settings.START_PATH)
+        self.cmd_start.add_argument(
+            "-p", "--path", default=settings.START_PATH
+        )
         self.cmd_start.add_argument(
             "-m",
             "--mode",
@@ -70,7 +72,9 @@ class Command:
 
     def setup_logs(self):
         self.cmd_logs = self.subparsers.add_parser("logs", help="Logs")
-        self.cmd_logs = self.cmd_logs.add_argument_group("Usage: dotflow log [OPTIONS]")
+        self.cmd_logs = self.cmd_logs.add_argument_group(
+            "Usage: dotflow log [OPTIONS]"
+        )
         self.cmd_logs.set_defaults(exec=LogCommand)
 
     def command(self):

@@ -27,7 +27,9 @@ class SerializerTask(BaseModel):
     previous_context: Any = Field(default=None, alias="_previous_context")
     group_name: str = Field(default=None)
     max: int | None = Field(default=None, exclude=True)
-    size_message: str | None = Field(default="Context size exceeded", exclude=True)
+    size_message: str | None = Field(
+        default="Context size exceeded", exclude=True
+    )
 
     def model_dump_json(self, **kwargs) -> str:
         dump_json = super().model_dump_json(serialize_as_any=True, **kwargs)
@@ -37,7 +39,9 @@ class SerializerTask(BaseModel):
             self.current_context = self.size_message
             self.previous_context = self.size_message
 
-            dump_json = super().model_dump_json(serialize_as_any=True, **kwargs)
+            dump_json = super().model_dump_json(
+                serialize_as_any=True, **kwargs
+            )
 
             return dump_json[0 : self.max]
 

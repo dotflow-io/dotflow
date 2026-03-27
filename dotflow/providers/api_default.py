@@ -38,7 +38,9 @@ class ApiDefault(Api):
         enabled: bool | None = None,
     ) -> None:
         env_enabled = os.getenv("DOTFLOW_API_ENABLED")
-        self.base_url = (base_url or os.getenv("DOTFLOW_API_URL") or "").rstrip("/")
+        self.base_url = (
+            base_url or os.getenv("DOTFLOW_API_URL") or ""
+        ).rstrip("/")
         self.user_token = user_token or os.getenv("DOTFLOW_USER_TOKEN")
         self.timeout = timeout
 
@@ -57,7 +59,9 @@ class ApiDefault(Api):
             logger.error("DOTFLOW_API_URL missing; cannot call dotflow-api.")
             return False
         if not self.user_token:
-            logger.error("DOTFLOW_USER_TOKEN missing; cannot call dotflow-api.")
+            logger.error(
+                "DOTFLOW_USER_TOKEN missing; cannot call dotflow-api."
+            )
             return False
         return True
 
@@ -88,9 +92,12 @@ class ApiDefault(Api):
                     {
                         "id": getattr(t, "task_id", None),
                         "step": self._callable_path(getattr(t, "step", None)),
-                        "callback": self._callable_path(getattr(t, "callback", None)),
+                        "callback": self._callable_path(
+                            getattr(t, "callback", None)
+                        ),
                         "initial_context": initial_context,
-                        "group_name": getattr(t, "group_name", None) or "default",
+                        "group_name": getattr(t, "group_name", None)
+                        or "default",
                     }
                 )
 
@@ -128,7 +135,9 @@ class ApiDefault(Api):
             )
             response.raise_for_status()
         except Exception as error:
-            logger.error("Failed to create workflow in dotflow-api: %s", str(error))
+            logger.error(
+                "Failed to create workflow in dotflow-api: %s", str(error)
+            )
 
         return None
 

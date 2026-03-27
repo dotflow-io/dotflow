@@ -149,7 +149,9 @@ class Action:
             except Exception as error:
                 last_exception = error
 
-                if is_execution_with_class_internal_error(error=last_exception):
+                if is_execution_with_class_internal_error(
+                    error=last_exception
+                ):
                     raise ExecutionWithClassError() from None
 
                 if attempt == self.retry:
@@ -176,7 +178,9 @@ class Action:
             context["initial_context"] = Context(kwargs.get("initial_context"))
 
         if "previous_context" in self.params:
-            context["previous_context"] = Context(kwargs.get("previous_context"))
+            context["previous_context"] = Context(
+                kwargs.get("previous_context")
+            )
 
         return context
 

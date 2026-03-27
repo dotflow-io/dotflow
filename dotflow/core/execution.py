@@ -58,7 +58,8 @@ class Execution:
         try:
             return (
                 callable(getattr(class_instance, func))
-                and getattr(class_instance, func).__module__ is Action.__module__
+                and getattr(class_instance, func).__module__
+                is Action.__module__
                 and not func.startswith("__")
             )
         except AttributeError:
