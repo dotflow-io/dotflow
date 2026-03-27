@@ -1,5 +1,7 @@
 """Start validator module"""
 
+from __future__ import annotations
+
 from pydantic import BaseModel, Field  # type: ignore
 
 from dotflow.settings import Settings as settings

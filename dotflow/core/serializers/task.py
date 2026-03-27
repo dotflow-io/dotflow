@@ -1,5 +1,7 @@
 """Task serializer module"""
 
+from __future__ import annotations
+
 import json
 from typing import Any
 from uuid import UUID

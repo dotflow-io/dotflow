@@ -1,5 +1,7 @@
 """Config module"""
 
+from __future__ import annotations
+
 from dotflow.abc.api import Api
 from dotflow.abc.log import Log
 from dotflow.abc.notify import Notify

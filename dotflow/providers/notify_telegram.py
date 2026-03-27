@@ -1,5 +1,7 @@
 """Notify Default"""
 
+from __future__ import annotations
+
 from json import dumps
 from typing import Any
 
