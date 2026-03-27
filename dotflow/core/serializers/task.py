@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from typing import Any
+from typing import Any, Optional
 from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
@@ -20,16 +20,16 @@ class SerializerTask(BaseModel):
     model_config = ConfigDict(title="task")
 
     task_id: int = Field(default=None)
-    workflow_id: UUID | None = Field(default=None)
+    workflow_id: Optional[UUID] = Field(default=None)
     status: str = Field(default=None, alias="_status")
-    error: SerializerTaskError | None = Field(default=None, alias="_error")
-    duration: float | None = Field(default=None, alias="_duration")
+    error: Optional[SerializerTaskError] = Field(default=None, alias="_error")
+    duration: Optional[float] = Field(default=None, alias="_duration")
     initial_context: Any = Field(default=None, alias="_initial_context")
     current_context: Any = Field(default=None, alias="_current_context")
     previous_context: Any = Field(default=None, alias="_previous_context")
     group_name: str = Field(default=None)
-    max: int | None = Field(default=None, exclude=True)
-    size_message: str | None = Field(
+    max: Optional[int] = Field(default=None, exclude=True)
+    size_message: Optional[str] = Field(
         default="Context size exceeded", exclude=True
     )
 
