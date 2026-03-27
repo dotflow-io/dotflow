@@ -5,7 +5,6 @@ from dotflow import DotFlow, action
 
 @action(retry=5)
 class StepX:
-
     @action
     def first_function(self):
         return {"foo": "bar"}
@@ -17,7 +16,6 @@ class StepX:
 
 @action(retry=5)
 class StepY:
-
     def __init__(self, initial_context):
         print(initial_context.storage, "__init__")
         assert initial_context.storage
@@ -56,7 +54,10 @@ def extract_task_x():
 
 @action
 def transform_task_x(initial_context, previous_context):
-    print("initial_context:", initial_context.storage, )
+    print(
+        "initial_context:",
+        initial_context.storage,
+    )
     print("previous_context:", previous_context.storage)
 
     assert initial_context.storage, {"foo": True}
@@ -108,14 +109,8 @@ def main():
 
     workflow = DotFlow()
     workflow.task.add(
-        [
-            StepX,
-            StepY,
-            extract_task_x,
-            transform_task_x,
-            load_task_x
-        ],
-        initial_context={"foo": "bar"}
+        [StepX, StepY, extract_task_x, transform_task_x, load_task_x],
+        initial_context={"foo": "bar"},
     )
     workflow.start()
 
@@ -127,9 +122,9 @@ def main():
             "tests.test_flow.extract_task_x",
             "tests.test_flow.transform_task_x",
             "tests.test_flow.load_task_x",
-            simple_step
+            simple_step,
         ],
-        initial_context={"foo": "bar"}
+        initial_context={"foo": "bar"},
     )
     workflow.start()
 

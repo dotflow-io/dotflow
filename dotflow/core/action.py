@@ -1,13 +1,12 @@
 """Action module"""
 
-from time import sleep
-
+from collections.abc import Callable
 from concurrent.futures import ThreadPoolExecutor
-from typing import Callable, Dict
+from time import sleep
 from types import FunctionType
 
-from dotflow.core.exception import ExecutionWithClassError
 from dotflow.core.context import Context
+from dotflow.core.exception import ExecutionWithClassError
 from dotflow.core.types.status import TypeStatus
 
 
@@ -21,7 +20,7 @@ def is_execution_with_class_internal_error(error: Exception) -> bool:
     return any(pattern in message for pattern in patterns)
 
 
-class Action(object):
+class Action:
     """
     Import:
         You can import the **action** decorator directly from dotflow:
@@ -159,11 +158,13 @@ class Action(object):
             except Exception as error:
                 last_exception = error
 
-                if is_execution_with_class_internal_error(error=last_exception):
-                    raise ExecutionWithClassError()
+                if is_execution_with_class_internal_error(
+                    error=last_exception
+                ):
+                    raise ExecutionWithClassError() from None
 
                 if attempt == self.retry:
-                    raise last_exception
+                    raise last_exception from last_exception
 
                 if task:
                     task.status = TypeStatus.RETRY
@@ -174,24 +175,26 @@ class Action(object):
 
     def _set_params(self):
         if isinstance(self.func, FunctionType):
-            self.params = [param for param in self.func.__code__.co_varnames]
+            self.params = list(self.func.__code__.co_varnames)
 
-        if type(self.func) is type:
-            if hasattr(self.func, "__init__"):
-                if hasattr(self.func.__init__, "__code__"):
-                    self.params = [
-                        param for param in self.func.__init__.__code__.co_varnames
-                    ]
+        if (
+            type(self.func) is type
+            and hasattr(self.func, "__init__")
+            and hasattr(self.func.__init__, "__code__")
+        ):
+            self.params = list(self.func.__init__.__code__.co_varnames)
 
-    def _get_context(self, kwargs: Dict):
+    def _get_context(self, kwargs: dict):
         context = {}
         if "initial_context" in self.params:
             context["initial_context"] = Context(kwargs.get("initial_context"))
 
         if "previous_context" in self.params:
-            context["previous_context"] = Context(kwargs.get("previous_context"))
+            context["previous_context"] = Context(
+                kwargs.get("previous_context")
+            )
 
         return context
 
-    def _get_task(self, kwargs: Dict):
+    def _get_task(self, kwargs: dict):
         return kwargs.get("task")

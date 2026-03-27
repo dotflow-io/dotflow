@@ -1,24 +1,22 @@
 """Test context of controller"""
 
 import unittest
-
+from multiprocessing import get_context
 from uuid import uuid4
 
-from multiprocessing.queues import Queue
-
-from dotflow.core.workflow import SequentialGroup, grouper
-from dotflow.core.types import TypeStatus
 from dotflow.core.task import Task, TaskError
-
+from dotflow.core.types import TypeStatus
+from dotflow.core.workflow import SequentialGroup, grouper
 from tests.mocks import (
     action_step,
     action_step_with_error,
     simple_callback,
 )
 
+Queue = type(get_context("fork").Queue())
+
 
 class TestWorkflowSequentialGroup(unittest.TestCase):
-
     def setUp(self):
         self.workflow_id = uuid4()
         self.ignore = False
@@ -59,7 +57,13 @@ class TestWorkflowSequentialGroup(unittest.TestCase):
         self.assertEqual(tasks[0].error.message, "")
 
     def test_workflow_with_sequential_group_function_failed(self):
-        tasks = [Task(task_id=0, step=action_step_with_error, callback=simple_callback)]
+        tasks = [
+            Task(
+                task_id=0,
+                step=action_step_with_error,
+                callback=simple_callback,
+            )
+        ]
 
         execution = SequentialGroup(
             tasks=tasks,

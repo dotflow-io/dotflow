@@ -6,16 +6,14 @@ from uuid import uuid4
 from dotflow.core.config import Config
 from dotflow.core.context import Context
 from dotflow.core.exception import MissingActionDecorator
-from dotflow.core.task import Task, TaskBuilder
-from dotflow.core.serializers.workflow import SerializerWorkflow
 from dotflow.core.serializers.task import SerializerTask
+from dotflow.core.serializers.workflow import SerializerWorkflow
+from dotflow.core.task import Task, TaskBuilder
 from dotflow.utils import basic_callback
-
-from tests.mocks import action_step, simple_step, SimpleStep
+from tests.mocks import SimpleStep, action_step, simple_step
 
 
 class TestTaskBuild(unittest.TestCase):
-
     def setUp(self):
         self.config = Config()
         self.content = {"foo": "bar"}
@@ -36,7 +34,9 @@ class TestTaskBuild(unittest.TestCase):
 
     def test_add_method_with_class_context(self):
         task = TaskBuilder(config=self.config)
-        task.add(step=action_step, initial_context=Context(storage=self.content))
+        task.add(
+            step=action_step, initial_context=Context(storage=self.content)
+        )
 
         self.assertEqual(task.queue[0].initial_context.storage, self.content)
 
@@ -90,7 +90,9 @@ class TestTaskBuild(unittest.TestCase):
     def test_task_build_schema(self):
         expected_workflow_id = uuid4()
 
-        task = TaskBuilder(config=self.config, workflow_id=expected_workflow_id)
+        task = TaskBuilder(
+            config=self.config, workflow_id=expected_workflow_id
+        )
         task.add(step=action_step, initial_context=self.content)
 
         schema = task.schema()
@@ -117,7 +119,9 @@ class TestTaskBuild(unittest.TestCase):
             ],
         }
 
-        task = TaskBuilder(config=self.config, workflow_id=expected_workflow_id)
+        task = TaskBuilder(
+            config=self.config, workflow_id=expected_workflow_id
+        )
         task.add(step=action_step, initial_context=self.content)
 
         result = task.result()

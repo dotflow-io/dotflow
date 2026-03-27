@@ -1,5 +1,15 @@
 # Release Notes
 
+## v0.13.2
+
+- [📦 PyPI - Build 0.13.2](https://github.com/dotflow-io/dotflow/releases/tag/v0.13.2)
+- [🪲 BUG: Fix Background mode results unreliable](https://github.com/dotflow-io/dotflow/pull/85)
+- [🪲 BUG: Fix busy-wait loop and enable multiprocessing on macOS](https://github.com/dotflow-io/dotflow/pull/78)
+- [🪲 Fix typo in workflow filename and export WorkflowStatus](https://github.com/dotflow-io/dotflow/pull/91)
+- [🪲 Fix typo _excution → _execution in execution.py](https://github.com/dotflow-io/dotflow/pull/94)
+- [🪲 Fix TaskBuilder.add() return type annotation](https://github.com/dotflow-io/dotflow/pull/79)
+- [⬆️ Configure PyPI publish workflows with OIDC](https://github.com/dotflow-io/dotflow/pull/97)
+
 ## v0.13.1
 
 - [📦 PyPI - Build 0.13.1](https://github.com/dotflow-io/dotflow/releases/tag/v0.13.1)

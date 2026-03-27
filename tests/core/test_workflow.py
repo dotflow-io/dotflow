@@ -1,16 +1,14 @@
 """Test context of controller"""
 
 import unittest
-
-from uuid import UUID
-from unittest.mock import Mock
 from types import FunctionType
+from unittest.mock import Mock
+from uuid import UUID
 
-from dotflow.core.workflow import Manager
-from dotflow.core.types import TypeExecution, TypeStatus
 from dotflow.core.exception import ExecutionModeNotExist
 from dotflow.core.task import Task
-
+from dotflow.core.types import TypeExecution, TypeStatus
+from dotflow.core.workflow import Manager
 from tests.mocks import (
     ActionStep,
     action_step,
@@ -20,13 +18,8 @@ from tests.mocks import (
 
 
 class TestWorkflow(unittest.TestCase):
-
     def setUp(self):
-        task = Task(
-            task_id=0,
-            step=action_step,
-            callback=simple_callback
-        )
+        task = Task(task_id=0, step=action_step, callback=simple_callback)
         self.tasks = [task]
 
     def test_instantiating_workflow_class(self):
@@ -38,20 +31,14 @@ class TestWorkflow(unittest.TestCase):
         self.assertIsInstance(controller.on_failure, FunctionType)
 
     def test_workflow_with_function_completed(self):
-        task = Task(
-            task_id=0,
-            step=action_step,
-            callback=simple_callback
-        )
+        task = Task(task_id=0, step=action_step, callback=simple_callback)
 
         controller = Manager(tasks=[task])
         self.assertEqual(controller.tasks[0].status, TypeStatus.COMPLETED)
 
     def test_workflow_with_function_failed(self):
         task = Task(
-            task_id=0,
-            step=action_step_with_error,
-            callback=simple_callback
+            task_id=0, step=action_step_with_error, callback=simple_callback
         )
 
         controller = Manager(tasks=[task])
@@ -71,11 +58,7 @@ class TestWorkflow(unittest.TestCase):
         Manager(tasks=self.tasks, mode=TypeExecution.PARALLEL)
 
     def test_callback_success_called(self):
-        task = Task(
-            task_id=0,
-            step=action_step,
-            callback=simple_callback
-        )
+        task = Task(task_id=0, step=action_step, callback=simple_callback)
         mock_success = Mock()
 
         Manager(tasks=[task], on_success=mock_success)
@@ -83,9 +66,7 @@ class TestWorkflow(unittest.TestCase):
 
     def test_callback_failure_called(self):
         task = Task(
-            task_id=0,
-            step=action_step_with_error,
-            callback=simple_callback
+            task_id=0, step=action_step_with_error, callback=simple_callback
         )
         mock_failure = Mock()
 
@@ -93,11 +74,7 @@ class TestWorkflow(unittest.TestCase):
         mock_failure.assert_called()
 
     def test_workflow_with_class_completed(self):
-        task = Task(
-            task_id=0,
-            step=ActionStep,
-            callback=simple_callback
-        )
+        task = Task(task_id=0, step=ActionStep, callback=simple_callback)
 
         controller = Manager(tasks=[task])
         self.assertEqual(controller.tasks[0].status, TypeStatus.COMPLETED)

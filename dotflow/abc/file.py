@@ -4,16 +4,9 @@ from abc import ABC, abstractmethod
 
 
 class FileClient(ABC):
-
     @abstractmethod
     @classmethod
-    def write(
-        self,
-        path: str,
-        content: str,
-        mode: str,
-        encoding: str
-    ) -> None:
+    def write(self, path: str, content: str, mode: str, encoding: str) -> None:
         pass
 
     @abstractmethod

@@ -1,28 +1,26 @@
 """Execution module"""
 
-from uuid import UUID
+from collections.abc import Callable
 from datetime import datetime
-from typing import Callable, List, Tuple
 from inspect import getsourcelines
 from types import FunctionType
+from uuid import UUID
 
 try:
     from types import NoneType
 except ImportError:
     NoneType = type(None)
 
-from dotflow.core.exception import ExecutionWithClassError
-from dotflow.logging import logger
 from dotflow.core.action import Action
 from dotflow.core.context import Context
+from dotflow.core.exception import ExecutionWithClassError
 from dotflow.core.task import Task
 from dotflow.core.types import TypeStatus
-
+from dotflow.logging import logger
 from dotflow.utils import basic_callback
 
 
 class Execution:
-
     VALID_OBJECTS = [
         str,
         int,
@@ -54,21 +52,22 @@ class Execution:
         self.task.previous_context = previous_context
         self.task.workflow_id = workflow_id
 
-        self._excution(_flow_callback)
+        self._execution(_flow_callback)
 
     def _is_action(self, class_instance: Callable, func: Callable):
         try:
             return (
                 callable(getattr(class_instance, func))
-                and getattr(class_instance, func).__module__ is Action.__module__
+                and getattr(class_instance, func).__module__
+                is Action.__module__
                 and not func.startswith("__")
             )
         except AttributeError:
             return False
 
     def _execution_orderer(
-        self, callable_list: List[str], class_instance: Callable
-    ) -> Tuple[int, Callable]:
+        self, callable_list: list[str], class_instance: Callable
+    ) -> tuple[int, Callable]:
         ordered_list = []
 
         try:
@@ -137,7 +136,7 @@ class Execution:
 
         return new_context
 
-    def _excution(self, _flow_callback):
+    def _execution(self, _flow_callback):
         try:
             start = datetime.now()
             current_context = self.task.step(

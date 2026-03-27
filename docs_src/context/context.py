@@ -1,8 +1,6 @@
 from dotflow import Context
 
-new_context = Context(
-    storage={"foo": [0, 1, 2, 3]}
-)
+new_context = Context(storage={"foo": [0, 1, 2, 3]})
 
 print(new_context.time)
 print(new_context.task_id)

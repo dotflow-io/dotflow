@@ -8,7 +8,6 @@ def simple_step():
 
 @action
 class SimpleStepX:
-
     @action(retry=5)
     def run(self):
         raise Exception("Unknown")
@@ -16,7 +15,6 @@ class SimpleStepX:
 
 @action(retry=3)
 class SimpleStepY:
-
     @action
     def run(self):
         raise Exception("Unknown")

@@ -1,9 +1,8 @@
 """Context module"""
 
-from uuid import UUID
-
-from typing import Any
 from datetime import datetime
+from typing import Any
+from uuid import UUID
 
 
 class ContextInstance:
@@ -44,17 +43,12 @@ class Context(ContextInstance):
     """
 
     def __init__(
-            self,
-            storage: Any = None,
-            task_id: int = 0,
-            workflow_id: UUID = None,
+        self,
+        storage: Any = None,
+        task_id: int = 0,
+        workflow_id: UUID = None,
     ) -> None:
-        super().__init__(
-            task_id,
-            storage,
-            task_id,
-            workflow_id
-        )
+        super().__init__(task_id, storage, task_id, workflow_id)
         self.time = datetime.now()
         self.task_id = task_id
         self.workflow_id = workflow_id

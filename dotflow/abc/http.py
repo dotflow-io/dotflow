@@ -1,11 +1,10 @@
 """HTTP ABC"""
 
 from abc import ABC, abstractmethod
-from typing import Callable
+from collections.abc import Callable
 
 
 class HTTPRequest(ABC):
-
     def __init__(self, url: str, context: Callable):
         self.url = url
         self.context = context

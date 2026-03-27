@@ -1,17 +1,18 @@
 """Notify Default"""
 
+from __future__ import annotations
+
 from json import dumps
-from typing import Any, Optional
+from typing import Any
 
 from requests import post
 
-from dotflow.core.types.status import TypeStatus
 from dotflow.abc.notify import Notify
+from dotflow.core.types.status import TypeStatus
 from dotflow.logging import logger
 
 
 class NotifyTelegram(Notify):
-
     MESSAGE = "{symbol} {status}\n```json\n{task}```\n{workflow_id}-{task_id}"
     API_TELEGRAM = "https://api.telegram.org/bot{token}/sendMessage"
 
@@ -19,8 +20,8 @@ class NotifyTelegram(Notify):
         self,
         token: str,
         chat_id: int,
-        notification_type: Optional[TypeStatus] = None,
-        timeout: int = 1.5
+        notification_type: TypeStatus | None = None,
+        timeout: int = 1.5,
     ):
         self.token = token
         self.chat_id = chat_id
@@ -39,7 +40,7 @@ class NotifyTelegram(Notify):
                     url=self.API_TELEGRAM.format(token=self.token),
                     headers={"Content-Type": "application/json"},
                     data=dumps(data),
-                    timeout=self.timeout
+                    timeout=self.timeout,
                 )
                 response.raise_for_status()
             except Exception as error:

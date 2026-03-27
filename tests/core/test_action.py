@@ -1,34 +1,30 @@
 """Test context of actions"""
 
-import unittest
 import logging
+import unittest
 
 from pytest import fixture  # type: ignore
 
-from dotflow.core.task import Task
-from dotflow.core.context import Context
 from dotflow.core.action import Action
+from dotflow.core.context import Context
+from dotflow.core.task import Task
 from dotflow.core.types.status import TypeStatus
 
 from tests.mocks import (
     action_step,
     simple_step,
-    simple_step_with_params,
+    simple_step_with_fail,
     simple_step_with_initial_context,
+    simple_step_with_params,
     simple_step_with_previous_context,
-    simple_step_with_fail
 )
 
 
 class TestClassActions(unittest.TestCase):
-
     @fixture(autouse=True)
     def inject_fixtures(self, caplog):
         self._caplog = caplog
-        self.task = Task(
-            task_id=1,
-            step=action_step
-        )
+        self.task = Task(task_id=1, step=action_step)
 
     def test_instantiating_action_class(self):
         number_of_retries = 1
@@ -93,7 +89,7 @@ class TestClassActions(unittest.TestCase):
 
         with self._caplog.at_level(logging.DEBUG):
             inside(task=self.task)
-            self.assertEqual(self._caplog.records[0].message, 'None')
+            self.assertEqual(self._caplog.records[0].message, "None")
 
     def test_set_params_previous_context(self):
         inside = Action(simple_step_with_previous_context)
