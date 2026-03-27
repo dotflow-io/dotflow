@@ -31,8 +31,9 @@ def read_file(path: Path, encoding: str = "utf-8") -> Any:
     """Read file"""
     if path.exists():
         with open(file=path, encoding=encoding) as file:
-            try:
-                return loads(file.read())
-            except JSONDecodeError:
-                return file.read()
+            content = file.read()
+        try:
+            return loads(content)
+        except JSONDecodeError:
+            return content
     return None
