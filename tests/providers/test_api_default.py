@@ -74,7 +74,9 @@ class TestApiDefaultCallablePath(unittest.TestCase):
         self.assertIsNone(ApiDefault._callable_path(None))
 
     def test_string_returns_string(self):
-        self.assertEqual(ApiDefault._callable_path("my.module.func"), "my.module.func")
+        self.assertEqual(
+            ApiDefault._callable_path("my.module.func"), "my.module.func"
+        )
 
     def test_callable_returns_module_name(self):
         def my_func():
@@ -146,7 +148,9 @@ class TestApiDefaultCreateWorkflow(unittest.TestCase):
         mock_response = MagicMock()
         mock_response.raise_for_status = MagicMock()
 
-        with patch("dotflow.providers.api_default.post", return_value=mock_response):
+        with patch(
+            "dotflow.providers.api_default.post", return_value=mock_response
+        ):
             api.create_workflow("workflow-id")
 
         mock_response.raise_for_status.assert_called_once()
@@ -158,7 +162,9 @@ class TestApiDefaultCreateWorkflow(unittest.TestCase):
             user_token="token",
         )
 
-        with patch("dotflow.providers.api_default.post", side_effect=Exception("fail")):
+        with patch(
+            "dotflow.providers.api_default.post", side_effect=Exception("fail")
+        ):
             result = api.create_workflow("workflow-id")
 
         self.assertIsNone(result)

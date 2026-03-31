@@ -27,7 +27,9 @@ class TestTimeDecorator(unittest.TestCase):
         self.assertGreaterEqual(task.duration, 0)
 
     def test_return_value_is_preserved(self):
-        expected_task = Task(task_id=0, step=action_step, callback=simple_callback)
+        expected_task = Task(
+            task_id=0, step=action_step, callback=simple_callback
+        )
 
         @time
         def run():

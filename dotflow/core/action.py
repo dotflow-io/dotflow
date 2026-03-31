@@ -7,6 +7,7 @@ from types import FunctionType
 
 from dotflow.core.context import Context
 from dotflow.core.exception import ExecutionWithClassError
+from dotflow.core.types.status import TypeStatus
 
 
 def is_execution_with_class_internal_error(error: Exception) -> bool:
@@ -93,7 +94,6 @@ class Action:
         self.params = []
 
     def __call__(self, *args, **kwargs):
-        # With parameters
         if self.func:
             self._set_params()
 
@@ -102,18 +102,17 @@ class Action:
 
             if contexts:
                 return Context(
-                    storage=self._run_action(*args, **contexts),
+                    storage=self._run_action(*args, task=task, **contexts),
                     task_id=task.task_id,
                     workflow_id=task.workflow_id,
                 )
 
             return Context(
-                storage=self._run_action(*args),
+                storage=self._run_action(*args, task=task),
                 task_id=task.task_id,
                 workflow_id=task.workflow_id,
             )
 
-        # No parameters
         def action(*_args, **_kwargs):
             self.func = args[0]
             self._set_params()
@@ -123,28 +122,30 @@ class Action:
 
             if contexts:
                 return Context(
-                    storage=self._run_action(*_args, **contexts),
+                    storage=self._run_action(*_args, task=task, **contexts),
                     task_id=task.task_id,
                     workflow_id=task.workflow_id,
                 )
 
             return Context(
-                storage=self._run_action(*_args),
+                storage=self._run_action(*_args, task=task),
                 task_id=task.task_id,
                 workflow_id=task.workflow_id,
             )
 
         return action
 
-    def _run_action(self, *args, **kwargs):
+    def _run_action(self, *args, task=None, **kwargs):
         for attempt in range(1, self.retry + 1):
             try:
                 if self.timeout:
                     with ThreadPoolExecutor(max_workers=1) as executor:
                         future = executor.submit(self.func, *args, **kwargs)
-                        return future.result(timeout=self.timeout)
+                        result = future.result(timeout=self.timeout)
+                else:
+                    result = self.func(*args, **kwargs)
 
-                return self.func(*args, **kwargs)
+                return result
 
             except Exception as error:
                 last_exception = error
@@ -156,6 +157,9 @@ class Action:
 
                 if attempt == self.retry:
                     raise last_exception from last_exception
+
+                if task is not None:
+                    task.status = TypeStatus.RETRY
 
                 sleep(self.retry_delay)
                 if self.backoff:
