@@ -94,52 +94,48 @@ class Action:
         self.params = []
 
     def __call__(self, *args, **kwargs):
-        # With parameters
         if self.func:
             self._set_params()
 
-            self._current_task = self._get_task(kwargs=kwargs)
+            task = self._get_task(kwargs=kwargs)
             contexts = self._get_context(kwargs=kwargs)
 
             if contexts:
                 return Context(
-                    storage=self._run_action(*args, **contexts),
-                    task_id=self._current_task.task_id,
-                    workflow_id=self._current_task.workflow_id,
+                    storage=self._run_action(*args, task=task, **contexts),
+                    task_id=task.task_id,
+                    workflow_id=task.workflow_id,
                 )
 
             return Context(
-                storage=self._run_action(*args),
-                task_id=self._current_task.task_id,
-                workflow_id=self._current_task.workflow_id,
+                storage=self._run_action(*args, task=task),
+                task_id=task.task_id,
+                workflow_id=task.workflow_id,
             )
 
-        # No parameters
         def action(*_args, **_kwargs):
             self.func = args[0]
             self._set_params()
 
-            self._current_task = self._get_task(kwargs=_kwargs)
+            task = self._get_task(kwargs=_kwargs)
             contexts = self._get_context(kwargs=_kwargs)
 
             if contexts:
                 return Context(
-                    storage=self._run_action(*_args, **contexts),
-                    task_id=self._current_task.task_id,
-                    workflow_id=self._current_task.workflow_id,
+                    storage=self._run_action(*_args, task=task, **contexts),
+                    task_id=task.task_id,
+                    workflow_id=task.workflow_id,
                 )
 
             return Context(
-                storage=self._run_action(*_args),
-                task_id=self._current_task.task_id,
-                workflow_id=self._current_task.workflow_id,
+                storage=self._run_action(*_args, task=task),
+                task_id=task.task_id,
+                workflow_id=task.workflow_id,
             )
 
         return action
 
-    def _run_action(self, *args, **kwargs):
-        task = getattr(self, '_current_task', None)
-
+    def _run_action(self, *args, task=None, **kwargs):
         for attempt in range(1, self.retry + 1):
             try:
                 if self.timeout:
@@ -148,10 +144,6 @@ class Action:
                         result = future.result(timeout=self.timeout)
                 else:
                     result = self.func(*args, **kwargs)
-
-                # Reset status to IN_PROGRESS after successful retry
-                if task and attempt > 1:
-                    task.status = TypeStatus.IN_PROGRESS
 
                 return result
 
@@ -166,7 +158,7 @@ class Action:
                 if attempt == self.retry:
                     raise last_exception from last_exception
 
-                if task:
+                if task is not None:
                     task.status = TypeStatus.RETRY
 
                 sleep(self.retry_delay)
