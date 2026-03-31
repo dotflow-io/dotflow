@@ -136,6 +136,8 @@ class Action:
         return action
 
     def _run_action(self, *args, task=None, **kwargs):
+        current_delay = self.retry_delay
+
         for attempt in range(1, self.retry + 1):
             try:
                 if self.timeout:
@@ -161,9 +163,9 @@ class Action:
                 if task is not None:
                     task.status = TypeStatus.RETRY
 
-                sleep(self.retry_delay)
+                sleep(current_delay)
                 if self.backoff:
-                    self.retry_delay *= 2
+                    current_delay *= 2
 
     def _set_params(self):
         if isinstance(self.func, FunctionType):
