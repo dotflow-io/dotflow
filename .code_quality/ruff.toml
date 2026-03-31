@@ -5,7 +5,7 @@
 line-length = 79
 
 # Target Python version
-target-version = "py312"
+target-version = "py39"
 
 # Exclude patterns
 exclude = [
@@ -44,6 +44,7 @@ ignore = [
     "ARG001", # Unused function argument (intentional in interface implementations)
     "ARG002", # Unused method argument (intentional in *args/**kwargs constructors and providers)
     "UP007",  # Use X | Y for unions — disabled due to Python 3.9 lacking support for this syntax
+    "UP045",  # Use X | Y for type annotations — disabled due to Python 3.9 lacking support for this syntax
 ]
 
 # Allowed configurations for specific rules
