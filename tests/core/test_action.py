@@ -85,8 +85,9 @@ class TestClassActions(unittest.TestCase):
 
         inside = Action(always_fail, retry=3, retry_delay=1, backoff=True)
 
-        with self.assertRaises(RuntimeError):
-            inside()
+        with unittest.mock.patch("dotflow.core.action.sleep"):  # noqa: SIM117
+            with self.assertRaises(RuntimeError):
+                inside()
 
         self.assertEqual(inside.retry_delay, 1)
 
