@@ -79,6 +79,17 @@ class TestClassActions(unittest.TestCase):
         self.assertEqual(len(statuses), 1)
         self.assertEqual(statuses[0], TypeStatus.RETRY)
 
+    def test_backoff_does_not_mutate_retry_delay(self):
+        def always_fail():
+            raise RuntimeError("fail")
+
+        inside = Action(always_fail, retry=3, retry_delay=1, backoff=True)
+
+        with self.assertRaises(RuntimeError):
+            inside()
+
+        self.assertEqual(inside.retry_delay, 1)
+
     def test_action_class_with_previous_context(self):
         inside = Action(simple_step_with_previous_context, task=self.task)
 
