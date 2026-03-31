@@ -9,7 +9,6 @@ from dotflow.core.action import Action
 from dotflow.core.context import Context
 from dotflow.core.task import Task
 from dotflow.core.types.status import TypeStatus
-
 from tests.mocks import (
     action_step,
     simple_step,
