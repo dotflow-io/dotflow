@@ -104,6 +104,7 @@ class TestTask(unittest.TestCase):
             "task_id": 0,
             "workflow_id": str(expected_workflow_id),
             "status": "Not started",
+            "error": None,
             "errors": [],
             "retry_count": 0,
             "duration": expected_duration,
