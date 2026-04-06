@@ -38,8 +38,12 @@ class DotFlow:
         start (Manager):
     """
 
-    def __init__(self, config: Config | None = None) -> None:
-        self.workflow_id = uuid4()
+    def __init__(
+        self,
+        config: Config | None = None,
+        workflow_id: str | None = None,
+    ) -> None:
+        self.workflow_id = workflow_id or uuid4()
         config = config if config else Config()
         config.api.create_workflow(workflow=self.workflow_id)
 
