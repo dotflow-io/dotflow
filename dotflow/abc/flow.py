@@ -13,12 +13,14 @@ class Flow(ABC):
         workflow_id: UUID,
         ignore: bool,
         groups: dict[str, list[Task]],
+        resume: bool = False,
     ) -> None:
         self.queue = None
         self.tasks = tasks
         self.workflow_id = workflow_id
         self.ignore = ignore
         self.groups = groups
+        self.resume = resume
 
         self.setup_queue()
         self.run()
