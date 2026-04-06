@@ -6,7 +6,7 @@ from time import sleep
 from types import FunctionType
 
 from dotflow.core.context import Context
-from dotflow.core.exception import ExecutionWithClassError
+from dotflow.core.exception import ExecutionWithClassError, TaskError
 from dotflow.core.types.status import TypeStatus
 
 
@@ -161,6 +161,10 @@ class Action:
                     raise last_exception from last_exception
 
                 if task is not None:
+                    task.retry_count += 1
+                    task.errors.append(TaskError(
+                        error=error, attempt=attempt,
+                    ))
                     task.status = TypeStatus.RETRY
 
                 sleep(current_delay)

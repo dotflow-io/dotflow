@@ -158,7 +158,7 @@ class Execution:
             raise err
 
         except Exception as err:
-            self.task.error = err
+            self.task.errors = err
             self.task.current_context = None
             self.task.status = TypeStatus.FAILED
 
