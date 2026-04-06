@@ -1,5 +1,6 @@
 """Action module"""
 
+import asyncio
 from collections.abc import Callable
 from concurrent.futures import ThreadPoolExecutor
 from time import sleep
@@ -138,14 +139,21 @@ class Action:
     def _run_action(self, *args, task=None, **kwargs):
         current_delay = self.retry_delay
 
+        is_async = asyncio.iscoroutinefunction(self.func)
+
         for attempt in range(1, self.retry + 1):
             try:
                 if self.timeout:
                     with ThreadPoolExecutor(max_workers=1) as executor:
-                        future = executor.submit(self.func, *args, **kwargs)
+                        future = executor.submit(
+                            self._call_func,
+                            is_async,
+                            *args,
+                            **kwargs,
+                        )
                         result = future.result(timeout=self.timeout)
                 else:
-                    result = self.func(*args, **kwargs)
+                    result = self._call_func(is_async, *args, **kwargs)
 
                 return result
 
@@ -171,6 +179,23 @@ class Action:
                 sleep(current_delay)
                 if self.backoff:
                     current_delay *= 2
+
+    def _call_func(self, is_async, *args, **kwargs):
+        if is_async:
+            try:
+                loop = asyncio.get_running_loop()
+            except RuntimeError:
+                loop = None
+
+            if loop and loop.is_running():
+                import concurrent.futures
+
+                with concurrent.futures.ThreadPoolExecutor() as pool:
+                    return pool.submit(
+                        asyncio.run, self.func(*args, **kwargs)
+                    ).result()
+            return asyncio.run(self.func(*args, **kwargs))
+        return self.func(*args, **kwargs)
 
     def _set_params(self):
         if isinstance(self.func, FunctionType):
