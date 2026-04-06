@@ -15,3 +15,5 @@ class TypeStorage:
 
     DEFAULT: Annotated[str, Doc("Default storage.")] = "default"
     FILE: Annotated[str, Doc("File storage.")] = "file"
+    S3: Annotated[str, Doc("AWS S3 storage.")] = "s3"
+    GCS: Annotated[str, Doc("Google Cloud Storage.")] = "gcs"
