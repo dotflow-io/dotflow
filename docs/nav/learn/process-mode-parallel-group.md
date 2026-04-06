@@ -1,5 +1,7 @@
 # Parallel Group
 
+Tasks are organized into named groups. Groups run in parallel, but tasks within each group run sequentially, passing context between them.
+
 ## Implementation
 
 {* ./docs_src/process_mode/parallel_group.py hl[26] *}
@@ -16,3 +18,8 @@ flowchart TD
     E -->|response| Y[task_d]
     Y --> H[Finish]
 ```
+
+## References
+
+- [Task Groups](https://dotflow-io.github.io/dotflow/nav/tutorial/groups/)
+- [Manager](https://dotflow-io.github.io/dotflow/nav/reference/workflow/)

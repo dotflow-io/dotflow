@@ -1,5 +1,9 @@
 # Parallel
 
+All tasks run simultaneously in separate processes. Each task executes independently without receiving context from other tasks.
+
+## Implementation
+
 {* ./docs_src/process_mode/parallel.py hl[26] *}
 
 ## Workflow
@@ -15,3 +19,7 @@ flowchart TD
     C --> H[Finish]
     D --> H[Finish]
 ```
+
+## References
+
+- [Manager](https://dotflow-io.github.io/dotflow/nav/reference/workflow/)

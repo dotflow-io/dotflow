@@ -1,5 +1,7 @@
 # With Mode
 
+Choose the execution mode: `sequential`, `background`, or `parallel`.
+
 ```bash
 dotflow start --step docs_src.cli.cli_with_mode.simple_step --mode sequential
 ```

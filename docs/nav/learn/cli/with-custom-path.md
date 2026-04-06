@@ -1,5 +1,7 @@
 # With Custom Path
 
+Set a custom output path for file storage.
+
 ```bash
 dotflow start --step docs_src.cli.cli_with_path.simple_step --path .storage --storage file
 ```
