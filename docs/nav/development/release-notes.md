@@ -3,15 +3,15 @@
 ## v0.14.0
 
 - [📦 PyPI - Build 0.14.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.14.0)
-- [⚙️ FEATURE: Replace task.error with task.errors list for full retry observability](https://github.com/dotflow-io/dotflow/pull/113)
-- [⚙️ FEATURE: Checkpoint-based resume from failure](https://github.com/dotflow-io/dotflow/pull/118)
-- [⚙️ FEATURE: Add StorageS3 provider for AWS S3 persistence](https://github.com/dotflow-io/dotflow/pull/114)
-- [⚙️ FEATURE: Add StorageGCS provider for Google Cloud Storage persistence](https://github.com/dotflow-io/dotflow/pull/116)
-- [⚙️ FEATURE: Rewrite dotflow init with interactive cookiecutter template](https://github.com/dotflow-io/dotflow/pull/121)
-- [⚙️ FEATURE: Add async/await support for actions](https://github.com/dotflow-io/dotflow/pull/122)
-- [⚙️ FEATURE: Fix thread-safety in Action retry and set task status to RETRY](https://github.com/dotflow-io/dotflow/pull/99)
-- [🪲 BUG: Fix backoff mutating retry_delay permanently across calls](https://github.com/dotflow-io/dotflow/pull/100)
-- [🪲 BUG: Fix incorrect member references in docs](https://github.com/dotflow-io/dotflow/pull/120)
+- [⚙️ FEATURE-#102: Workflow observability — task.errors and retry tracking](https://github.com/dotflow-io/dotflow/pull/113)
+- [⚙️ FEATURE-#101: Checkpoint-based durable state (resume from failure)](https://github.com/dotflow-io/dotflow/pull/118)
+- [⚙️ FEATURE-#104: Add StorageS3 provider for AWS S3 persistence](https://github.com/dotflow-io/dotflow/pull/114)
+- [⚙️ FEATURE-#115: Add StorageGCS provider for Google Cloud Storage persistence](https://github.com/dotflow-io/dotflow/pull/116)
+- [⚙️ FEATURE-#107: Rewrite dotflow init with interactive cookiecutter template](https://github.com/dotflow-io/dotflow/pull/121)
+- [⚙️ FEATURE-#103: Add async/await support for actions](https://github.com/dotflow-io/dotflow/pull/122)
+- [⚙️ FEATURE-#84: Fix thread-safety in Action retry and set task status to RETRY](https://github.com/dotflow-io/dotflow/pull/99)
+- [🪲 BUG-#82: Fix backoff mutating retry_delay permanently across calls](https://github.com/dotflow-io/dotflow/pull/100)
+- [📘 DOCS-#119: Fix documentation gaps — incorrect references, missing parameters, outdated attributes](https://github.com/dotflow-io/dotflow/pull/120)
 
 ## v0.13.2
 
