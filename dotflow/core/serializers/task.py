@@ -39,16 +39,22 @@ class SerializerTask(BaseModel):
     )
 
     def model_dump_json(self, **kwargs) -> str:
-        dump_json = super().model_dump_json(serialize_as_any=True, **kwargs)
+        data = json.loads(
+            super().model_dump_json(serialize_as_any=True, **kwargs)
+        )
+        data["error"] = data["errors"][-1] if data["errors"] else None
+        dump_json = json.dumps(data)
 
         if self.max and len(dump_json) > self.max:
             self.initial_context = self.size_message
             self.current_context = self.size_message
             self.previous_context = self.size_message
 
-            dump_json = super().model_dump_json(
-                serialize_as_any=True, **kwargs
+            data = json.loads(
+                super().model_dump_json(serialize_as_any=True, **kwargs)
             )
+            data["error"] = data["errors"][-1] if data["errors"] else None
+            dump_json = json.dumps(data)
 
             return dump_json[0 : self.max]
 
