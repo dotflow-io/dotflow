@@ -1,5 +1,7 @@
 # Exception
 
+::: dotflow.core.exception.TaskError
+
 ::: dotflow.core.exception.MissingActionDecorator
 
 ::: dotflow.core.exception.ExecutionModeNotExist

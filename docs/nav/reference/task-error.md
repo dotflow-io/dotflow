@@ -1,3 +1,3 @@
 # TaskError
 
-::: dotflow.core.task.TaskError
+::: dotflow.core.exception.TaskError
