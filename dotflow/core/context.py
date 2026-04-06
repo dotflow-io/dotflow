@@ -80,6 +80,8 @@ class Context(ContextInstance):
 
     @workflow_id.setter
     def workflow_id(self, value: UUID):
+        if isinstance(value, str):
+            value = UUID(value)
         if isinstance(value, UUID):
             self._workflow_id = value
 

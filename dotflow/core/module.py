@@ -19,7 +19,7 @@ class Module:
         spec = file_location(value, cls._get_path(value))
         module = module_from_spec(spec)
 
-        sys.modules[module] = module
+        sys.modules[module.__name__] = module
         spec.loader.exec_module(module)
 
         if hasattr(module, cls._get_name(value)):
