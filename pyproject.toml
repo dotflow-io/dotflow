@@ -78,6 +78,8 @@ tox = "^4.23.2"
 pytest-cov = "^6.0.0"
 pylint = "^3.3.4"
 pyzmq = "^26.2.1"
+boto3 = "^1.42.83"
+moto = "^5.1.22"
 
 
 [tool.poetry.group.code-quality.dependencies]
