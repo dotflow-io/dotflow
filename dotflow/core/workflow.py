@@ -107,7 +107,12 @@ class Manager:
         execution = None
         groups = grouper(tasks=tasks)
 
-        VALID_MODES = {"sequential", "sequential_group", "background", "parallel"}
+        VALID_MODES = {
+            "sequential",
+            "sequential_group",
+            "background",
+            "parallel",
+        }
         if mode not in VALID_MODES:
             raise ExecutionModeNotExist()
 
