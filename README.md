@@ -109,7 +109,7 @@ workflow.start()
 
 ### Execution Modes
 
-> [Process Mode docs](https://dotflow-io.github.io/dotflow/nav/learn/process-mode/sequential/)
+> [Process Mode docs](https://dotflow-io.github.io/dotflow/nav/learn/process-mode-sequential/)
 
 Dotflow supports 4 execution strategies out of the box:
 
@@ -180,7 +180,7 @@ flowchart TD
 
 ### Retry, Timeout & Backoff
 
-> [Retry docs](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/retry/) | [Backoff docs](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/backoff/) | [Timeout docs](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/timeout/)
+> [Retry docs](https://dotflow-io.github.io/dotflow/nav/tutorial/task-retry/) | [Backoff docs](https://dotflow-io.github.io/dotflow/nav/tutorial/task-backoff/) | [Timeout docs](https://dotflow-io.github.io/dotflow/nav/tutorial/task-timeout/)
 
 The `@action` decorator supports built-in resilience options:
 
@@ -203,7 +203,7 @@ def unreliable_api_call():
 
 ### Context System
 
-> [Context docs](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/initial-context/) | [Previous Context](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/previous-context/) | [Many Contexts](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/many-contexts/)
+> [Context docs](https://dotflow-io.github.io/dotflow/nav/tutorial/initial-context/) | [Previous Context](https://dotflow-io.github.io/dotflow/nav/tutorial/previous-context/) | [Many Contexts](https://dotflow-io.github.io/dotflow/nav/tutorial/many-contexts/)
 
 Tasks communicate through a context chain. Each task receives the previous task's output and can access its own initial context.
 
@@ -234,7 +234,7 @@ Each `Context` object contains:
 
 ### Checkpoint & Resume
 
-> [Checkpoint docs](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/checkpoint/)
+> [Checkpoint docs](https://dotflow-io.github.io/dotflow/nav/tutorial/checkpoint/)
 
 Resume a workflow from where it left off. Requires a persistent storage provider and a fixed `workflow_id`.
 
@@ -260,7 +260,7 @@ workflow.start(resume=True)
 
 ### Storage Providers
 
-> [Storage docs](https://dotflow-io.github.io/dotflow/nav/learn/providers/storage-default/)
+> [Storage docs](https://dotflow-io.github.io/dotflow/nav/tutorial/provider-storage/)
 
 Choose where task results are persisted:
 
@@ -314,7 +314,7 @@ workflow = DotFlow(config=config)
 
 ### Notifications
 
-> [Telegram docs](https://dotflow-io.github.io/dotflow/nav/learn/advanced/notify-telegram/)
+> [Telegram docs](https://dotflow-io.github.io/dotflow/nav/advanced/notify-with-telegram/)
 
 Get notified about task status changes via Telegram.
 
@@ -371,7 +371,7 @@ workflow.start()
 
 ### Task Groups
 
-> [Groups docs](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/groups/)
+> [Groups docs](https://dotflow-io.github.io/dotflow/nav/tutorial/groups/)
 
 Organize tasks into named groups for parallel group execution.
 
@@ -388,7 +388,7 @@ workflow.start()  # groups run in parallel, tasks within each group run sequenti
 
 ### Callbacks
 
-> [Task Callback docs](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/task-callback/) | [Workflow Callback docs](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/workflow-callback/)
+> [Task Callback docs](https://dotflow-io.github.io/dotflow/nav/tutorial/task-callback/) | [Workflow Callback docs](https://dotflow-io.github.io/dotflow/nav/tutorial/workflow-callback/)
 
 Execute a function after each task completes — useful for logging, alerting, or side effects.
 
@@ -415,7 +415,7 @@ workflow.start(on_success=on_success, on_failure=on_failure)
 
 ### Error Handling
 
-> [Error Handling docs](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/error-handling/) | [Keep Going docs](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/keep-going/)
+> [Error Handling docs](https://dotflow-io.github.io/dotflow/nav/tutorial/error-handling/) | [Keep Going docs](https://dotflow-io.github.io/dotflow/nav/tutorial/keep-going/)
 
 Control whether the workflow stops or continues when a task fails:
 
@@ -445,7 +445,7 @@ for task in workflow.result_task():
 
 ### Async Support
 
-> [Async docs](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/async-action/)
+> [Async docs](https://dotflow-io.github.io/dotflow/nav/tutorial/async-actions/)
 
 `@action` automatically detects and handles async functions:
 

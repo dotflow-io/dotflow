@@ -51,7 +51,7 @@ Homepage = "https://github.com/dotflow-io/dotflow"
 Issues = "https://github.com/dotflow-io/dotflow/issues"
 Repository = "https://github.com/dotflow-io/dotflow"
 Documentation = "https://dotflow-io.github.io/dotflow/"
-Changelog = "https://dotflow-io.github.io/dotflow/nav/release-notes/"
+Changelog = "https://dotflow-io.github.io/dotflow/nav/development/release-notes/"
 
 [project.optional-dependencies]
 mongodb = ["dotflow-mongodb"]
