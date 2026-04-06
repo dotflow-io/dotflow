@@ -54,7 +54,6 @@ Documentation = "https://dotflow-io.github.io/dotflow/"
 Changelog = "https://dotflow-io.github.io/dotflow/nav/development/release-notes/"
 
 [project.optional-dependencies]
-mongodb = ["dotflow-mongodb"]
 aws = ["boto3"]
 gcp = ["google-cloud-storage"]
 scheduler = ["croniter"]
@@ -138,6 +137,7 @@ mkdocs-simple-blog = "0.2.0"
 mkdocs-material = "^9.6.13"
 markdown-include-variants = "^0.0.4"
 mkdocs-static-i18n = "^1.3.0"
+mkdocs-redirects = "^1.2.2"
 mdx-include = "^1.4.2"
 griffe = "<1.14"
 
