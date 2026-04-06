@@ -348,9 +348,8 @@ class Background(Flow):
                 break
 
     def run(self) -> None:
-        thread = threading.Thread(target=self._run_sequential)
-        thread.start()
-        thread.join()
+        self.thread = threading.Thread(target=self._run_sequential)
+        self.thread.start()
 
 
 class Parallel(Flow):
