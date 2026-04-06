@@ -162,6 +162,7 @@ nav:
         - nav/learn/process-mode-parallel.md
         - nav/learn/process-mode-parallel-group.md
       - Dotflow CLI:
+        - nav/learn/cli/init.md
         - nav/learn/cli/simple-start.md
         - nav/learn/cli/with-initial-context.md
         - nav/learn/cli/with-callback.md
