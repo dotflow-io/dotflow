@@ -78,5 +78,5 @@ class Config:
     def _validate(self) -> None:
         for name, abc in self._PROVIDERS.items():
             value = getattr(self, name)
-            if not isinstance(value, abc):
+            if value is not None and not isinstance(value, abc):
                 raise NotCallableObject(name=name)

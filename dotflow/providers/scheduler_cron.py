@@ -131,7 +131,8 @@ class SchedulerCron(Scheduler):
     def _dispatch_queue(self, workflow: Callable, **kwargs) -> None:
         with self._lock:
             if self._executing:
-                self._queue_count += 1
+                if self._queue_count == 0:
+                    self._queue_count = 1
                 return
             self._executing = True
 
@@ -170,6 +171,8 @@ class SchedulerCron(Scheduler):
                     self._executing = False
 
     def _register_signals(self) -> None:
+        if threading.current_thread() is not threading.main_thread():
+            return
         signal.signal(signal.SIGINT, self._handle_signal)
         signal.signal(signal.SIGTERM, self._handle_signal)
 

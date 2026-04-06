@@ -39,10 +39,14 @@ class StartCommand(Command):
             "gcs": StorageGCS,
         }
 
-        config = Config(
-            storage=storage_classes.get(self.params.storage)(
-                path=self.params.path,
-            )
-        )
+        storage_cls = storage_classes.get(self.params.storage)
+        storage_with_path = {StorageDefault, StorageFile}
+
+        if storage_cls in storage_with_path:
+            storage = storage_cls(path=self.params.path)
+        else:
+            storage = storage_cls()
+
+        config = Config(storage=storage)
 
         return DotFlow(config=config)
