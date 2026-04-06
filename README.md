@@ -260,7 +260,7 @@ workflow.start(resume=True)
 
 ### Storage Providers
 
-> [Storage docs](https://dotflow-io.github.io/dotflow/nav/tutorial/provider-storage/)
+> [Storage docs](https://dotflow-io.github.io/dotflow/nav/tutorial/storage-default/)
 
 Choose where task results are persisted:
 
@@ -314,7 +314,7 @@ workflow = DotFlow(config=config)
 
 ### Notifications
 
-> [Telegram docs](https://dotflow-io.github.io/dotflow/nav/advanced/notify-with-telegram/)
+> [Telegram docs](https://dotflow-io.github.io/dotflow/nav/tutorial/notify-telegram/)
 
 Get notified about task status changes via Telegram.
 
