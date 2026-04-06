@@ -126,14 +126,17 @@ nav:
       - nav/learn/index.md
       - nav/learn/concept-of-context.md
       - Providers:
-        - Storage Provider:
+        - Storage:
           - nav/tutorial/storage-default.md
           - nav/tutorial/storage-file.md
           - nav/tutorial/storage-s3.md
           - nav/tutorial/storage-gcs.md
-        - nav/tutorial/provider-notify.md
-        - nav/tutorial/provider-log.md
-        - Scheduler Provider:
+        - Notify:
+          - nav/tutorial/notify-default.md
+          - nav/tutorial/notify-telegram.md
+        - Log:
+          - nav/tutorial/log-default.md
+        - Scheduler:
           - nav/tutorial/scheduler-default.md
           - nav/tutorial/scheduler-cron.md
       - Tutorial - User Guide:
@@ -159,7 +162,9 @@ nav:
         #   - nav/tutorial/output-storage.md
         #   - nav/tutorial/output-task.md
       - Advanced User Guide:
-        - nav/advanced/notify-with-telegram.md
+        - nav/advanced/scheduled-pipeline-with-resume.md
+        - nav/advanced/parallel-with-groups.md
+        - nav/advanced/notifications-on-failure.md
       - Process Mode:
         - nav/learn/process-mode-sequential.md
         - nav/learn/process-mode-background.md
@@ -213,5 +218,7 @@ nav:
         - nav/reference/abc-scheduler.md
         - nav/reference/abc-storage.md
         - nav/reference/abc-http.md
-    - Development Guide: nav/development/development-guide.md
+    - Development Guide:
+      - nav/development/development-guide.md
+      - nav/development/custom-providers.md
     - Release Notes: nav/development/release-notes.md
