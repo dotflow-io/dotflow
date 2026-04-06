@@ -30,6 +30,9 @@ class DotFlow:
     Args:
         config (Optional[Config]): Configuration class.
 
+        workflow_id (Optional[str]): Fixed workflow identifier for checkpoint
+            resume. If not provided, a random UUID is generated.
+
     Attributes:
         workflow_id (UUID):
 
