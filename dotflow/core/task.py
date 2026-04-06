@@ -215,7 +215,9 @@ class Task(TaskInstance):
         import warnings
 
         warnings.warn(
-            "'error' is deprecated, use 'errors' instead.",
+            "'error' is deprecated, use 'errors' instead. "
+            "Note: 'TaskError.exception' is now a string "
+            "(e.g. 'ValueError'), not an Exception object.",
             DeprecationWarning,
             stacklevel=2,
         )
@@ -228,7 +230,9 @@ class Task(TaskInstance):
         import warnings
 
         warnings.warn(
-            "'error' is deprecated, use 'errors' instead.",
+            "'error' is deprecated, use 'errors' instead. "
+            "Note: 'TaskError.exception' is now a string "
+            "(e.g. 'ValueError'), not an Exception object.",
             DeprecationWarning,
             stacklevel=2,
         )
