@@ -1,15 +1,13 @@
-# Scheduler Provider
+# Scheduler Default
 
-The `scheduler` provider defines how workflows are executed on a recurring schedule.
+`SchedulerDefault` is the default scheduler provider. It does nothing — `schedule()` returns immediately without running the workflow on any recurring schedule.
+
+This is the provider used when no scheduler is explicitly configured in `Config`. It ensures that calling `workflow.schedule()` is always safe, even when scheduling is not needed.
 
 ## Available providers
 
 - `SchedulerDefault`: no scheduling — `schedule()` returns immediately.
 - `SchedulerCron`: cron-based recurring execution using cron expressions.
-
-/// note
-`SchedulerCron` requires `pip install dotflow[scheduler]`
-///
 
 ## Example
 

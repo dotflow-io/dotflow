@@ -74,6 +74,17 @@ class SchedulerCron(Scheduler):
                 f"Invalid cron expression {cron!r}: {err}"
             ) from err
 
+        valid_overlaps = {
+            TypeOverlap.SKIP,
+            TypeOverlap.QUEUE,
+            TypeOverlap.PARALLEL,
+        }
+        if overlap not in valid_overlaps:
+            raise ValueError(
+                f"Invalid overlap {overlap!r}. "
+                f"Must be one of: {sorted(valid_overlaps)}"
+            )
+
         self.cron = cron
         self.overlap = overlap
         self.running = False
@@ -123,6 +134,11 @@ class SchedulerCron(Scheduler):
             self._dispatch_queue(workflow=workflow, **kwargs)
         elif self.overlap == TypeOverlap.PARALLEL:
             self._dispatch_parallel(workflow=workflow, **kwargs)
+        else:
+            logger.error(
+                "Unknown overlap strategy %r — workflow not dispatched",
+                self.overlap,
+            )
 
     def _dispatch_skip(self, workflow: Callable, **kwargs) -> None:
         with self._lock:

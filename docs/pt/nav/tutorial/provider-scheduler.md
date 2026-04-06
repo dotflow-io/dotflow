@@ -1,15 +1,13 @@
-# Provider de Scheduler
+# Scheduler Default
 
-O provider `scheduler` define como os workflows são executados de forma recorrente.
+`SchedulerDefault` é o provider de scheduler padrão. Ele não faz nada — `schedule()` retorna imediatamente sem executar o workflow em nenhum agendamento recorrente.
+
+Este é o provider usado quando nenhum scheduler é configurado explicitamente no `Config`. Ele garante que chamar `workflow.schedule()` é sempre seguro, mesmo quando o agendamento não é necessário.
 
 ## Providers disponíveis
 
 - `SchedulerDefault`: sem agendamento — `schedule()` retorna imediatamente.
 - `SchedulerCron`: execução recorrente baseada em expressões cron.
-
-/// note
-`SchedulerCron` requer `pip install dotflow[scheduler]`
-///
 
 ## Exemplo
 
