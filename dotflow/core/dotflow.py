@@ -53,19 +53,15 @@ class DotFlow:
         self._config.api.create_workflow(workflow=self.workflow_id)
 
         self.task = TaskBuilder(
-            config=self._config,
-            workflow_id=self.workflow_id
+            config=self._config, workflow_id=self.workflow_id
         )
 
         self.start = partial(
-            Manager,
-            tasks=self.task.queue,
-            workflow_id=self.workflow_id
+            Manager, tasks=self.task.queue, workflow_id=self.workflow_id
         )
 
         self.schedule = partial(
-            self._config.scheduler.start,
-            workflow=self.start
+            self._config.scheduler.start, workflow=self.start
         )
 
     def result_task(self):

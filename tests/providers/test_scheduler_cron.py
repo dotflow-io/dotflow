@@ -15,7 +15,6 @@ from dotflow.providers.scheduler_cron import SchedulerCron  # noqa: E402
 
 
 class TestSchedulerCron(unittest.TestCase):
-
     def test_instance(self):
         scheduler = SchedulerCron(cron="*/5 * * * *")
 

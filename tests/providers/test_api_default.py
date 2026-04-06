@@ -8,7 +8,6 @@ from dotflow.providers.api_default import ApiDefault
 
 
 class TestApiDefaultInit(unittest.TestCase):
-
     def test_enabled_false_when_env_not_set(self):
         api = ApiDefault()
         self.assertFalse(api.enabled)
@@ -47,7 +46,6 @@ class TestApiDefaultInit(unittest.TestCase):
 
 
 class TestApiDefaultIsReady(unittest.TestCase):
-
     def test_not_ready_when_disabled(self):
         api = ApiDefault(enabled=False)
         self.assertFalse(api._is_ready())
@@ -72,7 +70,6 @@ class TestApiDefaultIsReady(unittest.TestCase):
 
 
 class TestApiDefaultCallablePath(unittest.TestCase):
-
     def test_none_returns_none(self):
         self.assertIsNone(ApiDefault._callable_path(None))
 
@@ -95,7 +92,6 @@ class TestApiDefaultCallablePath(unittest.TestCase):
 
 
 class TestApiDefaultWorkflowToPayload(unittest.TestCase):
-
     def test_with_uuid_workflow(self):
         api = ApiDefault()
         workflow_id = uuid4()
@@ -137,7 +133,6 @@ class TestApiDefaultWorkflowToPayload(unittest.TestCase):
 
 
 class TestApiDefaultCreateWorkflow(unittest.TestCase):
-
     def test_does_nothing_when_not_ready(self):
         api = ApiDefault(enabled=False)
         result = api.create_workflow("workflow")
@@ -176,7 +171,6 @@ class TestApiDefaultCreateWorkflow(unittest.TestCase):
 
 
 class TestApiDefaultNoOps(unittest.TestCase):
-
     def test_update_workflow_returns_none(self):
         api = ApiDefault()
         self.assertIsNone(api.update_workflow("wf"))

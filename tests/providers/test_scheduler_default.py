@@ -8,7 +8,6 @@ from dotflow.providers.scheduler_default import SchedulerDefault
 
 
 class TestSchedulerDefault(unittest.TestCase):
-
     def test_instance(self):
         scheduler = SchedulerDefault()
 

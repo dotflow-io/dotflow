@@ -13,7 +13,6 @@ from tests.mocks import action_step
 
 
 class TestStorageFile(unittest.TestCase):
-
     def setUp(self):
         self.path = Path("tests")
         self.file_name = "file.json"

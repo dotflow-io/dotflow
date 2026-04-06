@@ -60,12 +60,14 @@ class Command:
         self.cmd_start.add_argument("-c", "--callback", default=basic_callback)
         self.cmd_start.add_argument("-i", "--initial-context")
         self.cmd_start.add_argument(
-            "-o", "--storage", choices=[
+            "-o",
+            "--storage",
+            choices=[
                 TypeStorage.DEFAULT,
                 TypeStorage.FILE,
                 TypeStorage.S3,
                 TypeStorage.GCS,
-            ]
+            ],
         )
         self.cmd_start.add_argument(
             "-p", "--path", default=settings.START_PATH
@@ -93,7 +95,9 @@ class Command:
 
         self.cmd_schedule.add_argument("-s", "--step", required=True)
         self.cmd_schedule.add_argument(
-            "--cron", required=True, help="Cron expression (e.g. '*/5 * * * *')"
+            "--cron",
+            required=True,
+            help="Cron expression (e.g. '*/5 * * * *')",
         )
         self.cmd_schedule.add_argument(
             "-c", "--callback", default=basic_callback

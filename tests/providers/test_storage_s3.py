@@ -18,7 +18,6 @@ REGION = "us-east-1"
 
 
 class TestStorageS3(unittest.TestCase):
-
     def setUp(self):
         self.mock = mock_aws()
         self.mock.start()
