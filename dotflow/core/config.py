@@ -37,7 +37,7 @@ class Config:
     Args:
         storage (Optional[Storage]): Type of the storage.
         notify (Optional[Notify]): Type of the notify.
-        log (Optional[Log]): Type of the notify.
+        log (Optional[Log]): Type of the log.
 
     Attributes:
         storage (Optional[Storage]):
