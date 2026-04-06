@@ -1,7 +1,7 @@
 <div align="center">
   <a aria-label="Serverless.com" href="https://dotflow.io">Website</a>
   &nbsp;•&nbsp;
-  <a aria-label="Dotglow Documentation" href="https://dotflow-io.github.io/dotflow/">Documentation</a>
+  <a aria-label="Dotflow Documentation" href="https://dotflow-io.github.io/dotflow/">Documentation</a>
   &nbsp;•&nbsp;
   <a aria-label="Pypi" href="https://pypi.org/project/dotflow/">Pypi</a>
 </div>
@@ -20,13 +20,9 @@
 
 </div>
 
-# Welcome to dotflow
+# Welcome to Dotflow
 
-With Dotflow, you get a powerful and easy-to-use library designed to create execution pipelines without complication. Add tasks intuitively and control the entire process with just a few commands.
-
-Our goal is to make task management faster and more secure, without overwhelming you with complexity. Simply instantiate the DotFlow class, add your tasks with the `add` method, and start execution with the `start` method.
-
-Start with the basics [here](https://dotflow-io.github.io/dotflow/).
+Dotflow is a lightweight Python library for building execution pipelines. Define tasks with decorators, chain them together, and run workflows in sequential, parallel, or background mode — with built-in retry, timeout, storage, notifications, and more.
 
 ## Table of Contents
 
@@ -34,21 +30,22 @@ Start with the basics [here](https://dotflow-io.github.io/dotflow/).
 <summary>Click to expand</summary>
 
 - [Getting Help](#getting-help)
-- [Getting Started](#getting-started)
-    - [Install](#install)
-- [A Simple Example](#a-simple-example)
-- [First Steps](#first-steps)
-    - [Import](#import)
-    - [Callback function](#callback-function)
-    - [Task function](#task-function)
-    - [DotFlow Class](#dotflow-class)
-    - [Add Task](#add-task)
-    - [Start](#start)
-- [CLI](#cli)
-    - [Simple Start](#simple-start)
-    - [With Initial Context](#with-initial-context)
-    - [With Callback](#with-callback)
-    - [With Mode](#with-mode)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Features](#features)
+  - [Execution Modes](#execution-modes)
+  - [Retry, Timeout & Backoff](#retry-timeout--backoff)
+  - [Context System](#context-system)
+  - [Checkpoint & Resume](#checkpoint--resume)
+  - [Storage Providers](#storage-providers)
+  - [Notifications](#notifications)
+  - [Class-Based Steps](#class-based-steps)
+  - [Task Groups](#task-groups)
+  - [Callbacks](#callbacks)
+  - [Error Handling](#error-handling)
+  - [Async Support](#async-support)
+  - [CLI](#cli)
+  - [Dependency Injection via Config](#dependency-injection-via-config)
 - [More Examples](#more-examples)
 - [Commit Style](#commit-style)
 - [License](#license)
@@ -57,297 +54,612 @@ Start with the basics [here](https://dotflow-io.github.io/dotflow/).
 
 ## Getting Help
 
-We use GitHub issues for tracking bugs and feature requests and have limited bandwidth to address them. If you need anything, I ask you to please follow our templates for opening issues or discussions.
+We use GitHub issues for tracking bugs and feature requests.
 
-- 🐛 [Bug Report](https://github.com/dotflow-io/dotflow/issues/new/choose)
-- 📕 [Documentation](https://github.com/dotflow-io/dotflow/issues/new/choose)
-- 🚀 [Feature Request](https://github.com/dotflow-io/dotflow/issues/new/choose)
-- ⚠️ [Security Issue](https://github.com/dotflow-io/dotflow/issues/new/choose)
-- 💬 [General Question](https://github.com/dotflow-io/dotflow/issues/new/choose)
+- [Bug Report](https://github.com/dotflow-io/dotflow/issues/new/choose)
+- [Documentation](https://github.com/dotflow-io/dotflow/issues/new/choose)
+- [Feature Request](https://github.com/dotflow-io/dotflow/issues/new/choose)
+- [Security Issue](https://github.com/dotflow-io/dotflow/issues/new/choose)
+- [General Question](https://github.com/dotflow-io/dotflow/issues/new/choose)
 
-## Getting Started
-
-### Install
-
-To install `Dotflow`, run the following command from the command line:
-
-**With Pip**
+## Installation
 
 ```bash
 pip install dotflow
 ```
 
-**With Poetry**
+**Optional extras:**
 
 ```bash
-poetry add dotflow
+pip install dotflow[aws]      # AWS S3 storage
+pip install dotflow[gcp]      # Google Cloud Storage
 ```
 
-## A Simple Example
-
-The simplest file could look like this:
+## Quick Start
 
 ```python
 from dotflow import DotFlow, action
 
-def my_callback(*args, **kwargs):
-    print(args, kwargs)
+@action
+def extract():
+    return {"users": 150}
 
 @action
-def my_task_x():
-    print("task")
+def transform(previous_context):
+    total = previous_context.storage["users"]
+    return {"users": total, "active": int(total * 0.8)}
 
 @action
-def my_task_y():
-    print("task")
+def load(previous_context):
+    print(f"Loaded {previous_context.storage['active']} active users")
 
 workflow = DotFlow()
-
-workflow.task.add(step=my_task_x, callback=my_callback)
-workflow.task.add(step=my_task_y, callback=my_callback)
-
-workflow.start()
-```
-
-## First Steps
-
-#### 1. Import
-
-Start with the basics, which is importing the necessary classes and methods. ([DotFlow](https://dotflow-io.github.io/dotflow/nav/reference/dotflow/), [action](https://dotflow-io.github.io/dotflow/nav/reference/action/))
-
-```python
-from dotflow import DotFlow, action
-```
-
-#### 2. Callback function
-
-Create a `my_callback` function to receive execution information of a task. `It is not necessary` to include this function, as you will still have a report at the end of the execution in the instantiated object of the `DotFlow` class. This `my_callback` function is only needed if you need to do something after the execution of the task, for example: sending a message to someone, making a phone call, or sending a letter. [More details](https://dotflow-io.github.io/dotflow/nav/reference/utils/#dotflow.utils.basic_functions.basic_callback)
-
-```python
-def my_callback(*args, **kwargs):
-    print(args, kwargs)
-```
-
-#### 3. Task function
-
-Now, create the function responsible for executing your task. It's very simple; just use the [action](https://dotflow-io.github.io/dotflow/nav/reference/action/) decorator above the function, and that's it—you've created a task.
-
-```python
-@action
-def my_task_x():
-    print("task")
-```
-
-#### 4. DotFlow Class
-
-Instantiate the DotFlow class in a `workflow` variable to be used in the following steps. [More details](https://dotflow-io.github.io/dotflow/nav/reference/dotflow/).
-
-```python
-workflow = DotFlow()
-```
-
-#### 5. Add Task
-
-Now, simply add the `my_task_x` and `my_callback` functions you created earlier to the workflow using the code below. This process is necessary to define which tasks will be executed and the order in which they will run. The execution order follows the sequence in which they were added to the workflow. [More details](https://dotflow-io.github.io/dotflow/nav/reference/task-builder/#dotflow.core.task.TaskBuilder.add)
-
-- Adding one step at a time:
-
-```python
-workflow.task.add(step=my_task_x, callback=my_callback)
-workflow.task.add(step=my_task_y, callback=my_callback)
-```
-
-- Adding multiple steps at the same time:
-
-```python
-workflow.task.add(step=[my_task_x, my_task_y], callback=my_callback)
-```
-
-- Adding a step with the module path:
-
-```python
-workflow.task.add(step="module.task.my_task_x", callback=my_callback)
-```
-
-#### 6. Start
-
-Finally, just execute the workflow with the following code snippet. [More details](https://dotflow-io.github.io/dotflow/nav/reference/workflow/#dotflow.core.workflow.Manager)
-
-```python
-workflow.start()
-```
-
-## CLI
-
-#### Simple Start
-
-```bash
-dotflow start --step examples.cli_with_mode.simple_step
-```
-
-#### With Initial Context
-
-```bash
-dotflow start --step examples.cli_with_initial_context.simple_step --initial-context abc
-```
-
-#### With Callback
-
-```bash
-dotflow start --step examples.cli_with_callback.simple_step --callback examples.cli_with_callback.callback
-```
-
-#### With Mode
-
-```bash
-dotflow start --step examples.cli_with_mode.simple_step --mode sequential
-```
-
-```bash
-dotflow start --step examples.cli_with_mode.simple_step --mode background
-```
-
-```bash
-dotflow start --step examples.cli_with_mode.simple_step --mode parallel
-```
-
-## Process Mode
-
-#### Sequential
-
-```python
-workflow.task.add(step=task_foo)
-workflow.task.add(step=task_bar)
+workflow.task.add(step=extract)
+workflow.task.add(step=transform)
+workflow.task.add(step=load)
 
 workflow.start()
 ```
-<details>
-<summary>Click to see diagram</summary>
+
+## Features
+
+### Execution Modes
+
+Dotflow supports 4 execution strategies out of the box:
+
+#### Sequential (default)
+
+Tasks run one after another. The context from each task flows to the next.
+
+```python
+workflow.task.add(step=task_a)
+workflow.task.add(step=task_b)
+
+workflow.start()  # or mode="sequential"
+```
 
 ```mermaid
-flowchart TD
-A[Start] -->|run| B
-B[task_foo] -->|response to| C
-C[task_bar] -->|response| D
-D[Finish]
+flowchart LR
+    A[task_a] --> B[task_b] --> C[Finish]
 ```
-
-</details>
 
 #### Background
 
-```python
-workflow.task.add(step=task_foo)
-workflow.task.add(step=task_bar)
+Same as sequential, but runs in a background thread — non-blocking.
 
+```python
 workflow.start(mode="background")
 ```
 
-<details>
-<summary>Click to see diagram</summary>
-
-```mermaid
-flowchart TD
-A[Start] -->|run| B
-B[task_foo] -->|response to| C
-C[task_bar] -->|response| D
-D[Finish]
-```
-
-</details>
-
 #### Parallel
+
+Every task runs simultaneously in its own process.
 
 ```python
 workflow.task.add(step=task_a)
 workflow.task.add(step=task_b)
 workflow.task.add(step=task_c)
-workflow.task.add(step=task_d)
 
 workflow.start(mode="parallel")
 ```
 
-<details>
-<summary>Click to see diagram</summary>
-
 ```mermaid
 flowchart TD
-    S[Start] -->|run| A[task_a]
-    S[Start] -->|run| B[task_b]
-    S[Start] -->|run| C[task_c]
-    S[Start] -->|run| D[task_d]
-    A --> H[Finish]
-    B --> H[Finish]
-    C --> H[Finish]
-    D --> H[Finish]
+    S[Start] --> A[task_a] & B[task_b] & C[task_c]
+    A & B & C --> F[Finish]
 ```
 
-</details>
+#### Parallel Groups
 
-#### Parallel with Groups
+Assign tasks to named groups. Groups run in parallel, but tasks within each group run sequentially.
 
 ```python
-workflow.task.add(step=task_foo, group_name="foo")
-workflow.task.add(step=task_bar, group_name="bar")
+workflow.task.add(step=fetch_users, group_name="users")
+workflow.task.add(step=save_users, group_name="users")
+workflow.task.add(step=fetch_orders, group_name="orders")
+workflow.task.add(step=save_orders, group_name="orders")
 
 workflow.start()
 ```
 
-<details>
-<summary>Click to see diagram</summary>
-
 ```mermaid
 flowchart TD
-    A[Start] -->|run| C(Parallel Groups)
-    C -->|run| D[task_a]
-    C -->|run| E[task_c]
-    D -->|response| X[task_b]
-    X --> H[Finish]
-    E -->|response| Y[task_d]
-    Y --> H[Finish]
+    S[Start] --> G1[Group: users] & G2[Group: orders]
+    G1 --> A[fetch_users] --> B[save_users]
+    G2 --> C[fetch_orders] --> D[save_orders]
+    B & D --> F[Finish]
 ```
 
-</details>
+---
+
+### Retry, Timeout & Backoff
+
+The `@action` decorator supports built-in resilience options:
+
+```python
+@action(retry=3, timeout=10, retry_delay=2, backoff=True)
+def unreliable_api_call():
+    response = requests.get("https://api.example.com/data")
+    response.raise_for_status()
+    return response.json()
+```
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `retry` | `int` | `1` | Number of attempts before failing |
+| `timeout` | `int` | `0` | Max seconds per attempt (0 = no limit) |
+| `retry_delay` | `int` | `1` | Seconds to wait between retries |
+| `backoff` | `bool` | `False` | Exponential backoff (delay doubles each retry) |
+
+---
+
+### Context System
+
+Tasks communicate through a context chain. Each task receives the previous task's output and can access its own initial context.
+
+```python
+@action
+def step_one():
+    return "Hello"
+
+@action
+def step_two(previous_context, initial_context):
+    greeting = previous_context.storage   # "Hello"
+    name = initial_context.storage        # "World"
+    return f"{greeting}, {name}!"
+
+workflow = DotFlow()
+workflow.task.add(step=step_one)
+workflow.task.add(step=step_two, initial_context="World")
+workflow.start()
+```
+
+Each `Context` object contains:
+- **`storage`** — the return value from the task
+- **`task_id`** — the task identifier
+- **`workflow_id`** — the workflow identifier
+- **`time`** — timestamp of execution
+
+---
+
+### Checkpoint & Resume
+
+Resume a workflow from where it left off. Requires a persistent storage provider and a fixed `workflow_id`.
+
+```python
+from dotflow import DotFlow, Config, action
+from dotflow.providers import StorageFile
+
+config = Config(storage=StorageFile())
+
+workflow = DotFlow(config=config, workflow_id="my-pipeline-v1")
+workflow.task.add(step=step_a)
+workflow.task.add(step=step_b)
+workflow.task.add(step=step_c)
+
+# First run — executes all tasks and saves checkpoints
+workflow.start()
+
+# If step_c failed, fix and re-run — skips step_a and step_b
+workflow.start(resume=True)
+```
+
+---
+
+### Storage Providers
+
+Choose where task results are persisted:
+
+#### In-Memory (default)
+
+```python
+from dotflow import DotFlow
+
+workflow = DotFlow()  # uses StorageDefault (in-memory)
+```
+
+#### File System
+
+```python
+from dotflow import DotFlow, Config
+from dotflow.providers import StorageFile
+
+config = Config(storage=StorageFile(path=".output"))
+workflow = DotFlow(config=config)
+```
+
+#### AWS S3
+
+```bash
+pip install dotflow[aws]
+```
+
+```python
+from dotflow import DotFlow, Config
+from dotflow.providers import StorageS3
+
+config = Config(storage=StorageS3(bucket="my-bucket", prefix="pipelines/", region="us-east-1"))
+workflow = DotFlow(config=config)
+```
+
+#### Google Cloud Storage
+
+```bash
+pip install dotflow[gcp]
+```
+
+```python
+from dotflow import DotFlow, Config
+from dotflow.providers import StorageGCS
+
+config = Config(storage=StorageGCS(bucket="my-bucket", prefix="pipelines/", project="my-project"))
+workflow = DotFlow(config=config)
+```
+
+---
+
+### Notifications
+
+Get notified about task status changes via Telegram.
+
+```python
+from dotflow import DotFlow, Config
+from dotflow.providers import NotifyTelegram
+from dotflow.core.types.status import TypeStatus
+
+notify = NotifyTelegram(
+    token="YOUR_BOT_TOKEN",
+    chat_id=123456789,
+    notification_type=TypeStatus.FAILED,  # only notify on failures (optional)
+)
+
+config = Config(notify=notify)
+workflow = DotFlow(config=config)
+```
+
+Status types: `NOT_STARTED`, `IN_PROGRESS`, `COMPLETED`, `PAUSED`, `RETRY`, `FAILED`
+
+---
+
+### Class-Based Steps
+
+Return a class instance from a task, and Dotflow will automatically discover and execute all `@action`-decorated methods in source order.
+
+```python
+from dotflow import action
+
+class ETLPipeline:
+    @action
+    def extract(self):
+        return {"raw": [1, 2, 3]}
+
+    @action
+    def transform(self, previous_context):
+        data = previous_context.storage["raw"]
+        return {"processed": [x * 2 for x in data]}
+
+    @action
+    def load(self, previous_context):
+        print(f"Loaded: {previous_context.storage['processed']}")
+
+@action
+def run_pipeline():
+    return ETLPipeline()
+
+workflow = DotFlow()
+workflow.task.add(step=run_pipeline)
+workflow.start()
+```
+
+---
+
+### Task Groups
+
+Organize tasks into named groups for parallel group execution.
+
+```python
+workflow.task.add(step=scrape_site_a, group_name="scraping")
+workflow.task.add(step=scrape_site_b, group_name="scraping")
+workflow.task.add(step=process_data, group_name="processing")
+workflow.task.add(step=save_results, group_name="processing")
+
+workflow.start()  # groups run in parallel, tasks within each group run sequentially
+```
+
+---
+
+### Callbacks
+
+Execute a function after each task completes — useful for logging, alerting, or side effects.
+
+```python
+def on_task_done(task):
+    print(f"Task {task.task_id} finished with status: {task.status}")
+
+workflow.task.add(step=my_step, callback=on_task_done)
+```
+
+Workflow-level callbacks for success and failure:
+
+```python
+def on_success(*args, **kwargs):
+    print("All tasks completed!")
+
+def on_failure(*args, **kwargs):
+    print("Something went wrong.")
+
+workflow.start(on_success=on_success, on_failure=on_failure)
+```
+
+---
+
+### Error Handling
+
+Control whether the workflow stops or continues when a task fails:
+
+```python
+# Stop on first failure (default)
+workflow.start(keep_going=False)
+
+# Continue executing remaining tasks even if one fails
+workflow.start(keep_going=True)
+```
+
+Each task tracks its errors with full detail:
+- Attempt number
+- Exception type and message
+- Traceback
+
+Access results after execution:
+
+```python
+for task in workflow.result_task():
+    print(f"Task {task.task_id}: {task.status}")
+    if task.errors:
+        print(f"  Errors: {task.errors}")
+```
+
+---
+
+### Async Support
+
+`@action` automatically detects and handles async functions:
+
+```python
+import httpx
+from dotflow import DotFlow, action
+
+@action(timeout=30)
+async def fetch_data():
+    async with httpx.AsyncClient() as client:
+        response = await client.get("https://api.example.com/data")
+        return response.json()
+
+workflow = DotFlow()
+workflow.task.add(step=fetch_data)
+workflow.start()
+```
+
+---
+
+### CLI
+
+Run workflows directly from the command line:
+
+```bash
+# Simple execution
+dotflow start --step my_module.my_task
+
+# With initial context
+dotflow start --step my_module.my_task --initial-context '{"key": "value"}'
+
+# With callback
+dotflow start --step my_module.my_task --callback my_module.on_done
+
+# With execution mode
+dotflow start --step my_module.my_task --mode parallel
+
+# With file storage
+dotflow start --step my_module.my_task --storage file --path .output
+```
+
+Available CLI commands:
+
+| Command | Description |
+|---------|-------------|
+| `dotflow init` | Initialize a new Dotflow project |
+| `dotflow start` | Run a workflow |
+| `dotflow log` | View execution logs |
+
+---
+
+### Dependency Injection via Config
+
+The `Config` class lets you swap providers for storage, notifications, logging, and API integration:
+
+```python
+from dotflow import DotFlow, Config
+from dotflow.providers import StorageFile, NotifyTelegram, LogDefault
+
+config = Config(
+    storage=StorageFile(path=".output"),
+    notify=NotifyTelegram(token="...", chat_id=123),
+    log=LogDefault(),
+)
+
+workflow = DotFlow(config=config)
+```
+
+Extend Dotflow by implementing the abstract base classes:
+
+| ABC | Methods | Purpose |
+|-----|---------|---------|
+| `Storage` | `post`, `get`, `key` | Custom storage backends |
+| `Notify` | `send` | Custom notification channels |
+| `Log` | `info`, `error` | Custom logging |
+
+---
+
+### Results & Inspection
+
+After execution, inspect results directly from the workflow object:
+
+```python
+workflow.start()
+
+# List of Task objects
+tasks = workflow.result_task()
+
+# List of Context objects (one per task)
+contexts = workflow.result_context()
+
+# List of storage values (raw return values)
+storages = workflow.result_storage()
+
+# Serialized result (Pydantic model)
+result = workflow.result()
+```
+
+Task builder utilities:
+
+```python
+workflow.task.count()     # Number of tasks
+workflow.task.clear()     # Remove all tasks
+workflow.task.reverse()   # Reverse execution order
+workflow.task.schema()    # Pydantic schema of the workflow
+```
+
+---
+
+### Dynamic Module Import
+
+Reference tasks and callbacks by their module path string instead of importing them directly:
+
+```python
+workflow.task.add(step="my_package.tasks.process_data")
+workflow.task.add(step="my_package.tasks.save_results", callback="my_package.callbacks.notify")
+```
+
+---
 
 ## More Examples
 
-| Example | Command |
-| ------- | ------- |
-| [cli_with_callback](https://github.com/dotflow-io/examples/blob/master/cli_with_callback.py) | `dotflow start --step examples.cli_with_callback.simple_step --callback examples.cli_with_callback.callback` |
-| [cli_with_initial_context](https://github.com/dotflow-io/examples/blob/master/cli_with_initial_context.py) | `dotflow start --step examples.cli_with_initial_context.simple_step --initial-context abc` |
-| [cli_with_mode](https://github.com/dotflow-io/examples/blob/master/cli_with_mode.py) | `dotflow start --step examples.cli_with_mode.simple_step --mode sequential` |
-| [cli_with_output_context](https://github.com/dotflow-io/examples/blob/master/cli_with_output_context.py) | `dotflow start --step examples.cli_with_output_context.simple_step --storage file` |
-| [cli_with_path](https://github.com/dotflow-io/examples/blob/master/cli_with_path.py) | `dotflow start --step examples.cli_with_path.simple_step --path .storage --storage file` |
-| [flow](https://github.com/dotflow-io/examples/blob/master/flow.py) | `python examples/flow.py` |
-| [simple_class_workflow](https://github.com/dotflow-io/examples/blob/master/simple_class_workflow.py) | `python examples/simple_class_workflow.py` |
-| [simple_cli](https://github.com/dotflow-io/examples/blob/master/simple_cli.py) | `dotflow start --step examples.simple_cli.simple_step` |
-| [simple_function_workflow](https://github.com/dotflow-io/examples/blob/master/simple_function_workflow.py) | `python examples/simple_function_workflow.py` |
-| [simple_function_workflow_with_error](https://github.com/dotflow-io/examples/blob/master/simple_function_workflow_with_error.py) | `python examples/simple_function_workflow_with_error.py` |
-| [step_class_result_context](https://github.com/dotflow-io/examples/blob/master/step_class_result_context.py) | `python examples/step_class_result_context.py` |
-| [step_class_result_storage](https://github.com/dotflow-io/examples/blob/master/step_class_result_storage.py) | `python examples/step_class_result_storage.py` |
-| [step_class_result_task](https://github.com/dotflow-io/examples/blob/master/step_class_result_task.py) | `python examples/step_class_result_task.py` |
-| [step_function_result_context](https://github.com/dotflow-io/examples/blob/master/step_function_result_context.py) | `python examples/step_function_result_context.py` |
-| [step_function_result_storage](https://github.com/dotflow-io/examples/blob/master/step_function_result_storage.py) | `python examples/step_function_result_storage.py` |
-| [step_function_result_task](https://github.com/dotflow-io/examples/blob/master/step_function_result_task.py) | `python examples/step_function_result_task.py` |
-| [step_with_groups](https://github.com/dotflow-io/examples/blob/master/step_with_groups.py) | `python examples/step_with_groups.py` |
-| [step_with_initial_context](https://github.com/dotflow-io/examples/blob/master/step_with_initial_context.py) | `python examples/step_with_initial_context.py` |
-| [step_with_many_contexts](https://github.com/dotflow-io/examples/blob/master/step_with_many_contexts.py) | `python examples/step_with_many_contexts.py` |
-| [step_with_notify_telegram](https://github.com/dotflow-io/examples/blob/master/step_with_notify_telegram.py) | `python examples/step_with_notify_telegram.py` |
-| [step_with_previous_context](https://github.com/dotflow-io/examples/blob/master/step_with_previous_context.py) | `python examples/step_with_previous_context.py` |
-| [step_with_storage_file](https://github.com/dotflow-io/examples/blob/master/step_with_storage_file.py) | `python examples/step_with_storage_file.py` |
-| [step_with_storage_mongodb](https://github.com/dotflow-io/examples/blob/master/step_with_storage_mongodb.py) | `python examples/step_with_storage_mongodb.py` |
-| [workflow_background_mode](https://github.com/dotflow-io/examples/blob/master/workflow_background_mode.py) | `python examples/workflow_background_mode.py` |
-| [workflow_keep_going_true](https://github.com/dotflow-io/examples/blob/master/workflow_keep_going_true.py) | `python examples/workflow_keep_going_true.py` |
-| [workflow_parallel_mode](https://github.com/dotflow-io/examples/blob/master/workflow_parallel_mode.py) | `python examples/workflow_parallel_mode.py` |
-| [workflow_sequential_group_mode](https://github.com/dotflow-io/examples/blob/master/workflow_sequential_group_mode.py) | `python examples/workflow_sequential_group_mode.py` |
-| [workflow_sequential_mode](https://github.com/dotflow-io/examples/blob/master/workflow_sequential_mode.py) | `python examples/workflow_sequential_mode.py` |
-| [workflow_step_callback](https://github.com/dotflow-io/examples/blob/master/workflow_step_callback.py) | `python examples/workflow_step_callback.py` |
-| [workflow_with_backoff](https://github.com/dotflow-io/examples/blob/master/workflow_with_backoff.py) | `python examples/workflow_with_backoff.py` |
-| [workflow_with_callback_failure](https://github.com/dotflow-io/examples/blob/master/workflow_with_callback_failure.py) | `python examples/workflow_with_callback_failure.py` |
-| [workflow_with_callback_success](https://github.com/dotflow-io/examples/blob/master/workflow_with_callback_success.py) | `python examples/workflow_with_callback_success.py` |
-| [workflow_with_retry](https://github.com/dotflow-io/examples/blob/master/workflow_with_retry.py) | `python examples/workflow_with_retry.py` |
-| [workflow_with_retry_delay](https://github.com/dotflow-io/examples/blob/master/workflow_with_retry_delay.py) | `python examples/workflow_with_retry_delay.py` |
-| [workflow_with_timeout](https://github.com/dotflow-io/examples/blob/master/workflow_with_timeout.py) | `python examples/workflow_with_timeout.py` |
+All examples are available in the [`docs_src/`](https://github.com/dotflow-io/dotflow/tree/develop/docs_src) directory.
+
+#### Basic
+
+| Example | Description | Command |
+|---------|-------------|---------|
+| [first_steps](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/first_steps/first_steps.py) | Minimal workflow with callback | `python docs_src/first_steps/first_steps.py` |
+| [simple_function_workflow](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/basic/simple_function_workflow.py) | Simple function-based workflow | `python docs_src/basic/simple_function_workflow.py` |
+| [simple_class_workflow](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/basic/simple_class_workflow.py) | Class-based step with retry | `python docs_src/basic/simple_class_workflow.py` |
+| [simple_function_workflow_with_error](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/basic/simple_function_workflow_with_error.py) | Error inspection after failure | `python docs_src/basic/simple_function_workflow_with_error.py` |
+
+#### Async
+
+| Example | Description | Command |
+|---------|-------------|---------|
+| [async_action](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/async/async_action.py) | Async task functions | `python docs_src/async/async_action.py` |
+
+#### Context
+
+| Example | Description | Command |
+|---------|-------------|---------|
+| [context](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/context/context.py) | Creating and inspecting a Context | `python docs_src/context/context.py` |
+| [initial_context](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/initial_context/initial_context.py) | Passing initial context per task | `python docs_src/initial_context/initial_context.py` |
+| [previous_context](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/previous_context/previous_context.py) | Chaining context between tasks | `python docs_src/previous_context/previous_context.py` |
+| [many_contexts](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/context/many_contexts.py) | Using both initial and previous context | `python docs_src/context/many_contexts.py` |
+
+#### Process Modes
+
+| Example | Description | Command |
+|---------|-------------|---------|
+| [sequential](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/process_mode/sequential.py) | Sequential execution | `python docs_src/process_mode/sequential.py` |
+| [background](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/process_mode/background.py) | Background (non-blocking) execution | `python docs_src/process_mode/background.py` |
+| [parallel](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/process_mode/parallel.py) | Parallel execution | `python docs_src/process_mode/parallel.py` |
+| [parallel_group](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/process_mode/parallel_group.py) | Parallel groups execution | `python docs_src/process_mode/parallel_group.py` |
+| [sequential_group_mode](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/workflow/sequential_group_mode.py) | Sequential with named groups | `python docs_src/workflow/sequential_group_mode.py` |
+
+#### Resilience (Retry, Backoff, Timeout)
+
+| Example | Description | Command |
+|---------|-------------|---------|
+| [retry](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/retry/retry.py) | Retry on function and class steps | `python docs_src/retry/retry.py` |
+| [retry_delay](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/retry/retry_delay.py) | Retry with delay between attempts | `python docs_src/retry/retry_delay.py` |
+| [backoff](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/backoff/backoff.py) | Exponential backoff on retries | `python docs_src/backoff/backoff.py` |
+| [timeout](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/timeout/timeout.py) | Timeout per task execution | `python docs_src/timeout/timeout.py` |
+
+#### Callbacks
+
+| Example | Description | Command |
+|---------|-------------|---------|
+| [task_callback](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/callback/task_callback.py) | Per-task callback on completion | `python docs_src/callback/task_callback.py` |
+| [workflow_callback_success](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/callback/workflow_callback_success.py) | Workflow-level success callback | `python docs_src/callback/workflow_callback_success.py` |
+| [workflow_callback_failure](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/callback/workflow_callback_failure.py) | Workflow-level failure callback | `python docs_src/callback/workflow_callback_failure.py` |
+
+#### Error Handling
+
+| Example | Description | Command |
+|---------|-------------|---------|
+| [errors](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/errors/errors.py) | Inspecting task errors and retry count | `python docs_src/errors/errors.py` |
+| [keep_going_true](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/workflow/keep_going_true.py) | Continue workflow after task failure | `python docs_src/workflow/keep_going_true.py` |
+
+#### Groups
+
+| Example | Description | Command |
+|---------|-------------|---------|
+| [step_with_groups](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/group/step_with_groups.py) | Tasks in named parallel groups | `python docs_src/group/step_with_groups.py` |
+
+#### Storage
+
+| Example | Description | Command |
+|---------|-------------|---------|
+| [storage_file](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/storage/storage_file.py) | File-based JSON storage | `python docs_src/storage/storage_file.py` |
+| [storage_s3](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/storage/storage_s3.py) | AWS S3 storage | `python docs_src/storage/storage_s3.py` |
+| [storage_gcs](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/storage/storage_gcs.py) | Google Cloud Storage | `python docs_src/storage/storage_gcs.py` |
+
+#### Checkpoint & Resume
+
+| Example | Description | Command |
+|---------|-------------|---------|
+| [checkpoint](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/checkpoint/checkpoint.py) | Resume workflow from last checkpoint | `python docs_src/checkpoint/checkpoint.py` |
+
+#### Notifications
+
+| Example | Description | Command |
+|---------|-------------|---------|
+| [notify_telegram](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/notify/notify_telegram.py) | Telegram notifications on failure | `python docs_src/notify/notify_telegram.py` |
+
+#### Config & Providers
+
+| Example | Description | Command |
+|---------|-------------|---------|
+| [config](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/config/config.py) | Full Config with storage, notify, log | `python docs_src/config/config.py` |
+| [storage_provider](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/config/storage_provider.py) | Swapping storage providers | `python docs_src/config/storage_provider.py` |
+| [notify_provider](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/config/notify_provider.py) | Swapping notification providers | `python docs_src/config/notify_provider.py` |
+| [log_provider](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/config/log_provider.py) | Custom log provider | `python docs_src/config/log_provider.py` |
+
+#### Results & Output
+
+| Example | Description | Command |
+|---------|-------------|---------|
+| [step_function_result_task](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/output/step_function_result_task.py) | Inspect task results (function) | `python docs_src/output/step_function_result_task.py` |
+| [step_function_result_context](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/output/step_function_result_context.py) | Inspect context results (function) | `python docs_src/output/step_function_result_context.py` |
+| [step_function_result_storage](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/output/step_function_result_storage.py) | Inspect storage results (function) | `python docs_src/output/step_function_result_storage.py` |
+| [step_class_result_task](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/output/step_class_result_task.py) | Inspect task results (class) | `python docs_src/output/step_class_result_task.py` |
+| [step_class_result_context](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/output/step_class_result_context.py) | Inspect context results (class) | `python docs_src/output/step_class_result_context.py` |
+| [step_class_result_storage](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/output/step_class_result_storage.py) | Inspect storage results (class) | `python docs_src/output/step_class_result_storage.py` |
+
+#### CLI
+
+| Example | Description | Command |
+|---------|-------------|---------|
+| [simple_cli](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/basic/simple_cli.py) | Basic CLI execution | `dotflow start --step docs_src.basic.simple_cli.simple_step` |
+| [cli_with_callback](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/cli/cli_with_callback.py) | CLI with callback function | `dotflow start --step docs_src.cli.cli_with_callback.simple_step --callback docs_src.cli.cli_with_callback.callback` |
+| [cli_with_initial_context](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/cli/cli_with_initial_context.py) | CLI with initial context | `dotflow start --step docs_src.cli.cli_with_initial_context.simple_step --initial-context abc` |
+| [cli_with_mode](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/cli/cli_with_mode.py) | CLI with execution mode | `dotflow start --step docs_src.cli.cli_with_mode.simple_step --mode sequential` |
+| [cli_with_output_context](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/cli/cli_with_output_context.py) | CLI with file storage output | `dotflow start --step docs_src.cli.cli_with_output_context.simple_step --storage file` |
+| [cli_with_path](https://github.com/dotflow-io/dotflow/blob/develop/docs_src/cli/cli_with_path.py) | CLI with custom storage path | `dotflow start --step docs_src.cli.cli_with_path.simple_step --path .storage --storage file` |
 
 ## Commit Style
 
