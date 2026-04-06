@@ -2,7 +2,7 @@
 
 ## v0.14.0
 
-- [📦 PyPI - Build 0.13.2](https://github.com/dotflow-io/dotflow/releases/tag/v0.13.2)
+- [📦 PyPI - Build 0.14.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.14.0)
 - [⚙️ FEATURE: Replace task.error with task.errors list for full retry observability](https://github.com/dotflow-io/dotflow/pull/113)
 - [⚙️ FEATURE: Checkpoint-based resume from failure](https://github.com/dotflow-io/dotflow/pull/118)
 - [⚙️ FEATURE: Add StorageS3 provider for AWS S3 persistence](https://github.com/dotflow-io/dotflow/pull/114)
