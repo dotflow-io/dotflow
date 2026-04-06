@@ -11,7 +11,8 @@
             - _initial_context 
             - _current_context 
             - _duration 
-            - _error 
+            - _errors 
             - _status 
             - _config 
             - group_name
+            - retry_count
