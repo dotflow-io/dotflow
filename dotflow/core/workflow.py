@@ -91,6 +91,7 @@ class Manager:
         mode: TypeExecution = TypeExecution.SEQUENTIAL,
         keep_going: bool = False,
         workflow_id: UUID = None,
+        resume: bool = False,
     ) -> None:
         self.tasks = tasks
         self.on_success = on_success
@@ -111,6 +112,7 @@ class Manager:
             workflow_id=workflow_id,
             ignore=keep_going,
             groups=groups,
+            resume=resume,
         )
 
         self._callback_workflow(tasks=self.tasks)
@@ -156,10 +158,30 @@ class Sequential(Flow):
     def _flow_callback(self, task: Task) -> None:
         self.queue.append(task)
 
+    def _has_checkpoint(self, task: Task) -> bool:
+        if not self.resume:
+            return False
+
+        context = task.config.storage.get(
+            key=task.config.storage.key(task=task)
+        )
+
+        return context.storage is not None
+
     def run(self) -> None:
         previous_context = Context(workflow_id=self.workflow_id)
 
         for task in self.tasks:
+            if self._has_checkpoint(task):
+                previous_context = task.config.storage.get(
+                    key=task.config.storage.key(task=task)
+                )
+
+                task.status = TypeStatus.COMPLETED
+                task.current_context = previous_context
+                self._flow_callback(task=task)
+                continue
+
             Execution(
                 task=task,
                 workflow_id=self.workflow_id,
@@ -231,10 +253,30 @@ class SequentialGroup(Flow):
         for process in self._processes:
             process.join()
 
+    def _has_checkpoint(self, task: Task) -> bool:
+        if not self.resume:
+            return False
+
+        context = task.config.storage.get(
+            key=task.config.storage.key(task=task)
+        )
+
+        return context.storage is not None
+
     def _run_group(self, groups: list[Task]) -> None:
         previous_context = Context(workflow_id=self.workflow_id)
 
         for task in groups:
+            if self._has_checkpoint(task):
+                previous_context = task.config.storage.get(
+                    key=task.config.storage.key(task=task)
+                )
+
+                task.status = TypeStatus.COMPLETED
+                task.current_context = previous_context
+                self._flow_callback(task=task)
+                continue
+
             Execution(
                 task=task,
                 workflow_id=self.workflow_id,
@@ -262,10 +304,30 @@ class Background(Flow):
     def _flow_callback(self, task: Task) -> None:
         self.queue.append(task)
 
+    def _has_checkpoint(self, task: Task) -> bool:
+        if not self.resume:
+            return False
+
+        context = task.config.storage.get(
+            key=task.config.storage.key(task=task)
+        )
+
+        return context.storage is not None
+
     def _run_sequential(self) -> None:
         previous_context = Context(workflow_id=self.workflow_id)
 
         for task in self.tasks:
+            if self._has_checkpoint(task):
+                previous_context = task.config.storage.get(
+                    key=task.config.storage.key(task=task)
+                )
+
+                task.status = TypeStatus.COMPLETED
+                task.current_context = previous_context
+                self._flow_callback(task=task)
+                continue
+
             Execution(
                 task=task,
                 workflow_id=self.workflow_id,
