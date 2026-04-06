@@ -7,3 +7,5 @@
             - count
             - clear
             - reverse
+            - schema
+            - result

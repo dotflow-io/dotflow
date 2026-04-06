@@ -5,5 +5,6 @@
         members:
             - _callback_workflow
             - sequential
+            - sequential_group
             - background
             - parallel

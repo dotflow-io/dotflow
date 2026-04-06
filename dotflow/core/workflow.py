@@ -73,6 +73,11 @@ class Manager:
 
         workflow_id (UUID): Workflow ID.
 
+        resume (bool):
+            If True, checks for existing checkpoints before executing each task.
+            Tasks with a checkpoint are skipped and their saved context is used.
+            Requires a persistent storage provider and a fixed workflow_id.
+
     Attributes:
         on_success (Callable):
 

@@ -9,3 +9,4 @@
             - result_task
             - result_context
             - result_storage
+            - result

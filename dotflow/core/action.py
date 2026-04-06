@@ -72,7 +72,7 @@ class Action:
 
         retry_delay (int): Retry delay on task on_failure. Duration (in seconds)
 
-        backoff (int): Exponential backoff
+        backoff (bool): Exponential backoff. Doubles retry_delay after each attempt.
 
     """
 
