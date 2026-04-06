@@ -13,6 +13,7 @@ __all__ = [
     "StorageDefault",
     "StorageFile",
     "StorageS3",
+    "StorageGCS",
 ]
 
 
@@ -21,4 +22,10 @@ def __getattr__(name):
         from dotflow.providers.storage_s3 import StorageS3
 
         return StorageS3
+
+    if name == "StorageGCS":
+        from dotflow.providers.storage_gcs import StorageGCS
+
+        return StorageGCS
+
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
