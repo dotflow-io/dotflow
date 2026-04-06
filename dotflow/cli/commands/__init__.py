@@ -2,6 +2,7 @@
 
 from dotflow.cli.commands.init import InitCommand
 from dotflow.cli.commands.log import LogCommand
+from dotflow.cli.commands.schedule import ScheduleCommand
 from dotflow.cli.commands.start import StartCommand
 
-__all__ = ["InitCommand", "LogCommand", "StartCommand"]
+__all__ = ["InitCommand", "LogCommand", "ScheduleCommand", "StartCommand"]
