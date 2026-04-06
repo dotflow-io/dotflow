@@ -35,6 +35,7 @@ Documentation = "https://github.com/dotflow-io/dotflow/blob/master/README.md"
 [project.optional-dependencies]
 mongodb = ["dotflow-mongodb"]
 aws = ["boto3"]
+gcp = ["google-cloud-storage"]
 
 [tool.poetry]
 name = "dotflow"
