@@ -57,6 +57,8 @@ class StorageS3(Storage):
         self.bucket = bucket
         self.prefix = prefix
 
+        self.s3.head_bucket(Bucket=self.bucket)
+
     def post(self, key: str, context: Context) -> None:
         task_context = []
 
@@ -70,7 +72,7 @@ class StorageS3(Storage):
         self._write(key=key, data=task_context)
 
     def get(self, key: str) -> Context:
-        task_context = self._read_existing(key)
+        task_context = self._read(key)
 
         if len(task_context) == 0:
             return Context()
@@ -87,7 +89,7 @@ class StorageS3(Storage):
     def key(self, task: Callable):
         return f"{task.workflow_id}-{task.task_id}"
 
-    def _read_existing(self, key: str) -> list:
+    def _read(self, key: str) -> list:
         try:
             response = self.s3.get_object(
                 Bucket=self.bucket,
