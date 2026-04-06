@@ -5,7 +5,7 @@ authors = [
   { name="Fernando Celmer", email="email@fernandocelmer.com" },
 ]
 license = {file = "LICENSE"}
-description = "🎲 Dotflow turns an idea into flow!"
+description = "🎲 Dotflow turns an idea into flow! Lightweight Python library for execution pipelines with retry, parallel, cron and async support."
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
@@ -26,6 +26,9 @@ keywords = [
   "async",
   "retry",
   "data-pipeline",
+  "scheduler",
+  "cron",
+  "cron-job",
 ]
 classifiers = [
   'Development Status :: 4 - Beta',
@@ -47,7 +50,8 @@ classifiers = [
 Homepage = "https://github.com/dotflow-io/dotflow"
 Issues = "https://github.com/dotflow-io/dotflow/issues"
 Repository = "https://github.com/dotflow-io/dotflow"
-Documentation = "https://github.com/dotflow-io/dotflow/blob/master/README.md"
+Documentation = "https://dotflow-io.github.io/dotflow/"
+Changelog = "https://dotflow-io.github.io/dotflow/nav/release-notes/"
 
 [project.optional-dependencies]
 mongodb = ["dotflow-mongodb"]
@@ -58,7 +62,7 @@ scheduler = ["croniter"]
 [tool.poetry]
 name = "dotflow"
 version = "0.13.2"
-description = "🎲 Dotflow turns an idea into flow!"
+description = "🎲 Dotflow turns an idea into flow! Lightweight Python library for execution pipelines with retry, parallel, cron and async support."
 authors = ["Fernando Celmer <email@fernandocelmer.com>"]
 readme = "README.md"
 license = "MIT"
@@ -77,6 +81,9 @@ keywords = [
   "async",
   "retry",
   "data-pipeline",
+  "scheduler",
+  "cron",
+  "cron-job",
 ]
 classifiers = [
   'Development Status :: 4 - Beta',
