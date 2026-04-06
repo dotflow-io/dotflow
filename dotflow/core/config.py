@@ -67,11 +67,11 @@ class Config:
         api: Api | None = None,
         scheduler: Scheduler | None = None,
     ) -> None:
-        self.storage = storage or StorageDefault()
-        self.notify = notify or NotifyDefault()
-        self.log = log or LogDefault()
-        self.api = api or ApiDefault()
-        self.scheduler = scheduler or SchedulerDefault()
+        self.storage = storage if storage is not None else StorageDefault()
+        self.notify = notify if notify is not None else NotifyDefault()
+        self.log = log if log is not None else LogDefault()
+        self.api = api if api is not None else ApiDefault()
+        self.scheduler = scheduler if scheduler is not None else SchedulerDefault()
 
         self._validate()
 
