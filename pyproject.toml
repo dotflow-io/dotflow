@@ -15,11 +15,27 @@ dependencies = [
   "cookiecutter (>=2.0)",
   "requests"
 ]
+keywords = [
+  "pipeline",
+  "workflow",
+  "etl",
+  "task-runner",
+  "orchestration",
+  "automation",
+  "parallel",
+  "async",
+  "retry",
+  "data-pipeline",
+]
 classifiers = [
   'Development Status :: 4 - Beta',
   "Operating System :: OS Independent",
   'Intended Audience :: Developers',
   'Natural Language :: English',
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Software Development :: Libraries",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: System :: Distributed Computing",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
@@ -50,11 +66,27 @@ package-mode = true
 homepage = "https://github.com/dotflow-io/dotflow"
 documentation = "https://dotflow-io.github.io/dotflow/"
 repository = "https://github.com/dotflow-io/dotflow"
+keywords = [
+  "pipeline",
+  "workflow",
+  "etl",
+  "task-runner",
+  "orchestration",
+  "automation",
+  "parallel",
+  "async",
+  "retry",
+  "data-pipeline",
+]
 classifiers = [
   'Development Status :: 4 - Beta',
   "Operating System :: OS Independent",
   'Intended Audience :: Developers',
   'Natural Language :: English',
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Software Development :: Libraries",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: System :: Distributed Computing",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
