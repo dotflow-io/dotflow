@@ -37,9 +37,9 @@ class TestStorageS3(unittest.TestCase):
         expected_value = {"foo": "bar"}
 
         storage = StorageS3(bucket=BUCKET, prefix=PREFIX, region=REGION)
-        storage.post(key="test.json", context=Context(storage=expected_value))
+        storage.post(key="test", context=Context(storage=expected_value))
 
-        obj = self.conn.get_object(Bucket=BUCKET, Key=f"{PREFIX}test.json")
+        obj = self.conn.get_object(Bucket=BUCKET, Key=f"{PREFIX}test")
         data = loads(obj["Body"].read().decode("utf-8"))
 
         self.assertEqual(loads(data[0]), expected_value)
@@ -58,34 +58,34 @@ class TestStorageS3(unittest.TestCase):
         )
 
         storage = StorageS3(bucket=BUCKET, prefix=PREFIX, region=REGION)
-        storage.post(key="test.json", context=input_value)
+        storage.post(key="test", context=input_value)
 
-        obj = self.conn.get_object(Bucket=BUCKET, Key=f"{PREFIX}test.json")
+        obj = self.conn.get_object(Bucket=BUCKET, Key=f"{PREFIX}test")
         data = loads(obj["Body"].read().decode("utf-8"))
 
         self.assertEqual(loads(data[0]), expected_one)
         self.assertEqual(loads(data[1]), expected_two)
 
     @mock_aws
-    def test_post_with_existing_key(self):
+    def test_post_overwrites_existing_key(self):
         self.conn.create_bucket(Bucket=BUCKET)
-        expected_one = {"foo": "bar"}
-        expected_two = True
+        old_value = {"foo": "bar"}
+        new_value = {"foo": "baz"}
 
         self.conn.put_object(
             Bucket=BUCKET,
-            Key=f"{PREFIX}test.json",
-            Body=dumps([dumps(expected_one)]),
+            Key=f"{PREFIX}test",
+            Body=dumps([dumps(old_value)]),
         )
 
         storage = StorageS3(bucket=BUCKET, prefix=PREFIX, region=REGION)
-        storage.post(key="test.json", context=Context(storage=expected_two))
+        storage.post(key="test", context=Context(storage=new_value))
 
-        obj = self.conn.get_object(Bucket=BUCKET, Key=f"{PREFIX}test.json")
+        obj = self.conn.get_object(Bucket=BUCKET, Key=f"{PREFIX}test")
         data = loads(obj["Body"].read().decode("utf-8"))
 
-        self.assertEqual(loads(data[0]), expected_one)
-        self.assertEqual(loads(data[1]), expected_two)
+        self.assertEqual(len(data), 1)
+        self.assertEqual(loads(data[0]), new_value)
 
     @mock_aws
     def test_get(self):
@@ -94,12 +94,12 @@ class TestStorageS3(unittest.TestCase):
 
         self.conn.put_object(
             Bucket=BUCKET,
-            Key=f"{PREFIX}test.json",
+            Key=f"{PREFIX}test",
             Body=dumps([dumps(expected_value)]),
         )
 
         storage = StorageS3(bucket=BUCKET, prefix=PREFIX, region=REGION)
-        result = storage.get(key="test.json")
+        result = storage.get(key="test")
 
         self.assertIsInstance(result, Context)
         self.assertEqual(result.storage, expected_value)
@@ -112,12 +112,12 @@ class TestStorageS3(unittest.TestCase):
 
         self.conn.put_object(
             Bucket=BUCKET,
-            Key=f"{PREFIX}test.json",
+            Key=f"{PREFIX}test",
             Body=dumps([dumps(expected_one), dumps(expected_two)]),
         )
 
         storage = StorageS3(bucket=BUCKET, prefix=PREFIX, region=REGION)
-        result = storage.get(key="test.json")
+        result = storage.get(key="test")
 
         self.assertIsInstance(result, Context)
         self.assertEqual(result.storage[0].storage, expected_one)
@@ -147,4 +147,4 @@ class TestStorageS3(unittest.TestCase):
         storage = StorageS3(bucket=BUCKET, prefix=PREFIX, region=REGION)
         result = storage.key(task=task)
 
-        self.assertEqual(result, f"{workflow_id}-0.json")
+        self.assertEqual(result, f"{workflow_id}-0")
