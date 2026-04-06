@@ -71,7 +71,9 @@ class Config:
         self.notify = notify if notify is not None else NotifyDefault()
         self.log = log if log is not None else LogDefault()
         self.api = api if api is not None else ApiDefault()
-        self.scheduler = scheduler if scheduler is not None else SchedulerDefault()
+        self.scheduler = (
+            scheduler if scheduler is not None else SchedulerDefault()
+        )
 
         self._validate()
 
