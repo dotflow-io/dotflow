@@ -350,7 +350,9 @@ class Background(Flow):
                 break
 
     def run(self) -> None:
-        self.thread = threading.Thread(target=self._run_sequential, daemon=True)
+        self.thread = threading.Thread(
+            target=self._run_sequential, daemon=True
+        )
         self.thread.start()
 
 
