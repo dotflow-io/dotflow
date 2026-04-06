@@ -11,6 +11,7 @@ from time import sleep
 from dotflow.abc.scheduler import Scheduler
 from dotflow.core.exception import ModuleNotFound
 from dotflow.core.types.overlap import TypeOverlap
+from dotflow.logging import logger
 
 
 class SchedulerCron(Scheduler):
@@ -66,12 +67,20 @@ class SchedulerCron(Scheduler):
                 module="croniter", library="dotflow[scheduler]"
             ) from err
 
+        try:
+            croniter(cron, datetime.now())
+        except (ValueError, KeyError) as err:
+            raise ValueError(
+                f"Invalid cron expression {cron!r}: {err}"
+            ) from err
+
         self.cron = cron
         self.overlap = overlap
         self.running = False
         self._executing = False
         self._lock = threading.Lock()
         self._queue_count = 0
+        self._parallel_semaphore = threading.Semaphore(10)
 
     def start(self, workflow: Callable, **kwargs) -> None:
         """Start the scheduler loop. Blocks the main thread.
@@ -144,12 +153,29 @@ class SchedulerCron(Scheduler):
         thread.start()
 
     def _dispatch_parallel(self, workflow: Callable, **kwargs) -> None:
-        thread = threading.Thread(target=workflow, kwargs=kwargs)
+        if not self._parallel_semaphore.acquire(blocking=False):
+            return
+
+        thread = threading.Thread(
+            target=self._execute_parallel,
+            args=(workflow,),
+            kwargs=kwargs,
+        )
         thread.start()
+
+    def _execute_parallel(self, workflow: Callable, **kwargs) -> None:
+        try:
+            workflow(**kwargs)
+        except Exception:
+            logger.exception("Scheduled workflow execution failed")
+        finally:
+            self._parallel_semaphore.release()
 
     def _execute_and_reset(self, workflow: Callable, **kwargs) -> None:
         try:
             workflow(**kwargs)
+        except Exception:
+            logger.exception("Scheduled workflow execution failed")
         finally:
             with self._lock:
                 self._executing = False
@@ -157,6 +183,8 @@ class SchedulerCron(Scheduler):
     def _execute_queued(self, workflow: Callable, **kwargs) -> None:
         try:
             workflow(**kwargs)
+        except Exception:
+            logger.exception("Scheduled workflow execution failed")
         finally:
             with self._lock:
                 if self._queue_count > 0:
