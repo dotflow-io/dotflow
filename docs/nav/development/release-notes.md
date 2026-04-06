@@ -3,6 +3,7 @@
 ## v0.14.0
 
 - [📦 PyPI - Build 0.14.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.14.0)
+- [📌 Workflow scheduler — cron-based recurring execution](https://github.com/dotflow-io/dotflow/pull/126)
 - [📌 Workflow observability — task.errors and retry tracking](https://github.com/dotflow-io/dotflow/pull/113)
 - [📌 Checkpoint-based durable state (resume from failure)](https://github.com/dotflow-io/dotflow/pull/118)
 - [📌 StorageS3 provider for AWS S3 persistence](https://github.com/dotflow-io/dotflow/pull/114)
