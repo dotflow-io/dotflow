@@ -1,4 +1,4 @@
-# Task
+# Task Callback
 
 Tasks can also receive a specific callback, and it’s quite simple.
 
@@ -21,3 +21,8 @@ The parameter `keep_going` was included to keep the workflow running even if a t
 ///
 
 {* ./docs_src/callback/task_callback.py ln[25:32] hl[30] *}
+
+## References
+
+- [Task](https://dotflow-io.github.io/dotflow/nav/reference/task/)
+- [Workflow Callback](https://dotflow-io.github.io/dotflow/nav/tutorial/workflow-callback/)

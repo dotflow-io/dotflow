@@ -57,3 +57,8 @@ async def unreliable_api():
 | File I/O | Yes |
 | CPU-bound computation | No — use sync |
 | Simple data transformation | No — use sync |
+
+## References
+
+- [Action](https://dotflow-io.github.io/dotflow/nav/reference/action/)
+- [Task Retry](https://dotflow-io.github.io/dotflow/nav/tutorial/task-retry/)

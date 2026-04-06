@@ -41,3 +41,9 @@ Finally, just execute the workflow with the following code snippet. [More detail
 The simplest file could look like this:
 
 {* ./docs_src/first_steps/first_steps.py *}
+
+## References
+
+- [DotFlow](https://dotflow-io.github.io/dotflow/nav/reference/dotflow/)
+- [Action](https://dotflow-io.github.io/dotflow/nav/reference/action/)
+- [TaskBuilder](https://dotflow-io.github.io/dotflow/nav/reference/task-builder/)

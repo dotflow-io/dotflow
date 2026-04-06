@@ -13,3 +13,19 @@ pip install dotflow
 ```bash
 poetry add dotflow
 ```
+
+## Optional dependencies
+
+Dotflow has optional extras for specific providers:
+
+| Extra | Command | What it enables |
+|-------|---------|-----------------|
+| `aws` | `pip install dotflow[aws]` | StorageS3 — AWS S3 persistence |
+| `gcp` | `pip install dotflow[gcp]` | StorageGCS — Google Cloud Storage persistence |
+| `scheduler` | `pip install dotflow[scheduler]` | SchedulerCron — cron-based recurring execution |
+
+Multiple extras can be installed at once:
+
+```bash
+pip install dotflow[aws,scheduler]
+```

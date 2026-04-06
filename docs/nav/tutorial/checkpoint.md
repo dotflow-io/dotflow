@@ -56,3 +56,8 @@ graph LR
 | `sequential_group` | Yes |
 | `background` | Yes |
 | `parallel` | No — tasks run independently, no sequential checkpointing |
+
+## References
+
+- [StorageFile](https://dotflow-io.github.io/dotflow/nav/reference/storage-file/)
+- [Manager](https://dotflow-io.github.io/dotflow/nav/reference/workflow/)

@@ -12,3 +12,8 @@ To send a context, just return some information in your task implementation. You
 In this example, an previous context value is received from the `previous_contexto` attribute defined in the function.
 
 {* ./docs_src/previous_context/previous_context.py hl[11,19] *}
+
+## References
+
+- [Context](https://dotflow-io.github.io/dotflow/nav/reference/context/)
+- [Initial Context](https://dotflow-io.github.io/dotflow/nav/tutorial/initial-context/)

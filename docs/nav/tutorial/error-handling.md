@@ -45,3 +45,8 @@ if task.errors:
 /// warning
 `task.error` is deprecated. Use `task.errors` instead.
 ///
+
+## References
+
+- [TaskError](https://dotflow-io.github.io/dotflow/nav/reference/task-error/)
+- [Task Retry](https://dotflow-io.github.io/dotflow/nav/tutorial/task-retry/)

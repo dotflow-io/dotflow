@@ -32,3 +32,8 @@ These callbacks should be used to handle post-execution actions depending on the
 In this example, we receive a list containing the [Task](https://dotflow-io.github.io/dotflow/pt/nav/reference/task/ "Task class") object.
 
 {* ./docs_src/callback/workflow_callback_failure.py ln[7:13] hl[7] *}
+
+## References
+
+- [Task](https://dotflow-io.github.io/dotflow/nav/reference/task/)
+- [Task Callback](https://dotflow-io.github.io/dotflow/nav/tutorial/task-callback/)
