@@ -134,7 +134,7 @@ nav:
         - nav/tutorial/provider-notify.md
         - nav/tutorial/provider-log.md
         - Scheduler Provider:
-          - nav/tutorial/provider-scheduler.md
+          - nav/tutorial/scheduler-default.md
           - nav/tutorial/scheduler-cron.md
       - Tutorial - User Guide:
         - nav/tutorial/install.md
