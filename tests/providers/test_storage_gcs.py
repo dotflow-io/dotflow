@@ -33,6 +33,7 @@ class TestStorageGCS(unittest.TestCase):
         self.storage.client = self.mock_client
         self.storage.bucket_obj = self.mock_bucket
         self.storage.prefix = PREFIX
+        self.storage._not_found = Exception
 
     def test_storage_gcs_instance(self):
         self.assertEqual(self.storage.prefix, PREFIX)
@@ -114,7 +115,7 @@ class TestStorageGCS(unittest.TestCase):
 
     def test_get_nonexistent_key(self):
         mock_blob = MagicMock()
-        mock_blob.exists.return_value = False
+        mock_blob.download_as_text.side_effect = Exception("NotFound")
         self.mock_bucket.blob.return_value = mock_blob
 
         result = self.storage.get(key="nonexistent")

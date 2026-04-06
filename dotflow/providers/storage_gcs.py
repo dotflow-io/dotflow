@@ -47,6 +47,7 @@ class StorageGCS(Storage):
         **kwargs,
     ):
         try:
+            from google.api_core.exceptions import NotFound
             from google.cloud import storage as gcs
         except ImportError:
             raise ModuleNotFound(
@@ -54,6 +55,7 @@ class StorageGCS(Storage):
                 library="dotflow[gcp]",
             ) from None
 
+        self._not_found = NotFound
         self.client = gcs.Client(project=project)
         self.bucket_obj = self.client.bucket(bucket)
         self.bucket_obj.reload()
@@ -91,10 +93,11 @@ class StorageGCS(Storage):
 
     def _read(self, key: str) -> list:
         blob = self.bucket_obj.blob(f"{self.prefix}{key}")
-        if not blob.exists():
+        try:
+            data = blob.download_as_text()
+            return loads(data)
+        except self._not_found:
             return []
-        data = blob.download_as_text()
-        return loads(data)
 
     def _write(self, key: str, data: list) -> None:
         blob = self.bucket_obj.blob(f"{self.prefix}{key}")
