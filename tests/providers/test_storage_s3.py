@@ -18,22 +18,22 @@ REGION = "us-east-1"
 
 
 class TestStorageS3(unittest.TestCase):
-    @mock_aws
     def setUp(self):
+        self.mock = mock_aws()
+        self.mock.start()
         self.conn = boto3.client("s3", region_name=REGION)
         self.conn.create_bucket(Bucket=BUCKET)
 
-    @mock_aws
+    def tearDown(self):
+        self.mock.stop()
+
     def test_storage_s3_instance(self):
-        self.conn.create_bucket(Bucket=BUCKET)
         storage = StorageS3(bucket=BUCKET, prefix=PREFIX, region=REGION)
 
         self.assertEqual(storage.bucket, BUCKET)
         self.assertEqual(storage.prefix, PREFIX)
 
-    @mock_aws
     def test_post(self):
-        self.conn.create_bucket(Bucket=BUCKET)
         expected_value = {"foo": "bar"}
 
         storage = StorageS3(bucket=BUCKET, prefix=PREFIX, region=REGION)
@@ -44,9 +44,7 @@ class TestStorageS3(unittest.TestCase):
 
         self.assertEqual(loads(data[0]), expected_value)
 
-    @mock_aws
     def test_post_many(self):
-        self.conn.create_bucket(Bucket=BUCKET)
         expected_one = {"foo": True}
         expected_two = {"foo": False}
 
@@ -66,9 +64,7 @@ class TestStorageS3(unittest.TestCase):
         self.assertEqual(loads(data[0]), expected_one)
         self.assertEqual(loads(data[1]), expected_two)
 
-    @mock_aws
     def test_post_overwrites_existing_key(self):
-        self.conn.create_bucket(Bucket=BUCKET)
         old_value = {"foo": "bar"}
         new_value = {"foo": "baz"}
 
@@ -87,9 +83,7 @@ class TestStorageS3(unittest.TestCase):
         self.assertEqual(len(data), 1)
         self.assertEqual(loads(data[0]), new_value)
 
-    @mock_aws
     def test_get(self):
-        self.conn.create_bucket(Bucket=BUCKET)
         expected_value = {"foo": "bar"}
 
         self.conn.put_object(
@@ -104,9 +98,7 @@ class TestStorageS3(unittest.TestCase):
         self.assertIsInstance(result, Context)
         self.assertEqual(result.storage, expected_value)
 
-    @mock_aws
     def test_get_many(self):
-        self.conn.create_bucket(Bucket=BUCKET)
         expected_one = {"foo": "bar"}
         expected_two = True
 
@@ -123,19 +115,14 @@ class TestStorageS3(unittest.TestCase):
         self.assertEqual(result.storage[0].storage, expected_one)
         self.assertEqual(result.storage[1].storage, expected_two)
 
-    @mock_aws
     def test_get_nonexistent_key(self):
-        self.conn.create_bucket(Bucket=BUCKET)
-
         storage = StorageS3(bucket=BUCKET, prefix=PREFIX, region=REGION)
-        result = storage.get(key="nonexistent.json")
+        result = storage.get(key="nonexistent")
 
         self.assertIsInstance(result, Context)
         self.assertIsNone(result.storage)
 
-    @mock_aws
     def test_key(self):
-        self.conn.create_bucket(Bucket=BUCKET)
         workflow_id = uuid4()
 
         task = Task(
