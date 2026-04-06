@@ -12,6 +12,7 @@ dependencies = [
 	"rich",
   "pydantic",
   "typing-extensions",
+  "cookiecutter (>=2.0)",
   "requests"
 ]
 classifiers = [
