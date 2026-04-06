@@ -6,7 +6,7 @@ This is the default storage used when no `Config` is provided.
 
 ## Example
 
-{* ./docs_src/config/storage_provider.py ln[1:14] hl[2,12] *}
+{* ./docs_src/config/storage_default.py hl[2,11] *}
 
 ## References
 
