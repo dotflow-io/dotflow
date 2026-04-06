@@ -68,9 +68,7 @@ class Context(ContextInstance):
 
     @task_id.setter
     def task_id(self, value: int):
-        if isinstance(value, int):
-            self._task_id = value
-        elif self._task_id is None:
+        if isinstance(value, int) or self._task_id is None:
             self._task_id = value
 
     @property
