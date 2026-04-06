@@ -147,6 +147,7 @@ nav:
           - nav/tutorial/task-timeout.md
         - nav/tutorial/error-handling.md
         - nav/tutorial/checkpoint.md
+        - nav/tutorial/async-actions.md
         - Callback:
           - nav/tutorial/workflow-callback.md
           - nav/tutorial/task-callback.md
