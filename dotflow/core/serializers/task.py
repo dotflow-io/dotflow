@@ -30,7 +30,9 @@ class SerializerTask(BaseModel):
     previous_context: Any = Field(default=None, alias="_previous_context")
     group_name: str = Field(default=None)
     retry_count: int = Field(default=0)
-    errors: list[SerializerTaskError] = Field(default_factory=list, alias="_errors")
+    errors: list[SerializerTaskError] = Field(
+        default_factory=list, alias="_errors"
+    )
     max: Optional[int] = Field(default=None, exclude=True)
     size_message: Optional[str] = Field(
         default="Context size exceeded", exclude=True

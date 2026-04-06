@@ -162,9 +162,12 @@ class Action:
 
                 if task is not None:
                     task.retry_count += 1
-                    task.errors.append(TaskError(
-                        error=error, attempt=attempt,
-                    ))
+                    task.errors.append(
+                        TaskError(
+                            error=error,
+                            attempt=attempt,
+                        )
+                    )
                     task.status = TypeStatus.RETRY
 
                 sleep(current_delay)
