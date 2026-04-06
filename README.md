@@ -24,6 +24,8 @@
 
 Dotflow is a lightweight Python library for building execution pipelines. Define tasks with decorators, chain them together, and run workflows in sequential, parallel, or background mode — with built-in retry, timeout, storage, notifications, and more.
 
+> **[Read the full documentation](https://dotflow-io.github.io/dotflow/)**
+
 ## Table of Contents
 
 <details>
@@ -44,6 +46,7 @@ Dotflow is a lightweight Python library for building execution pipelines. Define
   - [Callbacks](#callbacks)
   - [Error Handling](#error-handling)
   - [Async Support](#async-support)
+  - [Scheduler / Cron](#scheduler--cron)
   - [CLI](#cli)
   - [Dependency Injection via Config](#dependency-injection-via-config)
 - [More Examples](#more-examples)
@@ -71,8 +74,9 @@ pip install dotflow
 **Optional extras:**
 
 ```bash
-pip install dotflow[aws]      # AWS S3 storage
-pip install dotflow[gcp]      # Google Cloud Storage
+pip install dotflow[aws]        # AWS S3 storage
+pip install dotflow[gcp]        # Google Cloud Storage
+pip install dotflow[scheduler]  # Cron-based scheduler
 ```
 
 ## Quick Start
@@ -104,6 +108,8 @@ workflow.start()
 ## Features
 
 ### Execution Modes
+
+> [Process Mode docs](https://dotflow-io.github.io/dotflow/nav/learn/process-mode/sequential/)
 
 Dotflow supports 4 execution strategies out of the box:
 
@@ -174,6 +180,8 @@ flowchart TD
 
 ### Retry, Timeout & Backoff
 
+> [Retry docs](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/retry/) | [Backoff docs](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/backoff/) | [Timeout docs](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/timeout/)
+
 The `@action` decorator supports built-in resilience options:
 
 ```python
@@ -194,6 +202,8 @@ def unreliable_api_call():
 ---
 
 ### Context System
+
+> [Context docs](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/initial-context/) | [Previous Context](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/previous-context/) | [Many Contexts](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/many-contexts/)
 
 Tasks communicate through a context chain. Each task receives the previous task's output and can access its own initial context.
 
@@ -224,6 +234,8 @@ Each `Context` object contains:
 
 ### Checkpoint & Resume
 
+> [Checkpoint docs](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/checkpoint/)
+
 Resume a workflow from where it left off. Requires a persistent storage provider and a fixed `workflow_id`.
 
 ```python
@@ -247,6 +259,8 @@ workflow.start(resume=True)
 ---
 
 ### Storage Providers
+
+> [Storage docs](https://dotflow-io.github.io/dotflow/nav/learn/providers/storage-default/)
 
 Choose where task results are persisted:
 
@@ -299,6 +313,8 @@ workflow = DotFlow(config=config)
 ---
 
 ### Notifications
+
+> [Telegram docs](https://dotflow-io.github.io/dotflow/nav/learn/advanced/notify-telegram/)
 
 Get notified about task status changes via Telegram.
 
@@ -355,6 +371,8 @@ workflow.start()
 
 ### Task Groups
 
+> [Groups docs](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/groups/)
+
 Organize tasks into named groups for parallel group execution.
 
 ```python
@@ -369,6 +387,8 @@ workflow.start()  # groups run in parallel, tasks within each group run sequenti
 ---
 
 ### Callbacks
+
+> [Task Callback docs](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/task-callback/) | [Workflow Callback docs](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/workflow-callback/)
 
 Execute a function after each task completes — useful for logging, alerting, or side effects.
 
@@ -394,6 +414,8 @@ workflow.start(on_success=on_success, on_failure=on_failure)
 ---
 
 ### Error Handling
+
+> [Error Handling docs](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/error-handling/) | [Keep Going docs](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/keep-going/)
 
 Control whether the workflow stops or continues when a task fails:
 
@@ -423,6 +445,8 @@ for task in workflow.result_task():
 
 ### Async Support
 
+> [Async docs](https://dotflow-io.github.io/dotflow/nav/learn/tutorial/async-action/)
+
 `@action` automatically detects and handles async functions:
 
 ```python
@@ -442,7 +466,56 @@ workflow.start()
 
 ---
 
+### Scheduler / Cron
+
+Schedule workflows to run automatically using cron expressions.
+
+```bash
+pip install dotflow[scheduler]
+```
+
+```python
+from dotflow import DotFlow, Config, action
+from dotflow.providers import SchedulerCron
+
+@action
+def sync_data():
+    return {"synced": True}
+
+config = Config(scheduler=SchedulerCron(cron="*/5 * * * *"))
+
+workflow = DotFlow(config=config)
+workflow.task.add(step=sync_data)
+workflow.schedule()
+```
+
+#### Overlap Strategies
+
+Control what happens when a new execution triggers while the previous one is still running:
+
+| Strategy | Description |
+|----------|-------------|
+| `skip` | Drops the new run if the previous is still active (default) |
+| `queue` | Buffers one pending run, executes when the current finishes |
+| `parallel` | Runs up to 10 concurrent executions via semaphore |
+
+```python
+from dotflow.providers import SchedulerCron
+
+# Queue overlapping executions
+scheduler = SchedulerCron(cron="*/5 * * * *", overlap="queue")
+
+# Allow parallel executions
+scheduler = SchedulerCron(cron="*/5 * * * *", overlap="parallel")
+```
+
+The scheduler handles graceful shutdown via `SIGINT`/`SIGTERM` signals automatically.
+
+---
+
 ### CLI
+
+> [CLI docs](https://dotflow-io.github.io/dotflow/nav/learn/cli/simple-start/)
 
 Run workflows directly from the command line:
 
@@ -461,6 +534,21 @@ dotflow start --step my_module.my_task --mode parallel
 
 # With file storage
 dotflow start --step my_module.my_task --storage file --path .output
+
+# With S3 storage
+dotflow start --step my_module.my_task --storage s3
+
+# With GCS storage
+dotflow start --step my_module.my_task --storage gcs
+
+# Schedule with cron
+dotflow schedule --step my_module.my_task --cron "*/5 * * * *"
+
+# Schedule with overlap strategy
+dotflow schedule --step my_module.my_task --cron "0 * * * *" --overlap queue
+
+# Schedule with resume
+dotflow schedule --step my_module.my_task --cron "0 */6 * * *" --storage file --resume
 ```
 
 Available CLI commands:
@@ -469,22 +557,24 @@ Available CLI commands:
 |---------|-------------|
 | `dotflow init` | Initialize a new Dotflow project |
 | `dotflow start` | Run a workflow |
+| `dotflow schedule` | Run a workflow on a cron schedule |
 | `dotflow log` | View execution logs |
 
 ---
 
 ### Dependency Injection via Config
 
-The `Config` class lets you swap providers for storage, notifications, logging, and API integration:
+The `Config` class lets you swap providers for storage, notifications, logging, and scheduling:
 
 ```python
 from dotflow import DotFlow, Config
-from dotflow.providers import StorageFile, NotifyTelegram, LogDefault
+from dotflow.providers import StorageFile, NotifyTelegram, LogDefault, SchedulerCron
 
 config = Config(
     storage=StorageFile(path=".output"),
     notify=NotifyTelegram(token="...", chat_id=123),
     log=LogDefault(),
+    scheduler=SchedulerCron(cron="0 * * * *"),
 )
 
 workflow = DotFlow(config=config)
@@ -497,6 +587,7 @@ Extend Dotflow by implementing the abstract base classes:
 | `Storage` | `post`, `get`, `key` | Custom storage backends |
 | `Notify` | `send` | Custom notification channels |
 | `Log` | `info`, `error` | Custom logging |
+| `Scheduler` | `start`, `stop` | Custom scheduling strategies |
 
 ---
 

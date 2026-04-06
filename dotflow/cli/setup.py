@@ -3,14 +3,19 @@
 from rich import print  # type: ignore
 
 from dotflow import __description__, __version__
-from dotflow.cli.commands import InitCommand, LogCommand, StartCommand
+from dotflow.cli.commands import (
+    InitCommand,
+    LogCommand,
+    ScheduleCommand,
+    StartCommand,
+)
 from dotflow.core.exception import (
     MESSAGE_UNKNOWN_ERROR,
     ExecutionModeNotExist,
     ImportModuleError,
     MissingActionDecorator,
 )
-from dotflow.core.types import TypeExecution, TypeStorage
+from dotflow.core.types import TypeExecution, TypeOverlap, TypeStorage
 from dotflow.logging import logger
 from dotflow.settings import Settings as settings
 from dotflow.utils.basic_functions import basic_callback
@@ -33,6 +38,7 @@ class Command:
         self.setup_init()
         self.setup_logs()
         self.setup_start()
+        self.setup_schedule()
         self.command()
 
     def setup_init(self):
@@ -54,7 +60,14 @@ class Command:
         self.cmd_start.add_argument("-c", "--callback", default=basic_callback)
         self.cmd_start.add_argument("-i", "--initial-context")
         self.cmd_start.add_argument(
-            "-o", "--storage", choices=[TypeStorage.DEFAULT, TypeStorage.FILE]
+            "-o",
+            "--storage",
+            choices=[
+                TypeStorage.DEFAULT,
+                TypeStorage.FILE,
+                TypeStorage.S3,
+                TypeStorage.GCS,
+            ],
         )
         self.cmd_start.add_argument(
             "-p", "--path", default=settings.START_PATH
@@ -71,6 +84,66 @@ class Command:
         )
 
         self.cmd_start.set_defaults(exec=StartCommand)
+
+    def setup_schedule(self):
+        self.cmd_schedule = self.subparsers.add_parser(
+            "schedule", help="Schedule a workflow with a cron expression"
+        )
+        self.cmd_schedule = self.cmd_schedule.add_argument_group(
+            "Usage: dotflow schedule [OPTIONS]"
+        )
+
+        self.cmd_schedule.add_argument("-s", "--step", required=True)
+        self.cmd_schedule.add_argument(
+            "--cron",
+            required=True,
+            help="Cron expression (e.g. '*/5 * * * *')",
+        )
+        self.cmd_schedule.add_argument(
+            "-c", "--callback", default=basic_callback
+        )
+        self.cmd_schedule.add_argument("-i", "--initial-context")
+        self.cmd_schedule.add_argument(
+            "-o",
+            "--storage",
+            choices=[
+                TypeStorage.DEFAULT,
+                TypeStorage.FILE,
+                TypeStorage.S3,
+                TypeStorage.GCS,
+            ],
+        )
+        self.cmd_schedule.add_argument(
+            "-p", "--path", default=settings.START_PATH
+        )
+        self.cmd_schedule.add_argument(
+            "-m",
+            "--mode",
+            default=TypeExecution.SEQUENTIAL,
+            choices=[
+                TypeExecution.SEQUENTIAL,
+                TypeExecution.BACKGROUND,
+                TypeExecution.PARALLEL,
+            ],
+        )
+        self.cmd_schedule.add_argument(
+            "--resume",
+            action="store_true",
+            default=False,
+            help="Enable checkpoint-based resume",
+        )
+        self.cmd_schedule.add_argument(
+            "--overlap",
+            default=TypeOverlap.SKIP,
+            choices=[
+                TypeOverlap.SKIP,
+                TypeOverlap.QUEUE,
+                TypeOverlap.PARALLEL,
+            ],
+            help="Overlap strategy: skip, queue, or parallel",
+        )
+
+        self.cmd_schedule.set_defaults(exec=ScheduleCommand)
 
     def setup_logs(self):
         self.cmd_logs = self.subparsers.add_parser("logs", help="Logs")

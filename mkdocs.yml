@@ -133,6 +133,9 @@ nav:
           - nav/tutorial/storage-gcs.md
         - nav/tutorial/provider-notify.md
         - nav/tutorial/provider-log.md
+        - Scheduler Provider:
+          - nav/tutorial/scheduler-default.md
+          - nav/tutorial/scheduler-cron.md
       - Tutorial - User Guide:
         - nav/tutorial/install.md
         - nav/tutorial/first-steps.md
@@ -170,6 +173,7 @@ nav:
         - nav/learn/cli/with-mode.md
         - nav/learn/cli/with-output-context.md
         - nav/learn/cli/with-custom-path.md
+        - nav/learn/cli/with-schedule.md
       - nav/learn/examples.md
     - Reference:
       - nav/reference/action.md
@@ -188,6 +192,8 @@ nav:
         - nav/reference/log-default.md
         - nav/reference/notify-default.md
         - nav/reference/notify-telegram.md
+        - nav/reference/scheduler-default.md
+        - nav/reference/scheduler-cron.md
         - nav/reference/storage-init.md
         - nav/reference/storage-file.md
         - nav/reference/storage-s3.md
@@ -197,12 +203,14 @@ nav:
         - nav/reference/context-instance.md
       - Types:
         - nav/reference/type-execution.md
+        - nav/reference/type-overlap.md
         - nav/reference/type-status.md
       - Abstract methods:
         - nav/reference/abc-tcp.md
         - nav/reference/abc-log.md
         - nav/reference/abc-flow.md
         - nav/reference/abc-notify.md
+        - nav/reference/abc-scheduler.md
         - nav/reference/abc-storage.md
         - nav/reference/abc-http.md
     - Development Guide: nav/development/development-guide.md
