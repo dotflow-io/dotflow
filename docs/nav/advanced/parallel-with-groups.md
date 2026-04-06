@@ -29,4 +29,4 @@ flowchart TD
 ## References
 
 - [Groups](https://dotflow-io.github.io/dotflow/nav/tutorial/groups/)
-- [Process Mode — Parallel Group](https://dotflow-io.github.io/dotflow/nav/learn/process-mode-parallel-group/)
+- [Process Mode — Parallel Group](https://dotflow-io.github.io/dotflow/nav/concepts/process-mode-parallel-group/)

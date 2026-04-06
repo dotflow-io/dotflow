@@ -1,5 +1,30 @@
+.md-typeset .grid.cards.dotflow-integration-grid > ul {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11.5rem), 1fr));
+}
+
+/* How-to overview: fewer, wider section cards (Prefect-style hub) */
+.md-typeset .grid.cards.dotflow-howto-sections > ul {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+}
+
+@media screen and (min-width: 60em) {
+  .md-tabs {
+    display: block !important;
+  }
+}
+
+.md-tabs {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable;
+}
+
+.md-tabs__list {
+  flex-wrap: nowrap !important;
+}
+
 body {
-    /* font-size: 1.2em; */
     font-family: system-ui !important;
 }
 
