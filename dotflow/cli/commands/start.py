@@ -5,7 +5,12 @@ from os import system
 from dotflow import Config, DotFlow
 from dotflow.cli.command import Command
 from dotflow.core.types.execution import TypeExecution
-from dotflow.providers import StorageDefault, StorageFile, StorageGCS, StorageS3
+from dotflow.providers import (
+    StorageDefault,
+    StorageFile,
+    StorageGCS,
+    StorageS3,
+)
 
 
 class StartCommand(Command):

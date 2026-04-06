@@ -61,10 +61,10 @@ class SchedulerCron(Scheduler):
     ) -> None:
         try:
             from croniter import croniter  # noqa: F401
-        except ImportError:
+        except ImportError as err:
             raise ModuleNotFound(
                 module="croniter", library="dotflow[scheduler]"
-            )
+            ) from err
 
         self.cron = cron
         self.overlap = overlap
