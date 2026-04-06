@@ -1,18 +1,19 @@
 """Command init module"""
 
-from os import system
-
+from cookiecutter.main import cookiecutter
 from rich import print  # type: ignore
 
 from dotflow.cli.command import Command
 from dotflow.settings import Settings as settings
 
+TEMPLATE_REPO = "https://github.com/dotflow-io/template"
+
 
 class InitCommand(Command):
     def setup(self):
-        if settings.GITIGNORE.exists():
-            system("echo '\n\n# Dotflow\n.output' >> .gitignore")
-            print(
-                settings.INFO_ALERT,
-                f"Installation complete! The ({settings.GITIGNORE.resolve()}) file has been modified.",
-            )
+        cookiecutter(TEMPLATE_REPO)
+
+        print(
+            settings.INFO_ALERT,
+            "Project created!",
+        )

@@ -36,9 +36,11 @@ class Command:
         self.command()
 
     def setup_init(self):
-        self.cmd_init = self.subparsers.add_parser("init", help="Init")
+        self.cmd_init = self.subparsers.add_parser(
+            "init", help="Scaffold a new dotflow project"
+        )
         self.cmd_init = self.cmd_init.add_argument_group(
-            "Usage: dotflow init [OPTIONS]"
+            "Usage: dotflow init <project-name>"
         )
         self.cmd_init.set_defaults(exec=InitCommand)
 
