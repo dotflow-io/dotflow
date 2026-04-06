@@ -801,6 +801,22 @@ tomli = {version = "*", optional = true, markers = "python_full_version <= \"3.1
 toml = ["tomli ; python_full_version <= \"3.11.0a6\""]
 
 [[package]]
+name = "croniter"
+version = "6.2.2"
+description = "croniter provides iteration for datetime object with cron like format"
+optional = true
+python-versions = ">=3.9"
+groups = ["main"]
+markers = "extra == \"scheduler\""
+files = [
+    {file = "croniter-6.2.2-py3-none-any.whl", hash = "sha256:a5d17b1060974d36251ea4faf388233eca8acf0d09cbd92d35f4c4ac8f279960"},
+    {file = "croniter-6.2.2.tar.gz", hash = "sha256:ba60832a5ec8e12e51b8691c3309a113d1cf6526bdf1a48150ce8ec7a532d0ab"},
+]
+
+[package.dependencies]
+python-dateutil = "*"
+
+[[package]]
 name = "cryptography"
 version = "43.0.3"
 description = "cryptography is a package which provides cryptographic recipes and primitives to Python developers."
@@ -3712,8 +3728,9 @@ type = ["pytest-mypy"]
 aws = ["boto3"]
 gcp = ["google-cloud-storage"]
 mongodb = ["dotflow-mongodb"]
+scheduler = ["croniter"]
 
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.9.0"
-content-hash = "1c20705cd2c27f0bd6e60ceeb0ab9924ebf83f73217b02d1fc61a0d9fd749521"
+content-hash = "adb73d77ee7d0c9cf4c2c3a6a8ba24c7fc45bf0c85a908897301956a08ab5c92"

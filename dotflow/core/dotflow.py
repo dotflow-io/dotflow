@@ -39,6 +39,8 @@ class DotFlow:
         task (List[Task]):
 
         start (Manager):
+
+        schedule (Scheduler):
     """
 
     def __init__(
@@ -47,13 +49,23 @@ class DotFlow:
         workflow_id: str | None = None,
     ) -> None:
         self.workflow_id = workflow_id or uuid4()
-        config = config if config else Config()
-        config.api.create_workflow(workflow=self.workflow_id)
+        self._config = config if config else Config()
+        self._config.api.create_workflow(workflow=self.workflow_id)
 
-        self.task = TaskBuilder(config=config, workflow_id=self.workflow_id)
+        self.task = TaskBuilder(
+            config=self._config,
+            workflow_id=self.workflow_id
+        )
 
         self.start = partial(
-            Manager, tasks=self.task.queue, workflow_id=self.workflow_id
+            Manager,
+            tasks=self.task.queue,
+            workflow_id=self.workflow_id
+        )
+
+        self.schedule = partial(
+            self._config.scheduler.start,
+            workflow=self.start
         )
 
     def result_task(self):

@@ -37,6 +37,7 @@ Documentation = "https://github.com/dotflow-io/dotflow/blob/master/README.md"
 mongodb = ["dotflow-mongodb"]
 aws = ["boto3"]
 gcp = ["google-cloud-storage"]
+scheduler = ["croniter"]
 
 [tool.poetry]
 name = "dotflow"
