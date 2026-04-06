@@ -10,6 +10,7 @@ from tests.mocks import action_step
 
 
 class TestStorageDefault(unittest.TestCase):
+
     def test_storage_default_instance(self):
         StorageDefault()
 

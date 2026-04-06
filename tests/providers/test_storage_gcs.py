@@ -15,6 +15,7 @@ PROJECT = "test-project"
 
 
 class TestStorageGCS(unittest.TestCase):
+
     def setUp(self):
         self.mock_client = MagicMock()
         self.mock_bucket = MagicMock()
