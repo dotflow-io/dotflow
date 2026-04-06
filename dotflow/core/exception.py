@@ -1,5 +1,7 @@
 """Exception module"""
 
+from dotflow.utils import message_error, traceback_error
+
 MESSAGE_UNKNOWN_ERROR = (
     "Unknown error, please check logs for more information."
 )
@@ -50,3 +52,11 @@ class ModuleNotFound(Exception):
 class ExecutionWithClassError(Exception):
     def __init__(self):
         super().__init__("Unknown")
+
+
+class TaskError:
+    def __init__(self, error: Exception = None, attempt: int = None) -> None:
+        self.attempt = attempt
+        self.exception = type(error).__name__ if error else ""
+        self.traceback = traceback_error(error=error) if error else ""
+        self.message = message_error(error=error) if error else ""

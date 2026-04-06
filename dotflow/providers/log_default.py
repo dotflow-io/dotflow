@@ -2,8 +2,6 @@
 
 from typing import Any
 
-from rich.console import Console  # type: ignore
-
 from dotflow.abc.log import Log
 from dotflow.logging import logger
 
@@ -23,7 +21,5 @@ class LogDefault(Log):
             task.workflow_id,
             task.task_id,
             task.status,
-            task.error.traceback,
+            task.errors[-1].traceback if task.errors else "",
         )
-        console = Console()
-        console.print_exception(show_locals=True)

@@ -12,8 +12,10 @@ from dotflow.core.context import Context
 
 
 class SerializerTaskError(BaseModel):
-    traceback: str
-    message: str
+    attempt: Optional[int] = Field(default=None)
+    exception: str = Field(default="")
+    traceback: str = Field(default="")
+    message: str = Field(default="")
 
 
 class SerializerTask(BaseModel):
@@ -22,39 +24,53 @@ class SerializerTask(BaseModel):
     task_id: int = Field(default=None)
     workflow_id: Optional[UUID] = Field(default=None)
     status: str = Field(default=None, alias="_status")
-    error: Optional[SerializerTaskError] = Field(default=None, alias="_error")
     duration: Optional[float] = Field(default=None, alias="_duration")
     initial_context: Any = Field(default=None, alias="_initial_context")
     current_context: Any = Field(default=None, alias="_current_context")
     previous_context: Any = Field(default=None, alias="_previous_context")
     group_name: str = Field(default=None)
+    retry_count: int = Field(default=0)
+    errors: list[SerializerTaskError] = Field(
+        default_factory=list, alias="_errors"
+    )
     max: Optional[int] = Field(default=None, exclude=True)
     size_message: Optional[str] = Field(
         default="Context size exceeded", exclude=True
     )
 
     def model_dump_json(self, **kwargs) -> str:
-        dump_json = super().model_dump_json(serialize_as_any=True, **kwargs)
+        data = json.loads(
+            super().model_dump_json(serialize_as_any=True, **kwargs)
+        )
+        data["error"] = data["errors"][-1] if data["errors"] else None
+        dump_json = json.dumps(data)
 
         if self.max and len(dump_json) > self.max:
             self.initial_context = self.size_message
             self.current_context = self.size_message
             self.previous_context = self.size_message
 
-            dump_json = super().model_dump_json(
-                serialize_as_any=True, **kwargs
+            data = json.loads(
+                super().model_dump_json(serialize_as_any=True, **kwargs)
             )
+            data["error"] = data["errors"][-1] if data["errors"] else None
+            dump_json = json.dumps(data)
 
             return dump_json[0 : self.max]
 
         return dump_json
 
-    @field_validator("error", mode="before")
+    @field_validator("errors", mode="before")
     @classmethod
-    def error_validator(cls, value: str) -> str:
-        if value:
-            return SerializerTaskError(**value.__dict__)
-        return None
+    def errors_validator(cls, value: list) -> list:
+        if not value:
+            return []
+        return [
+            SerializerTaskError(**item.__dict__)
+            if not isinstance(item, dict)
+            else SerializerTaskError(**item)
+            for item in value
+        ]
 
     @field_validator(
         "initial_context", "current_context", "previous_context", mode="before"

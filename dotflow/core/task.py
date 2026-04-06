@@ -8,12 +8,16 @@ from uuid import UUID
 from dotflow.core.action import Action
 from dotflow.core.config import Config
 from dotflow.core.context import Context
-from dotflow.core.exception import MissingActionDecorator, NotCallableObject
+from dotflow.core.exception import (
+    MissingActionDecorator,
+    NotCallableObject,
+    TaskError,
+)
 from dotflow.core.module import Module
 from dotflow.core.serializers.task import SerializerTask
 from dotflow.core.serializers.workflow import SerializerWorkflow
 from dotflow.core.types.status import TypeStatus
-from dotflow.utils import basic_callback, message_error, traceback_error
+from dotflow.utils import basic_callback
 
 
 class TaskInstance:
@@ -33,10 +37,11 @@ class TaskInstance:
         self._initial_context = None
         self._current_context = None
         self._duration = None
-        self._error = None
         self._status = None
         self._config = None
+        self._errors = None
         self.group_name = None
+        self.retry_count = 0
 
 
 class Task(TaskInstance):
@@ -184,21 +189,54 @@ class Task(TaskInstance):
         self._duration = value
 
     @property
+    def errors(self):
+        if self._errors is None:
+            self._errors = []
+        return self._errors
+
+    @errors.setter
+    def errors(self, value) -> None:
+        if isinstance(value, list):
+            self._errors = value
+            return
+
+        if self._errors is None:
+            self._errors = []
+
+        if isinstance(value, TaskError):
+            self._errors.append(value)
+        elif isinstance(value, Exception):
+            self._errors.append(TaskError(value))
+
+        self.config.log.error(task=self)
+
+    @property
     def error(self):
-        if not self._error:
+        import warnings
+
+        warnings.warn(
+            "'error' is deprecated, use 'errors' instead. "
+            "Note: 'TaskError.exception' is now a string "
+            "(e.g. 'ValueError'), not an Exception object.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        if not self.errors:
             return TaskError()
-        return self._error
+        return self.errors[-1]
 
     @error.setter
-    def error(self, value: Exception) -> None:
-        if isinstance(value, TaskError):
-            self._error = value
+    def error(self, value) -> None:
+        import warnings
 
-        if isinstance(value, Exception):
-            task_error = TaskError(value)
-            self._error = task_error
-
-            self.config.log.error(task=self)
+        warnings.warn(
+            "'error' is deprecated, use 'errors' instead. "
+            "Note: 'TaskError.exception' is now a string "
+            "(e.g. 'ValueError'), not an Exception object.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        self.errors = value
 
     @property
     def status(self):
@@ -229,13 +267,6 @@ class Task(TaskInstance):
     def result(self, max: int = None) -> SerializerWorkflow:
         item = self.schema(max=max).model_dump_json()
         return json.loads(item)
-
-
-class TaskError:
-    def __init__(self, error: Exception = None) -> None:
-        self.exception = error
-        self.traceback = traceback_error(error=error) if error else ""
-        self.message = message_error(error=error) if error else ""
 
 
 class TaskBuilder:

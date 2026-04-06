@@ -197,11 +197,12 @@ class SequentialGroup(Flow):
                     "current_context"
                 ]
                 task.duration = contexts[task.task_id]["duration"]
-                task.error = contexts[task.task_id]["error"]
+                task.errors = contexts[task.task_id]["errors"]
+                task.retry_count = contexts[task.task_id]["retry_count"]
                 task.status = contexts[task.task_id]["status"]
             else:
                 task.status = TypeStatus.FAILED
-                task.error = TaskError(
+                task.errors = TaskError(
                     RuntimeError(
                         "Worker process terminated without reporting a result"
                     )
@@ -214,7 +215,8 @@ class SequentialGroup(Flow):
             task.task_id: {
                 "current_context": task.current_context,
                 "duration": task.duration,
-                "error": task.error,
+                "errors": task.errors,
+                "retry_count": task.retry_count,
                 "status": task.status,
             }
         }
@@ -306,11 +308,12 @@ class Parallel(Flow):
                     "current_context"
                 ]
                 task.duration = contexts[task.task_id]["duration"]
-                task.error = contexts[task.task_id]["error"]
+                task.errors = contexts[task.task_id]["errors"]
+                task.retry_count = contexts[task.task_id]["retry_count"]
                 task.status = contexts[task.task_id]["status"]
             else:
                 task.status = TypeStatus.FAILED
-                task.error = TaskError(
+                task.errors = TaskError(
                     RuntimeError(
                         "Worker process terminated without reporting a result"
                     )
@@ -323,7 +326,8 @@ class Parallel(Flow):
             task.task_id: {
                 "current_context": task.current_context,
                 "duration": task.duration,
-                "error": task.error,
+                "errors": task.errors,
+                "retry_count": task.retry_count,
                 "status": task.status,
             }
         }

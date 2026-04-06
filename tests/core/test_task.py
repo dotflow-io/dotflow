@@ -13,7 +13,7 @@ from dotflow.core.exception import (
     NotCallableObject,
 )
 from dotflow.core.serializers.task import SerializerTask, SerializerTaskError
-from dotflow.core.task import Task, TaskError
+from dotflow.core.task import Task
 from dotflow.core.types.status import TypeStatus
 from tests.mocks import action_step, simple_callback, simple_step
 
@@ -34,7 +34,7 @@ class TestTask(unittest.TestCase):
         self.assertIsInstance(task.initial_context, Context)
         self.assertIsInstance(task.current_context, Context)
         self.assertIsInstance(task.previous_context, Context)
-        self.assertIsInstance(task.error, TaskError)
+        self.assertEqual(task.errors, [])
         self.assertEqual(task.group_name, "default")
 
     def test_task_id(self):
@@ -76,7 +76,7 @@ class TestTask(unittest.TestCase):
         try:
             raise SystemError(expected_error_message)
         except Exception as error:
-            task.error = error
+            task.errors = error
 
         task.current_context = self.content
         task.previous_context = self.content
@@ -85,12 +85,12 @@ class TestTask(unittest.TestCase):
         schema = task.schema()
 
         self.assertIsInstance(schema, SerializerTask)
-        self.assertIsInstance(schema.error, SerializerTaskError)
+        self.assertIsInstance(schema.errors[-1], SerializerTaskError)
 
         self.assertEqual(schema.task_id, 0)
         self.assertEqual(schema.workflow_id, expected_workflow_id)
         self.assertEqual(schema.status, TypeStatus.NOT_STARTED)
-        self.assertEqual(schema.error.message, expected_error_message)
+        self.assertEqual(schema.errors[-1].message, expected_error_message)
         self.assertEqual(schema.duration, expected_duration)
         self.assertEqual(schema.initial_context, json.dumps(self.content))
         self.assertEqual(schema.current_context, json.dumps(self.content))
@@ -105,6 +105,8 @@ class TestTask(unittest.TestCase):
             "workflow_id": str(expected_workflow_id),
             "status": "Not started",
             "error": None,
+            "errors": [],
+            "retry_count": 0,
             "duration": expected_duration,
             "initial_context": '{"foo": "bar"}',
             "current_context": '{"foo": "bar"}',
@@ -217,10 +219,10 @@ class TestTaskSetter(unittest.TestCase):
         try:
             raise Exception(expected_value)
         except Exception as err:
-            self.task.error = err
+            self.task.errors = err
 
-        self.assertEqual(self.task.error.message, expected_value)
-        self.assertIsInstance(self.task.error.exception, Exception)
+        self.assertEqual(self.task.errors[-1].message, expected_value)
+        self.assertEqual(self.task.errors[-1].exception, "Exception")
 
     def test_set_status(self):
         expected_value = TypeStatus.COMPLETED

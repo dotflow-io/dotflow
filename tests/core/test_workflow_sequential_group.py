@@ -53,8 +53,7 @@ class TestWorkflowSequentialGroup(unittest.TestCase):
 
         self.assertEqual(tasks[0].status, TypeStatus.COMPLETED)
         self.assertEqual(tasks[0].current_context.storage, {"foo": "bar"})
-        self.assertIsInstance(tasks[0].error, TaskError)
-        self.assertEqual(tasks[0].error.message, "")
+        self.assertEqual(tasks[0].errors, [])
 
     def test_workflow_with_sequential_group_function_failed(self):
         tasks = [
@@ -76,8 +75,8 @@ class TestWorkflowSequentialGroup(unittest.TestCase):
 
         self.assertEqual(tasks[0].status, TypeStatus.FAILED)
         self.assertIsNone(tasks[0].current_context.storage)
-        self.assertIsInstance(tasks[0].error, TaskError)
-        self.assertEqual(tasks[0].error.message, "Fail!")
+        self.assertIsInstance(tasks[0].errors[-1], TaskError)
+        self.assertEqual(tasks[0].errors[-1].message, "Fail!")
 
     def test_instantiating_sequential_group_setup_queue(self):
         tasks = [Task(task_id=0, step=action_step, callback=simple_callback)]
