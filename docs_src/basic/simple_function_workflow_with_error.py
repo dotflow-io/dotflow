@@ -13,9 +13,10 @@ def main():
     workflow.start()
 
     for task in workflow.result_task():
-        print(task.error.message)
-        print(task.error.exception)
-        print(task.error.traceback)
+        if task.errors:
+            print(task.errors[-1].message)
+            print(task.errors[-1].exception)
+            print(task.errors[-1].traceback)
 
     return workflow
 
