@@ -219,7 +219,9 @@ class Task(TaskInstance):
             DeprecationWarning,
             stacklevel=2,
         )
-        return self.errors
+        if not self.errors:
+            return TaskError()
+        return self.errors[-1]
 
     @error.setter
     def error(self, value) -> None:
