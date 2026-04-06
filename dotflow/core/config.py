@@ -61,17 +61,17 @@ class Config:
 
     def __init__(
         self,
-        storage: Storage | None = StorageDefault(),
-        notify: Notify | None = NotifyDefault(),
-        log: Log | None = LogDefault(),
-        api: Api | None = ApiDefault(),
-        scheduler: Scheduler | None = SchedulerDefault(),
+        storage: Storage | None = None,
+        notify: Notify | None = None,
+        log: Log | None = None,
+        api: Api | None = None,
+        scheduler: Scheduler | None = None,
     ) -> None:
-        self.storage = storage
-        self.notify = notify
-        self.log = log
-        self.api = api
-        self.scheduler = scheduler
+        self.storage = storage or StorageDefault()
+        self.notify = notify or NotifyDefault()
+        self.log = log or LogDefault()
+        self.api = api or ApiDefault()
+        self.scheduler = scheduler or SchedulerDefault()
 
         self._validate()
 
