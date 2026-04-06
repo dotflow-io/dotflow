@@ -8,7 +8,11 @@ from uuid import UUID
 from dotflow.core.action import Action
 from dotflow.core.config import Config
 from dotflow.core.context import Context
-from dotflow.core.exception import MissingActionDecorator, NotCallableObject, TaskError
+from dotflow.core.exception import (
+    MissingActionDecorator,
+    NotCallableObject,
+    TaskError,
+)
 from dotflow.core.module import Module
 from dotflow.core.serializers.task import SerializerTask
 from dotflow.core.serializers.workflow import SerializerWorkflow
