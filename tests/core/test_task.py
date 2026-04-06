@@ -13,7 +13,7 @@ from dotflow.core.exception import (
     NotCallableObject,
 )
 from dotflow.core.serializers.task import SerializerTask, SerializerTaskError
-from dotflow.core.task import Task, TaskError
+from dotflow.core.task import Task
 from dotflow.core.types.status import TypeStatus
 from tests.mocks import action_step, simple_callback, simple_step
 
