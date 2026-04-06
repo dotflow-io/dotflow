@@ -109,7 +109,7 @@ workflow.start()
 
 ### Execution Modes
 
-> [Process Mode docs](https://dotflow-io.github.io/dotflow/nav/learn/process-mode-sequential/)
+> [Process Mode docs](https://dotflow-io.github.io/dotflow/nav/concepts/process-mode-sequential/)
 
 Dotflow supports 4 execution strategies out of the box:
 
@@ -515,7 +515,7 @@ The scheduler handles graceful shutdown via `SIGINT`/`SIGTERM` signals automatic
 
 ### CLI
 
-> [CLI docs](https://dotflow-io.github.io/dotflow/nav/learn/cli/simple-start/)
+> [CLI docs](https://dotflow-io.github.io/dotflow/nav/how-to/cli/simple-start/)
 
 Run workflows directly from the command line:
 
