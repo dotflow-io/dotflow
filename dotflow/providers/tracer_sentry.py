@@ -97,7 +97,7 @@ class TracerSentry(Tracer):
 
         span = transaction.start_child(
             op="task",
-            description=f"task:{task.task_id}",
+            name=f"task:{task.task_id}",
         )
         span.set_tag("dotflow.workflow_id", workflow_key)
         span.set_tag("dotflow.task_id", str(task.task_id))

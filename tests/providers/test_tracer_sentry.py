@@ -35,7 +35,8 @@ class TestTracerSentry(unittest.TestCase):
         self.assertIsInstance(tracer, Tracer)
 
     def test_init_with_dsn_calls_sentry_init(self):
-        mock_sentry_sdk.reset_mock()
+        sentry_mock = sys.modules["sentry_sdk"]
+        sentry_mock.reset_mock()
 
         TracerSentry(
             dsn="https://test@sentry.io/1",
@@ -43,18 +44,19 @@ class TestTracerSentry(unittest.TestCase):
             traces_sample_rate=0.8,
         )
 
-        mock_sentry_sdk.init.assert_called_once_with(
+        sentry_mock.init.assert_called_once_with(
             dsn="https://test@sentry.io/1",
             environment="staging",
             traces_sample_rate=0.8,
         )
 
     def test_init_without_dsn_skips_init(self):
-        mock_sentry_sdk.reset_mock()
+        sentry_mock = sys.modules["sentry_sdk"]
+        sentry_mock.reset_mock()
 
         TracerSentry()
 
-        mock_sentry_sdk.init.assert_not_called()
+        sentry_mock.init.assert_not_called()
 
     def test_start_workflow_creates_transaction(self):
         tracer = self._make_tracer()
@@ -102,7 +104,7 @@ class TestTracerSentry(unittest.TestCase):
         transaction = tracer._transactions["wf-123"]
         transaction.start_child.assert_called_once_with(
             op="task",
-            description="task:0",
+            name="task:0",
         )
         self.assertIn("wf-123:0", tracer._spans)
 
