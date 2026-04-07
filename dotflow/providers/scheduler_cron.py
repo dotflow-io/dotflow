@@ -131,9 +131,10 @@ class SchedulerCron(Scheduler):
             timeout: Max seconds to wait for each thread. None = wait forever.
         """
         self.running = False
-        for thread in self._threads:
+        with self._lock:
+            threads, self._threads = self._threads, []
+        for thread in threads:
             thread.join(timeout=timeout)
-        self._threads.clear()
 
     def _dispatch(self, workflow: Callable, **kwargs) -> None:
         if self.overlap == TypeOverlap.SKIP:
@@ -148,6 +149,11 @@ class SchedulerCron(Scheduler):
                 self.overlap,
             )
 
+    def _track_thread(self, thread: threading.Thread) -> None:
+        with self._lock:
+            self._threads = [t for t in self._threads if t.is_alive()]
+            self._threads.append(thread)
+
     def _dispatch_skip(self, workflow: Callable, **kwargs) -> None:
         with self._lock:
             if self._executing:
@@ -159,7 +165,7 @@ class SchedulerCron(Scheduler):
             args=(workflow,),
             kwargs=kwargs,
         )
-        self._threads.append(thread)
+        self._track_thread(thread)
         thread.start()
 
     def _dispatch_queue(self, workflow: Callable, **kwargs) -> None:
@@ -175,7 +181,7 @@ class SchedulerCron(Scheduler):
             args=(workflow,),
             kwargs=kwargs,
         )
-        self._threads.append(thread)
+        self._track_thread(thread)
         thread.start()
 
     def _dispatch_parallel(self, workflow: Callable, **kwargs) -> None:
@@ -187,7 +193,7 @@ class SchedulerCron(Scheduler):
             args=(workflow,),
             kwargs=kwargs,
         )
-        self._threads.append(thread)
+        self._track_thread(thread)
         thread.start()
 
     def _execute_parallel(self, workflow: Callable, **kwargs) -> None:
@@ -226,6 +232,7 @@ class SchedulerCron(Scheduler):
                     next_thread = None
 
             if next_thread is not None:
+                self._track_thread(next_thread)
                 next_thread.start()
 
     def _register_signals(self) -> None:
