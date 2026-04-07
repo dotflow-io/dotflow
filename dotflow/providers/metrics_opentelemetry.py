@@ -83,12 +83,12 @@ class MetricsOpenTelemetry(Metrics):
 
     def task_completed(self, task: Any) -> None:
         self._task_total.add(1, {"status": "completed"})
-        if task.duration:
+        if task.duration is not None:
             self._task_duration.record(task.duration, {"status": "completed"})
 
     def task_failed(self, task: Any) -> None:
         self._task_total.add(1, {"status": "failed"})
-        if task.duration:
+        if task.duration is not None:
             self._task_duration.record(task.duration, {"status": "failed"})
 
     def task_retried(self, task: Any) -> None:

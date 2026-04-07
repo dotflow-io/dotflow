@@ -104,7 +104,7 @@ class TracerOpenTelemetry(Tracer):
 
         span.set_attribute("dotflow.task.status", str(task.status))
 
-        if task.duration:
+        if task.duration is not None:
             span.set_attribute("dotflow.task.duration", task.duration)
         if task.retry_count:
             span.set_attribute("dotflow.task.retry_count", task.retry_count)
