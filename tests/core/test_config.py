@@ -68,3 +68,18 @@ class TestConfig(unittest.TestCase):
         config = Config(scheduler=scheduler)
 
         self.assertIs(config.scheduler, scheduler)
+
+    def test_default_providers_are_not_shared_between_instances(self):
+        config_a = Config()
+        config_b = Config()
+
+        self.assertIsNot(
+            config_a.storage,
+            config_b.storage,
+            "Each Config() call must produce a fresh StorageDefault instance",
+        )
+        self.assertIsNot(
+            config_a.notify,
+            config_b.notify,
+            "Each Config() call must produce a fresh NotifyDefault instance",
+        )
