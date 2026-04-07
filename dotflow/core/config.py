@@ -47,12 +47,16 @@ class Config:
         notify (Optional[Notify]): Type of the notify.
         log (Optional[Log]): Type of the log.
         scheduler (Optional[Scheduler]): Type of the scheduler.
+        tracer (Optional[Tracer]): Type of the tracer.
+        metrics (Optional[Metrics]): Type of the metrics.
 
     Attributes:
         storage (Optional[Storage]):
         notify (Optional[Notify]):
         log (Optional[Log]):
         scheduler (Optional[Scheduler]):
+        tracer (Optional[Tracer]):
+        metrics (Optional[Metrics]):
     """
 
     _PROVIDERS = {
