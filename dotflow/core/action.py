@@ -166,7 +166,7 @@ class Action:
                     raise ExecutionWithClassError() from None
 
                 if attempt == self.retry:
-                    raise last_exception from last_exception
+                    raise last_exception from None
 
                 if task is not None:
                     task.retry_count += 1
