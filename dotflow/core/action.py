@@ -164,6 +164,9 @@ class Action:
 
                 return result
 
+            except TimeoutError:
+                raise
+
             except Exception as error:
                 last_exception = error
 
