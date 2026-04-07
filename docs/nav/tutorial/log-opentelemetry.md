@@ -14,9 +14,19 @@ Requires `pip install dotflow[otel]`
 pip install dotflow[otel]
 ```
 
+## Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `service_name` | `str` | `"dotflow"` | Service name used in the OTel resource |
+| `level` | `str` | `"INFO"` | Minimum log level: `DEBUG`, `INFO`, `WARNING`, `ERROR` |
+| `output` | `str` | `"console"` | Log destination: `console`, `file`, or `both` |
+| `path` | `str` | `.output/flow.log` | Path to the log file (used when output is `file` or `both`) |
+| `format` | `str` | `"simple"` | Message format: `simple` or `json` |
+
 ## Basic example
 
-Pass `console=True` to emit log records to the console — useful for local development.
+Pass `output="console"` to emit log records to the console — useful for local development.
 
 {* ./docs_src/config/log_opentelemetry_basic.py hl[2,16:18] *}
 
@@ -43,8 +53,8 @@ pip install opentelemetry-exporter-otlp-proto-grpc
 
 | Feature | LogDefault | LogOpenTelemetry |
 |---------|-----------|-----------------|
-| Output | File / Console | OTel Logs SDK |
-| Format | Simple text or JSON | OTel LogRecord |
+| Output | File / Console | OTel Logs SDK + File / Console |
+| Format | Simple text or JSON | Simple text or JSON |
 | Backend | Local file | Loki, Datadog, Elastic, any OTLP |
 | Correlation | None | Shares service.name with Tracer/Metrics |
 

@@ -9,7 +9,7 @@ This is the provider used when no log is explicitly configured in `Config`.
 | Parameter | Values | Default | Description |
 |-----------|--------|---------|-------------|
 | `level` | `DEBUG`, `INFO`, `WARNING`, `ERROR` | `INFO` | Minimum log level |
-| `output` | `file`, `console`, `both` | `file` | Where logs are written |
+| `output` | `file`, `console`, `both` | `console` | Where logs are written |
 | `path` | Any file path | `.output/flow.log` | Log file location (used with `file` or `both`) |
 | `format` | `simple`, `json` | `simple` | Message format |
 
