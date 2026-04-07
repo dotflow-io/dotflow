@@ -94,6 +94,28 @@ class TestSchedulerCron(unittest.TestCase):
         self.assertEqual(scheduler._queue_count, 1)
         workflow.assert_not_called()
 
+    def test_dispatch_queue_caps_at_one(self):
+        scheduler = SchedulerCron(cron="*/5 * * * *", overlap="queue")
+        scheduler._executing = True
+        workflow = MagicMock()
+
+        scheduler._dispatch(workflow=workflow)
+        scheduler._dispatch(workflow=workflow)
+        scheduler._dispatch(workflow=workflow)
+
+        self.assertEqual(scheduler._queue_count, 1)
+
+    def test_execute_queued_resets_queue_count(self):
+        scheduler = SchedulerCron(cron="*/5 * * * *")
+        scheduler._executing = True
+        scheduler._queue_count = 0
+        workflow = MagicMock()
+
+        scheduler._execute_queued(workflow)
+
+        self.assertFalse(scheduler._executing)
+        self.assertEqual(scheduler._queue_count, 0)
+
     def test_execute_and_reset(self):
         scheduler = SchedulerCron(cron="*/5 * * * *")
         scheduler._executing = True
