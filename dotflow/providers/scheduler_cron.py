@@ -93,6 +93,8 @@ class SchedulerCron(Scheduler):
         self._queue_count = 0
         self._parallel_semaphore = threading.Semaphore(10)
         self._threads: list[threading.Thread] = []
+        self._prev_sigint = None
+        self._prev_sigterm = None
 
     def start(self, workflow: Callable, **kwargs) -> None:
         """Start the scheduler loop. Blocks the main thread.
@@ -131,6 +133,7 @@ class SchedulerCron(Scheduler):
             timeout: Max seconds to wait for each thread. None = wait forever.
         """
         self.running = False
+        self._restore_signals()
         for thread in self._threads:
             thread.join(timeout=timeout)
         self._threads.clear()
@@ -231,8 +234,16 @@ class SchedulerCron(Scheduler):
     def _register_signals(self) -> None:
         if threading.current_thread() is not threading.main_thread():
             return
-        signal.signal(signal.SIGINT, self._handle_signal)
-        signal.signal(signal.SIGTERM, self._handle_signal)
+        self._prev_sigint = signal.signal(signal.SIGINT, self._handle_signal)
+        self._prev_sigterm = signal.signal(signal.SIGTERM, self._handle_signal)
+
+    def _restore_signals(self) -> None:
+        if threading.current_thread() is not threading.main_thread():
+            return
+        if self._prev_sigint is not None:
+            signal.signal(signal.SIGINT, self._prev_sigint)
+        if self._prev_sigterm is not None:
+            signal.signal(signal.SIGTERM, self._prev_sigterm)
 
     def _handle_signal(self, signum, frame) -> None:
         self.stop()
