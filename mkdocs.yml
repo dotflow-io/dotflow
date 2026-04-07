@@ -292,6 +292,22 @@ nav:
       - nav/advanced/notifications-on-failure.md
     - Examples:
       - nav/examples/index.md
+      - nav/examples/getting-started.md
+      - nav/examples/context.md
+      - nav/examples/process-modes.md
+      - nav/examples/resilience.md
+      - nav/examples/error-handling.md
+      - nav/examples/callbacks.md
+      - nav/examples/async.md
+      - nav/examples/checkpoint.md
+      - nav/examples/scheduler.md
+      - nav/examples/storage.md
+      - nav/examples/notifications.md
+      - nav/examples/results.md
+      - nav/examples/cli.md
+      - Real-world Projects:
+        - nav/examples/etl-flow.md
+        - nav/examples/health-check-flow.md
     - Reference:
       - nav/reference/action.md
       - nav/reference/config.md
