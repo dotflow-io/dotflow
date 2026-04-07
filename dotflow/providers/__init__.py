@@ -10,6 +10,7 @@ from dotflow.providers.storage_file import StorageFile
 
 __all__ = [
     "LogDefault",
+    "LogOpenTelemetry",
     "NotifyDefault",
     "NotifyDiscord",
     "NotifyTelegram",
@@ -37,5 +38,10 @@ def __getattr__(name):
         from dotflow.providers.scheduler_cron import SchedulerCron
 
         return SchedulerCron
+
+    if name == "LogOpenTelemetry":
+        from dotflow.providers.log_opentelemetry import LogOpenTelemetry
+
+        return LogOpenTelemetry
 
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
