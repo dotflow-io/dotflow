@@ -120,7 +120,8 @@ class Manager:
             resume=resume,
         )
 
-        self._callback_workflow(tasks=self.tasks)
+        if mode != TypeExecution.BACKGROUND:
+            self._callback_workflow(tasks=self.tasks)
 
     def _callback_workflow(self, tasks: list[Task]):
         final_status = [task.status for task in tasks]
@@ -144,6 +145,7 @@ class Manager:
 
     def background(self, **kwargs) -> list[Task]:
         process = Background(**kwargs)
+        self.thread = process.thread
         return process.get_tasks()
 
     def parallel(self, **kwargs) -> list[Task]:
@@ -304,7 +306,7 @@ class Background(Flow):
         self.queue = []
 
     def get_tasks(self) -> list[Task]:
-        return self.queue
+        return self.tasks
 
     def _flow_callback(self, task: Task) -> None:
         self.queue.append(task)
@@ -348,9 +350,10 @@ class Background(Flow):
                 break
 
     def run(self) -> None:
-        thread = threading.Thread(target=self._run_sequential)
-        thread.start()
-        thread.join()
+        self.thread = threading.Thread(
+            target=self._run_sequential, daemon=True
+        )
+        self.thread.start()
 
 
 class Parallel(Flow):

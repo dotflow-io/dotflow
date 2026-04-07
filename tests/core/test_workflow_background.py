@@ -29,6 +29,7 @@ class TestWorkflowBackground(unittest.TestCase):
             groups=groups,
         )
 
+        execution.thread.join()
         tasks = execution.get_tasks()
 
         self.assertListEqual(tasks, tasks)
@@ -46,6 +47,7 @@ class TestWorkflowBackground(unittest.TestCase):
             groups=grouper(tasks=tasks),
         )
 
+        execution.thread.join()
         tasks = execution.get_tasks()
 
         self.assertEqual(tasks[0].status, TypeStatus.COMPLETED)
@@ -68,6 +70,7 @@ class TestWorkflowBackground(unittest.TestCase):
             groups=grouper(tasks=tasks),
         )
 
+        execution.thread.join()
         tasks = execution.get_tasks()
 
         self.assertEqual(tasks[0].status, TypeStatus.FAILED)
