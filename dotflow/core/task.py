@@ -248,7 +248,7 @@ class Task(TaskInstance):
     def status(self, value: TypeStatus) -> None:
         self._status = value
 
-        self.config.notify.send(task=self)
+        self.config.notify.hook_status_task(task=self)
         self.config.log.info(task=self)
 
     @property
