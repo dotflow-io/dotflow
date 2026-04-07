@@ -1,5 +1,6 @@
 """Test LogOpenTelemetry"""
 
+import logging
 import sys
 import unittest
 from unittest.mock import MagicMock
@@ -28,6 +29,8 @@ class TestLogOpenTelemetry(unittest.TestCase):
         task.status = status
         task.workflow_id = "wf-123"
         task.task_id = 0
+        task.duration = 0.5
+        task.retry_count = 0
         task.errors = []
         return task
 
@@ -42,7 +45,7 @@ class TestLogOpenTelemetry(unittest.TestCase):
 
         log.info(task=task)
 
-        log._logger.info.assert_called_once()
+        log._logger.log.assert_called_once_with(logging.INFO, unittest.mock.ANY)
 
     def test_error_with_task(self):
         log = self._make_log()
@@ -50,7 +53,7 @@ class TestLogOpenTelemetry(unittest.TestCase):
 
         log.error(task=task)
 
-        log._logger.error.assert_called_once()
+        log._logger.log.assert_called_once_with(logging.ERROR, unittest.mock.ANY)
 
     def test_warning_with_task(self):
         log = self._make_log()
@@ -58,40 +61,42 @@ class TestLogOpenTelemetry(unittest.TestCase):
 
         log.warning(task=task)
 
-        log._logger.warning.assert_called_once()
+        log._logger.log.assert_called_once_with(logging.WARNING, unittest.mock.ANY)
 
     def test_debug_with_task(self):
         log = self._make_log()
+        log._level = logging.DEBUG
         task = self._make_task()
 
         log.debug(task=task)
 
-        log._logger.debug.assert_called_once()
+        log._logger.log.assert_called_once_with(logging.DEBUG, unittest.mock.ANY)
 
     def test_info_with_kwargs(self):
         log = self._make_log()
 
         log.info(workflow_id="wf-1", duration=2.5)
 
-        log._logger.info.assert_called_once()
+        log._logger.log.assert_called_once_with(logging.INFO, unittest.mock.ANY)
 
     def test_error_with_kwargs(self):
         log = self._make_log()
 
         log.error(workflow_id="wf-1", message="failed")
 
-        log._logger.error.assert_called_once()
+        log._logger.log.assert_called_once_with(logging.ERROR, unittest.mock.ANY)
 
     def test_info_no_args(self):
         log = self._make_log()
 
         log.info()
 
-        log._logger.info.assert_called_once()
+        log._logger.log.assert_called_once_with(logging.INFO, unittest.mock.ANY)
 
     def test_debug_no_args(self):
         log = self._make_log()
+        log._level = logging.DEBUG
 
         log.debug()
 
-        log._logger.debug.assert_called_once()
+        log._logger.log.assert_called_once_with(logging.DEBUG, unittest.mock.ANY)
