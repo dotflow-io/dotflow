@@ -107,10 +107,16 @@ class Manager:
         execution = None
         groups = grouper(tasks=tasks)
 
-        try:
-            execution = getattr(self, mode)
-        except AttributeError as err:
-            raise ExecutionModeNotExist() from err
+        VALID_MODES = {
+            "sequential",
+            "sequential_group",
+            "background",
+            "parallel",
+        }
+        if mode not in VALID_MODES:
+            raise ExecutionModeNotExist()
+
+        execution = getattr(self, mode)
 
         self.tasks = execution(
             tasks=tasks,
