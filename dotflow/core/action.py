@@ -144,7 +144,8 @@ class Action:
         for attempt in range(1, self.retry + 1):
             try:
                 if self.timeout:
-                    with ThreadPoolExecutor(max_workers=1) as executor:
+                    executor = ThreadPoolExecutor(max_workers=1)
+                    try:
                         future = executor.submit(
                             self._call_func,
                             is_async,
@@ -152,6 +153,12 @@ class Action:
                             **kwargs,
                         )
                         result = future.result(timeout=self.timeout)
+                    except TimeoutError:
+                        future.cancel()
+                        executor.shutdown(wait=False, cancel_futures=True)
+                        raise
+                    else:
+                        executor.shutdown(wait=False)
                 else:
                     result = self._call_func(is_async, *args, **kwargs)
 
