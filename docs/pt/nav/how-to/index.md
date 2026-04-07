@@ -10,7 +10,7 @@ Guias práticos para **provedores**, **fluxos de trabalho**, **tarefas** e a **C
 
     Ligar backends de **armazenamento**, **notificação**, **registo de logs** e **agendamento**. Os submenus agrupam os tutoriais por tipo de provedor.
 
-    [:octicons-arrow-right-24: Guias práticos](/pt/nav/tutorial/storage-default/)
+    [:octicons-arrow-right-24: Guias práticos](../tutorial/storage-default.md)
 
 - :material-graph-outline: __Fluxos de trabalho__
 
@@ -18,7 +18,7 @@ Guias práticos para **provedores**, **fluxos de trabalho**, **tarefas** e a **C
 
     Instalar, passar **contexto** entre tarefas, usar **grupos**, **continuar** e **callbacks de workflow**.
 
-    [:octicons-arrow-right-24: Guias práticos](/pt/nav/tutorial/install/)
+    [:octicons-arrow-right-24: Guias práticos](../tutorial/install.md)
 
 - :material-playlist-check: __Tarefas__
 
@@ -26,7 +26,7 @@ Guias práticos para **provedores**, **fluxos de trabalho**, **tarefas** e a **C
 
     **Estratégias** (retry, backoff, timeout), **tratamento de erros**, **checkpoints**, ações **assíncronas** e **callbacks de tarefa**.
 
-    [:octicons-arrow-right-24: Guias práticos](/pt/nav/tutorial/task-retry/)
+    [:octicons-arrow-right-24: Guias práticos](../tutorial/task-retry.md)
 
 - :material-console: __CLI do Dotflow__
 
@@ -34,6 +34,6 @@ Guias práticos para **provedores**, **fluxos de trabalho**, **tarefas** e a **C
 
     Gerar projetos e correr fluxos na linha de comando—**init**, **start** e flags habituais para contexto, modo de processo, caminhos e agendamentos.
 
-    [:octicons-arrow-right-24: Guias práticos](/pt/nav/how-to/cli/init/)
+    [:octicons-arrow-right-24: Guias práticos](cli/init.md)
 
 </div>

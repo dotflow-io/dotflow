@@ -210,7 +210,6 @@ plugins:
 nav:
     - Home: index.md
     - Concepts:
-      - Overview: nav/concepts/index.md
       - "Workflow and tasks": nav/concepts/concept-workflow-and-tasks.md
       - "Concept of context": nav/concepts/concept-of-context.md
       - Providers: nav/concepts/concept-providers.md
