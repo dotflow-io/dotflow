@@ -114,7 +114,7 @@ class Manager:
 
         self.tasks = execution(
             tasks=tasks,
-            workflow_id=workflow_id,
+            workflow_id=self.workflow_id,
             ignore=keep_going,
             groups=groups,
             resume=resume,
