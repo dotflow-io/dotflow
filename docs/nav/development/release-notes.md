@@ -1,5 +1,18 @@
 # Release Notes
 
+## v0.14.1
+
+- [📦 PyPI - Build 0.14.1](https://github.com/dotflow-io/dotflow/releases/tag/v0.14.1)
+- [🪲 Fix co_varnames to only include parameters, not local variables](https://github.com/dotflow-io/dotflow/pull/161)
+- [🪲 Fix method ordering to use regex matching instead of string search](https://github.com/dotflow-io/dotflow/pull/163)
+- [🪲 Fix fork multiprocessing on macOS with OBJC safety flag](https://github.com/dotflow-io/dotflow/pull/165)
+- [🪲 Fix timeout thread leak in ThreadPoolExecutor](https://github.com/dotflow-io/dotflow/pull/166)
+- [🪲 Add thread-safe lock to Background list append](https://github.com/dotflow-io/dotflow/pull/167)
+- [🪲 Fix race condition in queue overlap dispatch](https://github.com/dotflow-io/dotflow/pull/169)
+- [🪲 Track and join spawned threads on scheduler stop](https://github.com/dotflow-io/dotflow/pull/170)
+- [🪲 Save and restore signal handlers on scheduler start/stop](https://github.com/dotflow-io/dotflow/pull/171)
+- [⚠️ Update vulnerable dependencies](https://github.com/dotflow-io/dotflow/pull/156)
+
 ## v0.14.0
 
 - [📦 PyPI - Build 0.14.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.14.0)
