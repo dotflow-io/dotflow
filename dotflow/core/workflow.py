@@ -16,7 +16,18 @@ from dotflow.core.task import Task, TaskError
 from dotflow.core.types import TypeExecution, TypeStatus
 from dotflow.utils import basic_callback
 
-_mp = get_context("fork") if sys.platform != "win32" else get_context("spawn")
+if sys.platform == "win32":
+    _mp = get_context("spawn")
+else:
+    import multiprocessing
+
+    if sys.platform == "darwin" and hasattr(
+        multiprocessing, "set_forkserver_preload"
+    ):
+        import os
+
+        os.environ.setdefault("OBJC_DISABLE_INITIALIZE_FORK_SAFETY", "YES")
+    _mp = get_context("fork")
 
 
 def grouper(tasks: list[Task]) -> dict[str, list[Task]]:
