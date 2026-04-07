@@ -104,6 +104,72 @@ class TestSchedulerCron(unittest.TestCase):
         workflow.assert_called_once()
         self.assertFalse(scheduler._executing)
 
+    def test_dispatch_queue_caps_at_one(self):
+        scheduler = SchedulerCron(cron="*/5 * * * *", overlap="queue")
+        scheduler._executing = True
+        workflow = MagicMock()
+
+        scheduler._dispatch(workflow=workflow)
+        scheduler._dispatch(workflow=workflow)
+        scheduler._dispatch(workflow=workflow)
+
+        self.assertEqual(scheduler._queue_count, 1)
+
+    def test_execute_queued_resets_queue_count(self):
+        scheduler = SchedulerCron(cron="*/5 * * * *")
+        scheduler._executing = True
+        scheduler._queue_count = 0
+        workflow = MagicMock()
+
+        scheduler._execute_queued(workflow)
+
+        self.assertFalse(scheduler._executing)
+        self.assertEqual(scheduler._queue_count, 0)
+
+    def test_thread_tracking_on_dispatch(self):
+        scheduler = SchedulerCron(cron="*/5 * * * *", overlap="skip")
+        workflow = MagicMock()
+
+        scheduler._dispatch(workflow=workflow)
+
+        for t in threading.enumerate():
+            if t != threading.current_thread():
+                t.join(timeout=2)
+
+        self.assertGreaterEqual(len(scheduler._threads), 1)
+
+    def test_stop_clears_threads(self):
+        scheduler = SchedulerCron(cron="*/5 * * * *", overlap="skip")
+        workflow = MagicMock()
+
+        scheduler._dispatch(workflow=workflow)
+
+        for t in threading.enumerate():
+            if t != threading.current_thread():
+                t.join(timeout=2)
+
+        scheduler.stop(timeout=2)
+
+        self.assertEqual(scheduler._threads, [])
+
+    def test_dead_threads_pruned(self):
+        scheduler = SchedulerCron(cron="*/5 * * * *", overlap="skip")
+        workflow = MagicMock()
+
+        scheduler._dispatch(workflow=workflow)
+        for t in threading.enumerate():
+            if t != threading.current_thread():
+                t.join(timeout=2)
+
+        scheduler._executing = False
+        scheduler._dispatch(workflow=workflow)
+        for t in threading.enumerate():
+            if t != threading.current_thread():
+                t.join(timeout=2)
+
+        alive = [t for t in scheduler._threads if t.is_alive()]
+        self.assertEqual(len(alive), 0)
+
     def test_handle_signal(self):
         scheduler = SchedulerCron(cron="*/5 * * * *")
         scheduler.running = True
