@@ -13,6 +13,7 @@ from dotflow.providers.tracer_default import TracerDefault
 __all__ = [
     "LogDefault",
     "LogOpenTelemetry",
+    "LogSentry",
     "NotifyDefault",
     "NotifyDiscord",
     "NotifyTelegram",
@@ -26,6 +27,7 @@ __all__ = [
     "MetricsOpenTelemetry",
     "TracerDefault",
     "TracerOpenTelemetry",
+    "TracerSentry",
 ]
 
 
@@ -61,5 +63,15 @@ def __getattr__(name):
         from dotflow.providers.log_opentelemetry import LogOpenTelemetry
 
         return LogOpenTelemetry
+
+    if name == "LogSentry":
+        from dotflow.providers.log_sentry import LogSentry
+
+        return LogSentry
+
+    if name == "TracerSentry":
+        from dotflow.providers.tracer_sentry import TracerSentry
+
+        return TracerSentry
 
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
