@@ -1,5 +1,6 @@
 """Command cloud module"""
 
+import re
 from pathlib import Path
 
 from requests import get
@@ -23,17 +24,22 @@ class CloudGenerateCommand(Command):
         if registry is None:
             return
 
-        if platform not in registry["platforms"]:
-            available = ", ".join(sorted(registry["platforms"].keys()))
+        platforms = registry.get("platforms")
+        if not isinstance(platforms, dict):
+            print(settings.ERROR_ALERT, "Unexpected registry format.")
+            return
+
+        if platform not in platforms:
+            available = ", ".join(sorted(platforms.keys()))
             print(
                 settings.ERROR_ALERT,
                 f"Unknown platform '{platform}'. Available: {available}",
             )
             return
 
-        platform_info = registry["platforms"][platform]
-        files = platform_info["files"]
-        output = Path(self.params.output)
+        platform_info = platforms[platform]
+        files = platform_info.get("files", [])
+        output = Path(self.params.output).resolve()
         output.mkdir(parents=True, exist_ok=True)
 
         project_name, module_name = self._detect_project()
@@ -44,10 +50,26 @@ class CloudGenerateCommand(Command):
 
         print(
             settings.INFO_ALERT,
-            f"Generating {platform_info['name']} files for '{project_name}'...",
+            f"Generating {platform_info.get('name', platform)} files"
+            f" for '{project_name}'...",
         )
 
         for filename in files:
+            filepath = (output / filename).resolve()
+            if not str(filepath).startswith(str(output)):
+                print(
+                    settings.ERROR_ALERT,
+                    f"  Skipped (unsafe filename): {filename}",
+                )
+                continue
+
+            if filepath.exists():
+                print(
+                    settings.WARNING_ALERT,
+                    f"  Skipped (already exists): {filepath}",
+                )
+                continue
+
             content = self._fetch_file(platform, filename)
             if content is None:
                 continue
@@ -55,7 +77,6 @@ class CloudGenerateCommand(Command):
             content = content.replace("{{PROJECT_NAME}}", project_name)
             content = content.replace("{{MODULE_NAME}}", module_name)
 
-            filepath = output / filename
             filepath.write_text(content)
             print(f"  Created: {filepath}")
 
@@ -63,30 +84,34 @@ class CloudGenerateCommand(Command):
 
     def _detect_project(self):
         path = Path.cwd()
-        while path != path.parent:
-            pyproject = path / "pyproject.toml"
-            if pyproject.exists():
-                name = self._read_project_name(pyproject)
-                if name:
-                    return name, name.replace("-", "_")
-            for child in path.iterdir():
-                if child.is_dir():
-                    pyproject = child / "pyproject.toml"
-                    if pyproject.exists():
-                        name = self._read_project_name(pyproject)
-                        if name:
-                            return name, name.replace("-", "_")
-            break
+        pyproject = path / "pyproject.toml"
+        if pyproject.exists():
+            name = self._read_project_name(pyproject)
+            if name:
+                return name, name.replace("-", "_")
+
+        for child in path.iterdir():
+            if child.is_dir():
+                pyproject = child / "pyproject.toml"
+                if pyproject.exists():
+                    name = self._read_project_name(pyproject)
+                    if name:
+                        return name, name.replace("-", "_")
 
         name = Path.cwd().name
         return name, name.replace("-", "_")
 
     def _read_project_name(self, pyproject: Path):
         try:
-            content = pyproject.read_text()
-            for line in content.splitlines():
-                if line.strip().startswith("name"):
-                    return line.split("=", 1)[1].strip().strip('"').strip("'")
+            in_project = False
+            for line in pyproject.read_text().splitlines():
+                stripped = line.strip()
+                if stripped.startswith("["):
+                    in_project = stripped in ("[project]", "[tool.poetry]")
+                if in_project and re.match(r"^name\s*=", stripped):
+                    return (
+                        stripped.split("=", 1)[1].strip().strip('"').strip("'")
+                    )
         except Exception:
             pass
         return None
@@ -130,12 +155,21 @@ class CloudListCommand(Command):
             )
             return
 
+        platforms = registry.get("platforms")
+        if not isinstance(platforms, dict):
+            print(settings.ERROR_ALERT, "Unexpected registry format.")
+            return
+
         table = Table(title="Available Platforms")
         table.add_column("Platform", style="bold cyan")
         table.add_column("Name", style="bold")
         table.add_column("Description")
 
-        for key, info in registry["platforms"].items():
-            table.add_row(key, info["name"], info["description"])
+        for key, info in platforms.items():
+            table.add_row(
+                key,
+                info.get("name", ""),
+                info.get("description", ""),
+            )
 
         Console().print(table)
