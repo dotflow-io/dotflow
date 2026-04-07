@@ -14,7 +14,7 @@ sys.modules["opentelemetry.sdk"] = MagicMock()
 sys.modules["opentelemetry.sdk.metrics"] = MagicMock()
 sys.modules["opentelemetry.sdk.resources"] = MagicMock()
 
-from dotflow.providers.metrics_opentelemetry import MetricsOpenTelemetry  # noqa: E402
+from dotflow.providers.metrics_opentelemetry import MetricsOpenTelemetry  # noqa: E402, I001
 
 
 class TestMetricsOpenTelemetry(unittest.TestCase):

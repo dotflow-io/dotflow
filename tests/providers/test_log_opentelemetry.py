@@ -2,7 +2,7 @@
 
 import sys
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 
 from dotflow.abc.log import Log
 from dotflow.core.types.status import TypeStatus
