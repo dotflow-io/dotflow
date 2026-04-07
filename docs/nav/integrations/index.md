@@ -42,6 +42,50 @@
 
 </div>
 
+## Discord
+
+<div class="grid cards dotflow-integration-grid" markdown>
+
+- :fontawesome-brands-discord: __Discord Webhook__
+
+    ---
+
+    Send workflow updates through **Discord** channels.
+
+    [:octicons-arrow-right-24: How-to](../tutorial/notify-discord.md)
+
+</div>
+
+## OpenTelemetry
+
+<div class="grid cards dotflow-integration-grid" markdown>
+
+- :material-chart-timeline-variant: __Traces__
+
+    ---
+
+    Export **distributed traces** with spans per workflow and task to Jaeger, Grafana Tempo, Datadog, or any OTLP-compatible backend.
+
+    [:octicons-arrow-right-24: How-to](../tutorial/tracer-opentelemetry.md)
+
+- :material-chart-bar: __Metrics__
+
+    ---
+
+    Export **counters and histograms** for workflow throughput, task duration, retries, and failures.
+
+    [:octicons-arrow-right-24: How-to](../tutorial/metrics-opentelemetry.md)
+
+- :material-text-box-outline: __Logs__
+
+    ---
+
+    Emit **structured log records** via the OTel Logs SDK to Loki, Datadog, Elastic, or any OTLP backend.
+
+    [:octicons-arrow-right-24: How-to](../tutorial/log-opentelemetry.md)
+
+</div>
+
 ## Built-in
 
 <div class="grid cards dotflow-integration-grid" markdown>

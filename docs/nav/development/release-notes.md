@@ -12,6 +12,7 @@
 - [🪲 Track and join spawned threads on scheduler stop](https://github.com/dotflow-io/dotflow/pull/170)
 - [🪲 Save and restore signal handlers on scheduler start/stop](https://github.com/dotflow-io/dotflow/pull/171)
 - [⚠️ Update vulnerable dependencies](https://github.com/dotflow-io/dotflow/pull/156)
+- [📌 Add NotifyDiscord provider](https://github.com/dotflow-io/dotflow/pull/185)
 
 ## v0.14.0
 

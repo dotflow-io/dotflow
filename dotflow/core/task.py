@@ -208,8 +208,6 @@ class Task(TaskInstance):
         elif isinstance(value, Exception):
             self._errors.append(TaskError(value))
 
-        self.config.log.error(task=self)
-
     @property
     def error(self):
         import warnings
@@ -248,8 +246,19 @@ class Task(TaskInstance):
     def status(self, value: TypeStatus) -> None:
         self._status = value
 
-        self.config.notify.send(task=self)
-        self.config.log.info(task=self)
+        self.config.notify.hook_status_task(task=self)
+
+        if value == TypeStatus.FAILED:
+            self.config.log.error(task=self)
+            self.config.metrics.task_failed(task=self)
+        elif value == TypeStatus.RETRY:
+            self.config.log.warning(task=self)
+            self.config.metrics.task_retried(task=self)
+        elif value == TypeStatus.COMPLETED:
+            self.config.log.info(task=self)
+            self.config.metrics.task_completed(task=self)
+        else:
+            self.config.log.info(task=self)
 
     @property
     def config(self):
