@@ -36,8 +36,11 @@ class CloudGenerateCommand(Command):
         output = Path(self.params.output)
         output.mkdir(parents=True, exist_ok=True)
 
-        project_name = self.params.project or Path.cwd().name
-        module_name = project_name.replace("-", "_")
+        project_name, module_name = self._detect_project()
+
+        if self.params.project:
+            project_name = self.params.project
+            module_name = project_name.replace("-", "_")
 
         print(
             settings.INFO_ALERT,
@@ -57,6 +60,36 @@ class CloudGenerateCommand(Command):
             print(f"  Created: {filepath}")
 
         print(settings.INFO_ALERT, "Done.")
+
+    def _detect_project(self):
+        path = Path.cwd()
+        while path != path.parent:
+            pyproject = path / "pyproject.toml"
+            if pyproject.exists():
+                name = self._read_project_name(pyproject)
+                if name:
+                    return name, name.replace("-", "_")
+            for child in path.iterdir():
+                if child.is_dir():
+                    pyproject = child / "pyproject.toml"
+                    if pyproject.exists():
+                        name = self._read_project_name(pyproject)
+                        if name:
+                            return name, name.replace("-", "_")
+            break
+
+        name = Path.cwd().name
+        return name, name.replace("-", "_")
+
+    def _read_project_name(self, pyproject: Path):
+        try:
+            content = pyproject.read_text()
+            for line in content.splitlines():
+                if line.strip().startswith("name"):
+                    return line.split("=", 1)[1].strip().strip('"').strip("'")
+        except Exception:
+            pass
+        return None
 
     def _fetch_registry(self):
         try:
