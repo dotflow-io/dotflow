@@ -4,6 +4,8 @@ from pathlib import Path
 
 from requests import get
 from rich import print  # type: ignore
+from rich.console import Console
+from rich.table import Table
 
 from dotflow.cli.command import Command
 from dotflow.settings import Settings as settings
@@ -95,9 +97,12 @@ class CloudListCommand(Command):
             )
             return
 
-        print("\nAvailable platforms:\n")
+        table = Table(title="Available Platforms")
+        table.add_column("Platform", style="bold cyan")
+        table.add_column("Name", style="bold")
+        table.add_column("Description")
+
         for key, info in registry["platforms"].items():
-            files = ", ".join(info["files"])
-            print(f"  {key:<15} {info['name']}")
-            print(f"  {'':<15} {info['description']}")
-            print(f"  {'':<15} Files: {files}\n")
+            table.add_row(key, info["name"], info["description"])
+
+        Console().print(table)
