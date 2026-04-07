@@ -57,7 +57,10 @@ class DotFlow:
         )
 
         self.start = partial(
-            Manager, tasks=self.task.queue, workflow_id=self.workflow_id
+            Manager,
+            tasks=self.task.queue,
+            workflow_id=self.workflow_id,
+            config=self._config,
         )
 
         self.schedule = partial(

@@ -57,6 +57,7 @@ Changelog = "https://dotflow-io.github.io/dotflow/nav/development/release-notes/
 aws = ["boto3"]
 gcp = ["google-cloud-storage"]
 scheduler = ["croniter"]
+otel = ["opentelemetry-api", "opentelemetry-sdk"]
 
 [tool.poetry]
 name = "dotflow"

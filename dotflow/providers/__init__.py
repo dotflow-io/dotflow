@@ -1,15 +1,18 @@
 """Providers __init__ module."""
 
 from dotflow.providers.log_default import LogDefault
+from dotflow.providers.metrics_default import MetricsDefault
 from dotflow.providers.notify_default import NotifyDefault
 from dotflow.providers.notify_discord import NotifyDiscord
 from dotflow.providers.notify_telegram import NotifyTelegram
 from dotflow.providers.scheduler_default import SchedulerDefault
 from dotflow.providers.storage_default import StorageDefault
 from dotflow.providers.storage_file import StorageFile
+from dotflow.providers.tracer_default import TracerDefault
 
 __all__ = [
     "LogDefault",
+    "LogOpenTelemetry",
     "NotifyDefault",
     "NotifyDiscord",
     "NotifyTelegram",
@@ -19,6 +22,10 @@ __all__ = [
     "StorageFile",
     "StorageS3",
     "StorageGCS",
+    "MetricsDefault",
+    "MetricsOpenTelemetry",
+    "TracerDefault",
+    "TracerOpenTelemetry",
 ]
 
 
@@ -37,5 +44,22 @@ def __getattr__(name):
         from dotflow.providers.scheduler_cron import SchedulerCron
 
         return SchedulerCron
+
+    if name == "TracerOpenTelemetry":
+        from dotflow.providers.tracer_opentelemetry import TracerOpenTelemetry
+
+        return TracerOpenTelemetry
+
+    if name == "MetricsOpenTelemetry":
+        from dotflow.providers.metrics_opentelemetry import (
+            MetricsOpenTelemetry,
+        )
+
+        return MetricsOpenTelemetry
+
+    if name == "LogOpenTelemetry":
+        from dotflow.providers.log_opentelemetry import LogOpenTelemetry
+
+        return LogOpenTelemetry
 
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

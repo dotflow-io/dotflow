@@ -49,9 +49,10 @@ class Execution:
         _flow_callback: Callable = basic_callback,
     ) -> None:
         self.task = task
-        self.task.status = TypeStatus.IN_PROGRESS
         self.task.previous_context = previous_context
         self.task.workflow_id = workflow_id
+        self.task.config.tracer.start_task(task=self.task)
+        self.task.status = TypeStatus.IN_PROGRESS
 
         self._execution(_flow_callback)
 
@@ -168,6 +169,7 @@ class Execution:
             self.task.status = TypeStatus.FAILED
 
         finally:
+            self.task.config.tracer.end_task(task=self.task)
             self.task.callback(task=self.task)
             _flow_callback(task=self.task)
 
