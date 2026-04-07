@@ -77,6 +77,14 @@ class TestClassActions(unittest.TestCase):
             "retry=0 should execute the task exactly once, not zero times",
         )
 
+    def test_retry_zero_raises_on_failure(self):
+        def always_fail():
+            raise ValueError("fail")
+
+        inside = Action(always_fail, retry=0)
+        with self.assertRaises(ValueError):
+            inside(task=self.task)
+
     def test_sets_retry_status_before_retrying(self):
         calls = {"count": 0}
         statuses = []

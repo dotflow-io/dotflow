@@ -141,7 +141,9 @@ class Action:
 
         is_async = asyncio.iscoroutinefunction(self.func)
 
-        for attempt in range(1, max(1, self.retry) + 1):
+        max_attempts = max(1, self.retry)
+
+        for attempt in range(1, max_attempts + 1):
             try:
                 if self.timeout:
                     with ThreadPoolExecutor(max_workers=1) as executor:
@@ -165,7 +167,7 @@ class Action:
                 ):
                     raise ExecutionWithClassError() from None
 
-                if attempt == self.retry:
+                if attempt == max_attempts:
                     raise last_exception from last_exception
 
                 if task is not None:
