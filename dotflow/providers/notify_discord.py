@@ -1,4 +1,4 @@
-"""Notify Telegram"""
+"""Notify Discord"""
 
 from __future__ import annotations
 
@@ -12,24 +12,23 @@ from dotflow.core.types.status import TypeStatus
 from dotflow.logging import logger
 
 
-class NotifyTelegram(Notify):
+class NotifyDiscord(Notify):
     """
     Import:
-        You can import the **NotifyTelegram** class with:
+        You can import the **NotifyDiscord** class with:
 
-            from dotflow.providers import NotifyTelegram
+            from dotflow.providers import NotifyDiscord
 
     Example:
-        `class` dotflow.providers.notify_telegram.NotifyTelegram
+        `class` dotflow.providers.notify_discord.NotifyDiscord
 
             from dotflow import Config, DotFlow
-            from dotflow.providers import NotifyTelegram
+            from dotflow.providers import NotifyDiscord
             from dotflow.core.types.status import TypeStatus
 
             config = Config(
-                notify=NotifyTelegram(
-                    token="YOUR_BOT_TOKEN",
-                    chat_id=123456789,
+                notify=NotifyDiscord(
+                    webhook_url="https://discord.com/api/webhooks/...",
                     notification_type=TypeStatus.FAILED,
                 )
             )
@@ -37,9 +36,7 @@ class NotifyTelegram(Notify):
             workflow = DotFlow(config=config)
 
     Args:
-        token (str): Telegram bot token from BotFather.
-
-        chat_id (int): Telegram chat ID to send messages to.
+        webhook_url (str): Discord webhook URL.
 
         notification_type (Optional[TypeStatus]): Filter notifications
             by task status. If None, all statuses are notified.
@@ -50,18 +47,23 @@ class NotifyTelegram(Notify):
         timeout (float): Request timeout in seconds.
     """
 
-    API_URL = "https://api.telegram.org/bot{token}/sendMessage"
+    COLORS = {
+        TypeStatus.COMPLETED: 0x4CAF50,
+        TypeStatus.FAILED: 0xF44336,
+        TypeStatus.RETRY: 0xFF9800,
+        TypeStatus.IN_PROGRESS: 0x2196F3,
+        TypeStatus.NOT_STARTED: 0x9E9E9E,
+        TypeStatus.PAUSED: 0x607D8B,
+    }
 
     def __init__(
         self,
-        token: str,
-        chat_id: int,
+        webhook_url: str,
         notification_type: TypeStatus | None = None,
         show_result: bool = False,
         timeout: float = 1.5,
     ):
-        self.token = token
-        self.chat_id = chat_id
+        self.webhook_url = webhook_url
         self.notification_type = notification_type
         self.show_result = show_result
         self.timeout = timeout
@@ -72,38 +74,39 @@ class NotifyTelegram(Notify):
 
         try:
             response = post(
-                url=self.API_URL.format(token=self.token),
+                url=self.webhook_url,
                 headers={"Content-Type": "application/json"},
-                data=dumps(
-                    {
-                        "chat_id": self.chat_id,
-                        "text": self._build_message(task),
-                        "parse_mode": "markdown",
-                    }
-                ),
+                data=dumps({"embeds": [self._build_embed(task)]}),
                 timeout=self.timeout,
             )
             response.raise_for_status()
         except Exception as error:
             logger.error(
-                "Internal problem sending notification on Telegram: %s",
+                "Internal problem sending notification on Discord: %s",
                 str(error),
             )
 
-    def _build_message(self, task: Any) -> str:
-        symbol = TypeStatus.get_symbol(task.status)
-        header = f"{symbol} {task.status}"
-        footer = f"`{task.workflow_id}` — Task {task.task_id}"
-
-        parts = [header]
+    def _build_embed(self, task: Any) -> dict:
+        embed = {
+            "title": f"{TypeStatus.get_symbol(task.status)} {task.status}",
+            "color": self.COLORS.get(task.status, 0x9E9E9E),
+            "description": f"`{task.workflow_id}` — Task {task.task_id}",
+            "fields": [],
+        }
 
         if self.show_result:
-            parts.append(f"```json\n{task.result(max=4000)}```")
+            embed["fields"].append(
+                {
+                    "name": "Result",
+                    "value": f"```json\n{task.result(max=1024)}```",
+                }
+            )
 
         if task.status == TypeStatus.FAILED and task.errors:
             last_error = task.errors[-1]
-            parts.append(f"`{last_error.exception}`: {last_error.message}")
+            error_value = f"`{last_error.exception}`: {last_error.message}"
+            embed["fields"].append(
+                {"name": "Error", "value": error_value[:1024]}
+            )
 
-        parts.append(footer)
-
-        return "\n".join(parts)
+        return embed

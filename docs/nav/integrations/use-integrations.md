@@ -22,7 +22,7 @@ pip install "dotflow[gcp,scheduler]"
 The authoritative list of extras and pinned versions lives in [`pyproject.toml`](https://github.com/dotflow-io/dotflow/blob/main/pyproject.toml) under `[project.optional-dependencies]`.
 
 /// note
-Built-in providers (default storage, file storage, default notify/log/scheduler) use only **core** dependencies—no extra needed. [Telegram](../tutorial/notify-telegram.md) uses `requests`, which is already a dependency of `dotflow`.
+Built-in providers (default storage, file storage, default notify/log/scheduler) use only **core** dependencies—no extra needed. [Telegram](../tutorial/notify-telegram.md) and [Discord](../tutorial/notify-discord.md) use `requests`, which is already a dependency of `dotflow`.
 ///
 
 ## Use a provider in code
@@ -55,7 +55,7 @@ workflow.task.add(step=step_one)
 workflow.start()
 ```
 
-The same pattern applies to **GCS** (`StorageGCS`), **cron** (`SchedulerCron` on `Config.scheduler`), **Telegram** (`NotifyTelegram` on `Config.notify`), and other providers—each [integration guide](index.md) shows the exact constructor arguments and auth model.
+The same pattern applies to **GCS** (`StorageGCS`), **cron** (`SchedulerCron` on `Config.scheduler`), **Telegram** (`NotifyTelegram` on `Config.notify`), **Discord** (`NotifyDiscord` on `Config.notify`), and other providers—each [integration guide](index.md) shows the exact constructor arguments and auth model.
 
 ## If import fails
 

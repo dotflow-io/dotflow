@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 from dotflow import Config, DotFlow, action
 from dotflow.core.types.status import TypeStatus
-from dotflow.providers import NotifyTelegram
+from dotflow.providers import NotifyDiscord
 
 
 @action
@@ -20,9 +20,8 @@ def step_two():
 def main():
     load_dotenv()
 
-    notify = NotifyTelegram(
-        token=os.getenv("BOT_TOKEN", ""),
-        chat_id=int(os.getenv("CHAT_ID", "0")),
+    notify = NotifyDiscord(
+        webhook_url=os.getenv("DISCORD_WEBHOOK_URL", ""),
         notification_type=TypeStatus.FAILED,
         show_result=True,
     )

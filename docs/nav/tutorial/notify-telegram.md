@@ -32,7 +32,7 @@ Store your token and chat ID in environment variables or a `.env` file. Never ha
 
 ## Example
 
-{* ./docs_src/notify/notify_telegram.py hl[8,26:30,32] *}
+{* ./docs_src/notify/notify_telegram.py hl[7,23:28,30] *}
 
 ## Notification types
 
@@ -41,6 +41,24 @@ Store your token and chat ID in environment variables or a `.env` file. Never ha
 | `TypeStatus.FAILED` | Only on failure |
 | `TypeStatus.COMPLETED` | Only on success |
 | `None` (default) | Every task, regardless of status |
+
+## Show result
+
+Set `show_result=True` to include the task result (as JSON) in the notification message. Disabled by default to keep messages compact.
+
+| `show_result` | Behavior |
+|---------------|----------|
+| `False` (default) | Only status, workflow ID, and task ID |
+| `True` | Adds the task output as a JSON code block |
+
+## Message format
+
+Notifications are sent as Telegram messages with:
+
+- Task status with emoji indicator
+- Workflow ID and Task ID
+- Task result as JSON (when `show_result=True`)
+- Error details (when failed)
 
 ## References
 

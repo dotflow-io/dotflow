@@ -11,7 +11,7 @@ This means you can persist task output to any database, send notifications to an
 | ABC | Import | Methods | Purpose |
 |-----|--------|---------|---------|
 | `Storage` | `dotflow.abc.storage` | `post()`, `get()`, `key()` | Persist and retrieve task context between steps |
-| `Notify` | `dotflow.abc.notify` | `send()` | Send notifications when tasks complete or fail |
+| `Notify` | `dotflow.abc.notify` | `hook_status_task()` | Hook called when a task status changes |
 | `Log` | `dotflow.abc.log` | `info()`, `error()` | Log task status changes during execution |
 | `Scheduler` | `dotflow.abc.scheduler` | `start()`, `stop()` | Control recurring workflow execution on a schedule |
 
@@ -79,9 +79,9 @@ class SchedulerInterval(Scheduler):
 
 ## Custom Notify
 
-The `Notify` provider is called after each task finishes. It receives the full task object, so you can inspect its status, errors, context, and duration to decide what to send and where.
+The `Notify` provider is called when a task status changes. It receives the full task object, so you can inspect its status, errors, context, and duration to decide what to send and where.
 
-- `send(task)` — send a notification based on the task state
+- `hook_status_task(task)` — hook called when a task status changes
 
 ```python
 from typing import Any
@@ -93,7 +93,7 @@ class NotifySlack(Notify):
     def __init__(self, webhook_url: str):
         self.webhook_url = webhook_url
 
-    def send(self, task: Any) -> None:
+    def hook_status_task(self, task: Any) -> None:
         import requests
         requests.post(self.webhook_url, json={
             "text": f"Task {task.task_id}: {task.status}"

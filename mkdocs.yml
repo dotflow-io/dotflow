@@ -232,6 +232,7 @@ nav:
         - Notify:
           - nav/tutorial/notify-default.md
           - nav/tutorial/notify-telegram.md
+          - nav/tutorial/notify-discord.md
         - Log:
           - nav/tutorial/log-default.md
         - Scheduler:
@@ -277,6 +278,8 @@ nav:
         - nav/tutorial/storage-gcs.md
       - Telegram:
         - nav/tutorial/notify-telegram.md
+      - Discord:
+        - nav/tutorial/notify-discord.md
       - Built-in:
         - nav/tutorial/storage-default.md
         - nav/tutorial/storage-file.md
@@ -306,6 +309,7 @@ nav:
       - Providers:
         - nav/reference/log-default.md
         - nav/reference/notify-default.md
+        - nav/reference/notify-discord.md
         - nav/reference/notify-telegram.md
         - nav/reference/scheduler-default.md
         - nav/reference/scheduler-cron.md

@@ -587,7 +587,7 @@ Extend Dotflow by implementing the abstract base classes:
 | ABC | Methods | Purpose |
 |-----|---------|---------|
 | `Storage` | `post`, `get`, `key` | Custom storage backends |
-| `Notify` | `send` | Custom notification channels |
+| `Notify` | `hook_status_task` | Custom notification channels |
 | `Log` | `info`, `error` | Custom logging |
 | `Scheduler` | `start`, `stop` | Custom scheduling strategies |
 
