@@ -234,6 +234,7 @@ nav:
           - nav/tutorial/notify-discord.md
         - Log:
           - nav/tutorial/log-default.md
+          - nav/tutorial/log-opentelemetry.md
         - Scheduler:
           - nav/tutorial/scheduler-default.md
           - nav/tutorial/scheduler-cron.md
@@ -323,6 +324,7 @@ nav:
       - nav/reference/exception.md
       - Providers:
         - nav/reference/log-default.md
+        - nav/reference/log-opentelemetry.md
         - nav/reference/notify-default.md
         - nav/reference/notify-discord.md
         - nav/reference/notify-telegram.md

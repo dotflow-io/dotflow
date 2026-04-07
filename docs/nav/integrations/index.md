@@ -56,6 +56,20 @@
 
 </div>
 
+## OpenTelemetry
+
+<div class="grid cards dotflow-integration-grid" markdown>
+
+- :material-chart-timeline-variant: __OpenTelemetry__
+
+    ---
+
+    Export **traces and spans** for every workflow and task to Jaeger, Grafana Tempo, Datadog, or any OTLP-compatible backend.
+
+    [:octicons-arrow-right-24: How-to](../tutorial/log-opentelemetry.md)
+
+</div>
+
 ## Built-in
 
 <div class="grid cards dotflow-integration-grid" markdown>

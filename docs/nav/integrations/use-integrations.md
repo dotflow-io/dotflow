@@ -11,6 +11,7 @@ Install the matching extra with `pip` before importing a provider that needs a t
 | `aws` | `boto3` | [Storage S3](../tutorial/storage-s3.md) |
 | `gcp` | `google-cloud-storage` | [Storage GCS](../tutorial/storage-gcs.md) |
 | `scheduler` | `croniter` | [Scheduler cron](../tutorial/scheduler-cron.md) |
+| `otel` | `opentelemetry-api`, `opentelemetry-sdk` | [Log OpenTelemetry](../tutorial/log-opentelemetry.md) |
 
 Examples:
 
