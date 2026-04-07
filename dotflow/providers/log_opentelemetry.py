@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import logging
+from pathlib import Path
 
-from dotflow.abc.log import Log
+from dotflow.abc.log import LEVELS, Log
 from dotflow.core.exception import ModuleNotFound
+from dotflow.settings import Settings as settings
 
 
 class LogOpenTelemetry(Log):
@@ -29,11 +31,23 @@ class LogOpenTelemetry(Log):
 
     Args:
         service_name (str): The service name used in the OpenTelemetry logger.
-        console (bool): If True, adds a ConsoleLogExporter. Defaults to False.
+        level (str): Minimum log level. One of DEBUG, INFO, WARNING, ERROR.
+            Defaults to INFO.
+        output (str): Log destination. One of console, file, both.
+            Defaults to console.
+        path (str): Path to the log file. Only used when output is file or both.
+            Defaults to .output/flow.log.
+        format (str): Message format. One of simple, json.
+            Defaults to simple.
     """
 
     def __init__(
-        self, service_name: str = "dotflow", console: bool = False
+        self,
+        service_name: str = "dotflow",
+        level: str = "INFO",
+        output: str = "console",
+        path: str = str(settings.LOG_PATH),
+        format: str = "simple",
     ) -> None:
         try:
             from opentelemetry._logs import set_logger_provider
@@ -48,68 +62,32 @@ class LogOpenTelemetry(Log):
                 module="opentelemetry", library="dotflow[otel]"
             ) from err
 
+        self._level = LEVELS.get(level.upper(), logging.INFO)
+        self._format = format
+
         resource = Resource.create({"service.name": service_name})
         provider = LoggerProvider(resource=resource)
         set_logger_provider(provider)
 
-        if console:
+        if output in ("console", "both"):
             provider.add_log_record_processor(
                 SimpleLogRecordProcessor(ConsoleLogExporter())
             )
 
-        handler = LoggingHandler(level=logging.DEBUG, logger_provider=provider)
+        handler = LoggingHandler(
+            level=self._level, logger_provider=provider
+        )
 
         self._logger = logging.getLogger(f"dotflow.otel.{id(self)}")
-        self._logger.setLevel(logging.DEBUG)
+        self._logger.setLevel(self._level)
         self._logger.handlers.clear()
         self._logger.propagate = False
         self._logger.addHandler(handler)
 
-    def info(self, **kwargs) -> None:
-        task = kwargs.get("task")
-        if task:
-            self._logger.info(
-                "ID %s - %s - %s",
-                task.workflow_id,
-                task.task_id,
-                task.status,
-            )
-        else:
-            self._logger.info("%s", kwargs)
-
-    def error(self, **kwargs) -> None:
-        task = kwargs.get("task")
-        if task:
-            self._logger.error(
-                "ID %s - %s - %s \n %s",
-                task.workflow_id,
-                task.task_id,
-                task.status,
-                task.errors[-1].traceback if task.errors else "",
-            )
-        else:
-            self._logger.error("%s", kwargs)
-
-    def warning(self, **kwargs) -> None:
-        task = kwargs.get("task")
-        if task:
-            self._logger.warning(
-                "ID %s - %s - %s",
-                task.workflow_id,
-                task.task_id,
-                task.status,
-            )
-        else:
-            self._logger.warning("%s", kwargs)
-
-    def debug(self, **kwargs) -> None:
-        task = kwargs.get("task")
-        if task:
-            self._logger.debug(
-                "ID %s - %s - %s",
-                task.workflow_id,
-                task.task_id,
-                task.status,
-            )
-        else:
-            self._logger.debug("%s", kwargs)
+        if output in ("file", "both"):
+            filepath = Path(path)
+            filepath.parent.mkdir(parents=True, exist_ok=True)
+            fh = logging.FileHandler(filepath, mode="a")
+            fh.setLevel(self._level)
+            fh.setFormatter(logging.Formatter(settings.LOG_FORMAT))
+            self._logger.addHandler(fh)
