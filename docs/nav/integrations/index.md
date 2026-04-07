@@ -42,6 +42,20 @@
 
 </div>
 
+## Discord
+
+<div class="grid cards dotflow-integration-grid" markdown>
+
+- :fontawesome-brands-discord: __Discord Webhook__
+
+    ---
+
+    Send workflow updates through **Discord** channels.
+
+    [:octicons-arrow-right-24: How-to](../tutorial/notify-discord.md)
+
+</div>
+
 ## Built-in
 
 <div class="grid cards dotflow-integration-grid" markdown>
