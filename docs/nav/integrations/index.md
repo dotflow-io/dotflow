@@ -86,6 +86,28 @@
 
 </div>
 
+## Sentry
+
+<div class="grid cards dotflow-integration-grid" markdown>
+
+- :material-bug-outline: __Error Monitoring__
+
+    ---
+
+    Send task errors to **Sentry** for real-time error tracking in production workflows.
+
+    [:octicons-arrow-right-24: How-to](../tutorial/log-sentry.md)
+
+- :material-speedometer: __Performance Monitoring__
+
+    ---
+
+    Track workflow transactions and task spans with **Sentry Performance** — durations, waterfalls, and bottlenecks.
+
+    [:octicons-arrow-right-24: How-to](../tutorial/tracer-sentry.md)
+
+</div>
+
 ## Built-in
 
 <div class="grid cards dotflow-integration-grid" markdown>

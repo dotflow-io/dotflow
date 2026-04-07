@@ -235,12 +235,14 @@ nav:
         - Log:
           - nav/tutorial/log-default.md
           - nav/tutorial/log-opentelemetry.md
+          - nav/tutorial/log-sentry.md
         - Scheduler:
           - nav/tutorial/scheduler-default.md
           - nav/tutorial/scheduler-cron.md
         - Tracer:
           - nav/tutorial/tracer-default.md
           - nav/tutorial/tracer-opentelemetry.md
+          - nav/tutorial/tracer-sentry.md
         - Metrics:
           - nav/tutorial/metrics-default.md
           - nav/tutorial/metrics-opentelemetry.md
@@ -290,6 +292,9 @@ nav:
         - nav/tutorial/log-opentelemetry.md
         - nav/tutorial/tracer-opentelemetry.md
         - nav/tutorial/metrics-opentelemetry.md
+      - Sentry:
+        - nav/tutorial/log-sentry.md
+        - nav/tutorial/tracer-sentry.md
       - Built-in:
         - nav/tutorial/storage-default.md
         - nav/tutorial/storage-file.md
@@ -335,6 +340,7 @@ nav:
       - Providers:
         - nav/reference/log-default.md
         - nav/reference/log-opentelemetry.md
+        - nav/reference/log-sentry.md
         - nav/reference/metrics-default.md
         - nav/reference/metrics-opentelemetry.md
         - nav/reference/notify-default.md
@@ -348,6 +354,7 @@ nav:
         - nav/reference/storage-gcs.md
         - nav/reference/tracer-default.md
         - nav/reference/tracer-opentelemetry.md
+        - nav/reference/tracer-sentry.md
       - Instance:
         - nav/reference/task-instance.md
         - nav/reference/context-instance.md
