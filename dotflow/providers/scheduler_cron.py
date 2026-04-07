@@ -204,15 +204,18 @@ class SchedulerCron(Scheduler):
         finally:
             with self._lock:
                 if self._queue_count > 0:
-                    self._queue_count -= 1
-                    thread = threading.Thread(
+                    self._queue_count = 0
+                    next_thread = threading.Thread(
                         target=self._execute_queued,
                         args=(workflow,),
                         kwargs=kwargs,
                     )
-                    thread.start()
                 else:
                     self._executing = False
+                    next_thread = None
+
+            if next_thread is not None:
+                next_thread.start()
 
     def _register_signals(self) -> None:
         if threading.current_thread() is not threading.main_thread():
