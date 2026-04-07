@@ -1,9 +1,5 @@
-from opentelemetry import trace
-from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
-from opentelemetry.sdk.trace.export import ConsoleSpanExporter, SimpleSpanProcessor
-
 from dotflow import Config, DotFlow, action
-from dotflow.providers import LogOpenTelemetry
+from dotflow.providers import MetricsOpenTelemetry
 
 
 @action
@@ -22,13 +18,9 @@ def load(previous_context):
 
 
 def main():
-    log = LogOpenTelemetry(service_name="my-pipeline")
-
-    provider = trace.get_tracer_provider()
-    provider.add_span_processor(SimpleSpanProcessor(ConsoleSpanExporter()))
-    provider.add_span_processor(SimpleSpanProcessor(OTLPSpanExporter()))
-
-    config = Config(log=log)
+    config = Config(
+        metrics=MetricsOpenTelemetry(service_name="my-pipeline"),
+    )
 
     workflow = DotFlow(config=config)
     workflow.task.add(step=extract)

@@ -1,5 +1,5 @@
 from dotflow import Config, DotFlow, action
-from dotflow.providers import LogOpenTelemetry
+from dotflow.providers import TracerOpenTelemetry
 
 
 @action
@@ -19,7 +19,7 @@ def load(previous_context):
 
 def main():
     config = Config(
-        log=LogOpenTelemetry(service_name="my-pipeline"),
+        tracer=TracerOpenTelemetry(service_name="my-pipeline"),
     )
 
     workflow = DotFlow(config=config)
