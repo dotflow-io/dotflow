@@ -79,6 +79,21 @@ class TestClassActions(unittest.TestCase):
         self.assertEqual(len(statuses), 1)
         self.assertEqual(statuses[0], TypeStatus.RETRY)
 
+    def test_retry_exception_does_not_chain_to_itself(self):
+        def always_fail():
+            raise ValueError("fail")
+
+        inside = Action(always_fail, retry=2, retry_delay=0)
+
+        try:
+            inside()
+        except ValueError as error:
+            self.assertIsNot(
+                error.__cause__,
+                error,
+                "Exception must not be its own __cause__ (circular chain)",
+            )
+
     def test_backoff_does_not_mutate_retry_delay(self):
         def always_fail():
             raise RuntimeError("fail")
