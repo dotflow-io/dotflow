@@ -18,7 +18,6 @@ from dotflow.providers.metrics_opentelemetry import MetricsOpenTelemetry  # noqa
 
 
 class TestMetricsOpenTelemetry(unittest.TestCase):
-
     def _make_task(self, status=TypeStatus.COMPLETED):
         task = MagicMock()
         task.status = status
@@ -38,15 +37,21 @@ class TestMetricsOpenTelemetry(unittest.TestCase):
 
         metrics.workflow_started(workflow_id="wf-1")
 
-        metrics._workflow_total.add.assert_called_with(1, {"status": "started"})
+        metrics._workflow_total.add.assert_called_with(
+            1, {"status": "started"}
+        )
 
     def test_workflow_completed(self):
         metrics = MetricsOpenTelemetry(service_name="test")
 
         metrics.workflow_completed(workflow_id="wf-1", duration=2.5)
 
-        metrics._workflow_total.add.assert_called_with(1, {"status": "completed"})
-        metrics._workflow_duration.record.assert_called_with(2.5, {"status": "completed"})
+        metrics._workflow_total.add.assert_called_with(
+            1, {"status": "completed"}
+        )
+        metrics._workflow_duration.record.assert_called_with(
+            2.5, {"status": "completed"}
+        )
 
     def test_workflow_failed(self):
         metrics = MetricsOpenTelemetry(service_name="test")
@@ -54,7 +59,9 @@ class TestMetricsOpenTelemetry(unittest.TestCase):
         metrics.workflow_failed(workflow_id="wf-1", duration=1.0)
 
         metrics._workflow_total.add.assert_called_with(1, {"status": "failed"})
-        metrics._workflow_duration.record.assert_called_with(1.0, {"status": "failed"})
+        metrics._workflow_duration.record.assert_called_with(
+            1.0, {"status": "failed"}
+        )
 
     def test_task_completed(self):
         metrics = MetricsOpenTelemetry(service_name="test")
@@ -63,7 +70,9 @@ class TestMetricsOpenTelemetry(unittest.TestCase):
         metrics.task_completed(task=task)
 
         metrics._task_total.add.assert_called_with(1, {"status": "completed"})
-        metrics._task_duration.record.assert_called_with(0.5, {"status": "completed"})
+        metrics._task_duration.record.assert_called_with(
+            0.5, {"status": "completed"}
+        )
 
     def test_task_failed(self):
         metrics = MetricsOpenTelemetry(service_name="test")

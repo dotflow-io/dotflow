@@ -8,7 +8,6 @@ from dotflow.providers.metrics_default import MetricsDefault
 
 
 class TestMetricsDefault(unittest.TestCase):
-
     def test_instance(self):
         metrics = MetricsDefault()
 

@@ -70,7 +70,9 @@ class Log(ABC):
         if level < self._level:
             return
 
-        formatter = getattr(self, self._FORMATTERS.get(self._format, "_format_text"))
+        formatter = getattr(
+            self, self._FORMATTERS.get(self._format, "_format_text")
+        )
         task = kwargs.get("task")
 
         if task:

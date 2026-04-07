@@ -45,7 +45,9 @@ class TestLogOpenTelemetry(unittest.TestCase):
 
         log.info(task=task)
 
-        log._logger.log.assert_called_once_with(logging.INFO, unittest.mock.ANY)
+        log._logger.log.assert_called_once_with(
+            logging.INFO, unittest.mock.ANY
+        )
 
     def test_error_with_task(self):
         log = self._make_log()
@@ -53,7 +55,9 @@ class TestLogOpenTelemetry(unittest.TestCase):
 
         log.error(task=task)
 
-        log._logger.log.assert_called_once_with(logging.ERROR, unittest.mock.ANY)
+        log._logger.log.assert_called_once_with(
+            logging.ERROR, unittest.mock.ANY
+        )
 
     def test_warning_with_task(self):
         log = self._make_log()
@@ -61,7 +65,9 @@ class TestLogOpenTelemetry(unittest.TestCase):
 
         log.warning(task=task)
 
-        log._logger.log.assert_called_once_with(logging.WARNING, unittest.mock.ANY)
+        log._logger.log.assert_called_once_with(
+            logging.WARNING, unittest.mock.ANY
+        )
 
     def test_debug_with_task(self):
         log = self._make_log()
@@ -70,28 +76,36 @@ class TestLogOpenTelemetry(unittest.TestCase):
 
         log.debug(task=task)
 
-        log._logger.log.assert_called_once_with(logging.DEBUG, unittest.mock.ANY)
+        log._logger.log.assert_called_once_with(
+            logging.DEBUG, unittest.mock.ANY
+        )
 
     def test_info_with_kwargs(self):
         log = self._make_log()
 
         log.info(workflow_id="wf-1", duration=2.5)
 
-        log._logger.log.assert_called_once_with(logging.INFO, unittest.mock.ANY)
+        log._logger.log.assert_called_once_with(
+            logging.INFO, unittest.mock.ANY
+        )
 
     def test_error_with_kwargs(self):
         log = self._make_log()
 
         log.error(workflow_id="wf-1", message="failed")
 
-        log._logger.log.assert_called_once_with(logging.ERROR, unittest.mock.ANY)
+        log._logger.log.assert_called_once_with(
+            logging.ERROR, unittest.mock.ANY
+        )
 
     def test_info_no_args(self):
         log = self._make_log()
 
         log.info()
 
-        log._logger.log.assert_called_once_with(logging.INFO, unittest.mock.ANY)
+        log._logger.log.assert_called_once_with(
+            logging.INFO, unittest.mock.ANY
+        )
 
     def test_debug_no_args(self):
         log = self._make_log()
@@ -99,4 +113,6 @@ class TestLogOpenTelemetry(unittest.TestCase):
 
         log.debug()
 
-        log._logger.log.assert_called_once_with(logging.DEBUG, unittest.mock.ANY)
+        log._logger.log.assert_called_once_with(
+            logging.DEBUG, unittest.mock.ANY
+        )

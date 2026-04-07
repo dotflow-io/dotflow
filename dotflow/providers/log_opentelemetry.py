@@ -74,9 +74,7 @@ class LogOpenTelemetry(Log):
                 SimpleLogRecordProcessor(ConsoleLogExporter())
             )
 
-        handler = LoggingHandler(
-            level=self._level, logger_provider=provider
-        )
+        handler = LoggingHandler(level=self._level, logger_provider=provider)
 
         self._logger = logging.getLogger(f"dotflow.otel.{id(self)}")
         self._logger.setLevel(self._level)

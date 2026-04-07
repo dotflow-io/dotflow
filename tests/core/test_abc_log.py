@@ -10,7 +10,6 @@ from dotflow.core.types.status import TypeStatus
 
 
 class ConcreteLog(Log):
-
     def __init__(self, level="INFO", format="simple"):
         self._level = LEVELS.get(level.upper(), logging.INFO)
         self._format = format
@@ -18,7 +17,6 @@ class ConcreteLog(Log):
 
 
 class TestLevels(unittest.TestCase):
-
     def test_levels_mapping(self):
         self.assertEqual(LEVELS["DEBUG"], logging.DEBUG)
         self.assertEqual(LEVELS["INFO"], logging.INFO)
@@ -27,7 +25,6 @@ class TestLevels(unittest.TestCase):
 
 
 class TestLogRecordError(unittest.TestCase):
-
     def test_defaults(self):
         error = LogRecordError()
 
@@ -42,7 +39,6 @@ class TestLogRecordError(unittest.TestCase):
 
 
 class TestLogRecord(unittest.TestCase):
-
     def test_defaults(self):
         record = LogRecord()
 
@@ -83,7 +79,6 @@ class TestLogRecord(unittest.TestCase):
 
 
 class TestLogDispatch(unittest.TestCase):
-
     def _make_task(self, status=TypeStatus.COMPLETED):
         task = MagicMock()
         task.status = status
@@ -100,7 +95,9 @@ class TestLogDispatch(unittest.TestCase):
 
         log.info(task=task)
 
-        log._logger.log.assert_called_once_with(logging.INFO, unittest.mock.ANY)
+        log._logger.log.assert_called_once_with(
+            logging.INFO, unittest.mock.ANY
+        )
 
     def test_error_dispatches_to_log(self):
         log = ConcreteLog()
@@ -108,7 +105,9 @@ class TestLogDispatch(unittest.TestCase):
 
         log.error(task=task)
 
-        log._logger.log.assert_called_once_with(logging.ERROR, unittest.mock.ANY)
+        log._logger.log.assert_called_once_with(
+            logging.ERROR, unittest.mock.ANY
+        )
 
     def test_warning_dispatches_to_log(self):
         log = ConcreteLog()
@@ -116,7 +115,9 @@ class TestLogDispatch(unittest.TestCase):
 
         log.warning(task=task)
 
-        log._logger.log.assert_called_once_with(logging.WARNING, unittest.mock.ANY)
+        log._logger.log.assert_called_once_with(
+            logging.WARNING, unittest.mock.ANY
+        )
 
     def test_debug_dispatches_to_log(self):
         log = ConcreteLog(level="DEBUG")
@@ -124,7 +125,9 @@ class TestLogDispatch(unittest.TestCase):
 
         log.debug(task=task)
 
-        log._logger.log.assert_called_once_with(logging.DEBUG, unittest.mock.ANY)
+        log._logger.log.assert_called_once_with(
+            logging.DEBUG, unittest.mock.ANY
+        )
 
     def test_level_filter_skips_below(self):
         log = ConcreteLog(level="ERROR")
@@ -145,11 +148,12 @@ class TestLogDispatch(unittest.TestCase):
 
         log.info(workflow_id="wf-1", duration=2.5)
 
-        log._logger.log.assert_called_once_with(logging.INFO, unittest.mock.ANY)
+        log._logger.log.assert_called_once_with(
+            logging.INFO, unittest.mock.ANY
+        )
 
 
 class TestFormatText(unittest.TestCase):
-
     def _make_task(self, status=TypeStatus.COMPLETED):
         task = MagicMock()
         task.status = status
@@ -190,7 +194,6 @@ class TestFormatText(unittest.TestCase):
 
 
 class TestFormatJson(unittest.TestCase):
-
     def _make_task(self, status=TypeStatus.COMPLETED):
         task = MagicMock()
         task.status = status

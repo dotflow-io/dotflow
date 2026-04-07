@@ -20,7 +20,6 @@ from dotflow.providers.tracer_opentelemetry import TracerOpenTelemetry  # noqa: 
 
 
 class TestTracerOpenTelemetry(unittest.TestCase):
-
     def _make_task(self, status=TypeStatus.COMPLETED):
         task = MagicMock()
         task.status = status

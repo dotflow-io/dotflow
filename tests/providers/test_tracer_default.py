@@ -8,7 +8,6 @@ from dotflow.providers.tracer_default import TracerDefault
 
 
 class TestTracerDefault(unittest.TestCase):
-
     def test_instance(self):
         tracer = TracerDefault()
 
