@@ -157,6 +157,9 @@ class Action:
                         future.cancel()
                         executor.shutdown(wait=False, cancel_futures=True)
                         raise
+                    except Exception:
+                        executor.shutdown(wait=False)
+                        raise
                     else:
                         executor.shutdown(wait=False)
                 else:
