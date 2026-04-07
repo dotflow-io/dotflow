@@ -29,9 +29,12 @@ class LogOpenTelemetry(Log):
 
     Args:
         service_name (str): The service name used in the OpenTelemetry logger.
+        console (bool): If True, adds a ConsoleLogExporter. Defaults to False.
     """
 
-    def __init__(self, service_name: str = "dotflow") -> None:
+    def __init__(
+        self, service_name: str = "dotflow", console: bool = False
+    ) -> None:
         try:
             from opentelemetry._logs import set_logger_provider
             from opentelemetry.sdk._logs import LoggerProvider, LoggingHandler
@@ -49,9 +52,10 @@ class LogOpenTelemetry(Log):
         provider = LoggerProvider(resource=resource)
         set_logger_provider(provider)
 
-        provider.add_log_record_processor(
-            SimpleLogRecordProcessor(ConsoleLogExporter())
-        )
+        if console:
+            provider.add_log_record_processor(
+                SimpleLogRecordProcessor(ConsoleLogExporter())
+            )
 
         handler = LoggingHandler(level=logging.DEBUG, logger_provider=provider)
 

@@ -16,7 +16,7 @@ pip install dotflow[otel]
 
 ## Basic example
 
-Log records are emitted to the console by default — no extra exporter needed.
+Pass `console=True` to emit log records to the console — useful for local development.
 
 {* ./docs_src/config/log_opentelemetry_basic.py hl[2,16:18] *}
 

@@ -14,7 +14,7 @@ def transform(previous_context):
 
 def main():
     config = Config(
-        log=LogOpenTelemetry(service_name="my-pipeline"),
+        log=LogOpenTelemetry(service_name="my-pipeline", console=True),
     )
 
     workflow = DotFlow(config=config)
