@@ -8,6 +8,7 @@ from dotflow.cli.commands import (
     LogCommand,
     ScheduleCommand,
     StartCommand,
+    VizCommand,
 )
 from dotflow.core.exception import (
     MESSAGE_UNKNOWN_ERROR,
@@ -39,6 +40,7 @@ class Command:
         self.setup_logs()
         self.setup_start()
         self.setup_schedule()
+        self.setup_viz()
         self.command()
 
     def setup_init(self):
@@ -144,6 +146,42 @@ class Command:
         )
 
         self.cmd_schedule.set_defaults(exec=ScheduleCommand)
+
+    def setup_viz(self):
+        self.cmd_viz = self.subparsers.add_parser(
+            "viz",
+            help="Visualize a workflow pipeline in the terminal",
+        )
+        self.cmd_viz = self.cmd_viz.add_argument_group(
+            "Usage: dotflow viz [OPTIONS]"
+        )
+
+        self.cmd_viz.add_argument(
+            "-s",
+            "--step",
+            required=True,
+            help="Dotted path to a DotFlow instance, TaskBuilder, or task list",
+        )
+        self.cmd_viz.add_argument(
+            "-m",
+            "--mode",
+            default=TypeExecution.SEQUENTIAL,
+            choices=[
+                TypeExecution.SEQUENTIAL,
+                TypeExecution.BACKGROUND,
+                TypeExecution.PARALLEL,
+                "sequential_group",
+            ],
+            help="Execution mode to visualize (default: sequential)",
+        )
+        self.cmd_viz.add_argument(
+            "--format",
+            default="terminal",
+            choices=["terminal", "mermaid"],
+            help="Output format: terminal (default) or mermaid",
+        )
+
+        self.cmd_viz.set_defaults(exec=VizCommand)
 
     def setup_logs(self):
         self.cmd_logs = self.subparsers.add_parser("logs", help="Logs")
