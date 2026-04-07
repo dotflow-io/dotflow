@@ -149,6 +149,15 @@ class Manager:
 
         if mode != TypeExecution.BACKGROUND:
             self._callback_workflow(tasks=self.tasks)
+        elif self.config:
+
+            def _background_cleanup():
+                self.thread.join()
+                self._callback_workflow(tasks=self.tasks)
+
+            threading.Thread(
+                target=_background_cleanup, daemon=True
+            ).start()
 
     def _callback_workflow(self, tasks: list[Task]):
         duration = (datetime.now() - self.started).total_seconds()
