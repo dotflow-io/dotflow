@@ -134,9 +134,10 @@ class SchedulerCron(Scheduler):
         """
         self.running = False
         self._restore_signals()
-        for thread in self._threads:
+        with self._lock:
+            threads, self._threads = self._threads, []
+        for thread in threads:
             thread.join(timeout=timeout)
-        self._threads.clear()
 
     def _dispatch(self, workflow: Callable, **kwargs) -> None:
         if self.overlap == TypeOverlap.SKIP:
@@ -151,6 +152,11 @@ class SchedulerCron(Scheduler):
                 self.overlap,
             )
 
+    def _track_thread(self, thread: threading.Thread) -> None:
+        with self._lock:
+            self._threads = [t for t in self._threads if t.is_alive()]
+            self._threads.append(thread)
+
     def _dispatch_skip(self, workflow: Callable, **kwargs) -> None:
         with self._lock:
             if self._executing:
@@ -162,7 +168,7 @@ class SchedulerCron(Scheduler):
             args=(workflow,),
             kwargs=kwargs,
         )
-        self._threads.append(thread)
+        self._track_thread(thread)
         thread.start()
 
     def _dispatch_queue(self, workflow: Callable, **kwargs) -> None:
@@ -178,7 +184,7 @@ class SchedulerCron(Scheduler):
             args=(workflow,),
             kwargs=kwargs,
         )
-        self._threads.append(thread)
+        self._track_thread(thread)
         thread.start()
 
     def _dispatch_parallel(self, workflow: Callable, **kwargs) -> None:
@@ -190,7 +196,7 @@ class SchedulerCron(Scheduler):
             args=(workflow,),
             kwargs=kwargs,
         )
-        self._threads.append(thread)
+        self._track_thread(thread)
         thread.start()
 
     def _execute_parallel(self, workflow: Callable, **kwargs) -> None:
@@ -229,6 +235,7 @@ class SchedulerCron(Scheduler):
                     next_thread = None
 
             if next_thread is not None:
+                self._track_thread(next_thread)
                 next_thread.start()
 
     def _register_signals(self) -> None:
@@ -242,8 +249,10 @@ class SchedulerCron(Scheduler):
             return
         if self._prev_sigint is not None:
             signal.signal(signal.SIGINT, self._prev_sigint)
+            self._prev_sigint = None
         if self._prev_sigterm is not None:
             signal.signal(signal.SIGTERM, self._prev_sigterm)
+            self._prev_sigterm = None
 
     def _handle_signal(self, signum, frame) -> None:
         self.stop()
