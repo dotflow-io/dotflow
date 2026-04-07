@@ -89,3 +89,16 @@ class ActionStepWithoutInit:
 class SimpleStep:
     def run() -> None:
         return {"foo": "bar"}
+
+
+@action
+class ActionStepPrefixMethods:
+    """Methods where one name is a prefix of another (e.g. run vs run_all)."""
+
+    @action
+    def run() -> None:
+        return {"result": "run"}
+
+    @action
+    def run_all() -> None:
+        return {"result": "run_all"}
