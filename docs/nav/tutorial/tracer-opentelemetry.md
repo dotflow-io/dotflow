@@ -1,8 +1,6 @@
-# Log OpenTelemetry
+# Tracer OpenTelemetry
 
-`LogOpenTelemetry` exports traces and spans for every workflow and task execution using the OpenTelemetry standard. Each workflow becomes a trace, each task becomes a child span with duration, status, retry count, and error events.
-
-One provider, all backends — Jaeger, Grafana Tempo, Datadog, Honeycomb, New Relic, AWS X-Ray, Google Cloud Trace.
+`TracerOpenTelemetry` exports distributed traces for every workflow and task execution using the OpenTelemetry standard. Each workflow becomes a parent span, each task becomes a child span with duration, status, retry events, and error details.
 
 /// note
 Requires `pip install dotflow[otel]`
@@ -16,9 +14,9 @@ pip install dotflow[otel]
 
 ## Basic example
 
-Use `LogOpenTelemetry` as the log provider in `Config`. Traces are created internally by the SDK — no exporter is needed for the provider to work.
+Traces are created internally by the SDK — no exporter is needed for the provider to work.
 
-{* ./docs_src/config/log_opentelemetry.py hl[2,21:23] *}
+{* ./docs_src/config/tracer_opentelemetry_basic.py hl[2,21:23] *}
 
 ## Exporting traces
 
@@ -28,7 +26,7 @@ To visualize traces, add an exporter. The example below sends traces to the cons
 pip install opentelemetry-exporter-otlp-proto-grpc
 ```
 
-{* ./docs_src/config/log_opentelemetry_export.py hl[2:3,28:29] *}
+{* ./docs_src/config/tracer_opentelemetry.py hl[2:3,28:29] *}
 
 ## Running Jaeger locally
 
@@ -36,11 +34,9 @@ pip install opentelemetry-exporter-otlp-proto-grpc
 docker run -d --name jaeger -p 16686:16686 -p 4317:4317 jaegertracing/all-in-one:latest
 ```
 
-Run the export example and open [http://localhost:16686](http://localhost:16686) — select the service name to see traces.
+Run the example and open [http://localhost:16686](http://localhost:16686) to see traces.
 
 ## Trace structure
-
-Each workflow creates a parent span. Each task is a child span under it.
 
 ```
 [Trace: workflow_id=550e8400...]
@@ -48,13 +44,9 @@ Each workflow creates a parent span. Each task is a child span under it.
   └── [Span: task:1] 1.2s OK — Completed
   └── [Span: task:2] 0.3s ERROR — Failed
         └── [Event: exception — ValueError "connection refused"]
-        └── [Event: retry — attempt 1]
-        └── [Event: retry — attempt 2]
 ```
 
 ## Span attributes
-
-Every task span includes:
 
 | Attribute | Source |
 |-----------|--------|
@@ -64,14 +56,14 @@ Every task span includes:
 | `dotflow.task.duration` | `task.duration` |
 | `dotflow.task.retry_count` | `task.retry_count` |
 
-## How it maps to log levels
+## Lifecycle
 
-| Log level | When | Span action |
-|-----------|------|-------------|
-| `info` | Status changes to Completed | Sets span status OK, ends span |
-| `error` | Status changes to Failed | Adds exception event, sets span status ERROR, ends span |
-| `warning` | Status changes to Retry | Adds retry event with attempt count |
-| `debug` | — | No-op |
+| ABC method | When | Span action |
+|------------|------|-------------|
+| `start_workflow` | Manager.__init__ | Creates parent span |
+| `start_task` | Execution.__init__ | Creates child span |
+| `end_task` | Execution finally | Sets attributes, status, ends span |
+| `end_workflow` | _callback_workflow | Sets workflow status, ends parent span |
 
 ## Compatible backends
 
@@ -88,6 +80,5 @@ Every task span includes:
 
 ## References
 
-- [LogOpenTelemetry](https://dotflow-io.github.io/dotflow/nav/reference/log-opentelemetry/)
-- [Log Default](https://dotflow-io.github.io/dotflow/nav/tutorial/log-default/)
-- [OpenTelemetry Python docs](https://opentelemetry-python.readthedocs.io/)
+- [TracerOpenTelemetry](https://dotflow-io.github.io/dotflow/nav/reference/tracer-opentelemetry/)
+- [TracerDefault](https://dotflow-io.github.io/dotflow/nav/reference/tracer-default/)

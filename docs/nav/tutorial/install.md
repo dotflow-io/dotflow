@@ -23,7 +23,7 @@ Dotflow has optional extras for specific providers:
 | `aws` | `pip install dotflow[aws]` | StorageS3 — AWS S3 persistence |
 | `gcp` | `pip install dotflow[gcp]` | StorageGCS — Google Cloud Storage persistence |
 | `scheduler` | `pip install dotflow[scheduler]` | SchedulerCron — cron-based recurring execution |
-| `otel` | `pip install dotflow[otel]` | LogOpenTelemetry — OpenTelemetry traces and spans |
+| `otel` | `pip install dotflow[otel]` | TracerOpenTelemetry + MetricsOpenTelemetry — distributed traces and metrics |
 
 Multiple extras can be installed at once:
 
