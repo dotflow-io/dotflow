@@ -200,7 +200,9 @@ class Action:
     def _set_params(self):
         if isinstance(self.func, FunctionType):
             code = self.func.__code__
-            self.params = list(code.co_varnames[: code.co_argcount])
+            self.params = list(
+                code.co_varnames[: code.co_argcount + code.co_kwonlyargcount]
+            )
 
         if (
             type(self.func) is type
@@ -208,7 +210,9 @@ class Action:
             and hasattr(self.func.__init__, "__code__")
         ):
             code = self.func.__init__.__code__
-            self.params = list(code.co_varnames[: code.co_argcount])
+            self.params = list(
+                code.co_varnames[: code.co_argcount + code.co_kwonlyargcount]
+            )
 
     def _get_context(self, kwargs: dict):
         context = {}
