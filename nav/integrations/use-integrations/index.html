@@ -1268,6 +1268,8 @@
       
         
       
+        
+      
     
     
     
@@ -1354,6 +1356,34 @@
     
   
     Notify Telegram
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/notify-discord/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notify Discord
   
 
     
@@ -2557,6 +2587,8 @@
       
         
       
+        
+      
     
     
     
@@ -3012,16 +3044,6 @@
       
         
       
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
     
     
     
@@ -3043,7 +3065,7 @@
   <span class="md-ellipsis">
     
   
-    Built-in
+    Discord
   
 
     
@@ -3056,6 +3078,106 @@
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Discord
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/notify-discord/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notify Discord
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Built-in
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3911,6 +4033,8 @@
       
         
       
+        
+      
     
     
     
@@ -3997,6 +4121,34 @@
     
   
     NotifyTelegram
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/notify-discord/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NotifyDiscord
   
 
     
@@ -5082,7 +5234,7 @@
 <p>The authoritative list of extras and pinned versions lives in <a href="https://github.com/dotflow-io/dotflow/blob/main/pyproject.toml"><code>pyproject.toml</code></a> under <code>[project.optional-dependencies]</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Built-in providers (default storage, file storage, default notify/log/scheduler) use only <strong>core</strong> dependencies—no extra needed. <a href="../../tutorial/notify-telegram/">Telegram</a> uses <code>requests</code>, which is already a dependency of <code>dotflow</code>.</p>
+<p>Built-in providers (default storage, file storage, default notify/log/scheduler) use only <strong>core</strong> dependencies—no extra needed. <a href="../../tutorial/notify-telegram/">Telegram</a> and <a href="../../tutorial/notify-discord/">Discord</a> use <code>requests</code>, which is already a dependency of <code>dotflow</code>.</p>
 </div>
 <h2 id="use-a-provider-in-code">Use a provider in code<a class="headerlink" href="#use-a-provider-in-code" title="Permanent link">&para;</a></h2>
 <ol>
@@ -5111,7 +5263,7 @@
 </span><span id="__span-1-18"><span class="n">workflow</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">step_one</span><span class="p">)</span>
 </span><span id="__span-1-19"><span class="n">workflow</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 </span></code></pre></div>
-<p>The same pattern applies to <strong>GCS</strong> (<code>StorageGCS</code>), <strong>cron</strong> (<code>SchedulerCron</code> on <code>Config.scheduler</code>), <strong>Telegram</strong> (<code>NotifyTelegram</code> on <code>Config.notify</code>), and other providers—each <a href="../">integration guide</a> shows the exact constructor arguments and auth model.</p>
+<p>The same pattern applies to <strong>GCS</strong> (<code>StorageGCS</code>), <strong>cron</strong> (<code>SchedulerCron</code> on <code>Config.scheduler</code>), <strong>Telegram</strong> (<code>NotifyTelegram</code> on <code>Config.notify</code>), <strong>Discord</strong> (<code>NotifyDiscord</code> on <code>Config.notify</code>), and other providers—each <a href="../">integration guide</a> shows the exact constructor arguments and auth model.</p>
 <h2 id="if-import-fails">If import fails<a class="headerlink" href="#if-import-fails" title="Permanent link">&para;</a></h2>
 <p>If a provider needs a library you did not install, Dotflow raises a clear error pointing at the extra (for example <code>library="dotflow[aws]"</code>). Install that extra and run again.</p>
 <h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>

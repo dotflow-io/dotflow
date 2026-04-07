@@ -1270,6 +1270,8 @@
       
         
       
+        
+      
     
     
     
@@ -1356,6 +1358,34 @@
     
   
     Notify Telegram
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/notify-discord/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notify Discord
   
 
     
@@ -2557,6 +2587,8 @@
       
         
       
+        
+      
     
     
     
@@ -2918,16 +2950,6 @@
       
         
       
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
     
     
     
@@ -2949,7 +2971,7 @@
   <span class="md-ellipsis">
     
   
-    Integrados
+    Discord
   
 
     
@@ -2962,6 +2984,106 @@
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Discord
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/notify-discord/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notify Discord
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrados
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3817,6 +3939,8 @@
       
         
       
+        
+      
     
     
     
@@ -3903,6 +4027,34 @@
     
   
     NotifyTelegram
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/notify-discord/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NotifyDiscord
   
 
     
@@ -5115,8 +5267,8 @@
 <tr>
 <td><code>Notify</code></td>
 <td><code>dotflow.abc.notify</code></td>
-<td><code>send()</code></td>
-<td>Send notifications when tasks complete or fail</td>
+<td><code>hook_status_task()</code></td>
+<td>Hook called when a task status changes</td>
 </tr>
 <tr>
 <td><code>Log</code></td>
@@ -5188,9 +5340,9 @@
 </span><span id="__span-1-19">        <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
 </span></code></pre></div>
 <h2 id="custom-notify">Custom Notify<a class="headerlink" href="#custom-notify" title="Permanent link">&para;</a></h2>
-<p>The <code>Notify</code> provider is called after each task finishes. It receives the full task object, so you can inspect its status, errors, context, and duration to decide what to send and where.</p>
+<p>The <code>Notify</code> provider is called when a task status changes. It receives the full task object, so you can inspect its status, errors, context, and duration to decide what to send and where.</p>
 <ul>
-<li><code>send(task)</code> — send a notification based on the task state</li>
+<li><code>hook_status_task(task)</code> — hook called when a task status changes</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span id="__span-2-1"><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
 </span><span id="__span-2-2">
@@ -5201,7 +5353,7 @@
 </span><span id="__span-2-7">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">webhook_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 </span><span id="__span-2-8">        <span class="bp">self</span><span class="o">.</span><span class="n">webhook_url</span> <span class="o">=</span> <span class="n">webhook_url</span>
 </span><span id="__span-2-9">
-</span><span id="__span-2-10">    <span class="k">def</span><span class="w"> </span><span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-2-10">    <span class="k">def</span><span class="w"> </span><span class="nf">hook_status_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="__span-2-11">        <span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
 </span><span id="__span-2-12">        <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">webhook_url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span>
 </span><span id="__span-2-13">            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Task </span><span class="si">{</span><span class="n">task</span><span class="o">.</span><span class="n">task_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">task</span><span class="o">.</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span>

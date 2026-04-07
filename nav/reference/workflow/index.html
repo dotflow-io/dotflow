@@ -1268,6 +1268,8 @@
       
         
       
+        
+      
     
     
     
@@ -1354,6 +1356,34 @@
     
   
     Notify Telegram
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/notify-discord/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notify Discord
   
 
     
@@ -2555,6 +2585,8 @@
       
         
       
+        
+      
     
     
     
@@ -2916,16 +2948,6 @@
       
         
       
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
     
     
     
@@ -2947,7 +2969,7 @@
   <span class="md-ellipsis">
     
   
-    Built-in
+    Discord
   
 
     
@@ -2960,6 +2982,106 @@
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Discord
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/notify-discord/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notify Discord
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Built-in
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3939,6 +4061,8 @@
       
         
       
+        
+      
     
     
     
@@ -4025,6 +4149,34 @@
     
   
     NotifyTelegram
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notify-discord/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NotifyDiscord
   
 
     
@@ -5346,18 +5498,7 @@ Requires a persistent storage provider and a fixed workflow_id.</p>
 
               <details class="quote">
                 <summary>Source code in <code>dotflow/core/workflow.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 33</span>
-<span class="normal"> 34</span>
-<span class="normal"> 35</span>
-<span class="normal"> 36</span>
-<span class="normal"> 37</span>
-<span class="normal"> 38</span>
-<span class="normal"> 39</span>
-<span class="normal"> 40</span>
-<span class="normal"> 41</span>
-<span class="normal"> 42</span>
-<span class="normal"> 43</span>
-<span class="normal"> 44</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 44</span>
 <span class="normal"> 45</span>
 <span class="normal"> 46</span>
 <span class="normal"> 47</span>
@@ -5464,125 +5605,152 @@ Requires a persistent storage provider and a fixed workflow_id.</p>
 <span class="normal">148</span>
 <span class="normal">149</span>
 <span class="normal">150</span>
-<span class="normal">151</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-33"><span class="k">class</span><span class="w"> </span><span class="nc">Manager</span><span class="p">:</span>
-</span><span id="__span-0-34"><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-0-35"><span class="sd">    Import:</span>
-</span><span id="__span-0-36"><span class="sd">        You can import the **Manager** class with:</span>
-</span><span id="__span-0-37">
-</span><span id="__span-0-38"><span class="sd">            from dotflow.core.workflow import Manager</span>
-</span><span id="__span-0-39">
-</span><span id="__span-0-40"><span class="sd">    Example:</span>
-</span><span id="__span-0-41"><span class="sd">        `class` dotflow.core.workflow.Manager</span>
-</span><span id="__span-0-42">
-</span><span id="__span-0-43"><span class="sd">            workflow = Manager(</span>
-</span><span id="__span-0-44"><span class="sd">                tasks=[tasks],</span>
-</span><span id="__span-0-45"><span class="sd">                on_success=basic_callback,</span>
-</span><span id="__span-0-46"><span class="sd">                on_failure=basic_callback,</span>
-</span><span id="__span-0-47"><span class="sd">                keep_going=True</span>
-</span><span id="__span-0-48"><span class="sd">            )</span>
-</span><span id="__span-0-49">
-</span><span id="__span-0-50"><span class="sd">    Args:</span>
-</span><span id="__span-0-51"><span class="sd">        tasks (List[Task]):</span>
-</span><span id="__span-0-52"><span class="sd">            A list containing objects of type Task.</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-44"><span class="k">class</span><span class="w"> </span><span class="nc">Manager</span><span class="p">:</span>
+</span><span id="__span-0-45"><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="__span-0-46"><span class="sd">    Import:</span>
+</span><span id="__span-0-47"><span class="sd">        You can import the **Manager** class with:</span>
+</span><span id="__span-0-48">
+</span><span id="__span-0-49"><span class="sd">            from dotflow.core.workflow import Manager</span>
+</span><span id="__span-0-50">
+</span><span id="__span-0-51"><span class="sd">    Example:</span>
+</span><span id="__span-0-52"><span class="sd">        `class` dotflow.core.workflow.Manager</span>
 </span><span id="__span-0-53">
-</span><span id="__span-0-54"><span class="sd">        on_success (Callable):</span>
-</span><span id="__span-0-55"><span class="sd">            Success function to be executed after the completion of the entire</span>
-</span><span id="__span-0-56"><span class="sd">            workflow. It&#39;s essentially a callback for successful scenarios.</span>
-</span><span id="__span-0-57">
-</span><span id="__span-0-58"><span class="sd">        on_failure (Callable):</span>
-</span><span id="__span-0-59"><span class="sd">            Failure function to be executed after the completion of the entire</span>
-</span><span id="__span-0-60"><span class="sd">            workflow. It&#39;s essentially a callback for error scenarios</span>
-</span><span id="__span-0-61">
-</span><span id="__span-0-62"><span class="sd">        mode (TypeExecution):</span>
-</span><span id="__span-0-63"><span class="sd">            Parameter that defines the execution mode of the workflow. Currently,</span>
-</span><span id="__span-0-64"><span class="sd">            there are options to execute in **sequential**, **background**, or **parallel** mode.</span>
-</span><span id="__span-0-65"><span class="sd">            The sequential mode is used by default.</span>
-</span><span id="__span-0-66">
-</span><span id="__span-0-67">
-</span><span id="__span-0-68"><span class="sd">        keep_going (bool):</span>
-</span><span id="__span-0-69"><span class="sd">            A parameter that receives a boolean object with the purpose of continuing</span>
-</span><span id="__span-0-70"><span class="sd">            or not the execution of the workflow in case of an error during the</span>
-</span><span id="__span-0-71"><span class="sd">            execution of a task. If it is **true**, the execution will continue;</span>
-</span><span id="__span-0-72"><span class="sd">            if it is **False**, the workflow will stop.</span>
-</span><span id="__span-0-73">
-</span><span id="__span-0-74"><span class="sd">        workflow_id (UUID): Workflow ID.</span>
-</span><span id="__span-0-75">
-</span><span id="__span-0-76"><span class="sd">        resume (bool):</span>
-</span><span id="__span-0-77"><span class="sd">            If True, checks for existing checkpoints before executing each task.</span>
-</span><span id="__span-0-78"><span class="sd">            Tasks with a checkpoint are skipped and their saved context is used.</span>
-</span><span id="__span-0-79"><span class="sd">            Requires a persistent storage provider and a fixed workflow_id.</span>
-</span><span id="__span-0-80">
-</span><span id="__span-0-81"><span class="sd">    Attributes:</span>
-</span><span id="__span-0-82"><span class="sd">        on_success (Callable):</span>
-</span><span id="__span-0-83">
-</span><span id="__span-0-84"><span class="sd">        on_failure (Callable):</span>
-</span><span id="__span-0-85">
-</span><span id="__span-0-86"><span class="sd">        workflow_id (UUID):</span>
-</span><span id="__span-0-87">
-</span><span id="__span-0-88"><span class="sd">        started (datetime):</span>
-</span><span id="__span-0-89"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-90">
-</span><span id="__span-0-91">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-</span><span id="__span-0-92">        <span class="bp">self</span><span class="p">,</span>
-</span><span id="__span-0-93">        <span class="n">tasks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Task</span><span class="p">],</span>
-</span><span id="__span-0-94">        <span class="n">on_success</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="n">basic_callback</span><span class="p">,</span>
-</span><span id="__span-0-95">        <span class="n">on_failure</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="n">basic_callback</span><span class="p">,</span>
-</span><span id="__span-0-96">        <span class="n">mode</span><span class="p">:</span> <span class="n">TypeExecution</span> <span class="o">=</span> <span class="n">TypeExecution</span><span class="o">.</span><span class="n">SEQUENTIAL</span><span class="p">,</span>
-</span><span id="__span-0-97">        <span class="n">keep_going</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="__span-0-98">        <span class="n">workflow_id</span><span class="p">:</span> <span class="n">UUID</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="__span-0-99">        <span class="n">resume</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="__span-0-100">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-101">        <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span> <span class="o">=</span> <span class="n">tasks</span>
-</span><span id="__span-0-102">        <span class="bp">self</span><span class="o">.</span><span class="n">on_success</span> <span class="o">=</span> <span class="n">on_success</span>
-</span><span id="__span-0-103">        <span class="bp">self</span><span class="o">.</span><span class="n">on_failure</span> <span class="o">=</span> <span class="n">on_failure</span>
-</span><span id="__span-0-104">        <span class="bp">self</span><span class="o">.</span><span class="n">workflow_id</span> <span class="o">=</span> <span class="n">workflow_id</span> <span class="ow">or</span> <span class="n">uuid4</span><span class="p">()</span>
-</span><span id="__span-0-105">        <span class="bp">self</span><span class="o">.</span><span class="n">started</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-</span><span id="__span-0-106">
-</span><span id="__span-0-107">        <span class="n">execution</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="__span-0-108">        <span class="n">groups</span> <span class="o">=</span> <span class="n">grouper</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="n">tasks</span><span class="p">)</span>
-</span><span id="__span-0-109">
-</span><span id="__span-0-110">        <span class="k">try</span><span class="p">:</span>
-</span><span id="__span-0-111">            <span class="n">execution</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
-</span><span id="__span-0-112">        <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-</span><span id="__span-0-113">            <span class="k">raise</span> <span class="n">ExecutionModeNotExist</span><span class="p">()</span> <span class="kn">from</span><span class="w"> </span><span class="nn">err</span>
-</span><span id="__span-0-114">
-</span><span id="__span-0-115">        <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span> <span class="o">=</span> <span class="n">execution</span><span class="p">(</span>
-</span><span id="__span-0-116">            <span class="n">tasks</span><span class="o">=</span><span class="n">tasks</span><span class="p">,</span>
-</span><span id="__span-0-117">            <span class="n">workflow_id</span><span class="o">=</span><span class="n">workflow_id</span><span class="p">,</span>
-</span><span id="__span-0-118">            <span class="n">ignore</span><span class="o">=</span><span class="n">keep_going</span><span class="p">,</span>
-</span><span id="__span-0-119">            <span class="n">groups</span><span class="o">=</span><span class="n">groups</span><span class="p">,</span>
-</span><span id="__span-0-120">            <span class="n">resume</span><span class="o">=</span><span class="n">resume</span><span class="p">,</span>
-</span><span id="__span-0-121">        <span class="p">)</span>
-</span><span id="__span-0-122">
-</span><span id="__span-0-123">        <span class="bp">self</span><span class="o">.</span><span class="n">_callback_workflow</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">)</span>
-</span><span id="__span-0-124">
-</span><span id="__span-0-125">    <span class="k">def</span><span class="w"> </span><span class="nf">_callback_workflow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tasks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Task</span><span class="p">]):</span>
-</span><span id="__span-0-126">        <span class="n">final_status</span> <span class="o">=</span> <span class="p">[</span><span class="n">task</span><span class="o">.</span><span class="n">status</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">]</span>
-</span><span id="__span-0-127">
-</span><span id="__span-0-128">        <span class="k">if</span> <span class="n">TypeStatus</span><span class="o">.</span><span class="n">FAILED</span> <span class="ow">in</span> <span class="n">final_status</span><span class="p">:</span>
-</span><span id="__span-0-129">            <span class="bp">self</span><span class="o">.</span><span class="n">on_failure</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="n">tasks</span><span class="p">)</span>
-</span><span id="__span-0-130">        <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-0-131">            <span class="bp">self</span><span class="o">.</span><span class="n">on_success</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="n">tasks</span><span class="p">)</span>
-</span><span id="__span-0-132">
-</span><span id="__span-0-133">    <span class="k">def</span><span class="w"> </span><span class="nf">sequential</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
-</span><span id="__span-0-134">        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;groups&quot;</span><span class="p">,</span> <span class="p">{}))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-</span><span id="__span-0-135">            <span class="n">process</span> <span class="o">=</span> <span class="n">SequentialGroup</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="__span-0-136">            <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
-</span><span id="__span-0-137">
-</span><span id="__span-0-138">        <span class="n">process</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="__span-0-139">        <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
-</span><span id="__span-0-140">
-</span><span id="__span-0-141">    <span class="k">def</span><span class="w"> </span><span class="nf">sequential_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-</span><span id="__span-0-142">        <span class="n">process</span> <span class="o">=</span> <span class="n">SequentialGroup</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="__span-0-143">        <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
-</span><span id="__span-0-144">
-</span><span id="__span-0-145">    <span class="k">def</span><span class="w"> </span><span class="nf">background</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
-</span><span id="__span-0-146">        <span class="n">process</span> <span class="o">=</span> <span class="n">Background</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="__span-0-147">        <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
-</span><span id="__span-0-148">
-</span><span id="__span-0-149">    <span class="k">def</span><span class="w"> </span><span class="nf">parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
-</span><span id="__span-0-150">        <span class="n">process</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="__span-0-151">        <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
+</span><span id="__span-0-54"><span class="sd">            workflow = Manager(</span>
+</span><span id="__span-0-55"><span class="sd">                tasks=[tasks],</span>
+</span><span id="__span-0-56"><span class="sd">                on_success=basic_callback,</span>
+</span><span id="__span-0-57"><span class="sd">                on_failure=basic_callback,</span>
+</span><span id="__span-0-58"><span class="sd">                keep_going=True</span>
+</span><span id="__span-0-59"><span class="sd">            )</span>
+</span><span id="__span-0-60">
+</span><span id="__span-0-61"><span class="sd">    Args:</span>
+</span><span id="__span-0-62"><span class="sd">        tasks (List[Task]):</span>
+</span><span id="__span-0-63"><span class="sd">            A list containing objects of type Task.</span>
+</span><span id="__span-0-64">
+</span><span id="__span-0-65"><span class="sd">        on_success (Callable):</span>
+</span><span id="__span-0-66"><span class="sd">            Success function to be executed after the completion of the entire</span>
+</span><span id="__span-0-67"><span class="sd">            workflow. It&#39;s essentially a callback for successful scenarios.</span>
+</span><span id="__span-0-68">
+</span><span id="__span-0-69"><span class="sd">        on_failure (Callable):</span>
+</span><span id="__span-0-70"><span class="sd">            Failure function to be executed after the completion of the entire</span>
+</span><span id="__span-0-71"><span class="sd">            workflow. It&#39;s essentially a callback for error scenarios</span>
+</span><span id="__span-0-72">
+</span><span id="__span-0-73"><span class="sd">        mode (TypeExecution):</span>
+</span><span id="__span-0-74"><span class="sd">            Parameter that defines the execution mode of the workflow. Currently,</span>
+</span><span id="__span-0-75"><span class="sd">            there are options to execute in **sequential**, **background**, or **parallel** mode.</span>
+</span><span id="__span-0-76"><span class="sd">            The sequential mode is used by default.</span>
+</span><span id="__span-0-77">
+</span><span id="__span-0-78">
+</span><span id="__span-0-79"><span class="sd">        keep_going (bool):</span>
+</span><span id="__span-0-80"><span class="sd">            A parameter that receives a boolean object with the purpose of continuing</span>
+</span><span id="__span-0-81"><span class="sd">            or not the execution of the workflow in case of an error during the</span>
+</span><span id="__span-0-82"><span class="sd">            execution of a task. If it is **true**, the execution will continue;</span>
+</span><span id="__span-0-83"><span class="sd">            if it is **False**, the workflow will stop.</span>
+</span><span id="__span-0-84">
+</span><span id="__span-0-85"><span class="sd">        workflow_id (UUID): Workflow ID.</span>
+</span><span id="__span-0-86">
+</span><span id="__span-0-87"><span class="sd">        resume (bool):</span>
+</span><span id="__span-0-88"><span class="sd">            If True, checks for existing checkpoints before executing each task.</span>
+</span><span id="__span-0-89"><span class="sd">            Tasks with a checkpoint are skipped and their saved context is used.</span>
+</span><span id="__span-0-90"><span class="sd">            Requires a persistent storage provider and a fixed workflow_id.</span>
+</span><span id="__span-0-91">
+</span><span id="__span-0-92"><span class="sd">    Attributes:</span>
+</span><span id="__span-0-93"><span class="sd">        on_success (Callable):</span>
+</span><span id="__span-0-94">
+</span><span id="__span-0-95"><span class="sd">        on_failure (Callable):</span>
+</span><span id="__span-0-96">
+</span><span id="__span-0-97"><span class="sd">        workflow_id (UUID):</span>
+</span><span id="__span-0-98">
+</span><span id="__span-0-99"><span class="sd">        started (datetime):</span>
+</span><span id="__span-0-100"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-0-101">
+</span><span id="__span-0-102">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+</span><span id="__span-0-103">        <span class="bp">self</span><span class="p">,</span>
+</span><span id="__span-0-104">        <span class="n">tasks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Task</span><span class="p">],</span>
+</span><span id="__span-0-105">        <span class="n">on_success</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="n">basic_callback</span><span class="p">,</span>
+</span><span id="__span-0-106">        <span class="n">on_failure</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="n">basic_callback</span><span class="p">,</span>
+</span><span id="__span-0-107">        <span class="n">mode</span><span class="p">:</span> <span class="n">TypeExecution</span> <span class="o">=</span> <span class="n">TypeExecution</span><span class="o">.</span><span class="n">SEQUENTIAL</span><span class="p">,</span>
+</span><span id="__span-0-108">        <span class="n">keep_going</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+</span><span id="__span-0-109">        <span class="n">workflow_id</span><span class="p">:</span> <span class="n">UUID</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-110">        <span class="n">resume</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+</span><span id="__span-0-111">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-112">        <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span> <span class="o">=</span> <span class="n">tasks</span>
+</span><span id="__span-0-113">        <span class="bp">self</span><span class="o">.</span><span class="n">on_success</span> <span class="o">=</span> <span class="n">on_success</span>
+</span><span id="__span-0-114">        <span class="bp">self</span><span class="o">.</span><span class="n">on_failure</span> <span class="o">=</span> <span class="n">on_failure</span>
+</span><span id="__span-0-115">        <span class="bp">self</span><span class="o">.</span><span class="n">workflow_id</span> <span class="o">=</span> <span class="n">workflow_id</span> <span class="ow">or</span> <span class="n">uuid4</span><span class="p">()</span>
+</span><span id="__span-0-116">        <span class="bp">self</span><span class="o">.</span><span class="n">started</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+</span><span id="__span-0-117">
+</span><span id="__span-0-118">        <span class="n">execution</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="__span-0-119">        <span class="n">groups</span> <span class="o">=</span> <span class="n">grouper</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="n">tasks</span><span class="p">)</span>
+</span><span id="__span-0-120">
+</span><span id="__span-0-121">        <span class="n">VALID_MODES</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-0-122">            <span class="s2">&quot;sequential&quot;</span><span class="p">,</span>
+</span><span id="__span-0-123">            <span class="s2">&quot;sequential_group&quot;</span><span class="p">,</span>
+</span><span id="__span-0-124">            <span class="s2">&quot;background&quot;</span><span class="p">,</span>
+</span><span id="__span-0-125">            <span class="s2">&quot;parallel&quot;</span><span class="p">,</span>
+</span><span id="__span-0-126">        <span class="p">}</span>
+</span><span id="__span-0-127">        <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">VALID_MODES</span><span class="p">:</span>
+</span><span id="__span-0-128">            <span class="k">raise</span> <span class="n">ExecutionModeNotExist</span><span class="p">()</span>
+</span><span id="__span-0-129">
+</span><span id="__span-0-130">        <span class="n">execution</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+</span><span id="__span-0-131">
+</span><span id="__span-0-132">        <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span> <span class="o">=</span> <span class="n">execution</span><span class="p">(</span>
+</span><span id="__span-0-133">            <span class="n">tasks</span><span class="o">=</span><span class="n">tasks</span><span class="p">,</span>
+</span><span id="__span-0-134">            <span class="n">workflow_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">workflow_id</span><span class="p">,</span>
+</span><span id="__span-0-135">            <span class="n">ignore</span><span class="o">=</span><span class="n">keep_going</span><span class="p">,</span>
+</span><span id="__span-0-136">            <span class="n">groups</span><span class="o">=</span><span class="n">groups</span><span class="p">,</span>
+</span><span id="__span-0-137">            <span class="n">resume</span><span class="o">=</span><span class="n">resume</span><span class="p">,</span>
+</span><span id="__span-0-138">        <span class="p">)</span>
+</span><span id="__span-0-139">
+</span><span id="__span-0-140">        <span class="k">if</span> <span class="n">mode</span> <span class="o">!=</span> <span class="n">TypeExecution</span><span class="o">.</span><span class="n">BACKGROUND</span><span class="p">:</span>
+</span><span id="__span-0-141">            <span class="bp">self</span><span class="o">.</span><span class="n">_callback_workflow</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">)</span>
+</span><span id="__span-0-142">
+</span><span id="__span-0-143">    <span class="k">def</span><span class="w"> </span><span class="nf">_callback_workflow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tasks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Task</span><span class="p">]):</span>
+</span><span id="__span-0-144">        <span class="n">final_status</span> <span class="o">=</span> <span class="p">[</span><span class="n">task</span><span class="o">.</span><span class="n">status</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">]</span>
+</span><span id="__span-0-145">
+</span><span id="__span-0-146">        <span class="k">if</span> <span class="n">TypeStatus</span><span class="o">.</span><span class="n">FAILED</span> <span class="ow">in</span> <span class="n">final_status</span><span class="p">:</span>
+</span><span id="__span-0-147">            <span class="bp">self</span><span class="o">.</span><span class="n">on_failure</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="n">tasks</span><span class="p">)</span>
+</span><span id="__span-0-148">        <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-0-149">            <span class="bp">self</span><span class="o">.</span><span class="n">on_success</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="n">tasks</span><span class="p">)</span>
+</span><span id="__span-0-150">
+</span><span id="__span-0-151">    <span class="k">def</span><span class="w"> </span><span class="nf">sequential</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
+</span><span id="__span-0-152">        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;groups&quot;</span><span class="p">,</span> <span class="p">{}))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+</span><span id="__span-0-153">            <span class="n">process</span> <span class="o">=</span> <span class="n">SequentialGroup</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="__span-0-154">            <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
+</span><span id="__span-0-155">
+</span><span id="__span-0-156">        <span class="n">process</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="__span-0-157">        <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
+</span><span id="__span-0-158">
+</span><span id="__span-0-159">    <span class="k">def</span><span class="w"> </span><span class="nf">sequential_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span id="__span-0-160">        <span class="n">process</span> <span class="o">=</span> <span class="n">SequentialGroup</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="__span-0-161">        <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
+</span><span id="__span-0-162">
+</span><span id="__span-0-163">    <span class="k">def</span><span class="w"> </span><span class="nf">background</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
+</span><span id="__span-0-164">        <span class="n">process</span> <span class="o">=</span> <span class="n">Background</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="__span-0-165">        <span class="bp">self</span><span class="o">.</span><span class="n">thread</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">thread</span>
+</span><span id="__span-0-166">        <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
+</span><span id="__span-0-167">
+</span><span id="__span-0-168">    <span class="k">def</span><span class="w"> </span><span class="nf">parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
+</span><span id="__span-0-169">        <span class="n">process</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="__span-0-170">        <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
 </span></code></pre></div></td></tr></table></div>
               </details>
 
@@ -5613,19 +5781,19 @@ Requires a persistent storage provider and a fixed workflow_id.</p>
 
             <details class="quote">
               <summary>Source code in <code>dotflow/core/workflow.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-125"><span class="k">def</span><span class="w"> </span><span class="nf">_callback_workflow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tasks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Task</span><span class="p">]):</span>
-</span><span id="__span-0-126">    <span class="n">final_status</span> <span class="o">=</span> <span class="p">[</span><span class="n">task</span><span class="o">.</span><span class="n">status</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">]</span>
-</span><span id="__span-0-127">
-</span><span id="__span-0-128">    <span class="k">if</span> <span class="n">TypeStatus</span><span class="o">.</span><span class="n">FAILED</span> <span class="ow">in</span> <span class="n">final_status</span><span class="p">:</span>
-</span><span id="__span-0-129">        <span class="bp">self</span><span class="o">.</span><span class="n">on_failure</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="n">tasks</span><span class="p">)</span>
-</span><span id="__span-0-130">    <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-0-131">        <span class="bp">self</span><span class="o">.</span><span class="n">on_success</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="n">tasks</span><span class="p">)</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-143"><span class="k">def</span><span class="w"> </span><span class="nf">_callback_workflow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tasks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Task</span><span class="p">]):</span>
+</span><span id="__span-0-144">    <span class="n">final_status</span> <span class="o">=</span> <span class="p">[</span><span class="n">task</span><span class="o">.</span><span class="n">status</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">]</span>
+</span><span id="__span-0-145">
+</span><span id="__span-0-146">    <span class="k">if</span> <span class="n">TypeStatus</span><span class="o">.</span><span class="n">FAILED</span> <span class="ow">in</span> <span class="n">final_status</span><span class="p">:</span>
+</span><span id="__span-0-147">        <span class="bp">self</span><span class="o">.</span><span class="n">on_failure</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="n">tasks</span><span class="p">)</span>
+</span><span id="__span-0-148">    <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-0-149">        <span class="bp">self</span><span class="o">.</span><span class="n">on_success</span><span class="p">(</span><span class="n">tasks</span><span class="o">=</span><span class="n">tasks</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -5647,19 +5815,19 @@ Requires a persistent storage provider and a fixed workflow_id.</p>
 
             <details class="quote">
               <summary>Source code in <code>dotflow/core/workflow.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-133"><span class="k">def</span><span class="w"> </span><span class="nf">sequential</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
-</span><span id="__span-0-134">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;groups&quot;</span><span class="p">,</span> <span class="p">{}))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-</span><span id="__span-0-135">        <span class="n">process</span> <span class="o">=</span> <span class="n">SequentialGroup</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="__span-0-136">        <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
-</span><span id="__span-0-137">
-</span><span id="__span-0-138">    <span class="n">process</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="__span-0-139">    <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-151"><span class="k">def</span><span class="w"> </span><span class="nf">sequential</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
+</span><span id="__span-0-152">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;groups&quot;</span><span class="p">,</span> <span class="p">{}))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+</span><span id="__span-0-153">        <span class="n">process</span> <span class="o">=</span> <span class="n">SequentialGroup</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="__span-0-154">        <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
+</span><span id="__span-0-155">
+</span><span id="__span-0-156">    <span class="n">process</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="__span-0-157">    <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -5681,11 +5849,11 @@ Requires a persistent storage provider and a fixed workflow_id.</p>
 
             <details class="quote">
               <summary>Source code in <code>dotflow/core/workflow.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-141"><span class="k">def</span><span class="w"> </span><span class="nf">sequential_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-</span><span id="__span-0-142">    <span class="n">process</span> <span class="o">=</span> <span class="n">SequentialGroup</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="__span-0-143">    <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-159"><span class="k">def</span><span class="w"> </span><span class="nf">sequential_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span id="__span-0-160">    <span class="n">process</span> <span class="o">=</span> <span class="n">SequentialGroup</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="__span-0-161">    <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -5707,11 +5875,13 @@ Requires a persistent storage provider and a fixed workflow_id.</p>
 
             <details class="quote">
               <summary>Source code in <code>dotflow/core/workflow.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-145"><span class="k">def</span><span class="w"> </span><span class="nf">background</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
-</span><span id="__span-0-146">    <span class="n">process</span> <span class="o">=</span> <span class="n">Background</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="__span-0-147">    <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-163"><span class="k">def</span><span class="w"> </span><span class="nf">background</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
+</span><span id="__span-0-164">    <span class="n">process</span> <span class="o">=</span> <span class="n">Background</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="__span-0-165">    <span class="bp">self</span><span class="o">.</span><span class="n">thread</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">thread</span>
+</span><span id="__span-0-166">    <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -5733,11 +5903,11 @@ Requires a persistent storage provider and a fixed workflow_id.</p>
 
             <details class="quote">
               <summary>Source code in <code>dotflow/core/workflow.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-149"><span class="k">def</span><span class="w"> </span><span class="nf">parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
-</span><span id="__span-0-150">    <span class="n">process</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="__span-0-151">    <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-168"><span class="k">def</span><span class="w"> </span><span class="nf">parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
+</span><span id="__span-0-169">    <span class="n">process</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="__span-0-170">    <span class="k">return</span> <span class="n">process</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>

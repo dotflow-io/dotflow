@@ -1270,6 +1270,8 @@
       
         
       
+        
+      
     
     
     
@@ -1356,6 +1358,34 @@
     
   
     Notify Telegram
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/notify-discord/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notify Discord
   
 
     
@@ -2557,6 +2587,8 @@
       
         
       
+        
+      
     
     
     
@@ -2918,16 +2950,6 @@
       
         
       
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
     
     
     
@@ -2949,7 +2971,7 @@
   <span class="md-ellipsis">
     
   
-    Integrados
+    Discord
   
 
     
@@ -2962,6 +2984,106 @@
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Discord
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/notify-discord/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notify Discord
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrados
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3822,6 +3944,8 @@
       
         
       
+        
+      
     
     
     
@@ -3908,6 +4032,34 @@
     
   
     NotifyTelegram
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notify-discord/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NotifyDiscord
   
 
     
@@ -4626,10 +4778,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#dotflow.abc.notify.Notify.send" class="md-nav__link">
+  <a href="#dotflow.abc.notify.Notify.hook_status_task" class="md-nav__link">
     <span class="md-ellipsis">
       
-        <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;send
+        <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;hook_status_task
       
     </span>
   </a>
@@ -4934,10 +5086,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#dotflow.abc.notify.Notify.send" class="md-nav__link">
+  <a href="#dotflow.abc.notify.Notify.hook_status_task" class="md-nav__link">
     <span class="md-ellipsis">
       
-        <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;send
+        <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;hook_status_task
       
     </span>
   </a>
@@ -5074,8 +5226,8 @@
 </span><span id="__span-0-8"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Notify&quot;&quot;&quot;</span>
 </span><span id="__span-0-9">
 </span><span id="__span-0-10">    <span class="nd">@abstractmethod</span>
-</span><span id="__span-0-11">    <span class="k">def</span><span class="w"> </span><span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-12"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Send&quot;&quot;&quot;</span>
+</span><span id="__span-0-11">    <span class="k">def</span><span class="w"> </span><span class="nf">hook_status_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-12"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Hook called when a task status changes.&quot;&quot;&quot;</span>
 </span></code></pre></div></td></tr></table></div>
               </details>
 
@@ -5094,19 +5246,19 @@
 <div class="doc doc-object doc-function">
 
 
-<h3 id="dotflow.abc.notify.Notify.send" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">send</span><span class="p">(</span><span class="n">task</span><span class="p">)</span></code>
+<h3 id="dotflow.abc.notify.Notify.hook_status_task" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <code class="highlight language-python"><span class="n">hook_status_task</span><span class="p">(</span><span class="n">task</span><span class="p">)</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-abstractmethod"><code>abstractmethod</code></small>
   </span>
 
-<a href="#dotflow.abc.notify.Notify.send" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#dotflow.abc.notify.Notify.hook_status_task" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
 
-        <p>Send</p>
+        <p>Hook called when a task status changes.</p>
 
           
 
@@ -5115,8 +5267,8 @@
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-10"><span class="nd">@abstractmethod</span>
-</span><span id="__span-0-11"><span class="k">def</span><span class="w"> </span><span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-12"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Send&quot;&quot;&quot;</span>
+</span><span id="__span-0-11"><span class="k">def</span><span class="w"> </span><span class="nf">hook_status_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-12"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Hook called when a task status changes.&quot;&quot;&quot;</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
