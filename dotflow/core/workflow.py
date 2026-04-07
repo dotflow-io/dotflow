@@ -310,12 +310,14 @@ class Background(Flow):
 
     def setup_queue(self) -> None:
         self.queue = []
+        self._lock = threading.Lock()
 
     def get_tasks(self) -> list[Task]:
         return self.tasks
 
     def _flow_callback(self, task: Task) -> None:
-        self.queue.append(task)
+        with self._lock:
+            self.queue.append(task)
 
     def _has_checkpoint(self, task: Task) -> bool:
         if not self.resume:
