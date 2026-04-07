@@ -14,6 +14,10 @@ class Settings:
     LOG_PATH = Path(".output/flow.log")
     LOG_FORMAT = "%(asctime)s - %(levelname)s [%(name)s]: %(message)s"
 
+    TEMPLATE_REPO = "https://github.com/dotflow-io/template.git"
+    TEMPLATE_BRANCH = "master"
+    TEMPLATE_CLOUD_DIR = "cloud"
+
     ICON = ":game_die:"
     ERROR_ALERT = f"{ICON} [bold red]Error:[/bold red]"
     INFO_ALERT = f"{ICON} [bold blue]Info:[/bold blue]"

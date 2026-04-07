@@ -1,9 +1,10 @@
 """Command cloud module"""
 
+import json
 import re
 from pathlib import Path
+from subprocess import run
 
-from requests import get
 from rich import print  # type: ignore
 from rich.console import Console
 from rich.table import Table
@@ -11,22 +12,96 @@ from rich.table import Table
 from dotflow.cli.command import Command
 from dotflow.settings import Settings as settings
 
-TEMPLATE_BASE_URL = (
-    "https://raw.githubusercontent.com/dotflow-io/template/master/cloud"
-)
+
+
+def _get_template_dir() -> Path | None:
+    import tempfile
+
+    target = Path(tempfile.gettempdir()) / "dotflow-template"
+    cloud_dir = target / settings.TEMPLATE_CLOUD_DIR
+
+    if cloud_dir.exists():
+        return cloud_dir
+
+    try:
+        result = run(
+            [
+                "git",
+                "clone",
+                "--depth",
+                "1",
+                "--branch",
+                settings.TEMPLATE_BRANCH,
+                settings.TEMPLATE_REPO,
+                str(target),
+            ],
+            capture_output=True,
+            text=True,
+        )
+        if result.returncode == 0:
+            return cloud_dir
+    except Exception as err:
+        print(
+            settings.ERROR_ALERT,
+            f"Failed to clone template repository: {err}",
+        )
+
+    return None
+
+
+def _load_registry(cloud_dir: Path) -> dict | None:
+    registry_path = cloud_dir / "registry.json"
+    if not registry_path.exists():
+        print(settings.ERROR_ALERT, "Registry not found in template.")
+        return None
+
+    try:
+        return json.loads(registry_path.read_text())
+    except Exception as err:
+        print(settings.ERROR_ALERT, f"Failed to read registry: {err}")
+        return None
+
+
+def _get_platforms(registry: dict) -> dict | None:
+    platforms = registry.get("platforms")
+    if not isinstance(platforms, dict):
+        print(settings.ERROR_ALERT, "Unexpected registry format.")
+        return None
+
+    return platforms
+
+
+def _read_project_name(pyproject: Path) -> str | None:
+    try:
+        in_project = False
+        for line in pyproject.read_text().splitlines():
+            stripped = line.strip()
+            if stripped.startswith("["):
+                in_project = stripped in ("[project]", "[tool.poetry]")
+            if in_project and re.match(r"^name\s*=", stripped):
+                return (
+                    stripped.split("=", 1)[1].strip().strip('"').strip("'")
+                )
+    except Exception:
+        return None
+    return None
 
 
 class CloudGenerateCommand(Command):
+
     def setup(self):
         platform = self.params.platform
 
-        registry = self._fetch_registry()
+        cloud_dir = _get_template_dir()
+        if cloud_dir is None:
+            return
+
+        registry = _load_registry(cloud_dir)
         if registry is None:
             return
 
-        platforms = registry.get("platforms")
-        if not isinstance(platforms, dict):
-            print(settings.ERROR_ALERT, "Unexpected registry format.")
+        platforms = _get_platforms(registry)
+        if platforms is None:
             return
 
         if platform not in platforms:
@@ -42,17 +117,23 @@ class CloudGenerateCommand(Command):
         output = Path(self.params.output).resolve()
         output.mkdir(parents=True, exist_ok=True)
 
-        project_name, module_name = self._detect_project()
+        project_name = self.params.project
+        if not project_name:
+            pyproject = Path.cwd() / "pyproject.toml"
+            if pyproject.exists():
+                project_name = _read_project_name(pyproject)
+            if not project_name:
+                project_name = Path.cwd().name
 
-        if self.params.project:
-            project_name = self.params.project
-            module_name = project_name.replace("-", "_")
+        module_name = project_name.replace("-", "_")
 
         print(
             settings.INFO_ALERT,
             f"Generating {platform_info.get('name', platform)} files"
             f" for '{project_name}'...",
         )
+
+        source_dir = cloud_dir / platform
 
         for filename in files:
             filepath = (output / filename).resolve()
@@ -70,10 +151,15 @@ class CloudGenerateCommand(Command):
                 )
                 continue
 
-            content = self._fetch_file(platform, filename)
-            if content is None:
+            source = source_dir / filename
+            if not source.exists():
+                print(
+                    settings.ERROR_ALERT,
+                    f"  Skipped (template not found): {filename}",
+                )
                 continue
 
+            content = source.read_text()
             content = content.replace("{{PROJECT_NAME}}", project_name)
             content = content.replace("{{MODULE_NAME}}", module_name)
 
@@ -82,82 +168,20 @@ class CloudGenerateCommand(Command):
 
         print(settings.INFO_ALERT, "Done.")
 
-    def _detect_project(self):
-        path = Path.cwd()
-        pyproject = path / "pyproject.toml"
-        if pyproject.exists():
-            name = self._read_project_name(pyproject)
-            if name:
-                return name, name.replace("-", "_")
-
-        for child in path.iterdir():
-            if child.is_dir():
-                pyproject = child / "pyproject.toml"
-                if pyproject.exists():
-                    name = self._read_project_name(pyproject)
-                    if name:
-                        return name, name.replace("-", "_")
-
-        name = Path.cwd().name
-        return name, name.replace("-", "_")
-
-    def _read_project_name(self, pyproject: Path):
-        try:
-            in_project = False
-            for line in pyproject.read_text().splitlines():
-                stripped = line.strip()
-                if stripped.startswith("["):
-                    in_project = stripped in ("[project]", "[tool.poetry]")
-                if in_project and re.match(r"^name\s*=", stripped):
-                    return (
-                        stripped.split("=", 1)[1].strip().strip('"').strip("'")
-                    )
-        except Exception:
-            pass
-        return None
-
-    def _fetch_registry(self):
-        try:
-            response = get(f"{TEMPLATE_BASE_URL}/registry.json", timeout=10)
-            response.raise_for_status()
-            return response.json()
-        except Exception as err:
-            print(
-                settings.ERROR_ALERT,
-                f"Failed to fetch cloud registry: {err}",
-            )
-            return None
-
-    def _fetch_file(self, platform, filename):
-        url = f"{TEMPLATE_BASE_URL}/{platform}/{filename}"
-        try:
-            response = get(url, timeout=10)
-            response.raise_for_status()
-            return response.text
-        except Exception as err:
-            print(
-                settings.ERROR_ALERT,
-                f"Failed to fetch {filename}: {err}",
-            )
-            return None
-
 
 class CloudListCommand(Command):
+
     def setup(self):
-        try:
-            response = get(f"{TEMPLATE_BASE_URL}/registry.json", timeout=10)
-            response.raise_for_status()
-            registry = response.json()
-        except Exception as err:
-            print(
-                settings.ERROR_ALERT,
-                f"Failed to fetch cloud registry: {err}",
-            )
+        cloud_dir = _get_template_dir()
+        if cloud_dir is None:
             return
 
-        platforms = registry.get("platforms")
-        if not isinstance(platforms, dict):
-            print(settings.ERROR_ALERT, "Unexpected registry format.")
+        registry = _load_registry(cloud_dir)
+        if registry is None:
+            return
+
+        platforms = _get_platforms(registry)
+        if platforms is None:
             return
 
         table = Table(title="Available Platforms")
