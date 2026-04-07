@@ -1,16 +1,21 @@
-"""Notify ABC"""
+"""Log ABC"""
 
 from abc import ABC, abstractmethod
-from typing import Any
 
 
 class Log(ABC):
     """Log"""
 
     @abstractmethod
-    def info(self, task: Any) -> None:
+    def info(self, **kwargs) -> None:
         """Info"""
 
     @abstractmethod
-    def error(self, task: Any) -> None:
+    def error(self, **kwargs) -> None:
         """Error"""
+
+    def warning(self, **kwargs) -> None:
+        """Warning"""
+
+    def debug(self, **kwargs) -> None:
+        """Debug"""
