@@ -76,6 +76,14 @@
 
     [:octicons-arrow-right-24: How-to](../tutorial/metrics-opentelemetry.md)
 
+- :material-text-box-outline: __Logs__
+
+    ---
+
+    Emit **structured log records** via the OTel Logs SDK to Loki, Datadog, Elastic, or any OTLP backend.
+
+    [:octicons-arrow-right-24: How-to](../tutorial/log-opentelemetry.md)
+
 </div>
 
 ## Built-in
