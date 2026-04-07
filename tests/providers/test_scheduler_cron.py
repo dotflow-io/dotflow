@@ -41,6 +41,9 @@ class TestSchedulerCron(unittest.TestCase):
         self.assertFalse(scheduler.running)
         self.assertFalse(scheduler._executing)
         self.assertEqual(scheduler._queue_count, 0)
+        self.assertEqual(scheduler._threads, [])
+        self.assertIsNone(scheduler._prev_sigint)
+        self.assertIsNone(scheduler._prev_sigterm)
 
     def test_stop(self):
         scheduler = SchedulerCron(cron="*/5 * * * *")
@@ -105,17 +108,6 @@ class TestSchedulerCron(unittest.TestCase):
 
         self.assertEqual(scheduler._queue_count, 1)
 
-    def test_execute_queued_resets_queue_count(self):
-        scheduler = SchedulerCron(cron="*/5 * * * *")
-        scheduler._executing = True
-        scheduler._queue_count = 0
-        workflow = MagicMock()
-
-        scheduler._execute_queued(workflow)
-
-        self.assertFalse(scheduler._executing)
-        self.assertEqual(scheduler._queue_count, 0)
-
     def test_execute_and_reset(self):
         scheduler = SchedulerCron(cron="*/5 * * * *")
         scheduler._executing = True
@@ -126,17 +118,6 @@ class TestSchedulerCron(unittest.TestCase):
         workflow.assert_called_once()
         self.assertFalse(scheduler._executing)
 
-    def test_dispatch_queue_caps_at_one(self):
-        scheduler = SchedulerCron(cron="*/5 * * * *", overlap="queue")
-        scheduler._executing = True
-        workflow = MagicMock()
-
-        scheduler._dispatch(workflow=workflow)
-        scheduler._dispatch(workflow=workflow)
-        scheduler._dispatch(workflow=workflow)
-
-        self.assertEqual(scheduler._queue_count, 1)
-
     def test_execute_queued_resets_queue_count(self):
         scheduler = SchedulerCron(cron="*/5 * * * *")
         scheduler._executing = True
@@ -147,6 +128,14 @@ class TestSchedulerCron(unittest.TestCase):
 
         self.assertFalse(scheduler._executing)
         self.assertEqual(scheduler._queue_count, 0)
+
+    def test_handle_signal(self):
+        scheduler = SchedulerCron(cron="*/5 * * * *")
+        scheduler.running = True
+
+        scheduler._handle_signal(signum=2, frame=None)
+
+        self.assertFalse(scheduler.running)
 
     def test_thread_tracking_on_dispatch(self):
         scheduler = SchedulerCron(cron="*/5 * * * *", overlap="skip")
@@ -192,13 +181,27 @@ class TestSchedulerCron(unittest.TestCase):
         alive = [t for t in scheduler._threads if t.is_alive()]
         self.assertEqual(len(alive), 0)
 
-    def test_handle_signal(self):
+    def test_signal_handlers_restored_on_stop(self):
+        import signal
+
         scheduler = SchedulerCron(cron="*/5 * * * *")
-        scheduler.running = True
+        original_sigint = signal.getsignal(signal.SIGINT)
 
-        scheduler._handle_signal(signum=2, frame=None)
+        scheduler._register_signals()
+        self.assertNotEqual(signal.getsignal(signal.SIGINT), original_sigint)
 
-        self.assertFalse(scheduler.running)
+        scheduler._restore_signals()
+        self.assertEqual(signal.getsignal(signal.SIGINT), original_sigint)
+
+    def test_double_restore_is_safe(self):
+        scheduler = SchedulerCron(cron="*/5 * * * *")
+
+        scheduler._register_signals()
+        scheduler._restore_signals()
+        scheduler._restore_signals()
+
+        self.assertIsNone(scheduler._prev_sigint)
+        self.assertIsNone(scheduler._prev_sigterm)
 
     def test_run_stops_gracefully(self):
         from datetime import datetime, timedelta
