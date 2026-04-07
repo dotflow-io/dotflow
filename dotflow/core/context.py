@@ -71,9 +71,6 @@ class Context(ContextInstance):
         if isinstance(value, int):
             self._task_id = value
 
-        if not self.task_id:
-            self._task_id = value
-
     @property
     def workflow_id(self):
         return self._workflow_id
