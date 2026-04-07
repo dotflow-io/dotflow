@@ -92,6 +92,7 @@ class SchedulerCron(Scheduler):
         self._lock = threading.Lock()
         self._queue_count = 0
         self._parallel_semaphore = threading.Semaphore(10)
+        self._threads: list[threading.Thread] = []
 
     def start(self, workflow: Callable, **kwargs) -> None:
         """Start the scheduler loop. Blocks the main thread.
@@ -123,9 +124,16 @@ class SchedulerCron(Scheduler):
 
             self._dispatch(workflow=workflow, **kwargs)
 
-    def stop(self) -> None:
-        """Stop the scheduler loop gracefully."""
+    def stop(self, timeout: float | None = None) -> None:
+        """Stop the scheduler loop and wait for in-flight threads.
+
+        Args:
+            timeout: Max seconds to wait for each thread. None = wait forever.
+        """
         self.running = False
+        for thread in self._threads:
+            thread.join(timeout=timeout)
+        self._threads.clear()
 
     def _dispatch(self, workflow: Callable, **kwargs) -> None:
         if self.overlap == TypeOverlap.SKIP:
@@ -151,6 +159,7 @@ class SchedulerCron(Scheduler):
             args=(workflow,),
             kwargs=kwargs,
         )
+        self._threads.append(thread)
         thread.start()
 
     def _dispatch_queue(self, workflow: Callable, **kwargs) -> None:
@@ -166,6 +175,7 @@ class SchedulerCron(Scheduler):
             args=(workflow,),
             kwargs=kwargs,
         )
+        self._threads.append(thread)
         thread.start()
 
     def _dispatch_parallel(self, workflow: Callable, **kwargs) -> None:
@@ -177,6 +187,7 @@ class SchedulerCron(Scheduler):
             args=(workflow,),
             kwargs=kwargs,
         )
+        self._threads.append(thread)
         thread.start()
 
     def _execute_parallel(self, workflow: Callable, **kwargs) -> None:
