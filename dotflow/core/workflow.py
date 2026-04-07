@@ -108,12 +108,22 @@ class Manager:
         keep_going: bool = False,
         workflow_id: UUID = None,
         resume: bool = False,
+        config=None,
     ) -> None:
         self.tasks = tasks
         self.on_success = on_success
         self.on_failure = on_failure
         self.workflow_id = workflow_id or uuid4()
         self.started = datetime.now()
+        self.config = config
+
+        if self.config:
+            self.config.tracer.start_workflow(
+                workflow_id=self.workflow_id, mode=mode, tasks_count=len(tasks)
+            )
+            self.config.metrics.workflow_started(
+                workflow_id=self.workflow_id, mode=mode
+            )
 
         execution = None
         groups = grouper(tasks=tasks)
@@ -141,9 +151,24 @@ class Manager:
             self._callback_workflow(tasks=self.tasks)
 
     def _callback_workflow(self, tasks: list[Task]):
+        duration = (datetime.now() - self.started).total_seconds()
         final_status = [task.status for task in tasks]
+        failed = TypeStatus.FAILED in final_status
 
-        if TypeStatus.FAILED in final_status:
+        if self.config:
+            self.config.tracer.end_workflow(
+                workflow_id=self.workflow_id,
+                duration=duration,
+                failed=failed,
+            )
+            if failed:
+                self.config.metrics.workflow_failed(self.workflow_id, duration)
+            else:
+                self.config.metrics.workflow_completed(
+                    self.workflow_id, duration
+                )
+
+        if failed:
             self.on_failure(tasks=tasks)
         else:
             self.on_success(tasks=tasks)

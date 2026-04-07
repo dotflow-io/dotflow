@@ -4,15 +4,19 @@ from __future__ import annotations
 
 from dotflow.abc.api import Api
 from dotflow.abc.log import Log
+from dotflow.abc.metrics import Metrics
 from dotflow.abc.notify import Notify
 from dotflow.abc.scheduler import Scheduler
 from dotflow.abc.storage import Storage
+from dotflow.abc.tracer import Tracer
 from dotflow.core.exception import NotCallableObject
 from dotflow.providers.api_default import ApiDefault
 from dotflow.providers.log_default import LogDefault
+from dotflow.providers.metrics_default import MetricsDefault
 from dotflow.providers.notify_default import NotifyDefault
 from dotflow.providers.scheduler_default import SchedulerDefault
 from dotflow.providers.storage_default import StorageDefault
+from dotflow.providers.tracer_default import TracerDefault
 
 
 class Config:
@@ -57,6 +61,8 @@ class Config:
         "log": Log,
         "api": Api,
         "scheduler": Scheduler,
+        "tracer": Tracer,
+        "metrics": Metrics,
     }
 
     def __init__(
@@ -66,6 +72,8 @@ class Config:
         log: Log | None = None,
         api: Api | None = None,
         scheduler: Scheduler | None = None,
+        tracer: Tracer | None = None,
+        metrics: Metrics | None = None,
     ) -> None:
         self.storage = storage if storage is not None else StorageDefault()
         self.notify = notify if notify is not None else NotifyDefault()
@@ -74,6 +82,8 @@ class Config:
         self.scheduler = (
             scheduler if scheduler is not None else SchedulerDefault()
         )
+        self.tracer = tracer if tracer is not None else TracerDefault()
+        self.metrics = metrics if metrics is not None else MetricsDefault()
 
         self._validate()
 

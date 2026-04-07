@@ -250,8 +250,13 @@ class Task(TaskInstance):
 
         if value == TypeStatus.FAILED:
             self.config.log.error(task=self)
+            self.config.metrics.task_failed(task=self)
         elif value == TypeStatus.RETRY:
             self.config.log.warning(task=self)
+            self.config.metrics.task_retried(task=self)
+        elif value == TypeStatus.COMPLETED:
+            self.config.log.info(task=self)
+            self.config.metrics.task_completed(task=self)
         else:
             self.config.log.info(task=self)
 
