@@ -141,7 +141,7 @@ class Action:
 
         is_async = asyncio.iscoroutinefunction(self.func)
 
-        for attempt in range(1, self.retry + 1):
+        for attempt in range(1, max(1, self.retry) + 1):
             try:
                 if self.timeout:
                     with ThreadPoolExecutor(max_workers=1) as executor:
