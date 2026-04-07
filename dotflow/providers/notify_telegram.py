@@ -101,11 +101,7 @@ class NotifyTelegram(Notify):
             parts.append(f"```json\n{task.result(max=4000)}```")
 
         if task.status == TypeStatus.FAILED and task.errors:
-            last_error = (
-                task.errors[-1]
-                if isinstance(task.errors, list)
-                else task.errors
-            )
+            last_error = task.errors[-1]
             parts.append(f"`{last_error.exception}`: {last_error.message}")
 
         parts.append(footer)

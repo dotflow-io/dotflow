@@ -103,18 +103,10 @@ class NotifyDiscord(Notify):
             )
 
         if task.status == TypeStatus.FAILED and task.errors:
-            last_error = (
-                task.errors[-1]
-                if isinstance(task.errors, list)
-                else task.errors
-            )
+            last_error = task.errors[-1]
+            error_value = f"`{last_error.exception}`: {last_error.message}"
             embed["fields"].append(
-                {
-                    "name": "Error",
-                    "value": f"`{last_error.exception}`: {last_error.message}"[
-                        :1024
-                    ],
-                }
+                {"name": "Error", "value": error_value[:1024]}
             )
 
         return embed
