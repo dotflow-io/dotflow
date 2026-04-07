@@ -1,5 +1,6 @@
 """Execution module"""
 
+import re
 from collections.abc import Callable
 from datetime import datetime
 from inspect import getsourcelines
@@ -74,8 +75,9 @@ class Execution:
             inside_code = getsourcelines(class_instance.__class__)[0]
 
             for callable_name in callable_list:
+                pattern = re.compile(rf"def {re.escape(callable_name)}\s*\(")
                 for index, code in enumerate(inside_code):
-                    if code.find(f"def {callable_name}") != -1:
+                    if pattern.search(code):
                         ordered_list.append((index, callable_name))
 
             ordered_list.sort()

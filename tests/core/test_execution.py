@@ -13,6 +13,7 @@ from dotflow.core.types import TypeStatus
 from tests.mocks import (
     ActionStep,
     ActionStepExecutionOrderer,
+    ActionStepPrefixMethods,
     ActionStepWithContexts,
     ActionStepWithError,
     ActionStepWithInitialContext,
@@ -291,6 +292,35 @@ class TestExecution(unittest.TestCase):
             ),
             expected_value,
         )
+
+    def test_execution_orderer_prefix_methods(self):
+        """_execution_orderer must not match 'run' against a 'def run_all' line."""
+        controller = Execution(
+            task=self.task,
+            workflow_id=self.workflow_id,
+            previous_context=Context(),
+        )
+
+        class_instance = ActionStepPrefixMethods(task=controller.task).storage
+        callable_list = [
+            func
+            for func in dir(class_instance)
+            if controller._is_action(class_instance, func)
+        ]
+
+        result = controller._execution_orderer(
+            callable_list=callable_list, class_instance=class_instance
+        )
+        result_names = [name for _, name in result]
+
+        # Both methods must appear exactly once
+        self.assertEqual(result_names.count("run"), 1)
+        self.assertEqual(result_names.count("run_all"), 1)
+
+        # 'run' must appear at an earlier line than 'run_all'
+        line_run = next(idx for idx, name in result if name == "run")
+        line_run_all = next(idx for idx, name in result if name == "run_all")
+        self.assertLess(line_run, line_run_all)
 
     def test_valid_objects(self):
         valid_objects = [

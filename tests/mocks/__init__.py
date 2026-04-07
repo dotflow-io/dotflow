@@ -5,6 +5,7 @@ from tests.mocks.constants import NOT_CALLABLE
 from tests.mocks.step_class import (
     ActionStep,
     ActionStepExecutionOrderer,
+    ActionStepPrefixMethods,
     ActionStepWithContexts,
     ActionStepWithError,
     ActionStepWithInitialContext,
@@ -37,6 +38,7 @@ __all__ = [
     "ActionStepWithoutInit",
     "SimpleStep",
     "ActionStepExecutionOrderer",
+    "ActionStepPrefixMethods",
     "action_step",
     "action_step_valid_object",
     "action_step_with_initial_context",
