@@ -6964,27 +6964,32 @@
 </ul>
 <h2 id="git-workflow">Git Workflow<a class="headerlink" href="#git-workflow" title="Permanent link">&para;</a></h2>
 <p>This project follows a <strong>Git Flow</strong> branching model. All development happens on the <code>develop</code> branch — never commit directly to <code>master</code>.</p>
-<pre class="mermaid"><code>gitGraph
+<pre class="mermaid"><code>---
+config:
+  gitGraph:
+    mainBranchName: master
+---
+gitGraph
     commit id: "v0.14.0"
     branch develop
     checkout develop
     commit id: "start dev"
     branch feature/173
     checkout feature/173
-    commit id: "⚙️ FEATURE-#173"
-    commit id: "📝 PEP8-#173"
+    commit id: "FEATURE-#173"
+    commit id: "PEP8-#173"
     checkout develop
-    merge feature/173 id: "PR #183 → develop"
+    merge feature/173 id: "PR #183"
     branch bug/143
     checkout bug/143
-    commit id: "🪲 BUG-#143"
+    commit id: "BUG-#143"
     checkout develop
-    merge bug/143 id: "PR #159 → develop"
+    merge bug/143 id: "PR #159"
     branch docs/95
     checkout docs/95
-    commit id: "📘 DOCS-#95"
+    commit id: "DOCS-#95"
     checkout develop
-    merge docs/95 id: "PR → develop"
+    merge docs/95 id: "PR develop"
     checkout master
     merge develop id: "Release v0.15.0" tag: "v0.15.0"</code></pre>
 <h3 id="branch-naming">Branch Naming<a class="headerlink" href="#branch-naming" title="Permanent link">&para;</a></h3>
