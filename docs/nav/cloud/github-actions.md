@@ -9,15 +9,34 @@ dotflow init
 # Select cloud: github-actions
 ```
 
+Or generate files for an existing project:
+
+```bash
+dotflow cloud generate --platform github-actions
+```
+
 ## Generated files
 
 | File | Description |
 |------|-------------|
 | `.github/workflows/dotflow.yml` | Workflow with cron schedule and manual trigger |
 
+## Prerequisites
+
+- `pip install dotflow[deploy-github]`
+- GitHub token: `export GITHUB_TOKEN=$(gh auth token)`
+
 ## Deploy
 
-Push to GitHub — the pipeline runs automatically on the configured schedule.
+### Option 1: dotflow deploy
+
+```bash
+dotflow deploy --platform github-actions --project my_pipeline
+```
+
+Creates a private repo on GitHub, pushes all project files, and GitHub Actions runs automatically.
+
+### Option 2: Manual
 
 ```bash
 git init && git add . && git commit -m "initial"
@@ -33,3 +52,4 @@ Go to your repository > **Actions** tab > select the workflow run.
 - Cron uses **UTC timezone**
 - Minimum interval is 5 minutes
 - `workflow_dispatch` allows manual trigger from the GitHub UI
+- No secrets or credentials needed unless your pipeline uses external services

@@ -224,7 +224,7 @@ Deploy your dotflow pipelines to any major cloud provider. Choose a target platf
 
     ---
 
-    Scheduled workflow running on GitHub Actions runner.
+    Scheduled workflow running on GitHub Actions. Deploy with `dotflow deploy`.
 
     [:octicons-arrow-right-24: Guide](github-actions.md)
 

@@ -71,18 +71,7 @@ class ActionsDeployer(Deployer):
         print("  Pushing files...")
 
         project_dir = Path.cwd()
-        existing = {}
-
-        try:
-            contents = repo.get_contents("", ref="main")
-            while contents:
-                item = contents.pop(0)
-                if item.type == "dir":
-                    contents.extend(repo.get_contents(item.path, ref="main"))
-                else:
-                    existing[item.path] = item.sha
-        except self._GithubException:
-            pass
+        count = 0
 
         for filepath in sorted(project_dir.rglob("*")):
             if not filepath.is_file():
@@ -101,27 +90,24 @@ class ActionsDeployer(Deployer):
             except UnicodeDecodeError:
                 continue
 
-            if relative in existing:
-                repo.update_file(
-                    path=relative,
-                    message=f"update {relative}",
-                    content=content,
-                    sha=existing[relative],
-                    branch="main",
-                )
-            else:
-                try:
-                    repo.create_file(
-                        path=relative,
-                        message=f"add {relative}",
-                        content=content,
-                        branch="main",
-                    )
-                except self._GithubException:
-                    repo.create_file(
-                        path=relative,
-                        message=f"add {relative}",
-                        content=content,
-                    )
+            self._create_or_update_file(repo, relative, content)
+            count += 1
 
-        print(f"  Pushed {len(list(project_dir.rglob('*')))} files")
+        print(f"  Pushed {count} files")
+
+    def _create_or_update_file(self, repo, path: str, content: str):
+        """Create or update a single file in the repo."""
+        try:
+            existing = repo.get_contents(path)
+            repo.update_file(
+                path=path,
+                message=f"update {path}",
+                content=content,
+                sha=existing.sha,
+            )
+        except self._GithubException:
+            repo.create_file(
+                path=path,
+                message=f"add {path}",
+                content=content,
+            )
