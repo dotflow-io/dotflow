@@ -218,8 +218,9 @@ class Sequential(Flow):
         previous_context = Context(workflow_id=self.workflow_id)
 
         for task in self.tasks:
-            if self._has_checkpoint(task):
-                previous_context = self._restore_checkpoint(task)
+            restored = self._try_restore_checkpoint(task)
+            if restored:
+                previous_context = restored
                 continue
 
             engine = TaskEngine(
@@ -302,8 +303,9 @@ class SequentialGroup(Flow):
         previous_context = Context(workflow_id=self.workflow_id)
 
         for task in groups:
-            if self._has_checkpoint(task):
-                previous_context = self._restore_checkpoint(task)
+            restored = self._try_restore_checkpoint(task)
+            if restored:
+                previous_context = restored
                 continue
 
             engine = TaskEngine(
@@ -344,8 +346,9 @@ class Background(Flow):
         previous_context = Context(workflow_id=self.workflow_id)
 
         for task in self.tasks:
-            if self._has_checkpoint(task):
-                previous_context = self._restore_checkpoint(task)
+            restored = self._try_restore_checkpoint(task)
+            if restored:
+                previous_context = restored
                 continue
 
             engine = TaskEngine(

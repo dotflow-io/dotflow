@@ -3,7 +3,6 @@
 from abc import ABC, abstractmethod
 from uuid import UUID
 
-from dotflow.core.context import Context
 from dotflow.core.task import Task
 from dotflow.core.types import TypeStatus
 
@@ -43,23 +42,20 @@ class Flow(ABC):
     def run(self) -> None:
         return None
 
-    def _has_checkpoint(self, task: Task) -> bool:
+    def _try_restore_checkpoint(self, task: Task):
+        """Attempts to restore a checkpoint. Returns the Context if found, None otherwise."""
         if not self.resume:
-            return False
+            return None
 
         context = task.config.storage.get(
             key=task.config.storage.key(task=task)
         )
 
-        return context.storage is not None
-
-    def _restore_checkpoint(self, task: Task) -> Context:
-        previous_context = task.config.storage.get(
-            key=task.config.storage.key(task=task)
-        )
+        if context.storage is None:
+            return None
 
         task.status = TypeStatus.COMPLETED
-        task.current_context = previous_context
+        task.current_context = context
         self._flow_callback(task=task)
 
-        return previous_context
+        return context
