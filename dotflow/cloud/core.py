@@ -45,6 +45,28 @@ class ObjectStorage(ABC):
         """Write data to a key."""
 
 
+class Queue(ABC):
+    """Base class for message queues (SQS, Pub/Sub, Azure Queue, etc.)."""
+
+    @abstractmethod
+    def create(self, name: str) -> str:
+        """Create queue. Returns queue URL/ID."""
+
+    @abstractmethod
+    def get_arn(self, name: str) -> str:
+        """Get queue ARN/ID."""
+
+
+class EventScheduler(ABC):
+    """Base class for event schedulers (EventBridge, Cloud Scheduler, etc.)."""
+
+    @abstractmethod
+    def create_schedule(
+        self, name: str, expression: str, target_arn: str
+    ) -> None:
+        """Create a scheduled rule targeting a resource."""
+
+
 class Deployer(ABC):
     """Base class for all cloud deployers."""
 
