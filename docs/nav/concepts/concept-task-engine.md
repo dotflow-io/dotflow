@@ -4,16 +4,24 @@ The `TaskEngine` manages the **lifecycle** of a single task — status transitio
 
 ## Architecture
 
-```
-Strategy (Sequential, Parallel, ...)
-  └── decides the ORDER of execution
-       └── TaskEngine
-            ├── start()              → lifecycle context manager
-            ├── execute_with_retry() → retry loop + timeout + backoff
-            │    ├── _execute_single()        → calls @action once
-            │    └── _execute_with_timeout()  → ThreadPoolExecutor with deadline
-            ├── execute()            → single execution (no retry)
-            └── checkpoint_context() → composable checkpoint behavior
+```mermaid
+flowchart TD
+    S["Strategy\n(Sequential, Parallel, ...)"] -->|"decides ORDER"| TE["TaskEngine"]
+
+    subgraph TE_SUB ["TaskEngine"]
+        START["start()\nlifecycle context manager"]
+        EWR["execute_with_retry()\nretry loop + timeout + backoff"]
+        ES["_execute_single()\ncalls @action once"]
+        ET["_execute_with_timeout()\nThreadPoolExecutor with deadline"]
+        E["execute()\nsingle execution"]
+        CC["checkpoint_context()\ncomposable checkpoint"]
+    end
+
+    START --> EWR
+    EWR -->|"no timeout"| ES
+    EWR -->|"timeout > 0"| ET
+    ET --> ES
+    ES -->|"calls"| A["@action\nuser function"]
 ```
 
 ## How it works
@@ -31,6 +39,18 @@ with engine.start():
 
 Manages everything that happens **around** the execution:
 
+```mermaid
+stateDiagram-v2
+    [*] --> IN_PROGRESS: start()
+    IN_PROGRESS --> COMPLETED: success
+    IN_PROGRESS --> RETRY: retry attempt
+    RETRY --> COMPLETED: success after retry
+    RETRY --> FAILED: max attempts reached
+    IN_PROGRESS --> FAILED: exception
+    COMPLETED --> [*]: end_task tracer
+    FAILED --> [*]: end_task tracer
+```
+
 1. Sets `status = IN_PROGRESS` and starts the timer
 2. Starts the tracer span
 3. **Yields** — the execution block runs here
@@ -41,6 +61,22 @@ Manages everything that happens **around** the execution:
 ### `execute_with_retry()` — retry, timeout, and backoff
 
 Reads `retry`, `timeout`, `retry_delay`, and `backoff` from the `@action` decorator and manages the full retry loop:
+
+```mermaid
+flowchart TD
+    A["execute_with_retry()"] --> B{"timeout > 0?"}
+    B -->|yes| C["_execute_with_timeout()"]
+    B -->|no| D["_execute_single()"]
+    C --> E{"success?"}
+    D --> E
+    E -->|yes| F["return result"]
+    E -->|no| G{"attempt < max?"}
+    G -->|yes| H["status = RETRY\nsleep(delay)"]
+    H -->|"backoff?"| I["delay *= 2"]
+    I --> B
+    H -->|no backoff| B
+    G -->|no| J["raise exception"]
+```
 
 - If `timeout > 0`: uses `ThreadPoolExecutor` with a real deadline
 - If execution fails and `attempt < max_attempts`: sets `status = RETRY`, waits, and retries
