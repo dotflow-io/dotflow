@@ -62,6 +62,29 @@ class TestClassActions(unittest.TestCase):
             for record in self._caplog.records:
                 self.assertEqual(record.message, error_message)
 
+    def test_retry_zero_still_executes_task_once(self):
+        call_count = {"n": 0}
+
+        def counting_step():
+            call_count["n"] += 1
+
+        inside = Action(counting_step, retry=0)
+        inside(task=self.task)
+
+        self.assertEqual(
+            call_count["n"],
+            1,
+            "retry=0 should execute the task exactly once, not zero times",
+        )
+
+    def test_retry_zero_raises_on_failure(self):
+        def always_fail():
+            raise ValueError("fail")
+
+        inside = Action(always_fail, retry=0)
+        with self.assertRaises(ValueError):
+            inside(task=self.task)
+
     def test_sets_retry_status_before_retrying(self):
         calls = {"count": 0}
         statuses = []
