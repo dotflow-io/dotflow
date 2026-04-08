@@ -58,6 +58,7 @@ aws = ["boto3"]
 gcp = ["google-cloud-storage"]
 deploy-aws = ["boto3"]
 deploy-gcp = ["google-cloud-run", "google-cloud-build", "google-cloud-artifact-registry", "google-cloud-service-usage", "google-cloud-storage", "google-auth"]
+deploy-github = ["PyGithub"]
 scheduler = ["croniter"]
 otel = ["opentelemetry-api", "opentelemetry-sdk"]
 
