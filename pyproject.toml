@@ -61,6 +61,7 @@ deploy-gcp = ["google-cloud-run", "google-cloud-build", "google-cloud-artifact-r
 deploy-github = ["PyGithub"]
 scheduler = ["croniter"]
 otel = ["opentelemetry-api", "opentelemetry-sdk"]
+sentry = ["sentry-sdk"]
 
 [tool.poetry]
 name = "dotflow"
