@@ -44,6 +44,9 @@ class StorageFile(Storage):
         if Path(self.path, key).exists():
             task_context = read_file(path=Path(self.path, key))
 
+        if not task_context:
+            return Context()
+
         if len(task_context) == 1:
             return self._loads(storage=task_context[0])
 
