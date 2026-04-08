@@ -56,6 +56,8 @@ Changelog = "https://dotflow-io.github.io/dotflow/nav/development/release-notes/
 [project.optional-dependencies]
 aws = ["boto3"]
 gcp = ["google-cloud-storage"]
+deploy-aws = ["boto3"]
+deploy-gcp = ["google-cloud-run", "google-cloud-build", "google-cloud-artifact-registry", "google-cloud-service-usage", "google-cloud-storage", "google-auth"]
 scheduler = ["croniter"]
 otel = ["opentelemetry-api", "opentelemetry-sdk"]
 
