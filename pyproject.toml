@@ -1,6 +1,6 @@
 [project]
 name = "dotflow"
-version = "0.14.1.dev2"
+version = "0.15.0.dev1"
 authors = [
   { name="Fernando Celmer", email="email@fernandocelmer.com" },
 ]
@@ -63,7 +63,7 @@ otel = ["opentelemetry-api", "opentelemetry-sdk"]
 
 [tool.poetry]
 name = "dotflow"
-version = "0.14.1.dev2"
+version = "0.15.0.dev1"
 description = "🎲 Dotflow turns an idea into flow! Lightweight Python library for execution pipelines with retry, parallel, cron and async support."
 authors = ["Fernando Celmer <email@fernandocelmer.com>"]
 readme = "README.md"
