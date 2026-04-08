@@ -35,7 +35,7 @@ gitGraph
     commit id: "📘 DOCS-#95"
     checkout develop
     merge docs/95 id: "PR → develop"
-    checkout main
+    checkout master
     merge develop id: "Release v0.15.0" tag: "v0.15.0"
 ```
 
