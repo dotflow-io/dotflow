@@ -47,7 +47,9 @@ class Flow(ABC):
         if not self.resume:
             return False
 
-        context = task.config.storage.get(key=task.config.storage.key(task=task))
+        context = task.config.storage.get(
+            key=task.config.storage.key(task=task)
+        )
 
         return context.storage is not None
 

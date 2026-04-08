@@ -56,7 +56,9 @@ class TestTaskEngine(unittest.TestCase):
 
     def test_engine_with_function_failed(self):
         workflow_id = uuid4()
-        task = Task(task_id=0, step=action_step_with_error, callback=simple_callback)
+        task = Task(
+            task_id=0, step=action_step_with_error, callback=simple_callback
+        )
         engine = TaskEngine(
             task=task, workflow_id=workflow_id, previous_context=Context()
         )
@@ -90,7 +92,9 @@ class TestTaskEngine(unittest.TestCase):
     def test_engine_with_class_failed(self):
         execution_log = ""
         workflow_id = uuid4()
-        task = Task(task_id=0, step=ActionStepWithError, callback=simple_callback)
+        task = Task(
+            task_id=0, step=ActionStepWithError, callback=simple_callback
+        )
         engine = TaskEngine(
             task=task, workflow_id=workflow_id, previous_context=Context()
         )
@@ -103,7 +107,9 @@ class TestTaskEngine(unittest.TestCase):
                 if log.funcName == "run":
                     execution_log = log.message
 
-        self.assertEqual(execution_log, "ActionStepWithError: Run function executed")
+        self.assertEqual(
+            execution_log, "ActionStepWithError: Run function executed"
+        )
         self.assertEqual(task.status, TypeStatus.FAILED)
         self.assertEqual(task.workflow_id, workflow_id)
 
@@ -196,8 +202,12 @@ class TestTaskEngine(unittest.TestCase):
 
         self.assertEqual(task.status, TypeStatus.COMPLETED)
         self.assertEqual(task.previous_context.storage, self.context)
-        self.assertEqual(task.current_context.storage[0].storage, {"func": "run_x"})
-        self.assertEqual(task.current_context.storage[1].storage, {"func": "run_y"})
+        self.assertEqual(
+            task.current_context.storage[0].storage, {"func": "run_x"}
+        )
+        self.assertEqual(
+            task.current_context.storage[1].storage, {"func": "run_y"}
+        )
 
     def test_engine_class_with_contexts(self):
         task = Task(
@@ -218,7 +228,9 @@ class TestTaskEngine(unittest.TestCase):
         self.assertEqual(task.status, TypeStatus.COMPLETED)
         self.assertEqual(task.initial_context.storage, self.context)
         self.assertEqual(task.previous_context.storage, self.context)
-        self.assertEqual(task.current_context.storage[0].storage, {"foo": "bar"})
+        self.assertEqual(
+            task.current_context.storage[0].storage, {"foo": "bar"}
+        )
 
     def test_engine_is_action_true(self):
         engine = TaskEngine(
@@ -231,7 +243,9 @@ class TestTaskEngine(unittest.TestCase):
             engine.execute()
 
         class_instance = ActionStep(task=engine.task).storage
-        self.assertTrue(engine._is_action(class_instance=class_instance, func="run"))
+        self.assertTrue(
+            engine._is_action(class_instance=class_instance, func="run")
+        )
 
     def test_engine_is_action_false(self):
         engine = TaskEngine(
@@ -244,7 +258,9 @@ class TestTaskEngine(unittest.TestCase):
             engine.execute()
 
         class_instance = SimpleStep()
-        self.assertFalse(engine._is_action(class_instance=class_instance, func="run"))
+        self.assertFalse(
+            engine._is_action(class_instance=class_instance, func="run")
+        )
 
     def test_engine_is_action_init_false(self):
         engine = TaskEngine(

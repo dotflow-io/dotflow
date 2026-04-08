@@ -22,7 +22,9 @@ if sys.platform == "win32":
 else:
     import multiprocessing
 
-    if sys.platform == "darwin" and hasattr(multiprocessing, "set_forkserver_preload"):
+    if sys.platform == "darwin" and hasattr(
+        multiprocessing, "set_forkserver_preload"
+    ):
         import os
 
         os.environ.setdefault("OBJC_DISABLE_INITIALIZE_FORK_SAFETY", "YES")
@@ -170,7 +172,9 @@ class Manager:
             if failed:
                 self.config.metrics.workflow_failed(self.workflow_id, duration)
             else:
-                self.config.metrics.workflow_completed(self.workflow_id, duration)
+                self.config.metrics.workflow_completed(
+                    self.workflow_id, duration
+                )
 
         if failed:
             self.on_failure(tasks=tasks)
@@ -257,7 +261,9 @@ class SequentialGroup(Flow):
 
         for task in self.tasks:
             if task.task_id in contexts:
-                task.current_context = contexts[task.task_id]["current_context"]
+                task.current_context = contexts[task.task_id][
+                    "current_context"
+                ]
                 task.duration = contexts[task.task_id]["duration"]
                 task.errors = contexts[task.task_id]["errors"]
                 task.retry_count = contexts[task.task_id]["retry_count"]
@@ -265,7 +271,9 @@ class SequentialGroup(Flow):
             else:
                 task.status = TypeStatus.FAILED
                 task.errors = TaskError(
-                    RuntimeError("Worker process terminated without reporting a result")
+                    RuntimeError(
+                        "Worker process terminated without reporting a result"
+                    )
                 )
 
         return self.tasks
@@ -361,7 +369,9 @@ class Background(Flow):
                 break
 
     def run(self) -> None:
-        self.thread = threading.Thread(target=self._run_sequential, daemon=True)
+        self.thread = threading.Thread(
+            target=self._run_sequential, daemon=True
+        )
         self.thread.start()
 
 
@@ -383,7 +393,9 @@ class Parallel(Flow):
 
         for task in self.tasks:
             if task.task_id in contexts:
-                task.current_context = contexts[task.task_id]["current_context"]
+                task.current_context = contexts[task.task_id][
+                    "current_context"
+                ]
                 task.duration = contexts[task.task_id]["duration"]
                 task.errors = contexts[task.task_id]["errors"]
                 task.retry_count = contexts[task.task_id]["retry_count"]
@@ -391,7 +403,9 @@ class Parallel(Flow):
             else:
                 task.status = TypeStatus.FAILED
                 task.errors = TaskError(
-                    RuntimeError("Worker process terminated without reporting a result")
+                    RuntimeError(
+                        "Worker process terminated without reporting a result"
+                    )
                 )
 
         return self.tasks

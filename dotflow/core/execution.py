@@ -42,6 +42,8 @@ class Execution:
         engine = TaskEngine.__new__(TaskEngine)
         return engine._is_action(class_instance, func)
 
-    def _execution_orderer(self, callable_list: list[str], class_instance: Callable):
+    def _execution_orderer(
+        self, callable_list: list[str], class_instance: Callable
+    ):
         engine = TaskEngine.__new__(TaskEngine)
         return engine._execution_orderer(callable_list, class_instance)
