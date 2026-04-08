@@ -2,6 +2,19 @@
 
 Deploy your dotflow pipeline as a Fargate task on Amazon ECS.
 
+## Create project
+
+```bash
+dotflow init
+# Select cloud: ecs
+```
+
+Or generate files for an existing project:
+
+```bash
+dotflow cloud generate --platform ecs
+```
+
 ## Generated files
 
 | File | Description |
@@ -11,40 +24,45 @@ Deploy your dotflow pipeline as a Fargate task on Amazon ECS.
 
 ## Prerequisites
 
+- `pip install dotflow[aws]`
 - AWS CLI configured (`aws configure`)
 - Docker
 
 ## Deploy
 
+### Option 1: dotflow deploy
+
+```bash
+dotflow deploy --platform ecs --project my_pipeline --region us-east-1
+```
+
+This creates: ECR repository, IAM role, CloudWatch log group, ECS cluster, task definition, and pushes the image.
+
+### Option 2: Manual
+
 ```bash
 ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 REGION=us-east-1
 
-# Create execution role (first time only)
-aws iam create-role --role-name ecsTaskExecutionRole \
-  --assume-role-policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Service":"ecs-tasks.amazonaws.com"},"Action":"sts:AssumeRole"}]}'
-aws iam attach-role-policy --role-name ecsTaskExecutionRole \
-  --policy-arn arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
-
-# Login to ECR
 aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
+aws ecr create-repository --repository-name my_pipeline --region $REGION
+docker build -t my_pipeline .
+docker tag my_pipeline:latest $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/my_pipeline:latest
+docker push $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/my_pipeline:latest
 
-# Create repository, build and push
-aws ecr create-repository --repository-name <project_name> --region $REGION
-docker build -t <project_name> .
-docker tag <project_name>:latest $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/<project_name>:latest
-docker push $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/<project_name>:latest
-
-# Create log group
-aws logs create-log-group --log-group-name /ecs/<project_name> --region $REGION
-
-# Register task definition and run
+aws logs create-log-group --log-group-name /ecs/my_pipeline --region $REGION
 aws ecs register-task-definition --cli-input-json file://task-definition.json --region $REGION
-aws ecs create-cluster --cluster-name dotflow --region $REGION
+aws ecs create-cluster --cluster-name my_pipeline-cluster --region $REGION
 
 SUBNET=$(aws ec2 describe-subnets --query "Subnets[0].SubnetId" --output text --region $REGION)
-aws ecs run-task --cluster dotflow --task-definition <project_name> --launch-type FARGATE \
+aws ecs run-task --cluster my_pipeline-cluster --task-definition my_pipeline --launch-type FARGATE \
   --network-configuration "awsvpcConfiguration={subnets=[$SUBNET],assignPublicIp=ENABLED}" --region $REGION
+```
+
+## View logs
+
+```bash
+aws logs tail /ecs/my_pipeline --region us-east-1 --since 5m
 ```
 
 ## Important

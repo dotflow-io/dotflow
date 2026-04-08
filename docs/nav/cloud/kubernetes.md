@@ -2,6 +2,19 @@
 
 Deploy your dotflow pipeline to a Kubernetes cluster.
 
+## Create project
+
+```bash
+dotflow init
+# Select cloud: kubernetes
+```
+
+Or generate files for an existing project:
+
+```bash
+dotflow cloud generate --platform kubernetes
+```
+
 ## Generated files
 
 | File | Description |
@@ -16,37 +29,32 @@ Deploy your dotflow pipeline to a Kubernetes cluster.
 - `kubectl`
 - A Kubernetes cluster (minikube for local testing)
 
-## Local deploy (minikube)
+## Deploy (local with minikube)
 
 ```bash
-# Install minikube (macOS)
 brew install minikube
-
-# Start cluster and use its Docker daemon
 minikube start
 eval $(minikube docker-env)
 
-# Build inside minikube
-docker build -t <project_name>:latest .
+docker build -t my_pipeline:latest .
 
-# Deploy
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
-
-# Check status
-kubectl get pods -l app=<project_name>
-
-# View logs
-kubectl logs -l app=<project_name>
 ```
 
-## Production deploy
+## Deploy (production)
 
 Replace `image` in `deployment.yaml` with your container registry URL and change `imagePullPolicy` to `Always`:
 
 ```bash
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
+```
+
+## View logs
+
+```bash
+kubectl logs -l app=my_pipeline
 ```
 
 ## Important

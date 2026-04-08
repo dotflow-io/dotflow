@@ -1,6 +1,19 @@
 # AWS Lambda
 
-Deploy your dotflow pipeline as a container-based AWS Lambda function using SAM.
+Deploy your dotflow pipeline as a container-based AWS Lambda function.
+
+## Create project
+
+```bash
+dotflow init
+# Select cloud: lambda
+```
+
+Or generate files for an existing project:
+
+```bash
+dotflow cloud generate --platform lambda
+```
 
 ## Generated files
 
@@ -13,16 +26,22 @@ Deploy your dotflow pipeline as a container-based AWS Lambda function using SAM.
 
 ## Prerequisites
 
+- `pip install dotflow[aws]`
 - AWS CLI configured (`aws configure`)
-- [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) (`brew install aws-sam-cli`)
 - Docker
 
 ## Deploy
 
-```bash
-# Create ECR repository (first time only)
-aws ecr create-repository --repository-name <project_name> --region us-east-1
+### Option 1: dotflow deploy
 
+```bash
+dotflow deploy --platform lambda --project my_pipeline
+```
+
+### Option 2: SAM CLI
+
+```bash
+aws ecr create-repository --repository-name my_pipeline --region us-east-1
 sam build
 sam deploy
 ```
@@ -30,26 +49,28 @@ sam deploy
 ## Invoke
 
 ```bash
+# Via dotflow deploy
+aws lambda invoke --function-name my_pipeline --region us-east-1 /dev/stdout
+
+# Via SAM
 sam remote invoke
 ```
 
 ## View logs
 
 ```bash
-sam logs --stack-name <project_name> --tail
+sam logs --stack-name my_pipeline --tail
 ```
 
 ## Variants
 
-| Platform | Trigger |
-|----------|---------|
-| `lambda` | Manual invocation |
-| `lambda-scheduled` | EventBridge cron/rate schedule |
-| `lambda-s3-trigger` | S3 file upload |
-| `lambda-sqs-trigger` | SQS message |
-| `lambda-api-trigger` | HTTP POST via API Gateway |
-
-All variants use the same deploy flow: `sam build && sam deploy`.
+| Platform | Trigger | Deploy method |
+|----------|---------|---------------|
+| `lambda` | Manual invocation | `dotflow deploy` or `sam deploy` |
+| `lambda-scheduled` | EventBridge cron/rate | `dotflow deploy --schedule` or `sam deploy` |
+| `lambda-s3-trigger` | S3 file upload | `sam deploy` |
+| `lambda-sqs-trigger` | SQS message | `sam deploy` |
+| `lambda-api-trigger` | HTTP POST via API Gateway | `sam deploy` |
 
 ## Important
 

@@ -2,6 +2,19 @@
 
 Deploy your dotflow pipeline to Google Cloud Run.
 
+## Create project
+
+```bash
+dotflow init
+# Select cloud: cloud-run
+```
+
+Or generate files for an existing project:
+
+```bash
+dotflow cloud generate --platform cloud-run
+```
+
 ## Generated files
 
 | File | Description |
@@ -23,13 +36,13 @@ gcloud config set project <gcp_project_id>
 gcloud services enable cloudbuild.googleapis.com run.googleapis.com artifactregistry.googleapis.com
 
 # Deploy (builds and deploys in one step)
-gcloud run deploy <project_name> --source . --region us-central1 --no-allow-unauthenticated
+gcloud run deploy my_pipeline --source . --region us-central1 --no-allow-unauthenticated
 ```
 
 ## View logs
 
 ```bash
-gcloud logging read "resource.type=cloud_run_revision AND resource.labels.service_name=<project_name>" --limit 50 --format="value(textPayload)"
+gcloud logging read "resource.type=cloud_run_revision AND resource.labels.service_name=my_pipeline" --limit 50 --format="value(textPayload)"
 ```
 
 ## Important

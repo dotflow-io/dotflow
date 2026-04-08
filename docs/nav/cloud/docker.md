@@ -2,6 +2,19 @@
 
 Deploy your dotflow pipeline with Docker and Docker Compose.
 
+## Create project
+
+```bash
+dotflow init
+# Select cloud: docker
+```
+
+Or generate files for an existing project:
+
+```bash
+dotflow cloud generate --platform docker
+```
+
 ## Generated files
 
 | File | Description |
