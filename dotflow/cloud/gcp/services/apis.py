@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import contextlib
-
 from dotflow.core.exception import ModuleNotFound
 
 
@@ -33,5 +31,9 @@ class APIs:
         print("  Enabling APIs...")
         for api in self.REQUIRED:
             name = f"projects/{self._project}/services/{api}"
-            with contextlib.suppress(Exception):
+            try:
                 self._client.enable_service(name=name).result()
+            except Exception as err:
+                if "already enabled" in str(err).lower():
+                    continue
+                print(f"  Warning: Failed to enable {api}: {err}")

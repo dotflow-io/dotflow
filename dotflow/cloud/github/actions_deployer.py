@@ -71,19 +71,11 @@ class ActionsDeployer(Deployer):
         print("  Pushing files...")
 
         project_dir = Path.cwd()
+        tracked = self._get_tracked_files(project_dir)
         count = 0
 
-        for filepath in sorted(project_dir.rglob("*")):
-            if not filepath.is_file():
-                continue
-
-            relative = str(filepath.relative_to(project_dir))
-
-            if relative.startswith(".") and not relative.startswith(".github"):
-                continue
-
-            if "__pycache__" in relative or ".egg-info" in relative:
-                continue
+        for relative in tracked:
+            filepath = project_dir / relative
 
             try:
                 content = filepath.read_text()
@@ -94,6 +86,17 @@ class ActionsDeployer(Deployer):
             count += 1
 
         print(f"  Pushed {count} files")
+
+    def _get_tracked_files(self, project_dir: Path) -> list[str]:
+        """Get files that git would track, respecting .gitignore."""
+        from git import Repo
+
+        repo = Repo(project_dir)
+        tracked = set(repo.git.ls_files("--cached").splitlines())
+        untracked = set(
+            repo.git.ls_files("--others", "--exclude-standard").splitlines()
+        )
+        return sorted(tracked | untracked)
 
     def _create_or_update_file(self, repo, path: str, content: str):
         """Create or update a single file in the repo."""

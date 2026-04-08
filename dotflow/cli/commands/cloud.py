@@ -20,6 +20,11 @@ def _get_template_dir() -> Path | None:
     cloud_dir = target / settings.TEMPLATE_CLOUD_DIR
 
     if cloud_dir.exists():
+        run(
+            ["git", "-C", str(target), "pull", "--ff-only"],
+            capture_output=True,
+            text=True,
+        )
         return cloud_dir
 
     try:
@@ -133,7 +138,9 @@ class CloudGenerateCommand(Command):
 
         for filename in files:
             filepath = (output / filename).resolve()
-            if not str(filepath).startswith(str(output)):
+            try:
+                filepath.relative_to(output)
+            except ValueError:
                 print(
                     settings.ERROR_ALERT,
                     f"  Skipped (unsafe filename): {filename}",
