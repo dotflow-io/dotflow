@@ -25,7 +25,9 @@ class DeployCommand(Command):
     def setup(self):
         platform = self.params.platform
         name = self.params.project
-        region = self.params.region or DEFAULT_REGIONS.get(platform, "us-east-1")
+        region = self.params.region or DEFAULT_REGIONS.get(
+            platform, "us-east-1"
+        )
         schedule = getattr(self.params, "schedule", None)
 
         if platform in SAM_PLATFORMS:
