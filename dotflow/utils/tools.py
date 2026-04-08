@@ -1,18 +1,8 @@
 """Tools"""
 
 from json import JSONDecodeError, dumps, loads
-from os import system
 from pathlib import Path
 from typing import Any
-
-
-def write_file_system(path: str, content: str, mode: str = "w") -> None:
-    """Write file system"""
-    if mode == "a":
-        system(f"echo '{content}' >> {path}")
-
-    if mode == "w":
-        system(f"echo '{content}' > {path}")
 
 
 def write_file(

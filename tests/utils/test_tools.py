@@ -3,10 +3,10 @@
 import unittest
 from pathlib import Path
 
-from dotflow.utils.tools import read_file, write_file_system
+from dotflow.utils.tools import read_file, write_file
 
 
-class TestWriteFileSystem(unittest.TestCase):
+class TestWriteFile(unittest.TestCase):
     def setUp(self):
         self.file_path = Path("tests", "test_tools.txt")
 
@@ -15,14 +15,14 @@ class TestWriteFileSystem(unittest.TestCase):
             self.file_path.unlink()
 
     def test_write_mode_creates_file_with_content(self):
-        write_file_system(path=str(self.file_path), content="hello", mode="w")
+        write_file(path=str(self.file_path), content="hello", mode="w")
 
         with open(self.file_path) as f:
             self.assertIn("hello", f.read())
 
     def test_append_mode_adds_content(self):
-        write_file_system(path=str(self.file_path), content="first", mode="w")
-        write_file_system(path=str(self.file_path), content="second", mode="a")
+        write_file(path=str(self.file_path), content="first", mode="w")
+        write_file(path=str(self.file_path), content="second", mode="a")
 
         with open(self.file_path) as f:
             content = f.read()
