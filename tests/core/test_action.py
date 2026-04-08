@@ -74,7 +74,7 @@ class TestClassActions(unittest.TestCase):
         self.assertEqual(
             call_count["n"],
             1,
-            "retry=0 should execute the task exactly once",
+            "retry=0 should execute the task exactly once, not zero times",
         )
 
     def test_retry_zero_raises_on_failure(self):
