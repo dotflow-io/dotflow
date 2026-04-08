@@ -10,6 +10,7 @@ from uuid import UUID, uuid4
 
 from dotflow.abc.flow import Flow
 from dotflow.core.context import Context
+from dotflow.core.engine import TaskEngine
 from dotflow.core.exception import ExecutionModeNotExist
 from dotflow.core.execution import Execution
 from dotflow.core.task import Task, TaskError
@@ -214,36 +215,25 @@ class Sequential(Flow):
     def _flow_callback(self, task: Task) -> None:
         self.queue.append(task)
 
-    def _has_checkpoint(self, task: Task) -> bool:
-        if not self.resume:
-            return False
-
-        context = task.config.storage.get(
-            key=task.config.storage.key(task=task)
-        )
-
-        return context.storage is not None
-
     def run(self) -> None:
         previous_context = Context(workflow_id=self.workflow_id)
 
         for task in self.tasks:
             if self._has_checkpoint(task):
-                previous_context = task.config.storage.get(
-                    key=task.config.storage.key(task=task)
-                )
-
-                task.status = TypeStatus.COMPLETED
-                task.current_context = previous_context
-                self._flow_callback(task=task)
+                previous_context = self._restore_checkpoint(task)
                 continue
 
-            Execution(
+            engine = TaskEngine(
                 task=task,
                 workflow_id=self.workflow_id,
                 previous_context=previous_context,
-                _flow_callback=self._flow_callback,
             )
+
+            with engine.start():
+                engine.execute_with_retry()
+
+            task.callback(task=task)
+            self._flow_callback(task=task)
 
             previous_context = task.config.storage.get(
                 key=task.config.storage.key(task=task)
@@ -309,36 +299,25 @@ class SequentialGroup(Flow):
         for process in self._processes:
             process.join()
 
-    def _has_checkpoint(self, task: Task) -> bool:
-        if not self.resume:
-            return False
-
-        context = task.config.storage.get(
-            key=task.config.storage.key(task=task)
-        )
-
-        return context.storage is not None
-
     def _run_group(self, groups: list[Task]) -> None:
         previous_context = Context(workflow_id=self.workflow_id)
 
         for task in groups:
             if self._has_checkpoint(task):
-                previous_context = task.config.storage.get(
-                    key=task.config.storage.key(task=task)
-                )
-
-                task.status = TypeStatus.COMPLETED
-                task.current_context = previous_context
-                self._flow_callback(task=task)
+                previous_context = self._restore_checkpoint(task)
                 continue
 
-            Execution(
+            engine = TaskEngine(
                 task=task,
                 workflow_id=self.workflow_id,
                 previous_context=previous_context,
-                _flow_callback=self._flow_callback,
             )
+
+            with engine.start():
+                engine.execute_with_retry()
+
+            task.callback(task=task)
+            self._flow_callback(task=task)
 
             previous_context = task.config.storage.get(
                 key=task.config.storage.key(task=task)
@@ -362,36 +341,25 @@ class Background(Flow):
         with self._lock:
             self.queue.append(task)
 
-    def _has_checkpoint(self, task: Task) -> bool:
-        if not self.resume:
-            return False
-
-        context = task.config.storage.get(
-            key=task.config.storage.key(task=task)
-        )
-
-        return context.storage is not None
-
     def _run_sequential(self) -> None:
         previous_context = Context(workflow_id=self.workflow_id)
 
         for task in self.tasks:
             if self._has_checkpoint(task):
-                previous_context = task.config.storage.get(
-                    key=task.config.storage.key(task=task)
-                )
-
-                task.status = TypeStatus.COMPLETED
-                task.current_context = previous_context
-                self._flow_callback(task=task)
+                previous_context = self._restore_checkpoint(task)
                 continue
 
-            Execution(
+            engine = TaskEngine(
                 task=task,
                 workflow_id=self.workflow_id,
                 previous_context=previous_context,
-                _flow_callback=self._flow_callback,
             )
+
+            with engine.start():
+                engine.execute_with_retry()
+
+            task.callback(task=task)
+            self._flow_callback(task=task)
 
             previous_context = task.config.storage.get(
                 key=task.config.storage.key(task=task)

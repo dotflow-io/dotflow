@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from dotflow import Config, DotFlow, action
 from dotflow.providers import StorageFile
 
@@ -21,7 +23,7 @@ config = Config(storage=StorageFile())
 
 
 def main():
-    workflow = DotFlow(config=config, workflow_id="my-etl-pipeline")
+    workflow = DotFlow(config=config, workflow_id=UUID("12345678-1234-5678-1234-567812345678"))
 
     workflow.task.add(step=step_one)
     workflow.task.add(step=step_two)
