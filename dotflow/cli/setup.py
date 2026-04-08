@@ -6,6 +6,7 @@ from dotflow import __description__, __version__
 from dotflow.cli.commands import (
     CloudGenerateCommand,
     CloudListCommand,
+    DeployCommand,
     InitCommand,
     LogCommand,
     ScheduleCommand,
@@ -42,6 +43,7 @@ class Command:
         self.setup_start()
         self.setup_schedule()
         self.setup_cloud()
+        self.setup_deploy()
         self.command()
 
     def setup_init(self):
@@ -179,6 +181,34 @@ class Command:
             "list", help="List available cloud platforms"
         )
         cmd_list.set_defaults(exec=CloudListCommand)
+
+    def setup_deploy(self):
+        self.cmd_deploy = self.subparsers.add_parser(
+            "deploy",
+            help="Deploy pipeline to a cloud platform",
+        )
+        self.cmd_deploy.add_argument(
+            "--platform",
+            required=True,
+            help="Target platform (e.g. lambda, ecs)",
+        )
+        self.cmd_deploy.add_argument(
+            "--project",
+            default=None,
+            required=True,
+            help="Project name",
+        )
+        self.cmd_deploy.add_argument(
+            "--region",
+            default="us-east-1",
+            help="Cloud region (defaults to us-east-1)",
+        )
+        self.cmd_deploy.add_argument(
+            "--schedule",
+            default=None,
+            help="Schedule expression (e.g. 'rate(6 hours)')",
+        )
+        self.cmd_deploy.set_defaults(exec=DeployCommand)
 
     def setup_logs(self):
         self.cmd_logs = self.subparsers.add_parser("logs", help="Logs")

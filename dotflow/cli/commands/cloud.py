@@ -182,11 +182,13 @@ class CloudListCommand(Command):
         table = Table(title="Available Platforms")
         table.add_column("Platform", style="bold cyan")
         table.add_column("Name", style="bold")
+        table.add_column("Description")
 
         for key, info in platforms.items():
             table.add_row(
                 key,
                 info.get("name", ""),
+                info.get("description", ""),
             )
 
         Console().print(table)
