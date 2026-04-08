@@ -230,7 +230,7 @@ class Sequential(Flow):
             )
 
             with engine.start():
-                engine.execute()
+                engine.execute_with_retry()
 
             task.callback(task=task)
             self._flow_callback(task=task)
@@ -314,7 +314,7 @@ class SequentialGroup(Flow):
             )
 
             with engine.start():
-                engine.execute()
+                engine.execute_with_retry()
 
             task.callback(task=task)
             self._flow_callback(task=task)
@@ -356,7 +356,7 @@ class Background(Flow):
             )
 
             with engine.start():
-                engine.execute()
+                engine.execute_with_retry()
 
             task.callback(task=task)
             self._flow_callback(task=task)

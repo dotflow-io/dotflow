@@ -33,7 +33,7 @@ class Execution:
         )
 
         with engine.start():
-            engine.execute()
+            engine.execute_with_retry()
 
         self.task.callback(task=self.task)
         _flow_callback(task=self.task)
