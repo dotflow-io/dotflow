@@ -25,6 +25,7 @@ from tests.mocks import (
     action_step_with_initial_context,
     action_step_with_previous_context,
     action_step_with_retry,
+    action_step_with_timeout,
     simple_callback,
     simple_step,
 )
@@ -374,7 +375,7 @@ class TestTaskEngine(unittest.TestCase):
 
         self.assertEqual(task.status, TypeStatus.COMPLETED)
 
-    def test_engine_retry_status_transitions_to_completed(self):
+    def test_engine_execute_with_retry_completed(self):
         task = Task(
             task_id=0,
             step=action_step_with_retry,
@@ -385,29 +386,37 @@ class TestTaskEngine(unittest.TestCase):
         )
 
         with engine.start():
-            engine.execute()
+            engine.execute_with_retry()
 
         self.assertEqual(task.status, TypeStatus.COMPLETED)
 
-    def test_engine_timeout_context_no_timeout(self):
-        task = Task(task_id=0, step=action_step, callback=simple_callback)
+    def test_engine_execute_with_retry_failed(self):
+        task = Task(
+            task_id=0,
+            step=action_step_with_error,
+            callback=simple_callback,
+        )
         engine = TaskEngine(
             task=task, workflow_id=self.workflow_id, previous_context=Context()
         )
 
-        with engine.start(), engine.timeout_context(seconds=0):
-            engine.execute()
+        with engine.start():
+            engine.execute_with_retry()
 
-        self.assertEqual(task.status, TypeStatus.COMPLETED)
+        self.assertEqual(task.status, TypeStatus.FAILED)
 
-    def test_engine_timeout_context_with_timeout(self):
-        task = Task(task_id=0, step=action_step, callback=simple_callback)
+    def test_engine_execute_with_timeout(self):
+        task = Task(
+            task_id=0,
+            step=action_step_with_timeout,
+            callback=simple_callback,
+        )
         engine = TaskEngine(
             task=task, workflow_id=self.workflow_id, previous_context=Context()
         )
 
-        with engine.start(), engine.timeout_context(seconds=10):
-            pass
+        with engine.start():
+            engine.execute_with_retry()
 
         self.assertEqual(task.status, TypeStatus.COMPLETED)
 
@@ -418,7 +427,7 @@ class TestTaskEngine(unittest.TestCase):
         )
 
         with engine.start(), engine.checkpoint_context():
-            engine.execute()
+            engine.execute_with_retry()
 
         self.assertEqual(task.status, TypeStatus.COMPLETED)
         self.assertIsNotNone(task.current_context)

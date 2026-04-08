@@ -41,6 +41,16 @@ def action_step_with_retry() -> Any:
     return {"foo": "bar"}
 
 
+@action(retry=3, retry_delay=0, backoff=True)
+def action_step_with_backoff() -> Any:
+    raise RuntimeError("always fail")
+
+
+@action(timeout=10)
+def action_step_with_timeout() -> Any:
+    return {"timed": True}
+
+
 @action
 def action_step_with_error() -> Any:
     raise Exception("Fail!")

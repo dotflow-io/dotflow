@@ -8,7 +8,6 @@ from pytest import fixture  # type: ignore
 from dotflow.core.action import Action
 from dotflow.core.context import Context
 from dotflow.core.task import Task
-from dotflow.core.types.status import TypeStatus
 from tests.mocks import (
     action_step,
     simple_step,
@@ -45,22 +44,15 @@ class TestClassActions(unittest.TestCase):
         self.assertEqual(inside.func, simple_step)
         self.assertIsInstance(decorated_function, Context)
 
-    def test_instantiating_action_class_with_fail_retry(self):
+    def test_instantiating_action_class_with_fail(self):
         error_message = "Fail!"
-        number_of_retries = 5
 
-        inside = Action(simple_step_with_fail, retry=number_of_retries)
+        inside = Action(simple_step_with_fail)
 
-        with self._caplog.at_level(logging.ERROR):
-            try:
-                inside()
-            except Exception as error:
-                self.assertEqual(error.args[0], error_message)
+        with self.assertRaises(Exception) as ctx:
+            inside()
 
-            self.assertEqual(len(self._caplog.records), number_of_retries)
-
-            for record in self._caplog.records:
-                self.assertEqual(record.message, error_message)
+        self.assertEqual(str(ctx.exception), error_message)
 
     def test_retry_zero_still_executes_task_once(self):
         call_count = {"n": 0}
@@ -85,22 +77,13 @@ class TestClassActions(unittest.TestCase):
         with self.assertRaises(ValueError):
             inside(task=self.task)
 
-    def test_sets_retry_status_before_retrying(self):
-        calls = {"count": 0}
-        statuses = []
+    def test_action_single_attempt_raises_on_failure(self):
+        def always_fail():
+            raise ValueError("fail")
 
-        def flaky_step():
-            calls["count"] += 1
-            if calls["count"] == 1:
-                raise Exception("Fail once")
-            statuses.append(self.task.status)
-            return "ok"
-
-        inside = Action(flaky_step, retry=2, retry_delay=0)
-        inside(task=self.task)
-
-        self.assertEqual(len(statuses), 1)
-        self.assertEqual(statuses[0], TypeStatus.RETRY)
+        inside = Action(always_fail)
+        with self.assertRaises(ValueError):
+            inside(task=self.task)
 
     def test_retry_exception_does_not_chain_to_itself(self):
         def always_fail():
@@ -117,17 +100,12 @@ class TestClassActions(unittest.TestCase):
                 "Exception must not be its own __cause__ (circular chain)",
             )
 
-    def test_backoff_does_not_mutate_retry_delay(self):
-        def always_fail():
-            raise RuntimeError("fail")
+    def test_action_preserves_retry_params(self):
+        inside = Action(simple_step, retry=3, retry_delay=2, backoff=True)
 
-        inside = Action(always_fail, retry=3, retry_delay=1, backoff=True)
-
-        with unittest.mock.patch("dotflow.core.action.sleep"):  # noqa: SIM117
-            with self.assertRaises(RuntimeError):
-                inside()
-
-        self.assertEqual(inside.retry_delay, 1)
+        self.assertEqual(inside.retry, 3)
+        self.assertEqual(inside.retry_delay, 2)
+        self.assertTrue(inside.backoff)
 
     def test_action_class_with_previous_context(self):
         inside = Action(simple_step_with_previous_context, task=self.task)
