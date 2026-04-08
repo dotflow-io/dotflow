@@ -1,0 +1,127 @@
+"""GitHub Actions deployment."""
+
+from __future__ import annotations
+
+import os
+from pathlib import Path
+
+from rich import print  # type: ignore
+
+from dotflow.cloud.core import Deployer
+from dotflow.cloud.github.constants import PYGITHUB_NOT_FOUND, TOKEN_NOT_FOUND
+from dotflow.settings import Settings as settings
+
+
+class ActionsDeployer(Deployer):
+    """Deploy dotflow pipeline to GitHub Actions."""
+
+    def __init__(self, token: str = None):
+        try:
+            from github import Github, GithubException
+        except ImportError as err:
+            raise SystemExit(PYGITHUB_NOT_FOUND) from err
+
+        self._token = token or os.environ.get("GITHUB_TOKEN")
+        if not self._token:
+            raise SystemExit(TOKEN_NOT_FOUND)
+
+        self._github = Github(self._token)
+        self._GithubException = GithubException
+        self._user = self._github.get_user()
+
+    def setup(self, name: str) -> None:
+        """No-op — GitHub manages everything."""
+
+    def ensure_roles(self, name: str) -> str:
+        """No-op."""
+        return ""
+
+    def ensure_logs(self, name: str) -> None:
+        """No-op."""
+
+    def deploy(self, name: str, **kwargs) -> None:
+        """Create repo and push all project files."""
+        print(settings.INFO_ALERT, f"Deploying to GitHub Actions '{name}'...")
+
+        repo = self._create_or_get_repo(name)
+        self._push_files(repo)
+
+        print(f"  Repository: {repo.html_url}")
+        print(f"  Actions: {repo.html_url}/actions")
+        print(settings.INFO_ALERT, "Done.")
+
+    def _create_or_get_repo(self, name: str):
+        """Create repo or get existing."""
+        try:
+            repo = self._user.get_repo(name)
+            print(f"  Using existing repo '{name}'")
+            return repo
+        except self._GithubException:
+            pass
+
+        print(f"  Creating repo '{name}'...")
+        return self._user.create_repo(
+            name=name,
+            private=True,
+            auto_init=False,
+        )
+
+    def _push_files(self, repo):
+        """Push all project files to the repo."""
+        print("  Pushing files...")
+
+        project_dir = Path.cwd()
+        existing = {}
+
+        try:
+            contents = repo.get_contents("", ref="main")
+            while contents:
+                item = contents.pop(0)
+                if item.type == "dir":
+                    contents.extend(repo.get_contents(item.path, ref="main"))
+                else:
+                    existing[item.path] = item.sha
+        except self._GithubException:
+            pass
+
+        for filepath in sorted(project_dir.rglob("*")):
+            if not filepath.is_file():
+                continue
+
+            relative = str(filepath.relative_to(project_dir))
+
+            if relative.startswith(".") and not relative.startswith(".github"):
+                continue
+
+            if "__pycache__" in relative or ".egg-info" in relative:
+                continue
+
+            try:
+                content = filepath.read_text()
+            except UnicodeDecodeError:
+                continue
+
+            if relative in existing:
+                repo.update_file(
+                    path=relative,
+                    message=f"update {relative}",
+                    content=content,
+                    sha=existing[relative],
+                    branch="main",
+                )
+            else:
+                try:
+                    repo.create_file(
+                        path=relative,
+                        message=f"add {relative}",
+                        content=content,
+                        branch="main",
+                    )
+                except self._GithubException:
+                    repo.create_file(
+                        path=relative,
+                        message=f"add {relative}",
+                        content=content,
+                    )
+
+        print(f"  Pushed {len(list(project_dir.rglob('*')))} files")
