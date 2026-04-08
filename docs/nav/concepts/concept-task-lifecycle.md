@@ -11,7 +11,7 @@ Every task moves through **status** values tracked by Dotflow. They describe whe
 
 ## Retries and pauses
 
-- **`RETRY`** — A retry is scheduled (for example after backoff); thread-safe retry behavior is part of the action runner.
+- **`RETRY`** — A retry is scheduled (for example after backoff); retry behavior is managed by the `TaskEngine`.
 - **`PAUSED`** — Execution is held (depending on workflow configuration and provider behavior).
 
 Retry policy is configured per task (timeouts, backoff, etc.); see [Task retry](../tutorial/task-retry.md) and [Task backoff](../tutorial/task-backoff.md).

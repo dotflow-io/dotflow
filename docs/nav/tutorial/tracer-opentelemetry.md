@@ -61,8 +61,8 @@ Run the example and open [http://localhost:16686](http://localhost:16686) to see
 | ABC method | When | Span action |
 |------------|------|-------------|
 | `start_workflow` | Manager.__init__ | Creates parent span |
-| `start_task` | Execution.__init__ | Creates child span |
-| `end_task` | Execution finally | Sets attributes, status, ends span |
+| `start_task` | TaskEngine.start() | Creates child span |
+| `end_task` | TaskEngine.start() finally | Sets attributes, status, ends span |
 | `end_workflow` | _callback_workflow | Sets workflow status, ends parent span |
 
 ## Compatible backends
