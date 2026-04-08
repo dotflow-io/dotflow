@@ -89,16 +89,6 @@ class TaskEngine:
         finally:
             self.task.config.tracer.end_task(task=self.task)
 
-    @contextmanager
-    def checkpoint_context(self):
-        """Saves a checkpoint after successful execution."""
-        yield
-        if self.task.status != TypeStatus.FAILED:
-            self.task.config.storage.post(
-                key=self.task.config.storage.key(task=self.task),
-                context=self.task.current_context,
-            )
-
     def execute(self):
         """Executes the task function and returns the context."""
         current_context = self.task.step(

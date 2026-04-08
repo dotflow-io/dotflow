@@ -419,15 +419,3 @@ class TestTaskEngine(unittest.TestCase):
             engine.execute_with_retry()
 
         self.assertEqual(task.status, TypeStatus.COMPLETED)
-
-    def test_engine_checkpoint_context(self):
-        task = Task(task_id=0, step=action_step, callback=simple_callback)
-        engine = TaskEngine(
-            task=task, workflow_id=self.workflow_id, previous_context=Context()
-        )
-
-        with engine.start(), engine.checkpoint_context():
-            engine.execute_with_retry()
-
-        self.assertEqual(task.status, TypeStatus.COMPLETED)
-        self.assertIsNotNone(task.current_context)

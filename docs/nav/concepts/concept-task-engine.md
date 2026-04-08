@@ -5,23 +5,37 @@ The `TaskEngine` manages the **lifecycle** of a single task — status transitio
 ## Architecture
 
 ```mermaid
-flowchart TD
-    S["Strategy\n(Sequential, Parallel, ...)"] -->|"decides ORDER"| TE["TaskEngine"]
+sequenceDiagram
+    participant S as Strategy
+    participant E as TaskEngine
+    participant A as @action
 
-    subgraph TE_SUB ["TaskEngine"]
-        START["start()\nlifecycle context manager"]
-        EWR["execute_with_retry()\nretry loop + timeout + backoff"]
-        ES["_execute_single()\ncalls @action once"]
-        ET["_execute_with_timeout()\nThreadPoolExecutor with deadline"]
-        E["execute()\nsingle execution"]
-        CC["checkpoint_context()\ncomposable checkpoint"]
+    S->>E: TaskEngine(task, workflow_id, previous_context)
+    S->>E: with engine.start()
+    E->>E: status = IN_PROGRESS
+    E->>E: tracer.start_task()
+    S->>E: engine.execute_with_retry()
+
+    loop retry loop (max_attempts)
+        alt timeout > 0
+            E->>E: _execute_with_timeout()
+        else no timeout
+            E->>E: _execute_single()
+        end
+        E->>A: task.step()
+        alt success
+            A-->>E: Context
+            E-->>S: result
+        else failure & attempts remaining
+            E->>E: status = RETRY
+            E->>E: sleep(delay)
+        end
     end
 
-    START --> EWR
-    EWR -->|"no timeout"| ES
-    EWR -->|"timeout > 0"| ET
-    ET --> ES
-    ES -->|"calls"| A["@action\nuser function"]
+    E->>E: status = COMPLETED / FAILED
+    E->>E: tracer.end_task()
+    S->>S: task.callback()
+    S->>S: _flow_callback()
 ```
 
 ## How it works
@@ -85,42 +99,6 @@ flowchart TD
 ### `execute()` — single execution
 
 Calls the task function once without retry. Used internally by `execute_with_retry()` and available for cases where retry is not needed.
-
-### `checkpoint_context()` — composable checkpoint
-
-Saves a checkpoint after successful execution:
-
-```python
-with engine.start(), engine.checkpoint_context():
-    engine.execute_with_retry()
-```
-
-## Composable behaviors
-
-The context manager pattern allows adding new behaviors without modifying the engine:
-
-```python
-with engine.start():
-    engine.execute_with_retry()
-
-# Add checkpoint saving
-with engine.start(), engine.checkpoint_context():
-    engine.execute_with_retry()
-```
-
-Custom context managers can be composed in the same way:
-
-```python
-@contextmanager
-def log_execution(engine):
-    logger.info(f"Starting task {engine.task.task_id}")
-    yield
-    logger.info(f"Finished task {engine.task.task_id}: {engine.task.status}")
-
-with engine.start():
-    with log_execution(engine):
-        engine.execute_with_retry()
-```
 
 ## References
 
