@@ -12,7 +12,6 @@ class _GithubException(Exception):
 
 
 class TestActionsDeployer(unittest.TestCase):
-
     def _make_deployer(self):
         with patch.object(ActionsDeployer, "__init__", return_value=None):
             deployer = ActionsDeployer()
