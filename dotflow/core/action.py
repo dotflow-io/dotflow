@@ -180,7 +180,7 @@ class Action:
                 ):
                     raise ExecutionWithClassError() from None
 
-                if attempt == self.retry:
+                if attempt == max_attempts:
                     raise last_exception from None
 
                 if task is not None:
