@@ -12,7 +12,6 @@ from dotflow.abc.flow import Flow
 from dotflow.core.context import Context
 from dotflow.core.engine import TaskEngine
 from dotflow.core.exception import ExecutionModeNotExist
-from dotflow.core.execution import Execution
 from dotflow.core.task import Task, TaskError
 from dotflow.core.types import TypeExecution, TypeStatus
 from dotflow.utils import basic_callback
@@ -422,12 +421,26 @@ class Parallel(Flow):
         }
         self.queue.put(current_task)
 
+    @staticmethod
+    def _run_task(task, workflow_id, previous_context, flow_callback):
+        engine = TaskEngine(
+            task=task,
+            workflow_id=workflow_id,
+            previous_context=previous_context,
+        )
+
+        with engine.start():
+            engine.execute_with_retry()
+
+        task.callback(task=task)
+        flow_callback(task=task)
+
     def run(self) -> None:
         previous_context = Context(workflow_id=self.workflow_id)
 
         for task in self.tasks:
             process = _mp.Process(
-                target=Execution,
+                target=self._run_task,
                 args=(
                     task,
                     self.workflow_id,
