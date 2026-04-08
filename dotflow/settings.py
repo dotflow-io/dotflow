@@ -1,17 +1,20 @@
 """Settings"""
 
+import os
 from pathlib import Path
+
+_OUTPUT = Path(os.environ.get("DOTFLOW_OUTPUT_PATH", ".output"))
 
 
 class Settings:
     """Settings DotFlow"""
 
-    START_PATH = Path(".output")
+    START_PATH = _OUTPUT
     GITIGNORE = Path(".gitignore")
 
     LOG_PROFILE = "dotflow"
     LOG_FILE_NAME = Path("flow.log")
-    LOG_PATH = Path(".output/flow.log")
+    LOG_PATH = _OUTPUT / "flow.log"
     LOG_FORMAT = "%(asctime)s - %(levelname)s [%(name)s]: %(message)s"
 
     TEMPLATE_REPO = "https://github.com/dotflow-io/template.git"
