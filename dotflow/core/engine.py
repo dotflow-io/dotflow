@@ -78,15 +78,15 @@ class TaskEngine:
             self.task.current_context = None
             self.task.status = TypeStatus.FAILED
         else:
-            self.task.duration = (
-                datetime.now() - self._start_time
-            ).total_seconds()
             if self.task.status in (
                 TypeStatus.IN_PROGRESS,
                 TypeStatus.RETRY,
             ):
                 self.task.status = TypeStatus.COMPLETED
         finally:
+            self.task.duration = (
+                datetime.now() - self._start_time
+            ).total_seconds()
             self.task.config.tracer.end_task(task=self.task)
 
     def execute(self):
@@ -172,15 +172,15 @@ class TaskEngine:
             return future.result(timeout=seconds)
         except TimeoutError:
             future.cancel()
+            raise
+        finally:
             executor.shutdown(wait=False, cancel_futures=True)
-            raise
-        except Exception:
-            executor.shutdown(wait=False)
-            raise
 
     @staticmethod
     def _is_class_internal_error(error: Exception) -> bool:
         """Checks if an error is an internal class execution error."""
+        if isinstance(error, ExecutionWithClassError):
+            return True
         message = str(error)
         patterns = [
             "initial_context",
