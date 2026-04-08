@@ -200,8 +200,8 @@ class Command:
         )
         self.cmd_deploy.add_argument(
             "--region",
-            default="us-east-1",
-            help="Cloud region (defaults to us-east-1)",
+            default=None,
+            help="Cloud region (e.g. us-east-1 for AWS, us-central1 for GCP)",
         )
         self.cmd_deploy.add_argument(
             "--schedule",
