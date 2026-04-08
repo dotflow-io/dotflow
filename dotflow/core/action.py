@@ -19,7 +19,11 @@ def is_execution_with_class_internal_error(error: Exception) -> bool:
 
 
 class Action:
-    """
+    """Decorator for creating task steps.
+
+    Accepts configuration for retry, timeout, retry_delay, and backoff,
+    which are stored as attributes and consumed by TaskEngine during execution.
+
     Import:
         You can import the **action** decorator directly from dotflow:
 
@@ -40,7 +44,6 @@ class Action:
             def my_task():
                 print("task")
 
-
         With Timeout
 
             @action(timeout=60)
@@ -58,6 +61,10 @@ class Action:
             @action(retry=5, backoff=True)
             def my_task():
                 print("task")
+
+    Note:
+        Retry, timeout, and backoff are enforced by TaskEngine.execute_with_retry(),
+        not by Action itself. Action stores the configuration as attributes.
 
     Args:
         func (Callable):
