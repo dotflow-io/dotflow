@@ -8,7 +8,7 @@
   <a aria-label="Pypi" href="https://pypi.org/project/dotflow/">Pypi</a>
 </div>
 
-![](https://raw.githubusercontent.com/FernandoCelmer/dotflow/master/docs/assets/dotflow.gif)
+![](assets/dotflow.png)
 
 ![GitHub Org's stars](https://img.shields.io/github/stars/dotflow-io?label=Dotflow&style=flat-square)
 ![GitHub last commit](https://img.shields.io/github/last-commit/dotflow-io/dotflow?style=flat-square)
