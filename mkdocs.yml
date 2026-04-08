@@ -214,6 +214,7 @@ nav:
       - "Concept of context": nav/concepts/concept-of-context.md
       - Providers: nav/concepts/concept-providers.md
       - "Task lifecycle and status": nav/concepts/concept-task-lifecycle.md
+      - "Task engine": nav/concepts/concept-task-engine.md
       - "Cron overlap": nav/concepts/concept-cron-overlap.md
       - Process Mode:
         - nav/concepts/process-mode-sequential.md
