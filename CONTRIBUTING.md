@@ -14,6 +14,11 @@ We use GitHub issues for tracking bugs and feature requests and have limited ban
 This project follows a **Git Flow** branching model. All development happens on the `develop` branch — never commit directly to `master`.
 
 ```mermaid
+---
+config:
+  gitGraph:
+    mainBranchName: master
+---
 gitGraph
     commit id: "v0.14.0"
     branch develop
@@ -21,20 +26,20 @@ gitGraph
     commit id: "start dev"
     branch feature/173
     checkout feature/173
-    commit id: "⚙️ FEATURE-#173"
-    commit id: "📝 PEP8-#173"
+    commit id: "FEATURE-#173"
+    commit id: "PEP8-#173"
     checkout develop
-    merge feature/173 id: "PR #183 → develop"
+    merge feature/173 id: "PR #183"
     branch bug/143
     checkout bug/143
-    commit id: "🪲 BUG-#143"
+    commit id: "BUG-#143"
     checkout develop
-    merge bug/143 id: "PR #159 → develop"
+    merge bug/143 id: "PR #159"
     branch docs/95
     checkout docs/95
-    commit id: "📘 DOCS-#95"
+    commit id: "DOCS-#95"
     checkout develop
-    merge docs/95 id: "PR → develop"
+    merge docs/95 id: "PR develop"
     checkout master
     merge develop id: "Release v0.15.0" tag: "v0.15.0"
 ```
