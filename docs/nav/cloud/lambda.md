@@ -68,9 +68,9 @@ sam logs --stack-name my_pipeline --tail
 |----------|---------|---------------|
 | `lambda` | Manual invocation | `dotflow deploy` or `sam deploy` |
 | `lambda-scheduled` | EventBridge cron/rate | `dotflow deploy --schedule` or `sam deploy` |
-| `lambda-s3-trigger` | S3 file upload | `sam deploy` |
-| `lambda-sqs-trigger` | SQS message | `sam deploy` |
-| `lambda-api-trigger` | HTTP POST via API Gateway | `sam deploy` |
+| `lambda-s3-trigger` | S3 file upload | `dotflow deploy` or `sam deploy` |
+| `lambda-sqs-trigger` | SQS message | `dotflow deploy` or `sam deploy` |
+| `lambda-api-trigger` | HTTP POST via API Gateway | `dotflow deploy` or `sam deploy` |
 
 ## Important
 

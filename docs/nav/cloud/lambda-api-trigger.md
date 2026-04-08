@@ -26,19 +26,27 @@ dotflow cloud generate --platform lambda-api-trigger
 
 ## Prerequisites
 
+- `pip install dotflow[deploy-aws]`
 - AWS CLI configured (`aws configure`)
-- [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) (`brew install aws-sam-cli`)
 - Docker
 
 ## Deploy
+
+### Option 1: dotflow deploy
+
+```bash
+dotflow deploy --platform lambda-api-trigger --project my_pipeline
+```
+
+The endpoint URL is shown after deploy.
+
+### Option 2: SAM CLI
 
 ```bash
 aws ecr create-repository --repository-name my_pipeline --region us-east-1
 sam build
 sam deploy
 ```
-
-The API Gateway URL is shown in the CloudFormation outputs after deploy.
 
 ## Invoke
 
@@ -49,7 +57,7 @@ curl -X POST https://<api_id>.execute-api.us-east-1.amazonaws.com/workflow
 ## View logs
 
 ```bash
-sam logs --stack-name my_pipeline --tail
+aws logs tail /aws/lambda/my_pipeline --region us-east-1 --since 5m
 ```
 
 ## Important

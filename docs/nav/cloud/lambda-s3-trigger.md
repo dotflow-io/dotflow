@@ -26,11 +26,19 @@ dotflow cloud generate --platform lambda-s3-trigger
 
 ## Prerequisites
 
+- `pip install dotflow[deploy-aws]`
 - AWS CLI configured (`aws configure`)
-- [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) (`brew install aws-sam-cli`)
 - Docker
 
 ## Deploy
+
+### Option 1: dotflow deploy
+
+```bash
+dotflow deploy --platform lambda-s3-trigger --project my_pipeline
+```
+
+### Option 2: SAM CLI
 
 ```bash
 aws ecr create-repository --repository-name my_pipeline --region us-east-1

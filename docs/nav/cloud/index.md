@@ -40,7 +40,7 @@ Deploy your dotflow pipelines to any major cloud provider. Choose a target platf
 
     ---
 
-    Pipeline triggered by S3 file upload. Deploy with `sam deploy`.
+    Pipeline triggered by S3 file upload. Deploy with `dotflow deploy`.
 
     [:octicons-arrow-right-24: Guide](lambda-s3-trigger.md)
 
@@ -48,7 +48,7 @@ Deploy your dotflow pipelines to any major cloud provider. Choose a target platf
 
     ---
 
-    Pipeline triggered by SQS messages. Deploy with `sam deploy`.
+    Pipeline triggered by SQS messages. Deploy with `dotflow deploy`.
 
     [:octicons-arrow-right-24: Guide](lambda-sqs-trigger.md)
 
@@ -56,7 +56,7 @@ Deploy your dotflow pipelines to any major cloud provider. Choose a target platf
 
     ---
 
-    Pipeline triggered by HTTP POST. Deploy with `sam deploy`.
+    Pipeline triggered by HTTP POST. Deploy with `dotflow deploy`.
 
     [:octicons-arrow-right-24: Guide](lambda-api-trigger.md)
 
