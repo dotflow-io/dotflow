@@ -30,13 +30,34 @@ class TestStorageGCS(unittest.TestCase):
         from dotflow.providers.storage_gcs import StorageGCS
 
         self.storage = StorageGCS()
-        self.storage.client = self.mock_client
-        self.storage.bucket_obj = self.mock_bucket
-        self.storage.prefix = PREFIX
-        self.storage._not_found = Exception
+
+        mock_gcs = MagicMock()
+        mock_gcs._bucket = self.mock_bucket
+        mock_gcs._not_found = Exception
+        mock_gcs.prefix = PREFIX
+        mock_gcs.read = self._mock_read
+        mock_gcs.write = self._mock_write
+        self.storage._gcs = mock_gcs
+        self._written = {}
+
+    def _mock_read(self, key):
+        blob = self.mock_bucket.blob(f"{PREFIX}{key}")
+        try:
+            data = blob.download_as_text()
+            from json import loads
+
+            return loads(data)
+        except Exception:
+            return []
+
+    def _mock_write(self, key, data):
+        blob = self.mock_bucket.blob(f"{PREFIX}{key}")
+        from json import dumps
+
+        blob.upload_from_string(dumps(data), content_type="application/json")
 
     def test_storage_gcs_instance(self):
-        self.assertEqual(self.storage.prefix, PREFIX)
+        self.assertEqual(self.storage._gcs.prefix, PREFIX)
 
     def test_post(self):
         expected_value = {"foo": "bar"}
