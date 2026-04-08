@@ -8,5 +8,5 @@ class Notify(ABC):
     """Notify"""
 
     @abstractmethod
-    def send(self, task: Any) -> None:
-        """Send"""
+    def hook_status_task(self, task: Any) -> None:
+        """Hook called when a task status changes."""

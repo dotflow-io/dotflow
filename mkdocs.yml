@@ -82,6 +82,9 @@ markdown_extensions:
   pymdownx.blocks.details: null
   pymdownx.blocks.tab:
     alternate_style: true
+  pymdownx.emoji:
+    emoji_index: !!python/name:material.extensions.emoji.twemoji
+    emoji_generator: !!python/name:material.extensions.emoji.to_svg
   mdx_include: null
   markdown_include_variants: null
 
@@ -115,16 +118,110 @@ plugins:
           build: true
           nav_translations:
             Home: Início
-            Learn: Aprender
+            Concepts: Conceitos
+            Overview: Visão geral
+            How-to guides: Guias práticos
+            Workflows: Fluxos de trabalho
+            Tasks: Tarefas
+            Advanced: Avançado
+            Examples: Exemplos
             Development Guide: Guia de Desenvolvimento
             Release Notes: Notas de Lançamento
             Process Mode: Modo de Processamento
+            Providers: Provedores
+            Storage: Armazenamento
+            Notify: Notificações
+            Log: Registro
+            Scheduler: Agendador
+            Strategies: Estratégias
+            Callback: Callback
+            "Dotflow CLI": "CLI do Dotflow"
+            Reference: Referência
+            Integrations: Integrações
+            AWS: AWS
+            GCP: GCP
+            Telegram: Telegram
+            Built-in: Integrados
+            "Use integrations": "Usar integrações"
+            "Workflow and tasks": "Fluxo de trabalho e tarefas"
+            "Task lifecycle and status": "Ciclo de vida e status da tarefa"
+            "Cron overlap": "Sobreposição no cron"
+            "Concept of context": "Conceito de contexto"
+  - redirects:
+      redirect_maps:
+        # Short-lived URLs (/nav/how-to/tutorial/...) → canonical /nav/tutorial/...
+        nav/how-to/tutorial/async-actions.md: nav/tutorial/async-actions.md
+        nav/how-to/tutorial/checkpoint.md: nav/tutorial/checkpoint.md
+        nav/how-to/tutorial/error-handling.md: nav/tutorial/error-handling.md
+        nav/how-to/tutorial/first-steps.md: nav/tutorial/first-steps.md
+        nav/how-to/tutorial/groups.md: nav/tutorial/groups.md
+        nav/how-to/tutorial/initial-context.md: nav/tutorial/initial-context.md
+        nav/how-to/tutorial/install.md: nav/tutorial/install.md
+        nav/how-to/tutorial/keep-going.md: nav/tutorial/keep-going.md
+        nav/how-to/tutorial/log-default.md: nav/tutorial/log-default.md
+        nav/how-to/tutorial/many-contexts.md: nav/tutorial/many-contexts.md
+        nav/how-to/tutorial/notify-default.md: nav/tutorial/notify-default.md
+        nav/how-to/tutorial/notify-telegram.md: nav/tutorial/notify-telegram.md
+        nav/how-to/tutorial/output-context.md: nav/tutorial/output-context.md
+        nav/how-to/tutorial/output-storage.md: nav/tutorial/output-storage.md
+        nav/how-to/tutorial/output-task.md: nav/tutorial/output-task.md
+        nav/how-to/tutorial/previous-context.md: nav/tutorial/previous-context.md
+        nav/how-to/tutorial/scheduler-cron.md: nav/tutorial/scheduler-cron.md
+        nav/how-to/tutorial/scheduler-default.md: nav/tutorial/scheduler-default.md
+        nav/how-to/tutorial/storage-default.md: nav/tutorial/storage-default.md
+        nav/how-to/tutorial/storage-file.md: nav/tutorial/storage-file.md
+        nav/how-to/tutorial/storage-gcs.md: nav/tutorial/storage-gcs.md
+        nav/how-to/tutorial/storage-s3.md: nav/tutorial/storage-s3.md
+        nav/how-to/tutorial/task-backoff.md: nav/tutorial/task-backoff.md
+        nav/how-to/tutorial/task-callback.md: nav/tutorial/task-callback.md
+        nav/how-to/tutorial/task-retry.md: nav/tutorial/task-retry.md
+        nav/how-to/tutorial/task-timeout.md: nav/tutorial/task-timeout.md
+        nav/how-to/tutorial/workflow-callback.md: nav/tutorial/workflow-callback.md
+        pt/nav/how-to/tutorial/initial-context.md: pt/nav/tutorial/initial-context.md
+        pt/nav/how-to/tutorial/previous-context.md: pt/nav/tutorial/previous-context.md
+        pt/nav/how-to/tutorial/scheduler-cron.md: pt/nav/tutorial/scheduler-cron.md
+        pt/nav/how-to/tutorial/scheduler-default.md: pt/nav/tutorial/scheduler-default.md
+        nav/learn/concept-cron-overlap.md: nav/concepts/concept-cron-overlap.md
+        nav/learn/concept-of-context.md: nav/concepts/concept-of-context.md
+        nav/learn/concept-providers.md: nav/concepts/concept-providers.md
+        nav/learn/concept-task-lifecycle.md: nav/concepts/concept-task-lifecycle.md
+        nav/learn/concept-workflow-and-tasks.md: nav/concepts/concept-workflow-and-tasks.md
+        nav/learn/index.md: nav/concepts/index.md
+        nav/learn/process-mode-background.md: nav/concepts/process-mode-background.md
+        nav/learn/process-mode-parallel-group.md: nav/concepts/process-mode-parallel-group.md
+        nav/learn/process-mode-parallel.md: nav/concepts/process-mode-parallel.md
+        nav/learn/process-mode-sequential.md: nav/concepts/process-mode-sequential.md
+        nav/learn/cli/init.md: nav/how-to/cli/init.md
+        nav/learn/cli/simple-start.md: nav/how-to/cli/simple-start.md
+        nav/learn/cli/with-callback.md: nav/how-to/cli/with-callback.md
+        nav/learn/cli/with-custom-path.md: nav/how-to/cli/with-custom-path.md
+        nav/learn/cli/with-initial-context.md: nav/how-to/cli/with-initial-context.md
+        nav/learn/cli/with-mode.md: nav/how-to/cli/with-mode.md
+        nav/learn/cli/with-output-context.md: nav/how-to/cli/with-output-context.md
+        nav/learn/cli/with-schedule.md: nav/how-to/cli/with-schedule.md
+        nav/learn/examples.md: nav/examples/index.md
+        pt/nav/learn/concept-cron-overlap.md: pt/nav/concepts/concept-cron-overlap.md
+        pt/nav/learn/concept-of-context.md: pt/nav/concepts/concept-of-context.md
+        pt/nav/learn/concept-providers.md: pt/nav/concepts/concept-providers.md
+        pt/nav/learn/concept-task-lifecycle.md: pt/nav/concepts/concept-task-lifecycle.md
+        pt/nav/learn/concept-workflow-and-tasks.md: pt/nav/concepts/concept-workflow-and-tasks.md
+        pt/nav/learn/index.md: pt/nav/concepts/index.md
   
 nav:
     - Home: index.md
-    - Learn:
-      - nav/learn/index.md
-      - nav/learn/concept-of-context.md
+    - Concepts:
+      - "Workflow and tasks": nav/concepts/concept-workflow-and-tasks.md
+      - "Concept of context": nav/concepts/concept-of-context.md
+      - Providers: nav/concepts/concept-providers.md
+      - "Task lifecycle and status": nav/concepts/concept-task-lifecycle.md
+      - "Cron overlap": nav/concepts/concept-cron-overlap.md
+      - Process Mode:
+        - nav/concepts/process-mode-sequential.md
+        - nav/concepts/process-mode-background.md
+        - nav/concepts/process-mode-parallel.md
+        - nav/concepts/process-mode-parallel-group.md
+    - How-to guides:
+      - Overview: nav/how-to/index.md
       - Providers:
         - Storage:
           - nav/tutorial/storage-default.md
@@ -134,12 +231,22 @@ nav:
         - Notify:
           - nav/tutorial/notify-default.md
           - nav/tutorial/notify-telegram.md
+          - nav/tutorial/notify-discord.md
         - Log:
           - nav/tutorial/log-default.md
+          - nav/tutorial/log-opentelemetry.md
+          - nav/tutorial/log-sentry.md
         - Scheduler:
           - nav/tutorial/scheduler-default.md
           - nav/tutorial/scheduler-cron.md
-      - Tutorial - User Guide:
+        - Tracer:
+          - nav/tutorial/tracer-default.md
+          - nav/tutorial/tracer-opentelemetry.md
+          - nav/tutorial/tracer-sentry.md
+        - Metrics:
+          - nav/tutorial/metrics-default.md
+          - nav/tutorial/metrics-opentelemetry.md
+      - Workflows:
         - nav/tutorial/install.md
         - nav/tutorial/first-steps.md
         - nav/tutorial/initial-context.md
@@ -147,6 +254,8 @@ nav:
         - nav/tutorial/many-contexts.md
         - nav/tutorial/keep-going.md
         - nav/tutorial/groups.md
+        - nav/tutorial/workflow-callback.md
+      - Tasks:
         - Strategies:
           - nav/tutorial/task-retry.md
           - nav/tutorial/task-backoff.md
@@ -154,32 +263,67 @@ nav:
         - nav/tutorial/error-handling.md
         - nav/tutorial/checkpoint.md
         - nav/tutorial/async-actions.md
-        - Callback:
-          - nav/tutorial/workflow-callback.md
-          - nav/tutorial/task-callback.md
+        - nav/tutorial/task-callback.md
         # - Output:
         #   - nav/tutorial/output-context.md
         #   - nav/tutorial/output-storage.md
         #   - nav/tutorial/output-task.md
-      - Advanced User Guide:
-        - nav/advanced/scheduled-pipeline-with-resume.md
-        - nav/advanced/parallel-with-groups.md
-        - nav/advanced/notifications-on-failure.md
-      - Process Mode:
-        - nav/learn/process-mode-sequential.md
-        - nav/learn/process-mode-background.md
-        - nav/learn/process-mode-parallel.md
-        - nav/learn/process-mode-parallel-group.md
       - Dotflow CLI:
-        - nav/learn/cli/init.md
-        - nav/learn/cli/simple-start.md
-        - nav/learn/cli/with-initial-context.md
-        - nav/learn/cli/with-callback.md
-        - nav/learn/cli/with-mode.md
-        - nav/learn/cli/with-output-context.md
-        - nav/learn/cli/with-custom-path.md
-        - nav/learn/cli/with-schedule.md
-      - nav/learn/examples.md
+        - nav/how-to/cli/init.md
+        - nav/how-to/cli/simple-start.md
+        - nav/how-to/cli/with-initial-context.md
+        - nav/how-to/cli/with-callback.md
+        - nav/how-to/cli/with-mode.md
+        - nav/how-to/cli/with-output-context.md
+        - nav/how-to/cli/with-custom-path.md
+        - nav/how-to/cli/with-schedule.md
+    - Integrations:
+      - Overview: nav/integrations/index.md
+      - "Use integrations": nav/integrations/use-integrations.md
+      - AWS:
+        - nav/tutorial/storage-s3.md
+      - GCP:
+        - nav/tutorial/storage-gcs.md
+      - Telegram:
+        - nav/tutorial/notify-telegram.md
+      - Discord:
+        - nav/tutorial/notify-discord.md
+      - OpenTelemetry:
+        - nav/tutorial/log-opentelemetry.md
+        - nav/tutorial/tracer-opentelemetry.md
+        - nav/tutorial/metrics-opentelemetry.md
+      - Sentry:
+        - nav/tutorial/log-sentry.md
+        - nav/tutorial/tracer-sentry.md
+      - Built-in:
+        - nav/tutorial/storage-default.md
+        - nav/tutorial/storage-file.md
+        - nav/tutorial/notify-default.md
+        - nav/tutorial/log-default.md
+        - nav/tutorial/scheduler-default.md
+        - nav/tutorial/scheduler-cron.md
+    - Advanced:
+      - nav/advanced/scheduled-pipeline-with-resume.md
+      - nav/advanced/parallel-with-groups.md
+      - nav/advanced/notifications-on-failure.md
+    - Examples:
+      - nav/examples/index.md
+      - nav/examples/getting-started.md
+      - nav/examples/context.md
+      - nav/examples/process-modes.md
+      - nav/examples/resilience.md
+      - nav/examples/error-handling.md
+      - nav/examples/callbacks.md
+      - nav/examples/async.md
+      - nav/examples/checkpoint.md
+      - nav/examples/scheduler.md
+      - nav/examples/storage.md
+      - nav/examples/notifications.md
+      - nav/examples/results.md
+      - nav/examples/cli.md
+      - Real-world Projects:
+        - nav/examples/etl-flow.md
+        - nav/examples/health-check-flow.md
     - Reference:
       - nav/reference/action.md
       - nav/reference/config.md
@@ -195,7 +339,12 @@ nav:
       - nav/reference/exception.md
       - Providers:
         - nav/reference/log-default.md
+        - nav/reference/log-opentelemetry.md
+        - nav/reference/log-sentry.md
+        - nav/reference/metrics-default.md
+        - nav/reference/metrics-opentelemetry.md
         - nav/reference/notify-default.md
+        - nav/reference/notify-discord.md
         - nav/reference/notify-telegram.md
         - nav/reference/scheduler-default.md
         - nav/reference/scheduler-cron.md
@@ -203,6 +352,9 @@ nav:
         - nav/reference/storage-file.md
         - nav/reference/storage-s3.md
         - nav/reference/storage-gcs.md
+        - nav/reference/tracer-default.md
+        - nav/reference/tracer-opentelemetry.md
+        - nav/reference/tracer-sentry.md
       - Instance:
         - nav/reference/task-instance.md
         - nav/reference/context-instance.md
@@ -217,8 +369,17 @@ nav:
         - nav/reference/abc-notify.md
         - nav/reference/abc-scheduler.md
         - nav/reference/abc-storage.md
+        - nav/reference/abc-tracer.md
+        - nav/reference/abc-metrics.md
         - nav/reference/abc-http.md
     - Development Guide:
       - nav/development/development-guide.md
-      - nav/development/custom-providers.md
+      - Custom Providers:
+        - nav/development/custom-providers.md
+        - nav/development/custom-storage.md
+        - nav/development/custom-notify.md
+        - nav/development/custom-log.md
+        - nav/development/custom-scheduler.md
+        - nav/development/custom-tracer.md
+        - nav/development/custom-metrics.md
     - Release Notes: nav/development/release-notes.md

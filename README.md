@@ -109,7 +109,7 @@ workflow.start()
 
 ### Execution Modes
 
-> [Process Mode docs](https://dotflow-io.github.io/dotflow/nav/learn/process-mode-sequential/)
+> [Process Mode docs](https://dotflow-io.github.io/dotflow/nav/concepts/process-mode-sequential/)
 
 Dotflow supports 4 execution strategies out of the box:
 
@@ -468,6 +468,8 @@ workflow.start()
 
 ### Scheduler / Cron
 
+> [Cron scheduler docs](https://dotflow-io.github.io/dotflow/nav/tutorial/scheduler-cron/) | [Default scheduler](https://dotflow-io.github.io/dotflow/nav/tutorial/scheduler-default/) | [Cron overlap (concepts)](https://dotflow-io.github.io/dotflow/nav/concepts/concept-cron-overlap/)
+
 Schedule workflows to run automatically using cron expressions.
 
 ```bash
@@ -515,7 +517,7 @@ The scheduler handles graceful shutdown via `SIGINT`/`SIGTERM` signals automatic
 
 ### CLI
 
-> [CLI docs](https://dotflow-io.github.io/dotflow/nav/learn/cli/simple-start/)
+> [CLI docs](https://dotflow-io.github.io/dotflow/nav/how-to/cli/simple-start/)
 
 Run workflows directly from the command line:
 
@@ -585,7 +587,7 @@ Extend Dotflow by implementing the abstract base classes:
 | ABC | Methods | Purpose |
 |-----|---------|---------|
 | `Storage` | `post`, `get`, `key` | Custom storage backends |
-| `Notify` | `send` | Custom notification channels |
+| `Notify` | `hook_status_task` | Custom notification channels |
 | `Log` | `info`, `error` | Custom logging |
 | `Scheduler` | `start`, `stop` | Custom scheduling strategies |
 

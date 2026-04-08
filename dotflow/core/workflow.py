@@ -16,7 +16,18 @@ from dotflow.core.task import Task, TaskError
 from dotflow.core.types import TypeExecution, TypeStatus
 from dotflow.utils import basic_callback
 
-_mp = get_context("fork") if sys.platform != "win32" else get_context("spawn")
+if sys.platform == "win32":
+    _mp = get_context("spawn")
+else:
+    import multiprocessing
+
+    if sys.platform == "darwin" and hasattr(
+        multiprocessing, "set_forkserver_preload"
+    ):
+        import os
+
+        os.environ.setdefault("OBJC_DISABLE_INITIALIZE_FORK_SAFETY", "YES")
+    _mp = get_context("fork")
 
 
 def grouper(tasks: list[Task]) -> dict[str, list[Task]]:
@@ -97,35 +108,74 @@ class Manager:
         keep_going: bool = False,
         workflow_id: UUID = None,
         resume: bool = False,
+        config=None,
     ) -> None:
         self.tasks = tasks
         self.on_success = on_success
         self.on_failure = on_failure
         self.workflow_id = workflow_id or uuid4()
         self.started = datetime.now()
+        self.config = config
+
+        if self.config:
+            self.config.tracer.start_workflow(
+                workflow_id=self.workflow_id, mode=mode, tasks_count=len(tasks)
+            )
+            self.config.metrics.workflow_started(
+                workflow_id=self.workflow_id, mode=mode
+            )
 
         execution = None
         groups = grouper(tasks=tasks)
 
-        try:
-            execution = getattr(self, mode)
-        except AttributeError as err:
-            raise ExecutionModeNotExist() from err
+        VALID_MODES = {
+            "sequential",
+            "sequential_group",
+            "background",
+            "parallel",
+        }
+        if mode not in VALID_MODES:
+            raise ExecutionModeNotExist()
+
+        execution = getattr(self, mode)
 
         self.tasks = execution(
             tasks=tasks,
-            workflow_id=workflow_id,
+            workflow_id=self.workflow_id,
             ignore=keep_going,
             groups=groups,
             resume=resume,
         )
 
-        self._callback_workflow(tasks=self.tasks)
+        if mode != TypeExecution.BACKGROUND:
+            self._callback_workflow(tasks=self.tasks)
+        elif self.config:
+
+            def _background_cleanup():
+                self.thread.join()
+                self._callback_workflow(tasks=self.tasks)
+
+            threading.Thread(target=_background_cleanup, daemon=True).start()
 
     def _callback_workflow(self, tasks: list[Task]):
+        duration = (datetime.now() - self.started).total_seconds()
         final_status = [task.status for task in tasks]
+        failed = TypeStatus.FAILED in final_status
 
-        if TypeStatus.FAILED in final_status:
+        if self.config:
+            self.config.tracer.end_workflow(
+                workflow_id=self.workflow_id,
+                duration=duration,
+                failed=failed,
+            )
+            if failed:
+                self.config.metrics.workflow_failed(self.workflow_id, duration)
+            else:
+                self.config.metrics.workflow_completed(
+                    self.workflow_id, duration
+                )
+
+        if failed:
             self.on_failure(tasks=tasks)
         else:
             self.on_success(tasks=tasks)
@@ -144,6 +194,7 @@ class Manager:
 
     def background(self, **kwargs) -> list[Task]:
         process = Background(**kwargs)
+        self.thread = process.thread
         return process.get_tasks()
 
     def parallel(self, **kwargs) -> list[Task]:
@@ -302,12 +353,14 @@ class Background(Flow):
 
     def setup_queue(self) -> None:
         self.queue = []
+        self._lock = threading.Lock()
 
     def get_tasks(self) -> list[Task]:
-        return self.queue
+        return self.tasks
 
     def _flow_callback(self, task: Task) -> None:
-        self.queue.append(task)
+        with self._lock:
+            self.queue.append(task)
 
     def _has_checkpoint(self, task: Task) -> bool:
         if not self.resume:
@@ -348,9 +401,10 @@ class Background(Flow):
                 break
 
     def run(self) -> None:
-        thread = threading.Thread(target=self._run_sequential)
-        thread.start()
-        thread.join()
+        self.thread = threading.Thread(
+            target=self._run_sequential, daemon=True
+        )
+        self.thread.start()
 
 
 class Parallel(Flow):

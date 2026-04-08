@@ -1,5 +1,6 @@
 """Execution module"""
 
+import re
 from collections.abc import Callable
 from datetime import datetime
 from inspect import getsourcelines
@@ -48,9 +49,10 @@ class Execution:
         _flow_callback: Callable = basic_callback,
     ) -> None:
         self.task = task
-        self.task.status = TypeStatus.IN_PROGRESS
         self.task.previous_context = previous_context
         self.task.workflow_id = workflow_id
+        self.task.config.tracer.start_task(task=self.task)
+        self.task.status = TypeStatus.IN_PROGRESS
 
         self._execution(_flow_callback)
 
@@ -59,7 +61,7 @@ class Execution:
             return (
                 callable(getattr(class_instance, func))
                 and getattr(class_instance, func).__module__
-                is Action.__module__
+                == Action.__module__
                 and not func.startswith("__")
             )
         except AttributeError:
@@ -74,9 +76,13 @@ class Execution:
             inside_code = getsourcelines(class_instance.__class__)[0]
 
             for callable_name in callable_list:
+                pattern = re.compile(
+                    rf"\bdef\s+{re.escape(callable_name)}\s*\("
+                )
                 for index, code in enumerate(inside_code):
-                    if code.find(f"def {callable_name}") != -1:
+                    if pattern.search(code):
                         ordered_list.append((index, callable_name))
+                        break
 
             ordered_list.sort()
             return ordered_list
@@ -163,6 +169,7 @@ class Execution:
             self.task.status = TypeStatus.FAILED
 
         finally:
+            self.task.config.tracer.end_task(task=self.task)
             self.task.callback(task=self.task)
             _flow_callback(task=self.task)
 

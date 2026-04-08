@@ -71,15 +71,19 @@ class Context(ContextInstance):
         if isinstance(value, int):
             self._task_id = value
 
-        if not self.task_id:
-            self._task_id = value
-
     @property
     def workflow_id(self):
         return self._workflow_id
 
     @workflow_id.setter
     def workflow_id(self, value: UUID):
+        if isinstance(value, str):
+            try:
+                value = UUID(value)
+            except ValueError as err:
+                raise ValueError(
+                    f"Invalid workflow_id: '{value}' is not a valid UUID format."
+                ) from err
         if isinstance(value, UUID):
             self._workflow_id = value
 

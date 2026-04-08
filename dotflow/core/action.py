@@ -146,7 +146,8 @@ class Action:
         for attempt in range(1, max_attempts + 1):
             try:
                 if self.timeout:
-                    with ThreadPoolExecutor(max_workers=1) as executor:
+                    executor = ThreadPoolExecutor(max_workers=1)
+                    try:
                         future = executor.submit(
                             self._call_func,
                             is_async,
@@ -154,10 +155,22 @@ class Action:
                             **kwargs,
                         )
                         result = future.result(timeout=self.timeout)
+                    except TimeoutError:
+                        future.cancel()
+                        executor.shutdown(wait=False, cancel_futures=True)
+                        raise
+                    except Exception:
+                        executor.shutdown(wait=False)
+                        raise
+                    else:
+                        executor.shutdown(wait=False)
                 else:
                     result = self._call_func(is_async, *args, **kwargs)
 
                 return result
+
+            except TimeoutError:
+                raise
 
             except Exception as error:
                 last_exception = error
@@ -167,8 +180,8 @@ class Action:
                 ):
                     raise ExecutionWithClassError() from None
 
-                if attempt == max_attempts:
-                    raise last_exception from last_exception
+                if attempt == self.retry:
+                    raise last_exception from None
 
                 if task is not None:
                     task.retry_count += 1
@@ -201,14 +214,20 @@ class Action:
 
     def _set_params(self):
         if isinstance(self.func, FunctionType):
-            self.params = list(self.func.__code__.co_varnames)
+            code = self.func.__code__
+            self.params = list(
+                code.co_varnames[: code.co_argcount + code.co_kwonlyargcount]
+            )
 
         if (
             type(self.func) is type
             and hasattr(self.func, "__init__")
             and hasattr(self.func.__init__, "__code__")
         ):
-            self.params = list(self.func.__init__.__code__.co_varnames)
+            code = self.func.__init__.__code__
+            self.params = list(
+                code.co_varnames[: code.co_argcount + code.co_kwonlyargcount]
+            )
 
     def _get_context(self, kwargs: dict):
         context = {}

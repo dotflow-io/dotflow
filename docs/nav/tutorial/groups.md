@@ -12,5 +12,5 @@ Assign tasks to named groups to run independent branches in parallel while keepi
 
 ## References
 
-- [Process Mode — Parallel Group](https://dotflow-io.github.io/dotflow/nav/learn/process-mode-parallel-group/)
+- [Process Mode — Parallel Group](https://dotflow-io.github.io/dotflow/nav/concepts/process-mode-parallel-group/)
 - [TaskBuilder](https://dotflow-io.github.io/dotflow/nav/reference/task-builder/)
