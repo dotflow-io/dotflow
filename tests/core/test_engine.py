@@ -379,9 +379,8 @@ class TestTaskEngine(unittest.TestCase):
             task=task, workflow_id=self.workflow_id, previous_context=Context()
         )
 
-        with engine.start():
-            with engine.timeout_context(seconds=0):
-                engine.execute()
+        with engine.start(), engine.timeout_context(seconds=0):
+            engine.execute()
 
         self.assertEqual(task.status, TypeStatus.COMPLETED)
 
@@ -391,9 +390,8 @@ class TestTaskEngine(unittest.TestCase):
             task=task, workflow_id=self.workflow_id, previous_context=Context()
         )
 
-        with engine.start():
-            with engine.timeout_context(seconds=10):
-                pass
+        with engine.start(), engine.timeout_context(seconds=10):
+            pass
 
         self.assertEqual(task.status, TypeStatus.COMPLETED)
 
@@ -403,9 +401,8 @@ class TestTaskEngine(unittest.TestCase):
             task=task, workflow_id=self.workflow_id, previous_context=Context()
         )
 
-        with engine.start():
-            with engine.checkpoint_context():
-                engine.execute()
+        with engine.start(), engine.checkpoint_context():
+            engine.execute()
 
         self.assertEqual(task.status, TypeStatus.COMPLETED)
         self.assertIsNotNone(task.current_context)
