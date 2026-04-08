@@ -100,10 +100,24 @@ pip install dotflow[deploy-github]  # GitHub Actions deploy
 
 > **[Read the full documentation →](https://dotflow-io.github.io/dotflow/)**
 
+## Documentation
+
+| Section | Description |
+|---------|-------------|
+| [Concepts](https://dotflow-io.github.io/dotflow/nav/concepts/concept-workflow-and-tasks/) | Workflows, tasks, context, providers, process modes |
+| [How-to Guides](https://dotflow-io.github.io/dotflow/nav/how-to/) | Step-by-step tutorials for workflows, tasks, and CLI |
+| [Cloud Deployment](https://dotflow-io.github.io/dotflow/nav/cloud/) | Deploy to AWS, GCP, Kubernetes, Docker, GitHub Actions |
+| [Integrations](https://dotflow-io.github.io/dotflow/nav/integrations/) | OpenTelemetry, Sentry, Telegram, Discord, S3, GCS |
+| [Examples](https://dotflow-io.github.io/dotflow/nav/examples/) | Real-world pipelines: ETL, health checks, async, scheduler |
+| [Reference](https://dotflow-io.github.io/dotflow/nav/reference/dotflow/) | API reference for all classes and providers |
+| [Custom Providers](https://dotflow-io.github.io/dotflow/nav/development/custom-providers/) | Build your own storage, notify, log, tracer, or metrics provider |
+
 ## Features
 
 <details>
 <summary><strong>Observability</strong></summary>
+
+> [OpenTelemetry docs](https://dotflow-io.github.io/dotflow/nav/tutorial/log-opentelemetry/) | [Sentry docs](https://dotflow-io.github.io/dotflow/nav/tutorial/log-sentry/) | [Tracer docs](https://dotflow-io.github.io/dotflow/nav/tutorial/tracer-opentelemetry/) | [Metrics docs](https://dotflow-io.github.io/dotflow/nav/tutorial/metrics-opentelemetry/)
 
 Built-in support for OpenTelemetry and Sentry:
 
@@ -354,7 +368,7 @@ workflow = DotFlow(config=config)
 <details>
 <summary><strong>Notifications</strong></summary>
 
-> [Telegram docs](https://dotflow-io.github.io/dotflow/nav/tutorial/notify-telegram/)
+> [Telegram docs](https://dotflow-io.github.io/dotflow/nav/tutorial/notify-telegram/) | [Discord docs](https://dotflow-io.github.io/dotflow/nav/tutorial/notify-discord/)
 
 Get notified about task status changes via Telegram or Discord.
 
