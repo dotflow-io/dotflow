@@ -2,13 +2,10 @@
 
 import asyncio
 from collections.abc import Callable
-from concurrent.futures import ThreadPoolExecutor
-from time import sleep
 from types import FunctionType
 
 from dotflow.core.context import Context
-from dotflow.core.exception import ExecutionWithClassError, TaskError
-from dotflow.core.types.status import TypeStatus
+from dotflow.core.exception import ExecutionWithClassError
 
 
 def is_execution_with_class_internal_error(error: Exception) -> bool:
@@ -103,13 +100,13 @@ class Action:
 
             if contexts:
                 return Context(
-                    storage=self._run_action(*args, task=task, **contexts),
+                    storage=self._run_action(*args, **contexts),
                     task_id=task.task_id,
                     workflow_id=task.workflow_id,
                 )
 
             return Context(
-                storage=self._run_action(*args, task=task),
+                storage=self._run_action(*args),
                 task_id=task.task_id,
                 workflow_id=task.workflow_id,
             )
@@ -123,77 +120,33 @@ class Action:
 
             if contexts:
                 return Context(
-                    storage=self._run_action(*_args, task=task, **contexts),
+                    storage=self._run_action(*_args, **contexts),
                     task_id=task.task_id,
                     workflow_id=task.workflow_id,
                 )
 
             return Context(
-                storage=self._run_action(*_args, task=task),
+                storage=self._run_action(*_args),
                 task_id=task.task_id,
                 workflow_id=task.workflow_id,
             )
 
+        action.retry = self.retry
+        action.timeout = self.timeout
+        action.retry_delay = self.retry_delay
+        action.backoff = self.backoff
+
         return action
 
-    def _run_action(self, *args, task=None, **kwargs):
-        current_delay = self.retry_delay
-
+    def _run_action(self, *args, **kwargs):
         is_async = asyncio.iscoroutinefunction(self.func)
 
-        max_attempts = max(1, self.retry)
-
-        for attempt in range(1, max_attempts + 1):
-            try:
-                if self.timeout:
-                    executor = ThreadPoolExecutor(max_workers=1)
-                    try:
-                        future = executor.submit(
-                            self._call_func,
-                            is_async,
-                            *args,
-                            **kwargs,
-                        )
-                        result = future.result(timeout=self.timeout)
-                    except TimeoutError:
-                        future.cancel()
-                        executor.shutdown(wait=False, cancel_futures=True)
-                        raise
-                    except Exception:
-                        executor.shutdown(wait=False)
-                        raise
-                    else:
-                        executor.shutdown(wait=False)
-                else:
-                    result = self._call_func(is_async, *args, **kwargs)
-
-                return result
-
-            except TimeoutError:
-                raise
-
-            except Exception as error:
-                last_exception = error
-
-                if is_execution_with_class_internal_error(
-                    error=last_exception
-                ):
-                    raise ExecutionWithClassError() from None
-
-                if attempt == max_attempts:
-                    raise last_exception from None
-
-                if task is not None:
-                    task.retry_count += 1
-                    task.errors = TaskError(
-                        error=error,
-                        attempt=attempt,
-                    )
-                    task.status = TypeStatus.RETRY
-
-                sleep(current_delay)
-                if self.backoff:
-                    current_delay *= 2
+        try:
+            return self._call_func(is_async, *args, **kwargs)
+        except Exception as error:
+            if is_execution_with_class_internal_error(error=error):
+                raise ExecutionWithClassError() from None
+            raise
 
     def _call_func(self, is_async, *args, **kwargs):
         if is_async:

@@ -2,9 +2,11 @@
 
 import re
 from collections.abc import Callable
+from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
 from datetime import datetime
 from inspect import getsourcelines
+from time import sleep
 from types import FunctionType
 from uuid import UUID
 
@@ -15,7 +17,7 @@ except ImportError:
 
 from dotflow.core.action import Action
 from dotflow.core.context import Context
-from dotflow.core.exception import ExecutionWithClassError
+from dotflow.core.exception import ExecutionWithClassError, TaskError
 from dotflow.core.task import Task
 from dotflow.core.types import TypeStatus
 from dotflow.logging import logger
@@ -88,27 +90,6 @@ class TaskEngine:
             self.task.config.tracer.end_task(task=self.task)
 
     @contextmanager
-    def timeout_context(self, seconds: int):
-        """Wraps execution block with a timeout.
-
-        If seconds is 0 or None, no timeout is applied.
-
-        Args:
-            seconds: Maximum execution time in seconds.
-        """
-        if not seconds:
-            yield
-            return
-
-        start = datetime.now()
-        yield
-        elapsed = (datetime.now() - start).total_seconds()
-        if elapsed > seconds:
-            raise TimeoutError(
-                f"Task exceeded timeout of {seconds}s (took {elapsed:.2f}s)"
-            )
-
-    @contextmanager
     def checkpoint_context(self):
         """Saves a checkpoint after successful execution."""
         yield
@@ -133,6 +114,90 @@ class TaskEngine:
 
         self.task.current_context = current_context
         return current_context
+
+    def execute_with_retry(self):
+        """Executes the task with retry, timeout, and backoff managed by the engine.
+
+        Reads retry, timeout, retry_delay, and backoff from the task's step
+        (the @action decorator) and manages the full retry loop.
+        """
+        step = self.task.step
+        max_attempts = max(1, step.retry)
+        timeout = step.timeout
+        retry_delay = step.retry_delay
+        backoff = step.backoff
+        current_delay = retry_delay
+
+        for attempt in range(1, max_attempts + 1):
+            try:
+                if timeout:
+                    result = self._execute_with_timeout(timeout)
+                else:
+                    result = self._execute_single()
+
+                self.task.current_context = result
+                return result
+
+            except TimeoutError:
+                raise
+
+            except Exception as error:
+                if self._is_class_internal_error(error):
+                    raise
+
+                if attempt == max_attempts:
+                    raise
+
+                self.task.retry_count += 1
+                self.task.errors = TaskError(
+                    error=error,
+                    attempt=attempt,
+                )
+                self.task.status = TypeStatus.RETRY
+
+                sleep(current_delay)
+                if backoff:
+                    current_delay *= 2
+
+    def _execute_single(self):
+        """Executes the task function once, handling class-based steps."""
+        current_context = self.task.step(
+            initial_context=self.task.initial_context,
+            previous_context=self.task.previous_context,
+            task=self.task,
+        )
+
+        if type(current_context.storage) not in self.VALID_OBJECTS:
+            current_context = self._execution_with_class(
+                class_instance=current_context.storage
+            )
+
+        return current_context
+
+    def _execute_with_timeout(self, seconds: int):
+        """Executes the task function with a real timeout using ThreadPoolExecutor."""
+        executor = ThreadPoolExecutor(max_workers=1)
+        try:
+            future = executor.submit(self._execute_single)
+            return future.result(timeout=seconds)
+        except TimeoutError:
+            future.cancel()
+            executor.shutdown(wait=False, cancel_futures=True)
+            raise
+        except Exception:
+            executor.shutdown(wait=False)
+            raise
+
+    @staticmethod
+    def _is_class_internal_error(error: Exception) -> bool:
+        """Checks if an error is an internal class execution error."""
+        message = str(error)
+        patterns = [
+            "initial_context",
+            "previous_context",
+            "missing 1 required positional argument: 'self'",
+        ]
+        return any(pattern in message for pattern in patterns)
 
     def _is_action(self, class_instance: Callable, func: Callable):
         try:
@@ -167,7 +232,8 @@ class TaskEngine:
 
         except TypeError as err:
             logger.error(
-                "Internal problem with ordering the class functions, but don't worry, it was executed.: %s",
+                "Internal problem with ordering the class functions, "
+                "but don't worry, it was executed.: %s",
                 str(err),
             )
 
