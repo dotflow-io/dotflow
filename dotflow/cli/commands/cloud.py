@@ -13,7 +13,6 @@ from dotflow.cli.command import Command
 from dotflow.settings import Settings as settings
 
 
-
 def _get_template_dir() -> Path | None:
     import tempfile
 
@@ -79,16 +78,13 @@ def _read_project_name(pyproject: Path) -> str | None:
             if stripped.startswith("["):
                 in_project = stripped in ("[project]", "[tool.poetry]")
             if in_project and re.match(r"^name\s*=", stripped):
-                return (
-                    stripped.split("=", 1)[1].strip().strip('"').strip("'")
-                )
+                return stripped.split("=", 1)[1].strip().strip('"').strip("'")
     except Exception:
         return None
     return None
 
 
 class CloudGenerateCommand(Command):
-
     def setup(self):
         platform = self.params.platform
 
@@ -170,7 +166,6 @@ class CloudGenerateCommand(Command):
 
 
 class CloudListCommand(Command):
-
     def setup(self):
         cloud_dir = _get_template_dir()
         if cloud_dir is None:

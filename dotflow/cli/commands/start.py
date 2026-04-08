@@ -14,7 +14,6 @@ from dotflow.providers import (
 
 
 class StartCommand(Command):
-
     def setup(self):
         workflow = self._new_workflow()
 

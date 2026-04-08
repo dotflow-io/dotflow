@@ -10,7 +10,6 @@ TEMPLATE_REPO = "https://github.com/dotflow-io/template"
 
 
 class InitCommand(Command):
-
     def setup(self):
         cookiecutter(TEMPLATE_REPO)
 

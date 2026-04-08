@@ -12,7 +12,6 @@ from dotflow.providers import (
 
 
 class ScheduleCommand(Command):
-
     def setup(self):
         workflow = self._new_workflow()
 
