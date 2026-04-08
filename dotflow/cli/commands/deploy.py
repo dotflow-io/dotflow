@@ -6,15 +6,15 @@ from dotflow.cli.command import Command
 from dotflow.settings import Settings as settings
 
 SAM_PLATFORMS = {
-    "lambda-s3-trigger",
-    "lambda-sqs-trigger",
-    "lambda-api-trigger",
     "ecs-scheduled",
 }
 
 DEFAULT_REGIONS = {
     "lambda": "us-east-1",
     "lambda-scheduled": "us-east-1",
+    "lambda-s3-trigger": "us-east-1",
+    "lambda-sqs-trigger": "us-east-1",
+    "lambda-api-trigger": "us-east-1",
     "ecs": "us-east-1",
     "cloud-run": "us-central1",
     "cloud-run-scheduled": "us-central1",
@@ -41,9 +41,13 @@ class DeployCommand(Command):
         deployers = {
             "lambda": self._deploy_lambda,
             "lambda-scheduled": self._deploy_lambda,
+            "lambda-s3-trigger": self._deploy_lambda_s3,
+            "lambda-sqs-trigger": self._deploy_lambda_sqs,
+            "lambda-api-trigger": self._deploy_lambda_api,
             "ecs": self._deploy_ecs,
             "cloud-run": self._deploy_cloud_run,
             "cloud-run-scheduled": self._deploy_cloud_run,
+            "github-actions": self._deploy_github_actions,
         }
 
         handler = deployers.get(platform)
@@ -63,6 +67,27 @@ class DeployCommand(Command):
         deployer = LambdaDeployer(region=region)
         deployer.deploy(name, schedule=schedule)
 
+    def _deploy_lambda_api(self, name: str, region: str, **kwargs):
+        """Deploy to AWS Lambda + API Gateway."""
+        from dotflow.cloud.aws import LambdaApiDeployer
+
+        deployer = LambdaApiDeployer(region=region)
+        deployer.deploy(name)
+
+    def _deploy_lambda_s3(self, name: str, region: str, **kwargs):
+        """Deploy to AWS Lambda + S3 Trigger."""
+        from dotflow.cloud.aws import LambdaS3Deployer
+
+        deployer = LambdaS3Deployer(region=region)
+        deployer.deploy(name)
+
+    def _deploy_lambda_sqs(self, name: str, region: str, **kwargs):
+        """Deploy to AWS Lambda + SQS Trigger."""
+        from dotflow.cloud.aws import LambdaSQSDeployer
+
+        deployer = LambdaSQSDeployer(region=region)
+        deployer.deploy(name)
+
     def _deploy_ecs(self, name: str, region: str, **kwargs):
         """Deploy to AWS ECS Fargate."""
         from dotflow.cloud.aws import ECSDeployer
@@ -75,4 +100,11 @@ class DeployCommand(Command):
         from dotflow.cloud.gcp import CloudRunDeployer
 
         deployer = CloudRunDeployer(region=region)
+        deployer.deploy(name)
+
+    def _deploy_github_actions(self, name: str, **kwargs):
+        """Deploy to GitHub Actions."""
+        from dotflow.cloud.github import ActionsDeployer
+
+        deployer = ActionsDeployer()
         deployer.deploy(name)
