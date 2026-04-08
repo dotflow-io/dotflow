@@ -90,7 +90,6 @@ def _read_project_name(pyproject: Path) -> str | None:
 
 
 class CloudGenerateCommand(Command):
-
     def setup(self):
         platform = self.params.platform
 
