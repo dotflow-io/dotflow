@@ -2,6 +2,19 @@
 
 Run your dotflow pipeline automatically when a file is uploaded to an S3 bucket.
 
+## Create project
+
+```bash
+dotflow init
+# Select cloud: lambda-s3-trigger
+```
+
+Or generate files for an existing project:
+
+```bash
+dotflow cloud generate --platform lambda-s3-trigger
+```
+
 ## Generated files
 
 | File | Description |
@@ -11,13 +24,24 @@ Run your dotflow pipeline automatically when a file is uploaded to an S3 bucket.
 | `template.yaml` | SAM template with S3 event trigger |
 | `samconfig.toml` | Pre-configured deployment settings |
 
+## Prerequisites
+
+- AWS CLI configured (`aws configure`)
+- [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) (`brew install aws-sam-cli`)
+- Docker
+
 ## Deploy
 
 ```bash
-aws ecr create-repository --repository-name <project_name> --region us-east-1
-
+aws ecr create-repository --repository-name my_pipeline --region us-east-1
 sam build
 sam deploy
+```
+
+## View logs
+
+```bash
+sam logs --stack-name my_pipeline --tail
 ```
 
 ## Important

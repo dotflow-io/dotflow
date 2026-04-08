@@ -2,6 +2,19 @@
 
 Run your dotflow pipeline on a recurring schedule using ECS Fargate and EventBridge.
 
+## Create project
+
+```bash
+dotflow init
+# Select cloud: ecs-scheduled
+```
+
+Or generate files for an existing project:
+
+```bash
+dotflow cloud generate --platform ecs-scheduled
+```
+
 ## Generated files
 
 | File | Description |
@@ -20,17 +33,15 @@ Run your dotflow pipeline on a recurring schedule using ECS Fargate and EventBri
 ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 REGION=us-east-1
 
-# Login, build and push to ECR
 aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
-aws ecr create-repository --repository-name <project_name> --region $REGION
-docker build -t <project_name> .
-docker tag <project_name>:latest $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/<project_name>:latest
-docker push $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/<project_name>:latest
+aws ecr create-repository --repository-name my_pipeline --region $REGION
+docker build -t my_pipeline .
+docker tag my_pipeline:latest $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/my_pipeline:latest
+docker push $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/my_pipeline:latest
 
-# Deploy CloudFormation stack
 aws cloudformation deploy \
   --template-file template.yaml \
-  --stack-name <project_name> \
+  --stack-name my_pipeline \
   --capabilities CAPABILITY_IAM \
   --parameter-overrides SubnetId=<subnet_id> VpcId=<vpc_id> \
   --region $REGION

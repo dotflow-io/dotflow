@@ -287,14 +287,27 @@ nav:
         - nav/cloud/lambda-api-trigger.md
         - nav/cloud/ecs.md
         - nav/cloud/ecs-scheduled.md
+        - nav/cloud/step-functions.md
+        - nav/cloud/aws-batch.md
+        - nav/cloud/app-runner.md
       - GCP:
         - nav/cloud/cloud-run.md
         - nav/cloud/cloud-run-scheduled.md
+        - nav/cloud/cloud-functions.md
+        - nav/cloud/cloud-workflows.md
+        - nav/cloud/cloud-tasks.md
+        - nav/cloud/pubsub-trigger.md
       - Kubernetes:
         - nav/cloud/kubernetes.md
       - Azure:
         - nav/cloud/azure-functions.md
         - nav/cloud/azure-container.md
+        - nav/cloud/azure-container-instances.md
+        - nav/cloud/azure-logic-apps.md
+        - nav/cloud/azure-queue-trigger.md
+      - CI/CD:
+        - nav/cloud/github-actions.md
+        - nav/cloud/gitlab-ci.md
       - Heroku:
         - nav/cloud/heroku.md
       - Fly.io:
@@ -305,6 +318,14 @@ nav:
         - nav/cloud/render.md
       - DigitalOcean:
         - nav/cloud/digital-ocean.md
+      - Vercel:
+        - nav/cloud/vercel.md
+      - Coolify:
+        - nav/cloud/coolify.md
+      - Nomad:
+        - nav/cloud/nomad.md
+      - Terraform:
+        - nav/cloud/terraform.md
     - Advanced:
       - nav/advanced/scheduled-pipeline-with-resume.md
       - nav/advanced/parallel-with-groups.md

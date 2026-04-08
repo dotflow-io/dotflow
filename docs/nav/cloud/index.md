@@ -2,82 +2,6 @@
 
 Deploy your dotflow pipelines to any major cloud provider. Choose a target platform during project creation and get all the infrastructure files you need — fully configured and ready to deploy.
 
-## Quick start
-
-```bash
-# 1. Create a new project with cloud support
-dotflow init
-
-# 2. Enter the project
-cd my_pipeline
-
-# 3. Deploy
-dotflow deploy --platform lambda --project my_pipeline
-```
-
-## CLI
-
-| Command | Description |
-|---------|-------------|
-| `dotflow init` | Scaffold a new project (select cloud platform during setup) |
-| `dotflow cloud list` | Show available deployment platforms |
-| `dotflow cloud generate --platform <name>` | Generate deployment files for an existing project |
-| `dotflow deploy --platform <name> --project <name>` | Deploy to a cloud platform |
-
-### Deploy options
-
-```bash
-dotflow deploy --platform <name> --project <name> [--region <region>] [--schedule <expression>]
-```
-
-| Option | Default | Description |
-|--------|---------|-------------|
-| `--platform` | required | Target platform (`lambda`, `lambda-scheduled`, `ecs`) |
-| `--project` | required | Project name |
-| `--region` | `us-east-1` | AWS region |
-| `--schedule` | — | Schedule expression (e.g. `rate(6 hours)`) |
-
-### Deploy examples
-
-```bash
-# AWS Lambda
-dotflow deploy --platform lambda --project my_pipeline
-
-# AWS Lambda with schedule
-dotflow deploy --platform lambda-scheduled --project my_pipeline --schedule "rate(6 hours)"
-
-# AWS ECS Fargate
-dotflow deploy --platform ecs --project my_pipeline --region us-east-1
-
-# Docker (no deploy command needed)
-docker compose build && docker compose up
-
-# Kubernetes
-kubectl apply -f deployment.yaml -f service.yaml
-
-# GCP Cloud Run
-gcloud run deploy my_pipeline --source . --region us-central1
-
-# Platforms with triggers (S3, SQS, API Gateway, ECS scheduled)
-sam build && sam deploy
-```
-
-### Supported platforms
-
-| Platform | `dotflow deploy` | `sam deploy` | Manual |
-|----------|:---:|:---:|:---:|
-| `lambda` | :white_check_mark: | :white_check_mark: | — |
-| `lambda-scheduled` | :white_check_mark: | :white_check_mark: | — |
-| `lambda-s3-trigger` | — | :white_check_mark: | — |
-| `lambda-sqs-trigger` | — | :white_check_mark: | — |
-| `lambda-api-trigger` | — | :white_check_mark: | — |
-| `ecs` | :white_check_mark: | — | — |
-| `ecs-scheduled` | — | — | CloudFormation |
-| `cloud-run` | — | — | `gcloud` |
-| `cloud-run-scheduled` | — | — | `gcloud` |
-| `docker` | — | — | `docker compose` |
-| `kubernetes` | — | — | `kubectl` |
-
 ## Docker
 
 <div class="grid cards" markdown>
@@ -152,6 +76,30 @@ sam build && sam deploy
 
     [:octicons-arrow-right-24: Guide](ecs-scheduled.md)
 
+- :fontawesome-brands-aws: **Step Functions** :soon:
+
+    ---
+
+    State machine with Lambda tasks via SAM.
+
+    [:octicons-arrow-right-24: Guide](step-functions.md)
+
+- :fontawesome-brands-aws: **Batch** :soon:
+
+    ---
+
+    Fargate batch job for heavy workloads.
+
+    [:octicons-arrow-right-24: Guide](aws-batch.md)
+
+- :fontawesome-brands-aws: **App Runner** :soon:
+
+    ---
+
+    Serverless container service with minimal config.
+
+    [:octicons-arrow-right-24: Guide](app-runner.md)
+
 </div>
 
 ## GCP
@@ -173,6 +121,38 @@ sam build && sam deploy
     Scheduled Cloud Run with Cloud Scheduler.
 
     [:octicons-arrow-right-24: Guide](cloud-run-scheduled.md)
+
+- :fontawesome-brands-google: **Cloud Functions** :soon:
+
+    ---
+
+    Serverless function with HTTP trigger.
+
+    [:octicons-arrow-right-24: Guide](cloud-functions.md)
+
+- :fontawesome-brands-google: **Cloud Workflows** :soon:
+
+    ---
+
+    Orchestration workflow definition.
+
+    [:octicons-arrow-right-24: Guide](cloud-workflows.md)
+
+- :fontawesome-brands-google: **Cloud Tasks** :soon:
+
+    ---
+
+    HTTP task queue with Cloud Run backend.
+
+    [:octicons-arrow-right-24: Guide](cloud-tasks.md)
+
+- :fontawesome-brands-google: **Pub/Sub Trigger** :soon:
+
+    ---
+
+    Cloud Run triggered by Pub/Sub messages.
+
+    [:octicons-arrow-right-24: Guide](pubsub-trigger.md)
 
 </div>
 
@@ -200,15 +180,65 @@ sam build && sam deploy
 
     Timer-triggered function with `function.json`.
 
+    [:octicons-arrow-right-24: Guide](azure-functions.md)
+
 - :material-microsoft-azure: **Azure Container Apps**
 
     ---
 
     Containerized pipeline on Azure Container Apps.
 
+    [:octicons-arrow-right-24: Guide](azure-container.md)
+
+- :material-microsoft-azure: **Azure Container Instances** :soon:
+
+    ---
+
+    One-shot container execution.
+
+    [:octicons-arrow-right-24: Guide](azure-container-instances.md)
+
+- :material-microsoft-azure: **Azure Logic Apps** :soon:
+
+    ---
+
+    Orchestration workflow with HTTP trigger.
+
+    [:octicons-arrow-right-24: Guide](azure-logic-apps.md)
+
+- :material-microsoft-azure: **Azure Queue Trigger** :soon:
+
+    ---
+
+    Azure Function triggered by Storage Queue messages.
+
+    [:octicons-arrow-right-24: Guide](azure-queue-trigger.md)
+
 </div>
 
-## Coming soon :soon:
+## CI/CD
+
+<div class="grid cards" markdown>
+
+- :fontawesome-brands-github: **GitHub Actions**
+
+    ---
+
+    Scheduled workflow running on GitHub Actions runner.
+
+    [:octicons-arrow-right-24: Guide](github-actions.md)
+
+- :fontawesome-brands-gitlab: **GitLab CI** :soon:
+
+    ---
+
+    CI/CD pipeline with schedule and manual trigger.
+
+    [:octicons-arrow-right-24: Guide](gitlab-ci.md)
+
+</div>
+
+## More platforms :soon:
 
 <div class="grid cards" markdown>
 
@@ -218,28 +248,70 @@ sam build && sam deploy
 
     `Procfile` + `heroku.yml` for Heroku deployment.
 
-- :simple-flydotio: **Fly.io**
+    [:octicons-arrow-right-24: Guide](heroku.md)
+
+- :material-cloud-outline: **Fly.io**
 
     ---
 
     `fly.toml` for Fly.io edge deployment.
 
-- :simple-railway: **Railway**
+    [:octicons-arrow-right-24: Guide](fly-io.md)
+
+- :material-cloud-outline: **Railway**
 
     ---
 
     `railway.json` for Railway deployment.
 
-- :simple-render: **Render**
+    [:octicons-arrow-right-24: Guide](railway.md)
+
+- :material-cloud-outline: **Render**
 
     ---
 
     `render.yaml` for Render deployment.
 
-- :simple-digitalocean: **DigitalOcean**
+    [:octicons-arrow-right-24: Guide](render.md)
+
+- :material-cloud-outline: **DigitalOcean**
 
     ---
 
     `app.yaml` for DigitalOcean App Platform.
+
+    [:octicons-arrow-right-24: Guide](digital-ocean.md)
+
+- :material-cloud-outline: **Vercel** :soon:
+
+    ---
+
+    Serverless function via HTTP endpoint.
+
+    [:octicons-arrow-right-24: Guide](vercel.md)
+
+- :material-cloud-outline: **Coolify** :soon:
+
+    ---
+
+    Self-hosted PaaS deployment via Docker.
+
+    [:octicons-arrow-right-24: Guide](coolify.md)
+
+- :material-cloud-outline: **Nomad** :soon:
+
+    ---
+
+    Batch job for HashiCorp Nomad orchestrator.
+
+    [:octicons-arrow-right-24: Guide](nomad.md)
+
+- :material-cloud-outline: **Terraform** :soon:
+
+    ---
+
+    Infrastructure as Code.
+
+    [:octicons-arrow-right-24: Guide](terraform.md)
 
 </div>
