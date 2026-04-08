@@ -22,6 +22,7 @@ DEFAULT_REGIONS = {
 
 
 class DeployCommand(Command):
+
     def setup(self):
         platform = self.params.platform
         name = self.params.project
