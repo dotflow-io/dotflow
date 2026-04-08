@@ -4,6 +4,9 @@ from rich import print  # type: ignore
 
 from dotflow import __description__, __version__
 from dotflow.cli.commands import (
+    CloudGenerateCommand,
+    CloudListCommand,
+    DeployCommand,
     InitCommand,
     LogCommand,
     ScheduleCommand,
@@ -39,6 +42,8 @@ class Command:
         self.setup_logs()
         self.setup_start()
         self.setup_schedule()
+        self.setup_cloud()
+        self.setup_deploy()
         self.command()
 
     def setup_init(self):
@@ -144,6 +149,66 @@ class Command:
         )
 
         self.cmd_schedule.set_defaults(exec=ScheduleCommand)
+
+    def setup_cloud(self):
+        self.cmd_cloud = self.subparsers.add_parser(
+            "cloud",
+            help="Generate cloud infrastructure files for a target platform",
+        )
+        cloud_subparsers = self.cmd_cloud.add_subparsers()
+
+        cmd_generate = cloud_subparsers.add_parser(
+            "generate", help="Generate infrastructure files"
+        )
+        cmd_generate.add_argument(
+            "--platform",
+            required=True,
+            help="Target platform (e.g. docker, lambda, cloud-run, ecs, kubernetes)",
+        )
+        cmd_generate.add_argument(
+            "--project",
+            default=None,
+            help="Project name (defaults to current directory name)",
+        )
+        cmd_generate.add_argument(
+            "--output",
+            default=".",
+            help="Output directory (defaults to current directory)",
+        )
+        cmd_generate.set_defaults(exec=CloudGenerateCommand)
+
+        cmd_list = cloud_subparsers.add_parser(
+            "list", help="List available cloud platforms"
+        )
+        cmd_list.set_defaults(exec=CloudListCommand)
+
+    def setup_deploy(self):
+        self.cmd_deploy = self.subparsers.add_parser(
+            "deploy",
+            help="Deploy pipeline to a cloud platform",
+        )
+        self.cmd_deploy.add_argument(
+            "--platform",
+            required=True,
+            help="Target platform (e.g. lambda, ecs)",
+        )
+        self.cmd_deploy.add_argument(
+            "--project",
+            default=None,
+            required=True,
+            help="Project name",
+        )
+        self.cmd_deploy.add_argument(
+            "--region",
+            default=None,
+            help="Cloud region (e.g. us-east-1 for AWS, us-central1 for GCP)",
+        )
+        self.cmd_deploy.add_argument(
+            "--schedule",
+            default=None,
+            help="Schedule expression (e.g. 'rate(6 hours)')",
+        )
+        self.cmd_deploy.set_defaults(exec=DeployCommand)
 
     def setup_logs(self):
         self.cmd_logs = self.subparsers.add_parser("logs", help="Logs")

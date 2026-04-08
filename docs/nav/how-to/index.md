@@ -2,14 +2,6 @@
 
 <div class="grid cards dotflow-howto-sections" markdown>
 
-- :material-cog-outline: __Providers__
-
-    ---
-
-    Connect **storage**, **notify**, **log**, and **scheduler** backends. Submenus group tutorials by provider type.
-
-    [:octicons-arrow-right-24: How-to guides](../tutorial/storage-default.md)
-
 - :material-graph-outline: __Workflows__
 
     ---

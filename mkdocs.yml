@@ -222,30 +222,6 @@ nav:
         - nav/concepts/process-mode-parallel-group.md
     - How-to guides:
       - Overview: nav/how-to/index.md
-      - Providers:
-        - Storage:
-          - nav/tutorial/storage-default.md
-          - nav/tutorial/storage-file.md
-          - nav/tutorial/storage-s3.md
-          - nav/tutorial/storage-gcs.md
-        - Notify:
-          - nav/tutorial/notify-default.md
-          - nav/tutorial/notify-telegram.md
-          - nav/tutorial/notify-discord.md
-        - Log:
-          - nav/tutorial/log-default.md
-          - nav/tutorial/log-opentelemetry.md
-          - nav/tutorial/log-sentry.md
-        - Scheduler:
-          - nav/tutorial/scheduler-default.md
-          - nav/tutorial/scheduler-cron.md
-        - Tracer:
-          - nav/tutorial/tracer-default.md
-          - nav/tutorial/tracer-opentelemetry.md
-          - nav/tutorial/tracer-sentry.md
-        - Metrics:
-          - nav/tutorial/metrics-default.md
-          - nav/tutorial/metrics-opentelemetry.md
       - Workflows:
         - nav/tutorial/install.md
         - nav/tutorial/first-steps.md
@@ -302,6 +278,25 @@ nav:
         - nav/tutorial/log-default.md
         - nav/tutorial/scheduler-default.md
         - nav/tutorial/scheduler-cron.md
+    - Cloud:
+      - Overview: nav/cloud/index.md
+      - Docker:
+        - nav/cloud/docker.md
+      - AWS:
+        - nav/cloud/lambda.md
+        - nav/cloud/lambda-scheduled.md
+        - nav/cloud/lambda-s3-trigger.md
+        - nav/cloud/lambda-sqs-trigger.md
+        - nav/cloud/lambda-api-trigger.md
+        - nav/cloud/ecs.md
+        - nav/cloud/ecs-scheduled.md
+      - GCP:
+        - nav/cloud/cloud-run.md
+        - nav/cloud/cloud-run-scheduled.md
+      - Kubernetes:
+        - nav/cloud/kubernetes.md
+      - CI/CD:
+        - nav/cloud/github-actions.md
     - Advanced:
       - nav/advanced/scheduled-pipeline-with-resume.md
       - nav/advanced/parallel-with-groups.md

@@ -1,6 +1,6 @@
 [project]
 name = "dotflow"
-version = "0.14.1.dev2"
+version = "0.15.0.dev2"
 authors = [
   { name="Fernando Celmer", email="email@fernandocelmer.com" },
 ]
@@ -56,13 +56,16 @@ Changelog = "https://dotflow-io.github.io/dotflow/nav/development/release-notes/
 [project.optional-dependencies]
 aws = ["boto3"]
 gcp = ["google-cloud-storage"]
+deploy-aws = ["boto3"]
+deploy-gcp = ["google-cloud-run", "google-cloud-build", "google-cloud-artifact-registry", "google-cloud-service-usage", "google-cloud-storage", "google-auth"]
+deploy-github = ["PyGithub", "GitPython"]
 scheduler = ["croniter"]
 otel = ["opentelemetry-api", "opentelemetry-sdk"]
 sentry = ["sentry-sdk"]
 
 [tool.poetry]
 name = "dotflow"
-version = "0.14.1.dev2"
+version = "0.15.0.dev2"
 description = "🎲 Dotflow turns an idea into flow! Lightweight Python library for execution pipelines with retry, parallel, cron and async support."
 authors = ["Fernando Celmer <email@fernandocelmer.com>"]
 readme = "README.md"
