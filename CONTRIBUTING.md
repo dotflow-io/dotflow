@@ -1,4 +1,4 @@
-# Development Guide
+# Contributing to Dotflow
 
 ## Getting Help
 
