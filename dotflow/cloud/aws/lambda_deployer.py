@@ -6,6 +6,7 @@ import contextlib
 
 from rich import print  # type: ignore
 
+from dotflow.cloud.aws.constants import BOTO3_NOT_FOUND, CREDENTIALS_NOT_FOUND
 from dotflow.cloud.aws.services.cloudwatch import CloudWatch
 from dotflow.cloud.aws.services.ecr import ECR
 from dotflow.cloud.aws.services.iam import IAM
@@ -20,16 +21,17 @@ class LambdaDeployer(Deployer):
         try:
             import boto3
         except ImportError as err:
-            raise SystemExit(
-                "boto3 is required: pip install dotflow[aws]"
-            ) from err
+            raise SystemExit(BOTO3_NOT_FOUND) from err
+
+        try:
+            sts = boto3.client("sts", region_name=region)
+            self._account_id = sts.get_caller_identity()["Account"]
+        except Exception as err:
+            raise SystemExit(CREDENTIALS_NOT_FOUND) from err
 
         self._region = region
         self._lambda = boto3.client("lambda", region_name=region)
         self._events = boto3.client("events", region_name=region)
-
-        sts = boto3.client("sts", region_name=region)
-        self._account_id = sts.get_caller_identity()["Account"]
 
         self._ecr = ECR(
             boto3.client("ecr", region_name=region),
