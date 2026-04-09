@@ -206,7 +206,7 @@ class Command:
         self.cmd_deploy.add_argument(
             "--schedule",
             default=None,
-            help="Schedule expression (e.g. 'rate(6 hours)')",
+            help="Cron expression (e.g. '*/5 * * * *')",
         )
         self.cmd_deploy.set_defaults(exec=DeployCommand)
 

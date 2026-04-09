@@ -49,7 +49,7 @@ class ScheduleResolver:
 
         if not raw:
             raise SystemExit(
-                f"{settings.ERROR_ALERT} --schedule is required for {platform}"
+                f"{settings.ERROR_ALERT} --schedule (cron) is required for {platform}"
             )
 
         return provider.convert(raw) if provider else raw
@@ -63,19 +63,20 @@ class ScheduleResolver:
         choices = {}
         if template_schedule:
             choices["1"] = f"Use from template.yaml: {template_schedule}"
-        choices["2"] = "Enter schedule expression"
+        choices["2"] = "Enter cron expression"
 
-        print(settings.QUESTION_ALERT, "Schedule expression is required:")
+        print(settings.QUESTION_ALERT, "Cron schedule is required:")
         for key, label in choices.items():
             print(f"  [bold cyan]{key}[/bold cyan] - {label}")
 
         choice = Prompt.ask("  Select", choices=list(choices.keys()))
 
         if choice == "1" and template_schedule:
-            print(settings.INFO_ALERT, f"Using schedule: {template_schedule}")
+            print(settings.INFO_ALERT, f"Using cron: {template_schedule}")
             return template_schedule
 
-        return Prompt.ask("  Cron expression (e.g. */5 * * * *)") or None
+        print("  Format: [bold]min hour day month weekday[/bold]")
+        return Prompt.ask("  Cron (e.g. */5 * * * *)") or None
 
 
 class DeployCommand(Command):

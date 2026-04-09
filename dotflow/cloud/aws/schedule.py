@@ -29,7 +29,9 @@ class AWSSchedule:
 
         return _crontab_to_aws(expression)
 
-    SCHEDULE_PATTERN = re.compile(r'Schedule:\s*["\'](.+?)["\']')
+    SCHEDULE_PATTERN = re.compile(
+        r'(?:Schedule|ScheduleExpression):\s*["\'](.+?)["\']'
+    )
 
     @classmethod
     def read_from_template(

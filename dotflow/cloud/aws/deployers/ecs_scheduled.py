@@ -86,7 +86,7 @@ class ECSScheduledDeployer(ECSDeployer):
             ],
         )
 
-        print(f"  {settings.STEP_ICON} Schedule: {schedule}")
+        print(f"  {settings.STEP_ICON} Cron: {schedule}")
 
     def _ensure_events_role(self, name: str) -> str:
         """Create IAM role for EventBridge to run ECS tasks."""

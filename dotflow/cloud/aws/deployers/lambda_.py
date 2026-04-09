@@ -52,4 +52,4 @@ class LambdaDeployer(BaseLambdaDeployer):
             Targets=[{"Id": "1", "Arn": self._function_arn}],
         )
 
-        print(f"  {settings.STEP_ICON} Schedule: {schedule}")
+        print(f"  {settings.STEP_ICON} Cron: {schedule}")
