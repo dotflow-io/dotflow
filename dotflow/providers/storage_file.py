@@ -22,7 +22,9 @@ class StorageFile(Storage):
         task_context = []
 
         if Path(self.path, key).exists():
-            task_context = read_file(path=Path(self.path, key))
+            data = read_file(path=Path(self.path, key))
+            if isinstance(data, list):
+                task_context = data
 
         if isinstance(context.storage, list):
             for item in context.storage:
@@ -42,7 +44,9 @@ class StorageFile(Storage):
         task_context = []
 
         if Path(self.path, key).exists():
-            task_context = read_file(path=Path(self.path, key))
+            data = read_file(path=Path(self.path, key))
+            if isinstance(data, list):
+                task_context = data
 
         if not task_context:
             return Context()
