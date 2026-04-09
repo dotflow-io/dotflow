@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import contextlib
+import time
 
 from rich import print  # type: ignore
 
@@ -42,6 +43,8 @@ class LambdaS3Deployer(BaseLambdaDeployer):
                 Principal="s3.amazonaws.com",
                 SourceArn=f"arn:aws:s3:::{bucket_name}",
             )
+
+        time.sleep(5)
 
         print(f"  {settings.STEP_ICON} Configuring S3 notification...")
         s3.put_bucket_notification_configuration(
