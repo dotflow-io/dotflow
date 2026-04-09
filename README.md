@@ -81,6 +81,7 @@ dotflow deploy --platform lambda --project my_pipeline
 | <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-aws-ecs.svg" width="16" /> **AWS ECS Fargate** | `dotflow deploy` |
 | <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-google-cloud.svg" width="16" /> **Google Cloud Run** | `gcloud run deploy` |
 | <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-kubernetes.svg" width="16" /> **Kubernetes** | `kubectl apply` |
+| <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-alibaba-cloud.svg" width="16" /> **Alibaba Cloud FC** | `dotflow deploy` |
 | <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-github-actions.svg" width="16" /> **GitHub Actions** | `dotflow deploy` |
 
 > [See all 34+ platforms →](https://dotflow-io.github.io/dotflow/nav/cloud/)
@@ -93,9 +94,10 @@ pip install dotflow[gcp]            # Google Cloud Storage
 pip install dotflow[scheduler]      # Cron scheduler
 pip install dotflow[otel]           # OpenTelemetry
 pip install dotflow[sentry]         # Sentry error tracking
-pip install dotflow[deploy-aws]     # AWS deploy (Lambda, ECS)
-pip install dotflow[deploy-gcp]     # GCP deploy (Cloud Run)
-pip install dotflow[deploy-github]  # GitHub Actions deploy
+pip install dotflow[deploy-aws]      # AWS deploy (Lambda, ECS)
+pip install dotflow[deploy-gcp]      # GCP deploy (Cloud Run)
+pip install dotflow[deploy-alibaba]  # Alibaba Cloud deploy (FC)
+pip install dotflow[deploy-github]   # GitHub Actions deploy
 ```
 
 > **[Read the full documentation →](https://dotflow-io.github.io/dotflow/)**

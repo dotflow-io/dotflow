@@ -52,6 +52,18 @@ dotflow deploy --platform ecs-scheduled --project my-pipeline --schedule "0 */6 
 dotflow deploy --platform cloud-run --project my-pipeline
 ```
 
+## Alibaba Cloud Function Compute
+
+```bash
+dotflow deploy --platform alibaba-fc --project my-pipeline
+```
+
+## Alibaba Cloud FC Scheduled
+
+```bash
+dotflow deploy --platform alibaba-fc-scheduled --project my-pipeline --schedule "0 */6 * * *"
+```
+
 ## GitHub Actions
 
 ```bash
@@ -64,11 +76,14 @@ dotflow deploy --platform github-actions --project my-pipeline
 |--------|-------------|
 | `--platform` | Target platform (required) |
 | `--project` | Project name (required) |
-| `--region` | Cloud region (default: us-east-1 for AWS, us-central1 for GCP) |
+| `--region` | Cloud region (default: us-east-1 for AWS, us-central1 for GCP, cn-hangzhou for Alibaba) |
 | `--schedule` | Cron expression for scheduled platforms (e.g. `*/5 * * * *`) |
 
 !!! note
     Cron expressions use standard 5-field format (`min hour day month weekday`). Dotflow converts to the cloud provider format automatically (e.g. AWS EventBridge `cron()`).
 
 !!! note
-    AWS deploy requires `pip install dotflow[deploy-aws]`. GCP deploy requires `pip install dotflow[deploy-gcp]`. GitHub Actions requires `pip install dotflow[deploy-github]`.
+    - AWS: `pip install dotflow[deploy-aws]`
+    - GCP: `pip install dotflow[deploy-gcp]`
+    - Alibaba: `pip install dotflow[deploy-alibaba]`
+    - GitHub: `pip install dotflow[deploy-github]`
