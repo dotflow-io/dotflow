@@ -20,6 +20,7 @@
 - [🪲 Bug: CLI --storage s3/gcs crashes with TypeError — missing required bucket argument](https://github.com/dotflow-io/dotflow/pull/232)
 - [🪲 Bug: Context setters silently ignore invalid values](https://github.com/dotflow-io/dotflow/pull/234)
 - [🪲 Fix PR #202 review issues — duration, executor leak, checkpoint, docstring](https://github.com/dotflow-io/dotflow/pull/222)
+- [🪲 Fix deploy scheduled platforms, add ECSScheduledDeployer and ScheduleResolver](https://github.com/dotflow-io/dotflow/pull/236)
 
 ## v0.14.1
 
