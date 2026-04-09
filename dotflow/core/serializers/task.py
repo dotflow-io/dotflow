@@ -51,6 +51,11 @@ class SerializerTask(BaseModel):
             data["previous_context"] = self.size_message
             dump_json = json.dumps(data)
 
+            if len(dump_json) > self.max:
+                data["errors"] = []
+                data["error"] = None
+                dump_json = json.dumps(data)
+
         return dump_json
 
     @field_validator("errors", mode="before")
