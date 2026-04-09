@@ -111,7 +111,9 @@ class AliyunFCDeployer(Deployer):
                     ),
                 ),
             )
-        except Exception:
+        except Exception as err:
+            if not (hasattr(err, "status_code") and err.status_code == 404):
+                raise
             print(f"  {settings.STEP_ICON} Creating function '{name}'...")
             self._fc.create_function(
                 models.CreateFunctionRequest(

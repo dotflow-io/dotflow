@@ -3,11 +3,22 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
-from dotflow.cloud.alibaba.deployers.fc import (
-    AliyunFCDeployer,
+import pytest
+
+try:
+    from dotflow.cloud.alibaba.deployers.fc import (
+        AliyunFCDeployer,
+    )
+except ImportError:
+    AliyunFCDeployer = None
+
+skip_no_sdk = pytest.mark.skipif(
+    AliyunFCDeployer is None,
+    reason="alibabacloud SDK not installed",
 )
 
 
+@skip_no_sdk
 class TestAliyunFCDeployer(unittest.TestCase):
     def test_sanitize_name(self):
         self.assertEqual(

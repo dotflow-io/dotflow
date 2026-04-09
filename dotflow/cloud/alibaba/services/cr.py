@@ -71,6 +71,7 @@ class ContainerRegistry(Registry):
                 self._registry,
             ],
             input=password,
+            text=True,
             check=True,
         )
 

@@ -3,11 +3,22 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
-from dotflow.cloud.alibaba.deployers.fc_scheduled import (
-    AliyunFCScheduledDeployer,
+import pytest
+
+try:
+    from dotflow.cloud.alibaba.deployers.fc_scheduled import (
+        AliyunFCScheduledDeployer,
+    )
+except ImportError:
+    AliyunFCScheduledDeployer = None
+
+skip_no_sdk = pytest.mark.skipif(
+    AliyunFCScheduledDeployer is None,
+    reason="alibabacloud SDK not installed",
 )
 
 
+@skip_no_sdk
 class TestAliyunFCScheduledDeployer(unittest.TestCase):
     @patch.dict(
         "os.environ",

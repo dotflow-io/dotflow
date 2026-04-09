@@ -57,7 +57,9 @@ class AliyunFCScheduledDeployer(AliyunFCDeployer):
                     ),
                 ),
             )
-        except Exception:
+        except Exception as err:
+            if not (hasattr(err, "status_code") and err.status_code == 404):
+                raise
             self._fc.create_trigger(
                 name,
                 models.CreateTriggerRequest(
