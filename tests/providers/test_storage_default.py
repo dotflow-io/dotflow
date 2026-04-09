@@ -42,16 +42,27 @@ class TestStorageDefault(unittest.TestCase):
 
         self.assertEqual(key, f"{task.workflow_id}-{task.task_id}")
 
-    def test_get_with_task_context(self):
+    def test_post_overwrites_previous_value(self):
+        storage = StorageDefault()
+
+        storage.post(key="k", context=Context(storage="first"))
+        storage.post(key="k", context=Context(storage="second"))
+        result = storage.get(key="k")
+
+        self.assertEqual(result.storage, "second")
+
+    def test_post_and_get_with_task(self):
+        storage = StorageDefault()
         task = Task(
             task_id=0,
             workflow_id=uuid4(),
             step=action_step,
         )
-        task.current_context = "flow"
 
-        storage = StorageDefault()
         key = storage.key(task=task)
+        context = Context(storage="flow")
+        storage.post(key=key, context=context)
         result = storage.get(key=key)
 
         self.assertIsInstance(result, Context)
+        self.assertEqual(result.storage, "flow")
