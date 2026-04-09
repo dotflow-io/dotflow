@@ -8,7 +8,6 @@ from dotflow.core.context import Context
 
 
 class TestContext(unittest.TestCase):
-
     def setUp(self):
         self.content = {"foo": "bar"}
 
@@ -26,7 +25,6 @@ class TestContext(unittest.TestCase):
 
 
 class TestContextTaskIdSetter(unittest.TestCase):
-
     def test_valid_int(self):
         ctx = Context(task_id=5)
         self.assertEqual(ctx.task_id, 5)
@@ -50,7 +48,6 @@ class TestContextTaskIdSetter(unittest.TestCase):
 
 
 class TestContextWorkflowIdSetter(unittest.TestCase):
-
     def test_valid_uuid(self):
         uid = uuid4()
         ctx = Context(workflow_id=uid)
