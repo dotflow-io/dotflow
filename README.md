@@ -72,16 +72,16 @@ dotflow deploy --platform lambda --project my_pipeline
 
 | Platform | Deploy method |
 |----------|---------------|
-| <img src="https://cdn.simpleicons.org/docker" width="16" /> **Docker** | `docker compose up` |
+| <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-docker.svg" width="16" /> **Docker** | `docker compose up` |
 | <img src="https://www.vectorlogo.zone/logos/amazon_awslambda/amazon_awslambda-icon.svg" width="16" /> **AWS Lambda** | `dotflow deploy` |
 | <img src="https://www.vectorlogo.zone/logos/amazon_awslambda/amazon_awslambda-icon.svg" width="16" /> **AWS Lambda + EventBridge** | `dotflow deploy --schedule` |
 | <img src="https://www.vectorlogo.zone/logos/amazon_awslambda/amazon_awslambda-icon.svg" width="16" /> **AWS Lambda + S3 Trigger** | `dotflow deploy` |
 | <img src="https://www.vectorlogo.zone/logos/amazon_awslambda/amazon_awslambda-icon.svg" width="16" /> **AWS Lambda + SQS Trigger** | `dotflow deploy` |
 | <img src="https://www.vectorlogo.zone/logos/amazon_awslambda/amazon_awslambda-icon.svg" width="16" /> **AWS Lambda + API Gateway** | `dotflow deploy` |
 | <img src="https://www.vectorlogo.zone/logos/amazon_ecs/amazon_ecs-icon.svg" width="16" /> **AWS ECS Fargate** | `dotflow deploy` |
-| <img src="https://cdn.simpleicons.org/googlecloud" width="16" /> **Google Cloud Run** | `gcloud run deploy` |
-| <img src="https://cdn.simpleicons.org/kubernetes" width="16" /> **Kubernetes** | `kubectl apply` |
-| <img src="https://cdn.simpleicons.org/githubactions" width="16" /> **GitHub Actions** | `dotflow deploy` |
+| <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-google-cloud.svg" width="16" /> **Google Cloud Run** | `gcloud run deploy` |
+| <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-kubernetes.svg" width="16" /> **Kubernetes** | `kubectl apply` |
+| <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-github-actions.svg" width="16" /> **GitHub Actions** | `dotflow deploy` |
 
 > [See all 34+ platforms →](https://dotflow-io.github.io/dotflow/nav/cloud/)
 
