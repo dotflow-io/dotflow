@@ -1,6 +1,6 @@
 <div align="center">
 
-![](docs/assets/dotflow.png)
+![](https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/dotflow.png)
 
 **import dotflow. @action. deploy. Done.**
 
