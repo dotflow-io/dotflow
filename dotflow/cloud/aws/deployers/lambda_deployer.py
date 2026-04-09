@@ -4,7 +4,10 @@ from __future__ import annotations
 
 import contextlib
 
+from rich import print  # type: ignore
+
 from dotflow.cloud.aws.deployers.base_lambda_deployer import BaseLambdaDeployer
+from dotflow.settings import Settings as settings
 
 
 class LambdaDeployer(BaseLambdaDeployer):
@@ -18,7 +21,9 @@ class LambdaDeployer(BaseLambdaDeployer):
 
         rule_name = f"{name}-schedule"
 
-        print(f"  Creating EventBridge rule '{rule_name}'...")
+        print(
+            f"  {settings.STEP_ICON} Creating EventBridge rule '{rule_name}'..."
+        )
         events = self._boto3.client("events", region_name=self._region)
 
         events.put_rule(
@@ -46,4 +51,4 @@ class LambdaDeployer(BaseLambdaDeployer):
             Targets=[{"Id": "1", "Arn": self._function_arn}],
         )
 
-        print(f"  Schedule: {schedule}")
+        print(f"  {settings.STEP_ICON} Schedule: {schedule}")

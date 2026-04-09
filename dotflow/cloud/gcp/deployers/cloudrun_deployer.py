@@ -55,7 +55,9 @@ class CloudRunDeployer(Deployer):
         try:
             from google.cloud import service_usage_v1
 
-            print("  Ensuring Cloud Build service account...")
+            print(
+                f"  {settings.STEP_ICON} Ensuring Cloud Build service account..."
+            )
             client = service_usage_v1.ServiceUsageClient()
             client.generate_service_identity(
                 request={
@@ -77,7 +79,7 @@ class CloudRunDeployer(Deployer):
 
     def _deploy_service(self, name: str, image: str):
         """Create or update Cloud Run service."""
-        print("  Deploying service...")
+        print(f"  {settings.STEP_ICON} Deploying service...")
 
         client = self._run_v2.ServicesClient()
         parent = f"projects/{self._project}/locations/{self._region}"
@@ -97,7 +99,7 @@ class CloudRunDeployer(Deployer):
             operation = client.create_service(request=request)
             operation.result()
         except self._exceptions.AlreadyExists:
-            print("  Updating existing service...")
+            print(f"  {settings.STEP_ICON} Updating existing service...")
             service.name = f"{parent}/services/{name}"
             request = self._run_v2.UpdateServiceRequest(service=service)
             operation = client.update_service(request=request)

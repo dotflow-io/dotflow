@@ -1,6 +1,7 @@
 """Command deploy module."""
 
 from rich import print  # type: ignore
+from rich.prompt import Prompt
 
 from dotflow.cli.command import Command
 from dotflow.cloud.aws.constants import DEFAULT_REGION as AWS_DEFAULT_REGION
@@ -38,7 +39,11 @@ class ScheduleResolver:
             return schedule
 
         provider = cls._get_provider(platform)
-        raw = schedule or cls._from_template(provider) or cls._from_input()
+
+        if schedule:
+            return provider.convert(schedule) if provider else schedule
+
+        raw = cls._ask_schedule(provider)
 
         if not raw:
             raise SystemExit(
@@ -48,24 +53,27 @@ class ScheduleResolver:
         return provider.convert(raw) if provider else raw
 
     @classmethod
-    def _from_template(cls, provider: type | None) -> str | None:
-        if provider is None:
-            return None
+    def _ask_schedule(cls, provider: type | None) -> str | None:
+        template_schedule = None
+        if provider:
+            template_schedule = provider.read_from_template()
 
-        result = provider.read_from_template()
-        if result:
-            print(
-                settings.INFO_ALERT,
-                f"Using schedule from template: {result}",
-            )
-        return result
+        choices = {}
+        if template_schedule:
+            choices["1"] = f"Use from template.yaml: {template_schedule}"
+        choices["2"] = "Enter schedule expression"
 
-    @classmethod
-    def _from_input(cls) -> str | None:
-        return (
-            input("  Schedule expression (e.g. rate(6 hours)): ").strip()
-            or None
-        )
+        print(settings.QUESTION_ALERT, "Schedule expression is required:")
+        for key, label in choices.items():
+            print(f"  [bold cyan]{key}[/bold cyan] - {label}")
+
+        choice = Prompt.ask("  Select", choices=list(choices.keys()))
+
+        if choice == "1" and template_schedule:
+            print(settings.INFO_ALERT, f"Using schedule: {template_schedule}")
+            return template_schedule
+
+        return Prompt.ask("  Cron expression (e.g. */5 * * * *)") or None
 
 
 class DeployCommand(Command):

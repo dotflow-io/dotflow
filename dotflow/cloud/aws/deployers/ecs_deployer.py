@@ -64,7 +64,7 @@ class ECSDeployer(Deployer):
     def _register_from_file(self):
         """Register task definition from task-definition.json."""
         content = json.loads((Path.cwd() / "task-definition.json").read_text())
-        print("  Registering task definition...")
+        print(f"  {settings.STEP_ICON} Registering task definition...")
         self._ecs.register_task_definition(**content)
 
     def _create_task_definition(self, name: str, execution_role_arn: str):
@@ -73,7 +73,7 @@ class ECSDeployer(Deployer):
             f"{self._account_id}.dkr.ecr.{self._region}"
             f".amazonaws.com/{name}:latest"
         )
-        print("  Creating task definition...")
+        print(f"  {settings.STEP_ICON} Creating task definition...")
         self._ecs.register_task_definition(
             family=name,
             networkMode="awsvpc",
@@ -104,5 +104,7 @@ class ECSDeployer(Deployer):
         clusters = self._ecs.describe_clusters(clusters=[cluster_name])
         active = [c for c in clusters["clusters"] if c["status"] == "ACTIVE"]
         if not active:
-            print(f"  Creating ECS cluster '{cluster_name}'...")
+            print(
+                f"  {settings.STEP_ICON} Creating ECS cluster '{cluster_name}'..."
+            )
             self._ecs.create_cluster(clusterName=cluster_name)

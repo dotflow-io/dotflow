@@ -36,20 +36,20 @@ class ActionsDeployer(Deployer):
         repo = self._create_or_get_repo(name)
         self._push_files(repo)
 
-        print(f"  Repository: {repo.html_url}")
-        print(f"  Actions: {repo.html_url}/actions")
+        print(f"  {settings.STEP_ICON} Repository: {repo.html_url}")
+        print(f"  {settings.STEP_ICON} Actions: {repo.html_url}/actions")
         print(settings.INFO_ALERT, "Done.")
 
     def _create_or_get_repo(self, name: str):
         """Create repo or get existing."""
         try:
             repo = self._user.get_repo(name)
-            print(f"  Using existing repo '{name}'")
+            print(f"  {settings.STEP_ICON} Using existing repo '{name}'")
             return repo
         except self._GithubException:
             pass
 
-        print(f"  Creating repo '{name}'...")
+        print(f"  {settings.STEP_ICON} Creating repo '{name}'...")
         return self._user.create_repo(
             name=name,
             private=True,
@@ -58,7 +58,7 @@ class ActionsDeployer(Deployer):
 
     def _push_files(self, repo):
         """Push all project files to the repo."""
-        print("  Pushing files...")
+        print(f"  {settings.STEP_ICON} Pushing files...")
 
         project_dir = Path.cwd()
         tracked = self._get_tracked_files(project_dir)
@@ -75,7 +75,7 @@ class ActionsDeployer(Deployer):
             self._create_or_update_file(repo, relative, content)
             count += 1
 
-        print(f"  Pushed {count} files")
+        print(f"  {settings.STEP_ICON} Pushed {count} files")
 
     def _get_tracked_files(self, project_dir: Path) -> list[str]:
         """Get files that git would track, respecting .gitignore."""

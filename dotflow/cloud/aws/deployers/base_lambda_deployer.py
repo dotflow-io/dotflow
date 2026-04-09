@@ -69,12 +69,12 @@ class BaseLambdaDeployer(Deployer):
         """Create or update Lambda function."""
         try:
             self._lambda.get_function(FunctionName=name)
-            print("  Updating Lambda function...")
+            print(f"  {settings.STEP_ICON} Updating Lambda function...")
             self._lambda.update_function_code(
                 FunctionName=name, ImageUri=image_uri
             )
         except self._lambda.exceptions.ResourceNotFoundException:
-            print("  Creating Lambda function...")
+            print(f"  {settings.STEP_ICON} Creating Lambda function...")
             self._lambda.create_function(
                 FunctionName=name,
                 PackageType="Image",

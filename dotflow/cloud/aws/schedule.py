@@ -28,26 +28,20 @@ class AWSSchedule:
 
         return _crontab_to_aws(expression)
 
-    @staticmethod
-    def read_from_template(path: Path = Path("template.yaml")) -> str | None:
+    SCHEDULE_PATTERN = re.compile(r'Schedule:\s*["\'](.+?)["\']')
+
+    @classmethod
+    def read_from_template(
+        cls, path: Path = Path("template.yaml")
+    ) -> str | None:
         """Reads a schedule expression from a SAM template.yaml file."""
         if not path.exists():
             return None
         try:
-            import yaml
-
-            data = yaml.safe_load(path.read_text())
-            resources = data.get("Resources", {})
-            for resource in resources.values():
-                events = resource.get("Properties", {}).get("Events", {})
-                for event in events.values():
-                    if event.get("Type") == "Schedule":
-                        schedule = event.get("Properties", {}).get("Schedule")
-                        if schedule:
-                            return schedule
+            match = cls.SCHEDULE_PATTERN.search(path.read_text())
+            return match.group(1) if match else None
         except Exception:
-            pass
-        return None
+            return None
 
 
 def _crontab_to_aws(expression: str) -> str:

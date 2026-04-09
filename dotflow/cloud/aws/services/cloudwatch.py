@@ -4,7 +4,10 @@ from __future__ import annotations
 
 import contextlib
 
+from rich import print  # type: ignore
+
 from dotflow.cloud.core import LogManager
+from dotflow.settings import Settings as settings
 
 
 class CloudWatch(LogManager):
@@ -19,4 +22,4 @@ class CloudWatch(LogManager):
             self._logs.exceptions.ResourceAlreadyExistsException
         ):
             self._logs.create_log_group(logGroupName=name)
-            print(f"  Created log group '{name}'")
+            print(f"  {settings.STEP_ICON} Created log group '{name}'")

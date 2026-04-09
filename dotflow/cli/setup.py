@@ -233,6 +233,9 @@ class Command:
         except ImportModuleError as err:
             print(settings.WARNING_ALERT, err)
 
+        except KeyboardInterrupt:
+            print("\n", settings.INFO_ALERT, "Aborted.")
+
         except Exception as err:
             logger.error(f"Internal problem: {str(err)}")
             print(settings.ERROR_ALERT, MESSAGE_UNKNOWN_ERROR)
