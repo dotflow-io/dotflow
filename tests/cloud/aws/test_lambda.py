@@ -3,7 +3,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
-from dotflow.cloud.aws.deployers.lambda_deployer import LambdaDeployer
+from dotflow.cloud.aws.deployers.lambda_ import LambdaDeployer
 from dotflow.cloud.core import Deployer
 
 

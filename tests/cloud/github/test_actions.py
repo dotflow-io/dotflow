@@ -4,7 +4,7 @@ import unittest
 from unittest.mock import MagicMock, patch
 
 from dotflow.cloud.core import Deployer
-from dotflow.cloud.github.deployers.actions_deployer import ActionsDeployer
+from dotflow.cloud.github.deployers.actions import ActionsDeployer
 
 
 class _GithubException(Exception):

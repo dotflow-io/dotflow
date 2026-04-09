@@ -6,7 +6,6 @@ from rich.prompt import Prompt
 from dotflow.cli.command import Command
 from dotflow.cloud.aws.constants import DEFAULT_REGION as AWS_DEFAULT_REGION
 from dotflow.cloud.aws.constants import PLATFORMS as AWS_PLATFORMS
-from dotflow.cloud.aws.constants import SAM_PLATFORMS
 from dotflow.cloud.aws.constants import SCHEDULED_PLATFORMS as AWS_SCHEDULED
 from dotflow.cloud.gcp.constants import DEFAULT_REGION as GCP_DEFAULT_REGION
 from dotflow.cloud.gcp.constants import PLATFORMS as GCP_PLATFORMS
@@ -88,14 +87,6 @@ class DeployCommand(Command):
             getattr(self.params, "schedule", None), platform
         )
 
-        if platform in SAM_PLATFORMS:
-            print(
-                settings.INFO_ALERT,
-                f"'{platform}' requires SAM for full trigger setup.",
-            )
-            print("  Run: sam build && sam deploy")
-            return
-
         method_name = f"_deploy_{platform.replace('-', '_')}"
         handler = getattr(self, method_name, None)
         if not handler:
@@ -135,6 +126,11 @@ class DeployCommand(Command):
         from dotflow.cloud.aws import ECSDeployer
 
         ECSDeployer(region=region).deploy(name)
+
+    def _deploy_ecs_scheduled(self, name, region, schedule=None):
+        from dotflow.cloud.aws import ECSScheduledDeployer
+
+        ECSScheduledDeployer(region=region).deploy(name, schedule=schedule)
 
     def _deploy_cloud_run(self, name, region, **kwargs):
         from dotflow.cloud.gcp import CloudRunDeployer

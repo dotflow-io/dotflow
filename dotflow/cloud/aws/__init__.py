@@ -2,6 +2,7 @@
 
 from dotflow.cloud.aws.deployers import (
     ECSDeployer,
+    ECSScheduledDeployer,
     LambdaApiDeployer,
     LambdaDeployer,
     LambdaS3Deployer,
@@ -10,6 +11,7 @@ from dotflow.cloud.aws.deployers import (
 
 __all__ = [
     "ECSDeployer",
+    "ECSScheduledDeployer",
     "LambdaApiDeployer",
     "LambdaDeployer",
     "LambdaS3Deployer",

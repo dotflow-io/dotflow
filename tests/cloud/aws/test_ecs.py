@@ -3,7 +3,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
-from dotflow.cloud.aws.deployers.ecs_deployer import ECSDeployer
+from dotflow.cloud.aws.deployers.ecs import ECSDeployer
 from dotflow.cloud.core import Deployer
 
 
@@ -37,9 +37,7 @@ class TestECSDeployer(unittest.TestCase):
         deployer = self._make_deployer()
         deployer._ecs.describe_clusters.return_value = {"clusters": []}
 
-        with patch(
-            "dotflow.cloud.aws.deployers.ecs_deployer.Path"
-        ) as mock_path:
+        with patch("dotflow.cloud.aws.deployers.ecs.Path") as mock_path:
             mock_path.cwd.return_value.__truediv__ = MagicMock(
                 return_value=MagicMock(
                     exists=MagicMock(return_value=True),
@@ -56,9 +54,7 @@ class TestECSDeployer(unittest.TestCase):
         deployer._ecs.describe_clusters.return_value = {"clusters": []}
         deployer._iam.ensure_ecs_execution_role.return_value = "arn:role"
 
-        with patch(
-            "dotflow.cloud.aws.deployers.ecs_deployer.Path"
-        ) as mock_path:
+        with patch("dotflow.cloud.aws.deployers.ecs.Path") as mock_path:
             mock_path.cwd.return_value.__truediv__ = MagicMock(
                 return_value=MagicMock(exists=MagicMock(return_value=False))
             )

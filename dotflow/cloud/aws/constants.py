@@ -18,7 +18,6 @@ PLATFORMS = {
     "ecs-scheduled",
 }
 
-SAM_PLATFORMS = {"ecs-scheduled"}
-SCHEDULED_PLATFORMS = {"lambda-scheduled"}
+SCHEDULED_PLATFORMS = {"lambda-scheduled", "ecs-scheduled"}
 
 DEFAULT_REGION = "us-east-1"

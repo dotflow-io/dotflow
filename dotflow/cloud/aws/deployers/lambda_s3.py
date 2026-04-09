@@ -7,7 +7,7 @@ import time
 
 from rich import print  # type: ignore
 
-from dotflow.cloud.aws.deployers.base_lambda_deployer import BaseLambdaDeployer
+from dotflow.cloud.aws.deployers.base_lambda import BaseLambdaDeployer
 from dotflow.settings import Settings as settings
 
 
