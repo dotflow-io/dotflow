@@ -49,6 +49,6 @@ aws cloudformation deploy \
 
 ## Important
 
-- The schedule expression is configured during project creation
+- Use standard cron format (e.g. `0 */6 * * *`). Dotflow converts to AWS EventBridge format automatically
 - The stack creates its own ECS cluster, IAM roles, log group, and security group
 - You need to provide `SubnetId` and `VpcId` as parameters
