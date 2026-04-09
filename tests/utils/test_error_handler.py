@@ -8,7 +8,7 @@ from dotflow.utils.error_handler import message_error, traceback_error
 class TestTracebackError(unittest.TestCase):
     def test_returns_traceback_from_error_parameter(self):
         try:
-            1 / 0
+            _ = 1 / 0
         except ZeroDivisionError as e:
             saved_error = e
 
