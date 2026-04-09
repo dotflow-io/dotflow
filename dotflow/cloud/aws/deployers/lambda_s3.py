@@ -3,8 +3,12 @@
 from __future__ import annotations
 
 import contextlib
+import time
 
-from dotflow.cloud.aws.base_lambda_deployer import BaseLambdaDeployer
+from rich import print  # type: ignore
+
+from dotflow.cloud.aws.deployers.base_lambda import BaseLambdaDeployer
+from dotflow.settings import Settings as settings
 
 
 class LambdaS3Deployer(BaseLambdaDeployer):
@@ -15,7 +19,7 @@ class LambdaS3Deployer(BaseLambdaDeployer):
         s3 = self._boto3.client("s3", region_name=self._region)
         bucket_name = f"{name}-source"
 
-        print(f"  Creating S3 bucket '{bucket_name}'...")
+        print(f"  {settings.STEP_ICON} Creating S3 bucket '{bucket_name}'...")
         try:
             if self._region == "us-east-1":
                 s3.create_bucket(Bucket=bucket_name)
@@ -40,7 +44,9 @@ class LambdaS3Deployer(BaseLambdaDeployer):
                 SourceArn=f"arn:aws:s3:::{bucket_name}",
             )
 
-        print("  Configuring S3 notification...")
+        time.sleep(5)
+
+        print(f"  {settings.STEP_ICON} Configuring S3 notification...")
         s3.put_bucket_notification_configuration(
             Bucket=bucket_name,
             NotificationConfiguration={
@@ -53,4 +59,4 @@ class LambdaS3Deployer(BaseLambdaDeployer):
             },
         )
 
-        print(f"  Trigger: s3://{bucket_name}/*")
+        print(f"  {settings.STEP_ICON} Trigger: s3://{bucket_name}/*")

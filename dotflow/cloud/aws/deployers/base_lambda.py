@@ -52,16 +52,13 @@ class BaseLambdaDeployer(Deployer):
         self._role_arn = self._iam.ensure_lambda_role(name)
         self._logs.ensure_log_group(f"/aws/lambda/{name}")
 
-    def ensure_roles(self, name: str) -> str:
-        """Create or get Lambda execution role."""
-        return self._iam.ensure_lambda_role(name)
-
-    def ensure_logs(self, name: str) -> None:
-        """Create CloudWatch log group."""
-        self._logs.ensure_log_group(f"/aws/lambda/{name}")
+    @staticmethod
+    def _sanitize_name(name: str) -> str:
+        return name.replace("_", "-").lower()
 
     def deploy(self, name: str, **kwargs) -> None:
         """Deploy Lambda and configure trigger."""
+        name = self._sanitize_name(name)
         print(settings.INFO_ALERT, f"Deploying '{name}'...")
 
         self.setup(name)
@@ -77,12 +74,12 @@ class BaseLambdaDeployer(Deployer):
         """Create or update Lambda function."""
         try:
             self._lambda.get_function(FunctionName=name)
-            print("  Updating Lambda function...")
+            print(f"  {settings.STEP_ICON} Updating Lambda function...")
             self._lambda.update_function_code(
                 FunctionName=name, ImageUri=image_uri
             )
         except self._lambda.exceptions.ResourceNotFoundException:
-            print("  Creating Lambda function...")
+            print(f"  {settings.STEP_ICON} Creating Lambda function...")
             self._lambda.create_function(
                 FunctionName=name,
                 PackageType="Image",

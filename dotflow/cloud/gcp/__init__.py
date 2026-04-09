@@ -1,5 +1,5 @@
 """GCP cloud module."""
 
-from dotflow.cloud.gcp.cloudrun_deployer import CloudRunDeployer
+from dotflow.cloud.gcp.deployers import CloudRunDeployer
 
 __all__ = ["CloudRunDeployer"]

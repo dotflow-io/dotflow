@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
+from rich import print  # type: ignore
+
 from dotflow.core.exception import ModuleNotFound
+from dotflow.settings import Settings as settings
 
 
 class APIs:
@@ -28,7 +31,7 @@ class APIs:
 
     def enable(self):
         """Enable all required APIs."""
-        print("  Enabling APIs...")
+        print(f"  {settings.STEP_ICON} Enabling APIs...")
         for api in self.REQUIRED:
             name = f"projects/{self._project}/services/{api}"
             try:
@@ -36,4 +39,7 @@ class APIs:
             except Exception as err:
                 if "already enabled" in str(err).lower():
                     continue
-                print(f"  Warning: Failed to enable {api}: {err}")
+                print(
+                    f"  {settings.STEP_ICON} Warning: "
+                    f"Failed to enable {api}: {err}"
+                )

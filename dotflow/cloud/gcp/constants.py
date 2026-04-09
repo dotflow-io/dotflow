@@ -9,3 +9,12 @@ CREDENTIALS_NOT_FOUND = (
     "Run 'gcloud auth application-default login' "
     "or set GOOGLE_APPLICATION_CREDENTIALS environment variable."
 )
+
+PLATFORMS = {
+    "cloud-run",
+    "cloud-run-scheduled",
+}
+
+SCHEDULED_PLATFORMS = {"cloud-run-scheduled"}
+
+DEFAULT_REGION = "us-central1"

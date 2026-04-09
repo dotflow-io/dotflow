@@ -5,7 +5,10 @@ from __future__ import annotations
 import json
 import time
 
+from rich import print  # type: ignore
+
 from dotflow.cloud.core import RoleManager
+from dotflow.settings import Settings as settings
 
 
 class IAM(RoleManager):
@@ -52,7 +55,7 @@ class IAM(RoleManager):
         except self._iam.exceptions.NoSuchEntityException:
             pass
 
-        print(f"  Creating IAM role '{role_name}'...")
+        print(f"  {settings.STEP_ICON} Creating IAM role '{role_name}'...")
         response = self._iam.create_role(
             RoleName=role_name,
             AssumeRolePolicyDocument=json.dumps(

@@ -126,6 +126,7 @@ class CloudGenerateCommand(Command):
             if not project_name:
                 project_name = Path.cwd().name
 
+        project_name = project_name.replace("_", "-").lower()
         module_name = project_name.replace("-", "_")
 
         print(

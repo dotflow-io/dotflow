@@ -163,7 +163,7 @@ class Command:
         cmd_generate.add_argument(
             "--platform",
             required=True,
-            help="Target platform (e.g. docker, lambda, cloud-run, ecs, kubernetes)",
+            help=("Target platform (e.g. docker, lambda, cloud-run)"),
         )
         cmd_generate.add_argument(
             "--project",
@@ -206,7 +206,7 @@ class Command:
         self.cmd_deploy.add_argument(
             "--schedule",
             default=None,
-            help="Schedule expression (e.g. 'rate(6 hours)')",
+            help="Cron expression (e.g. '*/5 * * * *')",
         )
         self.cmd_deploy.set_defaults(exec=DeployCommand)
 
@@ -232,6 +232,9 @@ class Command:
 
         except ImportModuleError as err:
             print(settings.WARNING_ALERT, err)
+
+        except KeyboardInterrupt:
+            print("\n", settings.INFO_ALERT, "Aborted.")
 
         except Exception as err:
             logger.error(f"Internal problem: {str(err)}")

@@ -47,8 +47,13 @@ class ECSDeployer(Deployer):
         self._logs.ensure_log_group(f"/ecs/{name}")
         self._ensure_cluster(name)
 
+    @staticmethod
+    def _sanitize_name(name: str) -> str:
+        return name.replace("_", "-").lower()
+
     def deploy(self, name: str, **kwargs) -> None:
         """Deploy an ECS Fargate task from the current directory."""
+        name = self._sanitize_name(name)
         print(settings.INFO_ALERT, f"Deploying ECS task '{name}'...")
 
         self.setup(name)
@@ -64,7 +69,7 @@ class ECSDeployer(Deployer):
     def _register_from_file(self):
         """Register task definition from task-definition.json."""
         content = json.loads((Path.cwd() / "task-definition.json").read_text())
-        print("  Registering task definition...")
+        print(f"  {settings.STEP_ICON} Registering task definition...")
         self._ecs.register_task_definition(**content)
 
     def _create_task_definition(self, name: str, execution_role_arn: str):
@@ -73,7 +78,7 @@ class ECSDeployer(Deployer):
             f"{self._account_id}.dkr.ecr.{self._region}"
             f".amazonaws.com/{name}:latest"
         )
-        print("  Creating task definition...")
+        print(f"  {settings.STEP_ICON} Creating task definition...")
         self._ecs.register_task_definition(
             family=name,
             networkMode="awsvpc",
@@ -104,5 +109,8 @@ class ECSDeployer(Deployer):
         clusters = self._ecs.describe_clusters(clusters=[cluster_name])
         active = [c for c in clusters["clusters"] if c["status"] == "ACTIVE"]
         if not active:
-            print(f"  Creating ECS cluster '{cluster_name}'...")
+            print(
+                f"  {settings.STEP_ICON} "
+                f"Creating ECS cluster '{cluster_name}'..."
+            )
             self._ecs.create_cluster(clusterName=cluster_name)

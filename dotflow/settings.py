@@ -22,6 +22,8 @@ class Settings:
     TEMPLATE_CLOUD_DIR = "cloud"
 
     ICON = ":game_die:"
+    STEP_ICON = ":gear:"
     ERROR_ALERT = f"{ICON} [bold red]Error:[/bold red]"
     INFO_ALERT = f"{ICON} [bold blue]Info:[/bold blue]"
     WARNING_ALERT = f"{ICON} [bold yellow]Warning:[/bold yellow]"
+    QUESTION_ALERT = f"{ICON} [bold magenta]Question:[/bold magenta]"

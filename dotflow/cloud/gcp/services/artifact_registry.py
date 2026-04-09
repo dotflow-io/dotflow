@@ -6,8 +6,11 @@ import io
 import os
 import tarfile
 
+from rich import print  # type: ignore
+
 from dotflow.cloud.core import Registry
 from dotflow.core.exception import ModuleNotFound
+from dotflow.settings import Settings as settings
 
 
 class ArtifactRegistry(Registry):
@@ -50,7 +53,9 @@ class ArtifactRegistry(Registry):
 
     def _ensure_repository(self, name: str):
         """Create Artifact Registry Docker repository if it doesn't exist."""
-        print("  Ensuring Artifact Registry repository...")
+        print(
+            f"  {settings.STEP_ICON} Ensuring Artifact Registry repository..."
+        )
 
         client = self._ar.ArtifactRegistryClient()
         parent = f"projects/{self._project}/locations/{self._region}"
@@ -70,7 +75,7 @@ class ArtifactRegistry(Registry):
 
     def _upload_source(self, object_name: str):
         """Tar the current directory and upload to GCS."""
-        print("  Uploading source...")
+        print(f"  {settings.STEP_ICON} Uploading source...")
 
         buf = io.BytesIO()
         with tarfile.open(fileobj=buf, mode="w:gz") as tar:
@@ -93,7 +98,10 @@ class ArtifactRegistry(Registry):
 
     def _build(self, image: str, object_name: str):
         """Build Docker image via Cloud Build."""
-        print("  Building and pushing image via Cloud Build...")
+        print(
+            f"  {settings.STEP_ICON} "
+            "Building and pushing image via Cloud Build..."
+        )
 
         client = self._cloudbuild.CloudBuildClient()
 
@@ -118,9 +126,12 @@ class ArtifactRegistry(Registry):
                 project_id=self._project,
                 build=build,
             )
-            print(f"  Build started: {operation.metadata.build.id}")
+            print(
+                f"  {settings.STEP_ICON} "
+                f"Build started: {operation.metadata.build.id}"
+            )
             result = operation.result(timeout=600)
-            print(f"  Build status: {result.status.name}")
+            print(f"  {settings.STEP_ICON} Build status: {result.status.name}")
         except Exception as err:
             raise SystemExit(
                 f"Cloud Build failed: {type(err).__name__}: {err}"

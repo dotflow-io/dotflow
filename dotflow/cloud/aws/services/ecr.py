@@ -6,7 +6,10 @@ import base64
 import contextlib
 from subprocess import run
 
+from rich import print  # type: ignore
+
 from dotflow.cloud.core import Registry
+from dotflow.settings import Settings as settings
 
 
 class ECR(Registry):
@@ -27,20 +30,20 @@ class ECR(Registry):
             f".amazonaws.com/{name}:latest"
         )
 
-        print("  Building image...")
+        print(f"  {settings.STEP_ICON} Building image...")
         run(["docker", "build", "-t", name, "."], check=True)
 
-        print("  Tagging image...")
+        print(f"  {settings.STEP_ICON} Tagging image...")
         run(["docker", "tag", f"{name}:latest", image_uri], check=True)
 
-        print("  Pushing image...")
+        print(f"  {settings.STEP_ICON} Pushing image...")
         run(["docker", "push", image_uri], check=True)
 
         return image_uri
 
     def _ensure_repository(self, name: str):
         """Create ECR repository if it doesn't exist."""
-        print("  Creating ECR repository...")
+        print(f"  {settings.STEP_ICON} Creating ECR repository...")
         with contextlib.suppress(
             self._ecr.exceptions.RepositoryAlreadyExistsException
         ):
@@ -48,7 +51,7 @@ class ECR(Registry):
 
     def login(self):
         """Authenticate Docker with ECR."""
-        print("  Logging in to ECR...")
+        print(f"  {settings.STEP_ICON} Logging in to ECR...")
         token = self._ecr.get_authorization_token()
         auth = token["authorizationData"][0]
         registry = auth["proxyEndpoint"]

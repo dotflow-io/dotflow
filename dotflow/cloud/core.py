@@ -6,7 +6,10 @@ from abc import ABC, abstractmethod
 
 
 class Registry(ABC):
-    """Base class for container registries (ECR, Artifact Registry, Docker Hub, etc.)."""
+    """Base class for container registries.
+
+    Supports ECR, Artifact Registry, Docker Hub, etc.
+    """
 
     @abstractmethod
     def push(self, name: str) -> str:
@@ -22,7 +25,10 @@ class RoleManager(ABC):
 
     @abstractmethod
     def ensure_role(self, name: str, service: str, policy: str) -> str:
-        """Create or get a role for the given service. Returns the role ARN/ID."""
+        """Create or get a role for the given service.
+
+        Returns the role ARN/ID.
+        """
 
 
 class LogManager(ABC):

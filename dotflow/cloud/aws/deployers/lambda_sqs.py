@@ -2,7 +2,12 @@
 
 from __future__ import annotations
 
-from dotflow.cloud.aws.base_lambda_deployer import BaseLambdaDeployer
+import time
+
+from rich import print  # type: ignore
+
+from dotflow.cloud.aws.deployers.base_lambda import BaseLambdaDeployer
+from dotflow.settings import Settings as settings
 
 
 class LambdaSQSDeployer(BaseLambdaDeployer):
@@ -10,10 +15,20 @@ class LambdaSQSDeployer(BaseLambdaDeployer):
 
     def _configure_trigger(self, name: str, **kwargs) -> None:
         """Create SQS queue and event source mapping."""
+        self._boto3.client("iam", region_name=self._region).attach_role_policy(
+            RoleName=f"{name}-lambda-role",
+            PolicyArn=(
+                "arn:aws:iam::aws:policy/service-role/"
+                "AWSLambdaSQSQueueExecutionRole"
+            ),
+        )
+
+        time.sleep(10)
+
         sqs = self._boto3.client("sqs", region_name=self._region)
         queue_name = f"{name}-queue"
 
-        print(f"  Creating SQS queue '{queue_name}'...")
+        print(f"  {settings.STEP_ICON} Creating SQS queue '{queue_name}'...")
         try:
             response = sqs.create_queue(
                 QueueName=queue_name,
@@ -32,7 +47,7 @@ class LambdaSQSDeployer(BaseLambdaDeployer):
         )["EventSourceMappings"]
 
         if not existing:
-            print("  Creating event source mapping...")
+            print(f"  {settings.STEP_ICON} Creating event source mapping...")
             self._lambda.create_event_source_mapping(
                 FunctionName=name,
                 EventSourceArn=queue_arn,
@@ -40,4 +55,4 @@ class LambdaSQSDeployer(BaseLambdaDeployer):
                 Enabled=True,
             )
 
-        print(f"  Queue: {queue_url}")
+        print(f"  {settings.STEP_ICON} Queue: {queue_url}")

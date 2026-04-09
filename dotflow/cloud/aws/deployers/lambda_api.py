@@ -4,7 +4,10 @@ from __future__ import annotations
 
 import contextlib
 
-from dotflow.cloud.aws.base_lambda_deployer import BaseLambdaDeployer
+from rich import print  # type: ignore
+
+from dotflow.cloud.aws.deployers.base_lambda import BaseLambdaDeployer
+from dotflow.settings import Settings as settings
 
 
 class LambdaApiDeployer(BaseLambdaDeployer):
@@ -18,7 +21,7 @@ class LambdaApiDeployer(BaseLambdaDeployer):
         api_id = self._find_api(apigw, api_name)
 
         if not api_id:
-            print("  Creating API Gateway...")
+            print(f"  {settings.STEP_ICON} Creating API Gateway...")
             response = apigw.create_api(Name=api_name, ProtocolType="HTTP")
             api_id = response["ApiId"]
 
@@ -57,7 +60,7 @@ class LambdaApiDeployer(BaseLambdaDeployer):
             f"https://{api_id}.execute-api."
             f"{self._region}.amazonaws.com/workflow"
         )
-        print(f"  Endpoint: {url}")
+        print(f"  {settings.STEP_ICON} Endpoint: {url}")
 
     def _find_api(self, apigw, name: str) -> str | None:
         """Find existing API by name."""
