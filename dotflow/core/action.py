@@ -162,15 +162,9 @@ class Action:
             return self.func(*args, **kwargs)
 
         try:
-            loop = asyncio.get_running_loop()
+            asyncio.get_running_loop()
         except RuntimeError:
-            loop = None
-
-        if loop is None:
             return asyncio.run(self.func(*args, **kwargs))
-
-        if not loop.is_running():
-            return loop.run_until_complete(self.func(*args, **kwargs))
 
         with ThreadPoolExecutor(max_workers=1) as pool:
             return pool.submit(
