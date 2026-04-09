@@ -162,6 +162,44 @@
 
 </div>
 
+## Cloud Deploy
+
+<div class="grid cards dotflow-integration-grid" markdown>
+
+- :fontawesome-brands-aws: __AWS Lambda / ECS__
+
+    ---
+
+    Deploy pipelines to **Lambda**, **ECS Fargate**, with triggers (S3, SQS, API Gateway, EventBridge).
+
+    [:octicons-arrow-right-24: Cloud platforms](../cloud/index.md)
+
+- :fontawesome-brands-google: __Google Cloud Run__
+
+    ---
+
+    Deploy pipelines to **Cloud Run** with optional Cloud Scheduler.
+
+    [:octicons-arrow-right-24: Cloud Run](../cloud/cloud-run.md)
+
+- :material-cloud-outline: __Alibaba Cloud FC__
+
+    ---
+
+    Deploy pipelines to **Alibaba Function Compute** with optional timer trigger.
+
+    [:octicons-arrow-right-24: Alibaba FC](../cloud/alibaba-fc.md)
+
+- :fontawesome-brands-github: __GitHub Actions__
+
+    ---
+
+    Run pipelines on **GitHub Actions** with scheduled workflows.
+
+    [:octicons-arrow-right-24: GitHub Actions](../cloud/github-actions.md)
+
+</div>
+
 ## Build your own
 
 To implement a custom provider, see the [Development Guide](../development/custom-providers.md) and the **Reference → Abstract methods** section.

@@ -35,7 +35,7 @@ dotflow cloud generate --platform lambda-scheduled
 ### Option 1: dotflow deploy
 
 ```bash
-dotflow deploy --platform lambda-scheduled --project my_pipeline --schedule "rate(6 hours)"
+dotflow deploy --platform lambda-scheduled --project my_pipeline --schedule "0 */6 * * *"
 ```
 
 ### Option 2: SAM CLI
@@ -54,5 +54,5 @@ sam logs --stack-name my_pipeline --tail
 
 ## Important
 
-- The schedule expression is configured during project creation (e.g. `rate(6 hours)`, `cron(0 12 * * ? *)`)
+- Use standard cron format (e.g. `0 */6 * * *`). Dotflow converts to AWS EventBridge format automatically
 - Edit `template.yaml` to change the schedule after generation

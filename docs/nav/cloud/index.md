@@ -156,6 +156,28 @@ Deploy your dotflow pipelines to any major cloud provider. Choose a target platf
 
 </div>
 
+## Alibaba Cloud
+
+<div class="grid cards" markdown>
+
+- :material-cloud-outline: **Function Compute**
+
+    ---
+
+    Serverless function on Alibaba Cloud FC. Deploy with `dotflow deploy`.
+
+    [:octicons-arrow-right-24: Guide](alibaba-fc.md)
+
+- :material-cloud-outline: **FC + Timer Trigger**
+
+    ---
+
+    Scheduled FC function with cron. Deploy with `dotflow deploy --schedule`.
+
+    [:octicons-arrow-right-24: Guide](alibaba-fc-scheduled.md)
+
+</div>
+
 ## Kubernetes
 
 <div class="grid cards" markdown>

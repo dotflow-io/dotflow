@@ -295,6 +295,9 @@ nav:
       - GCP:
         - nav/cloud/cloud-run.md
         - nav/cloud/cloud-run-scheduled.md
+      - Alibaba Cloud:
+        - nav/cloud/alibaba-fc.md
+        - nav/cloud/alibaba-fc-scheduled.md
       - Kubernetes:
         - nav/cloud/kubernetes.md
       - CI/CD:

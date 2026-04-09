@@ -4,6 +4,13 @@ from rich import print  # type: ignore
 from rich.prompt import Prompt
 
 from dotflow.cli.command import Command
+from dotflow.cloud.alibaba.constants import (
+    DEFAULT_REGION as ALI_DEFAULT_REGION,
+)
+from dotflow.cloud.alibaba.constants import PLATFORMS as ALI_PLATFORMS
+from dotflow.cloud.alibaba.constants import (
+    SCHEDULED_PLATFORMS as ALI_SCHEDULED,
+)
 from dotflow.cloud.aws.constants import DEFAULT_REGION as AWS_DEFAULT_REGION
 from dotflow.cloud.aws.constants import PLATFORMS as AWS_PLATFORMS
 from dotflow.cloud.aws.constants import SCHEDULED_PLATFORMS as AWS_SCHEDULED
@@ -15,9 +22,10 @@ from dotflow.settings import Settings as settings
 DEFAULT_REGIONS = {
     **dict.fromkeys(AWS_PLATFORMS, AWS_DEFAULT_REGION),
     **dict.fromkeys(GCP_PLATFORMS, GCP_DEFAULT_REGION),
+    **dict.fromkeys(ALI_PLATFORMS, ALI_DEFAULT_REGION),
 }
 
-SCHEDULED_PLATFORMS = AWS_SCHEDULED | GCP_SCHEDULED
+SCHEDULED_PLATFORMS = AWS_SCHEDULED | GCP_SCHEDULED | ALI_SCHEDULED
 
 
 class ScheduleResolver:
@@ -147,3 +155,17 @@ class DeployCommand(Command):
         from dotflow.cloud.github import ActionsDeployer
 
         ActionsDeployer().deploy(name)
+
+    def _deploy_alibaba_fc(self, name, region, **kwargs):
+        from dotflow.cloud.alibaba import AliyunFCDeployer
+
+        AliyunFCDeployer(region=region).deploy(name)
+
+    def _deploy_alibaba_fc_scheduled(self, name, region, schedule=None):
+        from dotflow.cloud.alibaba import (
+            AliyunFCScheduledDeployer,
+        )
+
+        AliyunFCScheduledDeployer(region=region).deploy(
+            name, schedule=schedule
+        )

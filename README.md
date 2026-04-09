@@ -25,7 +25,7 @@ Dotflow is a lightweight Python library for execution pipelines. Define tasks wi
 - **Resilient** — Retry, backoff, timeout, checkpoints, and error handling out of the box.
 - **Observable** — OpenTelemetry traces, metrics, and logs. Sentry error tracking.
 - **Deployable** — `dotflow deploy --platform lambda` ships your pipeline to AWS in one command.
-- **Portable** — Same code runs on Lambda, ECS, Cloud Run, Kubernetes, Docker, or GitHub Actions.
+- **Portable** — Same code runs on Lambda, ECS, Cloud Run, Alibaba FC, Kubernetes, Docker, or GitHub Actions.
 
 ## Install
 
@@ -74,13 +74,17 @@ dotflow deploy --platform lambda --project my_pipeline
 |----------|---------------|
 | <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-docker.svg" width="16" /> **Docker** | `docker compose up` |
 | <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-aws-lambda.svg" width="16" /> **AWS Lambda** | `dotflow deploy` |
-| <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-aws-lambda.svg" width="16" /> **AWS Lambda + EventBridge** | `dotflow deploy --schedule` |
-| <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-aws-lambda.svg" width="16" /> **AWS Lambda + S3 Trigger** | `dotflow deploy` |
-| <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-aws-lambda.svg" width="16" /> **AWS Lambda + SQS Trigger** | `dotflow deploy` |
-| <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-aws-lambda.svg" width="16" /> **AWS Lambda + API Gateway** | `dotflow deploy` |
+| <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-aws-lambda.svg" width="16" /> <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-aws-eventbridge.svg" width="16" /> **AWS Lambda + EventBridge** | `dotflow deploy --schedule` |
+| <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-aws-lambda.svg" width="16" /> <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-aws-s3.svg" width="16" /> **AWS Lambda + S3 Trigger** | `dotflow deploy` |
+| <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-aws-lambda.svg" width="16" /> <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-aws-sqs.svg" width="16" /> **AWS Lambda + SQS Trigger** | `dotflow deploy` |
+| <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-aws-lambda.svg" width="16" /> <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-aws-api-gateway.svg" width="16" /> **AWS Lambda + API Gateway** | `dotflow deploy` |
 | <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-aws-ecs.svg" width="16" /> **AWS ECS Fargate** | `dotflow deploy` |
-| <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-google-cloud.svg" width="16" /> **Google Cloud Run** | `gcloud run deploy` |
+| <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-aws-ecs.svg" width="16" /> <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-aws-eventbridge.svg" width="16" /> **AWS ECS + EventBridge** | `dotflow deploy --schedule` |
+| <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-google-cloud.svg" width="16" /> **Google Cloud Run** | `dotflow deploy` |
+| <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-google-cloud.svg" width="16" /> <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-google-cloud-scheduler.svg" width="16" /> **Cloud Run + Scheduler** | `dotflow deploy --schedule` |
 | <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-kubernetes.svg" width="16" /> **Kubernetes** | `kubectl apply` |
+| <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-alibaba-cloud.svg" width="16" /> **Alibaba Cloud FC** | `dotflow deploy` |
+| <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-alibaba-cloud.svg" width="16" /> **Alibaba Cloud FC + Timer** | `dotflow deploy --schedule` |
 | <img src="https://raw.githubusercontent.com/dotflow-io/dotflow/develop/docs/assets/icon-github-actions.svg" width="16" /> **GitHub Actions** | `dotflow deploy` |
 
 > [See all 34+ platforms →](https://dotflow-io.github.io/dotflow/nav/cloud/)
@@ -93,9 +97,10 @@ pip install dotflow[gcp]            # Google Cloud Storage
 pip install dotflow[scheduler]      # Cron scheduler
 pip install dotflow[otel]           # OpenTelemetry
 pip install dotflow[sentry]         # Sentry error tracking
-pip install dotflow[deploy-aws]     # AWS deploy (Lambda, ECS)
-pip install dotflow[deploy-gcp]     # GCP deploy (Cloud Run)
-pip install dotflow[deploy-github]  # GitHub Actions deploy
+pip install dotflow[deploy-aws]      # AWS deploy (Lambda, ECS)
+pip install dotflow[deploy-gcp]      # GCP deploy (Cloud Run)
+pip install dotflow[deploy-alibaba]  # Alibaba Cloud deploy (FC)
+pip install dotflow[deploy-github]   # GitHub Actions deploy
 ```
 
 > **[Read the full documentation →](https://dotflow-io.github.io/dotflow/)**
@@ -106,7 +111,7 @@ pip install dotflow[deploy-github]  # GitHub Actions deploy
 |---------|-------------|
 | [Concepts](https://dotflow-io.github.io/dotflow/nav/concepts/concept-workflow-and-tasks/) | Workflows, tasks, context, providers, process modes |
 | [How-to Guides](https://dotflow-io.github.io/dotflow/nav/how-to/) | Step-by-step tutorials for workflows, tasks, and CLI |
-| [Cloud Deployment](https://dotflow-io.github.io/dotflow/nav/cloud/) | Deploy to AWS, GCP, Kubernetes, Docker, GitHub Actions |
+| [Cloud Deployment](https://dotflow-io.github.io/dotflow/nav/cloud/) | Deploy to AWS, GCP, Alibaba, Kubernetes, Docker, GitHub Actions |
 | [Integrations](https://dotflow-io.github.io/dotflow/nav/integrations/) | OpenTelemetry, Sentry, Telegram, Discord, S3, GCS |
 | [Examples](https://dotflow-io.github.io/dotflow/nav/examples/) | Real-world pipelines: ETL, health checks, async, scheduler |
 | [Reference](https://dotflow-io.github.io/dotflow/nav/reference/dotflow/) | API reference for all classes and providers |
