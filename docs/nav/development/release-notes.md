@@ -2,6 +2,9 @@
 
 ## v0.15.0
 
+- [⚙️ Feature: dotflow deploy CLI — cross-cloud infrastructure generation](https://github.com/dotflow-io/dotflow/pull/183)
+- [⚙️ Feature: Add warning/debug log levels and workflow-level logging to Log ABC](https://github.com/dotflow-io/dotflow/pull/189)
+- [⚙️ Feature: OpenTelemetry integration — traces and spans per workflow/task](https://github.com/dotflow-io/dotflow/pull/190)
 - [📌 Remove external dotflow-mongodb package references](https://github.com/dotflow-io/dotflow/pull/200)
 - [⚙️ Refactor: Separate Engine from Execution Strategy](https://github.com/dotflow-io/dotflow/pull/202)
 - [⚠️ Security: Remove shell injection vulnerability in write_file_system](https://github.com/dotflow-io/dotflow/pull/213)
