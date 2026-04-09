@@ -1,7 +1,9 @@
 """Action module"""
 
 import asyncio
+import inspect
 from collections.abc import Callable
+from concurrent.futures import ThreadPoolExecutor
 from types import FunctionType
 
 from dotflow.core.context import Context
@@ -146,7 +148,7 @@ class Action:
         return action
 
     def _run_action(self, *args, **kwargs):
-        is_async = asyncio.iscoroutinefunction(self.func)
+        is_async = inspect.iscoroutinefunction(self.func)
 
         try:
             return self._call_func(is_async, *args, **kwargs)
@@ -156,21 +158,24 @@ class Action:
             raise
 
     def _call_func(self, is_async, *args, **kwargs):
-        if is_async:
-            try:
-                loop = asyncio.get_running_loop()
-            except RuntimeError:
-                loop = None
+        if not is_async:
+            return self.func(*args, **kwargs)
 
-            if loop and loop.is_running():
-                import concurrent.futures
+        try:
+            loop = asyncio.get_running_loop()
+        except RuntimeError:
+            loop = None
 
-                with concurrent.futures.ThreadPoolExecutor() as pool:
-                    return pool.submit(
-                        asyncio.run, self.func(*args, **kwargs)
-                    ).result()
+        if loop is None:
             return asyncio.run(self.func(*args, **kwargs))
-        return self.func(*args, **kwargs)
+
+        if not loop.is_running():
+            return loop.run_until_complete(self.func(*args, **kwargs))
+
+        with ThreadPoolExecutor(max_workers=1) as pool:
+            return pool.submit(
+                asyncio.run, self.func(*args, **kwargs)
+            ).result()
 
     def _set_params(self):
         if isinstance(self.func, FunctionType):
