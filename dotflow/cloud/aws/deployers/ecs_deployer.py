@@ -105,6 +105,7 @@ class ECSDeployer(Deployer):
         active = [c for c in clusters["clusters"] if c["status"] == "ACTIVE"]
         if not active:
             print(
-                f"  {settings.STEP_ICON} Creating ECS cluster '{cluster_name}'..."
+                f"  {settings.STEP_ICON} "
+                f"Creating ECS cluster '{cluster_name}'..."
             )
             self._ecs.create_cluster(clusterName=cluster_name)

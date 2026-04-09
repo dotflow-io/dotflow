@@ -40,5 +40,6 @@ class APIs:
                 if "already enabled" in str(err).lower():
                     continue
                 print(
-                    f"  {settings.STEP_ICON} Warning: Failed to enable {api}: {err}"
+                    f"  {settings.STEP_ICON} Warning: "
+                    f"Failed to enable {api}: {err}"
                 )

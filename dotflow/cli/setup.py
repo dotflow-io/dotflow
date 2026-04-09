@@ -163,7 +163,7 @@ class Command:
         cmd_generate.add_argument(
             "--platform",
             required=True,
-            help="Target platform (e.g. docker, lambda, cloud-run, ecs, kubernetes)",
+            help=("Target platform (e.g. docker, lambda, cloud-run)"),
         )
         cmd_generate.add_argument(
             "--project",

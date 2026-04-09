@@ -56,12 +56,14 @@ class CloudRunDeployer(Deployer):
             from google.cloud import service_usage_v1
 
             print(
-                f"  {settings.STEP_ICON} Ensuring Cloud Build service account..."
+                f"  {settings.STEP_ICON} "
+                "Ensuring Cloud Build service account..."
             )
             client = service_usage_v1.ServiceUsageClient()
             client.generate_service_identity(
                 request={
-                    "parent": f"projects/{self._project}/services/cloudbuild.googleapis.com"
+                    "parent": f"projects/{self._project}"
+                    f"/services/cloudbuild.googleapis.com"
                 }
             )
         except Exception:

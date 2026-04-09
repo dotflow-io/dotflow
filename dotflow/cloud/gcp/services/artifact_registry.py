@@ -99,7 +99,8 @@ class ArtifactRegistry(Registry):
     def _build(self, image: str, object_name: str):
         """Build Docker image via Cloud Build."""
         print(
-            f"  {settings.STEP_ICON} Building and pushing image via Cloud Build..."
+            f"  {settings.STEP_ICON} "
+            "Building and pushing image via Cloud Build..."
         )
 
         client = self._cloudbuild.CloudBuildClient()
@@ -126,7 +127,8 @@ class ArtifactRegistry(Registry):
                 build=build,
             )
             print(
-                f"  {settings.STEP_ICON} Build started: {operation.metadata.build.id}"
+                f"  {settings.STEP_ICON} "
+                f"Build started: {operation.metadata.build.id}"
             )
             result = operation.result(timeout=600)
             print(f"  {settings.STEP_ICON} Build status: {result.status.name}")

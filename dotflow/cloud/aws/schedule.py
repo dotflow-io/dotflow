@@ -16,7 +16,8 @@ class AWSSchedule:
 
         - rate(...) → passed through
         - cron(...) → passed through (assumed valid 6-field AWS cron)
-        - 5-field crontab → converted to cron(min hour day-of-month month ? year)
+        - 5-field crontab → converted to
+          cron(min hour dom month ? year)
         """
         expression = expression.strip()
 

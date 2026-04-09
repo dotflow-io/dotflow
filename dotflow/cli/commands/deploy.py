@@ -22,7 +22,10 @@ SCHEDULED_PLATFORMS = AWS_SCHEDULED | GCP_SCHEDULED
 
 
 class ScheduleResolver:
-    """Resolves a schedule expression from CLI args, template, or user input."""
+    """Resolves a schedule expression.
+
+    From CLI args, template, or user input.
+    """
 
     @classmethod
     def _get_provider(cls, platform: str) -> type | None:

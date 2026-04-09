@@ -22,7 +22,8 @@ class LambdaDeployer(BaseLambdaDeployer):
         rule_name = f"{name}-schedule"
 
         print(
-            f"  {settings.STEP_ICON} Creating EventBridge rule '{rule_name}'..."
+            f"  {settings.STEP_ICON} "
+            f"Creating EventBridge rule '{rule_name}'..."
         )
         events = self._boto3.client("events", region_name=self._region)
 
