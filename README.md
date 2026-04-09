@@ -2,7 +2,7 @@
 
 ![](docs/assets/dotflow.png)
 
-**Build production-ready data pipelines in minutes, not days.**
+**import dotflow. @action. deploy. Done.**
 
 [![PyPI](https://img.shields.io/pypi/v/dotflow?style=flat-square)](https://pypi.org/project/dotflow/)
 [![Python](https://img.shields.io/pypi/pyversions/dotflow?style=flat-square)](https://pypi.org/project/dotflow/)
