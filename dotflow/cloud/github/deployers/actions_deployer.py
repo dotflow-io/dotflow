@@ -29,16 +29,6 @@ class ActionsDeployer(Deployer):
         self._GithubException = GithubException
         self._user = self._github.get_user()
 
-    def setup(self, name: str) -> None:
-        """No-op — GitHub manages everything."""
-
-    def ensure_roles(self, name: str) -> str:
-        """No-op."""
-        return ""
-
-    def ensure_logs(self, name: str) -> None:
-        """No-op."""
-
     def deploy(self, name: str, **kwargs) -> None:
         """Create repo and push all project files."""
         print(settings.INFO_ALERT, f"Deploying to GitHub Actions '{name}'...")

@@ -65,13 +65,6 @@ class CloudRunDeployer(Deployer):
         except Exception:
             pass
 
-    def ensure_roles(self, name: str) -> str:
-        """No-op — Cloud Run manages service accounts automatically."""
-        return ""
-
-    def ensure_logs(self, name: str) -> None:
-        """No-op — Cloud Logging is automatic."""
-
     def deploy(self, name: str, **kwargs) -> None:
         """Deploy to Cloud Run via Cloud Build + Run SDK."""
         print(settings.INFO_ALERT, f"Deploying Cloud Run '{name}'...")

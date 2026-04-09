@@ -52,14 +52,6 @@ class BaseLambdaDeployer(Deployer):
         self._role_arn = self._iam.ensure_lambda_role(name)
         self._logs.ensure_log_group(f"/aws/lambda/{name}")
 
-    def ensure_roles(self, name: str) -> str:
-        """Create or get Lambda execution role."""
-        return self._iam.ensure_lambda_role(name)
-
-    def ensure_logs(self, name: str) -> None:
-        """Create CloudWatch log group."""
-        self._logs.ensure_log_group(f"/aws/lambda/{name}")
-
     def deploy(self, name: str, **kwargs) -> None:
         """Deploy Lambda and configure trigger."""
         print(settings.INFO_ALERT, f"Deploying '{name}'...")

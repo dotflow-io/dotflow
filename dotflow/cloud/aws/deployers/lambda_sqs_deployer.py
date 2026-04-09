@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dotflow.cloud.aws.base_lambda_deployer import BaseLambdaDeployer
+from dotflow.cloud.aws.deployers.base_lambda_deployer import BaseLambdaDeployer
 
 
 class LambdaSQSDeployer(BaseLambdaDeployer):

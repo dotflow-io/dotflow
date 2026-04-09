@@ -1,4 +1,4 @@
-"""AWS messages."""
+"""AWS constants."""
 
 CREDENTIALS_NOT_FOUND = (
     "AWS credentials not found. "
@@ -7,3 +7,18 @@ CREDENTIALS_NOT_FOUND = (
 )
 
 BOTO3_NOT_FOUND = "boto3 is required: pip install dotflow[deploy-aws]"
+
+PLATFORMS = {
+    "lambda",
+    "lambda-scheduled",
+    "lambda-s3-trigger",
+    "lambda-sqs-trigger",
+    "lambda-api-trigger",
+    "ecs",
+    "ecs-scheduled",
+}
+
+SAM_PLATFORMS = {"ecs-scheduled"}
+SCHEDULED_PLATFORMS = {"lambda-scheduled"}
+
+DEFAULT_REGION = "us-east-1"
