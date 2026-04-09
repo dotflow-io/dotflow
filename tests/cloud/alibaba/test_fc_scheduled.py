@@ -1,35 +1,39 @@
 """Test Alibaba FC Scheduled deployer."""
 
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 
 import pytest
 
 try:
-    from dotflow.cloud.alibaba.deployers.fc_scheduled import (
-        AliyunFCScheduledDeployer,
-    )
+    import alibabacloud_fc_open20210406  # noqa: F401
+
+    HAS_SDK = True
 except ImportError:
-    AliyunFCScheduledDeployer = None
+    HAS_SDK = False
 
 skip_no_sdk = pytest.mark.skipif(
-    AliyunFCScheduledDeployer is None,
+    not HAS_SDK,
     reason="alibabacloud SDK not installed",
 )
 
 
 @skip_no_sdk
 class TestAliyunFCScheduledDeployer(unittest.TestCase):
-    @patch.dict(
+    @unittest.mock.patch.dict(
         "os.environ",
         {
             "ALIBABA_CLOUD_ACCESS_KEY_ID": "test-key",
             "ALIBABA_CLOUD_ACCESS_KEY_SECRET": "test-secret",
         },
     )
-    @patch("alibabacloud_fc_open20210406.client.Client")
-    @patch("alibabacloud_tea_openapi.models.Config")
+    @unittest.mock.patch("alibabacloud_fc_open20210406.client.Client")
+    @unittest.mock.patch("alibabacloud_tea_openapi.models.Config")
     def test_deploy_with_schedule(self, mock_config, mock_client):
+        from dotflow.cloud.alibaba.deployers.fc_scheduled import (
+            AliyunFCScheduledDeployer,
+        )
+
         deployer = AliyunFCScheduledDeployer(
             region="cn-hangzhou",
             namespace="dotflow",
@@ -47,16 +51,20 @@ class TestAliyunFCScheduledDeployer(unittest.TestCase):
             "test-project", "0 */6 * * *"
         )
 
-    @patch.dict(
+    @unittest.mock.patch.dict(
         "os.environ",
         {
             "ALIBABA_CLOUD_ACCESS_KEY_ID": "test-key",
             "ALIBABA_CLOUD_ACCESS_KEY_SECRET": "test-secret",
         },
     )
-    @patch("alibabacloud_fc_open20210406.client.Client")
-    @patch("alibabacloud_tea_openapi.models.Config")
+    @unittest.mock.patch("alibabacloud_fc_open20210406.client.Client")
+    @unittest.mock.patch("alibabacloud_tea_openapi.models.Config")
     def test_deploy_without_schedule(self, mock_config, mock_client):
+        from dotflow.cloud.alibaba.deployers.fc_scheduled import (
+            AliyunFCScheduledDeployer,
+        )
+
         deployer = AliyunFCScheduledDeployer(
             region="cn-hangzhou",
             namespace="dotflow",
