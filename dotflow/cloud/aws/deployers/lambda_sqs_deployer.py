@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import time
+
 from rich import print  # type: ignore
 
 from dotflow.cloud.aws.deployers.base_lambda_deployer import BaseLambdaDeployer
@@ -13,6 +15,16 @@ class LambdaSQSDeployer(BaseLambdaDeployer):
 
     def _configure_trigger(self, name: str, **kwargs) -> None:
         """Create SQS queue and event source mapping."""
+        self._boto3.client("iam", region_name=self._region).attach_role_policy(
+            RoleName=f"{name}-lambda-role",
+            PolicyArn=(
+                "arn:aws:iam::aws:policy/service-role/"
+                "AWSLambdaSQSQueueExecutionRole"
+            ),
+        )
+
+        time.sleep(10)
+
         sqs = self._boto3.client("sqs", region_name=self._region)
         queue_name = f"{name}-queue"
 
