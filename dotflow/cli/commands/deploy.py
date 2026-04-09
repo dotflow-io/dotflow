@@ -3,32 +3,79 @@
 from rich import print  # type: ignore
 
 from dotflow.cli.command import Command
+from dotflow.cloud.aws.constants import DEFAULT_REGION as AWS_DEFAULT_REGION
+from dotflow.cloud.aws.constants import PLATFORMS as AWS_PLATFORMS
+from dotflow.cloud.aws.constants import SAM_PLATFORMS
+from dotflow.cloud.aws.constants import SCHEDULED_PLATFORMS as AWS_SCHEDULED
+from dotflow.cloud.gcp.constants import DEFAULT_REGION as GCP_DEFAULT_REGION
+from dotflow.cloud.gcp.constants import PLATFORMS as GCP_PLATFORMS
+from dotflow.cloud.gcp.constants import SCHEDULED_PLATFORMS as GCP_SCHEDULED
 from dotflow.settings import Settings as settings
 
-SAM_PLATFORMS = {
-    "ecs-scheduled",
+DEFAULT_REGIONS = {
+    **dict.fromkeys(AWS_PLATFORMS, AWS_DEFAULT_REGION),
+    **dict.fromkeys(GCP_PLATFORMS, GCP_DEFAULT_REGION),
 }
 
-DEFAULT_REGIONS = {
-    "lambda": "us-east-1",
-    "lambda-scheduled": "us-east-1",
-    "lambda-s3-trigger": "us-east-1",
-    "lambda-sqs-trigger": "us-east-1",
-    "lambda-api-trigger": "us-east-1",
-    "ecs": "us-east-1",
-    "cloud-run": "us-central1",
-    "cloud-run-scheduled": "us-central1",
-}
+SCHEDULED_PLATFORMS = AWS_SCHEDULED | GCP_SCHEDULED
+
+
+class ScheduleResolver:
+    """Resolves a schedule expression from CLI args, template, or user input."""
+
+    @classmethod
+    def _get_provider(cls, platform: str) -> type | None:
+        if platform in AWS_PLATFORMS:
+            from dotflow.cloud.aws.schedule import AWSSchedule
+
+            return AWSSchedule
+
+        return None
+
+    @classmethod
+    def resolve(cls, schedule: str | None, platform: str) -> str | None:
+        if platform not in SCHEDULED_PLATFORMS:
+            return schedule
+
+        provider = cls._get_provider(platform)
+        raw = schedule or cls._from_template(provider) or cls._from_input()
+
+        if not raw:
+            raise SystemExit(
+                f"{settings.ERROR_ALERT} --schedule is required for {platform}"
+            )
+
+        return provider.convert(raw) if provider else raw
+
+    @classmethod
+    def _from_template(cls, provider: type | None) -> str | None:
+        if provider is None:
+            return None
+
+        result = provider.read_from_template()
+        if result:
+            print(
+                settings.INFO_ALERT,
+                f"Using schedule from template: {result}",
+            )
+        return result
+
+    @classmethod
+    def _from_input(cls) -> str | None:
+        return (
+            input("  Schedule expression (e.g. rate(6 hours)): ").strip()
+            or None
+        )
 
 
 class DeployCommand(Command):
     def setup(self):
         platform = self.params.platform
         name = self.params.project
-        region = self.params.region or DEFAULT_REGIONS.get(
-            platform, "us-east-1"
+        region = self.params.region or DEFAULT_REGIONS.get(platform)
+        schedule = ScheduleResolver.resolve(
+            getattr(self.params, "schedule", None), platform
         )
-        schedule = getattr(self.params, "schedule", None)
 
         if platform in SAM_PLATFORMS:
             print(
@@ -38,73 +85,57 @@ class DeployCommand(Command):
             print("  Run: sam build && sam deploy")
             return
 
-        deployers = {
-            "lambda": self._deploy_lambda,
-            "lambda-scheduled": self._deploy_lambda,
-            "lambda-s3-trigger": self._deploy_lambda_s3,
-            "lambda-sqs-trigger": self._deploy_lambda_sqs,
-            "lambda-api-trigger": self._deploy_lambda_api,
-            "ecs": self._deploy_ecs,
-            "cloud-run": self._deploy_cloud_run,
-            "cloud-run-scheduled": self._deploy_cloud_run,
-            "github-actions": self._deploy_github_actions,
-        }
-
-        handler = deployers.get(platform)
+        method_name = f"_deploy_{platform.replace('-', '_')}"
+        handler = getattr(self, method_name, None)
         if not handler:
             print(
-                settings.ERROR_ALERT,
-                f"Deploy not supported for '{platform}'.",
+                settings.ERROR_ALERT, f"Deploy not supported for '{platform}'."
             )
             return
 
         handler(name=name, region=region, schedule=schedule)
 
-    def _deploy_lambda(self, name: str, region: str, schedule: str = None):
-        """Deploy to AWS Lambda."""
+    def _deploy_lambda(self, name, region, schedule=None):
         from dotflow.cloud.aws import LambdaDeployer
 
-        deployer = LambdaDeployer(region=region)
-        deployer.deploy(name, schedule=schedule)
+        LambdaDeployer(region=region).deploy(name, schedule=schedule)
 
-    def _deploy_lambda_api(self, name: str, region: str, **kwargs):
-        """Deploy to AWS Lambda + API Gateway."""
-        from dotflow.cloud.aws import LambdaApiDeployer
+    def _deploy_lambda_scheduled(self, name, region, schedule=None):
+        from dotflow.cloud.aws import LambdaDeployer
 
-        deployer = LambdaApiDeployer(region=region)
-        deployer.deploy(name)
+        LambdaDeployer(region=region).deploy(name, schedule=schedule)
 
-    def _deploy_lambda_s3(self, name: str, region: str, **kwargs):
-        """Deploy to AWS Lambda + S3 Trigger."""
+    def _deploy_lambda_s3_trigger(self, name, region, **kwargs):
         from dotflow.cloud.aws import LambdaS3Deployer
 
-        deployer = LambdaS3Deployer(region=region)
-        deployer.deploy(name)
+        LambdaS3Deployer(region=region).deploy(name)
 
-    def _deploy_lambda_sqs(self, name: str, region: str, **kwargs):
-        """Deploy to AWS Lambda + SQS Trigger."""
+    def _deploy_lambda_sqs_trigger(self, name, region, **kwargs):
         from dotflow.cloud.aws import LambdaSQSDeployer
 
-        deployer = LambdaSQSDeployer(region=region)
-        deployer.deploy(name)
+        LambdaSQSDeployer(region=region).deploy(name)
 
-    def _deploy_ecs(self, name: str, region: str, **kwargs):
-        """Deploy to AWS ECS Fargate."""
+    def _deploy_lambda_api_trigger(self, name, region, **kwargs):
+        from dotflow.cloud.aws import LambdaApiDeployer
+
+        LambdaApiDeployer(region=region).deploy(name)
+
+    def _deploy_ecs(self, name, region, **kwargs):
         from dotflow.cloud.aws import ECSDeployer
 
-        deployer = ECSDeployer(region=region)
-        deployer.deploy(name)
+        ECSDeployer(region=region).deploy(name)
 
-    def _deploy_cloud_run(self, name: str, region: str, **kwargs):
-        """Deploy to Google Cloud Run."""
+    def _deploy_cloud_run(self, name, region, **kwargs):
         from dotflow.cloud.gcp import CloudRunDeployer
 
-        deployer = CloudRunDeployer(region=region)
-        deployer.deploy(name)
+        CloudRunDeployer(region=region).deploy(name)
 
-    def _deploy_github_actions(self, name: str, **kwargs):
-        """Deploy to GitHub Actions."""
+    def _deploy_cloud_run_scheduled(self, name, region, **kwargs):
+        from dotflow.cloud.gcp import CloudRunDeployer
+
+        CloudRunDeployer(region=region).deploy(name)
+
+    def _deploy_github_actions(self, name, **kwargs):
         from dotflow.cloud.github import ActionsDeployer
 
-        deployer = ActionsDeployer()
-        deployer.deploy(name)
+        ActionsDeployer().deploy(name)
