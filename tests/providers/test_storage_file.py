@@ -119,6 +119,43 @@ class TestStorageFile(unittest.TestCase):
         self.assertEqual(result.storage[0].storage, expected_value_one)
         self.assertEqual(result.storage[1].storage, expected_value_two)
 
+    def test_post_with_corrupted_file(self):
+        self.path.joinpath("tasks").mkdir()
+
+        with open(
+            file=self.path.joinpath("tasks", self.file_name), mode="w"
+        ) as file:
+            file.write("not valid json {{{")
+
+        storage = StorageFile(path=self.path)
+        storage.post(
+            key=self.file_name, context=Context(storage={"new": "data"})
+        )
+
+        result = storage.get(key=self.file_name)
+        self.assertEqual(result.storage, {"new": "data"})
+
+    def test_get_with_corrupted_file(self):
+        self.path.joinpath("tasks").mkdir()
+
+        with open(
+            file=self.path.joinpath("tasks", self.file_name), mode="w"
+        ) as file:
+            file.write("corrupted content")
+
+        storage = StorageFile(path=self.path)
+        result = storage.get(key=self.file_name)
+
+        self.assertIsInstance(result, Context)
+        self.assertIsNone(result.storage)
+
+    def test_get_missing_file(self):
+        storage = StorageFile(path=self.path)
+        result = storage.get(key="nonexistent.json")
+
+        self.assertIsInstance(result, Context)
+        self.assertIsNone(result.storage)
+
     def test_key(self):
         workflow_id = uuid4()
 
