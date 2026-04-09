@@ -17,7 +17,7 @@ class Settings:
     LOG_PATH = _OUTPUT / "flow.log"
     LOG_FORMAT = "%(asctime)s - %(levelname)s [%(name)s]: %(message)s"
 
-    TEMPLATE_REPO = "https://github.com/dotflow-io/template.git"
+    TEMPLATE_REPO = "https://github.com/dotflow-io/templates.git"
     TEMPLATE_BRANCH = "master"
     TEMPLATE_CLOUD_DIR = "cloud"
 
