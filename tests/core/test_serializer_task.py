@@ -8,7 +8,6 @@ from dotflow.core.serializers.task import SerializerTask
 
 
 class TestSerializerTaskDumpJson(unittest.TestCase):
-
     def _make_task(self, **kwargs):
         defaults = {
             "task_id": 0,
