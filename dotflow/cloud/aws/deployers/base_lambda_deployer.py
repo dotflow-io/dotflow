@@ -52,8 +52,13 @@ class BaseLambdaDeployer(Deployer):
         self._role_arn = self._iam.ensure_lambda_role(name)
         self._logs.ensure_log_group(f"/aws/lambda/{name}")
 
+    @staticmethod
+    def _sanitize_name(name: str) -> str:
+        return name.replace("_", "-").lower()
+
     def deploy(self, name: str, **kwargs) -> None:
         """Deploy Lambda and configure trigger."""
+        name = self._sanitize_name(name)
         print(settings.INFO_ALERT, f"Deploying '{name}'...")
 
         self.setup(name)

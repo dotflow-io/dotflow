@@ -47,8 +47,13 @@ class ECSDeployer(Deployer):
         self._logs.ensure_log_group(f"/ecs/{name}")
         self._ensure_cluster(name)
 
+    @staticmethod
+    def _sanitize_name(name: str) -> str:
+        return name.replace("_", "-").lower()
+
     def deploy(self, name: str, **kwargs) -> None:
         """Deploy an ECS Fargate task from the current directory."""
+        name = self._sanitize_name(name)
         print(settings.INFO_ALERT, f"Deploying ECS task '{name}'...")
 
         self.setup(name)

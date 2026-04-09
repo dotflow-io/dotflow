@@ -90,6 +90,7 @@ def _read_project_name(pyproject: Path) -> str | None:
 
 
 class CloudGenerateCommand(Command):
+
     def setup(self):
         platform = self.params.platform
 
@@ -126,6 +127,7 @@ class CloudGenerateCommand(Command):
             if not project_name:
                 project_name = Path.cwd().name
 
+        project_name = project_name.replace("_", "-").lower()
         module_name = project_name.replace("-", "_")
 
         print(
@@ -173,6 +175,7 @@ class CloudGenerateCommand(Command):
 
 
 class CloudListCommand(Command):
+
     def setup(self):
         cloud_dir = _get_template_dir()
         if cloud_dir is None:

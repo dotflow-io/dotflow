@@ -69,8 +69,13 @@ class CloudRunDeployer(Deployer):
         except Exception:
             pass
 
+    @staticmethod
+    def _sanitize_name(name: str) -> str:
+        return name.replace("_", "-").lower()
+
     def deploy(self, name: str, **kwargs) -> None:
         """Deploy to Cloud Run via Cloud Build + Run SDK."""
+        name = self._sanitize_name(name)
         print(settings.INFO_ALERT, f"Deploying Cloud Run '{name}'...")
 
         self.setup(name)

@@ -29,8 +29,13 @@ class ActionsDeployer(Deployer):
         self._GithubException = GithubException
         self._user = self._github.get_user()
 
+    @staticmethod
+    def _sanitize_name(name: str) -> str:
+        return name.replace("_", "-").lower()
+
     def deploy(self, name: str, **kwargs) -> None:
         """Create repo and push all project files."""
+        name = self._sanitize_name(name)
         print(settings.INFO_ALERT, f"Deploying to GitHub Actions '{name}'...")
 
         repo = self._create_or_get_repo(name)
