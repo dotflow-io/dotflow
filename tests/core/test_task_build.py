@@ -14,6 +14,7 @@ from tests.mocks import SimpleStep, action_step, simple_step
 
 
 class TestTaskBuild(unittest.TestCase):
+
     def setUp(self):
         self.config = Config()
         self.content = {"foo": "bar"}
@@ -27,7 +28,7 @@ class TestTaskBuild(unittest.TestCase):
         task = TaskBuilder(config=self.config)
         task.add(step=action_step)
 
-        self.assertEqual(task.queue[0].task_id, 0)
+        self.assertEqual(task.queue[0].task_id, 1)
         self.assertIsInstance(task.queue[0], Task)
         self.assertEqual(task.queue[0].callback, basic_callback)
         self.assertEqual(len(task.queue), 1)
@@ -114,7 +115,7 @@ class TestTaskBuild(unittest.TestCase):
             result["workflow_id"],
             str(expected_workflow_id),
         )
-        self.assertEqual(task_result["task_id"], 0)
+        self.assertEqual(task_result["task_id"], 1)
         self.assertEqual(task_result["status"], "Not started")
         self.assertEqual(task_result["duration"], None)
         self.assertEqual(task_result["retry_count"], 0)
