@@ -14,7 +14,6 @@ from tests.mocks import SimpleStep, action_step, simple_step
 
 
 class TestTaskBuild(unittest.TestCase):
-
     def setUp(self):
         self.config = Config()
         self.content = {"foo": "bar"}
