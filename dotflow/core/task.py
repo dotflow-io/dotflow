@@ -109,7 +109,7 @@ class Task(TaskInstance):
         self.callback = callback
         self.initial_context = initial_context
         self.status = TypeStatus.NOT_STARTED
-        self.config.api.create_task(task=self)
+        self.config.server.create_task(task=self)
 
     @property
     def step(self):
@@ -247,6 +247,8 @@ class Task(TaskInstance):
         self._status = value
 
         self.config.notify.hook_status_task(task=self)
+        if value != TypeStatus.NOT_STARTED:
+            self.config.server.update_task(task=self)
 
         if value == TypeStatus.FAILED:
             self.config.log.error(task=self)

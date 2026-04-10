@@ -14,6 +14,7 @@ from dotflow.core.engine import TaskEngine
 from dotflow.core.exception import ExecutionModeNotExist
 from dotflow.core.task import Task, TaskError
 from dotflow.core.types import TypeExecution, TypeStatus
+from dotflow.core.types.workflow import WorkflowStatus
 from dotflow.utils import basic_callback
 
 if sys.platform == "win32":
@@ -124,6 +125,10 @@ class Manager:
             self.config.metrics.workflow_started(
                 workflow_id=self.workflow_id, mode=mode
             )
+            self.config.server.update_workflow(
+                workflow=self.workflow_id,
+                status=WorkflowStatus.IN_PROGRESS,
+            )
 
         execution = None
         groups = grouper(tasks=tasks)
@@ -174,6 +179,12 @@ class Manager:
                 self.config.metrics.workflow_completed(
                     self.workflow_id, duration
                 )
+
+        if self.config:
+            self.config.server.update_workflow(
+                workflow=self.workflow_id,
+                status=WorkflowStatus.COMPLETED,
+            )
 
         if failed:
             self.on_failure(tasks=tasks)
