@@ -2,19 +2,19 @@
 
 from __future__ import annotations
 
-from dotflow.abc.api import Api
 from dotflow.abc.log import Log
 from dotflow.abc.metrics import Metrics
 from dotflow.abc.notify import Notify
 from dotflow.abc.scheduler import Scheduler
+from dotflow.abc.server import Server
 from dotflow.abc.storage import Storage
 from dotflow.abc.tracer import Tracer
 from dotflow.core.exception import NotCallableObject
-from dotflow.providers.api_default import ApiDefault
 from dotflow.providers.log_default import LogDefault
 from dotflow.providers.metrics_default import MetricsDefault
 from dotflow.providers.notify_default import NotifyDefault
 from dotflow.providers.scheduler_default import SchedulerDefault
+from dotflow.providers.server_default import ServerDefault
 from dotflow.providers.storage_default import StorageDefault
 from dotflow.providers.tracer_default import TracerDefault
 
@@ -63,7 +63,7 @@ class Config:
         "storage": Storage,
         "notify": Notify,
         "log": Log,
-        "api": Api,
+        "server": Server,
         "scheduler": Scheduler,
         "tracer": Tracer,
         "metrics": Metrics,
@@ -74,7 +74,7 @@ class Config:
         storage: Storage | None = None,
         notify: Notify | None = None,
         log: Log | None = None,
-        api: Api | None = None,
+        server: Server | None = None,
         scheduler: Scheduler | None = None,
         tracer: Tracer | None = None,
         metrics: Metrics | None = None,
@@ -82,7 +82,7 @@ class Config:
         self.storage = storage if storage is not None else StorageDefault()
         self.notify = notify if notify is not None else NotifyDefault()
         self.log = log if log is not None else LogDefault()
-        self.api = api if api is not None else ApiDefault()
+        self.server = server if server is not None else ServerDefault()
         self.scheduler = (
             scheduler if scheduler is not None else SchedulerDefault()
         )
