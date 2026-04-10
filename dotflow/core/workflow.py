@@ -181,9 +181,14 @@ class Manager:
                 )
 
         if self.config:
+            wf_status = (
+                WorkflowStatus.FAILED
+                if failed
+                else WorkflowStatus.COMPLETED
+            )
             self.config.server.update_workflow(
                 workflow=self.workflow_id,
-                status=WorkflowStatus.COMPLETED,
+                status=wf_status,
             )
 
         if failed:
