@@ -90,6 +90,7 @@ class TaskEngine:
                 self.task.finished_at - self._start_time
             ).total_seconds()
             self.task.config.tracer.end_task(task=self.task)
+            self.task.config.server.update_task(task=self.task)
 
     def execute(self):
         """Executes the task function and returns the context."""
