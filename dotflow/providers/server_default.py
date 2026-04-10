@@ -76,14 +76,10 @@ class ServerDefault(Server):
         if not self.enabled:
             return
 
-        payload = {}
-        if status:
-            payload["status"] = status
-
         self._request(
             http_patch,
             f"{self.base_url}/workflows/{workflow}",
-            payload,
+            {"status": status},
         )
 
     def create_task(self, task: Any) -> None:
@@ -110,11 +106,8 @@ class ServerDefault(Server):
         if not self.enabled:
             return
 
-        payload = task.result()
-        payload["workflow_id"] = str(task.workflow_id)
-
         self._request(
             http_patch,
             f"{self.base_url}/tasks/{task.task_id}",
-            payload,
+            task.result(),
         )
