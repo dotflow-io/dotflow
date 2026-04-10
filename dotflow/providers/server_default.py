@@ -106,6 +106,7 @@ class ServerDefault(Server):
 
         self._request(
             http_patch,
-            f"{self.base_url}/tasks/{task.task_id}",
+            f"{self.base_url}/workflows/"
+            f"{task.workflow_id}/tasks/{task.task_id}",
             task.result(),
         )
