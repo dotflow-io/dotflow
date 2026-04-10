@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime
 from typing import Any, Optional
 from uuid import UUID
 
@@ -36,6 +37,9 @@ class SerializerTask(BaseModel):
     previous_context: Any = Field(default=None, alias="_previous_context")
     group_name: str = Field(default=None)
     retry_count: int = Field(default=0)
+    created_at: Optional[datetime] = Field(default=None)
+    started_at: Optional[datetime] = Field(default=None)
+    finished_at: Optional[datetime] = Field(default=None)
     errors: list[SerializerTaskError] = Field(
         default_factory=list, alias="_errors"
     )
