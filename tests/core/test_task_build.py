@@ -127,4 +127,16 @@ class TestTaskBuild(unittest.TestCase):
         task.add(step=action_step, initial_context=self.content)
 
         result = task.result()
-        self.assertEqual(result, expected_result)
+        task_result = result["tasks"][0]
+        self.assertEqual(
+            result["workflow_id"],
+            str(expected_workflow_id),
+        )
+        self.assertEqual(task_result["task_id"], 0)
+        self.assertEqual(task_result["status"], "Not started")
+        self.assertEqual(task_result["duration"], None)
+        self.assertEqual(task_result["retry_count"], 0)
+        self.assertEqual(task_result["group_name"], "default")
+        self.assertIn("created_at", task_result)
+        self.assertIn("started_at", task_result)
+        self.assertIn("finished_at", task_result)
