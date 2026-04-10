@@ -6,7 +6,13 @@ import json
 from typing import Any, Optional
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    computed_field,
+    field_validator,
+)
 
 from dotflow.core.context import Context
 
@@ -38,23 +44,28 @@ class SerializerTask(BaseModel):
         default="Context size exceeded", exclude=True
     )
 
+    @computed_field
+    @property
+    def error(self) -> Optional[SerializerTaskError]:
+        """Last error (convenience field)."""
+        return self.errors[-1] if self.errors else None
+
     def model_dump_json(self, **kwargs) -> str:
-        data = json.loads(
-            super().model_dump_json(serialize_as_any=True, **kwargs)
-        )
-        data["error"] = data["errors"][-1] if data["errors"] else None
+        data = self.model_dump(mode="json", serialize_as_any=True, **kwargs)
         dump_json = json.dumps(data)
 
-        if self.max and len(dump_json) > self.max:
-            data["initial_context"] = self.size_message
-            data["current_context"] = self.size_message
-            data["previous_context"] = self.size_message
-            dump_json = json.dumps(data)
+        if not self.max or len(dump_json) <= self.max:
+            return dump_json
 
-            if len(dump_json) > self.max:
-                data["errors"] = []
-                data["error"] = None
-                dump_json = json.dumps(data)
+        data["initial_context"] = self.size_message
+        data["current_context"] = self.size_message
+        data["previous_context"] = self.size_message
+        dump_json = json.dumps(data)
+
+        if len(dump_json) > self.max:
+            data["errors"] = []
+            data["error"] = None
+            dump_json = json.dumps(data)
 
         return dump_json
 
@@ -71,31 +82,34 @@ class SerializerTask(BaseModel):
         ]
 
     @field_validator(
-        "initial_context", "current_context", "previous_context", mode="before"
+        "initial_context",
+        "current_context",
+        "previous_context",
+        mode="before",
     )
     @classmethod
-    def context_validator(cls, value: str) -> str:
+    def context_validator(cls, value: Any) -> Any:
         if value and value.storage:
-            context = cls.context_loop(value=value)
-            return context
+            return cls._serialize_context(value)
         return None
 
     @classmethod
-    def format_context(cls, value):
-        try:
-            return json.dumps(value.storage)
-        except TypeError:
-            return str(value.storage)
-
-    @classmethod
-    def context_loop(cls, value):
-        if isinstance(value.storage, list):
+    def _serialize_context(cls, ctx: Context) -> Any:
+        """Serialize a Context to its storage value."""
+        if isinstance(ctx.storage, list):
             contexts = {}
-            if any(isinstance(context, Context) for context in value.storage):
-                for context in value.storage:
-                    if isinstance(context, Context):
-                        contexts[context.task_id] = cls.context_loop(context)
-                    else:
-                        contexts[context.task_id] = cls.format_context(context)
+            for item in ctx.storage:
+                if isinstance(item, Context):
+                    contexts[item.task_id] = cls._serialize_context(item)
+                else:
+                    contexts[item.task_id] = cls._format_storage(item)
             return contexts
-        return cls.format_context(value=value)
+        return cls._format_storage(ctx)
+
+    @staticmethod
+    def _format_storage(ctx: Context) -> Any:
+        """Format storage value as JSON string."""
+        try:
+            return json.dumps(ctx.storage)
+        except TypeError:
+            return str(ctx.storage)
