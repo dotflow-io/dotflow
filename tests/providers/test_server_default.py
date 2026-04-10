@@ -32,9 +32,7 @@ class TestServerDefaultInit(unittest.TestCase):
             base_url="http://localhost:8000/",
             user_token="token",
         )
-        self.assertEqual(
-            server.base_url, "http://localhost:8000"
-        )
+        self.assertEqual(server.base_url, "http://localhost:8000")
 
     def test_enabled_requires_both(self):
         s1 = ServerDefault(base_url="http://x")
@@ -43,9 +41,7 @@ class TestServerDefaultInit(unittest.TestCase):
         s2 = ServerDefault(user_token="t")
         self.assertFalse(s2.enabled)
 
-        s3 = ServerDefault(
-            base_url="http://x", user_token="t"
-        )
+        s3 = ServerDefault(base_url="http://x", user_token="t")
         self.assertTrue(s3.enabled)
 
 
@@ -54,13 +50,9 @@ class TestServerDefaultCreateWorkflow(unittest.TestCase):
         server = ServerDefault()
         server.create_workflow(workflow=uuid4())
 
-    @patch(
-        "dotflow.providers.server_default.http_post"
-    )
+    @patch("dotflow.providers.server_default.http_post")
     def test_posts_workflow(self, mock_post):
-        mock_post.return_value = MagicMock(
-            status_code=201
-        )
+        mock_post.return_value = MagicMock(status_code=201)
         server = ServerDefault(
             base_url="http://localhost:8000/api/v1",
             user_token="token",
@@ -88,13 +80,9 @@ class TestServerDefaultCreateTask(unittest.TestCase):
         server = ServerDefault()
         server.create_task(task=MagicMock())
 
-    @patch(
-        "dotflow.providers.server_default.http_post"
-    )
+    @patch("dotflow.providers.server_default.http_post")
     def test_posts_task(self, mock_post):
-        mock_post.return_value = MagicMock(
-            status_code=201
-        )
+        mock_post.return_value = MagicMock(status_code=201)
         server = ServerDefault(
             base_url="http://localhost:8000/api/v1",
             user_token="token",
@@ -115,26 +103,18 @@ class TestServerDefaultUpdateWorkflow(unittest.TestCase):
         server = ServerDefault()
         server.update_workflow(workflow=uuid4())
 
-    @patch(
-        "dotflow.providers.server_default.http_patch"
-    )
+    @patch("dotflow.providers.server_default.http_patch")
     def test_patches_workflow(self, mock_patch):
-        mock_patch.return_value = MagicMock(
-            status_code=200
-        )
+        mock_patch.return_value = MagicMock(status_code=200)
         server = ServerDefault(
             base_url="http://localhost:8000/api/v1",
             user_token="token",
         )
         uid = uuid4()
-        server.update_workflow(
-            workflow=uid, status="Completed"
-        )
+        server.update_workflow(workflow=uid, status="Completed")
         mock_patch.assert_called_once()
         payload = mock_patch.call_args[1]["json"]
-        self.assertEqual(
-            payload["status"], "Completed"
-        )
+        self.assertEqual(payload["status"], "Completed")
 
 
 class TestServerDefaultUpdateTask(unittest.TestCase):
@@ -142,41 +122,29 @@ class TestServerDefaultUpdateTask(unittest.TestCase):
         server = ServerDefault()
         server.update_task(task=MagicMock())
 
-    @patch(
-        "dotflow.providers.server_default.http_patch"
-    )
+    @patch("dotflow.providers.server_default.http_patch")
     def test_patches_task(self, mock_patch):
-        mock_patch.return_value = MagicMock(
-            status_code=200
-        )
+        mock_patch.return_value = MagicMock(status_code=200)
         server = ServerDefault(
             base_url="http://localhost:8000/api/v1",
             user_token="token",
         )
         task = MagicMock()
         task.task_id = 1
-        task.result.return_value = {
-            "status": "Completed"
-        }
+        task.result.return_value = {"status": "Completed"}
         server.update_task(task=task)
         mock_patch.assert_called_once()
 
-    @patch(
-        "dotflow.providers.server_default.http_patch"
-    )
+    @patch("dotflow.providers.server_default.http_patch")
     def test_sends_result(self, mock_patch):
-        mock_patch.return_value = MagicMock(
-            status_code=200
-        )
+        mock_patch.return_value = MagicMock(status_code=200)
         server = ServerDefault(
             base_url="http://localhost:8000/api/v1",
             user_token="token",
         )
         task = MagicMock()
         task.task_id = 5
-        task.result.return_value = {
-            "status": "Failed"
-        }
+        task.result.return_value = {"status": "Failed"}
         server.update_task(task=task)
         mock_patch.assert_called_once()
         payload = mock_patch.call_args[1]["json"]

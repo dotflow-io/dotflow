@@ -32,9 +32,7 @@ class ServerDefault(Server):
         self.base_url = base_url.rstrip("/")
         self.user_token = user_token
         self.timeout = timeout
-        self.enabled = bool(
-            self.base_url and self.user_token
-        )
+        self.enabled = bool(self.base_url and self.user_token)
 
     def _headers(self) -> dict[str, str]:
         return {
@@ -54,7 +52,8 @@ class ServerDefault(Server):
         except Exception as error:
             logger.error(
                 "Server %s failed: %s",
-                url, str(error),
+                url,
+                str(error),
             )
 
     def create_workflow(self, workflow: Any) -> None:
@@ -72,9 +71,7 @@ class ServerDefault(Server):
             },
         )
 
-    def update_workflow(
-        self, workflow: Any, status: str = ""
-    ) -> None:
+    def update_workflow(self, workflow: Any, status: str = "") -> None:
         """Update workflow status (synchronous)."""
         if not self.enabled:
             return
@@ -85,8 +82,7 @@ class ServerDefault(Server):
 
         self._request(
             http_patch,
-            f"{self.base_url}/workflows/"
-            f"{workflow}",
+            f"{self.base_url}/workflows/{workflow}",
             payload,
         )
 
@@ -99,18 +95,13 @@ class ServerDefault(Server):
             "id": task.task_id,
             "step": str(task.step),
             "callback": str(task.callback),
-            "initial_context": (
-                task.initial_context.storage
-            ),
-            "group_name": (
-                task.group_name or "default"
-            ),
+            "initial_context": (task.initial_context.storage),
+            "group_name": (task.group_name or "default"),
         }
 
         self._request(
             http_post,
-            f"{self.base_url}/workflows/"
-            f"{task.workflow_id}/tasks",
+            f"{self.base_url}/workflows/{task.workflow_id}/tasks",
             payload,
         )
 

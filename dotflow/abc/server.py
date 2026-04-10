@@ -18,9 +18,7 @@ class Server(ABC):
         """Register a new workflow on the remote server."""
 
     @abstractmethod
-    def update_workflow(
-        self, workflow: Any, status: str = ""
-    ) -> None:
+    def update_workflow(self, workflow: Any, status: str = "") -> None:
         """Update workflow status on the remote server."""
 
     @abstractmethod
