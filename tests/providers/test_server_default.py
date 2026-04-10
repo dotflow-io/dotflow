@@ -12,7 +12,7 @@ class TestServerDefaultInit(unittest.TestCase):
         server = ServerDefault()
         self.assertEqual(server.base_url, "")
         self.assertEqual(server.user_token, "")
-        self.assertEqual(server.timeout, 1.0)
+        self.assertEqual(server.timeout, 5.0)
         self.assertFalse(server.enabled)
 
     def test_with_args(self):
@@ -108,6 +108,33 @@ class TestServerDefaultCreateTask(unittest.TestCase):
         task.group_name = "default"
         server.create_task(task=task)
         mock_post.assert_called_once()
+
+
+class TestServerDefaultUpdateWorkflow(unittest.TestCase):
+    def test_skips_when_disabled(self):
+        server = ServerDefault()
+        server.update_workflow(workflow=uuid4())
+
+    @patch(
+        "dotflow.providers.server_default.http_patch"
+    )
+    def test_patches_workflow(self, mock_patch):
+        mock_patch.return_value = MagicMock(
+            status_code=200
+        )
+        server = ServerDefault(
+            base_url="http://localhost:8000/api/v1",
+            user_token="token",
+        )
+        uid = uuid4()
+        server.update_workflow(
+            workflow=uid, status="Completed"
+        )
+        mock_patch.assert_called_once()
+        payload = mock_patch.call_args[1]["json"]
+        self.assertEqual(
+            payload["status"], "Completed"
+        )
 
 
 class TestServerDefaultUpdateTask(unittest.TestCase):
