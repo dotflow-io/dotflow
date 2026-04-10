@@ -6917,7 +6917,7 @@
 </span></code></pre></div>
 <h2 id="important">Important<a class="headerlink" href="#important" title="Permanent link">&para;</a></h2>
 <ul>
-<li>The schedule expression is configured during project creation</li>
+<li>Use standard cron format (e.g. <code>0 */6 * * *</code>). Dotflow converts to AWS EventBridge format automatically</li>
 <li>The stack creates its own ECS cluster, IAM roles, log group, and security group</li>
 <li>You need to provide <code>SubnetId</code> and <code>VpcId</code> as parameters</li>
 </ul>

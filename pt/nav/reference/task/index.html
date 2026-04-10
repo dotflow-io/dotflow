@@ -4936,6 +4936,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#dotflow.core.task.Task.created_at" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;created_at
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#dotflow.core.task.Task.current_context" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4980,6 +4991,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#dotflow.core.task.Task.finished_at" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;finished_at
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#dotflow.core.task.Task.group_name" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5006,6 +5028,17 @@
     <span class="md-ellipsis">
       
         <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;previous_context
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dotflow.core.task.Task.started_at" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;started_at
       
     </span>
   </a>
@@ -6897,6 +6930,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#dotflow.core.task.Task.created_at" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;created_at
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#dotflow.core.task.Task.current_context" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -6941,6 +6985,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#dotflow.core.task.Task.finished_at" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;finished_at
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#dotflow.core.task.Task.group_name" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -6967,6 +7022,17 @@
     <span class="md-ellipsis">
       
         <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;previous_context
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dotflow.core.task.Task.started_at" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;started_at
       
     </span>
   </a>
@@ -7301,8 +7367,7 @@ which is basically a function. You can see in this
 
               <details class="quote">
                 <summary>Source code in <code>dotflow/core/task.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 47</span>
-<span class="normal"> 48</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 48</span>
 <span class="normal"> 49</span>
 <span class="normal"> 50</span>
 <span class="normal"> 51</span>
@@ -7532,238 +7597,245 @@ which is basically a function. You can see in this
 <span class="normal">275</span>
 <span class="normal">276</span>
 <span class="normal">277</span>
-<span class="normal">278</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-47"><span class="k">class</span><span class="w"> </span><span class="nc">Task</span><span class="p">(</span><span class="n">TaskInstance</span><span class="p">):</span>
-</span><span id="__span-0-48"><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-0-49"><span class="sd">    Import:</span>
-</span><span id="__span-0-50"><span class="sd">        You can import the **Task** class directly from dotflow:</span>
-</span><span id="__span-0-51">
-</span><span id="__span-0-52"><span class="sd">            from dotflow import Task</span>
-</span><span id="__span-0-53">
-</span><span id="__span-0-54"><span class="sd">    Example:</span>
-</span><span id="__span-0-55"><span class="sd">        `class` dotflow.core.task.Task</span>
-</span><span id="__span-0-56">
-</span><span id="__span-0-57"><span class="sd">            task = Task(</span>
-</span><span id="__span-0-58"><span class="sd">                task_id=1,</span>
-</span><span id="__span-0-59"><span class="sd">                step=my_step,</span>
-</span><span id="__span-0-60"><span class="sd">                callback=my_callback</span>
-</span><span id="__span-0-61"><span class="sd">            )</span>
-</span><span id="__span-0-62">
-</span><span id="__span-0-63"><span class="sd">    Args:</span>
-</span><span id="__span-0-64"><span class="sd">        task_id (int): Task ID.</span>
-</span><span id="__span-0-65">
-</span><span id="__span-0-66"><span class="sd">        step (Callable):</span>
-</span><span id="__span-0-67"><span class="sd">            A argument that receives an object of the callable type,</span>
-</span><span id="__span-0-68"><span class="sd">            which is basically a function. You can see in this</span>
-</span><span id="__span-0-69"><span class="sd">            [example](https://dotflow-io.github.io/dotflow/#3-task-function).</span>
-</span><span id="__span-0-70">
-</span><span id="__span-0-71"><span class="sd">        callback (Callable):</span>
-</span><span id="__span-0-72"><span class="sd">            Any callable object that receives **args** or **kwargs**,</span>
-</span><span id="__span-0-73"><span class="sd">            which is basically a function. You can see in this</span>
-</span><span id="__span-0-74"><span class="sd">            [example](https://dotflow-io.github.io/dotflow/#2-callback-function).</span>
-</span><span id="__span-0-75">
-</span><span id="__span-0-76"><span class="sd">        initial_context (Any): Any python object.</span>
-</span><span id="__span-0-77">
-</span><span id="__span-0-78"><span class="sd">        workflow_id (UUID): Workflow ID.</span>
-</span><span id="__span-0-79">
-</span><span id="__span-0-80"><span class="sd">        config (Config): Configuration class.</span>
-</span><span id="__span-0-81">
-</span><span id="__span-0-82"><span class="sd">        group_name (str): Group name of tasks.</span>
-</span><span id="__span-0-83"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-84">
-</span><span id="__span-0-85">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-</span><span id="__span-0-86">        <span class="bp">self</span><span class="p">,</span>
-</span><span id="__span-0-87">        <span class="n">task_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-</span><span id="__span-0-88">        <span class="n">step</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
-</span><span id="__span-0-89">        <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="n">basic_callback</span><span class="p">,</span>
-</span><span id="__span-0-90">        <span class="n">initial_context</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="__span-0-91">        <span class="n">workflow_id</span><span class="p">:</span> <span class="n">UUID</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="__span-0-92">        <span class="n">config</span><span class="p">:</span> <span class="n">Config</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="__span-0-93">        <span class="n">group_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
-</span><span id="__span-0-94">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-95">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
-</span><span id="__span-0-96">            <span class="n">task_id</span><span class="p">,</span>
-</span><span id="__span-0-97">            <span class="n">step</span><span class="p">,</span>
-</span><span id="__span-0-98">            <span class="n">callback</span><span class="p">,</span>
-</span><span id="__span-0-99">            <span class="n">initial_context</span><span class="p">,</span>
-</span><span id="__span-0-100">            <span class="n">workflow_id</span><span class="p">,</span>
-</span><span id="__span-0-101">            <span class="n">config</span><span class="p">,</span>
-</span><span id="__span-0-102">            <span class="n">group_name</span><span class="p">,</span>
-</span><span id="__span-0-103">        <span class="p">)</span>
-</span><span id="__span-0-104">        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span>
-</span><span id="__span-0-105">        <span class="bp">self</span><span class="o">.</span><span class="n">group_name</span> <span class="o">=</span> <span class="n">group_name</span>
-</span><span id="__span-0-106">        <span class="bp">self</span><span class="o">.</span><span class="n">task_id</span> <span class="o">=</span> <span class="n">task_id</span>
-</span><span id="__span-0-107">        <span class="bp">self</span><span class="o">.</span><span class="n">workflow_id</span> <span class="o">=</span> <span class="n">workflow_id</span>
-</span><span id="__span-0-108">        <span class="bp">self</span><span class="o">.</span><span class="n">step</span> <span class="o">=</span> <span class="n">step</span>
-</span><span id="__span-0-109">        <span class="bp">self</span><span class="o">.</span><span class="n">callback</span> <span class="o">=</span> <span class="n">callback</span>
-</span><span id="__span-0-110">        <span class="bp">self</span><span class="o">.</span><span class="n">initial_context</span> <span class="o">=</span> <span class="n">initial_context</span>
-</span><span id="__span-0-111">        <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">TypeStatus</span><span class="o">.</span><span class="n">NOT_STARTED</span>
-</span><span id="__span-0-112">        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
-</span><span id="__span-0-113">
-</span><span id="__span-0-114">    <span class="nd">@property</span>
-</span><span id="__span-0-115">    <span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-116">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_step</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-48"><span class="k">class</span><span class="w"> </span><span class="nc">Task</span><span class="p">(</span><span class="n">TaskInstance</span><span class="p">):</span>
+</span><span id="__span-0-49"><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="__span-0-50"><span class="sd">    Import:</span>
+</span><span id="__span-0-51"><span class="sd">        You can import the **Task** class directly from dotflow:</span>
+</span><span id="__span-0-52">
+</span><span id="__span-0-53"><span class="sd">            from dotflow import Task</span>
+</span><span id="__span-0-54">
+</span><span id="__span-0-55"><span class="sd">    Example:</span>
+</span><span id="__span-0-56"><span class="sd">        `class` dotflow.core.task.Task</span>
+</span><span id="__span-0-57">
+</span><span id="__span-0-58"><span class="sd">            task = Task(</span>
+</span><span id="__span-0-59"><span class="sd">                task_id=1,</span>
+</span><span id="__span-0-60"><span class="sd">                step=my_step,</span>
+</span><span id="__span-0-61"><span class="sd">                callback=my_callback</span>
+</span><span id="__span-0-62"><span class="sd">            )</span>
+</span><span id="__span-0-63">
+</span><span id="__span-0-64"><span class="sd">    Args:</span>
+</span><span id="__span-0-65"><span class="sd">        task_id (int): Task ID.</span>
+</span><span id="__span-0-66">
+</span><span id="__span-0-67"><span class="sd">        step (Callable):</span>
+</span><span id="__span-0-68"><span class="sd">            A argument that receives an object of the callable type,</span>
+</span><span id="__span-0-69"><span class="sd">            which is basically a function. You can see in this</span>
+</span><span id="__span-0-70"><span class="sd">            [example](https://dotflow-io.github.io/dotflow/#3-task-function).</span>
+</span><span id="__span-0-71">
+</span><span id="__span-0-72"><span class="sd">        callback (Callable):</span>
+</span><span id="__span-0-73"><span class="sd">            Any callable object that receives **args** or **kwargs**,</span>
+</span><span id="__span-0-74"><span class="sd">            which is basically a function. You can see in this</span>
+</span><span id="__span-0-75"><span class="sd">            [example](https://dotflow-io.github.io/dotflow/#2-callback-function).</span>
+</span><span id="__span-0-76">
+</span><span id="__span-0-77"><span class="sd">        initial_context (Any): Any python object.</span>
+</span><span id="__span-0-78">
+</span><span id="__span-0-79"><span class="sd">        workflow_id (UUID): Workflow ID.</span>
+</span><span id="__span-0-80">
+</span><span id="__span-0-81"><span class="sd">        config (Config): Configuration class.</span>
+</span><span id="__span-0-82">
+</span><span id="__span-0-83"><span class="sd">        group_name (str): Group name of tasks.</span>
+</span><span id="__span-0-84"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-0-85">
+</span><span id="__span-0-86">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+</span><span id="__span-0-87">        <span class="bp">self</span><span class="p">,</span>
+</span><span id="__span-0-88">        <span class="n">task_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+</span><span id="__span-0-89">        <span class="n">step</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+</span><span id="__span-0-90">        <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="n">basic_callback</span><span class="p">,</span>
+</span><span id="__span-0-91">        <span class="n">initial_context</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-92">        <span class="n">workflow_id</span><span class="p">:</span> <span class="n">UUID</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-93">        <span class="n">config</span><span class="p">:</span> <span class="n">Config</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-94">        <span class="n">group_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+</span><span id="__span-0-95">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-96">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+</span><span id="__span-0-97">            <span class="n">task_id</span><span class="p">,</span>
+</span><span id="__span-0-98">            <span class="n">step</span><span class="p">,</span>
+</span><span id="__span-0-99">            <span class="n">callback</span><span class="p">,</span>
+</span><span id="__span-0-100">            <span class="n">initial_context</span><span class="p">,</span>
+</span><span id="__span-0-101">            <span class="n">workflow_id</span><span class="p">,</span>
+</span><span id="__span-0-102">            <span class="n">config</span><span class="p">,</span>
+</span><span id="__span-0-103">            <span class="n">group_name</span><span class="p">,</span>
+</span><span id="__span-0-104">        <span class="p">)</span>
+</span><span id="__span-0-105">        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span>
+</span><span id="__span-0-106">        <span class="bp">self</span><span class="o">.</span><span class="n">group_name</span> <span class="o">=</span> <span class="n">group_name</span>
+</span><span id="__span-0-107">        <span class="bp">self</span><span class="o">.</span><span class="n">task_id</span> <span class="o">=</span> <span class="n">task_id</span>
+</span><span id="__span-0-108">        <span class="bp">self</span><span class="o">.</span><span class="n">workflow_id</span> <span class="o">=</span> <span class="n">workflow_id</span>
+</span><span id="__span-0-109">        <span class="bp">self</span><span class="o">.</span><span class="n">step</span> <span class="o">=</span> <span class="n">step</span>
+</span><span id="__span-0-110">        <span class="bp">self</span><span class="o">.</span><span class="n">callback</span> <span class="o">=</span> <span class="n">callback</span>
+</span><span id="__span-0-111">        <span class="bp">self</span><span class="o">.</span><span class="n">initial_context</span> <span class="o">=</span> <span class="n">initial_context</span>
+</span><span id="__span-0-112">        <span class="bp">self</span><span class="o">.</span><span class="n">created_at</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+</span><span id="__span-0-113">        <span class="bp">self</span><span class="o">.</span><span class="n">started_at</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="__span-0-114">        <span class="bp">self</span><span class="o">.</span><span class="n">finished_at</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="__span-0-115">        <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">TypeStatus</span><span class="o">.</span><span class="n">NOT_STARTED</span>
+</span><span id="__span-0-116">        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
 </span><span id="__span-0-117">
-</span><span id="__span-0-118">    <span class="nd">@step</span><span class="o">.</span><span class="n">setter</span>
-</span><span id="__span-0-119">    <span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Callable</span><span class="p">):</span>
-</span><span id="__span-0-120">        <span class="n">new_step</span> <span class="o">=</span> <span class="n">value</span>
+</span><span id="__span-0-118">    <span class="nd">@property</span>
+</span><span id="__span-0-119">    <span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-0-120">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_step</span>
 </span><span id="__span-0-121">
-</span><span id="__span-0-122">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="__span-0-123">            <span class="n">new_step</span> <span class="o">=</span> <span class="n">Module</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
-</span><span id="__span-0-124">
-</span><span id="__span-0-125">        <span class="k">if</span> <span class="n">new_step</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">!=</span> <span class="n">Action</span><span class="o">.</span><span class="vm">__module__</span><span class="p">:</span>
-</span><span id="__span-0-126">            <span class="k">raise</span> <span class="n">MissingActionDecorator</span><span class="p">()</span>
-</span><span id="__span-0-127">
-</span><span id="__span-0-128">        <span class="bp">self</span><span class="o">.</span><span class="n">_step</span> <span class="o">=</span> <span class="n">new_step</span>
-</span><span id="__span-0-129">
-</span><span id="__span-0-130">    <span class="nd">@property</span>
-</span><span id="__span-0-131">    <span class="k">def</span><span class="w"> </span><span class="nf">callback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-132">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_callback</span>
+</span><span id="__span-0-122">    <span class="nd">@step</span><span class="o">.</span><span class="n">setter</span>
+</span><span id="__span-0-123">    <span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Callable</span><span class="p">):</span>
+</span><span id="__span-0-124">        <span class="n">new_step</span> <span class="o">=</span> <span class="n">value</span>
+</span><span id="__span-0-125">
+</span><span id="__span-0-126">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="__span-0-127">            <span class="n">new_step</span> <span class="o">=</span> <span class="n">Module</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+</span><span id="__span-0-128">
+</span><span id="__span-0-129">        <span class="k">if</span> <span class="n">new_step</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">!=</span> <span class="n">Action</span><span class="o">.</span><span class="vm">__module__</span><span class="p">:</span>
+</span><span id="__span-0-130">            <span class="k">raise</span> <span class="n">MissingActionDecorator</span><span class="p">()</span>
+</span><span id="__span-0-131">
+</span><span id="__span-0-132">        <span class="bp">self</span><span class="o">.</span><span class="n">_step</span> <span class="o">=</span> <span class="n">new_step</span>
 </span><span id="__span-0-133">
-</span><span id="__span-0-134">    <span class="nd">@callback</span><span class="o">.</span><span class="n">setter</span>
-</span><span id="__span-0-135">    <span class="k">def</span><span class="w"> </span><span class="nf">callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Callable</span><span class="p">):</span>
-</span><span id="__span-0-136">        <span class="n">new_callback</span> <span class="o">=</span> <span class="n">value</span>
+</span><span id="__span-0-134">    <span class="nd">@property</span>
+</span><span id="__span-0-135">    <span class="k">def</span><span class="w"> </span><span class="nf">callback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-0-136">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_callback</span>
 </span><span id="__span-0-137">
-</span><span id="__span-0-138">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="__span-0-139">            <span class="n">new_callback</span> <span class="o">=</span> <span class="n">Module</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
-</span><span id="__span-0-140">
-</span><span id="__span-0-141">        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">new_callback</span><span class="p">,</span> <span class="n">Callable</span><span class="p">):</span>
-</span><span id="__span-0-142">            <span class="k">raise</span> <span class="n">NotCallableObject</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">new_callback</span><span class="p">))</span>
-</span><span id="__span-0-143">
-</span><span id="__span-0-144">        <span class="bp">self</span><span class="o">.</span><span class="n">_callback</span> <span class="o">=</span> <span class="n">new_callback</span>
-</span><span id="__span-0-145">
-</span><span id="__span-0-146">    <span class="nd">@property</span>
-</span><span id="__span-0-147">    <span class="k">def</span><span class="w"> </span><span class="nf">previous_context</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-148">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_previous_context</span><span class="p">:</span>
-</span><span id="__span-0-149">            <span class="k">return</span> <span class="n">Context</span><span class="p">()</span>
-</span><span id="__span-0-150">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_previous_context</span>
-</span><span id="__span-0-151">
-</span><span id="__span-0-152">    <span class="nd">@previous_context</span><span class="o">.</span><span class="n">setter</span>
-</span><span id="__span-0-153">    <span class="k">def</span><span class="w"> </span><span class="nf">previous_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Context</span><span class="p">):</span>
-</span><span id="__span-0-154">        <span class="bp">self</span><span class="o">.</span><span class="n">_previous_context</span> <span class="o">=</span> <span class="n">Context</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</span><span id="__span-0-138">    <span class="nd">@callback</span><span class="o">.</span><span class="n">setter</span>
+</span><span id="__span-0-139">    <span class="k">def</span><span class="w"> </span><span class="nf">callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Callable</span><span class="p">):</span>
+</span><span id="__span-0-140">        <span class="n">new_callback</span> <span class="o">=</span> <span class="n">value</span>
+</span><span id="__span-0-141">
+</span><span id="__span-0-142">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="__span-0-143">            <span class="n">new_callback</span> <span class="o">=</span> <span class="n">Module</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+</span><span id="__span-0-144">
+</span><span id="__span-0-145">        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">new_callback</span><span class="p">,</span> <span class="n">Callable</span><span class="p">):</span>
+</span><span id="__span-0-146">            <span class="k">raise</span> <span class="n">NotCallableObject</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">new_callback</span><span class="p">))</span>
+</span><span id="__span-0-147">
+</span><span id="__span-0-148">        <span class="bp">self</span><span class="o">.</span><span class="n">_callback</span> <span class="o">=</span> <span class="n">new_callback</span>
+</span><span id="__span-0-149">
+</span><span id="__span-0-150">    <span class="nd">@property</span>
+</span><span id="__span-0-151">    <span class="k">def</span><span class="w"> </span><span class="nf">previous_context</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-0-152">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_previous_context</span><span class="p">:</span>
+</span><span id="__span-0-153">            <span class="k">return</span> <span class="n">Context</span><span class="p">()</span>
+</span><span id="__span-0-154">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_previous_context</span>
 </span><span id="__span-0-155">
-</span><span id="__span-0-156">    <span class="nd">@property</span>
-</span><span id="__span-0-157">    <span class="k">def</span><span class="w"> </span><span class="nf">initial_context</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-158">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initial_context</span><span class="p">:</span>
-</span><span id="__span-0-159">            <span class="k">return</span> <span class="n">Context</span><span class="p">()</span>
-</span><span id="__span-0-160">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initial_context</span>
-</span><span id="__span-0-161">
-</span><span id="__span-0-162">    <span class="nd">@initial_context</span><span class="o">.</span><span class="n">setter</span>
-</span><span id="__span-0-163">    <span class="k">def</span><span class="w"> </span><span class="nf">initial_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Context</span><span class="p">):</span>
-</span><span id="__span-0-164">        <span class="bp">self</span><span class="o">.</span><span class="n">_initial_context</span> <span class="o">=</span> <span class="n">Context</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</span><span id="__span-0-156">    <span class="nd">@previous_context</span><span class="o">.</span><span class="n">setter</span>
+</span><span id="__span-0-157">    <span class="k">def</span><span class="w"> </span><span class="nf">previous_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Context</span><span class="p">):</span>
+</span><span id="__span-0-158">        <span class="bp">self</span><span class="o">.</span><span class="n">_previous_context</span> <span class="o">=</span> <span class="n">Context</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</span><span id="__span-0-159">
+</span><span id="__span-0-160">    <span class="nd">@property</span>
+</span><span id="__span-0-161">    <span class="k">def</span><span class="w"> </span><span class="nf">initial_context</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-0-162">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initial_context</span><span class="p">:</span>
+</span><span id="__span-0-163">            <span class="k">return</span> <span class="n">Context</span><span class="p">()</span>
+</span><span id="__span-0-164">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initial_context</span>
 </span><span id="__span-0-165">
-</span><span id="__span-0-166">    <span class="nd">@property</span>
-</span><span id="__span-0-167">    <span class="k">def</span><span class="w"> </span><span class="nf">current_context</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-168">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_context</span><span class="p">:</span>
-</span><span id="__span-0-169">            <span class="k">return</span> <span class="n">Context</span><span class="p">()</span>
-</span><span id="__span-0-170">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_context</span>
-</span><span id="__span-0-171">
-</span><span id="__span-0-172">    <span class="nd">@current_context</span><span class="o">.</span><span class="n">setter</span>
-</span><span id="__span-0-173">    <span class="k">def</span><span class="w"> </span><span class="nf">current_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Context</span><span class="p">):</span>
-</span><span id="__span-0-174">        <span class="bp">self</span><span class="o">.</span><span class="n">_current_context</span> <span class="o">=</span> <span class="n">Context</span><span class="p">(</span>
-</span><span id="__span-0-175">            <span class="n">task_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">task_id</span><span class="p">,</span> <span class="n">workflow_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">workflow_id</span><span class="p">,</span> <span class="n">storage</span><span class="o">=</span><span class="n">value</span>
-</span><span id="__span-0-176">        <span class="p">)</span>
-</span><span id="__span-0-177">
-</span><span id="__span-0-178">        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
-</span><span id="__span-0-179">            <span class="n">key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">),</span>
-</span><span id="__span-0-180">            <span class="n">context</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">current_context</span><span class="p">,</span>
-</span><span id="__span-0-181">        <span class="p">)</span>
-</span><span id="__span-0-182">
-</span><span id="__span-0-183">    <span class="nd">@property</span>
-</span><span id="__span-0-184">    <span class="k">def</span><span class="w"> </span><span class="nf">duration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-185">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_duration</span>
+</span><span id="__span-0-166">    <span class="nd">@initial_context</span><span class="o">.</span><span class="n">setter</span>
+</span><span id="__span-0-167">    <span class="k">def</span><span class="w"> </span><span class="nf">initial_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Context</span><span class="p">):</span>
+</span><span id="__span-0-168">        <span class="bp">self</span><span class="o">.</span><span class="n">_initial_context</span> <span class="o">=</span> <span class="n">Context</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</span><span id="__span-0-169">
+</span><span id="__span-0-170">    <span class="nd">@property</span>
+</span><span id="__span-0-171">    <span class="k">def</span><span class="w"> </span><span class="nf">current_context</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-0-172">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_context</span><span class="p">:</span>
+</span><span id="__span-0-173">            <span class="k">return</span> <span class="n">Context</span><span class="p">()</span>
+</span><span id="__span-0-174">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_context</span>
+</span><span id="__span-0-175">
+</span><span id="__span-0-176">    <span class="nd">@current_context</span><span class="o">.</span><span class="n">setter</span>
+</span><span id="__span-0-177">    <span class="k">def</span><span class="w"> </span><span class="nf">current_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Context</span><span class="p">):</span>
+</span><span id="__span-0-178">        <span class="bp">self</span><span class="o">.</span><span class="n">_current_context</span> <span class="o">=</span> <span class="n">Context</span><span class="p">(</span>
+</span><span id="__span-0-179">            <span class="n">task_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">task_id</span><span class="p">,</span> <span class="n">workflow_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">workflow_id</span><span class="p">,</span> <span class="n">storage</span><span class="o">=</span><span class="n">value</span>
+</span><span id="__span-0-180">        <span class="p">)</span>
+</span><span id="__span-0-181">
+</span><span id="__span-0-182">        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+</span><span id="__span-0-183">            <span class="n">key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">),</span>
+</span><span id="__span-0-184">            <span class="n">context</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">current_context</span><span class="p">,</span>
+</span><span id="__span-0-185">        <span class="p">)</span>
 </span><span id="__span-0-186">
-</span><span id="__span-0-187">    <span class="nd">@duration</span><span class="o">.</span><span class="n">setter</span>
-</span><span id="__span-0-188">    <span class="k">def</span><span class="w"> </span><span class="nf">duration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-</span><span id="__span-0-189">        <span class="bp">self</span><span class="o">.</span><span class="n">_duration</span> <span class="o">=</span> <span class="n">value</span>
+</span><span id="__span-0-187">    <span class="nd">@property</span>
+</span><span id="__span-0-188">    <span class="k">def</span><span class="w"> </span><span class="nf">duration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-0-189">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_duration</span>
 </span><span id="__span-0-190">
-</span><span id="__span-0-191">    <span class="nd">@property</span>
-</span><span id="__span-0-192">    <span class="k">def</span><span class="w"> </span><span class="nf">errors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-193">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-194">            <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-0-195">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span>
-</span><span id="__span-0-196">
-</span><span id="__span-0-197">    <span class="nd">@errors</span><span class="o">.</span><span class="n">setter</span>
-</span><span id="__span-0-198">    <span class="k">def</span><span class="w"> </span><span class="nf">errors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-199">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-</span><span id="__span-0-200">            <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span> <span class="o">=</span> <span class="n">value</span>
-</span><span id="__span-0-201">            <span class="k">return</span>
-</span><span id="__span-0-202">
-</span><span id="__span-0-203">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-204">            <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-0-205">
-</span><span id="__span-0-206">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">TaskError</span><span class="p">):</span>
-</span><span id="__span-0-207">            <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-</span><span id="__span-0-208">        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="ne">Exception</span><span class="p">):</span>
-</span><span id="__span-0-209">            <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TaskError</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
-</span><span id="__span-0-210">
-</span><span id="__span-0-211">    <span class="nd">@property</span>
-</span><span id="__span-0-212">    <span class="k">def</span><span class="w"> </span><span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-213">        <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+</span><span id="__span-0-191">    <span class="nd">@duration</span><span class="o">.</span><span class="n">setter</span>
+</span><span id="__span-0-192">    <span class="k">def</span><span class="w"> </span><span class="nf">duration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+</span><span id="__span-0-193">        <span class="bp">self</span><span class="o">.</span><span class="n">_duration</span> <span class="o">=</span> <span class="n">value</span>
+</span><span id="__span-0-194">
+</span><span id="__span-0-195">    <span class="nd">@property</span>
+</span><span id="__span-0-196">    <span class="k">def</span><span class="w"> </span><span class="nf">errors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-0-197">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-198">            <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-0-199">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span>
+</span><span id="__span-0-200">
+</span><span id="__span-0-201">    <span class="nd">@errors</span><span class="o">.</span><span class="n">setter</span>
+</span><span id="__span-0-202">    <span class="k">def</span><span class="w"> </span><span class="nf">errors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-203">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+</span><span id="__span-0-204">            <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span> <span class="o">=</span> <span class="n">value</span>
+</span><span id="__span-0-205">            <span class="k">return</span>
+</span><span id="__span-0-206">
+</span><span id="__span-0-207">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-208">            <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-0-209">
+</span><span id="__span-0-210">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">TaskError</span><span class="p">):</span>
+</span><span id="__span-0-211">            <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</span><span id="__span-0-212">        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="ne">Exception</span><span class="p">):</span>
+</span><span id="__span-0-213">            <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TaskError</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 </span><span id="__span-0-214">
-</span><span id="__span-0-215">        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-</span><span id="__span-0-216">            <span class="s2">&quot;&#39;error&#39; is deprecated, use &#39;errors&#39; instead. &quot;</span>
-</span><span id="__span-0-217">            <span class="s2">&quot;Note: &#39;TaskError.exception&#39; is now a string &quot;</span>
-</span><span id="__span-0-218">            <span class="s2">&quot;(e.g. &#39;ValueError&#39;), not an Exception object.&quot;</span><span class="p">,</span>
-</span><span id="__span-0-219">            <span class="ne">DeprecationWarning</span><span class="p">,</span>
-</span><span id="__span-0-220">            <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-</span><span id="__span-0-221">        <span class="p">)</span>
-</span><span id="__span-0-222">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="p">:</span>
-</span><span id="__span-0-223">            <span class="k">return</span> <span class="n">TaskError</span><span class="p">()</span>
-</span><span id="__span-0-224">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-</span><span id="__span-0-225">
-</span><span id="__span-0-226">    <span class="nd">@error</span><span class="o">.</span><span class="n">setter</span>
-</span><span id="__span-0-227">    <span class="k">def</span><span class="w"> </span><span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-228">        <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+</span><span id="__span-0-215">    <span class="nd">@property</span>
+</span><span id="__span-0-216">    <span class="k">def</span><span class="w"> </span><span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-0-217">        <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+</span><span id="__span-0-218">
+</span><span id="__span-0-219">        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+</span><span id="__span-0-220">            <span class="s2">&quot;&#39;error&#39; is deprecated, use &#39;errors&#39; instead. &quot;</span>
+</span><span id="__span-0-221">            <span class="s2">&quot;Note: &#39;TaskError.exception&#39; is now a string &quot;</span>
+</span><span id="__span-0-222">            <span class="s2">&quot;(e.g. &#39;ValueError&#39;), not an Exception object.&quot;</span><span class="p">,</span>
+</span><span id="__span-0-223">            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+</span><span id="__span-0-224">            <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+</span><span id="__span-0-225">        <span class="p">)</span>
+</span><span id="__span-0-226">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="p">:</span>
+</span><span id="__span-0-227">            <span class="k">return</span> <span class="n">TaskError</span><span class="p">()</span>
+</span><span id="__span-0-228">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </span><span id="__span-0-229">
-</span><span id="__span-0-230">        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-</span><span id="__span-0-231">            <span class="s2">&quot;&#39;error&#39; is deprecated, use &#39;errors&#39; instead. &quot;</span>
-</span><span id="__span-0-232">            <span class="s2">&quot;Note: &#39;TaskError.exception&#39; is now a string &quot;</span>
-</span><span id="__span-0-233">            <span class="s2">&quot;(e.g. &#39;ValueError&#39;), not an Exception object.&quot;</span><span class="p">,</span>
-</span><span id="__span-0-234">            <span class="ne">DeprecationWarning</span><span class="p">,</span>
-</span><span id="__span-0-235">            <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-</span><span id="__span-0-236">        <span class="p">)</span>
-</span><span id="__span-0-237">        <span class="bp">self</span><span class="o">.</span><span class="n">errors</span> <span class="o">=</span> <span class="n">value</span>
-</span><span id="__span-0-238">
-</span><span id="__span-0-239">    <span class="nd">@property</span>
-</span><span id="__span-0-240">    <span class="k">def</span><span class="w"> </span><span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-241">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">:</span>
-</span><span id="__span-0-242">            <span class="k">return</span> <span class="n">TypeStatus</span><span class="o">.</span><span class="n">NOT_STARTED</span>
-</span><span id="__span-0-243">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span>
-</span><span id="__span-0-244">
-</span><span id="__span-0-245">    <span class="nd">@status</span><span class="o">.</span><span class="n">setter</span>
-</span><span id="__span-0-246">    <span class="k">def</span><span class="w"> </span><span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">TypeStatus</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-247">        <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">value</span>
+</span><span id="__span-0-230">    <span class="nd">@error</span><span class="o">.</span><span class="n">setter</span>
+</span><span id="__span-0-231">    <span class="k">def</span><span class="w"> </span><span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-232">        <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+</span><span id="__span-0-233">
+</span><span id="__span-0-234">        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+</span><span id="__span-0-235">            <span class="s2">&quot;&#39;error&#39; is deprecated, use &#39;errors&#39; instead. &quot;</span>
+</span><span id="__span-0-236">            <span class="s2">&quot;Note: &#39;TaskError.exception&#39; is now a string &quot;</span>
+</span><span id="__span-0-237">            <span class="s2">&quot;(e.g. &#39;ValueError&#39;), not an Exception object.&quot;</span><span class="p">,</span>
+</span><span id="__span-0-238">            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+</span><span id="__span-0-239">            <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+</span><span id="__span-0-240">        <span class="p">)</span>
+</span><span id="__span-0-241">        <span class="bp">self</span><span class="o">.</span><span class="n">errors</span> <span class="o">=</span> <span class="n">value</span>
+</span><span id="__span-0-242">
+</span><span id="__span-0-243">    <span class="nd">@property</span>
+</span><span id="__span-0-244">    <span class="k">def</span><span class="w"> </span><span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-0-245">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">:</span>
+</span><span id="__span-0-246">            <span class="k">return</span> <span class="n">TypeStatus</span><span class="o">.</span><span class="n">NOT_STARTED</span>
+</span><span id="__span-0-247">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span>
 </span><span id="__span-0-248">
-</span><span id="__span-0-249">        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">notify</span><span class="o">.</span><span class="n">hook_status_task</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
-</span><span id="__span-0-250">
-</span><span id="__span-0-251">        <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="n">TypeStatus</span><span class="o">.</span><span class="n">FAILED</span><span class="p">:</span>
-</span><span id="__span-0-252">            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
-</span><span id="__span-0-253">            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">task_failed</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
-</span><span id="__span-0-254">        <span class="k">elif</span> <span class="n">value</span> <span class="o">==</span> <span class="n">TypeStatus</span><span class="o">.</span><span class="n">RETRY</span><span class="p">:</span>
-</span><span id="__span-0-255">            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
-</span><span id="__span-0-256">            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">task_retried</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
-</span><span id="__span-0-257">        <span class="k">elif</span> <span class="n">value</span> <span class="o">==</span> <span class="n">TypeStatus</span><span class="o">.</span><span class="n">COMPLETED</span><span class="p">:</span>
-</span><span id="__span-0-258">            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
-</span><span id="__span-0-259">            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">task_completed</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
-</span><span id="__span-0-260">        <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-0-261">            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
-</span><span id="__span-0-262">
-</span><span id="__span-0-263">    <span class="nd">@property</span>
-</span><span id="__span-0-264">    <span class="k">def</span><span class="w"> </span><span class="nf">config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-265">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">:</span>
-</span><span id="__span-0-266">            <span class="k">return</span> <span class="n">Config</span><span class="p">()</span>
-</span><span id="__span-0-267">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span>
-</span><span id="__span-0-268">
-</span><span id="__span-0-269">    <span class="nd">@config</span><span class="o">.</span><span class="n">setter</span>
-</span><span id="__span-0-270">    <span class="k">def</span><span class="w"> </span><span class="nf">config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Config</span><span class="p">):</span>
-</span><span id="__span-0-271">        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span> <span class="o">=</span> <span class="n">value</span>
+</span><span id="__span-0-249">    <span class="nd">@status</span><span class="o">.</span><span class="n">setter</span>
+</span><span id="__span-0-250">    <span class="k">def</span><span class="w"> </span><span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">TypeStatus</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-251">        <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">value</span>
+</span><span id="__span-0-252">
+</span><span id="__span-0-253">        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">notify</span><span class="o">.</span><span class="n">hook_status_task</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+</span><span id="__span-0-254">
+</span><span id="__span-0-255">        <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="n">TypeStatus</span><span class="o">.</span><span class="n">FAILED</span><span class="p">:</span>
+</span><span id="__span-0-256">            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+</span><span id="__span-0-257">            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">task_failed</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+</span><span id="__span-0-258">        <span class="k">elif</span> <span class="n">value</span> <span class="o">==</span> <span class="n">TypeStatus</span><span class="o">.</span><span class="n">RETRY</span><span class="p">:</span>
+</span><span id="__span-0-259">            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+</span><span id="__span-0-260">            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">task_retried</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+</span><span id="__span-0-261">        <span class="k">elif</span> <span class="n">value</span> <span class="o">==</span> <span class="n">TypeStatus</span><span class="o">.</span><span class="n">COMPLETED</span><span class="p">:</span>
+</span><span id="__span-0-262">            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+</span><span id="__span-0-263">            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">task_completed</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+</span><span id="__span-0-264">        <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-0-265">            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+</span><span id="__span-0-266">
+</span><span id="__span-0-267">    <span class="nd">@property</span>
+</span><span id="__span-0-268">    <span class="k">def</span><span class="w"> </span><span class="nf">config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-0-269">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="p">:</span>
+</span><span id="__span-0-270">            <span class="k">return</span> <span class="n">Config</span><span class="p">()</span>
+</span><span id="__span-0-271">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span>
 </span><span id="__span-0-272">
-</span><span id="__span-0-273">    <span class="k">def</span><span class="w"> </span><span class="nf">schema</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">max</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SerializerTask</span><span class="p">:</span>
-</span><span id="__span-0-274">        <span class="k">return</span> <span class="n">SerializerTask</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="nb">max</span><span class="p">)</span>
-</span><span id="__span-0-275">
-</span><span id="__span-0-276">    <span class="k">def</span><span class="w"> </span><span class="nf">result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">max</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SerializerWorkflow</span><span class="p">:</span>
-</span><span id="__span-0-277">        <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="nb">max</span><span class="p">)</span><span class="o">.</span><span class="n">model_dump_json</span><span class="p">()</span>
-</span><span id="__span-0-278">        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</span><span id="__span-0-273">    <span class="nd">@config</span><span class="o">.</span><span class="n">setter</span>
+</span><span id="__span-0-274">    <span class="k">def</span><span class="w"> </span><span class="nf">config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Config</span><span class="p">):</span>
+</span><span id="__span-0-275">        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span> <span class="o">=</span> <span class="n">value</span>
+</span><span id="__span-0-276">
+</span><span id="__span-0-277">    <span class="k">def</span><span class="w"> </span><span class="nf">schema</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">max</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SerializerTask</span><span class="p">:</span>
+</span><span id="__span-0-278">        <span class="k">return</span> <span class="n">SerializerTask</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="nb">max</span><span class="p">)</span>
+</span><span id="__span-0-279">
+</span><span id="__span-0-280">    <span class="k">def</span><span class="w"> </span><span class="nf">result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">max</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SerializerWorkflow</span><span class="p">:</span>
+</span><span id="__span-0-281">        <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="nb">max</span><span class="p">)</span><span class="o">.</span><span class="n">model_dump_json</span><span class="p">()</span>
+</span><span id="__span-0-282">        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
               </details>
 
@@ -7812,6 +7884,27 @@ which is basically a function. You can see in this
   </span>
 
 <a href="#dotflow.core.task.Task.config" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+          
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="dotflow.core.task.Task.created_at" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">created_at</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#dotflow.core.task.Task.created_at" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
@@ -7913,6 +8006,27 @@ which is basically a function. You can see in this
 
 
 
+<h3 id="dotflow.core.task.Task.finished_at" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">finished_at</span> <span class="o">=</span> <span class="kc">None</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#dotflow.core.task.Task.finished_at" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+          
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
 <h3 id="dotflow.core.task.Task.group_name" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">group_name</span> <span class="o">=</span> <span class="n">group_name</span></code>
 
@@ -7965,6 +8079,27 @@ which is basically a function. You can see in this
   </span>
 
 <a href="#dotflow.core.task.Task.previous_context" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+          
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="dotflow.core.task.Task.started_at" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">started_at</span> <span class="o">=</span> <span class="kc">None</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#dotflow.core.task.Task.started_at" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
@@ -8077,8 +8212,7 @@ which is basically a function. You can see in this
 
             <details class="quote">
               <summary>Source code in <code>dotflow/core/task.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 85</span>
-<span class="normal"> 86</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 86</span>
 <span class="normal"> 87</span>
 <span class="normal"> 88</span>
 <span class="normal"> 89</span>
@@ -8104,34 +8238,41 @@ which is basically a function. You can see in this
 <span class="normal">109</span>
 <span class="normal">110</span>
 <span class="normal">111</span>
-<span class="normal">112</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-85"><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-</span><span id="__span-0-86">    <span class="bp">self</span><span class="p">,</span>
-</span><span id="__span-0-87">    <span class="n">task_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-</span><span id="__span-0-88">    <span class="n">step</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
-</span><span id="__span-0-89">    <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="n">basic_callback</span><span class="p">,</span>
-</span><span id="__span-0-90">    <span class="n">initial_context</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="__span-0-91">    <span class="n">workflow_id</span><span class="p">:</span> <span class="n">UUID</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="__span-0-92">    <span class="n">config</span><span class="p">:</span> <span class="n">Config</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="__span-0-93">    <span class="n">group_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
-</span><span id="__span-0-94"><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-95">    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
-</span><span id="__span-0-96">        <span class="n">task_id</span><span class="p">,</span>
-</span><span id="__span-0-97">        <span class="n">step</span><span class="p">,</span>
-</span><span id="__span-0-98">        <span class="n">callback</span><span class="p">,</span>
-</span><span id="__span-0-99">        <span class="n">initial_context</span><span class="p">,</span>
-</span><span id="__span-0-100">        <span class="n">workflow_id</span><span class="p">,</span>
-</span><span id="__span-0-101">        <span class="n">config</span><span class="p">,</span>
-</span><span id="__span-0-102">        <span class="n">group_name</span><span class="p">,</span>
-</span><span id="__span-0-103">    <span class="p">)</span>
-</span><span id="__span-0-104">    <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span>
-</span><span id="__span-0-105">    <span class="bp">self</span><span class="o">.</span><span class="n">group_name</span> <span class="o">=</span> <span class="n">group_name</span>
-</span><span id="__span-0-106">    <span class="bp">self</span><span class="o">.</span><span class="n">task_id</span> <span class="o">=</span> <span class="n">task_id</span>
-</span><span id="__span-0-107">    <span class="bp">self</span><span class="o">.</span><span class="n">workflow_id</span> <span class="o">=</span> <span class="n">workflow_id</span>
-</span><span id="__span-0-108">    <span class="bp">self</span><span class="o">.</span><span class="n">step</span> <span class="o">=</span> <span class="n">step</span>
-</span><span id="__span-0-109">    <span class="bp">self</span><span class="o">.</span><span class="n">callback</span> <span class="o">=</span> <span class="n">callback</span>
-</span><span id="__span-0-110">    <span class="bp">self</span><span class="o">.</span><span class="n">initial_context</span> <span class="o">=</span> <span class="n">initial_context</span>
-</span><span id="__span-0-111">    <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">TypeStatus</span><span class="o">.</span><span class="n">NOT_STARTED</span>
-</span><span id="__span-0-112">    <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-86"><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+</span><span id="__span-0-87">    <span class="bp">self</span><span class="p">,</span>
+</span><span id="__span-0-88">    <span class="n">task_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+</span><span id="__span-0-89">    <span class="n">step</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+</span><span id="__span-0-90">    <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="n">basic_callback</span><span class="p">,</span>
+</span><span id="__span-0-91">    <span class="n">initial_context</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-92">    <span class="n">workflow_id</span><span class="p">:</span> <span class="n">UUID</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-93">    <span class="n">config</span><span class="p">:</span> <span class="n">Config</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-94">    <span class="n">group_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+</span><span id="__span-0-95"><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-96">    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+</span><span id="__span-0-97">        <span class="n">task_id</span><span class="p">,</span>
+</span><span id="__span-0-98">        <span class="n">step</span><span class="p">,</span>
+</span><span id="__span-0-99">        <span class="n">callback</span><span class="p">,</span>
+</span><span id="__span-0-100">        <span class="n">initial_context</span><span class="p">,</span>
+</span><span id="__span-0-101">        <span class="n">workflow_id</span><span class="p">,</span>
+</span><span id="__span-0-102">        <span class="n">config</span><span class="p">,</span>
+</span><span id="__span-0-103">        <span class="n">group_name</span><span class="p">,</span>
+</span><span id="__span-0-104">    <span class="p">)</span>
+</span><span id="__span-0-105">    <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span>
+</span><span id="__span-0-106">    <span class="bp">self</span><span class="o">.</span><span class="n">group_name</span> <span class="o">=</span> <span class="n">group_name</span>
+</span><span id="__span-0-107">    <span class="bp">self</span><span class="o">.</span><span class="n">task_id</span> <span class="o">=</span> <span class="n">task_id</span>
+</span><span id="__span-0-108">    <span class="bp">self</span><span class="o">.</span><span class="n">workflow_id</span> <span class="o">=</span> <span class="n">workflow_id</span>
+</span><span id="__span-0-109">    <span class="bp">self</span><span class="o">.</span><span class="n">step</span> <span class="o">=</span> <span class="n">step</span>
+</span><span id="__span-0-110">    <span class="bp">self</span><span class="o">.</span><span class="n">callback</span> <span class="o">=</span> <span class="n">callback</span>
+</span><span id="__span-0-111">    <span class="bp">self</span><span class="o">.</span><span class="n">initial_context</span> <span class="o">=</span> <span class="n">initial_context</span>
+</span><span id="__span-0-112">    <span class="bp">self</span><span class="o">.</span><span class="n">created_at</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+</span><span id="__span-0-113">    <span class="bp">self</span><span class="o">.</span><span class="n">started_at</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="__span-0-114">    <span class="bp">self</span><span class="o">.</span><span class="n">finished_at</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="__span-0-115">    <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">TypeStatus</span><span class="o">.</span><span class="n">NOT_STARTED</span>
+</span><span id="__span-0-116">    <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -8153,11 +8294,11 @@ which is basically a function. You can see in this
 
             <details class="quote">
               <summary>Source code in <code>dotflow/core/task.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">276</span>
-<span class="normal">277</span>
-<span class="normal">278</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-276"><span class="k">def</span><span class="w"> </span><span class="nf">result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">max</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SerializerWorkflow</span><span class="p">:</span>
-</span><span id="__span-0-277">    <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="nb">max</span><span class="p">)</span><span class="o">.</span><span class="n">model_dump_json</span><span class="p">()</span>
-</span><span id="__span-0-278">    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-280"><span class="k">def</span><span class="w"> </span><span class="nf">result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">max</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SerializerWorkflow</span><span class="p">:</span>
+</span><span id="__span-0-281">    <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="nb">max</span><span class="p">)</span><span class="o">.</span><span class="n">model_dump_json</span><span class="p">()</span>
+</span><span id="__span-0-282">    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -8179,9 +8320,9 @@ which is basically a function. You can see in this
 
             <details class="quote">
               <summary>Source code in <code>dotflow/core/task.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">273</span>
-<span class="normal">274</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-273"><span class="k">def</span><span class="w"> </span><span class="nf">schema</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">max</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SerializerTask</span><span class="p">:</span>
-</span><span id="__span-0-274">    <span class="k">return</span> <span class="n">SerializerTask</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="nb">max</span><span class="p">)</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">277</span>
+<span class="normal">278</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-277"><span class="k">def</span><span class="w"> </span><span class="nf">schema</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">max</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SerializerTask</span><span class="p">:</span>
+</span><span id="__span-0-278">    <span class="k">return</span> <span class="n">SerializerTask</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="nb">max</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>

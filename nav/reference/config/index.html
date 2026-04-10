@@ -4832,17 +4832,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#dotflow.core.config.Config.api" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;api
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -6773,17 +6762,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#dotflow.core.config.Config.api" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;api
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -7232,7 +7210,7 @@ from dotflow.providers import (
 </span><span id="__span-0-63">        <span class="s2">&quot;storage&quot;</span><span class="p">:</span> <span class="n">Storage</span><span class="p">,</span>
 </span><span id="__span-0-64">        <span class="s2">&quot;notify&quot;</span><span class="p">:</span> <span class="n">Notify</span><span class="p">,</span>
 </span><span id="__span-0-65">        <span class="s2">&quot;log&quot;</span><span class="p">:</span> <span class="n">Log</span><span class="p">,</span>
-</span><span id="__span-0-66">        <span class="s2">&quot;api&quot;</span><span class="p">:</span> <span class="n">Api</span><span class="p">,</span>
+</span><span id="__span-0-66">        <span class="s2">&quot;server&quot;</span><span class="p">:</span> <span class="n">Server</span><span class="p">,</span>
 </span><span id="__span-0-67">        <span class="s2">&quot;scheduler&quot;</span><span class="p">:</span> <span class="n">Scheduler</span><span class="p">,</span>
 </span><span id="__span-0-68">        <span class="s2">&quot;tracer&quot;</span><span class="p">:</span> <span class="n">Tracer</span><span class="p">,</span>
 </span><span id="__span-0-69">        <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="n">Metrics</span><span class="p">,</span>
@@ -7243,7 +7221,7 @@ from dotflow.providers import (
 </span><span id="__span-0-74">        <span class="n">storage</span><span class="p">:</span> <span class="n">Storage</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 </span><span id="__span-0-75">        <span class="n">notify</span><span class="p">:</span> <span class="n">Notify</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 </span><span id="__span-0-76">        <span class="n">log</span><span class="p">:</span> <span class="n">Log</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="__span-0-77">        <span class="n">api</span><span class="p">:</span> <span class="n">Api</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-77">        <span class="n">server</span><span class="p">:</span> <span class="n">Server</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 </span><span id="__span-0-78">        <span class="n">scheduler</span><span class="p">:</span> <span class="n">Scheduler</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 </span><span id="__span-0-79">        <span class="n">tracer</span><span class="p">:</span> <span class="n">Tracer</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 </span><span id="__span-0-80">        <span class="n">metrics</span><span class="p">:</span> <span class="n">Metrics</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -7251,7 +7229,7 @@ from dotflow.providers import (
 </span><span id="__span-0-82">        <span class="bp">self</span><span class="o">.</span><span class="n">storage</span> <span class="o">=</span> <span class="n">storage</span> <span class="k">if</span> <span class="n">storage</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">StorageDefault</span><span class="p">()</span>
 </span><span id="__span-0-83">        <span class="bp">self</span><span class="o">.</span><span class="n">notify</span> <span class="o">=</span> <span class="n">notify</span> <span class="k">if</span> <span class="n">notify</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">NotifyDefault</span><span class="p">()</span>
 </span><span id="__span-0-84">        <span class="bp">self</span><span class="o">.</span><span class="n">log</span> <span class="o">=</span> <span class="n">log</span> <span class="k">if</span> <span class="n">log</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">LogDefault</span><span class="p">()</span>
-</span><span id="__span-0-85">        <span class="bp">self</span><span class="o">.</span><span class="n">api</span> <span class="o">=</span> <span class="n">api</span> <span class="k">if</span> <span class="n">api</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">ApiDefault</span><span class="p">()</span>
+</span><span id="__span-0-85">        <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">server</span> <span class="k">if</span> <span class="n">server</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">ServerDefault</span><span class="p">()</span>
 </span><span id="__span-0-86">        <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span> <span class="o">=</span> <span class="p">(</span>
 </span><span id="__span-0-87">            <span class="n">scheduler</span> <span class="k">if</span> <span class="n">scheduler</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">SchedulerDefault</span><span class="p">()</span>
 </span><span id="__span-0-88">        <span class="p">)</span>
@@ -7332,27 +7310,6 @@ from dotflow.providers import (
   </span>
 
 <a href="#dotflow.core.config.Config.log" class="headerlink" title="Permanent link">&para;</a></h3>
-
-
-    <div class="doc doc-contents ">
-
-          
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-attribute">
-
-
-
-<h3 id="dotflow.core.config.Config.api" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <code class="highlight language-python"><span class="n">api</span> <span class="o">=</span> <span class="n">api</span> <span class="k">if</span> <span class="n">api</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">ApiDefault</span><span class="p">()</span></code>
-
-  <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
-  </span>
-
-<a href="#dotflow.core.config.Config.api" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">

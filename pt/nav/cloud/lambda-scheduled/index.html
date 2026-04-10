@@ -6989,7 +6989,7 @@
 </ul>
 <h2 id="deploy">Deploy<a class="headerlink" href="#deploy" title="Permanent link">&para;</a></h2>
 <h3 id="option-1-dotflow-deploy">Option 1: dotflow deploy<a class="headerlink" href="#option-1-dotflow-deploy" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span id="__span-2-1">dotflow<span class="w"> </span>deploy<span class="w"> </span>--platform<span class="w"> </span>lambda-scheduled<span class="w"> </span>--project<span class="w"> </span>my_pipeline<span class="w"> </span>--schedule<span class="w"> </span><span class="s2">&quot;rate(6 hours)&quot;</span>
+<div class="highlight"><pre><span></span><code><span id="__span-2-1">dotflow<span class="w"> </span>deploy<span class="w"> </span>--platform<span class="w"> </span>lambda-scheduled<span class="w"> </span>--project<span class="w"> </span>my_pipeline<span class="w"> </span>--schedule<span class="w"> </span><span class="s2">&quot;0 */6 * * *&quot;</span>
 </span></code></pre></div>
 <h3 id="option-2-sam-cli">Option 2: SAM CLI<a class="headerlink" href="#option-2-sam-cli" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span id="__span-3-1">aws<span class="w"> </span>ecr<span class="w"> </span>create-repository<span class="w"> </span>--repository-name<span class="w"> </span>my_pipeline<span class="w"> </span>--region<span class="w"> </span>us-east-1
@@ -7001,7 +7001,7 @@
 </span></code></pre></div>
 <h2 id="important">Important<a class="headerlink" href="#important" title="Permanent link">&para;</a></h2>
 <ul>
-<li>The schedule expression is configured during project creation (e.g. <code>rate(6 hours)</code>, <code>cron(0 12 * * ? *)</code>)</li>
+<li>Use standard cron format (e.g. <code>0 */6 * * *</code>). Dotflow converts to AWS EventBridge format automatically</li>
 <li>Edit <code>template.yaml</code> to change the schedule after generation</li>
 </ul>
 
