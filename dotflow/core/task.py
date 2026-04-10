@@ -1,6 +1,7 @@
 """Task module"""
 
 import json
+import threading
 from collections.abc import Callable
 from datetime import datetime
 from typing import Any
@@ -251,8 +252,14 @@ class Task(TaskInstance):
         self._status = value
 
         self.config.notify.hook_status_task(task=self)
-        if value != TypeStatus.NOT_STARTED:
+        if value in (TypeStatus.COMPLETED, TypeStatus.FAILED):
             self.config.server.update_task(task=self)
+        elif value != TypeStatus.NOT_STARTED:
+            threading.Thread(
+                target=self.config.server.update_task,
+                args=(self,),
+                daemon=True,
+            ).start()
 
         if value == TypeStatus.FAILED:
             self.config.log.error(task=self)
