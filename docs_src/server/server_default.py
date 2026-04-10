@@ -15,7 +15,7 @@ def transform(previous_context):
 
 @action
 def load(previous_context):
-    print(
+    return (
         f"Loaded {previous_context.storage['active']}"
         " active users"
     )
