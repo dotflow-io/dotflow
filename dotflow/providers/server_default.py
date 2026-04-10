@@ -89,8 +89,6 @@ class ServerDefault(Server):
 
         payload = {
             "id": task.task_id,
-            "step": str(task.step),
-            "callback": str(task.callback),
             "initial_context": (task.initial_context.storage),
             "group_name": (task.group_name or "default"),
         }
