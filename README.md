@@ -112,7 +112,7 @@ pip install dotflow[deploy-github]   # GitHub Actions deploy
 | [Concepts](https://dotflow-io.github.io/dotflow/nav/concepts/concept-workflow-and-tasks/) | Workflows, tasks, context, providers, process modes |
 | [How-to Guides](https://dotflow-io.github.io/dotflow/nav/how-to/) | Step-by-step tutorials for workflows, tasks, and CLI |
 | [Cloud Deployment](https://dotflow-io.github.io/dotflow/nav/cloud/) | Deploy to AWS, GCP, Alibaba, Kubernetes, Docker, GitHub Actions |
-| [Integrations](https://dotflow-io.github.io/dotflow/nav/integrations/) | OpenTelemetry, Sentry, Telegram, Discord, S3, GCS |
+| [Integrations](https://dotflow-io.github.io/dotflow/nav/integrations/) | OpenTelemetry, Sentry, Telegram, Discord, S3, GCS, Server |
 | [Examples](https://dotflow-io.github.io/dotflow/nav/examples/) | Real-world pipelines: ETL, health checks, async, scheduler |
 | [Reference](https://dotflow-io.github.io/dotflow/nav/reference/dotflow/) | API reference for all classes and providers |
 | [Custom Providers](https://dotflow-io.github.io/dotflow/nav/development/custom-providers/) | Build your own storage, notify, log, tracer, or metrics provider |
@@ -651,19 +651,63 @@ Available CLI commands:
 </details>
 
 <details>
+<summary><strong>Server Provider</strong></summary>
+
+> [Server docs](https://dotflow-io.github.io/dotflow/nav/tutorial/server-default/)
+
+Send workflow and task execution data to a remote API (e.g. dotflow-api) in real time.
+
+```python
+from dotflow import DotFlow, Config, action
+from dotflow.providers import ServerDefault
+
+@action
+def my_task():
+    return {"result": "ok"}
+
+config = Config(
+    server=ServerDefault(
+        base_url="http://localhost:8000/api/v1",
+        user_token="your-api-token",
+    )
+)
+
+workflow = DotFlow(config=config)
+workflow.task.add(step=my_task)
+workflow.start()
+```
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `base_url` | `str` | `""` | API base URL |
+| `user_token` | `str` | `""` | API token (`X-User-Token` header) |
+| `timeout` | `float` | `5.0` | HTTP request timeout in seconds |
+
+The server provider automatically:
+- Creates the workflow on `DotFlow()` init
+- Creates each task on `task.add()`
+- Updates task status on each transition (In progress, Completed, Failed, Retry)
+- Updates workflow status on completion (In progress → Completed)
+
+---
+
+</details>
+
+<details>
 <summary><strong>Dependency Injection via Config</strong></summary>
 
-The `Config` class lets you swap providers for storage, notifications, logging, and scheduling:
+The `Config` class lets you swap providers for storage, notifications, logging, scheduling, and server:
 
 ```python
 from dotflow import DotFlow, Config
-from dotflow.providers import StorageFile, NotifyTelegram, LogDefault, SchedulerCron
+from dotflow.providers import StorageFile, NotifyTelegram, LogDefault, SchedulerCron, ServerDefault
 
 config = Config(
     storage=StorageFile(path=".output"),
     notify=NotifyTelegram(token="...", chat_id=123),
     log=LogDefault(),
     scheduler=SchedulerCron(cron="0 * * * *"),
+    server=ServerDefault(base_url="...", user_token="..."),
 )
 
 workflow = DotFlow(config=config)
@@ -677,6 +721,7 @@ Extend Dotflow by implementing the abstract base classes:
 | `Notify` | `hook_status_task` | Custom notification channels |
 | `Log` | `info`, `error` | Custom logging |
 | `Scheduler` | `start`, `stop` | Custom scheduling strategies |
+| `Server` | `create_workflow`, `update_workflow`, `create_task`, `update_task` | Remote API communication |
 
 ---
 
