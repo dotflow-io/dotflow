@@ -102,24 +102,6 @@ class TestTaskBuild(unittest.TestCase):
 
     def test_task_build_result(self):
         expected_workflow_id = uuid4()
-        expected_result = {
-            "workflow_id": str(expected_workflow_id),
-            "tasks": [
-                {
-                    "task_id": 0,
-                    "workflow_id": str(expected_workflow_id),
-                    "status": "Not started",
-                    "error": None,
-                    "errors": [],
-                    "retry_count": 0,
-                    "duration": None,
-                    "initial_context": '{"foo": "bar"}',
-                    "current_context": None,
-                    "previous_context": None,
-                    "group_name": "default",
-                }
-            ],
-        }
 
         task = TaskBuilder(
             config=self.config, workflow_id=expected_workflow_id
