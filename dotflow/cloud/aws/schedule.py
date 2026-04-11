@@ -58,9 +58,22 @@ def _crontab_to_aws(expression: str) -> str:
 
     minute, hour, dom, month, dow = parts
 
-    if dow != "*" and dom == "*":
+    minute = _fix_step(minute)
+    hour = _fix_step(hour)
+    dom = _fix_step(dom)
+    month = _fix_step(month)
+    dow = _fix_step(dow)
+
+    if dow != "*" and dow != "?" and dom == "*":
         dom = "?"
     else:
         dow = "?"
 
     return f"cron({minute} {hour} {dom} {month} {dow} *)"
+
+
+def _fix_step(field: str) -> str:
+    """Convert */N to 0/N for AWS EventBridge compatibility."""
+    if field.startswith("*/"):
+        return "0/" + field[2:]
+    return field
