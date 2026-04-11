@@ -137,11 +137,24 @@ class TestSerializerTaskDumpJson(unittest.TestCase):
 
     def test_list_context_without_task_id(self):
         inner = Context(storage={"data": True})
+        inner._task_id = None
         ctx = Context(storage=[inner])
         task = self._make_task(_current_context=ctx)
 
         parsed = json.loads(task.model_dump_json())
+        self.assertIn("ctx:0", parsed["current_context"])
+
+    def test_context_task_id_none_no_collision(self):
+        ctx_none = Context(storage={"step": "extract"})
+        ctx_none._task_id = None
+        ctx_zero = Context(storage={"step": "transform"}, task_id=0)
+        ctx = Context(storage=[ctx_none, ctx_zero])
+        task = self._make_task(_current_context=ctx)
+
+        parsed = json.loads(task.model_dump_json())
+        self.assertIn("ctx:0", parsed["current_context"])
         self.assertIn("0", parsed["current_context"])
+        self.assertEqual(len(parsed["current_context"]), 2)
 
     def test_empty_list_returns_empty_dict(self):
         ctx = Context(storage=[])
