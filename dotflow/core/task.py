@@ -308,7 +308,7 @@ class TaskBuilder:
         self.queue: list[Callable] = []
         self.workflow_id = workflow_id
         self.config = config
-        self._next_id = 1
+        self._next_id = 0
 
     def add(
         self,
