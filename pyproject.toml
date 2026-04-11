@@ -153,6 +153,9 @@ name = "test"
 url = "https://test.pypi.org/simple/"
 priority = "supplemental"
 
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
