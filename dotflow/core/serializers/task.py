@@ -55,9 +55,7 @@ class SerializerTask(BaseModel):
         return self.errors[-1] if self.errors else None
 
     def model_dump_json(self, **kwargs) -> str:
-        data = self.model_dump(
-            mode="json", serialize_as_any=True, **kwargs
-        )
+        data = self.model_dump(mode="json", serialize_as_any=True, **kwargs)
         dump_json = json.dumps(data)
 
         if not self.max or len(dump_json) <= self.max:
@@ -110,11 +108,7 @@ class SerializerTask(BaseModel):
             contexts = {}
             for index, item in enumerate(ctx.storage):
                 if isinstance(item, Context):
-                    key = (
-                        item.task_id
-                        if item.task_id is not None
-                        else index
-                    )
+                    key = item.task_id if item.task_id is not None else index
                     contexts[key] = cls._serialize_context(item)
                 else:
                     contexts[index] = cls._format_raw(item)
