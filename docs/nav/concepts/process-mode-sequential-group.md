@@ -6,38 +6,7 @@ This mode is automatically selected when you use `mode="sequential"` with multip
 
 ## Implementation
 
-```python
-from dotflow import DotFlow, action
-
-
-@action
-def step_a():
-    return {"group": "A", "step": 1}
-
-
-@action
-def step_b(previous_context):
-    return {"group": "A", "step": 2}
-
-
-@action
-def step_c():
-    return {"group": "B", "step": 1}
-
-
-@action
-def step_d(previous_context):
-    return {"group": "B", "step": 2}
-
-
-workflow = DotFlow()
-workflow.task.add(step=step_a, group_name="group_a")
-workflow.task.add(step=step_b, group_name="group_a")
-workflow.task.add(step=step_c, group_name="group_b")
-workflow.task.add(step=step_d, group_name="group_b")
-
-workflow.start(mode="sequential_group")
-```
+{* ./docs_src/process_mode/sequential_group.py hl[33] *}
 
 ## Workflow
 
