@@ -108,7 +108,10 @@ class SerializerTask(BaseModel):
             contexts = {}
             for index, item in enumerate(ctx.storage):
                 if isinstance(item, Context):
-                    key = item.task_id if item.task_id is not None else index
+                    if item.task_id is not None:
+                        key = item.task_id
+                    else:
+                        key = f"ctx:{index}"
                     contexts[key] = cls._serialize_context(item)
                 else:
                     contexts[f"raw:{index}"] = cls._format_raw(item)
