@@ -66,8 +66,9 @@ class TaskEngine:
         self.task.workflow_id = self.workflow_id
         self.task.previous_context = self.previous_context
         self.task.config.tracer.start_task(task=self.task)
+        self.task.started_at = datetime.now()
         self.task.status = TypeStatus.IN_PROGRESS
-        self._start_time = datetime.now()
+        self._start_time = self.task.started_at
 
         try:
             yield self
@@ -84,10 +85,12 @@ class TaskEngine:
             ):
                 self.task.status = TypeStatus.COMPLETED
         finally:
+            self.task.finished_at = datetime.now()
             self.task.duration = (
-                datetime.now() - self._start_time
+                self.task.finished_at - self._start_time
             ).total_seconds()
             self.task.config.tracer.end_task(task=self.task)
+            self.task.config.server.update_task(task=self.task)
 
     def execute(self):
         """Executes the task function and returns the context."""

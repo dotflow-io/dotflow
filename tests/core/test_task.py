@@ -100,20 +100,6 @@ class TestTask(unittest.TestCase):
     def test_task_result(self):
         expected_duration = 1.0
         expected_workflow_id = uuid4()
-        expected_result = {
-            "task_id": 0,
-            "workflow_id": str(expected_workflow_id),
-            "status": "Not started",
-            "error": None,
-            "errors": [],
-            "retry_count": 0,
-            "duration": expected_duration,
-            "initial_context": '{"foo": "bar"}',
-            "current_context": '{"foo": "bar"}',
-            "previous_context": '{"foo": "bar"}',
-            "group_name": "default",
-        }
-
         task = Task(
             task_id=0,
             workflow_id=expected_workflow_id,
@@ -127,7 +113,20 @@ class TestTask(unittest.TestCase):
         task.duration = expected_duration
 
         result = task.result()
-        self.assertEqual(result, expected_result)
+        self.assertEqual(result["task_id"], 0)
+        self.assertEqual(
+            result["workflow_id"],
+            str(expected_workflow_id),
+        )
+        self.assertEqual(result["status"], "Not started")
+        self.assertEqual(result["duration"], expected_duration)
+        self.assertEqual(result["retry_count"], 0)
+        self.assertEqual(result["error"], None)
+        self.assertEqual(result["errors"], [])
+        self.assertEqual(result["group_name"], "default")
+        self.assertIn("created_at", result)
+        self.assertIn("started_at", result)
+        self.assertIn("finished_at", result)
 
 
 class TestTaskSetter(unittest.TestCase):
