@@ -40,9 +40,13 @@ class SerializerTask(BaseModel):
     created_at: Optional[datetime] = Field(default=None)
     started_at: Optional[datetime] = Field(default=None)
     finished_at: Optional[datetime] = Field(default=None)
-    errors: list[SerializerTaskError] = Field(default_factory=list, alias="_errors")
+    errors: list[SerializerTaskError] = Field(
+        default_factory=list, alias="_errors"
+    )
     max: Optional[int] = Field(default=None, exclude=True)
-    size_message: Optional[str] = Field(default="Context size exceeded", exclude=True)
+    size_message: Optional[str] = Field(
+        default="Context size exceeded", exclude=True
+    )
 
     @computed_field
     @property
@@ -51,7 +55,9 @@ class SerializerTask(BaseModel):
         return self.errors[-1] if self.errors else None
 
     def model_dump_json(self, **kwargs) -> str:
-        data = self.model_dump(mode="json", serialize_as_any=True, **kwargs)
+        data = self.model_dump(
+            mode="json", serialize_as_any=True, **kwargs
+        )
         dump_json = json.dumps(data)
 
         if not self.max or len(dump_json) <= self.max:
@@ -104,7 +110,11 @@ class SerializerTask(BaseModel):
             contexts = {}
             for index, item in enumerate(ctx.storage):
                 if isinstance(item, Context):
-                    key = item.task_id if item.task_id is not None else index
+                    key = (
+                        item.task_id
+                        if item.task_id is not None
+                        else index
+                    )
                     contexts[key] = cls._serialize_context(item)
                 else:
                     contexts[index] = cls._format_raw(item)
