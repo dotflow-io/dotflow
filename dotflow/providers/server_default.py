@@ -104,9 +104,25 @@ class ServerDefault(Server):
         if not self.enabled:
             return
 
+        result = task.result()
+        payload = {
+            k: result.get(k)
+            for k in (
+                "status",
+                "errors",
+                "retry_count",
+                "duration",
+                "current_context",
+                "previous_context",
+                "started_at",
+                "finished_at",
+            )
+            if result.get(k) is not None
+        }
+
         self._request(
             http_patch,
             f"{self.base_url}/workflows/"
             f"{task.workflow_id}/tasks/{task.task_id}",
-            task.result(),
+            payload,
         )
