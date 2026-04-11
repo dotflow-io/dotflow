@@ -1,5 +1,4 @@
-"""ServerDefault — sends workflow/task data to dotflow-api.
-"""
+"""ServerDefault — sends workflow/task data to dotflow-api."""
 
 from __future__ import annotations
 
@@ -132,7 +131,6 @@ class ServerDefault(Server):
 
         self._request_async(
             http_patch,
-            f"{self.base_url}/workflows/"
-            f"{task.workflow_id}/tasks/{task.task_id}",
+            f"{self.base_url}/workflows/{task.workflow_id}/tasks/{task.task_id}",
             payload,
         )
