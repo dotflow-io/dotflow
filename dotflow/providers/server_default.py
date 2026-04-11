@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import atexit
-from threading import Thread
 from typing import Any
 
 from requests import patch as http_patch
@@ -26,8 +24,6 @@ class ServerDefault(Server):
         self.user_token = user_token
         self.timeout = timeout
         self.enabled = bool(self.base_url and self.user_token)
-        self._pending: list[Thread] = []
-        atexit.register(self._flush)
 
     def _headers(self) -> dict[str, str]:
         return {
@@ -35,7 +31,7 @@ class ServerDefault(Server):
             "X-User-Token": self.user_token,
         }
 
-    def _do_request(self, method, url, payload=None):
+    def _request(self, method, url, payload=None):
         try:
             response = method(
                 url=url,
@@ -51,26 +47,12 @@ class ServerDefault(Server):
                 str(error),
             )
 
-    def _flush(self):
-        for t in self._pending:
-            t.join()
-        self._pending.clear()
-
-    def _request_async(self, method, url, payload=None):
-        t = Thread(target=self._do_request, args=(method, url, payload))
-        t.start()
-        self._pending.append(t)
-
-    def _request_sync(self, method, url, payload=None):
-        self._flush()
-        self._do_request(method, url, payload)
-
     def create_workflow(self, workflow: Any) -> None:
         """Create workflow record (synchronous."""
         if not self.enabled:
             return
 
-        self._request_sync(
+        self._request(
             http_post,
             f"{self.base_url}/workflows",
             {
@@ -85,7 +67,7 @@ class ServerDefault(Server):
         if not self.enabled:
             return
 
-        self._request_sync(
+        self._request(
             http_patch,
             f"{self.base_url}/workflows/{workflow}",
             {"status": status},
@@ -102,7 +84,7 @@ class ServerDefault(Server):
             "group_name": (task.group_name or "default"),
         }
 
-        self._request_sync(
+        self._request(
             http_post,
             f"{self.base_url}/workflows/{task.workflow_id}/tasks",
             payload,
@@ -129,7 +111,7 @@ class ServerDefault(Server):
             if result.get(k) is not None
         }
 
-        self._request_async(
+        self._request(
             http_patch,
             f"{self.base_url}/workflows/{task.workflow_id}/tasks/{task.task_id}",
             payload,
