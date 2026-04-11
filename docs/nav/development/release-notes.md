@@ -4,6 +4,7 @@
 
 - [📦 PyPI - Build 0.15.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.15.0)
 - [🪲 Bug: _serialize_context crashes when storage is a list of non-Context objects](https://github.com/dotflow-io/dotflow/pull/249)
+- [🪲 Bug: _crontab_to_aws generates invalid EventBridge cron — */N not supported](https://github.com/dotflow-io/dotflow/pull/251)
 - [⚙️ Feature: Add Alibaba Cloud Function Compute deployer](https://github.com/dotflow-io/dotflow/pull/238)
 - [⚙️ Feature: Implement Server provider for remote API communication](https://github.com/dotflow-io/dotflow/pull/240)
 - [⚙️ Feature: dotflow deploy CLI — cross-cloud infrastructure generation](https://github.com/dotflow-io/dotflow/pull/183)
