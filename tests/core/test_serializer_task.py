@@ -113,7 +113,8 @@ class TestSerializerTaskDumpJson(unittest.TestCase):
         task = self._make_task(_current_context=ctx)
 
         parsed = json.loads(task.model_dump_json())
-        self.assertEqual(len(parsed["current_context"]), 2)
+        self.assertIn("raw:0", parsed["current_context"])
+        self.assertIn("raw:1", parsed["current_context"])
 
     def test_list_of_context_objects(self):
         inner_a = Context(storage={"name": "a"}, task_id=1)
@@ -132,7 +133,7 @@ class TestSerializerTaskDumpJson(unittest.TestCase):
 
         parsed = json.loads(task.model_dump_json())
         self.assertIn("5", parsed["current_context"])
-        self.assertIn("1", parsed["current_context"])
+        self.assertIn("raw:1", parsed["current_context"])
 
     def test_list_context_without_task_id(self):
         inner = Context(storage={"data": True})
@@ -148,6 +149,17 @@ class TestSerializerTaskDumpJson(unittest.TestCase):
 
         parsed = json.loads(task.model_dump_json())
         self.assertEqual(parsed["current_context"], {})
+
+    def test_mixed_list_no_key_collision(self):
+        raw_item = {"users": 150}
+        context_item = Context(storage={"status": "done"}, task_id=0)
+        ctx = Context(storage=[raw_item, context_item])
+        task = self._make_task(_current_context=ctx)
+
+        parsed = json.loads(task.model_dump_json())
+        self.assertIn("raw:0", parsed["current_context"])
+        self.assertIn("0", parsed["current_context"])
+        self.assertEqual(len(parsed["current_context"]), 2)
 
     def test_tuple_storage(self):
         ctx = Context(storage=({"a": 1}, {"b": 2}))
