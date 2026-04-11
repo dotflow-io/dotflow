@@ -88,3 +88,70 @@ class TestSerializerTaskDumpJson(unittest.TestCase):
         parsed = json.loads(result)
 
         self.assertIn("large", str(parsed["initial_context"]))
+
+    def test_none_context_returns_none(self):
+        task = self._make_task(_current_context=None)
+
+        parsed = json.loads(task.model_dump_json())
+        self.assertIsNone(parsed["current_context"])
+
+    def test_context_with_none_storage_returns_none(self):
+        task = self._make_task(_current_context=Context(storage=None))
+
+        parsed = json.loads(task.model_dump_json())
+        self.assertIsNone(parsed["current_context"])
+
+    def test_list_of_dicts(self):
+        ctx = Context(storage=[{"id": 1}, {"id": 2}])
+        task = self._make_task(_current_context=ctx)
+
+        parsed = json.loads(task.model_dump_json())
+        self.assertEqual(len(parsed["current_context"]), 2)
+
+    def test_list_of_strings(self):
+        ctx = Context(storage=["hello", "world"])
+        task = self._make_task(_current_context=ctx)
+
+        parsed = json.loads(task.model_dump_json())
+        self.assertEqual(len(parsed["current_context"]), 2)
+
+    def test_list_of_context_objects(self):
+        inner_a = Context(storage={"name": "a"}, task_id=1)
+        inner_b = Context(storage={"name": "b"}, task_id=2)
+        ctx = Context(storage=[inner_a, inner_b])
+        task = self._make_task(_current_context=ctx)
+
+        parsed = json.loads(task.model_dump_json())
+        self.assertIn("1", parsed["current_context"])
+        self.assertIn("2", parsed["current_context"])
+
+    def test_list_mixed_context_and_raw(self):
+        inner = Context(storage={"nested": True}, task_id=5)
+        ctx = Context(storage=[inner, {"raw": True}])
+        task = self._make_task(_current_context=ctx)
+
+        parsed = json.loads(task.model_dump_json())
+        self.assertIn("5", parsed["current_context"])
+        self.assertIn("1", parsed["current_context"])
+
+    def test_list_context_without_task_id(self):
+        inner = Context(storage={"data": True})
+        ctx = Context(storage=[inner])
+        task = self._make_task(_current_context=ctx)
+
+        parsed = json.loads(task.model_dump_json())
+        self.assertIn("0", parsed["current_context"])
+
+    def test_empty_list_returns_empty_dict(self):
+        ctx = Context(storage=[])
+        task = self._make_task(_current_context=ctx)
+
+        parsed = json.loads(task.model_dump_json())
+        self.assertEqual(parsed["current_context"], {})
+
+    def test_tuple_storage(self):
+        ctx = Context(storage=({"a": 1}, {"b": 2}))
+        task = self._make_task(_current_context=ctx)
+
+        parsed = json.loads(task.model_dump_json())
+        self.assertEqual(len(parsed["current_context"]), 2)
