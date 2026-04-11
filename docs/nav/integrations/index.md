@@ -112,11 +112,11 @@
 
 <div class="grid cards dotflow-integration-grid" markdown>
 
-- :material-server-network: __dotflow-api__
+- :material-server-network: __Server__
 
     ---
 
-    Send real-time workflow and task execution data to a remote **dotflow-api** server.
+    Hook into the workflow lifecycle to send execution data to a remote server. Default is no-op — implement your own.
 
     [:octicons-arrow-right-24: How-to](../tutorial/server-default.md)
 
