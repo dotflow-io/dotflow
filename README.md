@@ -9,7 +9,7 @@
 [![Downloads](https://img.shields.io/pypi/dm/dotflow?style=flat-square)](https://pypi.org/project/dotflow/)
 [![Stars](https://img.shields.io/github/stars/dotflow-io?label=Stars&style=flat-square)](https://github.com/dotflow-io/dotflow)
 
-[Website](https://dotflow.io) · [Documentation](https://dotflow-io.github.io/dotflow/) · [PyPI](https://pypi.org/project/dotflow/)
+[Website](https://www.cloud.dotflow.io) · [Documentation](https://dotflow-io.github.io/dotflow/) · [PyPI](https://pypi.org/project/dotflow/)
 
 </div>
 

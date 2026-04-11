@@ -1,7 +1,7 @@
 # Welcome to dotflow
 
 <div align="center">
-  <a aria-label="Serverless.com" href="https://dotflow.io">Website</a>
+  <a aria-label="Serverless.com" href="https://www.cloud.dotflow.io">Website</a>
   &nbsp;•&nbsp;
   <a aria-label="Dotglow Documentation" href="https://dotflow-io.github.io/dotflow/">Documentation</a>
   &nbsp;•&nbsp;
