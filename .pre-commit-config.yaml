@@ -8,28 +8,26 @@ repos:
       - id: check-yaml
       - id: check-added-large-files
         args: [--maxkb=1000]
+      - id: check-toml
       - id: check-merge-conflict
+      - id: debug-statements
       - id: mixed-line-ending
         args: [--fix=lf]
 
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.15
+    hooks:
+      - id: ruff
+        name: ruff (lint)
+        args: [--config=.code_quality/ruff.toml, --fix]
+        types: [python]
+      - id: ruff-format
+        name: ruff (format)
+        args: [--config=.code_quality/ruff.toml]
+        types: [python]
+
   - repo: local
     hooks:
-      - id: ruff-check
-        name: Ruff (Linting)
-        entry: poetry run ruff check --config=.code_quality/ruff.toml
-        language: system
-        types: [python]
-        files: ^(dotflow|tests)/
-        pass_filenames: true
-
-      - id: ruff-format
-        name: Ruff (Formatting)
-        entry: poetry run ruff format --check --config=.code_quality/ruff.toml
-        language: system
-        types: [python]
-        files: ^(dotflow|tests)/
-        pass_filenames: true
-
       - id: pytest
         name: Run Unit Tests
         entry: poetry run pytest tests/ --tb=short -q
