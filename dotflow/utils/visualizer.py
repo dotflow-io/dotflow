@@ -259,7 +259,9 @@ def _render_mermaid(tasks: list[Task], mode: str) -> str:
         lines.append("  classDef hidden display:none")
     else:
         for i in range(len(node_ids) - 1):
-            lines.append(f'  {node_ids[i]}["{names[i]}"] --> {node_ids[i+1]}["{names[i+1]}"]')
+            lines.append(
+                f'  {node_ids[i]}["{names[i]}"] --> {node_ids[i + 1]}["{names[i + 1]}"]'
+            )
 
     return "\n".join(lines)
 

@@ -140,7 +140,9 @@ class TestRenderMermaid(unittest.TestCase):
         # Two tasks wrapping the same function must not collapse into a self-loop
         tasks = _make_tasks(step_a, step_a)
         output = _render_mermaid(tasks, mode="sequential")
-        arrow_lines = [line.strip() for line in output.splitlines() if "-->" in line]
+        arrow_lines = [
+            line.strip() for line in output.splitlines() if "-->" in line
+        ]
         self.assertEqual(len(arrow_lines), 1)
         parts = arrow_lines[0].split("-->")
         # The left and right node IDs must differ
