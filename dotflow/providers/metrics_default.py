@@ -6,6 +6,7 @@ from dotflow.abc.metrics import Metrics
 
 
 class MetricsDefault(Metrics):
+
     def workflow_started(self, workflow_id: Any, **kwargs) -> None:
         pass
 
