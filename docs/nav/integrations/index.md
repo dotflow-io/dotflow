@@ -108,6 +108,20 @@
 
 </div>
 
+## Server
+
+<div class="grid cards dotflow-integration-grid" markdown>
+
+- :material-server-network: __dotflow-api__
+
+    ---
+
+    Send real-time workflow and task execution data to a remote **dotflow-api** server.
+
+    [:octicons-arrow-right-24: How-to](../tutorial/server-default.md)
+
+</div>
+
 ## Built-in
 
 <div class="grid cards dotflow-integration-grid" markdown>

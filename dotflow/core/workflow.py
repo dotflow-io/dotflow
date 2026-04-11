@@ -195,6 +195,7 @@ class Manager:
             self.on_success(tasks=tasks)
 
     def sequential(self, **kwargs) -> list[Task]:
+        """Run tasks sequentially. Auto-selects SequentialGroup when multiple groups exist."""
         if len(kwargs.get("groups", {})) > 1:
             process = SequentialGroup(**kwargs)
             return process.get_tasks()
@@ -202,22 +203,25 @@ class Manager:
         process = Sequential(**kwargs)
         return process.get_tasks()
 
-    def sequential_group(self, **kwargs):
+    def sequential_group(self, **kwargs) -> list[Task]:
+        """Run task groups sequentially, with tasks within each group also sequential."""
         process = SequentialGroup(**kwargs)
         return process.get_tasks()
 
     def background(self, **kwargs) -> list[Task]:
+        """Run tasks in a background thread."""
         process = Background(**kwargs)
         self.thread = process.thread
         return process.get_tasks()
 
     def parallel(self, **kwargs) -> list[Task]:
+        """Run task groups in parallel using multiprocessing."""
         process = Parallel(**kwargs)
         return process.get_tasks()
 
 
 class Sequential(Flow):
-    """Sequential"""
+    """Execute tasks one after another, passing context between them."""
 
     def setup_queue(self) -> None:
         self.queue = []
@@ -258,7 +262,7 @@ class Sequential(Flow):
 
 
 class SequentialGroup(Flow):
-    """SequentialGroup"""
+    """Execute task groups sequentially using multiprocessing per group."""
 
     def setup_queue(self) -> None:
         self.queue = _mp.Queue()
@@ -343,7 +347,7 @@ class SequentialGroup(Flow):
 
 
 class Background(Flow):
-    """Background"""
+    """Execute tasks sequentially in a background thread."""
 
     def setup_queue(self) -> None:
         self.queue = []
@@ -392,7 +396,7 @@ class Background(Flow):
 
 
 class Parallel(Flow):
-    """Parallel"""
+    """Execute task groups in parallel using multiprocessing."""
 
     def setup_queue(self) -> None:
         self.queue = _mp.Queue()

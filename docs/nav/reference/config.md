@@ -6,4 +6,7 @@
             - storage
             - notify
             - log
-            - api
+            - server
+            - scheduler
+            - tracer
+            - metrics

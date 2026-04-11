@@ -14,6 +14,7 @@ Providers follow a simple pattern: an abstract base class (ABC) defines the cont
 | `Scheduler` | `dotflow.abc.scheduler` | `start()`, `stop()` | Control recurring workflow execution |
 | `Tracer` | `dotflow.abc.tracer` | `start_workflow()`, `end_workflow()`, `start_task()`, `end_task()` | Distributed tracing with spans |
 | `Metrics` | `dotflow.abc.metrics` | `workflow_started()`, `workflow_completed()`, `workflow_failed()`, `task_completed()`, `task_failed()`, `task_retried()` | Counters and histograms |
+| `Server` | `dotflow.abc.server` | `create_workflow()`, `update_workflow()`, `create_task()`, `update_task()` | Remote API communication |
 
 ## Using custom providers
 

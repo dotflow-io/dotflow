@@ -12,6 +12,7 @@
 | **Tracer** | Distributed traces per workflow/task | Default (no-op) | OpenTelemetry, Sentry |
 | **Metrics** | Counters and histograms | Default (no-op) | OpenTelemetry |
 | **Scheduler** | Drives recurring execution | Default (no-op) | Cron |
+| **Server** | Sends execution data to remote API | — | ServerDefault |
 
 You pass instances into `Config`:
 
@@ -48,4 +49,4 @@ Built-in providers use **core** dependencies. Cloud and observability integratio
 - [`Config`](../reference/config.md)
 - [Custom providers](../development/custom-providers.md)
 - [Integrations](../integrations/index.md)
-- Abstract bases: [`Storage`](../reference/abc-storage.md), [`Notify`](../reference/abc-notify.md), [`Log`](../reference/abc-log.md), [`Scheduler`](../reference/abc-scheduler.md), [`Tracer`](../reference/abc-tracer.md), [`Metrics`](../reference/abc-metrics.md)
+- Abstract bases: [`Storage`](../reference/abc-storage.md), [`Notify`](../reference/abc-notify.md), [`Log`](../reference/abc-log.md), [`Scheduler`](../reference/abc-scheduler.md), [`Tracer`](../reference/abc-tracer.md), [`Metrics`](../reference/abc-metrics.md), [`Server`](../reference/abc-server.md)

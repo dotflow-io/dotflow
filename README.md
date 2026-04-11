@@ -719,8 +719,10 @@ Extend Dotflow by implementing the abstract base classes:
 |-----|---------|---------|
 | `Storage` | `post`, `get`, `key` | Custom storage backends |
 | `Notify` | `hook_status_task` | Custom notification channels |
-| `Log` | `info`, `error` | Custom logging |
+| `Log` | `info`, `error`, `warning`, `debug` | Custom logging |
 | `Scheduler` | `start`, `stop` | Custom scheduling strategies |
+| `Tracer` | `start_workflow`, `end_workflow`, `start_task`, `end_task` | Distributed tracing |
+| `Metrics` | `workflow_started`, `workflow_completed`, `workflow_failed`, `task_completed`, `task_failed`, `task_retried` | Counters and histograms |
 | `Server` | `create_workflow`, `update_workflow`, `create_task`, `update_task` | Remote API communication |
 
 ---
