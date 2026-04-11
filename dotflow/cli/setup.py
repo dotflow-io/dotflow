@@ -7,6 +7,7 @@ from dotflow.cli.commands import (
     CloudGenerateCommand,
     CloudListCommand,
     DeployCommand,
+    FlowCommand,
     InitCommand,
     LogCommand,
     ScheduleCommand,
@@ -44,6 +45,7 @@ class Command:
         self.setup_schedule()
         self.setup_cloud()
         self.setup_deploy()
+        self.setup_flow()
         self.command()
 
     def setup_init(self):
@@ -209,6 +211,42 @@ class Command:
             help="Cron expression (e.g. '*/5 * * * *')",
         )
         self.cmd_deploy.set_defaults(exec=DeployCommand)
+
+    def setup_flow(self):
+        self.cmd_flow = self.subparsers.add_parser(
+            "flow",
+            help="Visualize a workflow pipeline in the terminal",
+        )
+        self.cmd_flow = self.cmd_flow.add_argument_group(
+            "Usage: dotflow flow [OPTIONS]"
+        )
+
+        self.cmd_flow.add_argument(
+            "-s",
+            "--step",
+            required=True,
+            help="Dotted path to a DotFlow instance, TaskBuilder, or task list",
+        )
+        self.cmd_flow.add_argument(
+            "-m",
+            "--mode",
+            default=TypeExecution.SEQUENTIAL,
+            choices=[
+                TypeExecution.SEQUENTIAL,
+                TypeExecution.BACKGROUND,
+                TypeExecution.PARALLEL,
+                "sequential_group",
+            ],
+            help="Execution mode to visualize (default: sequential)",
+        )
+        self.cmd_flow.add_argument(
+            "--format",
+            default="terminal",
+            choices=["terminal", "mermaid"],
+            help="Output format: terminal (default) or mermaid",
+        )
+
+        self.cmd_flow.set_defaults(exec=FlowCommand)
 
     def setup_logs(self):
         self.cmd_logs = self.subparsers.add_parser("logs", help="Logs")
