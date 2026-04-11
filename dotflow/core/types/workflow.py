@@ -12,3 +12,4 @@ class WorkflowStatus:
     NEW = "New"
     IN_PROGRESS = "In progress"
     COMPLETED = "Completed"
+    FAILED = "Failed"

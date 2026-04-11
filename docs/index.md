@@ -1,14 +1,14 @@
 # Welcome to dotflow
 
 <div align="center">
-  <a aria-label="Serverless.com" href="https://dotflow.io">Website</a>
+  <a aria-label="Serverless.com" href="https://www.cloud.dotflow.io">Website</a>
   &nbsp;•&nbsp;
   <a aria-label="Dotglow Documentation" href="https://dotflow-io.github.io/dotflow/">Documentation</a>
   &nbsp;•&nbsp;
   <a aria-label="Pypi" href="https://pypi.org/project/dotflow/">Pypi</a>
 </div>
 
-![](https://raw.githubusercontent.com/FernandoCelmer/dotflow/master/docs/assets/dotflow.gif)
+![](assets/dotflow.png)
 
 ![GitHub Org's stars](https://img.shields.io/github/stars/dotflow-io?label=Dotflow&style=flat-square)
 ![GitHub last commit](https://img.shields.io/github/last-commit/dotflow-io/dotflow?style=flat-square)

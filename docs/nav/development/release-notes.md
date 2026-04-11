@@ -1,5 +1,45 @@
 # Release Notes
 
+## v0.15.0
+
+- [📦 PyPI - Build 0.15.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.15.0)
+- [🪲 Bug: _serialize_context crashes when storage is a list of non-Context objects](https://github.com/dotflow-io/dotflow/pull/249)
+- [⚙️ Feature: Add Alibaba Cloud Function Compute deployer](https://github.com/dotflow-io/dotflow/pull/238)
+- [⚙️ Feature: Implement Server provider for remote API communication](https://github.com/dotflow-io/dotflow/pull/240)
+- [⚙️ Feature: dotflow deploy CLI — cross-cloud infrastructure generation](https://github.com/dotflow-io/dotflow/pull/183)
+- [⚙️ Feature: Add warning/debug log levels and workflow-level logging to Log ABC](https://github.com/dotflow-io/dotflow/pull/189)
+- [⚙️ Feature: OpenTelemetry integration — traces and spans per workflow/task](https://github.com/dotflow-io/dotflow/pull/190)
+- [📌 Remove external dotflow-mongodb package references](https://github.com/dotflow-io/dotflow/pull/200)
+- [⚙️ Refactor: Separate Engine from Execution Strategy](https://github.com/dotflow-io/dotflow/pull/202)
+- [⚠️ Security: Remove shell injection vulnerability in write_file_system](https://github.com/dotflow-io/dotflow/pull/213)
+- [🪲 Bug: Parallel strategy still uses Execution instead of TaskEngine](https://github.com/dotflow-io/dotflow/pull/214)
+- [🪲 Bug: StorageFile.get() returns empty list for missing keys — breaks resume=True](https://github.com/dotflow-io/dotflow/pull/223)
+- [🪲 Bug: StorageDefault uses ctypes.cast(id) — unsafe memory access](https://github.com/dotflow-io/dotflow/pull/226)
+- [🪲 Bug: traceback_error() ignores error parameter — uses sys.exc_info()](https://github.com/dotflow-io/dotflow/pull/225)
+- [🪲 Bug: SerializerTask.model_dump_json() mutates self and produces truncated invalid JSON](https://github.com/dotflow-io/dotflow/pull/224)
+- [🪲 Bug: Async task execution creates new event loops with asyncio.run()](https://github.com/dotflow-io/dotflow/pull/227)
+- [🪲 Bug: Module class uses spec_from_file_location instead of importlib.import_module](https://github.com/dotflow-io/dotflow/pull/229)
+- [🪲 Bug: StorageFile.post() crashes with AttributeError on corrupted task files](https://github.com/dotflow-io/dotflow/pull/230)
+- [🪲 Bug: InitCommand uses hardcoded TEMPLATE_REPO instead of Settings constant](https://github.com/dotflow-io/dotflow/pull/231)
+- [🪲 Bug: CLI --storage s3/gcs crashes with TypeError — missing required bucket argument](https://github.com/dotflow-io/dotflow/pull/232)
+- [🪲 Bug: Context setters silently ignore invalid values](https://github.com/dotflow-io/dotflow/pull/234)
+- [🪲 Fix PR #202 review issues — duration, executor leak, checkpoint, docstring](https://github.com/dotflow-io/dotflow/pull/222)
+- [🪲 Fix deploy scheduled platforms, add ECSScheduledDeployer and ScheduleResolver](https://github.com/dotflow-io/dotflow/pull/236)
+
+## v0.14.1
+
+- [📦 PyPI - Build 0.14.1](https://github.com/dotflow-io/dotflow/releases/tag/v0.14.1)
+- [🪲 Fix co_varnames to only include parameters, not local variables](https://github.com/dotflow-io/dotflow/pull/161)
+- [🪲 Fix method ordering to use regex matching instead of string search](https://github.com/dotflow-io/dotflow/pull/163)
+- [🪲 Fix fork multiprocessing on macOS with OBJC safety flag](https://github.com/dotflow-io/dotflow/pull/165)
+- [🪲 Fix timeout thread leak in ThreadPoolExecutor](https://github.com/dotflow-io/dotflow/pull/166)
+- [🪲 Add thread-safe lock to Background list append](https://github.com/dotflow-io/dotflow/pull/167)
+- [🪲 Fix race condition in queue overlap dispatch](https://github.com/dotflow-io/dotflow/pull/169)
+- [🪲 Track and join spawned threads on scheduler stop](https://github.com/dotflow-io/dotflow/pull/170)
+- [🪲 Save and restore signal handlers on scheduler start/stop](https://github.com/dotflow-io/dotflow/pull/171)
+- [⚠️ Update vulnerable dependencies](https://github.com/dotflow-io/dotflow/pull/156)
+- [📌 Add NotifyDiscord provider](https://github.com/dotflow-io/dotflow/pull/185)
+
 ## v0.14.0
 
 - [📦 PyPI - Build 0.14.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.14.0)

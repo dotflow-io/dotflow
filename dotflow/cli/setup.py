@@ -4,11 +4,14 @@ from rich import print  # type: ignore
 
 from dotflow import __description__, __version__
 from dotflow.cli.commands import (
+    CloudGenerateCommand,
+    CloudListCommand,
+    DeployCommand,
+    FlowCommand,
     InitCommand,
     LogCommand,
     ScheduleCommand,
     StartCommand,
-    VizCommand,
 )
 from dotflow.core.exception import (
     MESSAGE_UNKNOWN_ERROR,
@@ -40,7 +43,9 @@ class Command:
         self.setup_logs()
         self.setup_start()
         self.setup_schedule()
-        self.setup_viz()
+        self.setup_cloud()
+        self.setup_deploy()
+        self.setup_flow()
         self.command()
 
     def setup_init(self):
@@ -147,22 +152,82 @@ class Command:
 
         self.cmd_schedule.set_defaults(exec=ScheduleCommand)
 
-    def setup_viz(self):
-        self.cmd_viz = self.subparsers.add_parser(
-            "viz",
+    def setup_cloud(self):
+        self.cmd_cloud = self.subparsers.add_parser(
+            "cloud",
+            help="Generate cloud infrastructure files for a target platform",
+        )
+        cloud_subparsers = self.cmd_cloud.add_subparsers()
+
+        cmd_generate = cloud_subparsers.add_parser(
+            "generate", help="Generate infrastructure files"
+        )
+        cmd_generate.add_argument(
+            "--platform",
+            required=True,
+            help=("Target platform (e.g. docker, lambda, cloud-run)"),
+        )
+        cmd_generate.add_argument(
+            "--project",
+            default=None,
+            help="Project name (defaults to current directory name)",
+        )
+        cmd_generate.add_argument(
+            "--output",
+            default=".",
+            help="Output directory (defaults to current directory)",
+        )
+        cmd_generate.set_defaults(exec=CloudGenerateCommand)
+
+        cmd_list = cloud_subparsers.add_parser(
+            "list", help="List available cloud platforms"
+        )
+        cmd_list.set_defaults(exec=CloudListCommand)
+
+    def setup_deploy(self):
+        self.cmd_deploy = self.subparsers.add_parser(
+            "deploy",
+            help="Deploy pipeline to a cloud platform",
+        )
+        self.cmd_deploy.add_argument(
+            "--platform",
+            required=True,
+            help="Target platform (e.g. lambda, ecs)",
+        )
+        self.cmd_deploy.add_argument(
+            "--project",
+            default=None,
+            required=True,
+            help="Project name",
+        )
+        self.cmd_deploy.add_argument(
+            "--region",
+            default=None,
+            help="Cloud region (e.g. us-east-1 for AWS, us-central1 for GCP)",
+        )
+        self.cmd_deploy.add_argument(
+            "--schedule",
+            default=None,
+            help="Cron expression (e.g. '*/5 * * * *')",
+        )
+        self.cmd_deploy.set_defaults(exec=DeployCommand)
+
+    def setup_flow(self):
+        self.cmd_flow = self.subparsers.add_parser(
+            "flow",
             help="Visualize a workflow pipeline in the terminal",
         )
-        self.cmd_viz = self.cmd_viz.add_argument_group(
-            "Usage: dotflow viz [OPTIONS]"
+        self.cmd_flow = self.cmd_flow.add_argument_group(
+            "Usage: dotflow flow [OPTIONS]"
         )
 
-        self.cmd_viz.add_argument(
+        self.cmd_flow.add_argument(
             "-s",
             "--step",
             required=True,
             help="Dotted path to a DotFlow instance, TaskBuilder, or task list",
         )
-        self.cmd_viz.add_argument(
+        self.cmd_flow.add_argument(
             "-m",
             "--mode",
             default=TypeExecution.SEQUENTIAL,
@@ -174,14 +239,14 @@ class Command:
             ],
             help="Execution mode to visualize (default: sequential)",
         )
-        self.cmd_viz.add_argument(
+        self.cmd_flow.add_argument(
             "--format",
             default="terminal",
             choices=["terminal", "mermaid"],
             help="Output format: terminal (default) or mermaid",
         )
 
-        self.cmd_viz.set_defaults(exec=VizCommand)
+        self.cmd_flow.set_defaults(exec=FlowCommand)
 
     def setup_logs(self):
         self.cmd_logs = self.subparsers.add_parser("logs", help="Logs")
@@ -205,6 +270,9 @@ class Command:
 
         except ImportModuleError as err:
             print(settings.WARNING_ALERT, err)
+
+        except KeyboardInterrupt:
+            print("\n", settings.INFO_ALERT, "Aborted.")
 
         except Exception as err:
             logger.error(f"Internal problem: {str(err)}")

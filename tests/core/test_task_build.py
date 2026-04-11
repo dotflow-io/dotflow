@@ -27,7 +27,7 @@ class TestTaskBuild(unittest.TestCase):
         task = TaskBuilder(config=self.config)
         task.add(step=action_step)
 
-        self.assertEqual(task.queue[0].task_id, 0)
+        self.assertEqual(task.queue[0].task_id, 1)
         self.assertIsInstance(task.queue[0], Task)
         self.assertEqual(task.queue[0].callback, basic_callback)
         self.assertEqual(len(task.queue), 1)
@@ -102,24 +102,6 @@ class TestTaskBuild(unittest.TestCase):
 
     def test_task_build_result(self):
         expected_workflow_id = uuid4()
-        expected_result = {
-            "workflow_id": str(expected_workflow_id),
-            "tasks": [
-                {
-                    "task_id": 0,
-                    "workflow_id": str(expected_workflow_id),
-                    "status": "Not started",
-                    "error": None,
-                    "errors": [],
-                    "retry_count": 0,
-                    "duration": None,
-                    "initial_context": '{"foo": "bar"}',
-                    "current_context": None,
-                    "previous_context": None,
-                    "group_name": "default",
-                }
-            ],
-        }
 
         task = TaskBuilder(
             config=self.config, workflow_id=expected_workflow_id
@@ -127,4 +109,16 @@ class TestTaskBuild(unittest.TestCase):
         task.add(step=action_step, initial_context=self.content)
 
         result = task.result()
-        self.assertEqual(result, expected_result)
+        task_result = result["tasks"][0]
+        self.assertEqual(
+            result["workflow_id"],
+            str(expected_workflow_id),
+        )
+        self.assertEqual(task_result["task_id"], 1)
+        self.assertEqual(task_result["status"], "Not started")
+        self.assertEqual(task_result["duration"], None)
+        self.assertEqual(task_result["retry_count"], 0)
+        self.assertEqual(task_result["group_name"], "default")
+        self.assertIn("created_at", task_result)
+        self.assertIn("started_at", task_result)
+        self.assertIn("finished_at", task_result)

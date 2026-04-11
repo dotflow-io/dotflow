@@ -2,10 +2,10 @@
 
 import unittest
 
-from dotflow.abc.api import Api
 from dotflow.abc.log import Log
 from dotflow.abc.notify import Notify
 from dotflow.abc.scheduler import Scheduler
+from dotflow.abc.server import Server
 from dotflow.abc.storage import Storage
 from dotflow.core.config import Config
 from dotflow.core.exception import NotCallableObject
@@ -13,9 +13,9 @@ from dotflow.providers import (
     LogDefault,
     NotifyDefault,
     SchedulerDefault,
+    ServerDefault,
     StorageDefault,
 )
-from dotflow.providers.api_default import ApiDefault
 
 
 class TestConfig(unittest.TestCase):
@@ -25,7 +25,7 @@ class TestConfig(unittest.TestCase):
         self.assertIsInstance(config.storage, Storage)
         self.assertIsInstance(config.notify, Notify)
         self.assertIsInstance(config.log, Log)
-        self.assertIsInstance(config.api, Api)
+        self.assertIsInstance(config.server, Server)
         self.assertIsInstance(config.scheduler, Scheduler)
 
     def test_default_provider_types(self):
@@ -34,7 +34,7 @@ class TestConfig(unittest.TestCase):
         self.assertIsInstance(config.storage, StorageDefault)
         self.assertIsInstance(config.notify, NotifyDefault)
         self.assertIsInstance(config.log, LogDefault)
-        self.assertIsInstance(config.api, ApiDefault)
+        self.assertIsInstance(config.server, ServerDefault)
         self.assertIsInstance(config.scheduler, SchedulerDefault)
 
     def test_invalid_storage_raises(self):
@@ -49,9 +49,9 @@ class TestConfig(unittest.TestCase):
         with self.assertRaises(NotCallableObject):
             Config(log="invalid")
 
-    def test_invalid_api_raises(self):
+    def test_invalid_server_raises(self):
         with self.assertRaises(NotCallableObject):
-            Config(api="invalid")
+            Config(server="invalid")
 
     def test_invalid_scheduler_raises(self):
         with self.assertRaises(NotCallableObject):

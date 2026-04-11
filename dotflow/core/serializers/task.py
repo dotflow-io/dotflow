@@ -3,10 +3,17 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime
 from typing import Any, Optional
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    computed_field,
+    field_validator,
+)
 
 from dotflow.core.context import Context
 
@@ -30,6 +37,9 @@ class SerializerTask(BaseModel):
     previous_context: Any = Field(default=None, alias="_previous_context")
     group_name: str = Field(default=None)
     retry_count: int = Field(default=0)
+    created_at: Optional[datetime] = Field(default=None)
+    started_at: Optional[datetime] = Field(default=None)
+    finished_at: Optional[datetime] = Field(default=None)
     errors: list[SerializerTaskError] = Field(
         default_factory=list, alias="_errors"
     )
@@ -38,25 +48,28 @@ class SerializerTask(BaseModel):
         default="Context size exceeded", exclude=True
     )
 
+    @computed_field
+    @property
+    def error(self) -> Optional[SerializerTaskError]:
+        """Last error (convenience field)."""
+        return self.errors[-1] if self.errors else None
+
     def model_dump_json(self, **kwargs) -> str:
-        data = json.loads(
-            super().model_dump_json(serialize_as_any=True, **kwargs)
-        )
-        data["error"] = data["errors"][-1] if data["errors"] else None
+        data = self.model_dump(mode="json", serialize_as_any=True, **kwargs)
         dump_json = json.dumps(data)
 
-        if self.max and len(dump_json) > self.max:
-            self.initial_context = self.size_message
-            self.current_context = self.size_message
-            self.previous_context = self.size_message
+        if not self.max or len(dump_json) <= self.max:
+            return dump_json
 
-            data = json.loads(
-                super().model_dump_json(serialize_as_any=True, **kwargs)
-            )
-            data["error"] = data["errors"][-1] if data["errors"] else None
+        data["initial_context"] = self.size_message
+        data["current_context"] = self.size_message
+        data["previous_context"] = self.size_message
+        dump_json = json.dumps(data)
+
+        if len(dump_json) > self.max:
+            data["errors"] = []
+            data["error"] = None
             dump_json = json.dumps(data)
-
-            return dump_json[0 : self.max]
 
         return dump_json
 
@@ -73,31 +86,50 @@ class SerializerTask(BaseModel):
         ]
 
     @field_validator(
-        "initial_context", "current_context", "previous_context", mode="before"
+        "initial_context",
+        "current_context",
+        "previous_context",
+        mode="before",
     )
     @classmethod
-    def context_validator(cls, value: str) -> str:
-        if value and value.storage:
-            context = cls.context_loop(value=value)
-            return context
-        return None
+    def context_validator(cls, value: Any) -> Any:
+        if value is None:
+            return None
+        if not isinstance(value, Context):
+            return None
+        if value.storage is None:
+            return None
+        return cls._serialize_context(value)
 
     @classmethod
-    def format_context(cls, value):
-        try:
-            return json.dumps(value.storage)
-        except TypeError:
-            return str(value.storage)
-
-    @classmethod
-    def context_loop(cls, value):
-        if isinstance(value.storage, list):
+    def _serialize_context(cls, ctx: Context) -> Any:
+        """Serialize a Context to its storage value."""
+        if isinstance(ctx.storage, (list, tuple)):
             contexts = {}
-            if any(isinstance(context, Context) for context in value.storage):
-                for context in value.storage:
-                    if isinstance(context, Context):
-                        contexts[context.task_id] = cls.context_loop(context)
+            for index, item in enumerate(ctx.storage):
+                if isinstance(item, Context):
+                    if item.task_id is not None:
+                        key = item.task_id
                     else:
-                        contexts[context.task_id] = cls.format_context(context)
+                        key = f"ctx:{index}"
+                    contexts[key] = cls._serialize_context(item)
+                else:
+                    contexts[f"raw:{index}"] = cls._format_raw(item)
             return contexts
-        return cls.format_context(value=value)
+        return cls._format_storage(ctx)
+
+    @staticmethod
+    def _format_storage(ctx: Context) -> Any:
+        """Format storage value as JSON string."""
+        try:
+            return json.dumps(ctx.storage)
+        except TypeError:
+            return str(ctx.storage)
+
+    @staticmethod
+    def _format_raw(value: Any) -> Any:
+        """Format a raw (non-Context) value as JSON string."""
+        try:
+            return json.dumps(value)
+        except TypeError:
+            return str(value)

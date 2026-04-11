@@ -1,8 +1,6 @@
 """Task module"""
 
-import sys
-from importlib.util import module_from_spec
-from importlib.util import spec_from_file_location as file_location
+import importlib
 from typing import Any
 
 from dotflow.core.exception import ImportModuleError
@@ -16,21 +14,17 @@ class Module:
 
     @classmethod
     def import_module(cls, value: str):
-        spec = file_location(value, cls._get_path(value))
-        module = module_from_spec(spec)
+        module_path, _, attr_name = value.rpartition(".")
 
-        sys.modules[module] = module
-        spec.loader.exec_module(module)
+        if not module_path:
+            raise ImportModuleError(module=value)
 
-        if hasattr(module, cls._get_name(value)):
-            return getattr(module, cls._get_name(value))
+        try:
+            module = importlib.import_module(module_path)
+        except ModuleNotFoundError:
+            raise ImportModuleError(module=value) from None
+
+        if hasattr(module, attr_name):
+            return getattr(module, attr_name)
 
         raise ImportModuleError(module=value)
-
-    @classmethod
-    def _get_name(cls, value: str):
-        return value.split(".")[-1:][0]
-
-    @classmethod
-    def _get_path(cls, value: str):
-        return f"{'/'.join(value.split('.')[:-1])}.py"

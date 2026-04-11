@@ -1,20 +1,22 @@
 """Storage Default"""
 
 from collections.abc import Callable
-from ctypes import cast, py_object
 
 from dotflow.abc.storage import Storage
 from dotflow.core.context import Context
 
 
 class StorageDefault(Storage):
-    """Storage"""
+    """In-memory storage using a dictionary."""
+
+    def __init__(self):
+        self._store: dict[str, Context] = {}
 
     def post(self, key: str, context: Context) -> None:
-        return None
+        self._store[key] = context
 
     def get(self, key: str) -> Context:
-        return Context(storage=cast(key, py_object).value)
+        return self._store.get(key, Context())
 
-    def key(self, task: Callable):
-        return id(task.current_context)
+    def key(self, task: Callable) -> str:
+        return f"{task.workflow_id}-{task.task_id}"

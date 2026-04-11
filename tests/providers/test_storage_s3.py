@@ -30,8 +30,8 @@ class TestStorageS3(unittest.TestCase):
     def test_storage_s3_instance(self):
         storage = StorageS3(bucket=BUCKET, prefix=PREFIX, region=REGION)
 
-        self.assertEqual(storage.bucket, BUCKET)
-        self.assertEqual(storage.prefix, PREFIX)
+        self.assertEqual(storage._s3.bucket, BUCKET)
+        self.assertEqual(storage._s3.prefix, PREFIX)
 
     def test_post(self):
         expected_value = {"foo": "bar"}

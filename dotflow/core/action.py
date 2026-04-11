@@ -1,14 +1,13 @@
 """Action module"""
 
 import asyncio
+import inspect
 from collections.abc import Callable
 from concurrent.futures import ThreadPoolExecutor
-from time import sleep
 from types import FunctionType
 
 from dotflow.core.context import Context
-from dotflow.core.exception import ExecutionWithClassError, TaskError
-from dotflow.core.types.status import TypeStatus
+from dotflow.core.exception import ExecutionWithClassError
 
 
 def is_execution_with_class_internal_error(error: Exception) -> bool:
@@ -22,7 +21,11 @@ def is_execution_with_class_internal_error(error: Exception) -> bool:
 
 
 class Action:
-    """
+    """Decorator for creating task steps.
+
+    Accepts configuration for retry, timeout, retry_delay, and backoff,
+    which are stored as attributes and consumed by TaskEngine during execution.
+
     Import:
         You can import the **action** decorator directly from dotflow:
 
@@ -43,7 +46,6 @@ class Action:
             def my_task():
                 print("task")
 
-
         With Timeout
 
             @action(timeout=60)
@@ -61,6 +63,10 @@ class Action:
             @action(retry=5, backoff=True)
             def my_task():
                 print("task")
+
+    Note:
+        Retry, timeout, and backoff are enforced by TaskEngine.execute_with_retry(),
+        not by Action itself. Action stores the configuration as attributes.
 
     Args:
         func (Callable):
@@ -103,13 +109,13 @@ class Action:
 
             if contexts:
                 return Context(
-                    storage=self._run_action(*args, task=task, **contexts),
+                    storage=self._run_action(*args, **contexts),
                     task_id=task.task_id,
                     workflow_id=task.workflow_id,
                 )
 
             return Context(
-                storage=self._run_action(*args, task=task),
+                storage=self._run_action(*args),
                 task_id=task.task_id,
                 workflow_id=task.workflow_id,
             )
@@ -123,90 +129,64 @@ class Action:
 
             if contexts:
                 return Context(
-                    storage=self._run_action(*_args, task=task, **contexts),
+                    storage=self._run_action(*_args, **contexts),
                     task_id=task.task_id,
                     workflow_id=task.workflow_id,
                 )
 
             return Context(
-                storage=self._run_action(*_args, task=task),
+                storage=self._run_action(*_args),
                 task_id=task.task_id,
                 workflow_id=task.workflow_id,
             )
 
+        action.retry = self.retry
+        action.timeout = self.timeout
+        action.retry_delay = self.retry_delay
+        action.backoff = self.backoff
+
         return action
 
-    def _run_action(self, *args, task=None, **kwargs):
-        current_delay = self.retry_delay
+    def _run_action(self, *args, **kwargs):
+        is_async = inspect.iscoroutinefunction(self.func)
 
-        is_async = asyncio.iscoroutinefunction(self.func)
-
-        for attempt in range(1, self.retry + 1):
-            try:
-                if self.timeout:
-                    with ThreadPoolExecutor(max_workers=1) as executor:
-                        future = executor.submit(
-                            self._call_func,
-                            is_async,
-                            *args,
-                            **kwargs,
-                        )
-                        result = future.result(timeout=self.timeout)
-                else:
-                    result = self._call_func(is_async, *args, **kwargs)
-
-                return result
-
-            except Exception as error:
-                last_exception = error
-
-                if is_execution_with_class_internal_error(
-                    error=last_exception
-                ):
-                    raise ExecutionWithClassError() from None
-
-                if attempt == self.retry:
-                    raise last_exception from last_exception
-
-                if task is not None:
-                    task.retry_count += 1
-                    task.errors = TaskError(
-                        error=error,
-                        attempt=attempt,
-                    )
-                    task.status = TypeStatus.RETRY
-
-                sleep(current_delay)
-                if self.backoff:
-                    current_delay *= 2
+        try:
+            return self._call_func(is_async, *args, **kwargs)
+        except Exception as error:
+            if is_execution_with_class_internal_error(error=error):
+                raise ExecutionWithClassError() from None
+            raise
 
     def _call_func(self, is_async, *args, **kwargs):
-        if is_async:
-            try:
-                loop = asyncio.get_running_loop()
-            except RuntimeError:
-                loop = None
+        if not is_async:
+            return self.func(*args, **kwargs)
 
-            if loop and loop.is_running():
-                import concurrent.futures
-
-                with concurrent.futures.ThreadPoolExecutor() as pool:
-                    return pool.submit(
-                        asyncio.run, self.func(*args, **kwargs)
-                    ).result()
+        try:
+            asyncio.get_running_loop()
+        except RuntimeError:
             return asyncio.run(self.func(*args, **kwargs))
-        return self.func(*args, **kwargs)
+
+        with ThreadPoolExecutor(max_workers=1) as pool:
+            return pool.submit(
+                asyncio.run, self.func(*args, **kwargs)
+            ).result()
 
     def _set_params(self):
         if isinstance(self.func, FunctionType):
-            self.params = list(self.func.__code__.co_varnames)
+            code = self.func.__code__
+            self.params = list(
+                code.co_varnames[: code.co_argcount + code.co_kwonlyargcount]
+            )
 
         if (
             type(self.func) is type
             and hasattr(self.func, "__init__")
             and hasattr(self.func.__init__, "__code__")
         ):
-            self.params = list(self.func.__init__.__code__.co_varnames)
+            code = self.func.__init__.__code__
+            self.params = list(
+                code.co_varnames[: code.co_argcount + code.co_kwonlyargcount]
+            )
 
     def _get_context(self, kwargs: dict):
         context = {}

@@ -2,6 +2,7 @@
 
 import json
 from collections.abc import Callable
+from datetime import datetime
 from typing import Any
 from uuid import UUID
 
@@ -108,8 +109,11 @@ class Task(TaskInstance):
         self.step = step
         self.callback = callback
         self.initial_context = initial_context
+        self.created_at = datetime.now()
+        self.started_at = None
+        self.finished_at = None
         self.status = TypeStatus.NOT_STARTED
-        self.config.api.create_task(task=self)
+        self.config.server.create_task(task=self)
 
     @property
     def step(self):
@@ -208,8 +212,6 @@ class Task(TaskInstance):
         elif isinstance(value, Exception):
             self._errors.append(TaskError(value))
 
-        self.config.log.error(task=self)
-
     @property
     def error(self):
         import warnings
@@ -248,8 +250,19 @@ class Task(TaskInstance):
     def status(self, value: TypeStatus) -> None:
         self._status = value
 
-        self.config.notify.send(task=self)
-        self.config.log.info(task=self)
+        self.config.notify.hook_status_task(task=self)
+
+        if value == TypeStatus.FAILED:
+            self.config.log.error(task=self)
+            self.config.metrics.task_failed(task=self)
+        elif value == TypeStatus.RETRY:
+            self.config.log.warning(task=self)
+            self.config.metrics.task_retried(task=self)
+        elif value == TypeStatus.COMPLETED:
+            self.config.log.info(task=self)
+            self.config.metrics.task_completed(task=self)
+        else:
+            self.config.log.info(task=self)
 
     @property
     def config(self):
@@ -295,6 +308,7 @@ class TaskBuilder:
         self.queue: list[Callable] = []
         self.workflow_id = workflow_id
         self.config = config
+        self._next_id = 1
 
     def add(
         self,
@@ -334,9 +348,12 @@ class TaskBuilder:
                 )
             return self
 
+        task_id = self._next_id
+        self._next_id += 1
+
         self.queue.append(
             Task(
-                task_id=len(self.queue),
+                task_id=task_id,
                 step=step,
                 callback=Module(value=callback),
                 initial_context=initial_context,

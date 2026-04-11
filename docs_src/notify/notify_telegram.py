@@ -1,5 +1,4 @@
 import os
-import time
 
 from dotenv import load_dotenv
 
@@ -9,14 +8,12 @@ from dotflow.providers import NotifyTelegram
 
 
 @action
-def simple_step(initial_context):
-    time.sleep(0.5)
-
-    return initial_context.storage
+def step_one():
+    return {"data": "processed"}
 
 
 @action
-def simple_step_raise():
+def step_two():
     raise RuntimeError("Fail!")
 
 
@@ -27,11 +24,12 @@ def main():
         token=os.getenv("BOT_TOKEN", ""),
         chat_id=int(os.getenv("CHAT_ID", "0")),
         notification_type=TypeStatus.FAILED,
+        show_result=True,
     )
 
     workflow = DotFlow(config=Config(notify=notify))
-    workflow.task.add(step=simple_step, initial_context={"foo": "bar"})
-    workflow.task.add(step=simple_step_raise)
+    workflow.task.add(step=step_one)
+    workflow.task.add(step=step_two)
     workflow.start()
 
     return workflow

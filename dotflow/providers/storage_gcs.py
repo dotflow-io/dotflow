@@ -5,8 +5,8 @@ from json import dumps, loads
 from typing import Any
 
 from dotflow.abc.storage import Storage
+from dotflow.cloud.gcp.services.gcs import GCS
 from dotflow.core.context import Context
-from dotflow.core.exception import ModuleNotFound
 
 
 class StorageGCS(Storage):
@@ -46,20 +46,7 @@ class StorageGCS(Storage):
         project: str = None,
         **kwargs,
     ):
-        try:
-            from google.api_core.exceptions import NotFound
-            from google.cloud import storage as gcs
-        except ImportError:
-            raise ModuleNotFound(
-                module="google-cloud-storage",
-                library="dotflow[gcp]",
-            ) from None
-
-        self._not_found = NotFound
-        self.client = gcs.Client(project=project)
-        self.bucket_obj = self.client.bucket(bucket)
-        self.bucket_obj.reload()
-        self.prefix = prefix
+        self._gcs = GCS(bucket=bucket, prefix=prefix, project=project)
 
     def post(self, key: str, context: Context) -> None:
         task_context = []
@@ -71,10 +58,10 @@ class StorageGCS(Storage):
         else:
             task_context.append(self._dumps(storage=context.storage))
 
-        self._write(key=key, data=task_context)
+        self._gcs.write(key=key, data=task_context)
 
     def get(self, key: str) -> Context:
-        task_context = self._read(key)
+        task_context = self._gcs.read(key)
 
         if len(task_context) == 0:
             return Context()
@@ -90,21 +77,6 @@ class StorageGCS(Storage):
 
     def key(self, task: Callable):
         return f"{task.workflow_id}-{task.task_id}"
-
-    def _read(self, key: str) -> list:
-        blob = self.bucket_obj.blob(f"{self.prefix}{key}")
-        try:
-            data = blob.download_as_text()
-            return loads(data)
-        except self._not_found:
-            return []
-
-    def _write(self, key: str, data: list) -> None:
-        blob = self.bucket_obj.blob(f"{self.prefix}{key}")
-        blob.upload_from_string(
-            dumps(data),
-            content_type="application/json",
-        )
 
     def _loads(self, storage: Any) -> Context:
         try:

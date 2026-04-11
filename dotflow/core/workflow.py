@@ -10,13 +10,25 @@ from uuid import UUID, uuid4
 
 from dotflow.abc.flow import Flow
 from dotflow.core.context import Context
+from dotflow.core.engine import TaskEngine
 from dotflow.core.exception import ExecutionModeNotExist
-from dotflow.core.execution import Execution
 from dotflow.core.task import Task, TaskError
 from dotflow.core.types import TypeExecution, TypeStatus
+from dotflow.core.types.workflow import WorkflowStatus
 from dotflow.utils import basic_callback
 
-_mp = get_context("fork") if sys.platform != "win32" else get_context("spawn")
+if sys.platform == "win32":
+    _mp = get_context("spawn")
+else:
+    import multiprocessing
+
+    if sys.platform == "darwin" and hasattr(
+        multiprocessing, "set_forkserver_preload"
+    ):
+        import os
+
+        os.environ.setdefault("OBJC_DISABLE_INITIALIZE_FORK_SAFETY", "YES")
+    _mp = get_context("fork")
 
 
 def grouper(tasks: list[Task]) -> dict[str, list[Task]]:
@@ -97,40 +109,93 @@ class Manager:
         keep_going: bool = False,
         workflow_id: UUID = None,
         resume: bool = False,
+        config=None,
     ) -> None:
         self.tasks = tasks
         self.on_success = on_success
         self.on_failure = on_failure
         self.workflow_id = workflow_id or uuid4()
         self.started = datetime.now()
+        self.config = config
+
+        if self.config:
+            self.config.tracer.start_workflow(
+                workflow_id=self.workflow_id, mode=mode, tasks_count=len(tasks)
+            )
+            self.config.metrics.workflow_started(
+                workflow_id=self.workflow_id, mode=mode
+            )
+            self.config.server.update_workflow(
+                workflow=self.workflow_id,
+                status=WorkflowStatus.IN_PROGRESS,
+            )
 
         execution = None
         groups = grouper(tasks=tasks)
 
-        try:
-            execution = getattr(self, mode)
-        except AttributeError as err:
-            raise ExecutionModeNotExist() from err
+        VALID_MODES = {
+            "sequential",
+            "sequential_group",
+            "background",
+            "parallel",
+        }
+        if mode not in VALID_MODES:
+            raise ExecutionModeNotExist()
+
+        execution = getattr(self, mode)
 
         self.tasks = execution(
             tasks=tasks,
-            workflow_id=workflow_id,
+            workflow_id=self.workflow_id,
             ignore=keep_going,
             groups=groups,
             resume=resume,
         )
 
-        self._callback_workflow(tasks=self.tasks)
+        if mode != TypeExecution.BACKGROUND:
+            self._callback_workflow(tasks=self.tasks)
+        elif self.config:
+
+            def _background_cleanup():
+                self.thread.join()
+                self._callback_workflow(tasks=self.tasks)
+
+            threading.Thread(target=_background_cleanup, daemon=True).start()
 
     def _callback_workflow(self, tasks: list[Task]):
+        duration = (datetime.now() - self.started).total_seconds()
         final_status = [task.status for task in tasks]
+        failed = TypeStatus.FAILED in final_status
 
-        if TypeStatus.FAILED in final_status:
+        if self.config:
+            self.config.tracer.end_workflow(
+                workflow_id=self.workflow_id,
+                duration=duration,
+                failed=failed,
+            )
+            if failed:
+                self.config.metrics.workflow_failed(self.workflow_id, duration)
+            else:
+                self.config.metrics.workflow_completed(
+                    self.workflow_id, duration
+                )
+
+        if self.config:
+            wf_status = (
+                WorkflowStatus.FAILED if failed else WorkflowStatus.COMPLETED
+            )
+            self.config.server.update_workflow(
+                workflow=self.workflow_id,
+                status=wf_status,
+            )
+
+        if failed:
             self.on_failure(tasks=tasks)
         else:
             self.on_success(tasks=tasks)
 
     def sequential(self, **kwargs) -> list[Task]:
+        """Run tasks sequentially. Auto-selects SequentialGroup when multiple groups exist."""
         if len(kwargs.get("groups", {})) > 1:
             process = SequentialGroup(**kwargs)
             return process.get_tasks()
@@ -138,21 +203,25 @@ class Manager:
         process = Sequential(**kwargs)
         return process.get_tasks()
 
-    def sequential_group(self, **kwargs):
+    def sequential_group(self, **kwargs) -> list[Task]:
+        """Run task groups sequentially, with tasks within each group also sequential."""
         process = SequentialGroup(**kwargs)
         return process.get_tasks()
 
     def background(self, **kwargs) -> list[Task]:
+        """Run tasks in a background thread."""
         process = Background(**kwargs)
+        self.thread = process.thread
         return process.get_tasks()
 
     def parallel(self, **kwargs) -> list[Task]:
+        """Run task groups in parallel using multiprocessing."""
         process = Parallel(**kwargs)
         return process.get_tasks()
 
 
 class Sequential(Flow):
-    """Sequential"""
+    """Execute tasks one after another, passing context between them."""
 
     def setup_queue(self) -> None:
         self.queue = []
@@ -163,36 +232,26 @@ class Sequential(Flow):
     def _flow_callback(self, task: Task) -> None:
         self.queue.append(task)
 
-    def _has_checkpoint(self, task: Task) -> bool:
-        if not self.resume:
-            return False
-
-        context = task.config.storage.get(
-            key=task.config.storage.key(task=task)
-        )
-
-        return context.storage is not None
-
     def run(self) -> None:
         previous_context = Context(workflow_id=self.workflow_id)
 
         for task in self.tasks:
-            if self._has_checkpoint(task):
-                previous_context = task.config.storage.get(
-                    key=task.config.storage.key(task=task)
-                )
-
-                task.status = TypeStatus.COMPLETED
-                task.current_context = previous_context
-                self._flow_callback(task=task)
+            restored = self._try_restore_checkpoint(task)
+            if restored:
+                previous_context = restored
                 continue
 
-            Execution(
+            engine = TaskEngine(
                 task=task,
                 workflow_id=self.workflow_id,
                 previous_context=previous_context,
-                _flow_callback=self._flow_callback,
             )
+
+            with engine.start():
+                engine.execute_with_retry()
+
+            task.callback(task=task)
+            self._flow_callback(task=task)
 
             previous_context = task.config.storage.get(
                 key=task.config.storage.key(task=task)
@@ -203,7 +262,7 @@ class Sequential(Flow):
 
 
 class SequentialGroup(Flow):
-    """SequentialGroup"""
+    """Execute task groups sequentially using multiprocessing per group."""
 
     def setup_queue(self) -> None:
         self.queue = _mp.Queue()
@@ -258,36 +317,26 @@ class SequentialGroup(Flow):
         for process in self._processes:
             process.join()
 
-    def _has_checkpoint(self, task: Task) -> bool:
-        if not self.resume:
-            return False
-
-        context = task.config.storage.get(
-            key=task.config.storage.key(task=task)
-        )
-
-        return context.storage is not None
-
     def _run_group(self, groups: list[Task]) -> None:
         previous_context = Context(workflow_id=self.workflow_id)
 
         for task in groups:
-            if self._has_checkpoint(task):
-                previous_context = task.config.storage.get(
-                    key=task.config.storage.key(task=task)
-                )
-
-                task.status = TypeStatus.COMPLETED
-                task.current_context = previous_context
-                self._flow_callback(task=task)
+            restored = self._try_restore_checkpoint(task)
+            if restored:
+                previous_context = restored
                 continue
 
-            Execution(
+            engine = TaskEngine(
                 task=task,
                 workflow_id=self.workflow_id,
                 previous_context=previous_context,
-                _flow_callback=self._flow_callback,
             )
+
+            with engine.start():
+                engine.execute_with_retry()
+
+            task.callback(task=task)
+            self._flow_callback(task=task)
 
             previous_context = task.config.storage.get(
                 key=task.config.storage.key(task=task)
@@ -298,47 +347,39 @@ class SequentialGroup(Flow):
 
 
 class Background(Flow):
-    """Background"""
+    """Execute tasks sequentially in a background thread."""
 
     def setup_queue(self) -> None:
         self.queue = []
+        self._lock = threading.Lock()
 
     def get_tasks(self) -> list[Task]:
-        return self.queue
+        return self.tasks
 
     def _flow_callback(self, task: Task) -> None:
-        self.queue.append(task)
-
-    def _has_checkpoint(self, task: Task) -> bool:
-        if not self.resume:
-            return False
-
-        context = task.config.storage.get(
-            key=task.config.storage.key(task=task)
-        )
-
-        return context.storage is not None
+        with self._lock:
+            self.queue.append(task)
 
     def _run_sequential(self) -> None:
         previous_context = Context(workflow_id=self.workflow_id)
 
         for task in self.tasks:
-            if self._has_checkpoint(task):
-                previous_context = task.config.storage.get(
-                    key=task.config.storage.key(task=task)
-                )
-
-                task.status = TypeStatus.COMPLETED
-                task.current_context = previous_context
-                self._flow_callback(task=task)
+            restored = self._try_restore_checkpoint(task)
+            if restored:
+                previous_context = restored
                 continue
 
-            Execution(
+            engine = TaskEngine(
                 task=task,
                 workflow_id=self.workflow_id,
                 previous_context=previous_context,
-                _flow_callback=self._flow_callback,
             )
+
+            with engine.start():
+                engine.execute_with_retry()
+
+            task.callback(task=task)
+            self._flow_callback(task=task)
 
             previous_context = task.config.storage.get(
                 key=task.config.storage.key(task=task)
@@ -348,13 +389,14 @@ class Background(Flow):
                 break
 
     def run(self) -> None:
-        thread = threading.Thread(target=self._run_sequential)
-        thread.start()
-        thread.join()
+        self.thread = threading.Thread(
+            target=self._run_sequential, daemon=True
+        )
+        self.thread.start()
 
 
 class Parallel(Flow):
-    """Parallel"""
+    """Execute task groups in parallel using multiprocessing."""
 
     def setup_queue(self) -> None:
         self.queue = _mp.Queue()
@@ -400,12 +442,26 @@ class Parallel(Flow):
         }
         self.queue.put(current_task)
 
+    @staticmethod
+    def _run_task(task, workflow_id, previous_context, flow_callback):
+        engine = TaskEngine(
+            task=task,
+            workflow_id=workflow_id,
+            previous_context=previous_context,
+        )
+
+        with engine.start():
+            engine.execute_with_retry()
+
+        task.callback(task=task)
+        flow_callback(task=task)
+
     def run(self) -> None:
         previous_context = Context(workflow_id=self.workflow_id)
 
         for task in self.tasks:
             process = _mp.Process(
-                target=Execution,
+                target=self._run_task,
                 args=(
                     task,
                     self.workflow_id,

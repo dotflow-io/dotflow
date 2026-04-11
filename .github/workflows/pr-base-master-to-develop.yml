@@ -1,0 +1,31 @@
+name: 🔀 PR base master → develop
+
+on:
+  pull_request_target:
+    types: [opened, reopened, edited]
+    branches:
+      - master
+
+jobs:
+  retarget-to-develop:
+    name: Set base branch to develop
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    if: github.event.pull_request.base.ref == 'master'
+    steps:
+      - name: Change base branch to develop
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh pr edit "${{ github.event.pull_request.number }}" \
+            --repo "${{ github.repository }}" \
+            --base develop
+
+      - name: Explain retarget
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh pr comment "${{ github.event.pull_request.number }}" \
+            --repo "${{ github.repository }}" \
+            --body "Base branch was updated from \`master\` to \`develop\` automatically (this repo integrates changes on \`develop\`)."

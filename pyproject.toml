@@ -1,6 +1,6 @@
 [project]
 name = "dotflow"
-version = "0.14.0"
+version = "0.15.0.dev6"
 authors = [
   { name="Fernando Celmer", email="email@fernandocelmer.com" },
 ]
@@ -54,14 +54,19 @@ Documentation = "https://dotflow-io.github.io/dotflow/"
 Changelog = "https://dotflow-io.github.io/dotflow/nav/development/release-notes/"
 
 [project.optional-dependencies]
-mongodb = ["dotflow-mongodb"]
 aws = ["boto3"]
 gcp = ["google-cloud-storage"]
+deploy-aws = ["boto3"]
+deploy-gcp = ["google-cloud-run", "google-cloud-build", "google-cloud-artifact-registry", "google-cloud-service-usage", "google-cloud-storage", "google-auth"]
+deploy-alibaba = ["alibabacloud-fc-open20210406", "alibabacloud-tea-openapi"]
+deploy-github = ["PyGithub", "GitPython"]
 scheduler = ["croniter"]
+otel = ["opentelemetry-api", "opentelemetry-sdk"]
+sentry = ["sentry-sdk"]
 
 [tool.poetry]
 name = "dotflow"
-version = "0.14.0"
+version = "0.15.0.dev6"
 description = "🎲 Dotflow turns an idea into flow! Lightweight Python library for execution pipelines with retry, parallel, cron and async support."
 authors = ["Fernando Celmer <email@fernandocelmer.com>"]
 readme = "README.md"
@@ -116,7 +121,7 @@ requests = "^2.32.4"
 build = "^1.2.2.post1"
 pytest = "^8.3.4"
 flake8 = "^7.1.1"
-tox = "^4.23.2"
+tox = "^4.26.0"
 pytest-cov = "^6.0.0"
 pylint = "^3.3.4"
 pyzmq = "^26.2.1"
@@ -138,6 +143,7 @@ mkdocs-simple-blog = "0.2.0"
 mkdocs-material = "^9.6.13"
 markdown-include-variants = "^0.0.4"
 mkdocs-static-i18n = "^1.3.0"
+mkdocs-redirects = "^1.2.2"
 mdx-include = "^1.4.2"
 griffe = "<1.14"
 
@@ -146,6 +152,9 @@ griffe = "<1.14"
 name = "test"
 url = "https://test.pypi.org/simple/"
 priority = "supplemental"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
 
 [build-system]
 requires = ["poetry-core"]

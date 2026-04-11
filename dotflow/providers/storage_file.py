@@ -22,19 +22,17 @@ class StorageFile(Storage):
         task_context = []
 
         if Path(self.path, key).exists():
-            task_context = read_file(path=Path(self.path, key))
+            data = read_file(path=Path(self.path, key))
+            if isinstance(data, list):
+                task_context = data
 
         if isinstance(context.storage, list):
             for item in context.storage:
                 if isinstance(item, Context):
                     task_context.append(self._dumps(storage=item.storage))
+        else:
+            task_context.append(self._dumps(storage=context.storage))
 
-            write_file(
-                path=Path(self.path, key), content=task_context, mode="a"
-            )
-            return None
-
-        task_context.append(self._dumps(storage=context.storage))
         write_file(path=Path(self.path, key), content=task_context)
         return None
 
@@ -42,7 +40,12 @@ class StorageFile(Storage):
         task_context = []
 
         if Path(self.path, key).exists():
-            task_context = read_file(path=Path(self.path, key))
+            data = read_file(path=Path(self.path, key))
+            if isinstance(data, list):
+                task_context = data
+
+        if not task_context:
+            return Context()
 
         if len(task_context) == 1:
             return self._loads(storage=task_context[0])
