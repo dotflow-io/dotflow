@@ -40,13 +40,9 @@ class SerializerTask(BaseModel):
     created_at: Optional[datetime] = Field(default=None)
     started_at: Optional[datetime] = Field(default=None)
     finished_at: Optional[datetime] = Field(default=None)
-    errors: list[SerializerTaskError] = Field(
-        default_factory=list, alias="_errors"
-    )
+    errors: list[SerializerTaskError] = Field(default_factory=list, alias="_errors")
     max: Optional[int] = Field(default=None, exclude=True)
-    size_message: Optional[str] = Field(
-        default="Context size exceeded", exclude=True
-    )
+    size_message: Optional[str] = Field(default="Context size exceeded", exclude=True)
 
     @computed_field
     @property
@@ -93,20 +89,25 @@ class SerializerTask(BaseModel):
     )
     @classmethod
     def context_validator(cls, value: Any) -> Any:
-        if value and value.storage:
-            return cls._serialize_context(value)
-        return None
+        if value is None:
+            return None
+        if not isinstance(value, Context):
+            return None
+        if value.storage is None:
+            return None
+        return cls._serialize_context(value)
 
     @classmethod
     def _serialize_context(cls, ctx: Context) -> Any:
         """Serialize a Context to its storage value."""
-        if isinstance(ctx.storage, list):
+        if isinstance(ctx.storage, (list, tuple)):
             contexts = {}
-            for item in ctx.storage:
+            for index, item in enumerate(ctx.storage):
                 if isinstance(item, Context):
-                    contexts[item.task_id] = cls._serialize_context(item)
+                    key = item.task_id if item.task_id is not None else index
+                    contexts[key] = cls._serialize_context(item)
                 else:
-                    contexts[item.task_id] = cls._format_storage(item)
+                    contexts[index] = cls._format_raw(item)
             return contexts
         return cls._format_storage(ctx)
 
@@ -117,3 +118,11 @@ class SerializerTask(BaseModel):
             return json.dumps(ctx.storage)
         except TypeError:
             return str(ctx.storage)
+
+    @staticmethod
+    def _format_raw(value: Any) -> Any:
+        """Format a raw (non-Context) value as JSON string."""
+        try:
+            return json.dumps(value)
+        except TypeError:
+            return str(value)
