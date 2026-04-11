@@ -1,10 +1,6 @@
 [project]
 name = "dotflow"
-<<<<<<< HEAD
 version = "0.15.0.dev7"
-=======
-version = "0.14.1"
->>>>>>> master
 authors = [
   { name="Fernando Celmer", email="email@fernandocelmer.com" },
 ]
