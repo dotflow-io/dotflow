@@ -1,0 +1,39 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+        args: [--maxkb=1000]
+      - id: check-merge-conflict
+      - id: mixed-line-ending
+        args: [--fix=lf]
+
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: Ruff (Linting)
+        entry: poetry run ruff check --config=.code_quality/ruff.toml
+        language: system
+        types: [python]
+        files: ^(dotflow|tests)/
+        pass_filenames: true
+
+      - id: ruff-format
+        name: Ruff (Formatting)
+        entry: poetry run ruff format --check --config=.code_quality/ruff.toml
+        language: system
+        types: [python]
+        files: ^(dotflow|tests)/
+        pass_filenames: true
+
+      - id: pytest
+        name: Run Unit Tests
+        entry: poetry run pytest tests/ --tb=short -q
+        language: system
+        types: [python]
+        files: ^(dotflow|tests)/
+        pass_filenames: false
