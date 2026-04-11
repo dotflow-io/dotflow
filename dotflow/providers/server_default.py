@@ -1,16 +1,13 @@
-"""ServerDefault
+"""ServerDefault — sends workflow/task data to dotflow-api.
 
-Default implementation that communicates with a
-dotflow-api server.
-
-Args:
-    base_url (str): Base URL of the API.
-    user_token (str): API token (X-User-Token header).
-    timeout (float): HTTP request timeout in seconds.
+Create calls are synchronous (the record must exist before
+the next step). Update calls run in a background thread so
+they never slow down the workflow.
 """
 
 from __future__ import annotations
 
+from threading import Thread
 from typing import Any
 
 from requests import patch as http_patch
@@ -27,7 +24,7 @@ class ServerDefault(Server):
         self,
         base_url: str = "",
         user_token: str = "",
-        timeout: float = 5.0,
+        timeout: float = 15.0,
     ) -> None:
         self.base_url = base_url.rstrip("/")
         self.user_token = user_token
@@ -40,7 +37,7 @@ class ServerDefault(Server):
             "X-User-Token": self.user_token,
         }
 
-    def _request(self, method, url, payload=None):
+    def _do_request(self, method, url, payload=None):
         try:
             response = method(
                 url=url,
@@ -56,12 +53,22 @@ class ServerDefault(Server):
                 str(error),
             )
 
+    def _request(self, method, url, payload=None):
+        Thread(
+            target=self._do_request,
+            args=(method, url, payload),
+            daemon=True,
+        ).start()
+
+    def _request_sync(self, method, url, payload=None):
+        self._do_request(method, url, payload)
+
     def create_workflow(self, workflow: Any) -> None:
-        """Create workflow record (synchronous)."""
+        """Create workflow record (synchronous."""
         if not self.enabled:
             return
 
-        self._request(
+        self._request_sync(
             http_post,
             f"{self.base_url}/workflows",
             {
@@ -72,7 +79,7 @@ class ServerDefault(Server):
         )
 
     def update_workflow(self, workflow: Any, status: str = "") -> None:
-        """Update workflow status (synchronous)."""
+        """Update workflow status."""
         if not self.enabled:
             return
 
@@ -83,7 +90,7 @@ class ServerDefault(Server):
         )
 
     def create_task(self, task: Any) -> None:
-        """Create a task under a workflow (synchronous)."""
+        """Create a task under a workflow."""
         if not self.enabled:
             return
 
@@ -93,14 +100,14 @@ class ServerDefault(Server):
             "group_name": (task.group_name or "default"),
         }
 
-        self._request(
+        self._request_sync(
             http_post,
             f"{self.base_url}/workflows/{task.workflow_id}/tasks",
             payload,
         )
 
     def update_task(self, task: Any) -> None:
-        """Update task data (synchronous)."""
+        """Update task data."""
         if not self.enabled:
             return
 

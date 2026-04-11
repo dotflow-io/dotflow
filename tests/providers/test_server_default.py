@@ -12,7 +12,7 @@ class TestServerDefaultInit(unittest.TestCase):
         server = ServerDefault()
         self.assertEqual(server.base_url, "")
         self.assertEqual(server.user_token, "")
-        self.assertEqual(server.timeout, 5.0)
+        self.assertEqual(server.timeout, 15.0)
         self.assertFalse(server.enabled)
 
     def test_with_args(self):
