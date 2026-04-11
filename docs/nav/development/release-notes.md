@@ -2,6 +2,9 @@
 
 ## v0.15.0
 
+- [📦 PyPI - Build 0.15.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.15.0)
+- [⚙️ Feature: Add Alibaba Cloud Function Compute deployer](https://github.com/dotflow-io/dotflow/pull/238)
+- [⚙️ Feature: Implement Server provider for remote API communication](https://github.com/dotflow-io/dotflow/pull/240)
 - [⚙️ Feature: dotflow deploy CLI — cross-cloud infrastructure generation](https://github.com/dotflow-io/dotflow/pull/183)
 - [⚙️ Feature: Add warning/debug log levels and workflow-level logging to Log ABC](https://github.com/dotflow-io/dotflow/pull/189)
 - [⚙️ Feature: OpenTelemetry integration — traces and spans per workflow/task](https://github.com/dotflow-io/dotflow/pull/190)
