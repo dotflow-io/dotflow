@@ -121,12 +121,27 @@ class TestRenderMermaid(unittest.TestCase):
         tasks = _make_tasks(step_a, step_b, step_c)
         output = _render_mermaid(tasks, mode="sequential")
         self.assertIn("graph LR", output)
-        self.assertIn("step_a --> step_b", output)
-        self.assertIn("step_b --> step_c", output)
+        # Node IDs include positional suffix; display labels are the original names
+        self.assertIn('"step_a"', output)
+        self.assertIn('"step_b"', output)
+        self.assertIn('"step_c"', output)
+        # There should be two arrows: a→b and b→c
+        self.assertEqual(output.count("-->"), 2)
 
     def test_parallel_uses_start_end(self):
         tasks = _make_tasks(step_a, step_b)
         output = _render_mermaid(tasks, mode="parallel")
-        self.assertIn("START --> step_a", output)
-        self.assertIn("START --> step_b", output)
-        self.assertIn("step_a --> END", output)
+        self.assertIn("START -->", output)
+        self.assertIn("--> END", output)
+        self.assertIn('"step_a"', output)
+        self.assertIn('"step_b"', output)
+
+    def test_duplicate_names_produce_distinct_nodes(self):
+        # Two tasks wrapping the same function must not collapse into a self-loop
+        tasks = _make_tasks(step_a, step_a)
+        output = _render_mermaid(tasks, mode="sequential")
+        arrow_lines = [l.strip() for l in output.splitlines() if "-->" in l]
+        self.assertEqual(len(arrow_lines), 1)
+        parts = arrow_lines[0].split("-->")
+        # The left and right node IDs must differ
+        self.assertNotEqual(parts[0].strip(), parts[1].strip())

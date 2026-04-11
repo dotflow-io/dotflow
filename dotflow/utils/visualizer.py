@@ -31,13 +31,13 @@ _BRANCH_BOT = "└"
 def _task_name(task: Task) -> str:
     step = task.step
 
-    # Case 1: @action direct — step is an Action instance with .func set
     func = getattr(step, "func", None)
     if func is not None:
         return getattr(func, "__name__", None) or type(func).__name__
 
-    # Case 2: @action(retry=N) — step is the inner closure returned by Action.__call__
-    # The original function is captured as args[0] in the closure.
+    # @action(retry=N) wraps the original function in a closure.
+    # We must introspect __closure__ to recover the original function name
+    # because the wrapper doesn't preserve __name__.
     if callable(step) and getattr(step, "__closure__", None):
         free_vars = step.__code__.co_freevars
         cells = step.__closure__
@@ -55,10 +55,8 @@ def _task_name(task: Task) -> str:
 def _action_instance(task: Task):
     """Return the Action instance for a task regardless of decoration style."""
     step = task.step
-    # @action direct → step is the Action instance
     if hasattr(step, "retry"):
         return step
-    # @action(retry=N) → step is a closure; Action instance is in 'self' cell
     if callable(step) and getattr(step, "__closure__", None):
         free_vars = step.__code__.co_freevars
         if "self" in free_vars:
@@ -109,7 +107,7 @@ def _build_box(task: Task, width: int = 16) -> list[str]:
     config_lines = _task_config(task)
     status_line = _task_status(task)
 
-    inner = width - 2  # subtract border chars
+    inner = width - 2
 
     def pad(text: str) -> str:
         text = text[:inner]
@@ -151,11 +149,10 @@ def _render_sequential(tasks: list[Task]) -> str:
         if len(box) < height:
             inner_w = box_w - 2
             filler = f"{_V} {' ' * (inner_w - 1)}{_V}"
-            # Insert fillers before the last line (bottom border)
             box = box[:-1] + [filler] * (height - len(box)) + [box[-1]]
         padded.append(box)
 
-    mid = 1  # always connect on the first content row (row after top border)
+    mid = 1
     lines = []
     for row in range(height):
         parts = []
@@ -204,7 +201,6 @@ def _render_parallel(tasks: list[Task]) -> str:
     lines = []
     for t_idx, box in enumerate(padded):
         for b_row, b_line in enumerate(box):
-            # Left bracket
             if len(tasks) == 1:
                 bracket = "  "
             elif t_idx == 0 and b_row == box_h // 2:
@@ -250,18 +246,20 @@ def _render_groups(groups: dict[str, list[Task]]) -> str:
 def _render_mermaid(tasks: list[Task], mode: str) -> str:
     lines = ["graph LR"]
     names = [_task_name(t) for t in tasks]
+    # Use positional suffixes as node IDs to prevent Mermaid collapsing
+    # duplicate function names into a single node (self-loop).
+    node_ids = [f"{name}_{i}" for i, name in enumerate(names)]
 
     if mode == "parallel":
         lines.append("  START:::hidden")
         lines.append("  END:::hidden")
-        for name in names:
-            lines.append(f"  START --> {name}")
-            lines.append(f"  {name} --> END")
+        for node_id, name in zip(node_ids, names):
+            lines.append(f'  START --> {node_id}["{name}"]')
+            lines.append(f'  {node_id}["{name}"] --> END')
         lines.append("  classDef hidden display:none")
     else:
-        for i, name in enumerate(names):
-            if i < len(names) - 1:
-                lines.append(f"  {name} --> {names[i + 1]}")
+        for i in range(len(node_ids) - 1):
+            lines.append(f'  {node_ids[i]}["{names[i]}"] --> {node_ids[i+1]}["{names[i+1]}"]')
 
     return "\n".join(lines)
 
@@ -286,7 +284,7 @@ def visualize(
     from dotflow.core.workflow import grouper
 
     if fmt == "mermaid":
-        print(_render_mermaid(tasks, mode))
+        console.print(_render_mermaid(tasks, mode), highlight=False)
         return
 
     # ── Terminal output ───────────────────────────────────────────────────────
@@ -295,6 +293,9 @@ def visualize(
     if mode == "parallel":
         diagram = _render_parallel(tasks)
         mode_label = "parallel"
+    elif mode == "background":
+        diagram = _render_sequential(tasks)
+        mode_label = "background"
     elif has_groups or mode == "sequential_group":
         diagram = _render_groups(grouper(tasks))
         mode_label = "sequential_group"
