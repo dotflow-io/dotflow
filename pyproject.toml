@@ -116,6 +116,7 @@ pydantic = "^2.11.7"
 typing-extensions = "^4.14.1"
 python-dotenv = "^1.1.0"
 requests = "^2.32.4"
+cookiecutter = "^2.0"
 
 [tool.poetry.group.dev.dependencies]
 build = "^1.2.2.post1"
