@@ -446,11 +446,11 @@ class TestTaskEngine(unittest.TestCase):
 
         self.assertEqual(task.status, TypeStatus.FAILED)
 
-    def test_futures_timeout_error_is_caught(self):
+    def test_futures_timeout_error_converted_to_builtin(self):
         from concurrent.futures import (
             TimeoutError as FuturesTimeoutError,
         )
-        from unittest.mock import patch
+        from unittest.mock import MagicMock, patch
 
         task = Task(
             task_id=0,
@@ -463,14 +463,11 @@ class TestTaskEngine(unittest.TestCase):
             previous_context=Context(),
         )
 
-        with (
-            patch.object(
-                engine,
-                "_execute_with_timeout",
-                side_effect=FuturesTimeoutError("timed out"),
-            ),
-            engine.start(),
-        ):
-            engine.execute_with_retry()
+        mock_future = MagicMock()
+        mock_future.result.side_effect = FuturesTimeoutError("timed out")
 
-        self.assertEqual(task.status, TypeStatus.FAILED)
+        with patch("dotflow.core.engine.ThreadPoolExecutor") as mock_pool:
+            mock_pool.return_value.submit.return_value = mock_future
+
+            with self.assertRaises(TimeoutError):
+                engine._execute_with_timeout(seconds=1)
