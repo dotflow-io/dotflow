@@ -14,7 +14,6 @@ from dotflow.providers.tracer_sentry import TracerSentry  # noqa: E402, I001
 
 
 class TestTracerSentry(unittest.TestCase):
-
     def _make_tracer(self):
         tracer = TracerSentry()
         tracer._sentry = MagicMock()
