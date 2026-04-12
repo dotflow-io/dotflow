@@ -28,7 +28,11 @@ class StepWithPrefixMethods:
 class TestExecutionOrderer(unittest.TestCase):
     def setUp(self):
         self.workflow_id = uuid4()
-        self.task = Task(task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV", step=action_step, callback=simple_callback)
+        self.task = Task(
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+            step=action_step,
+            callback=simple_callback,
+        )
 
     def _make_engine(self):
         engine = TaskEngine(
