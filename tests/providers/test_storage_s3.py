@@ -126,7 +126,7 @@ class TestStorageS3(unittest.TestCase):
         workflow_id = uuid4()
 
         task = Task(
-            task_id=0,
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
             workflow_id=workflow_id,
             step=action_step,
         )
@@ -134,4 +134,4 @@ class TestStorageS3(unittest.TestCase):
         storage = StorageS3(bucket=BUCKET, prefix=PREFIX, region=REGION)
         result = storage.key(task=task)
 
-        self.assertEqual(result, f"{workflow_id}-0")
+        self.assertEqual(result, f"{workflow_id}-01ARZ3NDEKTSV4RRFFQ69G5FAV")
