@@ -7,7 +7,6 @@ from dotflow.providers.server_api import ServerAPI
 
 
 class TestServerAPI(unittest.TestCase):
-
     def setUp(self):
         self.server = ServerAPI(
             base_url="https://example.com/api/v1/",
