@@ -10,7 +10,7 @@ from dotflow.core.serializers.task import SerializerTask
 class TestSerializerTaskDumpJson(unittest.TestCase):
     def _make_task(self, **kwargs):
         defaults = {
-            "task_id": 0,
+            "task_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV",
             "_status": "Completed",
             "_duration": 1.5,
             "_initial_context": None,
@@ -28,7 +28,7 @@ class TestSerializerTaskDumpJson(unittest.TestCase):
         result = task.model_dump_json()
 
         parsed = json.loads(result)
-        self.assertEqual(parsed["task_id"], 0)
+        self.assertEqual(parsed["task_id"], "01ARZ3NDEKTSV4RRFFQ69G5FAV")
         self.assertEqual(parsed["status"], "Completed")
 
     def test_with_max_does_not_mutate_self(self):
@@ -172,22 +172,31 @@ class TestSerializerTaskDumpJson(unittest.TestCase):
         self.assertIn("raw:1", parsed["current_context"])
 
     def test_list_of_context_objects(self):
-        inner_a = Context(storage={"name": "a"}, task_id=1)
-        inner_b = Context(storage={"name": "b"}, task_id=2)
+        inner_a = Context(
+            storage={"name": "a"},
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        )
+        inner_b = Context(
+            storage={"name": "b"},
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAW",
+        )
         ctx = Context(storage=[inner_a, inner_b])
         task = self._make_task(_current_context=ctx)
 
         parsed = json.loads(task.model_dump_json())
-        self.assertIn("1", parsed["current_context"])
-        self.assertIn("2", parsed["current_context"])
+        self.assertIn("01ARZ3NDEKTSV4RRFFQ69G5FAV", parsed["current_context"])
+        self.assertIn("01ARZ3NDEKTSV4RRFFQ69G5FAW", parsed["current_context"])
 
     def test_list_mixed_context_and_raw(self):
-        inner = Context(storage={"nested": True}, task_id=5)
+        inner = Context(
+            storage={"nested": True},
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        )
         ctx = Context(storage=[inner, {"raw": True}])
         task = self._make_task(_current_context=ctx)
 
         parsed = json.loads(task.model_dump_json())
-        self.assertIn("5", parsed["current_context"])
+        self.assertIn("01ARZ3NDEKTSV4RRFFQ69G5FAV", parsed["current_context"])
         self.assertIn("raw:1", parsed["current_context"])
 
     def test_list_context_without_task_id(self):
@@ -202,13 +211,16 @@ class TestSerializerTaskDumpJson(unittest.TestCase):
     def test_context_task_id_none_no_collision(self):
         ctx_none = Context(storage={"step": "extract"})
         ctx_none._task_id = None
-        ctx_zero = Context(storage={"step": "transform"}, task_id=0)
-        ctx = Context(storage=[ctx_none, ctx_zero])
+        ctx_ulid = Context(
+            storage={"step": "transform"},
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        )
+        ctx = Context(storage=[ctx_none, ctx_ulid])
         task = self._make_task(_current_context=ctx)
 
         parsed = json.loads(task.model_dump_json())
         self.assertIn("ctx:0", parsed["current_context"])
-        self.assertIn("0", parsed["current_context"])
+        self.assertIn("01ARZ3NDEKTSV4RRFFQ69G5FAV", parsed["current_context"])
         self.assertEqual(len(parsed["current_context"]), 2)
 
     def test_empty_list_returns_empty_dict(self):
@@ -220,13 +232,16 @@ class TestSerializerTaskDumpJson(unittest.TestCase):
 
     def test_mixed_list_no_key_collision(self):
         raw_item = {"users": 150}
-        context_item = Context(storage={"status": "done"}, task_id=0)
+        context_item = Context(
+            storage={"status": "done"},
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        )
         ctx = Context(storage=[raw_item, context_item])
         task = self._make_task(_current_context=ctx)
 
         parsed = json.loads(task.model_dump_json())
         self.assertIn("raw:0", parsed["current_context"])
-        self.assertIn("0", parsed["current_context"])
+        self.assertIn("01ARZ3NDEKTSV4RRFFQ69G5FAV", parsed["current_context"])
         self.assertEqual(len(parsed["current_context"]), 2)
 
     def test_tuple_storage(self):
