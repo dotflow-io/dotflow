@@ -1,5 +1,7 @@
 """Command deploy module."""
 
+from __future__ import annotations
+
 from rich import print  # type: ignore
 from rich.prompt import Prompt
 
