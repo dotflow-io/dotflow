@@ -3,6 +3,8 @@
 from abc import ABC, abstractmethod
 from typing import Any
 
+from dotflow.constants import INITIAL_TASK_ID
+
 
 class Server(ABC):
     """Server ABC provider for sending workflow and task
@@ -28,3 +30,8 @@ class Server(ABC):
     @abstractmethod
     def update_task(self, task: Any) -> None:
         """Update task data on the remote server."""
+
+    def get_next_task_id(self, workflow: Any) -> int:
+        """Return the next task id to use inside an existing workflow.
+        """
+        return INITIAL_TASK_ID
