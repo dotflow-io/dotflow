@@ -86,4 +86,3 @@ class ServerAPI(Server):
             ),
             json=data,
         )
-
