@@ -80,7 +80,14 @@ class SerializerTask(BaseModel):
 
         data["errors"] = []
         data["error"] = None
-        return json.dumps(data)
+        dump_json = json.dumps(data)
+
+        if self.max and len(dump_json) > self.max:
+            for field in context_fields:
+                data[field] = None
+            dump_json = json.dumps(data)
+
+        return dump_json
 
     @field_validator("errors", mode="before")
     @classmethod
