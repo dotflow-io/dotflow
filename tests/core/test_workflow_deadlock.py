@@ -17,7 +17,7 @@ class TestWorkflowParallelDeadlock(unittest.TestCase):
         """get_tasks() must return even when a task fails (never puts to queue)."""
         tasks = [
             Task(
-                task_id=0,
+                task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
                 step=action_step_with_error,
                 callback=simple_callback,
             )
@@ -37,7 +37,7 @@ class TestWorkflowParallelDeadlock(unittest.TestCase):
 
     def test_parallel_processes_attribute_initialized(self):
         """_processes must be initialized in setup_queue."""
-        tasks = [Task(task_id=0, step=action_step, callback=simple_callback)]
+        tasks = [Task(task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV", step=action_step, callback=simple_callback)]
         execution = Parallel(
             tasks=tasks,
             workflow_id=self.workflow_id,
@@ -57,7 +57,7 @@ class TestWorkflowSequentialGroupDeadlock(unittest.TestCase):
         """get_tasks() must return even when a group task fails early."""
         tasks = [
             Task(
-                task_id=0,
+                task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
                 step=action_step_with_error,
                 callback=simple_callback,
             )
@@ -77,7 +77,7 @@ class TestWorkflowSequentialGroupDeadlock(unittest.TestCase):
 
     def test_sequential_group_processes_attribute_initialized(self):
         """_processes must be initialized in setup_queue."""
-        tasks = [Task(task_id=0, step=action_step, callback=simple_callback)]
+        tasks = [Task(task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV", step=action_step, callback=simple_callback)]
         execution = SequentialGroup(
             tasks=tasks,
             workflow_id=self.workflow_id,
