@@ -19,7 +19,6 @@ from tests.mocks import (
 
 
 class TestClassActions(unittest.TestCase):
-
     @fixture(autouse=True)
     def inject_fixtures(self, caplog):
         self._caplog = caplog
