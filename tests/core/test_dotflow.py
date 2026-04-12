@@ -94,9 +94,7 @@ class TestDotFlow(unittest.TestCase):
         config = Config(server=server)
         workflow = DotFlow(config=config, workflow_id="external-id")
 
-        server.get_next_task_id.assert_called_once_with(
-            workflow="external-id"
-        )
+        server.get_next_task_id.assert_called_once_with(workflow="external-id")
         workflow.task.add(step=action_step)
         workflow.task.add(step=action_step)
         self.assertEqual(workflow.task.queue[0].task_id, 5)
