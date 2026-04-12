@@ -15,8 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 class ServerAPI(Server):
-    """HTTP implementation of the Server ABC.
-    """
+    """HTTP implementation of the Server ABC."""
 
     def __init__(
         self,
@@ -99,9 +98,7 @@ class ServerAPI(Server):
             )
             logger.info("GET %s [%s]", url, response.status_code)
             if response.status_code == 200:
-                return int(
-                    response.json().get("next_id", INITIAL_TASK_ID)
-                )
+                return int(response.json().get("next_id", INITIAL_TASK_ID))
         except (RequestException, ValueError, TypeError) as error:
             logger.error("GET %s failed: %s", url, error)
 
