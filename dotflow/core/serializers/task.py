@@ -67,11 +67,11 @@ class SerializerTask(BaseModel):
             "previous_context",
             "initial_context",
         ]
-        for field in sorted(
-            context_fields,
-            key=lambda f: len(str(data.get(f, ""))),
-            reverse=True,
-        ):
+
+        def field_size(field: str) -> int:
+            return len(str(data.get(field, "")))
+
+        for field in sorted(context_fields, key=field_size, reverse=True):
             data[field] = self.size_message
             dump_json = json.dumps(data)
             if len(dump_json) <= self.max:
