@@ -168,4 +168,6 @@ class TestStorageFile(unittest.TestCase):
         storage = StorageFile(path=self.path)
         result = storage.key(task=task)
 
-        self.assertEqual(result, f"{workflow_id}-01ARZ3NDEKTSV4RRFFQ69G5FAV.json")
+        self.assertEqual(
+            result, f"{workflow_id}-01ARZ3NDEKTSV4RRFFQ69G5FAV.json"
+        )
