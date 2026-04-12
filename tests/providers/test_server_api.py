@@ -7,7 +7,6 @@ from dotflow.providers.server_api import ServerAPI
 
 
 class TestServerAPI(unittest.TestCase):
-
     def setUp(self):
         self.server = ServerAPI(
             base_url="https://example.com/api/v1/",
@@ -101,4 +100,3 @@ class TestServerAPI(unittest.TestCase):
         task.task_id = "01ARZ3NDEKTSV4RRFFQ69G5FAV"
         task.result.return_value = {"status": "Completed"}
         self.server.update_task(task=task)
-
