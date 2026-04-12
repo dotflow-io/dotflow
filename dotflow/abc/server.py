@@ -32,6 +32,5 @@ class Server(ABC):
         """Update task data on the remote server."""
 
     def get_next_task_id(self, workflow: Any) -> int:
-        """Return the next task id to use inside an existing workflow.
-        """
+        """Return the next task id to use inside an existing workflow."""
         return INITIAL_TASK_ID
