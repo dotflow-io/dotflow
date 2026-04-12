@@ -63,7 +63,7 @@ def task_class():
 
 class TestExecutionResult(unittest.TestCase):
     def setUp(self):
-        self.task = partial(Task, task_id=0, callback=simple_callback)
+        self.task = partial(Task, task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV", callback=simple_callback)
         self.workflow_id = uuid4()
 
     def _run(self, step):
