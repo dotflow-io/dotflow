@@ -72,7 +72,7 @@ class TestSerializerTaskDumpJson(unittest.TestCase):
             _initial_context=Context(storage={"large": "x" * 500}),
             _current_context=Context(storage={"large": "y" * 500}),
             _previous_context=Context(storage={"large": "z" * 500}),
-            max=200,
+            max=600,
         )
 
         result = task.model_dump_json()
@@ -91,6 +91,19 @@ class TestSerializerTaskDumpJson(unittest.TestCase):
             {"message": "Context size exceeded"},
         )
 
+    def test_with_max_very_small_nullifies_contexts(self):
+        task = self._make_task(
+            _initial_context=Context(storage={"large": "x" * 500}),
+            _current_context=Context(storage={"large": "y" * 500}),
+            max=100,
+        )
+
+        result = task.model_dump_json()
+        parsed = json.loads(result)
+
+        self.assertIsNone(parsed["initial_context"])
+        self.assertIsNone(parsed["current_context"])
+
     def test_with_max_clears_errors_if_still_over(self):
         large_errors = [
             {
@@ -101,10 +114,11 @@ class TestSerializerTaskDumpJson(unittest.TestCase):
             }
             for i in range(10)
         ]
-        task = self._make_task(_errors=large_errors, max=200)
+        task = self._make_task(_errors=large_errors, max=500)
 
         result = task.model_dump_json()
         parsed = json.loads(result)
+        self.assertLessEqual(len(result), 500)
 
         self.assertEqual(parsed["errors"], [])
         self.assertIsNone(parsed["error"])
