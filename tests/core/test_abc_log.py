@@ -10,7 +10,6 @@ from dotflow.core.types.status import TypeStatus
 
 
 class ConcreteLog(Log):
-
     def __init__(self, level="INFO", format="simple"):
         self._level = LEVELS.get(level.upper(), logging.INFO)
         self._format = format
@@ -18,7 +17,6 @@ class ConcreteLog(Log):
 
 
 class TestLevels(unittest.TestCase):
-
     def test_levels_mapping(self):
         self.assertEqual(LEVELS["DEBUG"], logging.DEBUG)
         self.assertEqual(LEVELS["INFO"], logging.INFO)
@@ -27,7 +25,6 @@ class TestLevels(unittest.TestCase):
 
 
 class TestLogRecordError(unittest.TestCase):
-
     def test_defaults(self):
         error = LogRecordError()
 
@@ -42,7 +39,6 @@ class TestLogRecordError(unittest.TestCase):
 
 
 class TestLogRecord(unittest.TestCase):
-
     def test_defaults(self):
         record = LogRecord()
 
@@ -68,7 +64,9 @@ class TestLogRecord(unittest.TestCase):
         self.assertEqual(record.retry_count, 2)
 
     def test_model_dump_json_excludes_none(self):
-        record = LogRecord(workflow_id="wf-1", task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV")
+        record = LogRecord(
+            workflow_id="wf-1", task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV"
+        )
         result = json.loads(record.model_dump_json(exclude_none=True))
 
         self.assertNotIn("duration", result)
@@ -83,7 +81,6 @@ class TestLogRecord(unittest.TestCase):
 
 
 class TestLogDispatch(unittest.TestCase):
-
     def _make_task(self, status=TypeStatus.COMPLETED):
         task = MagicMock()
         task.status = status
@@ -159,7 +156,6 @@ class TestLogDispatch(unittest.TestCase):
 
 
 class TestFormatText(unittest.TestCase):
-
     def _make_task(self, status=TypeStatus.COMPLETED):
         task = MagicMock()
         task.status = status
@@ -200,7 +196,6 @@ class TestFormatText(unittest.TestCase):
 
 
 class TestFormatJson(unittest.TestCase):
-
     def _make_task(self, status=TypeStatus.COMPLETED):
         task = MagicMock()
         task.status = status
