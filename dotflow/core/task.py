@@ -6,6 +6,7 @@ from datetime import datetime
 from typing import Any
 from uuid import UUID
 
+from dotflow.constants import INITIAL_TASK_ID
 from dotflow.core.action import Action
 from dotflow.core.config import Config
 from dotflow.core.context import Context
@@ -304,11 +305,16 @@ class TaskBuilder:
         workflow_id (UUID): Workflow ID.
     """
 
-    def __init__(self, config: Config, workflow_id: UUID = None) -> None:
+    def __init__(
+        self,
+        config: Config,
+        workflow_id: UUID = None,
+        initial_task_id: int = INITIAL_TASK_ID,
+    ) -> None:
         self.queue: list[Callable] = []
         self.workflow_id = workflow_id
         self.config = config
-        self._next_id = 1
+        self._next_id = initial_task_id
 
     def add(
         self,
