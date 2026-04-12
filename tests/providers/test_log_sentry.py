@@ -14,7 +14,6 @@ from dotflow.providers.log_sentry import LogSentry  # noqa: E402, I001
 
 
 class TestLogSentry(unittest.TestCase):
-
     def _make_sentry(self):
         log = LogSentry(dsn="https://test@sentry.io/1")
         log._sentry = MagicMock()
@@ -69,10 +68,14 @@ class TestLogSentry(unittest.TestCase):
 
         log._sentry.capture_message.assert_called_once()
         call_args = log._sentry.capture_message.call_args
-        self.assertIn("Task 01ARZ3NDEKTSV4RRFFQ69G5FAV failed: broken", call_args[0][0])
+        self.assertIn(
+            "Task 01ARZ3NDEKTSV4RRFFQ69G5FAV failed: broken", call_args[0][0]
+        )
         self.assertEqual(call_args[1]["level"], "error")
         self.assertEqual(call_args[1]["extras"]["workflow_id"], "wf-123")
-        self.assertEqual(call_args[1]["extras"]["task_id"], "01ARZ3NDEKTSV4RRFFQ69G5FAV")
+        self.assertEqual(
+            call_args[1]["extras"]["task_id"], "01ARZ3NDEKTSV4RRFFQ69G5FAV"
+        )
         self.assertEqual(call_args[1]["extras"]["exception"], "ValueError")
         self.assertEqual(call_args[1]["extras"]["attempt"], 1)
 
