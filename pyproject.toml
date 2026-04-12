@@ -35,7 +35,7 @@ classifiers = [
   "Operating System :: OS Independent",
   'Intended Audience :: Developers',
   'Natural Language :: English',
-  "License :: OSI Approved :: MIT License",
+  "License :: OSI Approved :: Apache Software License",
   "Topic :: Software Development :: Libraries",
   "Topic :: Software Development :: Libraries :: Python Modules",
   "Topic :: System :: Distributed Computing",
@@ -70,7 +70,7 @@ version = "0.15.0"
 description = "🎲 Dotflow turns an idea into flow! Lightweight Python library for execution pipelines with retry, parallel, cron and async support."
 authors = ["Fernando Celmer <email@fernandocelmer.com>"]
 readme = "README.md"
-license = "MIT"
+license = "Apache-2.0"
 package-mode = true
 homepage = "https://github.com/dotflow-io/dotflow"
 documentation = "https://dotflow-io.github.io/dotflow/"
@@ -95,7 +95,7 @@ classifiers = [
   "Operating System :: OS Independent",
   'Intended Audience :: Developers',
   'Natural Language :: English',
-  "License :: OSI Approved :: MIT License",
+  "License :: OSI Approved :: Apache Software License",
   "Topic :: Software Development :: Libraries",
   "Topic :: Software Development :: Libraries :: Python Modules",
   "Topic :: System :: Distributed Computing",
