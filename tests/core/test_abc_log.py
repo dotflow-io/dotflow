@@ -10,6 +10,7 @@ from dotflow.core.types.status import TypeStatus
 
 
 class ConcreteLog(Log):
+
     def __init__(self, level="INFO", format="simple"):
         self._level = LEVELS.get(level.upper(), logging.INFO)
         self._format = format
@@ -17,6 +18,7 @@ class ConcreteLog(Log):
 
 
 class TestLevels(unittest.TestCase):
+
     def test_levels_mapping(self):
         self.assertEqual(LEVELS["DEBUG"], logging.DEBUG)
         self.assertEqual(LEVELS["INFO"], logging.INFO)
@@ -25,6 +27,7 @@ class TestLevels(unittest.TestCase):
 
 
 class TestLogRecordError(unittest.TestCase):
+
     def test_defaults(self):
         error = LogRecordError()
 
@@ -39,6 +42,7 @@ class TestLogRecordError(unittest.TestCase):
 
 
 class TestLogRecord(unittest.TestCase):
+
     def test_defaults(self):
         record = LogRecord()
 
@@ -53,7 +57,7 @@ class TestLogRecord(unittest.TestCase):
             timestamp="2026-01-01T00:00:00",
             level="INFO",
             workflow_id="wf-1",
-            task_id="0",
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
             status="Completed",
             duration=1.5,
             retry_count=2,
@@ -64,7 +68,7 @@ class TestLogRecord(unittest.TestCase):
         self.assertEqual(record.retry_count, 2)
 
     def test_model_dump_json_excludes_none(self):
-        record = LogRecord(workflow_id="wf-1", task_id="0")
+        record = LogRecord(workflow_id="wf-1", task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV")
         result = json.loads(record.model_dump_json(exclude_none=True))
 
         self.assertNotIn("duration", result)
@@ -79,11 +83,12 @@ class TestLogRecord(unittest.TestCase):
 
 
 class TestLogDispatch(unittest.TestCase):
+
     def _make_task(self, status=TypeStatus.COMPLETED):
         task = MagicMock()
         task.status = status
         task.workflow_id = "wf-123"
-        task.task_id = 0
+        task.task_id = "01ARZ3NDEKTSV4RRFFQ69G5FAV"
         task.duration = 0.5
         task.retry_count = 0
         task.errors = []
@@ -154,11 +159,12 @@ class TestLogDispatch(unittest.TestCase):
 
 
 class TestFormatText(unittest.TestCase):
+
     def _make_task(self, status=TypeStatus.COMPLETED):
         task = MagicMock()
         task.status = status
         task.workflow_id = "wf-123"
-        task.task_id = 0
+        task.task_id = "01ARZ3NDEKTSV4RRFFQ69G5FAV"
         task.duration = 0.5
         task.retry_count = 0
         task.errors = []
@@ -194,11 +200,12 @@ class TestFormatText(unittest.TestCase):
 
 
 class TestFormatJson(unittest.TestCase):
+
     def _make_task(self, status=TypeStatus.COMPLETED):
         task = MagicMock()
         task.status = status
         task.workflow_id = "wf-123"
-        task.task_id = 0
+        task.task_id = "01ARZ3NDEKTSV4RRFFQ69G5FAV"
         task.duration = 0.5
         task.retry_count = 0
         task.errors = []
@@ -211,7 +218,7 @@ class TestFormatJson(unittest.TestCase):
         result = json.loads(log._format_json(logging.INFO, task=task))
 
         self.assertEqual(result["workflow_id"], "wf-123")
-        self.assertEqual(result["task_id"], "0")
+        self.assertEqual(result["task_id"], "01ARZ3NDEKTSV4RRFFQ69G5FAV")
         self.assertEqual(result["status"], "Completed")
         self.assertEqual(result["level"], "INFO")
         self.assertIn("timestamp", result)
