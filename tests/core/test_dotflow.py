@@ -85,30 +85,18 @@ class TestDotFlow(unittest.TestCase):
         server.create_workflow.assert_not_called()
         self.assertEqual(workflow.workflow_id, "external-id")
 
-    def test_external_workflow_id_fetches_next_task_id(self):
+    def test_task_ids_are_unique_ulids(self):
         from dotflow.providers.server_default import ServerDefault
 
         server = ServerDefault()
-        server.create_workflow = MagicMock()
-        server.get_next_task_id = MagicMock(return_value=5)
-        config = Config(server=server)
-        workflow = DotFlow(config=config, workflow_id="external-id")
-
-        server.get_next_task_id.assert_called_once_with(workflow="external-id")
-        workflow.task.add(step=action_step)
-        workflow.task.add(step=action_step)
-        self.assertEqual(workflow.task.queue[0].task_id, 5)
-        self.assertEqual(workflow.task.queue[1].task_id, 6)
-
-    def test_auto_generated_id_does_not_fetch_next_task_id(self):
-        from dotflow.providers.server_default import ServerDefault
-
-        server = ServerDefault()
-        server.create_workflow = MagicMock()
-        server.get_next_task_id = MagicMock()
         config = Config(server=server)
         workflow = DotFlow(config=config)
-
-        server.get_next_task_id.assert_not_called()
         workflow.task.add(step=action_step)
-        self.assertEqual(workflow.task.queue[0].task_id, 1)
+        workflow.task.add(step=action_step)
+
+        ids = [t.task_id for t in workflow.task.queue]
+        self.assertEqual(len(ids), 2)
+        self.assertNotEqual(ids[0], ids[1])
+        for tid in ids:
+            self.assertIsInstance(tid, str)
+            self.assertEqual(len(tid), 26)
