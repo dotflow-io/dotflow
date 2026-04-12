@@ -44,8 +44,9 @@ class SerializerTask(BaseModel):
         default_factory=list, alias="_errors"
     )
     max: Optional[int] = Field(default=None, exclude=True)
-    size_message: Optional[str] = Field(
-        default="Context size exceeded", exclude=True
+    size_message: dict = Field(
+        default={"message": "Context size exceeded"},
+        exclude=True,
     )
 
     @computed_field
@@ -58,17 +59,32 @@ class SerializerTask(BaseModel):
         data = self.model_dump(mode="json", serialize_as_any=True, **kwargs)
         dump_json = json.dumps(data)
 
-        if not self.max or len(dump_json) <= self.max:
+        if self.max is None or len(dump_json) <= self.max:
             return dump_json
 
-        data["initial_context"] = self.size_message
-        data["current_context"] = self.size_message
-        data["previous_context"] = self.size_message
+        context_fields = [
+            "current_context",
+            "previous_context",
+            "initial_context",
+        ]
+
+        for field in sorted(
+            context_fields,
+            key=lambda f: len(str(data.get(f, ""))),
+            reverse=True,
+        ):
+            data[field] = self.size_message
+            dump_json = json.dumps(data)
+            if len(dump_json) <= self.max:
+                return dump_json
+
+        data["errors"] = []
+        data["error"] = None
         dump_json = json.dumps(data)
 
-        if len(dump_json) > self.max:
-            data["errors"] = []
-            data["error"] = None
+        if self.max and len(dump_json) > self.max:
+            for field in context_fields:
+                data[field] = None
             dump_json = json.dumps(data)
 
         return dump_json

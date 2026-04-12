@@ -38,7 +38,7 @@ class TestSerializerTaskDumpJson(unittest.TestCase):
         task.model_dump_json()
         task.model_dump_json()
 
-        self.assertNotEqual(task.initial_context, task.size_message)
+        self.assertIsNotNone(task.initial_context)
 
     def test_with_max_returns_valid_json(self):
         ctx = Context(storage={"large": "x" * 500})
@@ -47,20 +47,62 @@ class TestSerializerTaskDumpJson(unittest.TestCase):
         result = task.model_dump_json()
         json.loads(result)
 
-    def test_with_max_replaces_contexts(self):
+    def test_with_max_truncates_largest_context_first(self):
         task = self._make_task(
-            _initial_context=Context(storage={"large": "x" * 500}),
+            _initial_context=Context(storage={"small": "x" * 10}),
             _current_context=Context(storage={"large": "y" * 500}),
-            _previous_context=Context(storage={"large": "z" * 500}),
-            max=200,
+            _previous_context=Context(storage={"medium": "z" * 100}),
+            max=500,
         )
 
         result = task.model_dump_json()
         parsed = json.loads(result)
 
-        self.assertEqual(parsed["initial_context"], "Context size exceeded")
-        self.assertEqual(parsed["current_context"], "Context size exceeded")
-        self.assertEqual(parsed["previous_context"], "Context size exceeded")
+        self.assertEqual(
+            parsed["current_context"],
+            {"message": "Context size exceeded"},
+        )
+        self.assertNotEqual(
+            parsed["initial_context"],
+            {"message": "Context size exceeded"},
+        )
+
+    def test_with_max_truncates_all_contexts_if_needed(self):
+        task = self._make_task(
+            _initial_context=Context(storage={"large": "x" * 500}),
+            _current_context=Context(storage={"large": "y" * 500}),
+            _previous_context=Context(storage={"large": "z" * 500}),
+            max=600,
+        )
+
+        result = task.model_dump_json()
+        parsed = json.loads(result)
+
+        self.assertEqual(
+            parsed["initial_context"],
+            {"message": "Context size exceeded"},
+        )
+        self.assertEqual(
+            parsed["current_context"],
+            {"message": "Context size exceeded"},
+        )
+        self.assertEqual(
+            parsed["previous_context"],
+            {"message": "Context size exceeded"},
+        )
+
+    def test_with_max_very_small_nullifies_contexts(self):
+        task = self._make_task(
+            _initial_context=Context(storage={"large": "x" * 500}),
+            _current_context=Context(storage={"large": "y" * 500}),
+            max=100,
+        )
+
+        result = task.model_dump_json()
+        parsed = json.loads(result)
+
+        self.assertIsNone(parsed["initial_context"])
+        self.assertIsNone(parsed["current_context"])
 
     def test_with_max_clears_errors_if_still_over(self):
         large_errors = [
@@ -72,13 +114,26 @@ class TestSerializerTaskDumpJson(unittest.TestCase):
             }
             for i in range(10)
         ]
-        task = self._make_task(_errors=large_errors, max=200)
+        task = self._make_task(_errors=large_errors, max=500)
+
+        result = task.model_dump_json()
+        parsed = json.loads(result)
+        self.assertLessEqual(len(result), 500)
+
+        self.assertEqual(parsed["errors"], [])
+        self.assertIsNone(parsed["error"])
+
+    def test_with_max_zero_truncates(self):
+        ctx = Context(storage={"data": "x" * 500})
+        task = self._make_task(_current_context=ctx, max=0)
 
         result = task.model_dump_json()
         parsed = json.loads(result)
 
-        self.assertEqual(parsed["errors"], [])
-        self.assertIsNone(parsed["error"])
+        self.assertEqual(
+            parsed["current_context"],
+            {"message": "Context size exceeded"},
+        )
 
     def test_without_max_returns_full_json(self):
         ctx = Context(storage={"large": "x" * 500})
