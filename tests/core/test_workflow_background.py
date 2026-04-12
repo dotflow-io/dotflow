@@ -19,7 +19,13 @@ class TestWorkflowBackground(unittest.TestCase):
         self.ignore = False
 
     def test_instantiating_background_class(self):
-        tasks = [Task(task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV", step=action_step, callback=simple_callback)]
+        tasks = [
+            Task(
+                task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+                step=action_step,
+                callback=simple_callback,
+            )
+        ]
         groups = grouper(tasks=tasks)
 
         execution = Background(
@@ -38,7 +44,13 @@ class TestWorkflowBackground(unittest.TestCase):
         self.assertEqual(execution.ignore, self.ignore)
 
     def test_workflow_with_background_function_completed(self):
-        tasks = [Task(task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV", step=action_step, callback=simple_callback)]
+        tasks = [
+            Task(
+                task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+                step=action_step,
+                callback=simple_callback,
+            )
+        ]
 
         execution = Background(
             tasks=tasks,
@@ -79,7 +91,13 @@ class TestWorkflowBackground(unittest.TestCase):
         self.assertEqual(tasks[0].errors[-1].message, "Fail!")
 
     def test_instantiating_background_setup_queue(self):
-        tasks = [Task(task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV", step=action_step, callback=simple_callback)]
+        tasks = [
+            Task(
+                task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+                step=action_step,
+                callback=simple_callback,
+            )
+        ]
         groups = grouper(tasks=tasks)
 
         execution = Background(
@@ -94,7 +112,11 @@ class TestWorkflowBackground(unittest.TestCase):
         self.assertListEqual(execution.queue, [])
 
     def test_instantiating_background_flow_callback(self):
-        task = Task(task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV", step=action_step, callback=simple_callback)
+        task = Task(
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+            step=action_step,
+            callback=simple_callback,
+        )
         groups = grouper(tasks=[task])
 
         execution = Background(
