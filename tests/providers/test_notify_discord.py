@@ -13,7 +13,7 @@ class TestNotifyDiscord(unittest.TestCase):
         task = MagicMock()
         task.status = status
         task.workflow_id = "wf-123"
-        task.task_id = 0
+        task.task_id = "01ARZ3NDEKTSV4RRFFQ69G5FAV"
         task.errors = []
         task.result.return_value = '{"foo": "bar"}'
         return task
