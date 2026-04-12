@@ -160,7 +160,7 @@ class TestStorageFile(unittest.TestCase):
         workflow_id = uuid4()
 
         task = Task(
-            task_id=0,
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
             workflow_id=workflow_id,
             step=action_step,
         )
@@ -168,4 +168,4 @@ class TestStorageFile(unittest.TestCase):
         storage = StorageFile(path=self.path)
         result = storage.key(task=task)
 
-        self.assertEqual(result, f"{workflow_id}-0.json")
+        self.assertEqual(result, f"{workflow_id}-01ARZ3NDEKTSV4RRFFQ69G5FAV.json")
