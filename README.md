@@ -800,4 +800,4 @@ All examples are available in the [`docs_src/`](https://github.com/dotflow-io/do
 
 ![GitHub License](https://img.shields.io/github/license/dotflow-io/dotflow)
 
-This project is licensed under the terms of the MIT License.
+This project is licensed under the terms of the Apache License 2.0.
