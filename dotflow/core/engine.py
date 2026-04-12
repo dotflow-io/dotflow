@@ -2,7 +2,12 @@
 
 import re
 from collections.abc import Callable
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import (
+    ThreadPoolExecutor,
+)
+from concurrent.futures import (
+    TimeoutError as FuturesTimeoutError,
+)
 from contextlib import contextmanager
 from datetime import datetime
 from inspect import getsourcelines
@@ -131,7 +136,7 @@ class TaskEngine:
                 self.task.current_context = result
                 return result
 
-            except TimeoutError:
+            except (TimeoutError, FuturesTimeoutError):
                 raise
 
             except Exception as error:
@@ -173,9 +178,9 @@ class TaskEngine:
         try:
             future = executor.submit(self._execute_single)
             return future.result(timeout=seconds)
-        except TimeoutError:
+        except (TimeoutError, FuturesTimeoutError):
             future.cancel()
-            raise
+            raise TimeoutError() from None
         finally:
             executor.shutdown(wait=False, cancel_futures=True)
 
