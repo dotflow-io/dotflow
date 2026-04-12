@@ -5,6 +5,7 @@ from __future__ import annotations
 from functools import partial
 from uuid import uuid4
 
+from dotflow.constants import INITIAL_TASK_ID
 from dotflow.core.config import Config
 from dotflow.core.task import TaskBuilder
 from dotflow.core.workflow import Manager
@@ -48,12 +49,22 @@ class DotFlow:
         config: Config | None = None,
         workflow_id: str | None = None,
     ) -> None:
+        self._externally_provided_id = workflow_id is not None
         self.workflow_id = workflow_id or uuid4()
         self._config = config if config else Config()
-        self._config.server.create_workflow(workflow=self.workflow_id)
+
+        if not self._externally_provided_id:
+            self._config.server.create_workflow(workflow=self.workflow_id)
+            initial_task_id = INITIAL_TASK_ID
+        else:
+            initial_task_id = self._config.server.get_next_task_id(
+                workflow=self.workflow_id
+            )
 
         self.task = TaskBuilder(
-            config=self._config, workflow_id=self.workflow_id
+            config=self._config,
+            workflow_id=self.workflow_id,
+            initial_task_id=initial_task_id,
         )
 
         self.start = partial(
