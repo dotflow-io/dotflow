@@ -7,6 +7,7 @@ from dotflow.providers.server_api import ServerAPI
 
 
 class TestServerAPI(unittest.TestCase):
+
     def setUp(self):
         self.server = ServerAPI(
             base_url="https://example.com/api/v1/",
@@ -52,14 +53,20 @@ class TestServerAPI(unittest.TestCase):
         mock_post.return_value = MagicMock(status_code=201)
         task = MagicMock()
         task.workflow_id = "wf-1"
-        task.task_id = 42
-        task.result.return_value = {"task_id": 42, "status": "Not started"}
+        task.task_id = "01ARZ3NDEKTSV4RRFFQ69G5FAV"
+        task.result.return_value = {
+            "task_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV",
+            "status": "Not started",
+        }
 
         self.server.create_task(task=task)
 
         mock_post.assert_called_once_with(
             "https://example.com/api/v1/workflows/wf-1/tasks",
-            json={"id": 42, "status": "Not started"},
+            json={
+                "id": "01ARZ3NDEKTSV4RRFFQ69G5FAV",
+                "status": "Not started",
+            },
             headers=self.server._headers,
             timeout=15.0,
         )
@@ -69,13 +76,13 @@ class TestServerAPI(unittest.TestCase):
         mock_patch.return_value = MagicMock(status_code=200)
         task = MagicMock()
         task.workflow_id = "wf-1"
-        task.task_id = 42
+        task.task_id = "01ARZ3NDEKTSV4RRFFQ69G5FAV"
         task.result.return_value = {"status": "Completed", "duration": 1.5}
 
         self.server.update_task(task=task)
 
         mock_patch.assert_called_once_with(
-            "https://example.com/api/v1/workflows/wf-1/tasks/42",
+            "https://example.com/api/v1/workflows/wf-1/tasks/01ARZ3NDEKTSV4RRFFQ69G5FAV",
             json={"status": "Completed", "duration": 1.5},
             headers=self.server._headers,
             timeout=15.0,
@@ -91,33 +98,7 @@ class TestServerAPI(unittest.TestCase):
         mock_patch.side_effect = RequestException("timeout")
         task = MagicMock()
         task.workflow_id = "wf-1"
-        task.task_id = 42
+        task.task_id = "01ARZ3NDEKTSV4RRFFQ69G5FAV"
         task.result.return_value = {"status": "Completed"}
         self.server.update_task(task=task)
 
-    @patch("dotflow.providers.server_api.get")
-    def test_get_next_task_id_returns_value_from_api(self, mock_get):
-        mock_get.return_value = MagicMock(
-            status_code=200,
-            json=MagicMock(return_value={"last_id": 3, "next_id": 4}),
-        )
-        result = self.server.get_next_task_id(workflow="wf-1")
-        mock_get.assert_called_once_with(
-            "https://example.com/api/v1/workflows/wf-1/tasks/next-id",
-            headers=self.server._headers,
-            timeout=15.0,
-        )
-        self.assertEqual(result, 4)
-
-    @patch("dotflow.providers.server_api.get")
-    def test_get_next_task_id_defaults_to_one_on_error(self, mock_get):
-        mock_get.side_effect = RequestException("boom")
-        self.assertEqual(self.server.get_next_task_id(workflow="wf-1"), 1)
-
-    @patch("dotflow.providers.server_api.get")
-    def test_get_next_task_id_defaults_to_one_on_non_200(self, mock_get):
-        mock_get.return_value = MagicMock(
-            status_code=404,
-            json=MagicMock(return_value={}),
-        )
-        self.assertEqual(self.server.get_next_task_id(workflow="wf-1"), 1)
