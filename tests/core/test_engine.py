@@ -419,3 +419,58 @@ class TestTaskEngine(unittest.TestCase):
             engine.execute_with_retry()
 
         self.assertEqual(task.status, TypeStatus.COMPLETED)
+
+    def test_timeout_expired_marks_task_failed(self):
+        from time import sleep as _sleep
+
+        from dotflow import action
+
+        @action(timeout=1)
+        def slow_step():
+            _sleep(5)
+            return {"done": True}
+
+        task = Task(
+            task_id=0,
+            step=slow_step,
+            callback=simple_callback,
+        )
+        engine = TaskEngine(
+            task=task,
+            workflow_id=self.workflow_id,
+            previous_context=Context(),
+        )
+
+        with engine.start():
+            engine.execute_with_retry()
+
+        self.assertEqual(task.status, TypeStatus.FAILED)
+
+    def test_futures_timeout_error_is_caught(self):
+        from concurrent.futures import (
+            TimeoutError as FuturesTimeoutError,
+        )
+        from unittest.mock import patch
+
+        task = Task(
+            task_id=0,
+            step=action_step_with_timeout,
+            callback=simple_callback,
+        )
+        engine = TaskEngine(
+            task=task,
+            workflow_id=self.workflow_id,
+            previous_context=Context(),
+        )
+
+        with (
+            patch.object(
+                engine,
+                "_execute_with_timeout",
+                side_effect=FuturesTimeoutError("timed out"),
+            ),
+            engine.start(),
+        ):
+            engine.execute_with_retry()
+
+        self.assertEqual(task.status, TypeStatus.FAILED)
