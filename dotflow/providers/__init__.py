@@ -6,6 +6,7 @@ from dotflow.providers.notify_default import NotifyDefault
 from dotflow.providers.notify_discord import NotifyDiscord
 from dotflow.providers.notify_telegram import NotifyTelegram
 from dotflow.providers.scheduler_default import SchedulerDefault
+from dotflow.providers.server_api import ServerAPI
 from dotflow.providers.server_default import ServerDefault
 from dotflow.providers.storage_default import StorageDefault
 from dotflow.providers.storage_file import StorageFile
@@ -20,6 +21,7 @@ __all__ = [
     "NotifyTelegram",
     "SchedulerCron",
     "SchedulerDefault",
+    "ServerAPI",
     "ServerDefault",
     "StorageDefault",
     "StorageFile",
