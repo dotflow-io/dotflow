@@ -19,10 +19,13 @@ from tests.mocks import (
 
 
 class TestClassActions(unittest.TestCase):
+
     @fixture(autouse=True)
     def inject_fixtures(self, caplog):
         self._caplog = caplog
-        self.task = Task(task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV", step=action_step)
+        self.task = Task(
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV", step=action_step
+        )
 
     def test_instantiating_action_class(self):
         number_of_retries = 1
