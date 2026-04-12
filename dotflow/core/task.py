@@ -6,7 +6,8 @@ from datetime import datetime
 from typing import Any
 from uuid import UUID
 
-from dotflow.constants import INITIAL_TASK_ID
+from ulid import ULID
+
 from dotflow.core.action import Action
 from dotflow.core.config import Config
 from dotflow.core.context import Context
@@ -57,13 +58,13 @@ class Task(TaskInstance):
         `class` dotflow.core.task.Task
 
             task = Task(
-                task_id=1,
+                task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
                 step=my_step,
                 callback=my_callback
             )
 
     Args:
-        task_id (int): Task ID.
+        task_id (str): Task ID (ULID).
 
         step (Callable):
             A argument that receives an object of the callable type,
@@ -86,7 +87,7 @@ class Task(TaskInstance):
 
     def __init__(
         self,
-        task_id: int,
+        task_id: str,
         step: Callable,
         callback: Callable = basic_callback,
         initial_context: Any = None,
@@ -309,12 +310,10 @@ class TaskBuilder:
         self,
         config: Config,
         workflow_id: UUID = None,
-        initial_task_id: int = INITIAL_TASK_ID,
     ) -> None:
         self.queue: list[Callable] = []
         self.workflow_id = workflow_id
         self.config = config
-        self._next_id = initial_task_id
 
     def add(
         self,
@@ -354,8 +353,7 @@ class TaskBuilder:
                 )
             return self
 
-        task_id = self._next_id
-        self._next_id += 1
+        task_id = str(ULID())
 
         self.queue.append(
             Task(
