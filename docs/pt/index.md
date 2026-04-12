@@ -51,4 +51,4 @@ Utilizamos issues do GitHub para rastrear bugs e solicitações de funcionalidad
 
 ![GitHub License](https://img.shields.io/github/license/FernandoCelmer/dotflow)
 
-Este projeto está licenciado sob os termos da Licença MIT.
+Este projeto está licenciado sob os termos da Licença Apache 2.0.

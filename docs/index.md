@@ -51,4 +51,4 @@ We use GitHub issues for tracking bugs and feature requests and have limited ban
 
 ![GitHub License](https://img.shields.io/github/license/FernandoCelmer/dotflow)
 
-This project is licensed under the terms of the MIT License.
+This project is licensed under the terms of the Apache License 2.0.
