@@ -13,7 +13,8 @@ dependencies = [
   "pydantic",
   "typing-extensions",
   "cookiecutter (>=2.0)",
-  "requests"
+  "requests",
+  "python-ulid (>=3.0)"
 ]
 keywords = [
   "pipeline",
@@ -117,6 +118,7 @@ typing-extensions = "^4.14.1"
 python-dotenv = "^1.1.0"
 requests = "^2.32.4"
 cookiecutter = "^2.0"
+python-ulid = "^3.0.0"
 
 [tool.poetry.group.dev.dependencies]
 build = "^1.2.2.post1"
