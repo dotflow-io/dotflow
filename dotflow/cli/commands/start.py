@@ -1,6 +1,5 @@
 """Command start module"""
 
-import os
 from os import system
 
 from dotflow import Config, DotFlow
@@ -9,8 +8,6 @@ from dotflow.core.exception import InvalidWorkflowFactory, WorkflowFlagConflict
 from dotflow.core.module import Module
 from dotflow.core.types.execution import TypeExecution
 from dotflow.providers import (
-    ServerAPI,
-    ServerDefault,
     StorageDefault,
     StorageFile,
     StorageGCS,
@@ -62,32 +59,10 @@ class StartCommand(Command):
         result.start(mode=self.params.mode)
 
     def _new_workflow(self):
-        config = self._build_config()
-        workflow_id = os.getenv("WORKFLOW_ID")
-
-        if config is None:
-            return DotFlow(workflow_id=workflow_id)
-        return DotFlow(config=config, workflow_id=workflow_id)
-
-    def _build_config(self):
         storage = self._build_storage()
-        server = self._build_server()
-
-        if storage is None and server is None:
-            return None
-
-        return Config(
-            storage=storage or StorageDefault(),
-            server=server or ServerDefault(),
-        )
-
-    def _build_server(self):
-        base_url = os.getenv("SERVER_BASE_URL")
-        user_token = os.getenv("SERVER_USER_TOKEN")
-
-        if not base_url or not user_token:
-            return None
-        return ServerAPI(base_url=base_url, user_token=user_token)
+        if storage is None:
+            return DotFlow()
+        return DotFlow(config=Config(storage=storage))
 
     def _build_storage(self):
         if not self.params.storage:
