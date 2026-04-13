@@ -22,7 +22,7 @@
 
     ---
 
-    Scaffold projects and run flows from the terminal—**init**, **start**, and common flags for context, process mode, paths, and schedules.
+    Scaffold projects and run flows from the terminal—**init**, **start** (via `--step` or `--workflow`), and common flags for context, process mode, paths, and schedules.
 
     [:octicons-arrow-right-24: How-to guides](cli/init.md)
 
