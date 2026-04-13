@@ -4,6 +4,8 @@ from os import system
 
 from dotflow import Config, DotFlow
 from dotflow.cli.command import Command
+from dotflow.core.exception import InvalidWorkflowFactory
+from dotflow.core.module import Module
 from dotflow.core.types.execution import TypeExecution
 from dotflow.providers import (
     StorageDefault,
@@ -14,7 +16,17 @@ from dotflow.providers import (
 
 
 class StartCommand(Command):
+
     def setup(self):
+        if getattr(self.params, "workflow", None):
+            self._start_from_factory()
+        else:
+            self._start_from_step()
+
+        if self.params.mode == TypeExecution.BACKGROUND:
+            system("/bin/bash")
+
+    def _start_from_step(self):
         workflow = self._new_workflow()
 
         workflow.task.add(
@@ -25,8 +37,18 @@ class StartCommand(Command):
 
         workflow.start(mode=self.params.mode)
 
-        if self.params.mode == TypeExecution.BACKGROUND:
-            system("/bin/bash")
+    def _start_from_factory(self):
+        factory = Module(self.params.workflow)
+
+        if not callable(factory):
+            raise InvalidWorkflowFactory(factory=self.params.workflow)
+
+        result = factory()
+
+        if not isinstance(result, DotFlow):
+            raise InvalidWorkflowFactory(factory=self.params.workflow)
+
+        result.start(mode=self.params.mode)
 
     def _new_workflow(self):
         if not self.params.storage:
