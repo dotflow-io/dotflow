@@ -199,6 +199,7 @@ plugins:
         nav/learn/cli/with-mode.md: nav/how-to/cli/with-mode.md
         nav/learn/cli/with-output-context.md: nav/how-to/cli/with-output-context.md
         nav/learn/cli/with-schedule.md: nav/how-to/cli/with-schedule.md
+        nav/learn/cli/with-workflow.md: nav/how-to/cli/with-workflow.md
         nav/learn/examples.md: nav/examples/index.md
         pt/nav/learn/concept-cron-overlap.md: pt/nav/concepts/concept-cron-overlap.md
         pt/nav/learn/concept-of-context.md: pt/nav/concepts/concept-of-context.md
@@ -255,6 +256,7 @@ nav:
         - nav/how-to/cli/with-output-context.md
         - nav/how-to/cli/with-custom-path.md
         - nav/how-to/cli/with-schedule.md
+        - nav/how-to/cli/with-workflow.md
         - nav/how-to/cli/with-deploy.md
     - Integrations:
       - Overview: nav/integrations/index.md
