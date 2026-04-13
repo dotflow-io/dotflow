@@ -79,11 +79,13 @@ dotflow deploy --platform github-actions --project my-pipeline
 | `--region` | Cloud region (default: us-east-1 for AWS, us-central1 for GCP, cn-hangzhou for Alibaba) |
 | `--schedule` | Cron expression for scheduled platforms (e.g. `*/5 * * * *`) |
 
-!!! note
-    Cron expressions use standard 5-field format (`min hour day month weekday`). Dotflow converts to the cloud provider format automatically (e.g. AWS EventBridge `cron()`).
+/// note
+Cron expressions use standard 5-field format (`min hour day month weekday`). Dotflow converts to the cloud provider format automatically (e.g. AWS EventBridge `cron()`).
+///
 
-!!! note
-    - AWS: `pip install dotflow[deploy-aws]`
-    - GCP: `pip install dotflow[deploy-gcp]`
-    - Alibaba: `pip install dotflow[deploy-alibaba]`
-    - GitHub: `pip install dotflow[deploy-github]`
+/// note
+- AWS: `pip install dotflow[deploy-aws]`
+- GCP: `pip install dotflow[deploy-gcp]`
+- Alibaba: `pip install dotflow[deploy-alibaba]`
+- GitHub: `pip install dotflow[deploy-github]`
+///
