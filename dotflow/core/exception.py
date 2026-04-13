@@ -64,9 +64,7 @@ class InvalidWorkflowFactory(Exception):
 
 class WorkflowFlagConflict(Exception):
     def __init__(self, flag: str):
-        super().__init__(
-            MESSAGE_WORKFLOW_FLAG_CONFLICT.format(flag=flag)
-        )
+        super().__init__(MESSAGE_WORKFLOW_FLAG_CONFLICT.format(flag=flag))
 
 
 class ExecutionWithClassError(Exception):
