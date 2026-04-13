@@ -8,3 +8,4 @@
 | [cli_with_mode](https://github.com/dotflow-io/examples/blob/master/cli_with_mode.py) | `dotflow start --step examples.cli_with_mode.simple_step --mode sequential` |
 | [cli_with_output_context](https://github.com/dotflow-io/examples/blob/master/cli_with_output_context.py) | `dotflow start --step examples.cli_with_output_context.simple_step --storage file` |
 | [cli_with_path](https://github.com/dotflow-io/examples/blob/master/cli_with_path.py) | `dotflow start --step examples.cli_with_path.simple_step --path .storage --storage file` |
+| [cli_with_workflow](https://github.com/dotflow-io/examples/blob/master/cli_with_workflow.py) | `dotflow start --workflow examples.cli_with_workflow.pipeline` |
