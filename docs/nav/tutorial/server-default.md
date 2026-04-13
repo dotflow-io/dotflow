@@ -1,8 +1,26 @@
 # Server Default
 
-The default Server provider is a **no-op** — all methods do nothing. It serves as a safe placeholder so the workflow lifecycle can call server hooks without errors when no remote server is configured.
+`ServerDefault` is the built-in Server provider. It auto-detects managed mode from environment variables — when `SERVER_BASE_URL` and `SERVER_USER_TOKEN` are present, it sends execution data to the remote API. Without them, all methods are no-ops.
 
-To send execution data to a remote API, implement a custom provider that extends the [`Server`](../reference/abc-server.md) ABC.
+## Managed mode (auto-detected)
+
+Set the environment variables before running your workflow:
+
+```bash
+export SERVER_BASE_URL="https://api.example.com/v1"
+export SERVER_USER_TOKEN="your-token"
+```
+
+Any `DotFlow()` instance picks them up automatically — no code changes required:
+
+```python
+from dotflow import DotFlow
+
+def main() -> DotFlow:
+    workflow = DotFlow()
+    workflow.task.add(step=my_step)
+    return workflow
+```
 
 ## Lifecycle hooks
 
@@ -26,19 +44,15 @@ from dotflow.abc.server import Server
 
 class MyServer(Server):
     def create_workflow(self, workflow):
-        # POST to your API
         pass
 
     def update_workflow(self, workflow, status=""):
-        # PATCH workflow status
         pass
 
     def create_task(self, task):
-        # POST task data
         pass
 
     def update_task(self, task):
-        # PATCH task results
         pass
 ```
 
