@@ -15,6 +15,9 @@ MESSAGE_PROBLEM_ORDERING = (
 MESSAGE_MODULE_NOT_FOUND = (
     "Module '{module}' not found. Please install with 'pip install {library}'"
 )
+MESSAGE_INVALID_WORKFLOW_FACTORY = (
+    "'{factory}' must be a callable that returns a DotFlow instance."
+)
 
 
 class MissingActionDecorator(Exception):
@@ -46,6 +49,13 @@ class ModuleNotFound(Exception):
     def __init__(self, module: str, library: str):
         super().__init__(
             MESSAGE_MODULE_NOT_FOUND.format(module=module, library=library)
+        )
+
+
+class InvalidWorkflowFactory(Exception):
+    def __init__(self, factory: str):
+        super().__init__(
+            MESSAGE_INVALID_WORKFLOW_FACTORY.format(factory=factory)
         )
 
 
