@@ -16,6 +16,7 @@ from dotflow.core.exception import (
     MESSAGE_UNKNOWN_ERROR,
     ExecutionModeNotExist,
     ImportModuleError,
+    InvalidWorkflowFactory,
     MissingActionDecorator,
 )
 from dotflow.core.types import TypeExecution, TypeOverlap, TypeStorage
@@ -56,12 +57,16 @@ class Command:
         self.cmd_init.set_defaults(exec=InitCommand)
 
     def setup_start(self):
-        self.cmd_start = self.subparsers.add_parser("start", help="Start")
-        self.cmd_start = self.cmd_start.add_argument_group(
+        cmd_start_parser = self.subparsers.add_parser("start", help="Start")
+        entry_group = cmd_start_parser.add_mutually_exclusive_group(
+            required=True
+        )
+        entry_group.add_argument("-s", "--step")
+        entry_group.add_argument("-w", "--workflow")
+
+        self.cmd_start = cmd_start_parser.add_argument_group(
             "Usage: dotflow start [OPTIONS]"
         )
-
-        self.cmd_start.add_argument("-s", "--step", required=True)
         self.cmd_start.add_argument("-c", "--callback", default=basic_callback)
         self.cmd_start.add_argument("-i", "--initial-context")
         self.cmd_start.add_argument(
@@ -88,7 +93,7 @@ class Command:
             ],
         )
 
-        self.cmd_start.set_defaults(exec=StartCommand)
+        cmd_start_parser.set_defaults(exec=StartCommand)
 
     def setup_schedule(self):
         self.cmd_schedule = self.subparsers.add_parser(
@@ -231,6 +236,9 @@ class Command:
             print(settings.WARNING_ALERT, err)
 
         except ImportModuleError as err:
+            print(settings.WARNING_ALERT, err)
+
+        except InvalidWorkflowFactory as err:
             print(settings.WARNING_ALERT, err)
 
         except KeyboardInterrupt:
