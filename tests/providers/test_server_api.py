@@ -76,13 +76,21 @@ class TestServerAPI(unittest.TestCase):
         task = MagicMock()
         task.workflow_id = "wf-1"
         task.task_id = "01ARZ3NDEKTSV4RRFFQ69G5FAV"
-        task.result.return_value = {"status": "Completed", "duration": 1.5}
+        task.result.return_value = {
+            "task_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV",
+            "status": "Completed",
+            "duration": 1.5,
+        }
 
         self.server.update_task(task=task)
 
         mock_patch.assert_called_once_with(
             "https://example.com/api/v1/workflows/wf-1/tasks/01ARZ3NDEKTSV4RRFFQ69G5FAV",
-            json={"status": "Completed", "duration": 1.5},
+            json={
+                "id": "01ARZ3NDEKTSV4RRFFQ69G5FAV",
+                "status": "Completed",
+                "duration": 1.5,
+            },
             headers=self.server._headers,
             timeout=15.0,
         )
