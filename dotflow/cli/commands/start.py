@@ -16,7 +16,6 @@ from dotflow.providers import (
 
 
 class StartCommand(Command):
-
     def setup(self):
         if getattr(self.params, "workflow", None):
             self._start_from_factory()
