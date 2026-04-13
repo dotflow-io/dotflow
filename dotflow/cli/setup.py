@@ -18,6 +18,7 @@ from dotflow.core.exception import (
     ImportModuleError,
     InvalidWorkflowFactory,
     MissingActionDecorator,
+    WorkflowFlagConflict,
 )
 from dotflow.core.types import TypeExecution, TypeOverlap, TypeStorage
 from dotflow.logging import logger
@@ -239,6 +240,9 @@ class Command:
             print(settings.WARNING_ALERT, err)
 
         except InvalidWorkflowFactory as err:
+            print(settings.WARNING_ALERT, err)
+
+        except WorkflowFlagConflict as err:
             print(settings.WARNING_ALERT, err)
 
         except KeyboardInterrupt:
