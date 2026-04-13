@@ -18,6 +18,9 @@ MESSAGE_MODULE_NOT_FOUND = (
 MESSAGE_INVALID_WORKFLOW_FACTORY = (
     "'{factory}' must be a callable that returns a DotFlow instance."
 )
+MESSAGE_WORKFLOW_FLAG_CONFLICT = (
+    "{flag} is only valid with --step and cannot be used with --workflow."
+)
 
 
 class MissingActionDecorator(Exception):
@@ -56,6 +59,13 @@ class InvalidWorkflowFactory(Exception):
     def __init__(self, factory: str):
         super().__init__(
             MESSAGE_INVALID_WORKFLOW_FACTORY.format(factory=factory)
+        )
+
+
+class WorkflowFlagConflict(Exception):
+    def __init__(self, flag: str):
+        super().__init__(
+            MESSAGE_WORKFLOW_FLAG_CONFLICT.format(flag=flag)
         )
 
 
