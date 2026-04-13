@@ -257,13 +257,14 @@ class TaskEngine:
 
         for new in ordered_list:
             new_object = getattr(class_instance, new[1])
+            task_ulid = str(ULID())
             try:
                 subcontext = new_object(
                     initial_context=self.task.initial_context,
                     previous_context=previous_context,
                     task=self.task,
                 )
-                subcontext.task_id = str(ULID())
+                subcontext.task_id = task_ulid
                 new_context.storage.append(subcontext)
                 previous_context = subcontext
 
@@ -277,7 +278,7 @@ class TaskEngine:
                     previous_context=previous_context,
                     task=self.task,
                 )
-                subcontext.task_id = str(ULID())
+                subcontext.task_id = task_ulid
                 new_context.storage.append(subcontext)
                 previous_context = subcontext
 
