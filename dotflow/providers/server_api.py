@@ -79,6 +79,7 @@ class ServerAPI(Server):
 
     def update_task(self, task: Any) -> None:
         data = task.result(max=5_000_000)
+        data["id"] = data.pop("task_id", task.task_id)
         self._patch(
             (
                 f"{self._base_url}/workflows/{task.workflow_id}"
