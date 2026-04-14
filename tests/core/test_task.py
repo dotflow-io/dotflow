@@ -135,7 +135,7 @@ class TestTaskSetter(unittest.TestCase):
         self.content = {"foo": "bar"}
 
     def test_set_step_with_path_module_success(self):
-        input_value = "tests.mocks.step_function.action_step"
+        input_value = "tests.mocks.step_function:action_step"
         expected_value = Action
 
         task = Task(task_id=0, step=input_value, callback=simple_callback)
@@ -143,7 +143,7 @@ class TestTaskSetter(unittest.TestCase):
         self.assertIsInstance(task.step, expected_value)
 
     def test_set_step_with_path_module_fail(self):
-        input_value = "tests.mocks.step_function.XPTO"
+        input_value = "tests.mocks.step_function:XPTO"
 
         with self.assertRaises(ImportModuleError):
             Task(task_id=0, step=input_value, callback=simple_callback)
@@ -163,7 +163,7 @@ class TestTaskSetter(unittest.TestCase):
             Task(task_id=0, step=input_value, callback=simple_callback)
 
     def test_set_callback_with_path_module_success(self):
-        input_value = "tests.mocks.step_function.action_step"
+        input_value = "tests.mocks.step_function:action_step"
         expected_value = Action
 
         task = Task(task_id=0, step=action_step, callback=input_value)
@@ -171,13 +171,13 @@ class TestTaskSetter(unittest.TestCase):
         self.assertIsInstance(task.step, expected_value)
 
     def test_set_callback_with_path_module_fail(self):
-        input_value = "tests.mocks.step_function.XPTO"
+        input_value = "tests.mocks.step_function:XPTO"
 
         with self.assertRaises(ImportModuleError):
             Task(task_id=0, step=action_step, callback=input_value)
 
     def test_set_callback_with_path_module_not_callable_fail(self):
-        input_value = "tests.mocks.constants.NOT_CALLABLE"
+        input_value = "tests.mocks.constants:NOT_CALLABLE"
 
         with self.assertRaises(NotCallableObject):
             Task(task_id=0, step=action_step, callback=input_value)
