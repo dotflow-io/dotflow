@@ -10,7 +10,7 @@ The `start` command supports two mutually exclusive entry points:
 ## Single step
 
 ```bash
-dotflow start --step docs_src.cli.cli_with_workflow.step_one
+dotflow start --step docs_src.cli.cli_with_workflow:step_one
 ```
 
 ## Full workflow factory
@@ -19,11 +19,11 @@ The factory must be a plain callable (no `@action`) that returns a configured
 `DotFlow` — the CLI is responsible for calling `.start()`.
 
 ```bash
-dotflow start --workflow docs_src.cli.cli_with_workflow.pipeline
+dotflow start --workflow docs_src.cli.cli_with_workflow:pipeline
 ```
 
 ```bash
-dotflow start --workflow docs_src.cli.cli_with_workflow.pipeline --mode parallel
+dotflow start --workflow docs_src.cli.cli_with_workflow:pipeline --mode parallel
 ```
 
 {* ./docs_src/cli/cli_with_workflow.py *}
