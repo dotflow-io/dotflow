@@ -23,13 +23,13 @@ def pipeline() -> DotFlow:
 
 def main():
     system(
-        "dotflow start --step docs_src.cli.cli_with_workflow.step_one"
+        "dotflow start --step docs_src.cli.cli_with_workflow:step_one"
     )
     system(
-        "dotflow start --workflow docs_src.cli.cli_with_workflow.pipeline"
+        "dotflow start --workflow docs_src.cli.cli_with_workflow:pipeline"
     )
     system(
-        "dotflow start --workflow docs_src.cli.cli_with_workflow.pipeline"
+        "dotflow start --workflow docs_src.cli.cli_with_workflow:pipeline"
         " --mode parallel"
     )
 

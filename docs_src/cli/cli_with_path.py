@@ -10,12 +10,12 @@ def simple_step():
 
 def main():
     system(
-        "dotflow start --step docs_src.cli.cli_with_path.simple_step "
+        "dotflow start --step docs_src.cli.cli_with_path:simple_step "
         "--path .storage --storage file"
     )
 
     system(
-        "dotflow start --step docs_src.cli.cli_with_path.simple_step "
+        "dotflow start --step docs_src.cli.cli_with_path:simple_step "
         "--path . --storage file"
     )
 

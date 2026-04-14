@@ -12,7 +12,7 @@ def simple_step(initial_context):
 
 def main():
     system(
-        "dotflow start --step docs_src.cli.cli_with_initial_context.simple_step "
+        "dotflow start --step docs_src.cli.cli_with_initial_context:simple_step "
         "--initial-context abc"
     )
 

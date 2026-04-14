@@ -117,11 +117,11 @@ def main():
     workflow = DotFlow()
     workflow.task.add(
         [
-            "tests.test_flow.StepX",
-            "tests.test_flow.StepY",
-            "tests.test_flow.extract_task_x",
-            "tests.test_flow.transform_task_x",
-            "tests.test_flow.load_task_x",
+            "tests.test_flow:StepX",
+            "tests.test_flow:StepY",
+            "tests.test_flow:extract_task_x",
+            "tests.test_flow:transform_task_x",
+            "tests.test_flow:load_task_x",
             simple_step,
         ],
         initial_context={"foo": "bar"},
