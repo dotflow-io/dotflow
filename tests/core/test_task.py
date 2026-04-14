@@ -148,6 +148,14 @@ class TestTaskSetter(unittest.TestCase):
         with self.assertRaises(ImportModuleError):
             Task(task_id=0, step=input_value, callback=simple_callback)
 
+    def test_set_step_with_dot_format_fallback_success(self):
+        input_value = "tests.mocks.step_function.action_step"
+        expected_value = Action
+
+        task = Task(task_id=0, step=input_value, callback=simple_callback)
+
+        self.assertIsInstance(task.step, expected_value)
+
     def test_set_step_with_function_success(self):
         input_value = action_step
         expected_value = Action
