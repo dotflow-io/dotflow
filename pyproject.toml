@@ -1,6 +1,6 @@
 [project]
 name = "dotflow"
-version = "0.16.0.dev4"
+version = "1.0.0.dev1"
 authors = [
   { name="Fernando Celmer", email="email@fernandocelmer.com" },
 ]
@@ -67,7 +67,7 @@ sentry = ["sentry-sdk"]
 
 [tool.poetry]
 name = "dotflow"
-version = "0.16.0.dev4"
+version = "1.0.0.dev1"
 description = "🎲 Dotflow turns an idea into flow! Lightweight Python library for execution pipelines with retry, parallel, cron and async support."
 authors = ["Fernando Celmer <email@fernandocelmer.com>"]
 readme = "README.md"
