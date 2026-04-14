@@ -12,7 +12,7 @@
 | **Tracer** | Distributed traces per workflow/task | Default (no-op) | OpenTelemetry, Sentry |
 | **Metrics** | Counters and histograms | Default (no-op) | OpenTelemetry |
 | **Scheduler** | Drives recurring execution | Default (no-op) | Cron |
-| **Server** | Sends execution data to remote API | — | ServerDefault |
+| **Server** | Sends execution data to remote API | ServerDefault (auto-detected) | — |
 
 You pass instances into `Config`:
 

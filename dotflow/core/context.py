@@ -37,7 +37,7 @@ class Context(ContextInstance):
     Args:
         storage (Any): Attribute where any type of Python object can be stored.
 
-        task_id (int): Task ID.
+        task_id (str): Task ID (ULID).
 
         workflow_id (UUID): Workflow ID.
     """
@@ -45,7 +45,7 @@ class Context(ContextInstance):
     def __init__(
         self,
         storage: Any = None,
-        task_id: int = 0,
+        task_id: str = "",
         workflow_id: UUID = None,
     ) -> None:
         super().__init__(task_id, storage, task_id, workflow_id)
@@ -67,13 +67,13 @@ class Context(ContextInstance):
         return self._task_id
 
     @task_id.setter
-    def task_id(self, value: int):
+    def task_id(self, value: str):
         if value is None:
             self._task_id = None
             return
-        if not isinstance(value, int):
+        if not isinstance(value, str):
             raise TypeError(
-                f"task_id must be an int, got {type(value).__name__}: {value!r}"
+                f"task_id must be a str, got {type(value).__name__}: {value!r}"
             )
         self._task_id = value
 

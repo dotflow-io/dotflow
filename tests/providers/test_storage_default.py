@@ -32,7 +32,7 @@ class TestStorageDefault(unittest.TestCase):
 
     def test_key_format(self):
         task = Task(
-            task_id=0,
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
             workflow_id=uuid4(),
             step=action_step,
         )
@@ -54,7 +54,7 @@ class TestStorageDefault(unittest.TestCase):
     def test_post_and_get_with_task(self):
         storage = StorageDefault()
         task = Task(
-            task_id=0,
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
             workflow_id=uuid4(),
             step=action_step,
         )

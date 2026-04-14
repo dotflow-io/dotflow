@@ -28,7 +28,7 @@ class SerializerTaskError(BaseModel):
 class SerializerTask(BaseModel):
     model_config = ConfigDict(title="task")
 
-    task_id: int = Field(default=None)
+    task_id: str = Field(default=None)
     workflow_id: Optional[UUID] = Field(default=None)
     status: str = Field(default=None, alias="_status")
     duration: Optional[float] = Field(default=None, alias="_duration")

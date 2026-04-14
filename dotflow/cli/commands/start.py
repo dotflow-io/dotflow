@@ -59,8 +59,14 @@ class StartCommand(Command):
         result.start(mode=self.params.mode)
 
     def _new_workflow(self):
-        if not self.params.storage:
+        storage = self._build_storage()
+        if storage is None:
             return DotFlow()
+        return DotFlow(config=Config(storage=storage))
+
+    def _build_storage(self):
+        if not self.params.storage:
+            return None
 
         storage_classes = {
             "default": StorageDefault,
@@ -73,10 +79,5 @@ class StartCommand(Command):
         storage_with_path = {StorageDefault, StorageFile}
 
         if storage_cls in storage_with_path:
-            storage = storage_cls(path=self.params.path)
-        else:
-            storage = storage_cls()
-
-        config = Config(storage=storage)
-
-        return DotFlow(config=config)
+            return storage_cls(path=self.params.path)
+        return storage_cls()

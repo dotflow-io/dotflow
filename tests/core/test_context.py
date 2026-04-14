@@ -25,18 +25,18 @@ class TestContext(unittest.TestCase):
 
 
 class TestContextTaskIdSetter(unittest.TestCase):
-    def test_valid_int(self):
-        ctx = Context(task_id=5)
-        self.assertEqual(ctx.task_id, 5)
+    def test_valid_str(self):
+        ctx = Context(task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV")
+        self.assertEqual(ctx.task_id, "01ARZ3NDEKTSV4RRFFQ69G5FAV")
 
     def test_none_is_allowed(self):
         ctx = Context()
         ctx.task_id = None
         self.assertIsNone(ctx.task_id)
 
-    def test_string_raises_type_error(self):
+    def test_int_raises_type_error(self):
         with self.assertRaises(TypeError):
-            Context(task_id="5")
+            Context(task_id=5)
 
     def test_float_raises_type_error(self):
         with self.assertRaises(TypeError):

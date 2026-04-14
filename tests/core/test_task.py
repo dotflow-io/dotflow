@@ -20,12 +20,16 @@ from tests.mocks import action_step, simple_callback, simple_step
 
 class TestTask(unittest.TestCase):
     def setUp(self):
-        self.task = Task(task_id=0, step=action_step, callback=simple_callback)
+        self.task = Task(
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+            step=action_step,
+            callback=simple_callback,
+        )
         self.content = {"foo": "bar"}
 
     def test_instantiating_task_class(self):
         task = Task(
-            task_id=0,
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
             initial_context=Context(storage=self.content),
             step=action_step,
             callback=simple_callback,
@@ -39,19 +43,19 @@ class TestTask(unittest.TestCase):
 
     def test_task_id(self):
         task = Task(
-            task_id=0,
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
             initial_context=Context(storage=self.content),
             step=action_step,
             callback=simple_callback,
         )
 
-        self.assertEqual(task.task_id, 0)
+        self.assertEqual(task.task_id, "01ARZ3NDEKTSV4RRFFQ69G5FAV")
 
     def test_workflow_id(self):
         workflow_id = uuid4()
 
         task = Task(
-            task_id=0,
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
             workflow_id=workflow_id,
             initial_context=Context(storage=self.content),
             step=action_step,
@@ -66,7 +70,7 @@ class TestTask(unittest.TestCase):
         expected_workflow_id = uuid4()
 
         task = Task(
-            task_id=0,
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
             workflow_id=expected_workflow_id,
             initial_context=Context(storage=self.content),
             step=action_step,
@@ -87,7 +91,7 @@ class TestTask(unittest.TestCase):
         self.assertIsInstance(schema, SerializerTask)
         self.assertIsInstance(schema.errors[-1], SerializerTaskError)
 
-        self.assertEqual(schema.task_id, 0)
+        self.assertEqual(schema.task_id, "01ARZ3NDEKTSV4RRFFQ69G5FAV")
         self.assertEqual(schema.workflow_id, expected_workflow_id)
         self.assertEqual(schema.status, TypeStatus.NOT_STARTED)
         self.assertEqual(schema.errors[-1].message, expected_error_message)
@@ -101,7 +105,7 @@ class TestTask(unittest.TestCase):
         expected_duration = 1.0
         expected_workflow_id = uuid4()
         task = Task(
-            task_id=0,
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
             workflow_id=expected_workflow_id,
             initial_context=Context(storage=self.content),
             step=action_step,
@@ -113,7 +117,7 @@ class TestTask(unittest.TestCase):
         task.duration = expected_duration
 
         result = task.result()
-        self.assertEqual(result["task_id"], 0)
+        self.assertEqual(result["task_id"], "01ARZ3NDEKTSV4RRFFQ69G5FAV")
         self.assertEqual(
             result["workflow_id"],
             str(expected_workflow_id),
@@ -131,14 +135,22 @@ class TestTask(unittest.TestCase):
 
 class TestTaskSetter(unittest.TestCase):
     def setUp(self):
-        self.task = Task(task_id=0, step=action_step, callback=simple_callback)
+        self.task = Task(
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+            step=action_step,
+            callback=simple_callback,
+        )
         self.content = {"foo": "bar"}
 
     def test_set_step_with_path_module_success(self):
         input_value = "tests.mocks.step_function.action_step"
         expected_value = Action
 
-        task = Task(task_id=0, step=input_value, callback=simple_callback)
+        task = Task(
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+            step=input_value,
+            callback=simple_callback,
+        )
 
         self.assertIsInstance(task.step, expected_value)
 
@@ -146,13 +158,21 @@ class TestTaskSetter(unittest.TestCase):
         input_value = "tests.mocks.step_function.XPTO"
 
         with self.assertRaises(ImportModuleError):
-            Task(task_id=0, step=input_value, callback=simple_callback)
+            Task(
+                task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+                step=input_value,
+                callback=simple_callback,
+            )
 
     def test_set_step_with_function_success(self):
         input_value = action_step
         expected_value = Action
 
-        task = Task(task_id=0, step=input_value, callback=simple_callback)
+        task = Task(
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+            step=input_value,
+            callback=simple_callback,
+        )
 
         self.assertIsInstance(task.step, expected_value)
 
@@ -160,13 +180,21 @@ class TestTaskSetter(unittest.TestCase):
         input_value = simple_step
 
         with self.assertRaises(MissingActionDecorator):
-            Task(task_id=0, step=input_value, callback=simple_callback)
+            Task(
+                task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+                step=input_value,
+                callback=simple_callback,
+            )
 
     def test_set_callback_with_path_module_success(self):
         input_value = "tests.mocks.step_function.action_step"
         expected_value = Action
 
-        task = Task(task_id=0, step=action_step, callback=input_value)
+        task = Task(
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+            step=action_step,
+            callback=input_value,
+        )
 
         self.assertIsInstance(task.step, expected_value)
 
@@ -174,13 +202,21 @@ class TestTaskSetter(unittest.TestCase):
         input_value = "tests.mocks.step_function.XPTO"
 
         with self.assertRaises(ImportModuleError):
-            Task(task_id=0, step=action_step, callback=input_value)
+            Task(
+                task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+                step=action_step,
+                callback=input_value,
+            )
 
     def test_set_callback_with_path_module_not_callable_fail(self):
         input_value = "tests.mocks.constants.NOT_CALLABLE"
 
         with self.assertRaises(NotCallableObject):
-            Task(task_id=0, step=action_step, callback=input_value)
+            Task(
+                task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+                step=action_step,
+                callback=input_value,
+            )
 
     def test_set_initial_context(self):
         expected_value = Context(storage=self.content)

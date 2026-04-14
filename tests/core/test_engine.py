@@ -39,11 +39,19 @@ class TestTaskEngine(unittest.TestCase):
     def setUp(self):
         self.workflow_id = uuid4()
         self.context = {"context": True}
-        self.task = Task(task_id=0, step=action_step, callback=simple_callback)
+        self.task = Task(
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+            step=action_step,
+            callback=simple_callback,
+        )
 
     def test_engine_with_function_completed(self):
         workflow_id = uuid4()
-        task = Task(task_id=0, step=action_step, callback=simple_callback)
+        task = Task(
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+            step=action_step,
+            callback=simple_callback,
+        )
         engine = TaskEngine(
             task=task, workflow_id=workflow_id, previous_context=Context()
         )
@@ -58,7 +66,9 @@ class TestTaskEngine(unittest.TestCase):
     def test_engine_with_function_failed(self):
         workflow_id = uuid4()
         task = Task(
-            task_id=0, step=action_step_with_error, callback=simple_callback
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+            step=action_step_with_error,
+            callback=simple_callback,
         )
         engine = TaskEngine(
             task=task, workflow_id=workflow_id, previous_context=Context()
@@ -73,7 +83,11 @@ class TestTaskEngine(unittest.TestCase):
     def test_engine_with_class_completed(self):
         execution_log = ""
         workflow_id = uuid4()
-        task = Task(task_id=0, step=ActionStep, callback=simple_callback)
+        task = Task(
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+            step=ActionStep,
+            callback=simple_callback,
+        )
         engine = TaskEngine(
             task=task, workflow_id=workflow_id, previous_context=Context()
         )
@@ -94,7 +108,9 @@ class TestTaskEngine(unittest.TestCase):
         execution_log = ""
         workflow_id = uuid4()
         task = Task(
-            task_id=0, step=ActionStepWithError, callback=simple_callback
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+            step=ActionStepWithError,
+            callback=simple_callback,
         )
         engine = TaskEngine(
             task=task, workflow_id=workflow_id, previous_context=Context()
@@ -116,7 +132,7 @@ class TestTaskEngine(unittest.TestCase):
 
     def test_engine_function_with_initial_context(self):
         task = Task(
-            task_id=0,
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
             step=action_step_with_initial_context,
             callback=simple_callback,
             initial_context=self.context,
@@ -133,7 +149,7 @@ class TestTaskEngine(unittest.TestCase):
 
     def test_engine_function_with_previous_context(self):
         task = Task(
-            task_id=0,
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
             step=action_step_with_previous_context,
             callback=simple_callback,
         )
@@ -151,7 +167,7 @@ class TestTaskEngine(unittest.TestCase):
 
     def test_engine_function_with_contexts(self):
         task = Task(
-            task_id=0,
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
             step=action_step_with_contexts,
             callback=simple_callback,
             initial_context=self.context,
@@ -171,7 +187,7 @@ class TestTaskEngine(unittest.TestCase):
 
     def test_engine_class_with_initial_context(self):
         task = Task(
-            task_id=0,
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
             step=ActionStepWithInitialContext,
             callback=simple_callback,
             initial_context=self.context,
@@ -188,7 +204,7 @@ class TestTaskEngine(unittest.TestCase):
 
     def test_engine_class_with_previous_context(self):
         task = Task(
-            task_id=0,
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
             step=ActionStepWithPreviousContext,
             callback=simple_callback,
         )
@@ -212,7 +228,7 @@ class TestTaskEngine(unittest.TestCase):
 
     def test_engine_class_with_contexts(self):
         task = Task(
-            task_id=0,
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
             step=ActionStepWithContexts,
             callback=simple_callback,
             initial_context=self.context,
@@ -333,7 +349,7 @@ class TestTaskEngine(unittest.TestCase):
 
         for input_value in valid_objects:
             task = Task(
-                task_id=0,
+                task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
                 step=action_step_valid_object,
                 callback=simple_callback,
                 initial_context=input_value,
@@ -352,7 +368,11 @@ class TestTaskEngine(unittest.TestCase):
     def test_engine_status_in_progress_during_execution(self):
         captured_status = None
 
-        task = Task(task_id=0, step=action_step, callback=simple_callback)
+        task = Task(
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+            step=action_step,
+            callback=simple_callback,
+        )
         engine = TaskEngine(
             task=task, workflow_id=self.workflow_id, previous_context=Context()
         )
@@ -365,7 +385,11 @@ class TestTaskEngine(unittest.TestCase):
         self.assertEqual(task.status, TypeStatus.COMPLETED)
 
     def test_engine_context_manager_without_execute(self):
-        task = Task(task_id=0, step=action_step, callback=simple_callback)
+        task = Task(
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+            step=action_step,
+            callback=simple_callback,
+        )
         engine = TaskEngine(
             task=task, workflow_id=self.workflow_id, previous_context=Context()
         )
@@ -377,7 +401,7 @@ class TestTaskEngine(unittest.TestCase):
 
     def test_engine_execute_with_retry_completed(self):
         task = Task(
-            task_id=0,
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
             step=action_step_with_retry,
             callback=simple_callback,
         )
@@ -392,7 +416,7 @@ class TestTaskEngine(unittest.TestCase):
 
     def test_engine_execute_with_retry_failed(self):
         task = Task(
-            task_id=0,
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
             step=action_step_with_error,
             callback=simple_callback,
         )
@@ -407,7 +431,7 @@ class TestTaskEngine(unittest.TestCase):
 
     def test_engine_execute_with_timeout(self):
         task = Task(
-            task_id=0,
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
             step=action_step_with_timeout,
             callback=simple_callback,
         )
@@ -431,7 +455,7 @@ class TestTaskEngine(unittest.TestCase):
             return {"done": True}
 
         task = Task(
-            task_id=0,
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
             step=slow_step,
             callback=simple_callback,
         )
@@ -453,7 +477,7 @@ class TestTaskEngine(unittest.TestCase):
         from unittest.mock import MagicMock, patch
 
         task = Task(
-            task_id=0,
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
             step=action_step_with_timeout,
             callback=simple_callback,
         )

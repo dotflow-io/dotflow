@@ -1,4 +1,4 @@
-"""Tests for StartCommand --workflow factory validation."""
+"""Tests for StartCommand."""
 
 from types import SimpleNamespace
 from unittest.mock import MagicMock, patch
@@ -24,6 +24,25 @@ def _make_cmd(**kwargs):
     cmd = StartCommand.__new__(StartCommand)
     cmd.params = SimpleNamespace(**defaults)
     return cmd
+
+
+class TestNewWorkflow:
+    @patch("dotflow.cli.commands.start.DotFlow")
+    def test_returns_dotflow_when_no_storage(self, mock_dotflow):
+        cmd = _make_cmd()
+        cmd._new_workflow()
+        mock_dotflow.assert_called_once_with()
+
+    @patch("dotflow.cli.commands.start.DotFlow")
+    @patch("dotflow.cli.commands.start.Config")
+    def test_returns_dotflow_with_config_when_storage_set(
+        self, mock_config, mock_dotflow
+    ):
+        cmd = _make_cmd(storage="file")
+        cmd._new_workflow()
+        mock_dotflow.assert_called_once()
+        _, kwargs = mock_dotflow.call_args
+        assert "config" in kwargs
 
 
 class TestStartFromFactory:

@@ -15,6 +15,8 @@ from time import sleep
 from types import FunctionType
 from uuid import UUID
 
+from ulid import ULID
+
 try:
     from types import NoneType
 except ImportError:
@@ -253,15 +255,16 @@ class TaskEngine:
             callable_list=callable_list, class_instance=class_instance
         )
 
-        for index, new in enumerate(ordered_list):
+        for new in ordered_list:
             new_object = getattr(class_instance, new[1])
+            task_ulid = str(ULID())
             try:
                 subcontext = new_object(
                     initial_context=self.task.initial_context,
                     previous_context=previous_context,
                     task=self.task,
                 )
-                subcontext.task_id = index
+                subcontext.task_id = task_ulid
                 new_context.storage.append(subcontext)
                 previous_context = subcontext
 
@@ -275,7 +278,7 @@ class TaskEngine:
                     previous_context=previous_context,
                     task=self.task,
                 )
-                subcontext.task_id = index
+                subcontext.task_id = task_ulid
                 new_context.storage.append(subcontext)
                 previous_context = subcontext
 
