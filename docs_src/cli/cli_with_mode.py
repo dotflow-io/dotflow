@@ -10,14 +10,14 @@ def simple_step():
 
 def main():
     system(
-        "dotflow start --step docs_src.cli.cli_with_mode.simple_step --mode sequential"
+        "dotflow start --step docs_src.cli.cli_with_mode:simple_step --mode sequential"
     )
     system(
-        "dotflow start --step docs_src.cli.cli_with_mode.simple_step --mode background"
+        "dotflow start --step docs_src.cli.cli_with_mode:simple_step --mode background"
     )
 
     system(
-        "dotflow start --step docs_src.cli.cli_with_mode.simple_step --mode parallel"
+        "dotflow start --step docs_src.cli.cli_with_mode:simple_step --mode parallel"
     )
 
 
