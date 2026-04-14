@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from functools import partial
 from uuid import uuid4
 
@@ -48,6 +49,7 @@ class DotFlow:
         config: Config | None = None,
         workflow_id: str | None = None,
     ) -> None:
+        workflow_id = workflow_id or os.getenv("WORKFLOW_ID")
         self._externally_provided_id = workflow_id is not None
         self.workflow_id = workflow_id or uuid4()
         self._config = config if config else Config()
