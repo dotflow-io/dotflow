@@ -35,7 +35,7 @@ class StartCommand(Command):
             initial_context=self.params.initial_context,
         )
 
-        workflow.start(mode=self.params.mode)
+        workflow.start(mode=self.params.mode, resume=self.params.resume)
 
     def _start_from_factory(self):
         step_only_flags = {
@@ -56,7 +56,7 @@ class StartCommand(Command):
         if not isinstance(result, DotFlow):
             raise InvalidWorkflowFactory(factory=self.params.workflow)
 
-        result.start(mode=self.params.mode)
+        result.start(mode=self.params.mode, resume=self.params.resume)
 
     def _new_workflow(self):
         storage = self._build_storage()

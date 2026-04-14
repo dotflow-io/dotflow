@@ -93,6 +93,12 @@ class Command:
                 TypeExecution.PARALLEL,
             ],
         )
+        self.cmd_start.add_argument(
+            "--resume",
+            action="store_true",
+            default=False,
+            help="Enable checkpoint-based resume",
+        )
 
         cmd_start_parser.set_defaults(exec=StartCommand)
 

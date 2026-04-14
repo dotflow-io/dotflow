@@ -19,6 +19,7 @@ def _make_cmd(**kwargs):
         "storage": None,
         "path": "/tmp",
         "mode": "sequential",
+        "resume": False,
     }
     defaults.update(kwargs)
     cmd = StartCommand.__new__(StartCommand)
@@ -90,4 +91,49 @@ class TestStartFromFactory:
             cmd = _make_cmd(workflow="mymod:factory")
             cmd._start_from_factory()
 
-        mock_workflow.start.assert_called_once_with(mode="sequential")
+        mock_workflow.start.assert_called_once_with(
+            mode="sequential", resume=False
+        )
+
+    def test_valid_factory_forwards_resume_flag(self):
+        mock_workflow = MagicMock()
+
+        def factory():
+            return mock_workflow
+
+        with (
+            patch("dotflow.cli.commands.start.Module", return_value=factory),
+            patch("dotflow.cli.commands.start.isinstance", return_value=True),
+        ):
+            cmd = _make_cmd(workflow="mymod:factory", resume=True)
+            cmd._start_from_factory()
+
+        mock_workflow.start.assert_called_once_with(
+            mode="sequential", resume=True
+        )
+
+
+class TestStartFromStep:
+    @patch("dotflow.cli.commands.start.DotFlow")
+    def test_step_forwards_resume_flag(self, mock_dotflow):
+        mock_workflow = MagicMock()
+        mock_dotflow.return_value = mock_workflow
+
+        cmd = _make_cmd(step="mymod:my_step", resume=True)
+        cmd._start_from_step()
+
+        mock_workflow.start.assert_called_once_with(
+            mode="sequential", resume=True
+        )
+
+    @patch("dotflow.cli.commands.start.DotFlow")
+    def test_step_default_resume_is_false(self, mock_dotflow):
+        mock_workflow = MagicMock()
+        mock_dotflow.return_value = mock_workflow
+
+        cmd = _make_cmd(step="mymod:my_step")
+        cmd._start_from_step()
+
+        mock_workflow.start.assert_called_once_with(
+            mode="sequential", resume=False
+        )
