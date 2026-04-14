@@ -29,14 +29,14 @@ def _make_cmd(**kwargs):
 class TestStartFromFactory:
     def test_raises_when_factory_not_callable(self):
         cmd = _make_cmd(
-            workflow="dotflow.core.exception.MESSAGE_UNKNOWN_ERROR"
+            workflow="dotflow.core.exception:MESSAGE_UNKNOWN_ERROR"
         )
         with pytest.raises(InvalidWorkflowFactory):
             cmd._start_from_factory()
 
     def test_raises_when_factory_returns_non_dotflow(self):
         cmd = _make_cmd(
-            workflow="dotflow.utils.basic_functions.basic_callback"
+            workflow="dotflow.utils.basic_functions:basic_callback"
         )
         with pytest.raises(InvalidWorkflowFactory):
             cmd._start_from_factory()
@@ -44,7 +44,7 @@ class TestStartFromFactory:
     def test_raises_on_callback_flag_conflict(self):
         custom_cb = MagicMock()
         cmd = _make_cmd(
-            workflow="dotflow.utils.basic_functions.basic_callback",
+            workflow="dotflow.utils.basic_functions:basic_callback",
             callback=custom_cb,
         )
         with pytest.raises(WorkflowFlagConflict):
@@ -52,7 +52,7 @@ class TestStartFromFactory:
 
     def test_raises_on_initial_context_flag_conflict(self):
         cmd = _make_cmd(
-            workflow="dotflow.utils.basic_functions.basic_callback",
+            workflow="dotflow.utils.basic_functions:basic_callback",
             initial_context="abc",
         )
         with pytest.raises(WorkflowFlagConflict):
@@ -68,7 +68,7 @@ class TestStartFromFactory:
             patch("dotflow.cli.commands.start.Module", return_value=factory),
             patch("dotflow.cli.commands.start.isinstance", return_value=True),
         ):
-            cmd = _make_cmd(workflow="mymod.factory")
+            cmd = _make_cmd(workflow="mymod:factory")
             cmd._start_from_factory()
 
         mock_workflow.start.assert_called_once_with(mode="sequential")
