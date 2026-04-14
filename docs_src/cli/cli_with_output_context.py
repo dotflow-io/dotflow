@@ -10,7 +10,7 @@ def simple_step():
 
 def main():
     system(
-        "dotflow start --step docs_src.cli.cli_with_output_context.simple_step "
+        "dotflow start --step docs_src.cli.cli_with_output_context:simple_step "
         "--storage file"
     )
 
