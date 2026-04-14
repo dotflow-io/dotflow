@@ -14,7 +14,7 @@ class Module:
 
     @classmethod
     def import_module(cls, value: str):
-        module_path, _, attr_name = value.rpartition(".")
+        module_path, _, attr_name = value.rpartition(":")
 
         if not module_path:
             raise ImportModuleError(module=value)
