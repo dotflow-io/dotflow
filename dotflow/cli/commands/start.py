@@ -51,12 +51,12 @@ class StartCommand(Command):
         if not callable(factory):
             raise InvalidWorkflowFactory(factory=self.params.workflow)
 
-        result = factory()
+        workflow = factory()
 
-        if not isinstance(result, DotFlow):
+        if not isinstance(workflow, DotFlow):
             raise InvalidWorkflowFactory(factory=self.params.workflow)
 
-        result.start(mode=self.params.mode, resume=self.params.resume)
+        workflow.start(mode=self.params.mode, resume=self.params.resume)
 
     def _new_workflow(self):
         storage = self._build_storage()
