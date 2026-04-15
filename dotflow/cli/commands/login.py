@@ -23,13 +23,7 @@ MAX_POLL_INTERVAL = 60
 
 class LoginCommand(Command):
     def setup(self):
-        token = getattr(self.params, "token", None)
         base_url = self._resolve_base_url()
-
-        if token:
-            save_cloud_config(token=token, base_url=base_url)
-            print(settings.INFO_ALERT, "Token saved.")
-            return
 
         handshake = self._start_device(base_url)
         if handshake is None:
@@ -49,10 +43,8 @@ class LoginCommand(Command):
         print(settings.INFO_ALERT, "Authenticated.")
 
     def _resolve_base_url(self) -> str:
-        """Flag or env var wins over the default."""
-        explicit = getattr(self.params, "base_url", None) or os.environ.get(
-            "SERVER_BASE_URL"
-        )
+        """``SERVER_BASE_URL`` env var wins over the default."""
+        explicit = os.environ.get("SERVER_BASE_URL")
         return explicit.rstrip("/") if explicit else DEFAULT_BASE_URL
 
     def _start_device(self, base_url: str) -> dict | None:
