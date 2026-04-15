@@ -21,7 +21,6 @@ DEFAULT_INTERVAL = 5
 
 
 class LoginCommand(Command):
-
     def setup(self):
         token = getattr(self.params, "token", None)
         base_url = self._resolve_base_url()
@@ -97,9 +96,9 @@ class LoginCommand(Command):
                 time.sleep(interval)
                 continue
 
-            if (
-                response.status_code == 400
-                and detail in ("slow_down", "slow down")
+            if response.status_code == 400 and detail in (
+                "slow_down",
+                "slow down",
             ):
                 interval += 5
                 time.sleep(interval)
