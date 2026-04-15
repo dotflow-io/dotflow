@@ -14,8 +14,7 @@ from dotflow.core.config_file import save_cloud_config
 from dotflow.settings import Settings as settings
 
 DEFAULT_BASE_URLS = (
-    "https://www.host.dotflow.io/api/v1",
-    "https://www.lib.dotflow.io/api/v1",
+    "https://www.cli.dotflow.io/api/v1",
 )
 DEFAULT_BASE_URL = DEFAULT_BASE_URLS[0]
 DEVICE_ENDPOINT = "/auth/cli/device"
