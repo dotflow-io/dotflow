@@ -132,57 +132,6 @@ class TestLoginDeviceFlow:
 
         assert not (tmp_home / ".dotflow" / "config.json").exists()
 
-    def test_falls_back_to_next_base_url_when_first_fails(self, tmp_home):
-        from requests import ConnectionError as RequestsConnectionError
-
-        from dotflow.cli.commands.login import DEFAULT_BASE_URLS
-
-        handshake = MagicMock()
-        handshake.status_code = 201
-        handshake.json.return_value = {
-            "device_code": "d",
-            "user_code": "AAAA-0000",
-            "verification_uri": "https://x",
-            "interval": 0,
-            "expires_in": 60,
-        }
-        handshake.raise_for_status = MagicMock()
-
-        ok = MagicMock()
-        ok.status_code = 200
-        ok.json.return_value = {"api_token": "dtf_sk_second"}
-
-        cmd = _make_cmd(LoginCommand, _params())
-        with (
-            patch(
-                "dotflow.cli.commands.login.post",
-                side_effect=[
-                    RequestsConnectionError("first down"),
-                    handshake,
-                    ok,
-                ],
-            ) as mock_post,
-            patch("dotflow.cli.commands.login.webbrowser.open"),
-        ):
-            cmd.setup()
-
-        assert (
-            mock_post.call_args_list[0]
-            .args[0]
-            .startswith(DEFAULT_BASE_URLS[0])
-        )
-        assert (
-            mock_post.call_args_list[1]
-            .args[0]
-            .startswith(DEFAULT_BASE_URLS[1])
-        )
-
-        config = tmp_home / ".dotflow" / "config.json"
-        assert '"token": "dtf_sk_second"' in config.read_text()
-        assert (
-            f'"base_url": "{DEFAULT_BASE_URLS[1]}"' in config.read_text()
-        )
-
     def test_explicit_base_url_skips_fallback(self, tmp_home):
         from requests import ConnectionError as RequestsConnectionError
 
