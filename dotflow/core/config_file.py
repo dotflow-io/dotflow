@@ -1,20 +1,15 @@
-"""Persistent CLI config stored at ``~/.dotflow/config.toml``.
-
-Kept minimal on purpose — the only shape we read/write is::
-
-    [cloud]
-    base_url = "https://host.dotflow.io/api/v1"
-    token = "dtf_sk_..."
+"""Persistent CLI config stored at ``~/.dotflow/config.json``.
 """
 
 from __future__ import annotations
 
+import contextlib
+import json
 import os
-import re
 from pathlib import Path
 
 CONFIG_DIR_NAME = ".dotflow"
-CONFIG_FILE_NAME = "config.toml"
+CONFIG_FILE_NAME = "config.json"
 CLOUD_SECTION = "cloud"
 
 
@@ -24,38 +19,53 @@ def config_path() -> Path:
 
 
 def load_cloud_config() -> dict[str, str]:
-    """Read ``[cloud]`` from the config file. Returns {} when absent."""
+    """Read the ``cloud`` section from the config file. ``{}`` when absent."""
     path = config_path()
 
     if not path.exists():
         return {}
 
     try:
-        return _parse_cloud_section(path.read_text(encoding="utf-8"))
+        raw = path.read_text(encoding="utf-8")
     except OSError:
         return {}
 
+    try:
+        data = json.loads(raw)
+    except json.JSONDecodeError:
+        return {}
+
+    section = data.get(CLOUD_SECTION) if isinstance(data, dict) else None
+    if not isinstance(section, dict):
+        return {}
+
+    return {
+        key: str(value)
+        for key, value in section.items()
+        if isinstance(value, str)
+    }
+
 
 def save_cloud_config(token: str, base_url: str) -> Path:
-    """Persist ``[cloud]`` with the given token/base_url. Returns the file path."""
+    """Persist ``cloud`` with the given token/base_url. Returns the file path."""
     path = config_path()
     path.parent.mkdir(parents=True, exist_ok=True)
 
-    content = (
-        f"[{CLOUD_SECTION}]\n"
-        f'base_url = "{_escape(base_url)}"\n'
-        f'token = "{_escape(token)}"\n'
-    )
+    payload = {
+        CLOUD_SECTION: {
+            "base_url": base_url,
+            "token": token,
+        }
+    }
+    content = json.dumps(payload, indent=2) + "\n"
 
     fd = os.open(
         str(path),
         os.O_WRONLY | os.O_CREAT | os.O_TRUNC,
         0o600,
     )
-    try:
+    with contextlib.suppress(OSError):
         os.fchmod(fd, 0o600)
-    except OSError:
-        pass
     with os.fdopen(fd, "w", encoding="utf-8") as fh:
         fh.write(content)
 
@@ -84,45 +94,3 @@ def resolve(key: str, env_var: str) -> str | None:
         return env_value
 
     return load_cloud_config().get(key) or None
-
-
-_SECTION_RE = re.compile(r"^\s*\[(?P<name>[^\]]+)\]\s*$")
-_KEY_VALUE_RE = re.compile(
-    r'^\s*(?P<key>[A-Za-z_][A-Za-z0-9_-]*)\s*=\s*"(?P<value>(?:[^"\\]|\\.)*)"\s*$'
-)
-
-
-def _parse_cloud_section(content: str) -> dict[str, str]:
-    """Parse just ``[cloud]`` key/string-value pairs from a TOML-ish file."""
-    current_section: str | None = None
-    result: dict[str, str] = {}
-
-    for line in content.splitlines():
-        stripped = line.strip()
-
-        if not stripped or stripped.startswith("#"):
-            continue
-
-        section = _SECTION_RE.match(line)
-        if section:
-            current_section = section.group("name").strip()
-            continue
-
-        if current_section != CLOUD_SECTION:
-            continue
-
-        key_value = _KEY_VALUE_RE.match(line)
-        if not key_value:
-            continue
-
-        result[key_value.group("key")] = _unescape(key_value.group("value"))
-
-    return result
-
-
-def _escape(value: str) -> str:
-    return value.replace("\\", "\\\\").replace('"', '\\"')
-
-
-def _unescape(value: str) -> str:
-    return value.replace('\\"', '"').replace("\\\\", "\\")
