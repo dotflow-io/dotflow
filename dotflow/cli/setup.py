@@ -9,6 +9,8 @@ from dotflow.cli.commands import (
     DeployCommand,
     InitCommand,
     LogCommand,
+    LoginCommand,
+    LogoutCommand,
     ScheduleCommand,
     StartCommand,
 )
@@ -42,11 +44,36 @@ class Command:
 
         self.setup_init()
         self.setup_logs()
+        self.setup_login()
+        self.setup_logout()
         self.setup_start()
         self.setup_schedule()
         self.setup_cloud()
         self.setup_deploy()
         self.command()
+
+    def setup_login(self):
+        cmd = self.subparsers.add_parser(
+            "login", help="Authenticate the CLI via browser"
+        )
+        cmd_group = cmd.add_argument_group("Usage: dotflow login [OPTIONS]")
+        cmd_group.add_argument(
+            "--base-url",
+            default=None,
+            help="Override the Dotflow Cloud API base URL",
+        )
+        cmd_group.add_argument(
+            "--token",
+            default=None,
+            help="Skip the browser flow and save a pre-obtained API token",
+        )
+        cmd.set_defaults(exec=LoginCommand)
+
+    def setup_logout(self):
+        cmd = self.subparsers.add_parser(
+            "logout", help="Remove saved CLI credentials"
+        )
+        cmd.set_defaults(exec=LogoutCommand)
 
     def setup_init(self):
         self.cmd_init = self.subparsers.add_parser(
