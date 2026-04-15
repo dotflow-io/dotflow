@@ -310,9 +310,11 @@ class TaskBuilder:
         self,
         config: Config,
         workflow_id: UUID = None,
+        workflow_name: str | None = None,
     ) -> None:
         self.queue: list[Callable] = []
         self.workflow_id = workflow_id
+        self.workflow_name = workflow_name
         self.config = config
 
     def add(
@@ -381,6 +383,7 @@ class TaskBuilder:
     def schema(self) -> SerializerWorkflow:
         return SerializerWorkflow(
             workflow_id=self.workflow_id,
+            workflow_name=self.workflow_name,
             tasks=[item.schema() for item in self.queue],
         )
 

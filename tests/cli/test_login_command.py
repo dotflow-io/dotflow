@@ -10,58 +10,20 @@ from dotflow.cli.commands.login import LoginCommand
 from dotflow.cli.commands.logout import LogoutCommand
 
 
-def _params(**kwargs) -> SimpleNamespace:
-    defaults = {"base_url": None, "token": None}
-    defaults.update(kwargs)
-    return SimpleNamespace(**defaults)
-
-
-def _make_cmd(cls, params: SimpleNamespace):
+def _make_cmd(cls):
     cmd = cls.__new__(cls)
-    cmd.params = params
+    cmd.params = SimpleNamespace()
     return cmd
 
 
 @pytest.fixture
 def tmp_home(tmp_path, monkeypatch):
     monkeypatch.setattr(Path, "home", lambda: tmp_path)
+    monkeypatch.delenv("SERVER_BASE_URL", raising=False)
     yield tmp_path
 
 
-class TestLoginWithExplicitToken:
-    def test_saves_token_without_network_calls(self, tmp_home):
-        cmd = _make_cmd(
-            LoginCommand,
-            _params(token="dtf_sk_direct", base_url="https://api.local"),
-        )
-        with (
-            patch("dotflow.cli.commands.login.post") as mock_post,
-            patch(
-                "dotflow.cli.commands.login.webbrowser.open"
-            ) as mock_browser,
-        ):
-            cmd.setup()
-            mock_post.assert_not_called()
-            mock_browser.assert_not_called()
-
-        config = tmp_home / ".dotflow" / "config.json"
-        assert config.exists()
-        content = config.read_text()
-        assert '"token": "dtf_sk_direct"' in content
-        assert '"base_url": "https://api.local"' in content
-
-
 class TestLoginDeviceFlow:
-    def _responses(self, *items):
-        for item in items:
-            r = MagicMock()
-            r.status_code = item[0]
-            if len(item) > 1:
-                r.json.return_value = item[1]
-            else:
-                r.json.return_value = {}
-            yield r
-
     def test_persists_token_on_successful_poll(self, tmp_home):
         handshake = MagicMock()
         handshake.status_code = 201
@@ -82,10 +44,7 @@ class TestLoginDeviceFlow:
         ok.status_code = 200
         ok.json.return_value = {"api_token": "dtf_sk_from_browser"}
 
-        cmd = _make_cmd(
-            LoginCommand,
-            _params(base_url="https://api.local"),
-        )
+        cmd = _make_cmd(LoginCommand)
         with (
             patch(
                 "dotflow.cli.commands.login.post",
@@ -120,7 +79,7 @@ class TestLoginDeviceFlow:
         gone.status_code = 410
         gone.json.return_value = {"detail": "Device code expired"}
 
-        cmd = _make_cmd(LoginCommand, _params(base_url="https://api.local"))
+        cmd = _make_cmd(LoginCommand)
         with (
             patch(
                 "dotflow.cli.commands.login.post",
@@ -132,10 +91,12 @@ class TestLoginDeviceFlow:
 
         assert not (tmp_home / ".dotflow" / "config.json").exists()
 
-    def test_explicit_base_url_skips_fallback(self, tmp_home):
+    def test_env_var_overrides_default_base_url(self, tmp_home, monkeypatch):
         from requests import ConnectionError as RequestsConnectionError
 
-        cmd = _make_cmd(LoginCommand, _params(base_url="https://only.local"))
+        monkeypatch.setenv("SERVER_BASE_URL", "https://only.local")
+
+        cmd = _make_cmd(LoginCommand)
         with (
             patch(
                 "dotflow.cli.commands.login.post",
@@ -146,6 +107,7 @@ class TestLoginDeviceFlow:
             cmd.setup()
 
         assert mock_post.call_count == 1
+        assert mock_post.call_args.args[0].startswith("https://only.local")
         assert not (tmp_home / ".dotflow" / "config.json").exists()
 
 
@@ -156,11 +118,12 @@ class TestLogout:
             '{"cloud": {"token": "x"}}'
         )
 
-        cmd = _make_cmd(LogoutCommand, _params())
+        cmd = _make_cmd(LogoutCommand)
         cmd.setup()
 
         assert not (tmp_home / ".dotflow" / "config.json").exists()
 
     def test_is_noop_when_no_config(self, tmp_home):
-        cmd = _make_cmd(LogoutCommand, _params())
-        cmd.setup()  # no error expected
+        cmd = _make_cmd(LogoutCommand)
+        cmd.setup()
+        assert not (tmp_home / ".dotflow" / "config.json").exists()

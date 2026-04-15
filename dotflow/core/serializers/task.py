@@ -1,5 +1,7 @@
 """Task serializer module"""
 
+# mypy: disable-error-code="misc"
+
 from __future__ import annotations
 
 import json
@@ -48,6 +50,11 @@ class SerializerTask(BaseModel):
         default={"message": "Context size exceeded"},
         exclude=True,
     )
+
+    @computed_field
+    @property
+    def id(self) -> Optional[str]:
+        return self.task_id
 
     @computed_field
     @property

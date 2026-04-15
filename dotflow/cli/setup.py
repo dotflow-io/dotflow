@@ -56,17 +56,6 @@ class Command:
         cmd = self.subparsers.add_parser(
             "login", help="Authenticate the CLI via browser"
         )
-        cmd_group = cmd.add_argument_group("Usage: dotflow login [OPTIONS]")
-        cmd_group.add_argument(
-            "--base-url",
-            default=None,
-            help="Override the Dotflow Cloud API base URL",
-        )
-        cmd_group.add_argument(
-            "--token",
-            default=None,
-            help="Skip the browser flow and save a pre-obtained API token",
-        )
         cmd.set_defaults(exec=LoginCommand)
 
     def setup_logout(self):

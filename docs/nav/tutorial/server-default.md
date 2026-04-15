@@ -1,26 +1,42 @@
 # Server Default
 
-`ServerDefault` is the built-in Server provider. It auto-detects managed mode from environment variables — when `SERVER_BASE_URL` and `SERVER_USER_TOKEN` are present, it sends execution data to the remote API. Without them, all methods are no-ops.
+`ServerDefault` is the built-in Server provider. It auto-detects managed mode from the CLI config file or environment variables — when a `base_url` and `token` are available, it sends execution data to the remote API. Without them, all methods are no-ops.
 
 ## Managed mode (auto-detected)
 
-Set the environment variables before running your workflow:
+There are two ways to feed the provider.
+
+### 1. `dotflow login` (recommended)
+
+Run the device-authorization flow once and the CLI stores `base_url` + `token` in `~/.dotflow/config.json`:
+
+```bash
+dotflow login
+```
+
+Any subsequent `DotFlow()` instance picks those up automatically — no env vars, no code changes:
+
+```python
+from dotflow import DotFlow
+
+
+def main() -> DotFlow:
+    workflow = DotFlow()
+    workflow.task.add(step=my_step)
+
+    return workflow
+```
+
+### 2. Environment variables (CI/CD)
+
+For non-interactive environments, export the variables directly:
 
 ```bash
 export SERVER_BASE_URL="https://api.example.com/v1"
 export SERVER_USER_TOKEN="your-token"
 ```
 
-Any `DotFlow()` instance picks them up automatically — no code changes required:
-
-```python
-from dotflow import DotFlow
-
-def main() -> DotFlow:
-    workflow = DotFlow()
-    workflow.task.add(step=my_step)
-    return workflow
-```
+Env vars take precedence over the config file.
 
 ## Lifecycle hooks
 
@@ -33,6 +49,8 @@ The server provider is called automatically at these points:
 | Workflow completes | `update_workflow()` |
 | `task.add()` | `create_task()` |
 | Task finishes | `update_task()` |
+
+Requests hit `{base_url}/cli/workflows/*` with `Authorization: Bearer <token>`.
 
 ## Custom implementation
 

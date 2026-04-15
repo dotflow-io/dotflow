@@ -249,6 +249,8 @@ nav:
         #   - nav/tutorial/output-task.md
       - Dotflow CLI:
         - nav/how-to/cli/init.md
+        - nav/how-to/cli/login.md
+        - nav/how-to/cli/logout.md
         - nav/how-to/cli/simple-start.md
         - nav/how-to/cli/with-initial-context.md
         - nav/how-to/cli/with-callback.md

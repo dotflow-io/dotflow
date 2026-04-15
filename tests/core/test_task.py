@@ -168,7 +168,11 @@ class TestTaskSetter(unittest.TestCase):
         input_value = "tests.mocks.step_function.action_step"
         expected_value = Action
 
-        task = Task(task_id=0, step=input_value, callback=simple_callback)
+        task = Task(
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+            step=input_value,
+            callback=simple_callback,
+        )
 
         self.assertIsInstance(task.step, expected_value)
 

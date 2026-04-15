@@ -70,9 +70,7 @@ class TestDotFlow(unittest.TestCase):
         config = Config(server=server)
         workflow = DotFlow(config=config)
 
-        server.create_workflow.assert_called_once_with(
-            workflow=workflow.workflow_id
-        )
+        server.create_workflow.assert_called_once_with(workflow=workflow)
 
     def test_create_workflow_skipped_when_id_externally_provided(self):
         from dotflow.providers.server_default import ServerDefault
@@ -100,3 +98,25 @@ class TestDotFlow(unittest.TestCase):
         for tid in ids:
             self.assertIsInstance(tid, str)
             self.assertEqual(len(tid), 26)
+
+    def test_default_name_is_hostname(self):
+        import socket
+
+        workflow = DotFlow()
+        self.assertEqual(workflow.name, socket.gethostname())
+
+    def test_explicit_name_overrides_hostname(self):
+        workflow = DotFlow(name="pipeline-xyz")
+        self.assertEqual(workflow.name, "pipeline-xyz")
+
+    def test_start_is_idempotent_for_same_queue(self):
+        first = self.workflow.start()
+        second = self.workflow.start()
+        self.assertIs(first, second)
+
+    def test_start_runs_again_after_task_clear(self):
+        first = self.workflow.start()
+        self.workflow.task.clear()
+        self.workflow.task.add(step=action_step)
+        second = self.workflow.start()
+        self.assertIsNot(first, second)

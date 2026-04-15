@@ -5,6 +5,16 @@ from dotflow.providers.server_default import ServerDefault
 
 
 class TestServerDefault(unittest.TestCase):
+    def setUp(self):
+        self._cfg_patch = patch(
+            "dotflow.core.config_file.load_cloud_config",
+            return_value={},
+        )
+        self._cfg_patch.start()
+
+    def tearDown(self):
+        self._cfg_patch.stop()
+
     @patch.dict("os.environ", {}, clear=True)
     def test_instantiation(self):
         server = ServerDefault()
