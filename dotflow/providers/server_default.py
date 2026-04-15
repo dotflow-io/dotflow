@@ -24,16 +24,15 @@ def managed(method):
 
 
 class ServerDefault(Server):
-    """Default Server provider with auto-detected managed mode.
-    """
+    """Default Server provider with auto-detected managed mode."""
 
     MAX_RESULT_SIZE = 5_000_000
     TIMEOUT = 15.0
 
-    ENDPOINT_WORKFLOWS = "/workflows"
-    ENDPOINT_WORKFLOW = "/workflows/{workflow_id}"
-    ENDPOINT_TASKS = "/workflows/{workflow_id}/tasks"
-    ENDPOINT_TASK = "/workflows/{workflow_id}/tasks/{task_id}"
+    ENDPOINT_WORKFLOWS = "/cli/workflows"
+    ENDPOINT_WORKFLOW = "/cli/workflows/{workflow_id}"
+    ENDPOINT_TASKS = "/cli/workflows/{workflow_id}/tasks"
+    ENDPOINT_TASK = "/cli/workflows/{workflow_id}/tasks/{task_id}"
 
     def __init__(self) -> None:
         base_url = os.environ.get("SERVER_BASE_URL") or None
