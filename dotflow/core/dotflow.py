@@ -9,6 +9,8 @@ from uuid import uuid4
 from dotflow.core.config import Config
 from dotflow.core.task import TaskBuilder
 from dotflow.core.workflow import Manager
+from dotflow.logging import logger
+from dotflow.utils import hostname
 
 
 class DotFlow:
@@ -34,8 +36,15 @@ class DotFlow:
         workflow_id (Optional[str]): Fixed workflow identifier for checkpoint
             resume. If not provided, a random UUID is generated.
 
+        name (Optional[str]): Human-readable label sent to the managed
+            server on registration. Defaults to the machine hostname so
+            runs from different hosts stay distinguishable in the
+            dashboard.
+
     Attributes:
         workflow_id (UUID):
+
+        name (str):
 
         task (List[Task]):
 
@@ -48,30 +57,47 @@ class DotFlow:
         self,
         config: Config | None = None,
         workflow_id: str | None = None,
+        name: str | None = None,
     ) -> None:
         workflow_id = workflow_id or os.getenv("WORKFLOW_ID")
         self._externally_provided_id = workflow_id is not None
         self.workflow_id = workflow_id or uuid4()
+        self.name = name or hostname()
         self._config = config if config else Config()
-
-        if not self._externally_provided_id:
-            self._config.server.create_workflow(workflow=self.workflow_id)
+        self._manager: Manager | None = None
+        self._last_run_signature: tuple = ()
 
         self.task = TaskBuilder(
             config=self._config,
             workflow_id=self.workflow_id,
+            workflow_name=self.name,
         )
 
-        self.start = partial(
-            Manager,
-            tasks=self.task.queue,
-            workflow_id=self.workflow_id,
-            config=self._config,
-        )
+        if not self._externally_provided_id:
+            self._config.server.create_workflow(workflow=self)
 
         self.schedule = partial(
             self._config.scheduler.start, workflow=self.start
         )
+
+    def start(self, **kwargs) -> Manager:
+        """Run the workflow once; duplicate calls return the original Manager."""
+        signature = tuple(task.task_id for task in self.task.queue)
+        if self._manager is not None and signature == self._last_run_signature:
+            logger.warning(
+                "DotFlow.start() already ran for %s; ignoring duplicate call",
+                self.workflow_id,
+            )
+            return self._manager
+
+        self._last_run_signature = signature
+        self._manager = Manager(
+            tasks=self.task.queue,
+            workflow_id=self.workflow_id,
+            config=self._config,
+            **kwargs,
+        )
+        return self._manager
 
     def result_task(self):
         """
