@@ -8,7 +8,6 @@ from dotflow.utils import read_file
 
 
 class LogCommand(Command):
-
     def setup(self):
         if settings.LOG_PATH.exists():
             print(read_file(path=settings.LOG_PATH))
