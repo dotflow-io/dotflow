@@ -9,7 +9,6 @@ Kept minimal on purpose — the only shape we read/write is::
 
 from __future__ import annotations
 
-import contextlib
 import os
 import re
 from pathlib import Path
@@ -47,10 +46,18 @@ def save_cloud_config(token: str, base_url: str) -> Path:
         f'base_url = "{_escape(base_url)}"\n'
         f'token = "{_escape(token)}"\n'
     )
-    path.write_text(content, encoding="utf-8")
 
-    with contextlib.suppress(OSError):
-        os.chmod(path, 0o600)
+    fd = os.open(
+        str(path),
+        os.O_WRONLY | os.O_CREAT | os.O_TRUNC,
+        0o600,
+    )
+    try:
+        os.fchmod(fd, 0o600)
+    except OSError:
+        pass
+    with os.fdopen(fd, "w", encoding="utf-8") as fh:
+        fh.write(content)
 
     return path
 
