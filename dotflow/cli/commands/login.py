@@ -18,6 +18,7 @@ DEVICE_ENDPOINT = "/cli/device"
 TOKEN_ENDPOINT = "/cli/token"
 TIMEOUT = 15
 DEFAULT_INTERVAL = 5
+MAX_POLL_INTERVAL = 60
 
 
 class LoginCommand(Command):
@@ -100,7 +101,7 @@ class LoginCommand(Command):
                 "slow_down",
                 "slow down",
             ):
-                interval += 5
+                interval = min(interval + 5, MAX_POLL_INTERVAL)
                 time.sleep(interval)
                 continue
 
