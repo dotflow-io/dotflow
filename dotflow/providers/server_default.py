@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import os
 from functools import wraps
 from typing import Any
 
@@ -10,6 +9,7 @@ from requests import patch, post
 from requests.exceptions import RequestException
 
 from dotflow.abc.server import Server
+from dotflow.core.config_file import resolve
 from dotflow.logging import logger
 
 
@@ -35,8 +35,8 @@ class ServerDefault(Server):
     ENDPOINT_TASK = "/cli/workflows/{workflow_id}/tasks/{task_id}"
 
     def __init__(self) -> None:
-        base_url = os.environ.get("SERVER_BASE_URL") or None
-        user_token = os.environ.get("SERVER_USER_TOKEN") or None
+        base_url = resolve(key="base_url", env_var="SERVER_BASE_URL")
+        user_token = resolve(key="token", env_var="SERVER_USER_TOKEN")
         self._managed = bool(base_url and user_token)
 
         self._base_url = base_url.rstrip("/") if base_url else None
@@ -75,7 +75,7 @@ class ServerDefault(Server):
     def create_workflow(self, workflow: Any) -> None:
         self._post(
             self._base_url + self.ENDPOINT_WORKFLOWS,
-            json={"id": str(workflow)},
+            json=workflow.result(),
         )
 
     @managed
@@ -88,22 +88,19 @@ class ServerDefault(Server):
 
     @managed
     def create_task(self, task: Any) -> None:
-        data = task.result(max=self.MAX_RESULT_SIZE)
-        data["id"] = data.pop("task_id", task.task_id)
         self._post(
             self._base_url
             + self.ENDPOINT_TASKS.format(workflow_id=task.workflow_id),
-            json=data,
+            json=task.result(max=self.MAX_RESULT_SIZE),
         )
 
     @managed
     def update_task(self, task: Any) -> None:
-        data = task.result(max=self.MAX_RESULT_SIZE)
         self._patch(
             self._base_url
             + self.ENDPOINT_TASK.format(
                 workflow_id=task.workflow_id,
                 task_id=task.task_id,
             ),
-            json=data,
+            json=task.result(max=self.MAX_RESULT_SIZE),
         )
