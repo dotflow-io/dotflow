@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import os
 from functools import wraps
 from typing import Any
 
@@ -10,6 +9,7 @@ from requests import patch, post
 from requests.exceptions import RequestException
 
 from dotflow.abc.server import Server
+from dotflow.core.config_file import resolve
 from dotflow.logging import logger
 
 
@@ -40,8 +40,8 @@ class ServerDefault(Server):
     ENDPOINT_TASK = "/workflows/{workflow_id}/tasks/{task_id}"
 
     def __init__(self) -> None:
-        base_url = os.getenv("SERVER_BASE_URL")
-        user_token = os.getenv("SERVER_USER_TOKEN")
+        base_url = resolve(key="base_url", env_var="SERVER_BASE_URL")
+        user_token = resolve(key="token", env_var="SERVER_USER_TOKEN")
         self._managed = bool(base_url and user_token)
 
         self._base_url = base_url.rstrip("/") if base_url else None
