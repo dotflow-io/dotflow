@@ -25,6 +25,7 @@ DEFAULT_INTERVAL = 5
 
 
 class LoginCommand(Command):
+
     def setup(self):
         token = getattr(self.params, "token", None)
 
