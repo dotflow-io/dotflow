@@ -39,19 +39,36 @@ class TestSaveAndLoad:
     def test_load_returns_empty_when_missing(self, tmp_home):
         assert load_cloud_config() == {}
 
-    def test_escapes_double_quote_in_values(self, tmp_home):
-        save_cloud_config(token='tok"en', base_url='url"with"quote')
+    def test_handles_special_chars_in_values(self, tmp_home):
+        save_cloud_config(token='tok"en\\x', base_url='url with space')
         data = load_cloud_config()
-        assert data["token"] == 'tok"en'
-        assert data["base_url"] == 'url"with"quote'
+        assert data["token"] == 'tok"en\\x'
+        assert data["base_url"] == 'url with space'
 
     def test_ignores_other_sections(self, tmp_home):
+        import json
+
         config_path().parent.mkdir(parents=True, exist_ok=True)
         config_path().write_text(
-            '[cloud]\ntoken = "abc"\nbase_url = "http://x"\n'
-            '[other]\ntoken = "ignored"\n'
+            json.dumps(
+                {
+                    "cloud": {
+                        "token": "abc",
+                        "base_url": "http://x",
+                    },
+                    "other": {"token": "ignored"},
+                }
+            )
         )
-        assert load_cloud_config() == {"token": "abc", "base_url": "http://x"}
+        assert load_cloud_config() == {
+            "token": "abc",
+            "base_url": "http://x",
+        }
+
+    def test_returns_empty_on_invalid_json(self, tmp_home):
+        config_path().parent.mkdir(parents=True, exist_ok=True)
+        config_path().write_text("not { valid json")
+        assert load_cloud_config() == {}
 
 
 class TestClear:
