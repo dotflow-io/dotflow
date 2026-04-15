@@ -120,6 +120,14 @@ class LoginCommand(Command):
                 time.sleep(interval)
                 continue
 
+            if (
+                response.status_code == 400
+                and detail in ("slow_down", "slow down")
+            ):
+                interval += 5
+                time.sleep(interval)
+                continue
+
             if response.status_code == 410:
                 print(settings.ERROR_ALERT, "Authorization expired.")
                 return None
