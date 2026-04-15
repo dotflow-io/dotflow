@@ -1,5 +1,4 @@
-"""Persistent CLI config stored at ``~/.dotflow/config.json``.
-"""
+"""Persistent CLI config stored at ``~/.dotflow/config.json``."""
 
 from __future__ import annotations
 
