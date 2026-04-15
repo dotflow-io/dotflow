@@ -40,10 +40,10 @@ class TestSaveAndLoad:
         assert load_cloud_config() == {}
 
     def test_handles_special_chars_in_values(self, tmp_home):
-        save_cloud_config(token='tok"en\\x', base_url='url with space')
+        save_cloud_config(token='tok"en\\x', base_url="url with space")
         data = load_cloud_config()
         assert data["token"] == 'tok"en\\x'
-        assert data["base_url"] == 'url with space'
+        assert data["base_url"] == "url with space"
 
     def test_ignores_other_sections(self, tmp_home):
         import json
