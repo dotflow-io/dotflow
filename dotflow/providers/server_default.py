@@ -1,4 +1,4 @@
-"""ServerDefault — no-op or managed HTTP server provider."""
+"""ServerDefault - managed HTTP server provider."""
 
 from __future__ import annotations
 
@@ -24,24 +24,19 @@ def managed(method):
 
 
 class ServerDefault(Server):
-    """Default Server provider with auto-detected managed mode.
-
-    When ``SERVER_BASE_URL`` and ``SERVER_USER_TOKEN`` env vars are set,
-    sends workflow and task events to the remote API. Otherwise, all
-    methods are no-ops.
-    """
+    """Default Server provider with auto-detected managed mode."""
 
     MAX_RESULT_SIZE = 5_000_000
     TIMEOUT = 15.0
 
-    ENDPOINT_WORKFLOWS = "/workflows"
-    ENDPOINT_WORKFLOW = "/workflows/{workflow_id}"
-    ENDPOINT_TASKS = "/workflows/{workflow_id}/tasks"
-    ENDPOINT_TASK = "/workflows/{workflow_id}/tasks/{task_id}"
+    ENDPOINT_WORKFLOWS = "/cli/workflows"
+    ENDPOINT_WORKFLOW = "/cli/workflows/{workflow_id}"
+    ENDPOINT_TASKS = "/cli/workflows/{workflow_id}/tasks"
+    ENDPOINT_TASK = "/cli/workflows/{workflow_id}/tasks/{task_id}"
 
     def __init__(self) -> None:
-        base_url = os.getenv("SERVER_BASE_URL")
-        user_token = os.getenv("SERVER_USER_TOKEN")
+        base_url = os.environ.get("SERVER_BASE_URL") or None
+        user_token = os.environ.get("SERVER_USER_TOKEN") or None
         self._managed = bool(base_url and user_token)
 
         self._base_url = base_url.rstrip("/") if base_url else None
@@ -56,25 +51,23 @@ class ServerDefault(Server):
 
     def _post(self, url: str, json: dict) -> None:
         try:
-            response = post(
+            post(
                 url,
                 json=json,
                 headers=self._headers,
                 timeout=self.TIMEOUT,
             )
-            logger.info("POST %s [%s]", url, response.status_code)
         except RequestException as error:
             logger.error("POST %s failed: %s", url, error)
 
     def _patch(self, url: str, json: dict) -> None:
         try:
-            response = patch(
+            patch(
                 url,
                 json=json,
                 headers=self._headers,
                 timeout=self.TIMEOUT,
             )
-            logger.info("PATCH %s [%s]", url, response.status_code)
         except RequestException as error:
             logger.error("PATCH %s failed: %s", url, error)
 
