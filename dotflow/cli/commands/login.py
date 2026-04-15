@@ -13,9 +13,9 @@ from dotflow.cli.command import Command
 from dotflow.core.config_file import save_cloud_config
 from dotflow.settings import Settings as settings
 
-DEFAULT_BASE_URL = "https://www.cli.dotflow.io/api/v1"
-DEVICE_ENDPOINT = "/auth/cli/device"
-TOKEN_ENDPOINT = "/auth/cli/token"
+DEFAULT_BASE_URL = "https://www.host.dotflow.io/api/v1"
+DEVICE_ENDPOINT = "/cli/device"
+TOKEN_ENDPOINT = "/cli/token"
 TIMEOUT = 15
 DEFAULT_INTERVAL = 5
 
