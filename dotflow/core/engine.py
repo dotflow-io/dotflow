@@ -2,13 +2,20 @@
 
 import re
 from collections.abc import Callable
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import (
+    ThreadPoolExecutor,
+)
+from concurrent.futures import (
+    TimeoutError as FuturesTimeoutError,
+)
 from contextlib import contextmanager
 from datetime import datetime
 from inspect import getsourcelines
 from time import sleep
 from types import FunctionType
 from uuid import UUID
+
+from ulid import ULID
 
 try:
     from types import NoneType
@@ -131,7 +138,7 @@ class TaskEngine:
                 self.task.current_context = result
                 return result
 
-            except TimeoutError:
+            except (TimeoutError, FuturesTimeoutError):
                 raise
 
             except Exception as error:
@@ -173,9 +180,9 @@ class TaskEngine:
         try:
             future = executor.submit(self._execute_single)
             return future.result(timeout=seconds)
-        except TimeoutError:
+        except (TimeoutError, FuturesTimeoutError):
             future.cancel()
-            raise
+            raise TimeoutError() from None
         finally:
             executor.shutdown(wait=False, cancel_futures=True)
 
@@ -248,15 +255,16 @@ class TaskEngine:
             callable_list=callable_list, class_instance=class_instance
         )
 
-        for index, new in enumerate(ordered_list):
+        for new in ordered_list:
             new_object = getattr(class_instance, new[1])
+            task_ulid = str(ULID())
             try:
                 subcontext = new_object(
                     initial_context=self.task.initial_context,
                     previous_context=previous_context,
                     task=self.task,
                 )
-                subcontext.task_id = index
+                subcontext.task_id = task_ulid
                 new_context.storage.append(subcontext)
                 previous_context = subcontext
 
@@ -270,7 +278,7 @@ class TaskEngine:
                     previous_context=previous_context,
                     task=self.task,
                 )
-                subcontext.task_id = index
+                subcontext.task_id = task_ulid
                 new_context.storage.append(subcontext)
                 previous_context = subcontext
 

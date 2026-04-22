@@ -5,13 +5,7 @@ from typing import Any
 
 
 class Server(ABC):
-    """Server ABC provider for sending workflow and task
-    data to a remote API.
-
-    Implementations should handle HTTP communication with
-    a server like dotflow-api, sending execution data
-    (status, duration, errors, context) in real time.
-    """
+    """Server ABC provider for sending workflow/task data remotely."""
 
     @abstractmethod
     def create_workflow(self, workflow: Any) -> None:

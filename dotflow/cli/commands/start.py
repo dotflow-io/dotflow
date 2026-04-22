@@ -4,6 +4,8 @@ from os import system
 
 from dotflow import Config, DotFlow
 from dotflow.cli.command import Command
+from dotflow.core.exception import InvalidWorkflowFactory, WorkflowFlagConflict
+from dotflow.core.module import Module
 from dotflow.core.types.execution import TypeExecution
 from dotflow.providers import (
     StorageDefault,
@@ -11,10 +13,20 @@ from dotflow.providers import (
     StorageGCS,
     StorageS3,
 )
+from dotflow.utils.basic_functions import basic_callback
 
 
 class StartCommand(Command):
     def setup(self):
+        if getattr(self.params, "workflow", None):
+            self._start_from_factory()
+        else:
+            self._start_from_step()
+
+        if self.params.mode == TypeExecution.BACKGROUND:
+            system("/bin/bash")
+
+    def _start_from_step(self):
         workflow = self._new_workflow()
 
         workflow.task.add(
@@ -23,14 +35,38 @@ class StartCommand(Command):
             initial_context=self.params.initial_context,
         )
 
-        workflow.start(mode=self.params.mode)
+        workflow.start(mode=self.params.mode, resume=self.params.resume)
 
-        if self.params.mode == TypeExecution.BACKGROUND:
-            system("/bin/bash")
+    def _start_from_factory(self):
+        step_only_flags = {
+            "--callback": self.params.callback is not basic_callback,
+            "--initial-context": self.params.initial_context is not None,
+        }
+        for flag, provided in step_only_flags.items():
+            if provided:
+                raise WorkflowFlagConflict(flag=flag)
+
+        factory = Module(self.params.workflow)
+
+        if not callable(factory):
+            raise InvalidWorkflowFactory(factory=self.params.workflow)
+
+        workflow = factory()
+
+        if not isinstance(workflow, DotFlow):
+            raise InvalidWorkflowFactory(factory=self.params.workflow)
+
+        workflow.start(mode=self.params.mode, resume=self.params.resume)
 
     def _new_workflow(self):
-        if not self.params.storage:
+        storage = self._build_storage()
+        if storage is None:
             return DotFlow()
+        return DotFlow(config=Config(storage=storage))
+
+    def _build_storage(self):
+        if not self.params.storage:
+            return None
 
         storage_classes = {
             "default": StorageDefault,
@@ -43,10 +79,5 @@ class StartCommand(Command):
         storage_with_path = {StorageDefault, StorageFile}
 
         if storage_cls in storage_with_path:
-            storage = storage_cls(path=self.params.path)
-        else:
-            storage = storage_cls()
-
-        config = Config(storage=storage)
-
-        return DotFlow(config=config)
+            return storage_cls(path=self.params.path)
+        return storage_cls()

@@ -75,7 +75,7 @@ jobs:
     secrets: inherit
 
   deploy:
-    name: Deploy to PyPI
+    name: Deploy to ${{ github.event.release.prerelease && 'TestPyPI' || 'PyPI' }}
     needs: [update-version, test, code-quality]
     runs-on: ubuntu-latest
 
@@ -126,5 +126,14 @@ jobs:
         with:
           python-version: "3.10"
 
+      - name: 📦 Publish Package to TestPyPI
+        if: github.event.release.prerelease == true
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+          skip-existing: true
+          verbose: true
+
       - name: 📦 Publish Package to PyPI
+        if: github.event.release.prerelease == false
         uses: pypa/gh-action-pypi-publish@release/v1

@@ -1,8 +1,42 @@
 # Server Default
 
-The default Server provider is a **no-op** — all methods do nothing. It serves as a safe placeholder so the workflow lifecycle can call server hooks without errors when no remote server is configured.
+`ServerDefault` is the built-in Server provider. It auto-detects managed mode from the CLI config file or environment variables — when a `base_url` and `token` are available, it sends execution data to the remote API. Without them, all methods are no-ops.
 
-To send execution data to a remote API, implement a custom provider that extends the [`Server`](../reference/abc-server.md) ABC.
+## Managed mode (auto-detected)
+
+There are two ways to feed the provider.
+
+### 1. `dotflow login` (recommended)
+
+Run the device-authorization flow once and the CLI stores `base_url` + `token` in `~/.dotflow/config.json`:
+
+```bash
+dotflow login
+```
+
+Any subsequent `DotFlow()` instance picks those up automatically — no env vars, no code changes:
+
+```python
+from dotflow import DotFlow
+
+
+def main() -> DotFlow:
+    workflow = DotFlow()
+    workflow.task.add(step=my_step)
+
+    return workflow
+```
+
+### 2. Environment variables (CI/CD)
+
+For non-interactive environments, export the variables directly:
+
+```bash
+export SERVER_BASE_URL="https://api.example.com/v1"
+export SERVER_USER_TOKEN="your-token"
+```
+
+Env vars take precedence over the config file.
 
 ## Lifecycle hooks
 
@@ -16,6 +50,8 @@ The server provider is called automatically at these points:
 | `task.add()` | `create_task()` |
 | Task finishes | `update_task()` |
 
+Requests hit `{base_url}/cli/workflows/*` with `Authorization: Bearer <token>`.
+
 ## Custom implementation
 
 To build your own server provider, extend the `Server` ABC:
@@ -26,19 +62,15 @@ from dotflow.abc.server import Server
 
 class MyServer(Server):
     def create_workflow(self, workflow):
-        # POST to your API
         pass
 
     def update_workflow(self, workflow, status=""):
-        # PATCH workflow status
         pass
 
     def create_task(self, task):
-        # POST task data
         pass
 
     def update_task(self, task):
-        # PATCH task results
         pass
 ```
 

@@ -22,7 +22,7 @@ class TestMetricsOpenTelemetry(unittest.TestCase):
         task = MagicMock()
         task.status = status
         task.workflow_id = "wf-123"
-        task.task_id = 0
+        task.task_id = "01ARZ3NDEKTSV4RRFFQ69G5FAV"
         task.duration = 0.5
         task.retry_count = 1
         return task

@@ -1,8 +1,17 @@
 """Tools"""
 
+import socket
 from json import JSONDecodeError, dumps, loads
 from pathlib import Path
 from typing import Any
+
+
+def hostname() -> str:
+    """Return the local hostname, with a ``local`` fallback."""
+    try:
+        return socket.gethostname() or "local"
+    except OSError:
+        return "local"
 
 
 def write_file(

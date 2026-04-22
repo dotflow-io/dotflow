@@ -11,7 +11,11 @@ class TestTimeDecorator(unittest.TestCase):
     def test_duration_is_set_after_execution(self):
         @time
         def run():
-            return Task(task_id=0, step=action_step, callback=simple_callback)
+            return Task(
+                task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+                step=action_step,
+                callback=simple_callback,
+            )
 
         task = run()
 
@@ -20,7 +24,11 @@ class TestTimeDecorator(unittest.TestCase):
     def test_duration_is_positive(self):
         @time
         def run():
-            return Task(task_id=0, step=action_step, callback=simple_callback)
+            return Task(
+                task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+                step=action_step,
+                callback=simple_callback,
+            )
 
         task = run()
 
@@ -28,7 +36,9 @@ class TestTimeDecorator(unittest.TestCase):
 
     def test_return_value_is_preserved(self):
         expected_task = Task(
-            task_id=0, step=action_step, callback=simple_callback
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+            step=action_step,
+            callback=simple_callback,
         )
 
         @time
@@ -42,7 +52,11 @@ class TestTimeDecorator(unittest.TestCase):
     def test_duration_is_float(self):
         @time
         def run():
-            return Task(task_id=0, step=action_step, callback=simple_callback)
+            return Task(
+                task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+                step=action_step,
+                callback=simple_callback,
+            )
 
         task = run()
 

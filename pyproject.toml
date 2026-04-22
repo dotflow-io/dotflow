@@ -1,6 +1,6 @@
 [project]
 name = "dotflow"
-version = "0.15.0"
+version = "1.0.0.dev5"
 authors = [
   { name="Fernando Celmer", email="email@fernandocelmer.com" },
 ]
@@ -13,7 +13,8 @@ dependencies = [
   "pydantic",
   "typing-extensions",
   "cookiecutter (>=2.0)",
-  "requests"
+  "requests",
+  "python-ulid (>=3.0)"
 ]
 keywords = [
   "pipeline",
@@ -35,7 +36,7 @@ classifiers = [
   "Operating System :: OS Independent",
   'Intended Audience :: Developers',
   'Natural Language :: English',
-  "License :: OSI Approved :: MIT License",
+  "License :: OSI Approved :: Apache Software License",
   "Topic :: Software Development :: Libraries",
   "Topic :: Software Development :: Libraries :: Python Modules",
   "Topic :: System :: Distributed Computing",
@@ -66,11 +67,11 @@ sentry = ["sentry-sdk"]
 
 [tool.poetry]
 name = "dotflow"
-version = "0.15.0"
+version = "1.0.0.dev5"
 description = "🎲 Dotflow turns an idea into flow! Lightweight Python library for execution pipelines with retry, parallel, cron and async support."
 authors = ["Fernando Celmer <email@fernandocelmer.com>"]
 readme = "README.md"
-license = "MIT"
+license = "Apache-2.0"
 package-mode = true
 homepage = "https://github.com/dotflow-io/dotflow"
 documentation = "https://dotflow-io.github.io/dotflow/"
@@ -95,7 +96,7 @@ classifiers = [
   "Operating System :: OS Independent",
   'Intended Audience :: Developers',
   'Natural Language :: English',
-  "License :: OSI Approved :: MIT License",
+  "License :: OSI Approved :: Apache Software License",
   "Topic :: Software Development :: Libraries",
   "Topic :: Software Development :: Libraries :: Python Modules",
   "Topic :: System :: Distributed Computing",
@@ -116,6 +117,8 @@ pydantic = "^2.11.7"
 typing-extensions = "^4.14.1"
 python-dotenv = "^1.1.0"
 requests = "^2.32.4"
+cookiecutter = "^2.0"
+python-ulid = "^3.0.0"
 
 [tool.poetry.group.dev.dependencies]
 build = "^1.2.2.post1"

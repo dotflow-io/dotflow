@@ -22,9 +22,9 @@ Console output with simple format:
 Output:
 
 ```
-2026-04-07 14:31:07 - INFO [dotflow]: ID abc-123 - 0 - Not started
-2026-04-07 14:31:07 - INFO [dotflow]: ID abc-123 - 0 - In progress
-2026-04-07 14:31:07 - INFO [dotflow]: ID abc-123 - 0 - Completed
+2026-04-07 14:31:07 - INFO [dotflow]: ID abc-123 - 01ARZ3NDEKTSV4RRFFQ69G5FAV - Not started
+2026-04-07 14:31:07 - INFO [dotflow]: ID abc-123 - 01ARZ3NDEKTSV4RRFFQ69G5FAV - In progress
+2026-04-07 14:31:07 - INFO [dotflow]: ID abc-123 - 01ARZ3NDEKTSV4RRFFQ69G5FAV - Completed
 ```
 
 ## JSON format
@@ -36,7 +36,7 @@ JSON output to both console and file — useful for log aggregation tools (ELK, 
 Output:
 
 ```json
-{"timestamp": "2026-04-07T19:34:24.626Z", "level": "INFO", "workflow_id": "abc-123", "task_id": "0", "status": "Completed", "duration": 0.0001}
+{"timestamp": "2026-04-07T19:34:24.626Z", "level": "INFO", "workflow_id": "abc-123", "task_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "status": "Completed", "duration": 0.0001}
 ```
 
 ## Log levels

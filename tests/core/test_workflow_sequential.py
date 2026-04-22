@@ -20,7 +20,13 @@ class TestWorkflowSequential(unittest.TestCase):
         self.ignore = False
 
     def test_instantiating_sequential_class(self):
-        tasks = [Task(task_id=0, step=action_step, callback=simple_callback)]
+        tasks = [
+            Task(
+                task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+                step=action_step,
+                callback=simple_callback,
+            )
+        ]
         groups = grouper(tasks=tasks)
 
         execution = Sequential(
@@ -37,7 +43,13 @@ class TestWorkflowSequential(unittest.TestCase):
 
     def test_workflow_with_callback(self):
         mock_callback = Mock()
-        tasks = [Task(task_id=0, step=action_step, callback=mock_callback)]
+        tasks = [
+            Task(
+                task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+                step=action_step,
+                callback=mock_callback,
+            )
+        ]
 
         Sequential(
             tasks=tasks,
@@ -49,7 +61,13 @@ class TestWorkflowSequential(unittest.TestCase):
         mock_callback.assert_called()
 
     def test_workflow_with_function_completed(self):
-        tasks = [Task(task_id=0, step=action_step, callback=simple_callback)]
+        tasks = [
+            Task(
+                task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+                step=action_step,
+                callback=simple_callback,
+            )
+        ]
 
         execution = Sequential(
             tasks=tasks,
@@ -67,7 +85,7 @@ class TestWorkflowSequential(unittest.TestCase):
     def test_workflow_with_function_failed(self):
         tasks = [
             Task(
-                task_id=0,
+                task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
                 step=action_step_with_error,
                 callback=simple_callback,
             )
@@ -86,7 +104,13 @@ class TestWorkflowSequential(unittest.TestCase):
         self.assertEqual(execution.tasks[0].errors[-1].message, "Fail!")
 
     def test_instantiating_sequential_setup_queue(self):
-        tasks = [Task(task_id=0, step=action_step, callback=simple_callback)]
+        tasks = [
+            Task(
+                task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+                step=action_step,
+                callback=simple_callback,
+            )
+        ]
         groups = grouper(tasks=tasks)
 
         execution = Sequential(
@@ -101,7 +125,11 @@ class TestWorkflowSequential(unittest.TestCase):
         self.assertListEqual(execution.queue, [])
 
     def test_instantiating_sequential_flow_callback(self):
-        task = Task(task_id=5, step=action_step, callback=simple_callback)
+        task = Task(
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+            step=action_step,
+            callback=simple_callback,
+        )
         groups = grouper(tasks=[task])
 
         execution = Sequential(
@@ -115,4 +143,4 @@ class TestWorkflowSequential(unittest.TestCase):
         execution._flow_callback(task=task)
 
         tasks = execution.get_tasks()
-        self.assertEqual(tasks[0].task_id, 5)
+        self.assertEqual(tasks[0].task_id, "01ARZ3NDEKTSV4RRFFQ69G5FAV")

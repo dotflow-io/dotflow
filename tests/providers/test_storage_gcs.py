@@ -148,11 +148,11 @@ class TestStorageGCS(unittest.TestCase):
         workflow_id = uuid4()
 
         task = Task(
-            task_id=0,
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
             workflow_id=workflow_id,
             step=action_step,
         )
 
         result = self.storage.key(task=task)
 
-        self.assertEqual(result, f"{workflow_id}-0")
+        self.assertEqual(result, f"{workflow_id}-01ARZ3NDEKTSV4RRFFQ69G5FAV")

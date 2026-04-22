@@ -23,7 +23,7 @@ class TestTracerSentry(unittest.TestCase):
         task = MagicMock()
         task.status = status
         task.workflow_id = "wf-123"
-        task.task_id = 0
+        task.task_id = "01ARZ3NDEKTSV4RRFFQ69G5FAV"
         task.duration = 0.5
         task.retry_count = 0
         task.errors = []
@@ -104,9 +104,9 @@ class TestTracerSentry(unittest.TestCase):
         transaction = tracer._transactions["wf-123"]
         transaction.start_child.assert_called_once_with(
             op="task",
-            name="task:0",
+            name="task:01ARZ3NDEKTSV4RRFFQ69G5FAV",
         )
-        self.assertIn("wf-123:0", tracer._spans)
+        self.assertIn("wf-123:01ARZ3NDEKTSV4RRFFQ69G5FAV", tracer._spans)
 
     def test_start_task_without_transaction(self):
         tracer = self._make_tracer()
@@ -114,20 +114,20 @@ class TestTracerSentry(unittest.TestCase):
 
         tracer.start_task(task=task)
 
-        self.assertNotIn("wf-123:0", tracer._spans)
+        self.assertNotIn("wf-123:01ARZ3NDEKTSV4RRFFQ69G5FAV", tracer._spans)
 
     def test_end_task_finishes_span(self):
         tracer = self._make_tracer()
         tracer.start_workflow(workflow_id="wf-123")
         task = self._make_task()
         tracer.start_task(task=task)
-        span = tracer._spans["wf-123:0"]
+        span = tracer._spans["wf-123:01ARZ3NDEKTSV4RRFFQ69G5FAV"]
 
         tracer.end_task(task=task)
 
         span.set_status.assert_called_with("ok")
         span.finish.assert_called_once()
-        self.assertNotIn("wf-123:0", tracer._spans)
+        self.assertNotIn("wf-123:01ARZ3NDEKTSV4RRFFQ69G5FAV", tracer._spans)
 
     def test_end_task_with_errors_sets_error_status(self):
         tracer = self._make_tracer()
@@ -137,7 +137,7 @@ class TestTracerSentry(unittest.TestCase):
         error.exception = "ValueError"
         task.errors = [error]
         tracer.start_task(task=task)
-        span = tracer._spans["wf-123:0"]
+        span = tracer._spans["wf-123:01ARZ3NDEKTSV4RRFFQ69G5FAV"]
 
         tracer.end_task(task=task)
 
@@ -150,7 +150,7 @@ class TestTracerSentry(unittest.TestCase):
         task = self._make_task()
         task.duration = 1.23
         tracer.start_task(task=task)
-        span = tracer._spans["wf-123:0"]
+        span = tracer._spans["wf-123:01ARZ3NDEKTSV4RRFFQ69G5FAV"]
 
         tracer.end_task(task=task)
 

@@ -11,3 +11,7 @@
 ::: dotflow.core.exception.NotCallableObject
 
 ::: dotflow.core.exception.ProblemOrdering
+
+::: dotflow.core.exception.InvalidWorkflowFactory
+
+::: dotflow.core.exception.WorkflowFlagConflict
