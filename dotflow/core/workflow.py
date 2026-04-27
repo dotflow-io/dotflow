@@ -19,13 +19,12 @@ from dotflow.core.exception import (
     InvalidOnInputChange,
 )
 from dotflow.core.fingerprint import (
-    VALID_POLICIES,
     fingerprint_of,
     read_fingerprint,
     write_fingerprint,
 )
 from dotflow.core.task import Task, TaskError
-from dotflow.core.types import TypeExecution, TypeStatus
+from dotflow.core.types import VALID_POLICIES, TypeExecution, TypeStatus
 from dotflow.core.types.workflow import WorkflowStatus
 from dotflow.utils import basic_callback
 
@@ -122,6 +121,7 @@ class Manager:
         workflow_id: UUID = None,
         resume: bool = False,
         on_input_change: str = "reuse",
+        fingerprint: str | None = None,
         config=None,
     ) -> None:
         self.tasks = tasks
@@ -135,6 +135,7 @@ class Manager:
             raise InvalidOnInputChange(value=on_input_change)
 
         self.on_input_change = on_input_change
+        self.fingerprint = fingerprint
 
         if resume and self.config:
             self._enforce_input_fingerprint(tasks=tasks)
@@ -187,16 +188,22 @@ class Manager:
         storage = self.config.storage
         workflow_key = str(self.workflow_id)
 
-        initial_payloads = [
-            getattr(task.initial_context, "storage", None) for task in tasks
-        ]
-        current_fp = fingerprint_of(initial_payloads)
+        if self.fingerprint is not None:
+            current_fp = self.fingerprint
+        else:
+            initial_payloads = [
+                getattr(task.initial_context, "storage", None)
+                for task in tasks
+            ]
+            current_fp = fingerprint_of(initial_payloads)
 
         stored_fp = read_fingerprint(storage=storage, workflow_id=workflow_key)
 
         if stored_fp is None:
             write_fingerprint(
-                storage=storage, workflow_id=workflow_key, value=current_fp,
+                storage=storage,
+                workflow_id=workflow_key,
+                value=current_fp,
             )
             return
 
@@ -211,7 +218,9 @@ class Manager:
 
         storage.clear(workflow_id=workflow_key)
         write_fingerprint(
-            storage=storage, workflow_id=workflow_key, value=current_fp,
+            storage=storage,
+            workflow_id=workflow_key,
+            value=current_fp,
         )
 
     def _callback_workflow(self, tasks: list[Task]):
