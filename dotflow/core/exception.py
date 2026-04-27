@@ -21,6 +21,14 @@ MESSAGE_INVALID_WORKFLOW_FACTORY = (
 MESSAGE_WORKFLOW_FLAG_CONFLICT = (
     "{flag} is only valid with --step and cannot be used with --workflow."
 )
+MESSAGE_INPUT_CHANGED = (
+    "Workflow '{workflow_id}' was previously executed with a different "
+    "initial_context. Pass on_input_change='reset' to discard prior "
+    "checkpoints, or 'reuse' to ignore the new input."
+)
+MESSAGE_INVALID_ON_INPUT_CHANGE = (
+    "on_input_change must be one of 'reuse', 'reset', 'raise'; got '{value}'."
+)
 
 
 class MissingActionDecorator(Exception):
@@ -70,6 +78,20 @@ class WorkflowFlagConflict(Exception):
 class ExecutionWithClassError(Exception):
     def __init__(self):
         super().__init__("Unknown")
+
+
+class InputChangedError(Exception):
+    def __init__(self, workflow_id: str):
+        super().__init__(
+            MESSAGE_INPUT_CHANGED.format(workflow_id=workflow_id)
+        )
+
+
+class InvalidOnInputChange(Exception):
+    def __init__(self, value: str):
+        super().__init__(
+            MESSAGE_INVALID_ON_INPUT_CHANGE.format(value=value)
+        )
 
 
 class TaskError:
