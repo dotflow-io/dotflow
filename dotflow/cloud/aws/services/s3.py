@@ -59,7 +59,9 @@ class S3(ObjectStorage):
         paginator = self._s3.get_paginator("list_objects_v2")
 
         for page in paginator.paginate(Bucket=self.bucket, Prefix=full_prefix):
-            objects = [{"Key": item["Key"]} for item in page.get("Contents", [])]
+            objects = [
+                {"Key": item["Key"]} for item in page.get("Contents", [])
+            ]
             if not objects:
                 continue
             self._s3.delete_objects(

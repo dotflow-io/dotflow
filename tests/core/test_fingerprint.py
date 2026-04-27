@@ -13,7 +13,6 @@ from dotflow.providers.storage_default import StorageDefault
 
 
 class TestFingerprintOf(unittest.TestCase):
-
     def test_same_input_same_fingerprint(self):
         a = fingerprint_of([{"k": 1, "z": 2}])
         b = fingerprint_of([{"z": 2, "k": 1}])
@@ -45,7 +44,6 @@ class TestFingerprintOf(unittest.TestCase):
 
 
 class TestFingerprintStorage(unittest.TestCase):
-
     def test_read_returns_none_when_absent(self):
         storage = StorageDefault()
 
@@ -56,7 +54,8 @@ class TestFingerprintStorage(unittest.TestCase):
         write_fingerprint(storage=storage, workflow_id="wf", value="abc123")
 
         self.assertEqual(
-            read_fingerprint(storage=storage, workflow_id="wf"), "abc123",
+            read_fingerprint(storage=storage, workflow_id="wf"),
+            "abc123",
         )
 
     def test_fp_key_is_stable_per_workflow(self):

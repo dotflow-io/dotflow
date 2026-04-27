@@ -79,4 +79,3 @@ class TestStorageDefault(unittest.TestCase):
         self.assertIsNone(storage.get(key="wf-A-task-1").storage)
         self.assertIsNone(storage.get(key="wf-A-task-2").storage)
         self.assertEqual(storage.get(key="wf-B-task-1").storage, "c")
-

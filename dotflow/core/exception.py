@@ -82,16 +82,12 @@ class ExecutionWithClassError(Exception):
 
 class InputChangedError(Exception):
     def __init__(self, workflow_id: str):
-        super().__init__(
-            MESSAGE_INPUT_CHANGED.format(workflow_id=workflow_id)
-        )
+        super().__init__(MESSAGE_INPUT_CHANGED.format(workflow_id=workflow_id))
 
 
 class InvalidOnInputChange(Exception):
     def __init__(self, value: str):
-        super().__init__(
-            MESSAGE_INVALID_ON_INPUT_CHANGE.format(value=value)
-        )
+        super().__init__(MESSAGE_INVALID_ON_INPUT_CHANGE.format(value=value))
 
 
 class TaskError:
