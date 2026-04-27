@@ -22,7 +22,7 @@ class StorageDefault(Storage):
         return f"{task.workflow_id}-{task.task_id}"
 
     def clear(self, workflow_id: str) -> None:
-        prefix = f"{workflow_id}"
+        prefix = f"{workflow_id}-"
         stale = [k for k in self._store if k.startswith(prefix)]
 
         for key in stale:

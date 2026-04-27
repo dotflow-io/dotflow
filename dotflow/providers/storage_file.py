@@ -60,11 +60,11 @@ class StorageFile(Storage):
         return f"{task.workflow_id}-{task.task_id}.json"
 
     def clear(self, workflow_id: str) -> None:
-        prefix = f"{workflow_id}"
+        prefix = f"{workflow_id}-"
 
         for entry in self.path.iterdir():
             if entry.is_file() and entry.name.startswith(prefix):
-                entry.unlink()
+                entry.unlink(missing_ok=True)
 
     def _loads(self, storage: Any) -> Context:
         try:

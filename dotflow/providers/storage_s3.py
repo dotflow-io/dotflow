@@ -79,7 +79,7 @@ class StorageS3(Storage):
         return f"{task.workflow_id}-{task.task_id}"
 
     def clear(self, workflow_id: str) -> None:
-        self._s3.delete_prefix(f"{workflow_id}")
+        self._s3.delete_prefix(f"{workflow_id}-")
 
     def _loads(self, storage: Any) -> Context:
         try:
