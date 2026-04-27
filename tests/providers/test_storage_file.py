@@ -171,3 +171,16 @@ class TestStorageFile(unittest.TestCase):
         self.assertEqual(
             result, f"{workflow_id}-01ARZ3NDEKTSV4RRFFQ69G5FAV.json"
         )
+
+    def test_clear_removes_only_matching_workflow(self):
+        storage = StorageFile(path=self.path)
+
+        storage.post(key="wf-A-task-1.json", context=Context(storage="a"))
+        storage.post(key="wf-A-task-2.json", context=Context(storage="b"))
+        storage.post(key="wf-B-task-1.json", context=Context(storage="c"))
+
+        storage.clear(workflow_id="wf-A")
+
+        self.assertFalse(storage.path.joinpath("wf-A-task-1.json").exists())
+        self.assertFalse(storage.path.joinpath("wf-A-task-2.json").exists())
+        self.assertTrue(storage.path.joinpath("wf-B-task-1.json").exists())
