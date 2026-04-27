@@ -13,9 +13,16 @@ VALID_POLICIES = ("reuse", "reset", "raise")
 
 
 def fingerprint_of(values: list[Any]) -> str:
-    """SHA256 of JSON-serialized list. Falls back to repr for non-JSON inputs."""
+    """SHA256 of JSON-serialized list of initial_context payloads.
+
+    Inputs must be JSON-serializable (primitives, lists, dicts).
+    Non-serializable objects fall back to ``repr``, which is **not**
+    guaranteed to be stable across processes — objects without a custom
+    ``__repr__`` will produce different fingerprints on every run because
+    the default repr embeds the memory address.
+    """
     try:
-        encoded = dumps(values, sort_keys=True, default=str)
+        encoded = dumps(values, sort_keys=True)
     except (TypeError, ValueError):
         encoded = repr(values)
 
