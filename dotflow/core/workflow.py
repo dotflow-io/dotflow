@@ -11,7 +11,12 @@ from uuid import UUID, uuid4
 from dotflow.abc.flow import Flow
 from dotflow.core.context import Context
 from dotflow.core.engine import TaskEngine
-from dotflow.core.exception import ExecutionModeNotExist
+from dotflow.core.exception import (
+    ExecutionModeNotExist, InputChangedError, InvalidOnInputChange,
+)
+from dotflow.core.fingerprint import (
+    VALID_POLICIES, fingerprint_of, read_fingerprint, write_fingerprint,
+)
 from dotflow.core.task import Task, TaskError
 from dotflow.core.types import TypeExecution, TypeStatus
 from dotflow.core.types.workflow import WorkflowStatus
@@ -109,6 +114,7 @@ class Manager:
         keep_going: bool = False,
         workflow_id: UUID = None,
         resume: bool = False,
+        on_input_change: str = "reuse",
         config=None,
     ) -> None:
         self.tasks = tasks
@@ -117,6 +123,14 @@ class Manager:
         self.workflow_id = workflow_id or uuid4()
         self.started = datetime.now()
         self.config = config
+
+        if on_input_change not in VALID_POLICIES:
+            raise InvalidOnInputChange(value=on_input_change)
+
+        self.on_input_change = on_input_change
+
+        if resume and self.config:
+            self._enforce_input_fingerprint(tasks=tasks)
 
         if self.config:
             self.config.tracer.start_workflow(
@@ -161,6 +175,37 @@ class Manager:
                 self._callback_workflow(tasks=self.tasks)
 
             threading.Thread(target=_background_cleanup, daemon=True).start()
+
+    def _enforce_input_fingerprint(self, tasks: list[Task]) -> None:
+        storage = self.config.storage
+        workflow_key = str(self.workflow_id)
+
+        initial_payloads = [
+            getattr(task.initial_context, "storage", None) for task in tasks
+        ]
+        current_fp = fingerprint_of(initial_payloads)
+
+        stored_fp = read_fingerprint(storage=storage, workflow_id=workflow_key)
+
+        if stored_fp is None:
+            write_fingerprint(
+                storage=storage, workflow_id=workflow_key, value=current_fp,
+            )
+            return
+
+        if stored_fp == current_fp:
+            return
+
+        if self.on_input_change == "reuse":
+            return
+
+        if self.on_input_change == "raise":
+            raise InputChangedError(workflow_id=workflow_key)
+
+        storage.clear(workflow_id=workflow_key)
+        write_fingerprint(
+            storage=storage, workflow_id=workflow_key, value=current_fp,
+        )
 
     def _callback_workflow(self, tasks: list[Task]):
         duration = (datetime.now() - self.started).total_seconds()
