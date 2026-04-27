@@ -9,7 +9,6 @@ from typing import Any
 from dotflow.core.context import Context
 
 FP_KEY_SUFFIX = "-_input_fp"
-VALID_POLICIES = ("reuse", "reset", "raise")
 
 
 def fingerprint_of(values: list[Any]) -> str:
