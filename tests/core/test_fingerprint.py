@@ -26,14 +26,16 @@ class TestFingerprintOf(unittest.TestCase):
 
         self.assertNotEqual(a, b)
 
-    def test_handles_non_json_serializable_falls_back_to_repr(self):
+    def test_falls_back_to_repr_for_non_serializable(self):
         class Custom:
-            pass
+            def __repr__(self):
+                return "<Custom>"
 
-        result = fingerprint_of([Custom()])
+        a = fingerprint_of([Custom()])
+        b = fingerprint_of([Custom()])
 
-        self.assertIsInstance(result, str)
-        self.assertEqual(len(result), 64)
+        self.assertEqual(a, b)
+        self.assertEqual(len(a), 64)
 
     def test_none_payload_yields_stable_fingerprint(self):
         a = fingerprint_of([None])
