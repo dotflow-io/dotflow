@@ -4,7 +4,10 @@ import unittest
 
 from dotflow.core.context import Context
 from dotflow.core.fingerprint import (
-    fingerprint_of, fp_key, read_fingerprint, write_fingerprint,
+    fingerprint_of,
+    fp_key,
+    read_fingerprint,
+    write_fingerprint,
 )
 from dotflow.providers.storage_default import StorageDefault
 

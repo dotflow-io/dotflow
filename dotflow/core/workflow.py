@@ -14,10 +14,15 @@ from dotflow.abc.flow import Flow
 from dotflow.core.context import Context
 from dotflow.core.engine import TaskEngine
 from dotflow.core.exception import (
-    ExecutionModeNotExist, InputChangedError, InvalidOnInputChange,
+    ExecutionModeNotExist,
+    InputChangedError,
+    InvalidOnInputChange,
 )
 from dotflow.core.fingerprint import (
-    VALID_POLICIES, fingerprint_of, read_fingerprint, write_fingerprint,
+    VALID_POLICIES,
+    fingerprint_of,
+    read_fingerprint,
+    write_fingerprint,
 )
 from dotflow.core.task import Task, TaskError
 from dotflow.core.types import TypeExecution, TypeStatus
