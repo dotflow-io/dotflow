@@ -2,6 +2,8 @@
 
 # mypy: disable-error-code="misc"
 
+from __future__ import annotations
+
 from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field, computed_field
