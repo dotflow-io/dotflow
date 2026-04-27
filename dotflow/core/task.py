@@ -325,7 +325,7 @@ class TaskBuilder:
         callback: Callable = basic_callback,
         initial_context: Any = None,
         group_name: str = "default",
-    ) -> "TaskBuilder":
+    ) -> TaskBuilder:
         """
         Args:
             step (Callable):
