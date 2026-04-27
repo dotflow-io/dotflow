@@ -14,7 +14,8 @@ dependencies = [
   "typing-extensions",
   "cookiecutter (>=2.0)",
   "requests",
-  "python-ulid (>=3.0)"
+  "python-ulid (>=3.0)",
+  "eval-type-backport ; python_version < \"3.10\""
 ]
 keywords = [
   "pipeline",
@@ -119,6 +120,7 @@ python-dotenv = "^1.1.0"
 requests = "^2.32.4"
 cookiecutter = "^2.0"
 python-ulid = "^3.0.0"
+eval-type-backport = { version = "^0.2", python = "<3.10" }
 
 [tool.poetry.group.dev.dependencies]
 build = "^1.2.2.post1"
