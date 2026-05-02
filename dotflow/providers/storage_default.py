@@ -71,7 +71,14 @@ class StorageDefault(Storage):
 
             return [k for k in self._store if k.startswith(prefix)]
 
-    def atomic_swap(self, key: str, expected: Any, new: Any) -> bool:
+    def atomic_swap(
+        self,
+        key: str,
+        expected: Any,
+        new: Any,
+        ttl: int | None = None,
+        fingerprint: str | None = None,
+    ) -> bool:
         with self._lock:
             current = self._store.get(key)
             current_value = (
@@ -83,6 +90,14 @@ class StorageDefault(Storage):
 
             payload = new if isinstance(new, Context) else Context(storage=new)
             self._store[key] = payload
+            self._fingerprints.pop(key, None)
+            self._expirations.pop(key, None)
+
+            if fingerprint is not None:
+                self._fingerprints[key] = fingerprint
+
+            if ttl is not None:
+                self._expirations[key] = time.monotonic() + ttl
 
             return True
 
