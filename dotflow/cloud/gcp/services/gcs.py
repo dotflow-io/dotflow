@@ -54,6 +54,35 @@ class GCS(ObjectStorage):
         except self._not_found:
             return False
 
+    def read_with_generation(self, key: str) -> tuple[list, int | None]:
+        """Return (data, generation). Generation is None when missing."""
+        blob = self._bucket.blob(f"{self.prefix}{key}")
+
+        try:
+            data = blob.download_as_text()
+            return loads(data), blob.generation
+        except self._not_found:
+            return [], None
+
+    def write_if_generation_match(
+        self, key: str, data: list, generation: int | None
+    ) -> bool:
+        """Conditional upload. Returns False on precondition failure."""
+        from google.api_core.exceptions import PreconditionFailed
+
+        blob = self._bucket.blob(f"{self.prefix}{key}")
+        precondition = generation if generation is not None else 0
+
+        try:
+            blob.upload_from_string(
+                dumps(data),
+                content_type="application/json",
+                if_generation_match=precondition,
+            )
+            return True
+        except PreconditionFailed:
+            return False
+
     def list_keys(self, sub_prefix: str) -> list[str]:
         """Return blob names starting with sub_prefix."""
         full_prefix = f"{self.prefix}{sub_prefix}"
