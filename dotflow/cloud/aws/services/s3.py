@@ -46,6 +46,32 @@ class S3(ObjectStorage):
             ContentType="application/json",
         )
 
+    def delete(self, key: str) -> bool:
+        """Delete a single object."""
+        full_key = f"{self.prefix}{key}"
+
+        try:
+            self._s3.head_object(Bucket=self.bucket, Key=full_key)
+        except self._s3.exceptions.ClientError:
+            return False
+
+        self._s3.delete_object(Bucket=self.bucket, Key=full_key)
+
+        return True
+
+    def list_keys(self, sub_prefix: str) -> list[str]:
+        """Return keys starting with sub_prefix."""
+        full_prefix = f"{self.prefix}{sub_prefix}"
+        paginator = self._s3.get_paginator("list_objects_v2")
+        names = []
+        offset = len(self.prefix)
+
+        for page in paginator.paginate(Bucket=self.bucket, Prefix=full_prefix):
+            for item in page.get("Contents", []):
+                names.append(item["Key"][offset:])
+
+        return names
+
     def delete_prefix(self, sub_prefix: str) -> None:
         """Delete every object whose key starts with prefix + sub_prefix.
 
