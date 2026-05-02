@@ -44,6 +44,28 @@ class GCS(ObjectStorage):
             content_type="application/json",
         )
 
+    def delete(self, key: str) -> bool:
+        """Delete a single blob."""
+        blob = self._bucket.blob(f"{self.prefix}{key}")
+
+        try:
+            blob.delete()
+            return True
+        except self._not_found:
+            return False
+
+    def list_keys(self, sub_prefix: str) -> list[str]:
+        """Return blob names starting with sub_prefix."""
+        full_prefix = f"{self.prefix}{sub_prefix}"
+        offset = len(self.prefix)
+
+        return [
+            blob.name[offset:]
+            for blob in self._client.list_blobs(
+                self._bucket, prefix=full_prefix
+            )
+        ]
+
     def delete_prefix(self, sub_prefix: str) -> None:
         """Delete every blob whose name starts with prefix + sub_prefix.
 
