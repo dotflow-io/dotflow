@@ -6,7 +6,7 @@ This mode is automatically selected when you use `mode="sequential"` with multip
 
 ## Implementation
 
-{* ./docs_src/process_mode/sequential_group.py hl[33] *}
+{* ./docs_src/process_mode/sequential_group.py hl[32] *}
 
 ## Workflow
 

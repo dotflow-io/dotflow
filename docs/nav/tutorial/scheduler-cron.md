@@ -8,13 +8,13 @@ Requires `pip install dotflow[scheduler]`
 
 ## Example
 
-{* ./docs_src/scheduler/scheduler_cron.py hl[4,17,24] *}
+{* ./docs_src/scheduler/scheduler_cron.py hl[2,17,23] *}
 
 ## With resume
 
 Combine scheduling with checkpoint-based resume. If a run fails, the next scheduled run picks up from the last completed step.
 
-{* ./docs_src/scheduler/scheduler_resume.py hl[22:24,32] *}
+{* ./docs_src/scheduler/scheduler_resume.py hl[22:24,30] *}
 
 ## Overlap strategies
 

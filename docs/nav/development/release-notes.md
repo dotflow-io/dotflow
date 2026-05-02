@@ -1,5 +1,23 @@
 # Release Notes
 
+## v1.0.0
+
+- [📦 PyPI - Build 1.0.0](https://test.pypi.org/project/dotflow/1.0.0)
+- [⚙️ Feature: on_input_change policy for resume workflows (#281)](https://github.com/dotflow-io/dotflow/pull/282)
+- [⚙️ Feature: Managed DotFlow with name, idempotent start, and CLI cleanup (#269)](https://github.com/dotflow-io/dotflow/pull/272)
+- [⚙️ Feature: Add dotflow login with device flow and config file (#269)](https://github.com/dotflow-io/dotflow/pull/271)
+- [⚙️ Feature: Add --resume flag to dotflow start CLI (#267)](https://github.com/dotflow-io/dotflow/pull/268)
+- [⚙️ Feature: Add --workflow flag to dotflow start (#259)](https://github.com/dotflow-io/dotflow/pull/260)
+- [⚙️ Feature: Managed-mode ServerAPI provider and task numbering (#257)](https://github.com/dotflow-io/dotflow/pull/258)
+- [⚙️ Feature: Use background threads for non-blocking server updates (#243)](https://github.com/dotflow-io/dotflow/pull/244)
+- [⚙️ Feature: Improve model_dump_json truncation strategy (#252)](https://github.com/dotflow-io/dotflow/pull/254)
+- [🪲 Bug: Honour WORKFLOW_ID env var in DotFlow constructor (#264)](https://github.com/dotflow-io/dotflow/pull/265)
+- [🪲 Bug: Fix entry point separator to use module.path:attribute format (#262)](https://github.com/dotflow-io/dotflow/pull/263)
+- [🪲 Bug: Fix TimeoutError not caught on Python 3.9/3.10 (#245)](https://github.com/dotflow-io/dotflow/pull/253)
+- [🪲 Bug: Fix ServerDefault update_task payload and add sequential_group docs (#241)](https://github.com/dotflow-io/dotflow/pull/242)
+- [⚠️ Security: Patch 12 Dependabot security vulnerabilities](https://github.com/dotflow-io/dotflow/pull/283)
+- [📘 Docs: Change license from MIT to Apache-2.0 (#255)](https://github.com/dotflow-io/dotflow/pull/256)
+
 ## v0.15.0
 
 - [📦 PyPI - Build 0.15.0](https://github.com/dotflow-io/dotflow/releases/tag/v0.15.0)

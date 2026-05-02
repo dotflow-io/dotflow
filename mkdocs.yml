@@ -149,7 +149,6 @@ plugins:
             "Concept of context": "Conceito de contexto"
   - redirects:
       redirect_maps:
-        # Short-lived URLs (/nav/how-to/tutorial/...) → canonical /nav/tutorial/...
         nav/how-to/tutorial/async-actions.md: nav/tutorial/async-actions.md
         nav/how-to/tutorial/checkpoint.md: nav/tutorial/checkpoint.md
         nav/how-to/tutorial/error-handling.md: nav/tutorial/error-handling.md
@@ -233,6 +232,7 @@ nav:
         - nav/tutorial/many-contexts.md
         - nav/tutorial/keep-going.md
         - nav/tutorial/groups.md
+        - nav/tutorial/workflow-with-name.md
         - nav/tutorial/workflow-callback.md
       - Tasks:
         - Strategies:
@@ -241,12 +241,13 @@ nav:
           - nav/tutorial/task-timeout.md
         - nav/tutorial/error-handling.md
         - nav/tutorial/checkpoint.md
+        - nav/tutorial/checkpoint-input-change.md
         - nav/tutorial/async-actions.md
         - nav/tutorial/task-callback.md
-        # - Output:
-        #   - nav/tutorial/output-context.md
-        #   - nav/tutorial/output-storage.md
-        #   - nav/tutorial/output-task.md
+        - Output:
+          - nav/tutorial/output-context.md
+          - nav/tutorial/output-storage.md
+          - nav/tutorial/output-task.md
       - Dotflow CLI:
         - nav/how-to/cli/init.md
         - nav/how-to/cli/login.md
@@ -259,6 +260,7 @@ nav:
         - nav/how-to/cli/with-custom-path.md
         - nav/how-to/cli/with-schedule.md
         - nav/how-to/cli/with-workflow.md
+        - nav/how-to/cli/with-resume.md
         - nav/how-to/cli/with-deploy.md
     - Integrations:
       - Overview: nav/integrations/index.md
