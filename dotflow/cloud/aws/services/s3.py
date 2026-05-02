@@ -84,9 +84,7 @@ class S3(ObjectStorage):
         except self._s3.exceptions.NoSuchKey:
             return [], None
 
-    def write_if_match(
-        self, key: str, data: list, etag: str | None
-    ) -> bool:
+    def write_if_match(self, key: str, data: list, etag: str | None) -> bool:
         """Conditional PutObject. Returns False on precondition failure."""
         from botocore.exceptions import ClientError
 
