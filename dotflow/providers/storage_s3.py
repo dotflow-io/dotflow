@@ -110,20 +110,35 @@ class StorageS3(Storage):
             if not n.endswith(".fingerprint")
         ]
 
-    def atomic_swap(self, key: str, expected: Any, new: Any) -> bool:
-        current = self.get(key)
-        current_value = (
-            current.storage if isinstance(current, Context) else None
-        )
+    def atomic_swap(
+        self,
+        key: str,
+        expected: Any,
+        new: Any,
+        ttl: int | None = None,
+        fingerprint: str | None = None,
+    ) -> bool:
+        data, etag = self._s3.read_with_etag(key)
+
+        if not data:
+            current_value = None
+        elif len(data) == 1:
+            current_value = self._loads(storage=data[0]).storage
+        else:
+            current_value = [self._loads(storage=d).storage for d in data]
 
         if current_value != expected:
             return False
 
-        self.delete(key)
         payload = new if isinstance(new, Context) else Context(storage=new)
-        self.post(key=key, context=payload)
+        new_data = [self._dumps(storage=payload.storage)]
 
-        return True
+        swapped = self._s3.write_if_match(key=key, data=new_data, etag=etag)
+
+        if swapped and fingerprint is not None:
+            self._s3.write(key=f"{key}.fingerprint", data=[fingerprint])
+
+        return swapped
 
     def key(self, task: Callable) -> str:
         return f"{task.workflow_id}-{task.task_id}"
