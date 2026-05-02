@@ -30,111 +30,123 @@ class StorageFile(Storage):
         ttl: int | None = None,
         fingerprint: str | None = None,
     ) -> None:
-        task_context = []
+        with self._lock:
+            task_context = []
 
-        if Path(self.path, key).exists():
-            data = read_file(path=Path(self.path, key))
+            if Path(self.path, key).exists():
+                data = read_file(path=Path(self.path, key))
 
-            if isinstance(data, list):
-                task_context = data
+                if isinstance(data, list):
+                    task_context = data
 
-        if isinstance(context.storage, list):
-            for item in context.storage:
-                if isinstance(item, Context):
-                    task_context.append(self._dumps(storage=item.storage))
-        else:
-            task_context.append(self._dumps(storage=context.storage))
+            if isinstance(context.storage, list):
+                for item in context.storage:
+                    if isinstance(item, Context):
+                        task_context.append(self._dumps(storage=item.storage))
+            else:
+                task_context.append(self._dumps(storage=context.storage))
 
-        write_file(path=Path(self.path, key), content=task_context)
+            write_file(path=Path(self.path, key), content=task_context)
 
-        meta = {}
+            meta = {}
 
-        if fingerprint is not None:
-            meta["fingerprint"] = fingerprint
+            if fingerprint is not None:
+                meta["fingerprint"] = fingerprint
 
-        if ttl is not None:
-            meta["expires_at"] = time.time() + ttl
+            if ttl is not None:
+                meta["expires_at"] = time.time() + ttl
 
-        if meta:
-            self._write_meta(key=key, meta=meta)
+            if meta:
+                self._write_meta(key=key, meta=meta)
 
     def get(self, key: str) -> Context:
-        if self._is_expired(key):
-            self.delete(key)
+        with self._lock:
+            if self._is_expired(key):
+                self.delete(key)
 
-            return Context()
+                return Context()
 
-        task_context = []
+            task_context = []
 
-        if Path(self.path, key).exists():
-            data = read_file(path=Path(self.path, key))
+            if Path(self.path, key).exists():
+                data = read_file(path=Path(self.path, key))
 
-            if isinstance(data, list):
-                task_context = data
+                if isinstance(data, list):
+                    task_context = data
 
-        if not task_context:
-            return Context()
+            if not task_context:
+                return Context()
 
-        if len(task_context) == 1:
-            return self._loads(storage=task_context[0])
+            if len(task_context) == 1:
+                return self._loads(storage=task_context[0])
 
-        contexts = Context(storage=[])
+            contexts = Context(storage=[])
 
-        for context in task_context:
-            contexts.storage.append(self._loads(storage=context))
+            for context in task_context:
+                contexts.storage.append(self._loads(storage=context))
 
-        return contexts
+            return contexts
 
     def delete(self, key: str) -> bool:
-        target = Path(self.path, key)
-        existed = target.exists()
+        with self._lock:
+            target = Path(self.path, key)
+            existed = target.exists()
 
-        target.unlink(missing_ok=True)
-        Path(self.path, f"{key}.meta").unlink(missing_ok=True)
+            target.unlink(missing_ok=True)
+            Path(self.path, f"{key}.meta").unlink(missing_ok=True)
 
-        return existed
+            return existed
 
     def delete_prefix(self, prefix: str) -> int:
-        removed = 0
+        with self._lock:
+            removed = 0
 
-        for entry in self.path.iterdir():
-            if not entry.is_file():
-                continue
+            for entry in self.path.iterdir():
+                if not entry.is_file():
+                    continue
 
-            if entry.name.endswith(".meta"):
-                continue
+                if entry.name.endswith(".meta"):
+                    continue
 
-            if not entry.name.startswith(prefix):
-                continue
+                if not entry.name.startswith(prefix):
+                    continue
 
-            entry.unlink(missing_ok=True)
-            Path(self.path, f"{entry.name}.meta").unlink(missing_ok=True)
-            removed += 1
+                entry.unlink(missing_ok=True)
+                Path(self.path, f"{entry.name}.meta").unlink(missing_ok=True)
+                removed += 1
 
-        return removed
+            return removed
 
     def list_keys(self, prefix: str) -> Iterable[str]:
-        names = []
+        with self._lock:
+            names = []
 
-        for entry in self.path.iterdir():
-            if not entry.is_file():
-                continue
+            for entry in self.path.iterdir():
+                if not entry.is_file():
+                    continue
 
-            if entry.name.endswith(".meta"):
-                continue
+                if entry.name.endswith(".meta"):
+                    continue
 
-            if not entry.name.startswith(prefix):
-                continue
+                if not entry.name.startswith(prefix):
+                    continue
 
-            if self._is_expired(entry.name):
-                self.delete(entry.name)
-                continue
+                if self._is_expired(entry.name):
+                    self.delete(entry.name)
+                    continue
 
-            names.append(entry.name)
+                names.append(entry.name)
 
-        return names
+            return names
 
-    def atomic_swap(self, key: str, expected: Any, new: Any) -> bool:
+    def atomic_swap(
+        self,
+        key: str,
+        expected: Any,
+        new: Any,
+        ttl: int | None = None,
+        fingerprint: str | None = None,
+    ) -> bool:
         with self._lock:
             current = self.get(key)
             current_value = (
@@ -146,7 +158,12 @@ class StorageFile(Storage):
 
             self.delete(key)
             payload = new if isinstance(new, Context) else Context(storage=new)
-            self.post(key=key, context=payload)
+            self.post(
+                key=key,
+                context=payload,
+                ttl=ttl,
+                fingerprint=fingerprint,
+            )
 
             return True
 
