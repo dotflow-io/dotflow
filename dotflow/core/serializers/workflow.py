@@ -1,7 +1,8 @@
 """Workflow serializer module"""
 
-# mypy: disable-error-code="misc"
+from __future__ import annotations
 
+# mypy: disable-error-code="misc"
 from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field, computed_field
