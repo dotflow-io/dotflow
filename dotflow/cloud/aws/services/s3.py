@@ -7,6 +7,11 @@ from json import dumps, loads
 from dotflow.cloud.core import ObjectStorage
 from dotflow.core.exception import ModuleNotFound
 
+_PRECONDITION_CODES = {
+    "PreconditionFailed",
+    "ConditionalRequestConflict",
+}
+
 
 class S3(ObjectStorage):
     """Amazon S3 object storage."""
@@ -48,16 +53,65 @@ class S3(ObjectStorage):
 
     def delete(self, key: str) -> bool:
         """Delete a single object."""
+        from botocore.exceptions import ClientError
+
         full_key = f"{self.prefix}{key}"
 
         try:
             self._s3.head_object(Bucket=self.bucket, Key=full_key)
-        except self._s3.exceptions.ClientError:
-            return False
+        except ClientError as error:
+            code = error.response.get("Error", {}).get("Code")
+
+            if code in ("404", "NoSuchKey", "NotFound"):
+                return False
+
+            raise
 
         self._s3.delete_object(Bucket=self.bucket, Key=full_key)
 
         return True
+
+    def read_with_etag(self, key: str) -> tuple[list, str | None]:
+        """Return (data, etag). Etag is None when key is missing."""
+        try:
+            response = self._s3.get_object(
+                Bucket=self.bucket,
+                Key=f"{self.prefix}{key}",
+            )
+            data = response["Body"].read().decode("utf-8")
+
+            return loads(data), response.get("ETag")
+        except self._s3.exceptions.NoSuchKey:
+            return [], None
+
+    def write_if_match(
+        self, key: str, data: list, etag: str | None
+    ) -> bool:
+        """Conditional PutObject. Returns False on precondition failure."""
+        from botocore.exceptions import ClientError
+
+        kwargs = {
+            "Bucket": self.bucket,
+            "Key": f"{self.prefix}{key}",
+            "Body": dumps(data),
+            "ContentType": "application/json",
+        }
+
+        if etag is None:
+            kwargs["IfNoneMatch"] = "*"
+        else:
+            kwargs["IfMatch"] = etag
+
+        try:
+            self._s3.put_object(**kwargs)
+            return True
+        except ClientError as error:
+            code = error.response.get("Error", {}).get("Code")
+
+            if code in _PRECONDITION_CODES:
+                return False
+
+            raise
 
     def list_keys(self, sub_prefix: str) -> list[str]:
         """Return keys starting with sub_prefix."""
