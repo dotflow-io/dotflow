@@ -20,7 +20,7 @@ Dotflow can resume a workflow from the last completed step after a crash or fail
 
 ## Example
 
-{* ./docs_src/checkpoint/checkpoint.py hl[24] *}
+{* ./docs_src/checkpoint/checkpoint.py hl[31] *}
 
 ## Execution flow
 
