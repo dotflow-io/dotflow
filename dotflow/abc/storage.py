@@ -23,3 +23,11 @@ class Storage(ABC):
     @abstractmethod
     def key(self, task: Callable):
         """Function that returns a key to get and post storage"""
+
+    @abstractmethod
+    def clear(self, workflow_id: str) -> None:
+        """Remove every persisted entry under ``workflow_id``.
+
+        Used by the input-fingerprint reset path when
+        ``on_input_change='reset'``.
+        """

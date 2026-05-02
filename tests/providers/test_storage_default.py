@@ -66,3 +66,16 @@ class TestStorageDefault(unittest.TestCase):
 
         self.assertIsInstance(result, Context)
         self.assertEqual(result.storage, "flow")
+
+    def test_clear_removes_only_matching_workflow(self):
+        storage = StorageDefault()
+
+        storage.post(key="wf-A-task-1", context=Context(storage="a"))
+        storage.post(key="wf-A-task-2", context=Context(storage="b"))
+        storage.post(key="wf-B-task-1", context=Context(storage="c"))
+
+        storage.clear(workflow_id="wf-A")
+
+        self.assertIsNone(storage.get(key="wf-A-task-1").storage)
+        self.assertIsNone(storage.get(key="wf-A-task-2").storage)
+        self.assertEqual(storage.get(key="wf-B-task-1").storage, "c")

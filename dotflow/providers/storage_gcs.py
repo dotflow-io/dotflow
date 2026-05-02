@@ -78,6 +78,9 @@ class StorageGCS(Storage):
     def key(self, task: Callable):
         return f"{task.workflow_id}-{task.task_id}"
 
+    def clear(self, workflow_id: str) -> None:
+        self._gcs.delete_prefix(f"{workflow_id}-")
+
     def _loads(self, storage: Any) -> Context:
         try:
             return Context(storage=loads(storage))

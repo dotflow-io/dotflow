@@ -45,3 +45,26 @@ class S3(ObjectStorage):
             Body=dumps(data),
             ContentType="application/json",
         )
+
+    def delete_prefix(self, sub_prefix: str) -> None:
+        """Delete every object whose key starts with prefix + sub_prefix.
+
+        Empty ``sub_prefix`` is rejected to avoid accidentally wiping
+        the entire bucket prefix.
+        """
+        if not sub_prefix:
+            raise ValueError("delete_prefix requires a non-empty sub_prefix")
+
+        full_prefix = f"{self.prefix}{sub_prefix}"
+        paginator = self._s3.get_paginator("list_objects_v2")
+
+        for page in paginator.paginate(Bucket=self.bucket, Prefix=full_prefix):
+            objects = [
+                {"Key": item["Key"]} for item in page.get("Contents", [])
+            ]
+            if not objects:
+                continue
+            self._s3.delete_objects(
+                Bucket=self.bucket,
+                Delete={"Objects": objects},
+            )

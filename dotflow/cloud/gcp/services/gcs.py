@@ -43,3 +43,17 @@ class GCS(ObjectStorage):
             dumps(data),
             content_type="application/json",
         )
+
+    def delete_prefix(self, sub_prefix: str) -> None:
+        """Delete every blob whose name starts with prefix + sub_prefix.
+
+        Empty ``sub_prefix`` is rejected to avoid accidentally wiping
+        the entire bucket prefix.
+        """
+        if not sub_prefix:
+            raise ValueError("delete_prefix requires a non-empty sub_prefix")
+
+        full_prefix = f"{self.prefix}{sub_prefix}"
+
+        for blob in self._client.list_blobs(self._bucket, prefix=full_prefix):
+            blob.delete()

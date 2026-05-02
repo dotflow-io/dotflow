@@ -1,6 +1,6 @@
 [project]
 name = "dotflow"
-version = "1.0.0.dev5"
+version = "1.0.0.dev6"
 authors = [
   { name="Fernando Celmer", email="email@fernandocelmer.com" },
 ]
@@ -14,7 +14,8 @@ dependencies = [
   "typing-extensions",
   "cookiecutter (>=2.0)",
   "requests",
-  "python-ulid (>=3.0)"
+  "python-ulid (>=3.0)",
+  "eval-type-backport ; python_version < \"3.10\""
 ]
 keywords = [
   "pipeline",
@@ -67,7 +68,7 @@ sentry = ["sentry-sdk"]
 
 [tool.poetry]
 name = "dotflow"
-version = "1.0.0.dev5"
+version = "1.0.0.dev6"
 description = "🎲 Dotflow turns an idea into flow! Lightweight Python library for execution pipelines with retry, parallel, cron and async support."
 authors = ["Fernando Celmer <email@fernandocelmer.com>"]
 readme = "README.md"
@@ -119,6 +120,7 @@ python-dotenv = "^1.1.0"
 requests = "^2.32.4"
 cookiecutter = "^2.0"
 python-ulid = "^3.0.0"
+eval-type-backport = { version = "^0.2", python = "<3.10" }
 
 [tool.poetry.group.dev.dependencies]
 build = "^1.2.2.post1"

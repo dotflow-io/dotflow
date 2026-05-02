@@ -135,3 +135,25 @@ class TestStorageS3(unittest.TestCase):
         result = storage.key(task=task)
 
         self.assertEqual(result, f"{workflow_id}-01ARZ3NDEKTSV4RRFFQ69G5FAV")
+
+    def test_clear_removes_only_matching_workflow(self):
+        storage = StorageS3(bucket=BUCKET, prefix=PREFIX, region=REGION)
+
+        storage.post(key="wf-A-task-1", context=Context(storage="a"))
+        storage.post(key="wf-A-task-2", context=Context(storage="b"))
+        storage.post(key="wf-B-task-1", context=Context(storage="c"))
+
+        storage.clear(workflow_id="wf-A")
+
+        listing = self.conn.list_objects_v2(Bucket=BUCKET, Prefix=PREFIX)
+        keys = {obj["Key"] for obj in listing.get("Contents", [])}
+
+        self.assertNotIn(f"{PREFIX}wf-A-task-1", keys)
+        self.assertNotIn(f"{PREFIX}wf-A-task-2", keys)
+        self.assertIn(f"{PREFIX}wf-B-task-1", keys)
+
+    def test_delete_prefix_rejects_empty(self):
+        storage = StorageS3(bucket=BUCKET, prefix=PREFIX, region=REGION)
+
+        with self.assertRaises(ValueError):
+            storage._s3.delete_prefix("")
