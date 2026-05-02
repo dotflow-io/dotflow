@@ -27,10 +27,12 @@ from dotflow.utils import basic_callback
 
 class TaskInstance:
     """
-    Import:
-        You can import the **TaskInstance** class with:
+    from __future__ import annotations
 
-            from dotflow.core.task import TaskInstance
+        Import:
+            You can import the **TaskInstance** class with:
+
+                from dotflow.core.task import TaskInstance
     """
 
     def __init__(self, *args, **kwargs) -> None:
