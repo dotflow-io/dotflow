@@ -2,2410 +2,2494 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <url>
         <loc>https://www.cloud.dotflow.io/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/advanced/notifications-on-failure/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/advanced/notifications-on-failure/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/advanced/notifications-on-failure/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/advanced/parallel-with-groups/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/advanced/parallel-with-groups/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/advanced/parallel-with-groups/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/advanced/scheduled-pipeline-with-resume/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/advanced/scheduled-pipeline-with-resume/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/advanced/scheduled-pipeline-with-resume/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/alibaba-fc-scheduled/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/alibaba-fc-scheduled/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/alibaba-fc-scheduled/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/alibaba-fc/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/alibaba-fc/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/alibaba-fc/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/app-runner/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/app-runner/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/app-runner/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/aws-batch/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/aws-batch/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/aws-batch/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/azure-container-instances/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/azure-container-instances/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/azure-container-instances/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/azure-container/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/azure-container/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/azure-container/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/azure-functions/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/azure-functions/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/azure-functions/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/azure-logic-apps/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/azure-logic-apps/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/azure-logic-apps/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/azure-queue-trigger/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/azure-queue-trigger/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/azure-queue-trigger/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/cloud-functions/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/cloud-functions/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/cloud-functions/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/cloud-run-scheduled/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/cloud-run-scheduled/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/cloud-run-scheduled/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/cloud-run/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/cloud-run/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/cloud-run/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/cloud-tasks/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/cloud-tasks/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/cloud-tasks/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/cloud-workflows/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/cloud-workflows/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/cloud-workflows/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/coolify/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/coolify/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/coolify/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/digital-ocean/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/digital-ocean/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/digital-ocean/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/docker/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/docker/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/docker/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/ecs-scheduled/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/ecs-scheduled/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/ecs-scheduled/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/ecs/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/ecs/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/ecs/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/fly-io/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/fly-io/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/fly-io/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/github-actions/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/github-actions/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/github-actions/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/gitlab-ci/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/gitlab-ci/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/gitlab-ci/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/heroku/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/heroku/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/heroku/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/kubernetes/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/kubernetes/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/kubernetes/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/lambda-api-trigger/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/lambda-api-trigger/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/lambda-api-trigger/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/lambda-s3-trigger/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/lambda-s3-trigger/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/lambda-s3-trigger/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/lambda-scheduled/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/lambda-scheduled/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/lambda-scheduled/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/lambda-sqs-trigger/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/lambda-sqs-trigger/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/lambda-sqs-trigger/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/lambda/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/lambda/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/lambda/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/nomad/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/nomad/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/nomad/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/pubsub-trigger/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/pubsub-trigger/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/pubsub-trigger/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/railway/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/railway/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/railway/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/render/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/render/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/render/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/step-functions/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/step-functions/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/step-functions/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/terraform/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/terraform/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/terraform/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/cloud/vercel/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/vercel/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/vercel/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/concepts/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/concepts/concept-cron-overlap/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/concept-cron-overlap/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/concept-cron-overlap/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/concepts/concept-of-context/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/concept-of-context/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/concept-of-context/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/concepts/concept-providers/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/concept-providers/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/concept-providers/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/concepts/concept-task-engine/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/concept-task-engine/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/concept-task-engine/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/concepts/concept-task-lifecycle/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/concept-task-lifecycle/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/concept-task-lifecycle/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/concepts/concept-workflow-and-tasks/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/concept-workflow-and-tasks/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/concept-workflow-and-tasks/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/concepts/process-mode-background/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/process-mode-background/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/process-mode-background/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/concepts/process-mode-parallel-group/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/process-mode-parallel-group/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/process-mode-parallel-group/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/concepts/process-mode-parallel/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/process-mode-parallel/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/process-mode-parallel/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/concepts/process-mode-sequential-group/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/process-mode-sequential-group/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/process-mode-sequential-group/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/concepts/process-mode-sequential/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/process-mode-sequential/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/process-mode-sequential/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/development/custom-log/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/development/custom-log/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/development/custom-log/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/development/custom-metrics/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/development/custom-metrics/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/development/custom-metrics/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/development/custom-notify/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/development/custom-notify/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/development/custom-notify/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/development/custom-providers/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/development/custom-providers/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/development/custom-providers/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/development/custom-scheduler/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/development/custom-scheduler/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/development/custom-scheduler/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/development/custom-storage/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/development/custom-storage/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/development/custom-storage/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/development/custom-tracer/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/development/custom-tracer/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/development/custom-tracer/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/development/development-guide/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/development/development-guide/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/development/development-guide/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/development/release-notes/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/development/release-notes/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/development/release-notes/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/examples/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/examples/async/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/async/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/async/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/examples/callbacks/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/callbacks/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/callbacks/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/examples/checkpoint/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/checkpoint/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/checkpoint/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/examples/cli/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/cli/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/cli/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/examples/context/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/context/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/context/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/examples/error-handling/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/error-handling/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/error-handling/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/examples/etl-flow/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/etl-flow/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/etl-flow/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/examples/getting-started/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/getting-started/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/getting-started/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/examples/health-check-flow/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/health-check-flow/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/health-check-flow/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/examples/notifications/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/notifications/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/notifications/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/examples/process-modes/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/process-modes/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/process-modes/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/examples/resilience/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/resilience/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/resilience/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/examples/results/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/results/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/results/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/examples/scheduler/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/scheduler/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/scheduler/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/examples/storage/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/storage/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/storage/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/how-to/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/how-to/cli/init/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/init/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/init/"/>
     </url>
     <url>
+        <loc>https://www.cloud.dotflow.io/nav/how-to/cli/login/</loc>
+        <lastmod>2026-05-02</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/login/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/login/"/>
+    </url>
+    <url>
+        <loc>https://www.cloud.dotflow.io/nav/how-to/cli/logout/</loc>
+        <lastmod>2026-05-02</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/logout/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/logout/"/>
+    </url>
+    <url>
         <loc>https://www.cloud.dotflow.io/nav/how-to/cli/simple-start/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/simple-start/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/simple-start/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/how-to/cli/with-callback/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/with-callback/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-callback/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/how-to/cli/with-custom-path/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/with-custom-path/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-custom-path/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/how-to/cli/with-deploy/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/with-deploy/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-deploy/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/how-to/cli/with-initial-context/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/with-initial-context/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-initial-context/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/how-to/cli/with-mode/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/with-mode/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-mode/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/how-to/cli/with-output-context/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/with-output-context/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-output-context/"/>
     </url>
     <url>
+        <loc>https://www.cloud.dotflow.io/nav/how-to/cli/with-resume/</loc>
+        <lastmod>2026-05-02</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/with-resume/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-resume/"/>
+    </url>
+    <url>
         <loc>https://www.cloud.dotflow.io/nav/how-to/cli/with-schedule/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/with-schedule/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-schedule/"/>
     </url>
     <url>
+        <loc>https://www.cloud.dotflow.io/nav/how-to/cli/with-workflow/</loc>
+        <lastmod>2026-05-02</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/with-workflow/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-workflow/"/>
+    </url>
+    <url>
         <loc>https://www.cloud.dotflow.io/nav/integrations/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/integrations/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/integrations/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/integrations/use-integrations/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/integrations/use-integrations/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/integrations/use-integrations/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/abc-flow/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/abc-flow/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/abc-flow/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/abc-http/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/abc-http/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/abc-http/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/abc-log/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/abc-log/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/abc-log/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/abc-metrics/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/abc-metrics/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/abc-metrics/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/abc-notify/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/abc-notify/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/abc-notify/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/abc-scheduler/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/abc-scheduler/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/abc-scheduler/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/abc-server/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/abc-server/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/abc-server/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/abc-storage/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/abc-storage/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/abc-storage/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/abc-tcp/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/abc-tcp/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/abc-tcp/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/abc-tracer/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/abc-tracer/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/abc-tracer/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/action/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/action/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/action/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/config/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/config/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/config/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/context-instance/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/context-instance/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/context-instance/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/context/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/context/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/context/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/decorators/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/decorators/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/decorators/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/dotflow/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/dotflow/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/dotflow/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/exception/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/exception/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/exception/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/log-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/log-default/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/log-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/log-opentelemetry/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/log-opentelemetry/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/log-opentelemetry/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/log-sentry/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/log-sentry/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/log-sentry/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/metrics-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/metrics-default/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/metrics-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/metrics-opentelemetry/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/metrics-opentelemetry/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/metrics-opentelemetry/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/notify-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/notify-default/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/notify-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/notify-discord/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/notify-discord/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/notify-discord/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/notify-telegram/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/notify-telegram/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/notify-telegram/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/scheduler-cron/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/scheduler-cron/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/scheduler-cron/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/scheduler-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/scheduler-default/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/scheduler-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/server-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/server-default/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/server-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/settings/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/settings/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/settings/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/storage-file/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/storage-file/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/storage-file/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/storage-gcs/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/storage-gcs/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/storage-gcs/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/storage-init/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/storage-init/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/storage-init/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/storage-s3/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/storage-s3/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/storage-s3/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/task-builder/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/task-builder/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/task-builder/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/task-error/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/task-error/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/task-error/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/task-instance/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/task-instance/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/task-instance/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/task/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/task/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/task/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/tracer-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/tracer-default/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/tracer-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/tracer-opentelemetry/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/tracer-opentelemetry/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/tracer-opentelemetry/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/tracer-sentry/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/tracer-sentry/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/tracer-sentry/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/type-execution/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/type-execution/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/type-execution/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/type-overlap/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/type-overlap/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/type-overlap/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/type-status/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/type-status/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/type-status/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/type-workflow-status/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/type-workflow-status/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/type-workflow-status/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/utils/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/utils/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/utils/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/reference/workflow/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/workflow/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/workflow/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/async-actions/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/async-actions/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/async-actions/"/>
     </url>
     <url>
+        <loc>https://www.cloud.dotflow.io/nav/tutorial/checkpoint-input-change/</loc>
+        <lastmod>2026-05-02</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/checkpoint-input-change/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/checkpoint-input-change/"/>
+    </url>
+    <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/checkpoint/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/checkpoint/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/checkpoint/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/error-handling/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/error-handling/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/error-handling/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/first-steps/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/first-steps/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/first-steps/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/groups/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/groups/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/groups/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/initial-context/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/initial-context/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/initial-context/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/install/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/install/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/install/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/keep-going/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/keep-going/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/keep-going/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/log-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/log-default/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/log-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/log-opentelemetry/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/log-opentelemetry/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/log-opentelemetry/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/log-sentry/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/log-sentry/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/log-sentry/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/many-contexts/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/many-contexts/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/many-contexts/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/metrics-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/metrics-default/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/metrics-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/metrics-opentelemetry/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/metrics-opentelemetry/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/metrics-opentelemetry/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/notify-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/notify-default/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/notify-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/notify-discord/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/notify-discord/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/notify-discord/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/notify-telegram/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/notify-telegram/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/notify-telegram/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/output-context/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/output-context/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/output-context/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/output-storage/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/output-storage/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/output-storage/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/output-task/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/output-task/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/output-task/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/previous-context/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/previous-context/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/previous-context/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/scheduler-cron/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/scheduler-cron/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/scheduler-cron/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/scheduler-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/scheduler-default/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/scheduler-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/server-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/server-default/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/server-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/storage-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/storage-default/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/storage-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/storage-file/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/storage-file/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/storage-file/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/storage-gcs/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/storage-gcs/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/storage-gcs/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/storage-s3/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/storage-s3/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/storage-s3/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/task-backoff/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/task-backoff/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/task-backoff/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/task-callback/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/task-callback/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/task-callback/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/task-retry/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/task-retry/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/task-retry/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/task-timeout/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/task-timeout/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/task-timeout/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/tracer-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/tracer-default/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/tracer-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/tracer-opentelemetry/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/tracer-opentelemetry/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/tracer-opentelemetry/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/tracer-sentry/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/tracer-sentry/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/tracer-sentry/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/nav/tutorial/workflow-callback/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/workflow-callback/"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/workflow-callback/"/>
     </url>
     <url>
+        <loc>https://www.cloud.dotflow.io/nav/tutorial/workflow-with-name/</loc>
+        <lastmod>2026-05-02</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/workflow-with-name/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/workflow-with-name/"/>
+    </url>
+    <url>
         <loc>https://www.cloud.dotflow.io/pt/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/advanced/notifications-on-failure/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/advanced/notifications-on-failure/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/advanced/notifications-on-failure/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/advanced/parallel-with-groups/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/advanced/parallel-with-groups/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/advanced/parallel-with-groups/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/advanced/scheduled-pipeline-with-resume/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/advanced/scheduled-pipeline-with-resume/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/advanced/scheduled-pipeline-with-resume/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/alibaba-fc-scheduled/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/alibaba-fc-scheduled/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/alibaba-fc-scheduled/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/alibaba-fc/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/alibaba-fc/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/alibaba-fc/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/app-runner/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/app-runner/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/app-runner/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/aws-batch/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/aws-batch/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/aws-batch/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/azure-container-instances/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/azure-container-instances/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/azure-container-instances/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/azure-container/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/azure-container/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/azure-container/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/azure-functions/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/azure-functions/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/azure-functions/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/azure-logic-apps/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/azure-logic-apps/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/azure-logic-apps/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/azure-queue-trigger/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/azure-queue-trigger/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/azure-queue-trigger/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/cloud-functions/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/cloud-functions/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/cloud-functions/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/cloud-run-scheduled/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/cloud-run-scheduled/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/cloud-run-scheduled/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/cloud-run/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/cloud-run/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/cloud-run/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/cloud-tasks/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/cloud-tasks/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/cloud-tasks/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/cloud-workflows/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/cloud-workflows/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/cloud-workflows/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/coolify/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/coolify/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/coolify/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/digital-ocean/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/digital-ocean/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/digital-ocean/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/docker/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/docker/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/docker/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/ecs-scheduled/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/ecs-scheduled/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/ecs-scheduled/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/ecs/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/ecs/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/ecs/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/fly-io/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/fly-io/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/fly-io/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/github-actions/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/github-actions/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/github-actions/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/gitlab-ci/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/gitlab-ci/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/gitlab-ci/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/heroku/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/heroku/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/heroku/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/kubernetes/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/kubernetes/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/kubernetes/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/lambda-api-trigger/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/lambda-api-trigger/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/lambda-api-trigger/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/lambda-s3-trigger/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/lambda-s3-trigger/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/lambda-s3-trigger/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/lambda-scheduled/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/lambda-scheduled/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/lambda-scheduled/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/lambda-sqs-trigger/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/lambda-sqs-trigger/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/lambda-sqs-trigger/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/lambda/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/lambda/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/lambda/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/nomad/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/nomad/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/nomad/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/pubsub-trigger/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/pubsub-trigger/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/pubsub-trigger/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/railway/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/railway/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/railway/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/render/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/render/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/render/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/step-functions/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/step-functions/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/step-functions/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/terraform/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/terraform/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/terraform/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/cloud/vercel/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/cloud/vercel/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/cloud/vercel/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/concepts/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/concepts/concept-cron-overlap/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/concept-cron-overlap/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/concept-cron-overlap/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/concepts/concept-of-context/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/concept-of-context/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/concept-of-context/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/concepts/concept-providers/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/concept-providers/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/concept-providers/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/concepts/concept-task-engine/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/concept-task-engine/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/concept-task-engine/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/concepts/concept-task-lifecycle/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/concept-task-lifecycle/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/concept-task-lifecycle/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/concepts/concept-workflow-and-tasks/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/concept-workflow-and-tasks/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/concept-workflow-and-tasks/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/concepts/process-mode-background/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/process-mode-background/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/process-mode-background/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/concepts/process-mode-parallel-group/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/process-mode-parallel-group/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/process-mode-parallel-group/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/concepts/process-mode-parallel/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/process-mode-parallel/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/process-mode-parallel/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/concepts/process-mode-sequential-group/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/process-mode-sequential-group/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/process-mode-sequential-group/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/concepts/process-mode-sequential/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/concepts/process-mode-sequential/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/concepts/process-mode-sequential/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/development/custom-log/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/development/custom-log/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/development/custom-log/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/development/custom-metrics/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/development/custom-metrics/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/development/custom-metrics/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/development/custom-notify/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/development/custom-notify/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/development/custom-notify/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/development/custom-providers/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/development/custom-providers/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/development/custom-providers/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/development/custom-scheduler/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/development/custom-scheduler/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/development/custom-scheduler/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/development/custom-storage/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/development/custom-storage/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/development/custom-storage/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/development/custom-tracer/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/development/custom-tracer/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/development/custom-tracer/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/development/development-guide/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/development/development-guide/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/development/development-guide/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/development/release-notes/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/development/release-notes/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/development/release-notes/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/examples/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/examples/async/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/async/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/async/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/examples/callbacks/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/callbacks/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/callbacks/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/examples/checkpoint/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/checkpoint/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/checkpoint/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/examples/cli/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/cli/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/cli/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/examples/context/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/context/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/context/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/examples/error-handling/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/error-handling/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/error-handling/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/examples/etl-flow/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/etl-flow/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/etl-flow/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/examples/getting-started/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/getting-started/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/getting-started/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/examples/health-check-flow/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/health-check-flow/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/health-check-flow/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/examples/notifications/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/notifications/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/notifications/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/examples/process-modes/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/process-modes/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/process-modes/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/examples/resilience/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/resilience/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/resilience/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/examples/results/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/results/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/results/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/examples/scheduler/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/scheduler/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/scheduler/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/examples/storage/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/examples/storage/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/examples/storage/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/how-to/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/how-to/cli/init/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/init/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/init/"/>
     </url>
     <url>
+        <loc>https://www.cloud.dotflow.io/pt/nav/how-to/cli/login/</loc>
+        <lastmod>2026-05-02</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/login/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/login/"/>
+    </url>
+    <url>
+        <loc>https://www.cloud.dotflow.io/pt/nav/how-to/cli/logout/</loc>
+        <lastmod>2026-05-02</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/logout/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/logout/"/>
+    </url>
+    <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/how-to/cli/simple-start/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/simple-start/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/simple-start/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-callback/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-callback/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/with-callback/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-custom-path/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-custom-path/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/with-custom-path/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-deploy/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-deploy/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/with-deploy/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-initial-context/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-initial-context/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/with-initial-context/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-mode/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-mode/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/with-mode/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-output-context/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-output-context/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/with-output-context/"/>
     </url>
     <url>
+        <loc>https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-resume/</loc>
+        <lastmod>2026-05-02</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-resume/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/with-resume/"/>
+    </url>
+    <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-schedule/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-schedule/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/with-schedule/"/>
     </url>
     <url>
+        <loc>https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-workflow/</loc>
+        <lastmod>2026-05-02</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/how-to/cli/with-workflow/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/how-to/cli/with-workflow/"/>
+    </url>
+    <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/integrations/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/integrations/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/integrations/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/integrations/use-integrations/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/integrations/use-integrations/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/integrations/use-integrations/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/abc-flow/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/abc-flow/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/abc-flow/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/abc-http/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/abc-http/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/abc-http/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/abc-log/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/abc-log/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/abc-log/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/abc-metrics/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/abc-metrics/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/abc-metrics/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/abc-notify/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/abc-notify/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/abc-notify/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/abc-scheduler/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/abc-scheduler/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/abc-scheduler/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/abc-server/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/abc-server/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/abc-server/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/abc-storage/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/abc-storage/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/abc-storage/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/abc-tcp/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/abc-tcp/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/abc-tcp/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/abc-tracer/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/abc-tracer/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/abc-tracer/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/action/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/action/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/action/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/config/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/config/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/config/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/context-instance/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/context-instance/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/context-instance/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/context/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/context/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/context/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/decorators/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/decorators/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/decorators/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/dotflow/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/dotflow/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/dotflow/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/exception/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/exception/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/exception/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/log-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/log-default/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/log-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/log-opentelemetry/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/log-opentelemetry/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/log-opentelemetry/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/log-sentry/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/log-sentry/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/log-sentry/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/metrics-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/metrics-default/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/metrics-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/metrics-opentelemetry/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/metrics-opentelemetry/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/metrics-opentelemetry/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/notify-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/notify-default/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/notify-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/notify-discord/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/notify-discord/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/notify-discord/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/notify-telegram/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/notify-telegram/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/notify-telegram/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/scheduler-cron/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/scheduler-cron/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/scheduler-cron/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/scheduler-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/scheduler-default/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/scheduler-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/server-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/server-default/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/server-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/settings/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/settings/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/settings/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/storage-file/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/storage-file/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/storage-file/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/storage-gcs/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/storage-gcs/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/storage-gcs/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/storage-init/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/storage-init/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/storage-init/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/storage-s3/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/storage-s3/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/storage-s3/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/task-builder/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/task-builder/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/task-builder/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/task-error/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/task-error/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/task-error/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/task-instance/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/task-instance/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/task-instance/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/task/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/task/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/task/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/tracer-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/tracer-default/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/tracer-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/tracer-opentelemetry/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/tracer-opentelemetry/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/tracer-opentelemetry/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/tracer-sentry/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/tracer-sentry/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/tracer-sentry/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/type-execution/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/type-execution/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/type-execution/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/type-overlap/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/type-overlap/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/type-overlap/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/type-status/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/type-status/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/type-status/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/type-workflow-status/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/type-workflow-status/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/type-workflow-status/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/utils/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/utils/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/utils/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/reference/workflow/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/reference/workflow/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/reference/workflow/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/async-actions/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/async-actions/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/async-actions/"/>
     </url>
     <url>
+        <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/checkpoint-input-change/</loc>
+        <lastmod>2026-05-02</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/checkpoint-input-change/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/checkpoint-input-change/"/>
+    </url>
+    <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/checkpoint/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/checkpoint/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/checkpoint/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/error-handling/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/error-handling/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/error-handling/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/first-steps/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/first-steps/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/first-steps/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/groups/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/groups/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/groups/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/initial-context/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/initial-context/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/initial-context/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/install/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/install/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/install/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/keep-going/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/keep-going/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/keep-going/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/log-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/log-default/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/log-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/log-opentelemetry/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/log-opentelemetry/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/log-opentelemetry/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/log-sentry/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/log-sentry/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/log-sentry/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/many-contexts/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/many-contexts/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/many-contexts/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/metrics-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/metrics-default/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/metrics-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/metrics-opentelemetry/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/metrics-opentelemetry/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/metrics-opentelemetry/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/notify-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/notify-default/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/notify-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/notify-discord/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/notify-discord/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/notify-discord/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/notify-telegram/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/notify-telegram/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/notify-telegram/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/output-context/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/output-context/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/output-context/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/output-storage/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/output-storage/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/output-storage/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/output-task/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/output-task/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/output-task/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/previous-context/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/previous-context/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/previous-context/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/scheduler-cron/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/scheduler-cron/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/scheduler-cron/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/scheduler-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/scheduler-default/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/scheduler-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/server-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/server-default/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/server-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/storage-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/storage-default/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/storage-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/storage-file/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/storage-file/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/storage-file/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/storage-gcs/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/storage-gcs/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/storage-gcs/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/storage-s3/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/storage-s3/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/storage-s3/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/task-backoff/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/task-backoff/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/task-backoff/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/task-callback/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/task-callback/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/task-callback/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/task-retry/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/task-retry/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/task-retry/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/task-timeout/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/task-timeout/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/task-timeout/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/tracer-default/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/tracer-default/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/tracer-default/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/tracer-opentelemetry/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/tracer-opentelemetry/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/tracer-opentelemetry/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/tracer-sentry/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/tracer-sentry/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/tracer-sentry/"/>
     </url>
     <url>
         <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/workflow-callback/</loc>
-        <lastmod>2026-04-11</lastmod>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/workflow-callback/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/workflow-callback/"/>
+    </url>
+    <url>
+        <loc>https://www.cloud.dotflow.io/pt/nav/tutorial/workflow-with-name/</loc>
+        <lastmod>2026-05-02</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://www.cloud.dotflow.io/pt/nav/tutorial/workflow-with-name/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.cloud.dotflow.io/nav/tutorial/workflow-with-name/"/>
     </url>
 </urlset>
