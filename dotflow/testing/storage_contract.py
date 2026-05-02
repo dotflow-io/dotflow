@@ -79,6 +79,40 @@ class StorageContract:
         self.assertFalse(ok)
         self.assertEqual(self.storage.get(key="k").storage, "old")
 
+    def test_atomic_swap_clears_inherited_ttl(self):
+        if not self.supports_ttl:
+            self.skipTest("driver does not support TTL")
+
+        self.storage.post(key="k", context=Context(storage="old"), ttl=1)
+
+        ok = self.storage.atomic_swap(key="k", expected="old", new="new")
+
+        self.assertTrue(ok)
+
+        time.sleep(1.2)
+
+        self.assertEqual(self.storage.get(key="k").storage, "new")
+
+    def test_atomic_swap_applies_new_ttl(self):
+        if not self.supports_ttl:
+            self.skipTest("driver does not support TTL")
+
+        self.storage.post(key="k", context=Context(storage="old"))
+
+        ok = self.storage.atomic_swap(
+            key="k",
+            expected="old",
+            new="new",
+            ttl=1,
+        )
+
+        self.assertTrue(ok)
+        self.assertEqual(self.storage.get(key="k").storage, "new")
+
+        time.sleep(1.2)
+
+        self.assertIsNone(self.storage.get(key="k").storage)
+
     def test_ttl_expiration(self):
         if not self.supports_ttl:
             self.skipTest("driver does not support TTL")
