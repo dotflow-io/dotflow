@@ -10,7 +10,7 @@ The **[Context](https://dotflow-io.github.io/dotflow/nav/reference/context/)** c
 
 ## Accessing context data
 
-{* ./docs_src/context/context.py hl[10] *}
+{* ./docs_src/context/context.py hl[8] *}
 
 For implementation details of the class, you can access them [here](https://dotflow-io.github.io/dotflow/nav/reference/context/ "Context class")
 
