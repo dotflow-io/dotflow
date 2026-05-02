@@ -42,7 +42,14 @@ class Storage(ABC):
         """Iterate keys starting with prefix."""
 
     @abstractmethod
-    def atomic_swap(self, key: str, expected: Any, new: Any) -> bool:
+    def atomic_swap(
+        self,
+        key: str,
+        expected: Any,
+        new: Any,
+        ttl: int | None = None,
+        fingerprint: str | None = None,
+    ) -> bool:
         """Replace value when current equals expected."""
 
     @abstractmethod
