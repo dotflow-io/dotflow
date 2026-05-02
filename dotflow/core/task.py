@@ -1,5 +1,7 @@
 """Task module"""
 
+from __future__ import annotations
+
 import json
 from collections.abc import Callable
 from datetime import datetime
@@ -25,10 +27,12 @@ from dotflow.utils import basic_callback
 
 class TaskInstance:
     """
-    Import:
-        You can import the **TaskInstance** class with:
+    from __future__ import annotations
 
-            from dotflow.core.task import TaskInstance
+        Import:
+            You can import the **TaskInstance** class with:
+
+                from dotflow.core.task import TaskInstance
     """
 
     def __init__(self, *args, **kwargs) -> None:
@@ -323,7 +327,7 @@ class TaskBuilder:
         callback: Callable = basic_callback,
         initial_context: Any = None,
         group_name: str = "default",
-    ) -> "TaskBuilder":
+    ) -> TaskBuilder:
         """
         Args:
             step (Callable):
