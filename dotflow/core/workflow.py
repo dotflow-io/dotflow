@@ -176,7 +176,7 @@ class Manager:
 
         if mode != TypeExecution.BACKGROUND:
             self._callback_workflow(tasks=self.tasks)
-        elif self.config:
+        else:
 
             def _background_cleanup():
                 self.thread.join()

@@ -1,5 +1,6 @@
 """Test context of controller"""
 
+import threading
 import unittest
 from types import FunctionType
 from unittest.mock import Mock
@@ -98,3 +99,57 @@ class TestWorkflow(unittest.TestCase):
 
         controller = Manager(tasks=[task])
         self.assertEqual(controller.tasks[0].status, TypeStatus.COMPLETED)
+
+    def test_background_callback_runs_without_config(self):
+        task = Task(
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+            step=action_step,
+            callback=simple_callback,
+        )
+        mock_success = Mock()
+
+        manager = Manager(
+            tasks=[task],
+            mode=TypeExecution.BACKGROUND,
+            on_success=mock_success,
+            config=None,
+        )
+
+        for executor in (manager.tasks, getattr(manager, "thread", None)):
+            if hasattr(executor, "join"):
+                executor.join(timeout=5)
+
+        for thread in list(threading.enumerate()):
+            if thread is threading.current_thread():
+                continue
+            if not thread.daemon:
+                continue
+            thread.join(timeout=5)
+
+        mock_success.assert_called()
+
+    def test_background_callback_failure_runs_without_config(self):
+        task = Task(
+            task_id="01ARZ3NDEKTSV4RRFFQ69G5FAV",
+            step=action_step_with_error,
+            callback=simple_callback,
+        )
+        mock_failure = Mock()
+
+        manager = Manager(
+            tasks=[task],
+            mode=TypeExecution.BACKGROUND,
+            on_failure=mock_failure,
+            config=None,
+        )
+
+        if hasattr(manager, "thread"):
+            manager.thread.join(timeout=5)
+        for thread in list(threading.enumerate()):
+            if thread is threading.current_thread():
+                continue
+            if not thread.daemon:
+                continue
+            thread.join(timeout=5)
+
+        mock_failure.assert_called()
