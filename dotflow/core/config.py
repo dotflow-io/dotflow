@@ -9,7 +9,13 @@ from dotflow.abc.scheduler import Scheduler
 from dotflow.abc.server import Server
 from dotflow.abc.storage import Storage
 from dotflow.abc.tracer import Tracer
+from dotflow.core.events import EventBus
 from dotflow.core.exception import NotCallableObject
+from dotflow.core.subscribers import (
+    LogSubscriber,
+    MetricsSubscriber,
+    NotifySubscriber,
+)
 from dotflow.providers.log_default import LogDefault
 from dotflow.providers.metrics_default import MetricsDefault
 from dotflow.providers.notify_default import NotifyDefault
@@ -90,6 +96,11 @@ class Config:
         self.metrics = metrics if metrics is not None else MetricsDefault()
 
         self._validate()
+
+        self.events = EventBus()
+        self.events.subscribe(LogSubscriber(self.log))
+        self.events.subscribe(NotifySubscriber(self.notify))
+        self.events.subscribe(MetricsSubscriber(self.metrics))
 
     def _validate(self) -> None:
         for name, abc in self._PROVIDERS.items():
