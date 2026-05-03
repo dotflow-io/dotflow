@@ -30,18 +30,38 @@ class Storage(ABC):
         """Return stored context or empty Context()."""
 
     @abstractmethod
+    def key(self, task: Callable) -> str:
+        """Storage key for task."""
+
+    def clear(self, workflow_id: str) -> None:
+        """Remove every entry under workflow_id.
+
+        Default implementation delegates to ``delete_prefix``. External
+        subclasses may override directly.
+        """
+        self.delete_prefix(f"{workflow_id}-")
+
     def delete(self, key: str) -> bool:
-        """Remove key. Returns True when present."""
+        """Remove key. Returns True when present.
 
-    @abstractmethod
+        Optional in 1.x. Becomes abstract in 2.0.
+        """
+        raise NotImplementedError
+
     def delete_prefix(self, prefix: str) -> int:
-        """Remove keys starting with prefix. Returns count."""
+        """Remove keys starting with prefix. Returns count.
 
-    @abstractmethod
+        Optional in 1.x. Becomes abstract in 2.0.
+        """
+        raise NotImplementedError
+
     def list_keys(self, prefix: str) -> Iterable[str]:
-        """Iterate keys starting with prefix."""
+        """Iterate keys starting with prefix.
 
-    @abstractmethod
+        Optional in 1.x. Becomes abstract in 2.0.
+        """
+        raise NotImplementedError
+
     def atomic_swap(
         self,
         key: str,
@@ -50,12 +70,8 @@ class Storage(ABC):
         ttl: int | None = None,
         fingerprint: str | None = None,
     ) -> bool:
-        """Replace value when current equals expected."""
+        """Replace value when current equals expected.
 
-    @abstractmethod
-    def key(self, task: Callable) -> str:
-        """Storage key for task."""
-
-    def clear(self, workflow_id: str) -> None:
-        """Remove every entry under workflow_id."""
-        self.delete_prefix(f"{workflow_id}-")
+        Optional in 1.x. Becomes abstract in 2.0.
+        """
+        raise NotImplementedError
