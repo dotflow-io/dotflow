@@ -2,6 +2,7 @@
 
 ## v1.0.1
 
+- [📦 PyPI - Build 1.0.1](https://test.pypi.org/project/dotflow/1.0.1)
 - [⚠️ Security: Bump vulnerable transitive deps flagged by Dependabot (#300)](https://github.com/dotflow-io/dotflow/pull/301)
 
 ## v1.0.0
