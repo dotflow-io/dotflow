@@ -30,6 +30,9 @@ jobs:
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: 🔍 Verify version
+        uses: ./.github/actions/verify-version
+
       - name: 📦 Build Package
         uses: ./.github/actions/build-package
         with:
