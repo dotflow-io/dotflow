@@ -7,15 +7,14 @@ authors = [
 license = {file = "LICENSE"}
 description = "🎲 Dotflow turns an idea into flow! Lightweight Python library for execution pipelines with retry, parallel, cron and async support."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
 	"rich",
   "pydantic",
   "typing-extensions",
   "cookiecutter (>=2.0)",
   "requests",
-  "python-ulid (>=3.0)",
-  "eval-type-backport ; python_version < \"3.10\""
+  "python-ulid (>=3.0)"
 ]
 keywords = [
   "pipeline",
@@ -41,7 +40,6 @@ classifiers = [
   "Topic :: Software Development :: Libraries",
   "Topic :: Software Development :: Libraries :: Python Modules",
   "Topic :: System :: Distributed Computing",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
@@ -101,7 +99,6 @@ classifiers = [
   "Topic :: Software Development :: Libraries",
   "Topic :: Software Development :: Libraries :: Python Modules",
   "Topic :: System :: Distributed Computing",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
@@ -112,7 +109,7 @@ classifiers = [
 dotflow = 'dotflow.main:main'
 
 [tool.poetry.dependencies]
-python = ">=3.9.0"
+python = ">=3.10.0"
 rich = "^14.1.0"
 pydantic = "^2.11.7"
 typing-extensions = "^4.14.1"
@@ -120,7 +117,6 @@ python-dotenv = "^1.1.0"
 requests = "^2.32.4"
 cookiecutter = "^2.0"
 python-ulid = "^3.0.0"
-eval-type-backport = { version = "^0.2", python = "<3.10" }
 
 [tool.poetry.group.dev.dependencies]
 build = "^1.2.2.post1"
