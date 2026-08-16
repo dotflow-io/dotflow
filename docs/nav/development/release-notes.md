@@ -3,6 +3,9 @@
 ## v1.0.1
 
 - [📦 PyPI - Build 1.0.1](https://test.pypi.org/project/dotflow/1.0.1)
+- [⚙️ Feature: Expand Storage ABC with delete, list, TTL, CAS (#287)](https://github.com/dotflow-io/dotflow/pull/297)
+- [🪲 Bug: Run background cleanup regardless of config (#246)](https://github.com/dotflow-io/dotflow/pull/296)
+- [⚠️ Security: Resolve open Dependabot alerts — bump GitPython, cryptography, pymdown-extensions, aiohttp; drop Python 3.9 (#302)](https://github.com/dotflow-io/dotflow/pull/303)
 - [⚠️ Security: Bump vulnerable transitive deps flagged by Dependabot (#300)](https://github.com/dotflow-io/dotflow/pull/301)
 
 ## v1.0.0
