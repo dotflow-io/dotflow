@@ -13,6 +13,7 @@ from ulid import ULID
 from dotflow.core.action import Action
 from dotflow.core.config import Config
 from dotflow.core.context import Context
+from dotflow.core.events import StatusChanged
 from dotflow.core.exception import (
     MissingActionDecorator,
     NotCallableObject,
@@ -254,21 +255,10 @@ class Task(TaskInstance):
 
     @status.setter
     def status(self, value: TypeStatus) -> None:
+        old = self._status
         self._status = value
 
-        self.config.notify.hook_status_task(task=self)
-
-        if value == TypeStatus.FAILED:
-            self.config.log.error(task=self)
-            self.config.metrics.task_failed(task=self)
-        elif value == TypeStatus.RETRY:
-            self.config.log.warning(task=self)
-            self.config.metrics.task_retried(task=self)
-        elif value == TypeStatus.COMPLETED:
-            self.config.log.info(task=self)
-            self.config.metrics.task_completed(task=self)
-        else:
-            self.config.log.info(task=self)
+        self.config.events.emit(StatusChanged(task=self, old=old, new=value))
 
     @property
     def config(self):
