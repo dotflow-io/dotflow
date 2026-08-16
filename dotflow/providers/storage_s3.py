@@ -1,6 +1,8 @@
 """Storage S3"""
 
-from collections.abc import Callable
+from __future__ import annotations
+
+from collections.abc import Callable, Iterable
 from json import dumps, loads
 from typing import Any
 
@@ -48,7 +50,13 @@ class StorageS3(Storage):
     ):
         self._s3 = S3(bucket=bucket, prefix=prefix, region=region)
 
-    def post(self, key: str, context: Context) -> None:
+    def post(
+        self,
+        key: str,
+        context: Context,
+        ttl: int | None = None,
+        fingerprint: str | None = None,
+    ) -> None:
         task_context = []
 
         if isinstance(context.storage, list):
@@ -60,6 +68,9 @@ class StorageS3(Storage):
 
         self._s3.write(key=key, data=task_context)
 
+        if fingerprint is not None:
+            self._s3.write(key=f"{key}.fingerprint", data=[fingerprint])
+
     def get(self, key: str) -> Context:
         task_context = self._s3.read(key)
 
@@ -70,16 +81,67 @@ class StorageS3(Storage):
             return self._loads(storage=task_context[0])
 
         contexts = Context(storage=[])
+
         for context in task_context:
             contexts.storage.append(self._loads(storage=context))
 
         return contexts
 
-    def key(self, task: Callable):
-        return f"{task.workflow_id}-{task.task_id}"
+    def delete(self, key: str) -> bool:
+        existed = self._s3.delete(key=key)
+        self._s3.delete(key=f"{key}.fingerprint")
 
-    def clear(self, workflow_id: str) -> None:
-        self._s3.delete_prefix(f"{workflow_id}-")
+        return existed
+
+    def delete_prefix(self, prefix: str) -> int:
+        names = self._s3.list_keys(prefix)
+
+        if not names:
+            return 0
+
+        self._s3.delete_prefix(prefix)
+
+        return sum(1 for n in names if not n.endswith(".fingerprint"))
+
+    def list_keys(self, prefix: str) -> Iterable[str]:
+        return [
+            n
+            for n in self._s3.list_keys(prefix)
+            if not n.endswith(".fingerprint")
+        ]
+
+    def atomic_swap(
+        self,
+        key: str,
+        expected: Any,
+        new: Any,
+        ttl: int | None = None,
+        fingerprint: str | None = None,
+    ) -> bool:
+        data, etag = self._s3.read_with_etag(key)
+
+        if not data:
+            current_value = None
+        elif len(data) == 1:
+            current_value = self._loads(storage=data[0]).storage
+        else:
+            current_value = [self._loads(storage=d).storage for d in data]
+
+        if current_value != expected:
+            return False
+
+        payload = new if isinstance(new, Context) else Context(storage=new)
+        new_data = [self._dumps(storage=payload.storage)]
+
+        swapped = self._s3.write_if_match(key=key, data=new_data, etag=etag)
+
+        if swapped and fingerprint is not None:
+            self._s3.write(key=f"{key}.fingerprint", data=[fingerprint])
+
+        return swapped
+
+    def key(self, task: Callable) -> str:
+        return f"{task.workflow_id}-{task.task_id}"
 
     def _loads(self, storage: Any) -> Context:
         try:

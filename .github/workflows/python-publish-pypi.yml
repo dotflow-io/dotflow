@@ -108,18 +108,9 @@ jobs:
           git pull origin ${{ steps.get_branch_deploy.outputs.branch }}
 
       - name: 🔍 Verify version
-        run: |
-          EXPECTED="${{ github.event.release.tag_name }}"
-          EXPECTED="${EXPECTED#v}"
-          echo "Expected version: $EXPECTED"
-          echo "LAST_VERSION: $(cat LAST_VERSION)"
-          echo "pyproject.toml: $(grep '^version = ' pyproject.toml | head -1)"
-          echo "__init__.py: $(grep '^__version__ = ' dotflow/__init__.py)"
-
-          if [ "$(cat LAST_VERSION)" != "$EXPECTED" ]; then
-            echo "ERROR: Version mismatch!"
-            exit 1
-          fi
+        uses: ./.github/actions/verify-version
+        with:
+          expected: ${{ github.event.release.tag_name }}
 
       - name: 📦 Build Package
         uses: ./.github/actions/build-package
