@@ -1,0 +1,13 @@
+[project]
+name = "dotflow"
+type = "library"
+ci = "github"
+language = "python"
+
+[source_host]
+kind = "github"
+repo = "dotflow-io/dotflow"
+
+[release]
+strategy = "semver"
+changelog = "conventional"
