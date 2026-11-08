@@ -122,7 +122,7 @@ python-ulid = "^3.0.0"
 build = "^1.2.2.post1"
 pytest = "^9.0.3"
 flake8 = "^7.1.1"
-tox = "^4.26.0"
+tox = { version = "^4.26.0", python = ">=3.11" }
 pytest-cov = "^6.0.0"
 pylint = "^4.0.9"
 pyzmq = "^26.2.1"
