@@ -4,6 +4,7 @@
 
 - [⚠️ Security: Patch open Dependabot alerts — bump urllib3, certifi, filelock, virtualenv, pytest, Werkzeug, mkdocs-material, cryptography (#307)](https://github.com/dotflow-io/dotflow/pull/308)
 - [⚠️ Security: Bump pylint to 4.0.9+ to fix pickle cache code execution, CVE-2026-114608 (#309)](https://github.com/dotflow-io/dotflow/issues/309)
+- [🪲 Bug: `dotflow cloud generate --platform github-actions` fails on nested template path (#311)](https://github.com/dotflow-io/dotflow/issues/311)
 
 ## v1.0.1
 
