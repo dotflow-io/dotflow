@@ -1,5 +1,9 @@
 # Release Notes
 
+## v1.0.3
+
+- [⚠️ Security: Resolve remaining filelock alerts — restrict tox dev dependency to Python >= 3.11 (#315)](https://github.com/dotflow-io/dotflow/pull/316)
+
 ## v1.0.2
 
 - [⚠️ Security: Patch open Dependabot alerts — bump urllib3, certifi, filelock, virtualenv, pytest, Werkzeug, mkdocs-material, cryptography (#307)](https://github.com/dotflow-io/dotflow/pull/308)
