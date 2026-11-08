@@ -120,7 +120,7 @@ python-ulid = "^3.0.0"
 
 [tool.poetry.group.dev.dependencies]
 build = "^1.2.2.post1"
-pytest = "^8.3.4"
+pytest = "^9.0.3"
 flake8 = "^7.1.1"
 tox = "^4.26.0"
 pytest-cov = "^6.0.0"
