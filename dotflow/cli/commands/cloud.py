@@ -169,6 +169,7 @@ class CloudGenerateCommand(Command):
             content = content.replace("{{PROJECT_NAME}}", project_name)
             content = content.replace("{{MODULE_NAME}}", module_name)
 
+            filepath.parent.mkdir(parents=True, exist_ok=True)
             filepath.write_text(content)
             print(f"  Created: {filepath}")
 
